@@ -78,6 +78,6 @@ elif output_unit == "m":
 elif output_unit == "km":
     answer = convert_to_meter / 1000
 
-result = f"{distance} {input_unit} is {answer} {output_unit}"
+result = f"{distance} {input_unit} is {answer:.7} {output_unit}"
 
 print(result)
