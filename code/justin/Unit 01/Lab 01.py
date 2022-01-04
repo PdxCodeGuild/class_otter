@@ -16,17 +16,19 @@ conversion_factor_map = {
 def get_conversion_factor(units):
     return conversion_factor_map.get(units)
 
-def convert_to_meters(distance, origin_unit):
-    return round(distance * get_conversion_factor(origin_unit), 4)
+def convert_between_units(distance, origin_unit, converted_unit):
+    conversion_factor = get_conversion_factor(origin_unit) / get_conversion_factor(converted_unit)
+    return round(distance * conversion_factor, 4)
 
 def main():
     distance = float(input("Enter a distance: "))
-    origin_unit = input("Enter a unit of measure ([in], [ft], [yd], [mi], [m], [km]): ").lower()
+    origin_unit = input("Enter the origin unit of measure ([in], [ft], [yd], [mi], [m], [km]): ").lower()
+    converted_unit = input("Enter the unit to convert to ([in], [ft], [yd], [mi], [m], [km]): ").lower()
     
-    # Convert a distance from a selected unit of measure into meters
-    distance_in_meters = convert_to_meters(distance, origin_unit)
+    # Convert a distance from a selected unit of measure into another
+    converted_distance = convert_between_units(distance, origin_unit, converted_unit)
 
-    print(f"{distance}{origin_unit} is {distance_in_meters}m\n")
+    print(f"{distance}{origin_unit} is {converted_distance}{converted_unit}\n")
 
     pass
 
