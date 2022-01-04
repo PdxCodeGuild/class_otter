@@ -4,18 +4,27 @@
 # Unit Converter
 # This program will convert a number between different units of measure
 
-foot_factor = 0.3048
+conversion_factor_map = {
+        "ft": 0.3048,
+        "mi": 1609.34,
+        "m": 1.0,
+        "km": 1000
+    }
 
-def convert_to_meters(distance_in_feet):
-    return round(distance_in_feet * foot_factor, 4)
+def get_conversion_factor(units):
+    return conversion_factor_map.get(units)
+
+def convert_to_meters(distance, origin_unit):
+    return round(distance * get_conversion_factor(origin_unit), 4)
 
 def main():
-    distance_in_feet = float(input("Enter a distance in feet: "))
+    distance = float(input("Enter a distance: "))
+    origin_unit = input("Enter a unit of measure ([ft], [mi], [m], [km]): ").lower()
     
-    # Convert a distance measured in feet to one in meters
-    distance_in_meters = convert_to_meters(distance_in_feet)
+    # Convert a distance from a selected unit of measure into meters
+    distance_in_meters = convert_to_meters(distance, origin_unit)
 
-    print(f"{distance_in_feet}ft is {distance_in_meters}m\n")
+    print(f"{distance}{origin_unit} is {distance_in_meters}m\n")
 
     pass
 
