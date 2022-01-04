@@ -19,8 +19,24 @@ conversion = {
     'mi': .6213712
 }
 
-# TODO: Add functionality where user can input various forms of units:
-# Examples: 'feet', "'", 'ft', 'meter', 'm', 'inch', '"', 'in' etc.
+# Create length unit dictionary to allow user to input several different forms of each unit and have the converter still work.
+# in/inch/"/ft/feet/'/yd/yard/m/meter/km/kilometer/mi/mile
+units = {
+    'in'    : 'in',
+    'inch'  : 'in',
+    '"'     : 'in',
+    'ft'    : 'ft',
+    'feet'  : 'ft',
+    "'"     : 'ft',
+    'yd'    : 'yd',
+    'yard'  : 'yd',
+    'm'     : 'm',
+    'meter' : 'm',
+    'km'    : 'km',
+    'kilometer': 'km',
+    'mi'    : 'mi',
+    'mile'  : 'mi'
+}
 
 # Welcome user.
 welcome_string = "\nWelcome to convertinator 2022!\n"
@@ -40,30 +56,38 @@ while True:
     else:
         break
 
+# Print acctepted input units.
+print("Accepted input units: in/inch/\"/ft/feet/\'/yd/yard/m/meter/km/kilometer/mi/mile")
+
 # Loop to prompt user to input units. Keep looping as long as input is not valid.
 while True:
     # Prompt user for input unit and save to variable.
-    input_unit = input("Please enter input length units (in/ft/yd/m/km/mi): ")
+    input_unit = input("Please enter input length units: ")
     # If user input is not one of the keys in the dictionary:
-    if not input_unit in conversion.keys():
+    if not input_unit in units.keys():
         # Inform user to input one of the choices.
         print("Please enter one of the choices for input length units.")
         # Go back to beginning of loop and prompt for input again.
         continue
     else:
+        input_unit = units[input_unit]
         break
+
+# Print accepted output units.
+print("Accepted output units: in/inch/\"/ft/feet/\'/yd/yard/m/meter/km/kilometer/mi/mile")
 
 # Loop to prompt user for output units. Keep looping as long as input is not valid.
 while True:
     # Prompt user to enter output units.
-    output_unit = input("Please enter the output length units (in/ft/yd/m/km/mi): ")
+    output_unit = input("Please enter the output length units: ")
     # If user input is not one of the keys in the dictionary:
-    if not output_unit in conversion.keys():
+    if not output_unit in units.keys():
         # Inform user to input one of the choices.
         print("Please enter one of the choices for output length units.")
         # Go back to beginning of loop and prompt for input again.
         continue
     else:
+        output_unit = units[output_unit]
         break
 
 # Convert the string-type input_length_as_string to int-type.
