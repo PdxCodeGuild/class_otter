@@ -80,7 +80,7 @@ ones = {
 }
 
 def numbers_to_words(input_integer):
-    '''Converts integer numbers between 0 and 99 to word numbers.'''
+    '''Converts integer numbers between 0 and 999 to word numbers.'''
 
     # Determine the numbers in each of 'hundreds', 'tens', and 'ones' places.
     hundreds_place = input_integer // 100
