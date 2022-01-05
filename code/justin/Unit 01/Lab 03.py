@@ -35,6 +35,42 @@ tens_place_names = {
     8: 'eighty',
     9: 'ninety' }
 
+units_roman_numeral = {
+    0: '',
+    1: 'I',
+    2: 'II',
+    3: 'III',
+    4: 'IV',
+    5: 'V',
+    6: 'VI',
+    7: 'VII',
+    8: 'VIII',
+    9: 'IX' }
+
+tens_roman_numeral = {
+    0: '',
+    1: 'X',
+    2: 'XX',
+    3: 'XXX',
+    4: 'XL',
+    5: 'L',
+    6: 'LX',
+    7: 'LXX',
+    8: 'LXXX',
+    9: 'XC' }
+
+hundreds_roman_numeral = {
+    0: '',
+    1: 'C',
+    2: 'CC',
+    3: 'CCC',
+    4: 'CD',
+    5: 'D',
+    6: 'DC',
+    7: 'DCC',
+    8: 'DCCC',
+    9: 'CM' }
+
 def convert_num_to_phrase(num):
     if num == 0:
         return 'zero'
@@ -76,3 +112,23 @@ def test_convert_num_to_phrase():
     assert convert_num_to_phrase(619) == 'six hundred nineteen'
     assert convert_num_to_phrase(811) == 'eight hundred eleven'
     assert convert_num_to_phrase(999) == 'nine hundred ninety-nine'
+
+def convert_num_to_roman_numeral(num):
+    hundreds_digit = num // 100
+    tens_digit = (num - (hundreds_digit * 100)) // 10
+    units_digit = num % 10
+
+    return f"{hundreds_roman_numeral[hundreds_digit]}{tens_roman_numeral[tens_digit]}{units_roman_numeral[units_digit]}"
+
+def test_convert_num_to_roman_numeral():
+    assert convert_num_to_roman_numeral(4) == "IV"
+    assert convert_num_to_roman_numeral(5) == "V"
+    assert convert_num_to_roman_numeral(6) == "VI"
+    assert convert_num_to_roman_numeral(9) == "IX"
+    assert convert_num_to_roman_numeral(10) == "X"
+    assert convert_num_to_roman_numeral(39) == "XXXIX"
+    assert convert_num_to_roman_numeral(160) == "CLX"
+    assert convert_num_to_roman_numeral(207) == "CCVII"
+    assert convert_num_to_roman_numeral(246) == "CCXLVI"
+    assert convert_num_to_roman_numeral(789) == "DCCLXXXIX"
+    assert convert_num_to_roman_numeral(999) == "CMXCIX"
