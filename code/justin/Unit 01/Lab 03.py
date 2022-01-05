@@ -71,6 +71,7 @@ hundreds_roman_numeral = {
     8: 'DCCC',
     9: 'CM' }
 
+
 def convert_num_to_phrase(num):
     if num == 0:
         return 'zero'
@@ -113,6 +114,7 @@ def test_convert_num_to_phrase():
     assert convert_num_to_phrase(811) == 'eight hundred eleven'
     assert convert_num_to_phrase(999) == 'nine hundred ninety-nine'
 
+
 def convert_num_to_roman_numeral(num):
     hundreds_digit = num // 100
     tens_digit = (num - (hundreds_digit * 100)) // 10
@@ -132,3 +134,24 @@ def test_convert_num_to_roman_numeral():
     assert convert_num_to_roman_numeral(246) == "CCXLVI"
     assert convert_num_to_roman_numeral(789) == "DCCLXXXIX"
     assert convert_num_to_roman_numeral(999) == "CMXCIX"
+
+
+def convert_time_to_phrase(time):
+    time_values = time.split(":")
+    hours = int(time_values[0])
+    minutes = int(time_values[1])
+    
+    result = convert_num_to_phrase(hours)
+
+    if minutes == 0:
+        result += " o'clock"
+    else:
+        result += f" {convert_num_to_phrase(minutes)}"
+
+    return result
+
+
+def test_convert_time_to_phrase():
+    assert convert_time_to_phrase("12:00") == "twelve o'clock"
+    assert convert_time_to_phrase("1:37") == "one thirty-seven"
+    assert convert_time_to_phrase("9:59") == "nine fifty-nine"
