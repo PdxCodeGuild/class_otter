@@ -22,22 +22,6 @@ while True:
         input_number_as_integer = int(input_number_as_string)
         break
 
-## This dictionary not needed. Leaving it here so I can see later why it's not used.
-# # Dictionary to map 'hundreds' place numbers to word form.
-# # NOTE: TODO: May just need to concatenate 'Hundred' onto the end for these and not need separate dictionary.
-# # Dictionary seems to be same/similar to 'ones' dictionary.
-# hundreds_dict = {
-#     9   : "Nine Hundred",
-#     8   : "Eight Hundred",
-#     7   : "Seven Hundred",
-#     6   : "Six Hundred",
-#     5   : "Five Hundred",
-#     4   : "Four Hundred",
-#     3   : "Three Hundred",
-#     2   : "Two Hundred",
-#     1   : "One Hundred"
-# }
-
 # Dictionary to map 'tens' place numbers to word form.
 tens_dict = {
     9   : 'Ninety',
@@ -87,55 +71,38 @@ def numbers_to_words(input_integer):
     tens_place = input_integer % 100 // 10
     ones_place = input_integer % 10
 
-    # print(f'''
-    # Hundreds: {hundreds_place}
-    # Tens: {tens_place}
-    # Ones: {ones_place}
-    # ''')
-
     ## Convert integer number to word number. ##
-    if hundreds_place == 0:
-
-        # If tens_place is 0 (number <= 9), we use only 'ones'.
-        if tens_place == 0:
-            result = ones[ones_place]
-        # If tens_place is 1, we use teens.
-        elif tens_place == 1:
-            result = teens[input_integer]
-        # Tens place is 2 or greater.
-        # Determine word for 'tens' place.
-        else:
-            tens_word = tens_dict[tens_place]
-            ones_word = ones[ones_place]
-            if ones_place == 0:
-                result = tens_word
-            else:
-                result = f"{tens_word} {ones_word}"
+    if hundreds_place != 0:
+        result = f"{ones[hundreds_place]} Hundred"
     else:
-        hundreds_word = f"{ones[hundreds_place]} Hundred"
-        # If tens_place is 0 (number <= 9), we use only 'ones'.
-        if tens_place == 0:
-            if ones_place == 0:
-                result = f"{hundreds_word}"
-            else:
-                result = f"{hundreds_word} {ones[ones_place]}"
-        # If tens_place is 1, we use teens.
-        elif tens_place == 1:
-            result = f"{hundreds_word} {teens[input_integer]}"
-        # Tens place is 2 or greater.
-        # Determine word for 'tens' place.
+        result = ''
+    
+    # If tens_place is 0 (number <= 9), we use only 'ones'.
+    if tens_place == 0:
+        result += f" {ones[ones_place]}"
+        
+    # If tens_place is 1, we use teens.
+    elif tens_place == 1:
+        # TODO: Figure out how to do this part without reconstructing the tens
+        # and ones place together. Previously used {teens[int(tens_place * 10 + ones_place)]} in f-string. Then used {teens[int(10 + ones_place)]}.
+        result += f" {teens[int(10 + ones_place)]}"
+        
+    # Tens place is 2 or greater.
+    # Determine word for 'tens' place.
+    else:
+        tens_word = tens_dict[tens_place]
+        ones_word = ones[ones_place]
+        if ones_place == 0:
+            result += f" {tens_word}"
         else:
-            tens_word = tens_dict[tens_place]
-            ones_word = ones[ones_place]
-            if ones_place == 0:
-                result = f"{hundreds_word} {tens_word}"
-            else:
-                result = f"{hundreds_word} {tens_word} {ones_word}"
+            result += f" {tens_word} {ones_word}"
 
-    # Print result.
+    # Print result. Use lstrip() to remove any leading spaces.
+    # Leading space occurs on number where hundreds place is 0 so initial result string is ''.
+    # Concatenating that empty string with another string causes a space at the beginning of the resultant string.
     print(f'''
-    Integer as number: {input_integer}
-    Integer as word: {result}
+    Integer as number: '{input_integer}'
+    Integer as word: '{result.lstrip()}'
     ''')
 
 numbers_to_words(input_number_as_integer)
