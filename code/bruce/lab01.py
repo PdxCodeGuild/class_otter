@@ -6,6 +6,9 @@
 #   Date: January 4, 2022
 #******************************#
 
+# Assignment:
+# https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/labs/01%20Unit%20Converter.md
+
 # Create a 'conversion' dictionary to hold the units and corresponding value of a specified length in that scale.
 # 1 ft == .3048 m == X <other units>
 # 39370.08 in == 3280.84 ft == 1093.613 yd == 1000 m == 1 km == .6213712 mi
