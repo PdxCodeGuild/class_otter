@@ -1,7 +1,7 @@
 # *********************** #
 #   Author: Bruce Stull   #
 #     Number to Phrase    #
-#       Version: 1.0      #
+#       Version: 2.0      #
 #        2022-01-05       #
 # *********************** #
 
@@ -12,7 +12,7 @@
 # Use 'while' loop to prompt user and verify input is usable.
 while True:
     # Prompt user for input number.
-    input_number_as_string = input("Please enter integer number to be converted to words: ")
+    input_number_as_string = input("Please enter integer number (0 - 999) to be converted to words: ")
     # If input is non-numeric:
     if not input_number_as_string.isnumeric():
         print("Please enter an integer numeric value.")
@@ -21,6 +21,22 @@ while True:
     else:
         input_number_as_integer = int(input_number_as_string)
         break
+
+## This dictionary not needed. Leaving it here so I can see later why it's not used.
+# # Dictionary to map 'hundreds' place numbers to word form.
+# # NOTE: TODO: May just need to concatenate 'Hundred' onto the end for these and not need separate dictionary.
+# # Dictionary seems to be same/similar to 'ones' dictionary.
+# hundreds_dict = {
+#     9   : "Nine Hundred",
+#     8   : "Eight Hundred",
+#     7   : "Seven Hundred",
+#     6   : "Six Hundred",
+#     5   : "Five Hundred",
+#     4   : "Four Hundred",
+#     3   : "Three Hundred",
+#     2   : "Two Hundred",
+#     1   : "One Hundred"
+# }
 
 # Dictionary to map 'tens' place numbers to word form.
 tens_dict = {
@@ -63,34 +79,58 @@ ones = {
     0   : 'Zero'
 }
 
-# print(f'''
-# Tens place: {input_number_as_integer // 10}
-# Ones place: {input_number_as_integer % 10}
-# ''')
-
 def numbers_to_words(input_integer):
     '''Converts integer numbers between 0 and 99 to word numbers.'''
 
-    # Determine the numbers in each of 'tens' and 'ones' places.
-    tens_place = input_integer // 10
+    # Determine the numbers in each of 'hundreds', 'tens', and 'ones' places.
+    hundreds_place = input_integer // 100
+    tens_place = input_integer % 100 // 10
     ones_place = input_integer % 10
 
+    # print(f'''
+    # Hundreds: {hundreds_place}
+    # Tens: {tens_place}
+    # Ones: {ones_place}
+    # ''')
+
     ## Convert integer number to word number. ##
-    # If tens_place is 0 (number <= 9), we use only 'ones'.
-    if tens_place == 0:
-        result = ones[ones_place]
-    # If tens_place is 1, we use teens.
-    elif tens_place == 1:
-        result = teens[input_integer]
-    # Tens place is 2 or greater.
-    # Determine word for 'tens' place.
-    else:
-        tens_word = tens_dict[tens_place]
-        ones_word = ones[ones_place]
-        if ones_place == 0:
-            result = tens_word
+    if hundreds_place == 0:
+
+        # If tens_place is 0 (number <= 9), we use only 'ones'.
+        if tens_place == 0:
+            result = ones[ones_place]
+        # If tens_place is 1, we use teens.
+        elif tens_place == 1:
+            result = teens[input_integer]
+        # Tens place is 2 or greater.
+        # Determine word for 'tens' place.
         else:
-            result = f"{tens_word} {ones_word}"
+            tens_word = tens_dict[tens_place]
+            ones_word = ones[ones_place]
+            if ones_place == 0:
+                result = tens_word
+            else:
+                result = f"{tens_word} {ones_word}"
+    else:
+        hundreds_word = f"{ones[hundreds_place]} Hundred"
+        # If tens_place is 0 (number <= 9), we use only 'ones'.
+        if tens_place == 0:
+            if ones_place == 0:
+                result = f"{hundreds_word}"
+            else:
+                result = f"{hundreds_word} {ones[ones_place]}"
+        # If tens_place is 1, we use teens.
+        elif tens_place == 1:
+            result = f"{hundreds_word} {teens[input_integer]}"
+        # Tens place is 2 or greater.
+        # Determine word for 'tens' place.
+        else:
+            tens_word = tens_dict[tens_place]
+            ones_word = ones[ones_place]
+            if ones_place == 0:
+                result = f"{hundreds_word} {tens_word}"
+            else:
+                result = f"{hundreds_word} {tens_word} {ones_word}"
 
     # Print result.
     print(f'''
