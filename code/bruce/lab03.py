@@ -7,7 +7,7 @@
 
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/labs/03%20Number%20To%20Phrase.md
-# Convert a given number into its english representation. For example: 67 becomes 'sixty-seven'. Handle numbers from 0-99.
+# Convert a given number into its english representation. For example: 67 becomes 'sixty-seven'. Handle numbers from 0-999.
 
 # Use 'while' loop to prompt user and verify input is usable.
 while True:
