@@ -101,8 +101,8 @@ def numbers_to_words(input_integer):
     # Leading space occurs on number where hundreds place is 0 so initial result string is ''.
     # Concatenating that empty string with another string causes a space at the beginning of the resultant string.
     print(f'''
-    Integer as number: '{input_integer}'
-    Integer as word: '{result.lstrip()}'
+    Integer as number:  {input_integer}
+    Integer as word:    {result.lstrip()}
     ''')
 
 numbers_to_words(input_number_as_integer)
