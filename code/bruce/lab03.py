@@ -23,7 +23,7 @@ while True:
         break
 
 # Dictionary to map 'tens' place numbers to word form.
-tens_dict = {
+tens = {
     9   : 'Ninety',
     8   : 'Eighty',
     7   : 'Seventy',
@@ -90,7 +90,7 @@ def numbers_to_words(input_integer):
     # Tens place is 2 or greater.
     # Determine word for 'tens' place.
     else:
-        tens_word = tens_dict[tens_place]
+        tens_word = tens[tens_place]
         ones_word = ones[ones_place]
         if ones_place == 0:
             result += f" {tens_word}"
