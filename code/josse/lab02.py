@@ -14,19 +14,26 @@ print(average)'''
 
 #----------------------------------------------------------------------#
 
-'''if number == nums:
-    print(number)
-
-elif number == "done":
-    print("done")'''
-
 
 nums = []
+#for loop to achieve multiple entries 
+for i in range(6):
 
-number = input("please enter a number or done:  ") 
+    number = input("please enter a number or done:  ") 
+    if number == "done":
+        print("done") 
+        break 
 
-nums.append(float(number))
+    nums.append(float(number))
 
+thesum = 0
 
-print(nums)
+for number in nums:
+    thesum += number
+
+total = len(nums) 
+
+average= thesum / total
+
+print(average)
 
