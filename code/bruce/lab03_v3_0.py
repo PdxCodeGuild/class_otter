@@ -27,11 +27,6 @@ while True:
         input_number_as_integer = int(input_number_as_string)
         break
 
-print(f'''
-Input string: {input_number_as_string} {type(input_number_as_string)}
-Input integer: {input_number_as_integer} {type(input_number_as_integer)}
-''')
-
 # TODO: Create version where D, L, and V are calculated like the the M, C, X, and I.
 
 # Determine how many thousands (M).
@@ -58,79 +53,58 @@ Tens:           {number_of_tens}
 Ones:           {number_of_ones}
 ''')
 
-result = ''
+# Dictionaries for mapping decimal to roman characters.
+thousands = {
+    4: "MMMM",
+    3: "MMM",
+    2: "MM",
+    1: "M",
+    0: ""
+}
 
-# Concatenate Thousands.
-if number_of_thousands == 4:
-    result += "MMMM"
-elif number_of_thousands == 3:
-    result += "MMM"
-elif number_of_thousands == 2:
-    result += "MM"
-elif number_of_thousands == 1:
-    result += "M"
+hundreds = {
+    9: "CM",
+    8: "DCCC",
+    7: "DCC",
+    6: "DC",
+    5: "D",
+    4: "CD",
+    3: "CCC",
+    2: "CC",
+    1: "C",
+    0: ""
+}
 
-# Concatenate Hundreds.
-if number_of_hundreds == 9:
-    result += "CM"
-elif number_of_hundreds == 8:
-    result += "DCCC"
-elif number_of_hundreds == 7:
-    result += "DCC"
-elif number_of_hundreds == 6:
-    result += "DC"
-elif number_of_hundreds == 5:
-    result += "D"
-elif number_of_hundreds == 4:
-    result += "CD"
-elif number_of_hundreds == 3:
-    result += "CCC"
-elif number_of_hundreds == 2:
-    result += "CC"
-elif number_of_hundreds == 1:
-    result += "C"
+tens = {
+    9: "XC",
+    8: "LXXX",
+    7: "LXX",
+    6: "LX",
+    5: "L",
+    4: "XL",
+    3: "XXX",
+    2: "XX",
+    1: "X",
+    0: ""
+}
 
-# Concatenate Tens.
-if number_of_tens == 9:
-    result += "XC"
-elif number_of_tens == 8:
-    result += "LXXX"
-elif number_of_tens == 7:
-    result += "LXX"
-elif number_of_tens == 6:
-    result += "LX"
-elif number_of_tens == 5:
-    result += "L"
-elif number_of_tens == 4:
-    result += "XL"
-elif number_of_tens == 3:
-    result += "XXX"
-elif number_of_tens == 2:
-    result += "XX"
-elif number_of_tens == 1:
-    result += "X"
+ones = {
+    9: "IX",
+    8: "VIII",
+    7: "VII",
+    6: "VI",
+    5: "V",
+    4: "IV",
+    3: "III",
+    2: "II",
+    1: "I",
+    0: ""
+}
 
-# Concatenate Ones.
-if number_of_ones == 9:
-    result += "IX"
-elif number_of_ones == 8:
-    result += "VIII"
-elif number_of_ones == 7:
-    result += "VII"
-elif number_of_ones == 6:
-    result += "VI"
-elif number_of_ones == 5:
-    result += "V"
-elif number_of_ones == 4:
-    result += "IV"
-elif number_of_ones == 3:
-    result += "III"
-elif number_of_ones == 2:
-    result += "II"
-elif number_of_ones == 1:
-    result += "I"
+# Concatenate the roman characters.
+result = f"{thousands[number_of_thousands]}{hundreds[number_of_hundreds]}{tens[number_of_tens]}{ones[number_of_ones]}"
 
-
+# Display results.
 print(f'''
 Decimal:    {input_number_as_integer}
 Roman:      {result}
