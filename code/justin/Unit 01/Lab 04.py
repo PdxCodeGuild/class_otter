@@ -14,6 +14,12 @@ worth 1. Use the following rules to determine the advice:
     Over 21, advise "Already Busted"
 
 Print out the current total point value and the advice.
+
+Version 2
+Aces can be worth 11 if they won't put the total point value of both cards over 21. Remember that you can have multiple
+aces in a hand. Try generating a list of all possible hand values by doubling the number of values in the output
+whenever you encounter an ace. For one half, add 1, for the other, add 11. This ensures if you have multiple aces that
+you account for the full range of possible values.
 '''
 
 
@@ -62,66 +68,100 @@ def get_card(card_ordinal):
     
     return None
 
-def get_hand_value(cards):
-    result = 0
+def get_hand_values(cards):
+    results = []
+    ace_count = 0
+    non_ace_sum = 0
     for card in cards:
-        result += playing_card_values[card]
-    return result
+        if card == 'A':
+            ace_count += 1
+        else:
+            non_ace_sum += playing_card_values[card]
 
-def test_get_hand_value():
-    assert get_hand_value(['A', '5', '4']) == 10
-    assert get_hand_value(['10', '9', '2']) == 21
-    assert get_hand_value(['K', 'Q', 'A']) == 21
-    assert get_hand_value(['K', 'Q', 'J']) == 30
+    if ace_count > 0:
+        for index in range(ace_count):
+            results.append(non_ace_sum + ace_count + (index * 10))
+            results.append(non_ace_sum + ace_count + ((index + 1) * 10))
+    else:
+        results.append(non_ace_sum)
+    
+    results.sort()
+    return results
 
-def get_advice(hand_value):
-    if hand_value < 3:
-        return None
-    elif hand_value < 17:
-        return advice_strings[0]
-    elif hand_value < 21:
-        return advice_strings[1]
-    elif hand_value == 21:
-        return advice_strings[2]
-    elif hand_value > 21:
-        return advice_strings[3]
+def test_get_hand_values():
+    assert get_hand_values(['A', '5', '4']) == [10, 20]
+    assert get_hand_values(['10', '9', '2']) == [21]
+    assert get_hand_values(['K', 'Q', 'A']) == [21, 31]
+    assert get_hand_values(['A', 'Q', 'A']) == [12, 22, 22, 32]
+    assert get_hand_values(['K', 'Q', 'J']) == [30]
+    assert get_hand_values(['A', 'A', 'A']) == [3, 13, 13, 23, 23, 33]
+    assert get_hand_values(['A', 'A', '9']) == [11, 21, 21, 31]
 
-    return None
+def get_advice(hand_values):
+    results = []
+    for hand_value in hand_values:
+        if hand_value < 3:
+            results.append('')
+            continue
+        elif hand_value < 17:
+            results.append(advice_strings[0])
+            continue
+        elif hand_value < 21:
+            results.append(advice_strings[1])
+            continue
+        elif hand_value == 21:
+            results.append(advice_strings[2])
+            continue
+        elif hand_value > 21:
+            results.append(advice_strings[3])
+            continue
+        else:
+            results.append('')
+            continue
+    
+    return results
 
 def test_get_advice():
-    assert get_advice(-37) == None
+    assert get_advice([-37]) == ['']
 
-    assert get_advice(3) == 'Hit'
-    assert get_advice(4) == 'Hit'
-    assert get_advice(5) == 'Hit'
-    assert get_advice(6) == 'Hit'
-    assert get_advice(7) == 'Hit'
-    assert get_advice(8) == 'Hit'
-    assert get_advice(9) == 'Hit'
-    assert get_advice(10) == 'Hit'
-    assert get_advice(11) == 'Hit'
-    assert get_advice(12) == 'Hit'
-    assert get_advice(13) == 'Hit'
-    assert get_advice(14) == 'Hit'
-    assert get_advice(15) == 'Hit'
-    assert get_advice(16) == 'Hit'
+    assert get_advice([3]) == ['Hit']
+    assert get_advice([4]) == ['Hit']
+    assert get_advice([5]) == ['Hit']
+    assert get_advice([6]) == ['Hit']
+    assert get_advice([7]) == ['Hit']
+    assert get_advice([8]) == ['Hit']
+    assert get_advice([9]) == ['Hit']
+    assert get_advice([10]) == ['Hit']
+    assert get_advice([11]) == ['Hit']
+    assert get_advice([12]) == ['Hit']
+    assert get_advice([13]) == ['Hit']
+    assert get_advice([14]) == ['Hit']
+    assert get_advice([15]) == ['Hit']
+    assert get_advice([16]) == ['Hit']
 
-    assert get_advice(17) == 'Stay'
-    assert get_advice(18) == 'Stay'
-    assert get_advice(19) == 'Stay'
-    assert get_advice(20) == 'Stay'
+    assert get_advice([17]) == ['Stay']
+    assert get_advice([18]) == ['Stay']
+    assert get_advice([19]) == ['Stay']
+    assert get_advice([20]) == ['Stay']
 
-    assert get_advice(21) == 'Blackjack!'
+    assert get_advice([21]) == ['Blackjack!']
 
-    assert get_advice(22) == 'Already Busted'
-    assert get_advice(23) == 'Already Busted'
-    assert get_advice(24) == 'Already Busted'
-    assert get_advice(25) == 'Already Busted'
-    assert get_advice(26) == 'Already Busted'
-    assert get_advice(27) == 'Already Busted'
-    assert get_advice(28) == 'Already Busted'
-    assert get_advice(29) == 'Already Busted'
-    assert get_advice(30) == 'Already Busted'
+    assert get_advice([22]) == ['Already Busted']
+    assert get_advice([23]) == ['Already Busted']
+    assert get_advice([24]) == ['Already Busted']
+    assert get_advice([25]) == ['Already Busted']
+    assert get_advice([26]) == ['Already Busted']
+    assert get_advice([27]) == ['Already Busted']
+    assert get_advice([28]) == ['Already Busted']
+    assert get_advice([29]) == ['Already Busted']
+    assert get_advice([30]) == ['Already Busted']
+    assert get_advice([31]) == ['Already Busted']
+    assert get_advice([32]) == ['Already Busted']
+    assert get_advice([33]) == ['Already Busted']
+
+    assert get_advice([12, 22, 22, 32]) == ['Hit', 'Already Busted', 'Already Busted', 'Already Busted']
+    assert get_advice([3, 13, 13, 23, 23, 33]) == ['Hit', 'Hit', 'Hit', 'Already Busted', 'Already Busted', 'Already Busted']
+    assert get_advice([11, 21, 21, 31]) == ['Hit', 'Blackjack!', 'Blackjack!', 'Already Busted']
 
 
 def main():
@@ -129,10 +169,12 @@ def main():
     for index in range(3):
         card_list.append(get_card(index+1))
     
-    hand_value = get_hand_value(card_list)
+    hand_values = get_hand_values(card_list)
 
-    advice = get_advice(hand_value)
+    advice_list = get_advice(hand_values)
 
-    print(f"\n{hand_value}: {advice}")
+    for index in range(len(hand_values)):
+        print(f"\n{hand_values[index]}: {advice_list[index]}")
+
 
 main()
