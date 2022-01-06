@@ -31,6 +31,9 @@ Steps
     Find how many numbers match
     Add to your balance the winnings from your matches
     After the loop, print the final balance
+
+Version 2
+The ROI (return on investment) is defined as (earnings - expenses)/expenses. Calculate your ROI, print it out along with your earnings and expenses.
 '''
 import random
 
@@ -94,15 +97,16 @@ def test_get_prize():
 
 def main():
     winning_numbers = pick_6()
-    balance = 0
+    expenses = 0
+    earnings = 0
 
     for _ in range(100000):
         ticket = pick_6()
-        balance -= 2
+        expenses += 2
         match_count = get_number_of_matches(ticket, winning_numbers)
-        balance += get_prize(match_count)
+        earnings += get_prize(match_count)
 
-    print(balance)
+    print(f"Winnings: {earnings - expenses}\nROI: {(earnings - expenses) / expenses}")
 
 
 main()
