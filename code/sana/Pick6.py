@@ -10,7 +10,7 @@ matches = {
 balance = 0
 earnings = 0
 expenses = 0
-for tickets in range(1000):
+for tickets in range(100000):
     winning_ticket = []
     generated_ticket = []
     for x in range(6):
@@ -35,4 +35,5 @@ for tickets in range(1000):
         earnings = earnings + matches[counter]
         print(earnings)
     balance = earnings - expenses
-print(f"This is your ROI is ${balance}")
+    roi = (earnings - expenses) / expenses
+print(f"This is your balance is ${balance} and ROD is {roi}")
