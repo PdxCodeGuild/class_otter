@@ -60,8 +60,30 @@ def peaks_and_valleys(data_list):
     results.sort()
     return results
 
-
-    return peaks(data_list).join(valleys(data_list)).sort()
-
 def test_peaks_and_valleys():
     assert peaks_and_valleys(test_data) == [6, 9, 14, 17]
+
+def graph_data(data_list):
+    max_value = -1
+    for value in data_list:
+        if value > max_value:
+            max_value = value
+
+    for iteration in range(max_value):
+        height = max_value - iteration
+        line = ""
+        for data in data_list:
+            if data >= height:
+                line += 'X'
+            else:
+                line += ' '
+        print(line)
+    
+
+def main():
+    graph_data(test_data)
+    print(peaks(test_data))
+    print(valleys(test_data))
+    print(peaks_and_valleys(test_data))
+
+main()
