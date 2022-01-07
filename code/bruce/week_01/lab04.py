@@ -37,7 +37,7 @@ def determine_points_of_cards(card_list):
         # Experiment with error handling.
         # Handle inputs not in dictionary.
         try:
-            points += cards[card]
+            points += cards[card.upper()]
         except KeyError:
             points += 0
     return points
@@ -47,6 +47,10 @@ def test_determine_points_of_cards():
     assert determine_points_of_cards([' ','2','3']) == 5
     assert determine_points_of_cards(['5','%','2']) == 7
     assert determine_points_of_cards(['9','2','?']) == 11
+    assert determine_points_of_cards(['9','2','j']) == 21
+    assert determine_points_of_cards(['9','q','?']) == 19
+    assert determine_points_of_cards(['k','2','?']) == 12
+    assert determine_points_of_cards(['q','k','j']) == 30
 
 def request_input_return_points(card_requests =['first', 'second', 'third']):
     '''Requests user input of cards and returns blackjack point value of the hand.'''
