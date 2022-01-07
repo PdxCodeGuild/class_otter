@@ -1,4 +1,4 @@
-first_ten_digits = {1: "one", 
+ones_digits = {1: "one", 
     2: "two", 
     3: "three", 
     4: "four", 
@@ -29,33 +29,52 @@ tens_digits = {
     7: "seventy",
     8: "eighty",
     9: "ninety",
-    10: "one hundred"
+    10: "one hundred",
+    20: "two hundred",
+    30: "three hundred",
+    40: "four hundred",
+    50: "five hundred",
+    60: "six hundred",
+    70: "seven hundred",
+    80: "eight hundred",
+    90: "nine hundred",
 }
 
 num = []
-num = int(input(" please"))
+num = int(input("please enter a number between 0 and 999:"))
+num_div_ten = num // 10
+num_remainder = num % 10
 
-tens_place = num // 10
-ones_place = num % 10
-
-if tens_place == 0:
-    string_num = first_ten_digits.get(num)
+if num_div_ten == 0: # single digits
+    string_num = ones_digits.get(num)
     print (string_num)
-elif tens_place == 1:
+elif num_div_ten == 1: # teens digits
     string_num = teen_digits.get(num)
     print (string_num)
-elif tens_place > 1 and tens_place < 11:
-    tens_string_num = tens_digits.get(tens_place)
-    ones_string_num = first_ten_digits.get(ones_place)
+elif num_div_ten > 1 and num_div_ten < 11: # numbers 20 through 109
+    tens_string_num = tens_digits.get(num_div_ten)
+    ones_string_num = ones_digits.get(num_remainder)
     string_num = str(tens_string_num) + "-" + str(ones_string_num)
     #string_num = "{}-{}".format(str(tens_string_num), str(ones_string_num))
     print(string_num)
-elif tens_place%10 == 1:
-    teen_num = num - (tens_place - 1)*10
+elif num_div_ten%10 == 1 and num > 100: # teen numbers over 100
+    teen_num = num - (num_div_ten - 1) * 10
     teen_string_num = teen_digits.get(teen_num)
-#    string_num = "one hundred " + str(teen_string_num)
-#    print(string_num)
-# elif tens_place > 11 and tens_place < 100 and tens_place%10 != 1:
-#     pass
-# else:
-#     print("This is an unacceptable number.")
+    hundred_num = num_div_ten - 1
+    hundred_string_num = tens_digits.get(hundred_num)
+    string_num = str(hundred_string_num) + " " + (teen_string_num)
+    print(string_num)
+elif num%100 == 0: #numbers divisible by 100
+    hundred_num = (num // 100) * 10 
+    string_num = tens_digits.get(hundred_num)
+    print(string_num)
+elif num_div_ten > 11 and num_div_ten < 100 and num_div_ten%10 != 1 and num%100 != 0: #numbers over 100 excluding teens
+    hundred_num = (num // 100) * 10 
+    hundred_string_num = tens_digits.get(hundred_num)
+    tens_num = num_div_ten%10
+    tens_string_num = tens_digits.get(tens_num)
+    ones_string_num = ones_digits.get(num_remainder)
+    string_num = str(hundred_string_num) + " " +(tens_string_num) + "-" + (ones_string_num)
+    print(string_num)
+else:
+     print("This is an unacceptable number.")
