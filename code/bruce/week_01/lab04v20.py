@@ -142,6 +142,32 @@ def main():
 
 main()
 
+# # If 'main()' is not commented-out, we get errored out.
+# PS C:\Users\Bruce\Programming\class_otter\code\bruce\week_01> pytest .\lab04v20.py
+# ======================================================================================= test session starts ========================================================================================
+# platform win32 -- Python 3.10.1, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+# rootdir: C:\Users\Bruce\Programming\class_otter\code\bruce\week_01
+# collected 0 items / 1 error
+
+# ============================================================================================== ERRORS ==============================================================================================
+# ___________________________________________________________________________________ ERROR collecting lab04v20.py ___________________________________________________________________________________
+# lab04v20.py:143: in <module>
+#     main()
+# lab04v20.py:135: in main
+#     card = request_input(request)
+# lab04v20.py:38: in request_input
+#     card = input(f"Please enter your {which_request} card: ")
+# C:\Users\Bruce\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\capture.py:217: in read
+#     raise OSError(
+# E   OSError: pytest: reading from stdin while output is captured!  Consider using `-s`.
+# ----------------------------------------------------------------------------------------- Captured stdout ------------------------------------------------------------------------------------------
+# Please enter your first card: 
+# ===================================================================================== short test summary info ====================================================================================== 
+# ERROR lab04v20.py - OSError: pytest: reading from stdin while output is captured!  Consider using `-s`.
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+# ========================================================================================= 1 error in 0.12s ========================================================================================= 
+# PS C:\Users\Bruce\Programming\class_otter\code\bruce\week_01>
+
 # This 'print()' function is not run during pytest.
 # Correction: The function may 'run' but there is nothing printed to console.
 print("Tests are probably complete.")
