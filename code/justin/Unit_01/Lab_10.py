@@ -72,11 +72,11 @@ def test_get_row_cells():
     sample_lines = load_lines_from_file('sample.csv')
     assert get_row_cells(sample_lines[0]) == ['header a', 'header b', 'header c', 'header d']
     assert get_row_cells(sample_lines[1]) == ['1', '5', '3', '9']
-    assert get_row_cells(sample_lines[2]) == ['1', '4', '5', '6']
-    assert get_row_cells(sample_lines[3]) == ['4', '5', '2', '0']
-    assert get_row_cells(sample_lines[4]) == ['1', '4', '2', '6']
-    assert get_row_cells(sample_lines[5]) == ['9', '2', '5', '2']
-    assert get_row_cells(sample_lines[6]) == ['2', '7', '4', '9']
+    assert get_row_cells(sample_lines[2]) == ['2', '4', '5', '6']
+    assert get_row_cells(sample_lines[3]) == ['3', '5', '2', '0']
+    assert get_row_cells(sample_lines[4]) == ['4', '4', '2', '6']
+    assert get_row_cells(sample_lines[5]) == ['5', '2', '5', '2']
+    assert get_row_cells(sample_lines[6]) == ['6', '7', '4', '9']
 
 def create_entry(headers, row):
     entry = {}
@@ -99,6 +99,7 @@ def test_create_entry():
 
 def process_csv(csv_lines):
     headers = get_row_cells(csv_lines[0])
+    table_id_header = headers[0]
 
     entries = []
     for index in range(len(csv_lines)):
@@ -107,14 +108,15 @@ def process_csv(csv_lines):
 
         row = get_row_cells(csv_lines[index])
         entries.append(create_entry(headers, row))
-    return entries
+    return entries, table_id_header
 
 def test_process_csv():
     sample_lines = load_lines_from_file('sample.csv')
     sample_headers = get_row_cells(sample_lines[0])
     rows = [get_row_cells(sample_lines[1]), get_row_cells(sample_lines[2]), get_row_cells(sample_lines[3]), get_row_cells(sample_lines[4]), get_row_cells(sample_lines[5]), get_row_cells(sample_lines[6])]
     
-    assert process_csv(sample_lines) == [
+    sample_table, table_id_header = process_csv(sample_lines)
+    assert sample_table == [
         {f'{sample_headers[0]}': f'{rows[0][0]}', f'{sample_headers[1]}': f'{rows[0][1]}', f'{sample_headers[2]}': f'{rows[0][2]}', f'{sample_headers[3]}': f'{rows[0][3]}'},
         {f'{sample_headers[0]}': f'{rows[1][0]}', f'{sample_headers[1]}': f'{rows[1][1]}', f'{sample_headers[2]}': f'{rows[1][2]}', f'{sample_headers[3]}': f'{rows[1][3]}'},
         {f'{sample_headers[0]}': f'{rows[2][0]}', f'{sample_headers[1]}': f'{rows[2][1]}', f'{sample_headers[2]}': f'{rows[2][2]}', f'{sample_headers[3]}': f'{rows[2][3]}'},
@@ -122,11 +124,12 @@ def test_process_csv():
         {f'{sample_headers[0]}': f'{rows[4][0]}', f'{sample_headers[1]}': f'{rows[4][1]}', f'{sample_headers[2]}': f'{rows[4][2]}', f'{sample_headers[3]}': f'{rows[4][3]}'},
         {f'{sample_headers[0]}': f'{rows[5][0]}', f'{sample_headers[1]}': f'{rows[5][1]}', f'{sample_headers[2]}': f'{rows[5][2]}', f'{sample_headers[3]}': f'{rows[5][3]}'}
     ]
+    assert table_id_header == 'header a'
 
 
-def create_record(table, name, favorite_fruit, favorite_color):
+def create_record(table, table_id_header, name, favorite_fruit, favorite_color):
     for entry in table:
-        if entry['name'] == name:
+        if entry[table_id_header] == name:
             return table
 
     entry = {'name': name, 'favorite fruit': favorite_fruit, 'favorite color': favorite_color}
@@ -134,43 +137,43 @@ def create_record(table, name, favorite_fruit, favorite_color):
     return table
 
 def test_create_record():
-    sample_contacts = process_csv(load_lines_from_file('sample_contacts.csv'))
-    create_record(sample_contacts, 'Kelly', 'Banana', 'Green')
+    sample_contacts, table_id_header = process_csv(load_lines_from_file('sample_contacts.csv'))
+    create_record(sample_contacts, table_id_header, 'Kelly', 'Banana', 'Green')
 
     record_found = False
     for contact in sample_contacts:
-        if contact['name'] == 'Kelly':
+        if contact[table_id_header] == 'Kelly':
             record_found = True
     assert record_found
 
-def retrieve_record(table, name):
+def retrieve_record(table, table_id_header, name):
     for entry in table:
-        if entry['name'] == name:
+        if entry[table_id_header] == name:
             return entry
     return None
 
 def test_retrieve_record():
-    sample_contacts = process_csv(load_lines_from_file('sample_contacts.csv'))
-    assert retrieve_record(sample_contacts, 'sam') == {'name': 'sam', 'favorite fruit': 'pineapple', 'favorite color': 'blue'}
-    assert retrieve_record(sample_contacts, 'bacon') == None
+    sample_contacts, table_id_header = process_csv(load_lines_from_file('sample_contacts.csv'))
+    assert retrieve_record(sample_contacts, table_id_header, 'sam') == {'name': 'sam', 'favorite fruit': 'pineapple', 'favorite color': 'blue'}
+    assert retrieve_record(sample_contacts, table_id_header, 'bacon') == None
 
-def update_record(table, name, updates):
+def update_record(table, table_id_header, name, updates):
     for entry in table:
-        if entry['name'] == name:
+        if entry[table_id_header] == name:
             for update in updates.items():
                 entry[update[0]] = update[1]
             return entry
     return None
 
 def test_update_record():
-    sample_contacts = process_csv(load_lines_from_file('sample_contacts.csv'))
-    assert update_record(sample_contacts, 'sam', {'favorite color': 'yellow'}) == {'name': 'sam', 'favorite fruit': 'pineapple', 'favorite color': 'yellow'}
+    sample_contacts, table_id_header = process_csv(load_lines_from_file('sample_contacts.csv'))
+    assert update_record(sample_contacts, table_id_header, 'sam', {'favorite color': 'yellow'}) == {'name': 'sam', 'favorite fruit': 'pineapple', 'favorite color': 'yellow'}
 
-def delete_record(table, name):
+def delete_record(table, table_id_header, name):
     record_found = False
     record_to_delete = None
     for entry in table:
-        if entry['name'] == name:
+        if entry[table_id_header] == name:
             record_found = True
             record_to_delete = entry
 
@@ -180,14 +183,15 @@ def delete_record(table, name):
     return table
 
 def test_delete_record():
-    sample_contacts = process_csv(load_lines_from_file('sample_contacts.csv'))
-    delete_record(sample_contacts, 'sam')
+    sample_contacts, table_id_header = process_csv(load_lines_from_file('sample_contacts.csv'))
+    delete_record(sample_contacts, table_id_header, 'sam')
 
     record_found = False
     for contact in sample_contacts:
-        if contact['name'] == 'sam':
+        if contact[table_id_header] == 'sam':
             record_found = True
     assert not record_found
+
 
 def clean_command_input(command_string):
     command_string = str(command_string)[0:1].upper()
@@ -210,10 +214,56 @@ def test_clean_command_input():
     assert clean_command_input(1337) == ''
     assert clean_command_input('$%^&*') == ''
 
+def table_to_csv_string(table):
+    csv_string = ''
+
+    for header in table[0].keys():
+        csv_string += header + ','
+    csv_string = csv_string[:-1]
+    
+    for row in table:
+        csv_string += '\n'
+        for _, value in row.items():
+            csv_string += value + ','
+        csv_string = csv_string[:-1]
+
+    return csv_string
+
+def test_table_to_csv_string():
+    sample_lines = load_lines_from_file('sample.csv')
+    sample_table, _ = process_csv(sample_lines)
+
+    assert table_to_csv_string(sample_table) == 'header a,header b,header c,header d\n1,5,3,9\n2,4,5,6\n3,5,2,0\n4,4,2,6\n5,2,5,2\n6,7,4,9'
+
+def write_to_db(table, file_name):
+    base_path = os.path.dirname(__file__)
+    try:
+        with open(f'{base_path}\\{file_name}', 'w') as file:
+            file.write(table_to_csv_string(table))
+    except FileNotFoundError as exception:
+        print(f'{exception.strerror}: {exception.filename}')
+
+def test_write_to_db():
+    file_name = 'sample.csv'
+    sample_table, table_id_header = process_csv(load_lines_from_file(file_name))
+
+    update_record(sample_table, table_id_header, '1', {'header b': '9'})
+    write_to_db(sample_table, file_name)
+    sample_table, table_id_header = process_csv(load_lines_from_file(file_name))
+    record = retrieve_record(sample_table, table_id_header, '1')
+    assert record['header b'] == '9'
+
+    update_record(sample_table, table_id_header, '1', {'header b': '5'})
+    write_to_db(sample_table, file_name)
+    sample_table, table_id_header = process_csv(load_lines_from_file(file_name))
+    record = retrieve_record(sample_table, table_id_header, '1')
+    assert record['header b'] == '5'
+
 
 def main():
-    lines = load_lines_from_file('sample_contacts.csv')
-    contacts_list = process_csv(lines)
+    file_name = 'sample_contacts.csv'
+    lines = load_lines_from_file(file_name)
+    contacts_list, table_id_header = process_csv(lines)
 
     while True:
         command = input("Enter a command ([C]reate, [R]etrieve, [U]pdate, [D]elete, or [Q]uit): ")
@@ -223,11 +273,11 @@ def main():
             name = input("\tEnter name: ")
             favorite_fruit = input("\tEnter favorite fruit: ")
             favorite_color = input("\tEnter favorite color: ")
-            create_record(contacts_list, name, favorite_fruit, favorite_color)
+            create_record(contacts_list, table_id_header, name, favorite_fruit, favorite_color)
             continue
         elif command == 'R':
             name = input("\tEnter name: ")
-            record = retrieve_record(contacts_list, name)
+            record = retrieve_record(contacts_list, table_id_header, name)
             if record == None:
                 print(f"No contact information for {name}")
             else:
@@ -245,15 +295,31 @@ def main():
                     continue
                 else:
                     break
-            update_record(contacts_list, name, updates)
+            update_record(contacts_list, table_id_header, name, updates)
             continue
         elif command == 'D':
             name = input("\tEnter name: ")
-            delete_record(contacts_list, name)
+            delete_record(contacts_list, table_id_header, name)
             continue
         elif command == 'Q':
             break
-
+    
+    write_to_db(contacts_list, file_name)
 
 
 main()
+
+'''sample_contacts.csv
+name, favorite fruit, favorite color
+matthew, blackberries, orange
+sam, pineapple, blue
+bob, cherry, blue
+alice, blueberry, red
+jenny, strawberry, pink
+frank, apple, red
+jason, cherry, red
+mike, pear, purple
+amber, cherry, pink
+jordan, kiwi, green
+stephanie, apple, pink
+'''
