@@ -44,6 +44,7 @@ def determine_points_of_cards(card_list):
 
 def test_determine_points_of_cards():
     assert determine_points_of_cards(['2','3','4']) == 9
+    assert determine_points_of_cards(['A','3','4']) == 8
     assert determine_points_of_cards([' ','2','3']) == 5
     assert determine_points_of_cards(['5','%','2']) == 7
     assert determine_points_of_cards(['9','2','?']) == 11
@@ -100,4 +101,4 @@ def main():
     {points}: {advise(points)}
     ''')
 
-main()
+# main()
