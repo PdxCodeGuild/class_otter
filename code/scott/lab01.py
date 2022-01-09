@@ -1,3 +1,4 @@
+#lab 01 Unit Converter - Scott Madden
 #Ask the user for the distance in feet then convert to meters
 units_in_meters = {
     'ft': 0.3048,

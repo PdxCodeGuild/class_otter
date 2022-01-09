@@ -1,4 +1,4 @@
-#Lab 2 Average Nunmbers Version 2
+#Lab 02 Average Nunmbers Version 2 - Scott Madden
 nums = []
 entry = True
 while entry:

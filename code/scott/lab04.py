@@ -1,4 +1,4 @@
-# BlackJack Advice lab04
+# BlackJack Advice lab04 - Scott Madden
 card_values = {
     'A': 1, 
     '2': 2, 
