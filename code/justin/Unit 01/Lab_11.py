@@ -81,6 +81,27 @@ def binary_search(nums, value):
 nums = [1, 2, 3, 4, 5, 6, 7, 8]
 index = linear_search(nums, 3)
 print(index) # 2
+
+
+Part 3 - Bubble Sort
+Bubble sort is one of the simplest and least efficient sorting algorithms.
+We repeatedly loop over the list, comparing each number to the one next
+to it, and swapping them if needed.
+
+procedure bubbleSort(A : list of sortable items)
+    n := length(A)
+    repeat
+        swapped = false
+        for i := 1 to n - 1 inclusive do
+            /* if this pair is out of order */
+            if A[i - 1] > A[i] then
+                /* swap them and remember something changed */
+                swap(A[i - 1], A[i])
+                swapped := true
+            end if
+        end for
+    until not swapped
+end procedure
 '''
 import math
 
@@ -95,7 +116,6 @@ def linear_search(nums, value):
 def test_linear_search():
     assert linear_search([1, 2, 3, 4, 5, 6, 7, 8], 3) == 2
     assert linear_search([1, 2, 3, 4, 5, 6, 7, 8], 8) == 7
-
     assert linear_search([1, 2, 3, 4, 5, 6, 7, 8], 20) == -1
 
 def binary_search(nums, value):
@@ -118,8 +138,28 @@ def binary_search(nums, value):
 def test_binary_search():
     assert binary_search([1, 2, 3, 4, 5, 6, 7, 8], 3) == 2
     assert binary_search([1, 2, 3, 4, 5, 6, 7, 8], 8) == 7
-
     assert binary_search([1, 2, 3, 4, 5, 6, 7, 8], 20) == -1
+
+def bubble_sort(list):
+    n = len(list)
+    swapped = True
+    current = 0
+    next = 0
+    while swapped:
+        swapped = False
+        for i in range(1, n):
+            current = list[i - 1]
+            next = list[i]
+            if current > next:
+                list[i - 1] = next
+                list[i] = current
+                swapped = True
+    return list
+
+def test_bubble_sort():
+    assert bubble_sort([6, 3, 1, 8, 5, 2, 4, 7]) == [1, 2, 3, 4, 5, 6, 7, 8]
+    assert bubble_sort([3, 8, 7, 5, 6, 4, 1, 2]) == [1, 2, 3, 4, 5, 6, 7, 8]
+    assert bubble_sort([7, 4, 3, 6, 8, 2, 5, 1]) == [1, 2, 3, 4, 5, 6, 7, 8]
 
 
 def main():
@@ -130,6 +170,10 @@ def main():
     nums.sort()
     index = binary_search(nums, 3)
     print(index)
+
+    unsorted = [6, 3, 1, 8, 5, 2, 4, 7]
+    sorted = bubble_sort(unsorted)
+    print(sorted)
 
 
 main()
