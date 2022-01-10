@@ -15,7 +15,11 @@ from io import StringIO
 # https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/docs/02%20Exceptions%20%26%20Testing.md
 
 # Create cards dictionary.
+# Added functionality which accepts a '1' as input in addition to 'A'.
 cards = {
+    '1': 1,
+    'A1': 1,
+    'A11': 11,
     'A': 1,
     '2': 2,
     '3': 3,
@@ -31,22 +35,29 @@ cards = {
     'K': 10,
 }
 
-# Not sure how to test this.
+# Use monkeypatch to test this.
 # https://gist.github.com/GenevieveBuckley/efd16862de9e2fe7adfd2bf2bef93e02
 def request_input(which_request = "Enter a value: "):
-    '''Request input of card rank and return the card.'''
-    card = input(f"Please enter your {which_request} card: ")
-    return card
+    '''Request input of card rank and return the upper-case card rank.'''
+    while True:
+        card = input(f"Please enter your {which_request} card: ").upper()
+        if card in cards.keys():
+            return card
+        else:
+            print("Please enter valid card rank.")
+            continue
 
 def test_request_input(monkeypatch):
     card_input = StringIO('a')
     monkeypatch.setattr('sys.stdin', card_input)
-    assert request_input() == 'a'
+    # request_input('a') should be 'A'
+    assert request_input() == 'A'
     
     card_input = StringIO('2')
     monkeypatch.setattr('sys.stdin', card_input)
     assert request_input() == '2'
 
+# TODO: Add card validation, or error handling here.
 def add_card_to_list(card, card_list = []):
     '''Add argument card to card list. Return the card list.'''
     card_list.append(card)
@@ -55,24 +66,89 @@ def add_card_to_list(card, card_list = []):
 def test_add_card_to_list():
     assert add_card_to_list('j') == ['j']
     assert add_card_to_list('k',['2', '3']) == ['2', '3', 'k']
+    assert add_card_to_list('K',['2', '3']) == ['2', '3', 'K']
     assert add_card_to_list('10',['1']) == ['1', '10']
     assert add_card_to_list('10',['7', '9']) == ['7', '9', '10']
     assert add_card_to_list('3',['j', '6']) == ['j', '6', '3']
 
-# def create_optional_points_of_cards(card_list):
-#     '''Accepts argument of card list. Returns a list of one or more point values when Aces are present.'''
-#     points = [0, 0, 0, 0, 0, 0, 0, 0]
-#     for card in card_list:
-#         if card not in ['A']:
-#             # Add card value to all slots in list.
-#             for score in points:
-#                 score += cards[card.upper()]
-#     return points
+# TODO: Maybe break out a function which only returns point value for a given card.
+# TODO: Need to figure out way to make determine_points_of_cards_with_ace_accomodation() simpler.
+# Maybe there is too much going on within the function?
+# Maybe refactor determine_points_of_cards() first?
 
-# def test_create_optional_points_of_cards():
-#     card_list = ['2']
-#     print(card_list)
-#     assert create_optional_points_of_cards(card_list) == [2, 2, 2, 2, 2, 2, 2, 2]
+def determine_points_of_cards_with_ace_accomodation(card_list):
+    '''Returns an integer point value if no Aces are present.'''
+    '''Otherwise, returns a list of point values. Accomodates 'A' values of '1' and '11'.'''
+    points_list = []
+    # This case seems to work properly, so now only need to work on Aces present case.
+    # No Aces present: Determine the integer point value when no Aces are present.
+    if 'A' not in card_list and 'a' not in card_list:
+        return determine_points_of_cards(card_list)
+    
+    # Aces present: Determine the point value list when Aces are present.
+    else:
+        list_of_point_values = [0, 0]
+        # Iterate over list of cards.
+        for card in card_list:
+            # Add non-Ace values to all elements of points list.
+            if card not in ['a', 'A']:
+                list_of_point_values = add_card_value_to_all_list_elements(card, list_of_point_values)
+            else:
+                # We have a list list_of_point_values.
+                # first_part = Add 1 to list of elements.
+                first_part = add_card_value_to_all_list_elements('A1', list_of_point_values)
+                # second_part = Add 11 to list of elements.
+                second_part = add_card_value_to_all_list_elements('A11', list_of_point_values)
+                # first_part.extend(second_part)
+                list_of_point_values = first_part.extend(second_part)
+        return list_of_point_values
+
+        # return f"\n'A' or 'a' present: {card_list}"
+
+def test_determine_points_of_cards_with_ace_accomodation():
+    ### Temporary tests ###
+    # assert determine_points_of_cards_with_ace_accomodation(['A','3','4']) == [8, 18]
+    ### Permanent tests ###
+#     assert determine_points_of_cards_with_ace_accomodation(['a','k','j']) == 21 or 31
+    assert determine_points_of_cards_with_ace_accomodation(['2','3','4']) == 9
+    assert determine_points_of_cards_with_ace_accomodation([' ','2','3']) == 5
+    assert determine_points_of_cards_with_ace_accomodation(['5','%','2']) == 7
+    assert determine_points_of_cards_with_ace_accomodation(['9','2','?']) == 11
+    assert determine_points_of_cards_with_ace_accomodation(['9','2','j']) == 21
+    assert determine_points_of_cards_with_ace_accomodation(['9','q','?']) == 19
+    assert determine_points_of_cards_with_ace_accomodation(['k','2','?']) == 12
+    assert determine_points_of_cards_with_ace_accomodation(['q','k','j']) == 30
+    assert True == True
+
+# def double_list(list = []):
+#     '''Accepts a list argument [a, b]. Returns [a, b, a, b]. Function works for lists of strings as well as lists of integers.'''
+#     list.extend(list)
+#     return list
+
+# def test_double_list():
+#     # Extending an empty list results in empty list.
+#     assert double_list([]) == []
+#     # Works with single-element integer lists.
+#     assert double_list([1]) == [1, 1]
+#     # Since the returned object from double_list() is a list,
+#     # it doesn't matter if there are spaces after the ','s in the below assert statements.
+#     assert double_list([1, 2]) == [1,2,1,2]
+#     assert double_list([1, 2]) == [1, 2, 1, 2]
+#     # Works with double-element string lists.
+#     assert double_list(['a','b']) == ['a','b','a','b']
+
+def add_card_value_to_all_list_elements(card, list_of_point_values = [0]):
+    '''Accepts card and list of integers. Returns list with the point value of the card added to all list members.'''
+    for i in range(len(list_of_point_values)):
+        list_of_point_values[i] += cards[card.upper()]
+    return list_of_point_values
+
+def test_add_card_value_to_all_list_elements():
+    assert add_card_value_to_all_list_elements('2', [1,2]) == [3,4]
+    assert add_card_value_to_all_list_elements('K', [3,5,7]) == [13,15,17]
+    assert add_card_value_to_all_list_elements('j', [3,5,7]) == [13,15,17]
+    assert add_card_value_to_all_list_elements('J', [3,5,7,2]) == [13,15,17,12]
+    assert add_card_value_to_all_list_elements('7', [3,5,7]) == [10,12,14]
 
 def determine_points_of_cards(card_list):
     '''Returns the point value of the sum of the argument card list.'''
@@ -88,13 +164,14 @@ def determine_points_of_cards(card_list):
 
 def test_determine_points_of_cards():
     assert determine_points_of_cards(['2','3','4']) == 9
+    assert determine_points_of_cards(['A','3','4']) == 8
     assert determine_points_of_cards([' ','2','3']) == 5
     assert determine_points_of_cards(['5','%','2']) == 7
     assert determine_points_of_cards(['9','2','?']) == 11
-    assert determine_points_of_cards(['9','2','j']) == 21
-    assert determine_points_of_cards(['9','q','?']) == 19
-    assert determine_points_of_cards(['k','2','?']) == 12
-    assert determine_points_of_cards(['q','k','j']) == 30
+    assert determine_points_of_cards(['9','2','J']) == 21
+    assert determine_points_of_cards(['9','Q','?']) == 19
+    assert determine_points_of_cards(['K','2','?']) == 12
+    assert determine_points_of_cards(['Q','K','J']) == 30
 
 def advise(points):
     '''Accepts arguments of points sum and returns the advise string.'''
@@ -130,68 +207,20 @@ def test_results_string():
 def main():    
     card_requests =['first', 'second', 'third']
     
-    card_list = []
     for request in card_requests:
         card = request_input(request)
-        card_list = add_card_to_list(card, card_list)
+        card_list = add_card_to_list(card)
         points = determine_points_of_cards(card_list)
 
     print(f'''
     {points}: {advise(points)}
     ''')
 
+    # points_list = []
+
+    # print(f'''
+    # Points list: {points_list}
+    # ''')
+        
+
 main()
-
-# # If 'main()' is not commented-out, we get errored out.
-# PS C:\Users\Bruce\Programming\class_otter\code\bruce\week_01> pytest .\lab04v20.py
-# ======================================================================================= test session starts ========================================================================================
-# platform win32 -- Python 3.10.1, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
-# rootdir: C:\Users\Bruce\Programming\class_otter\code\bruce\week_01
-# collected 0 items / 1 error
-
-# ============================================================================================== ERRORS ==============================================================================================
-# ___________________________________________________________________________________ ERROR collecting lab04v20.py ___________________________________________________________________________________
-# lab04v20.py:143: in <module>
-#     main()
-# lab04v20.py:135: in main
-#     card = request_input(request)
-# lab04v20.py:38: in request_input
-#     card = input(f"Please enter your {which_request} card: ")
-# C:\Users\Bruce\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\capture.py:217: in read
-#     raise OSError(
-# E   OSError: pytest: reading from stdin while output is captured!  Consider using `-s`.
-# ----------------------------------------------------------------------------------------- Captured stdout ------------------------------------------------------------------------------------------
-# Please enter your first card: 
-# ===================================================================================== short test summary info ====================================================================================== 
-# ERROR lab04v20.py - OSError: pytest: reading from stdin while output is captured!  Consider using `-s`.
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-# ========================================================================================= 1 error in 0.12s ========================================================================================= 
-# PS C:\Users\Bruce\Programming\class_otter\code\bruce\week_01>
-
-# This 'print()' function is not run during pytest.
-# Correction: The function may 'run' but there is nothing printed to console.
-print("Tests are probably complete.")
-
-# # This non-declared variable inside 'print()' is attempted to run during pytest, so pytest errored out.
-# print(a_non_declared_variable)
-
-# ___________________________________________________________________________________ ERROR collecting lab04v20.py ___________________________________________________________________________________ 
-# lab04v20.py:148: in <module>
-#     print(a_non_declared_variable)
-# E   NameError: name 'a_non_declared_variable' is not defined
-# ----------------------------------------------------------------------------------------- Captured stdout ------------------------------------------------------------------------------------------ 
-# Tests are probably complete.
-# ===================================================================================== short test summary info ====================================================================================== 
-# ERROR lab04v20.py - NameError: name 'a_non_declared_variable' is not defined
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-# ========================================================================================= 1 error in 0.13s ========================================================================================= 
-# PS C:\Users\Bruce\Programming\class_otter\code\bruce\week_01>
-
-
-# # Only the calling of 'main()' needs to commented out to successfully run tests.
-# # So, it seems, any code or function calls will run when pytest is run.
-# # i.e. Any code of function calls which are not inside of other function calls will run.
-# def main():
-#     print("Main function has run.")
-
-# main()

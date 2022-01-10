@@ -13,6 +13,7 @@ import random
 
 def generate_random_time_delay(time = .5, low = 0, hi = 10):
     '''Generates a random value between 0/10 and 10/10 of time.'''
+    '''Default is between 0 * (.5) and 1.0 * (.5).'''
     return time * (random.randint(low, hi) / 10)
 
 def test_generate_random_time_delay():
@@ -47,13 +48,14 @@ def test_generate_random_index():
 
 def main():
 
-    # TODO: Break these operations out into functions.
-    print_string = "abcdefghijk"
+    # Operation broken out into functions.
+    print_string = "The quick brown fox jumped over the lazy dog."
     # Use for loop to put time delay in between printing characters.
+    # Use 'enumerate()' to generate the index values for use in randomly-placed '?'.
     for i, character in enumerate(print_string):
         # Create random time delay value.
         # This can be used to simulate real typing.
-        random_time_delay = generate_random_time_delay()
+        random_time_delay = generate_random_time_delay(.3)
         # NOTE: Need the "end='', flush=True".
         print(character, end='', flush=True)
         time.sleep(random_time_delay)
