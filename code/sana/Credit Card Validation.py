@@ -65,7 +65,8 @@ ccheck = len(card_check)
 # print(ccheck)
 checkfinal = card_check[int(ccheck) - 1]
 # print(checkfinal)
-if int(match) == int(checkfinal):
+valdity = bool(int(match) == int(checkfinal))
+if valdity == True:
     print("Valid!")
 else:
     print("not Valid...")
