@@ -102,6 +102,22 @@ procedure bubbleSort(A : list of sortable items)
         end for
     until not swapped
 end procedure
+
+
+Part 4 - Insertion Sort (optional)
+Implement insertion sort, which like bubble sort is also O(n^2), but is
+efficient at placing new values into an already-sorted list.
+
+Psuedocode:
+i ← 1
+while i < length(A)
+    j ← i
+    while j > 0 and A[j-1] > A[j]
+        swap A[j] and A[j-1]
+        j ← j - 1
+    end while
+    i ← i + 1
+end while
 '''
 import math
 
@@ -141,13 +157,13 @@ def test_binary_search():
     assert binary_search([1, 2, 3, 4, 5, 6, 7, 8], 20) == -1
 
 def bubble_sort(list):
-    n = len(list)
+    length = len(list)
     swapped = True
     current = 0
     next = 0
     while swapped:
         swapped = False
-        for i in range(1, n):
+        for i in range(1, length):
             current = list[i - 1]
             next = list[i]
             if current > next:
@@ -161,6 +177,27 @@ def test_bubble_sort():
     assert bubble_sort([3, 8, 7, 5, 6, 4, 1, 2]) == [1, 2, 3, 4, 5, 6, 7, 8]
     assert bubble_sort([7, 4, 3, 6, 8, 2, 5, 1]) == [1, 2, 3, 4, 5, 6, 7, 8]
 
+def insertion_sort(list):
+    length = len(list)
+    i = 1
+    while i < length:
+        j = i
+        current = list[j - 1]
+        next = list[j]
+        while j > 0 and current > next:
+            list[j - 1] = next
+            list[j] = current
+            j -= 1
+            current = list[j - 1]
+            next = list[j]
+        i += 1
+    return list
+
+def test_insertion_sort():
+    assert insertion_sort([6, 3, 1, 8, 5, 2, 4, 7]) == [1, 2, 3, 4, 5, 6, 7, 8]
+    assert insertion_sort([3, 8, 7, 5, 6, 4, 1, 2]) == [1, 2, 3, 4, 5, 6, 7, 8]
+    assert insertion_sort([7, 4, 3, 6, 8, 2, 5, 1]) == [1, 2, 3, 4, 5, 6, 7, 8]
+
 
 def main():
     nums = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -173,6 +210,10 @@ def main():
 
     unsorted = [6, 3, 1, 8, 5, 2, 4, 7]
     sorted = bubble_sort(unsorted)
+    print(sorted)
+
+    unsorted = [6, 3, 1, 8, 5, 2, 4, 7]
+    sorted = insertion_sort(unsorted)
     print(sorted)
 
 
