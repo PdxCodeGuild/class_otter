@@ -101,4 +101,4 @@ def main():
     {points}: {advise(points)}
     ''')
 
-# main()
+main()
