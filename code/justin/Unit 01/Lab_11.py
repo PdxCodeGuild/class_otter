@@ -118,6 +118,35 @@ while i < length(A)
     end while
     i ← i + 1
 end while
+
+
+Quicksort is one of the most efficient sorting algorithms. It works by
+swapping elements on either side of a pivot value.
+
+Psuedocode:
+algorithm quicksort(A) is
+    quicksort_recursive(A, 0, length(A) - 1)
+
+algorithm quicksort_recursive(A, lo, hi) is
+    if lo < hi then
+        p := partition(A, lo, hi)
+        quicksort_recursive(A, lo, p)
+        quicksort_recursive(A, p + 1, hi)
+
+algorithm partition(A, lo, hi) is
+    pivot := A[lo + (hi - lo) / 2]
+    i := lo - 1
+    j := hi + 1
+    loop forever
+        do
+            i := i + 1
+        while A[i] < pivot
+        do
+            j := j - 1
+        while A[j] > pivot
+        if i ≥ j then
+            return j
+        swap A[i] with A[j]
 '''
 import math
 
@@ -198,23 +227,70 @@ def test_insertion_sort():
     assert insertion_sort([3, 8, 7, 5, 6, 4, 1, 2]) == [1, 2, 3, 4, 5, 6, 7, 8]
     assert insertion_sort([7, 4, 3, 6, 8, 2, 5, 1]) == [1, 2, 3, 4, 5, 6, 7, 8]
 
+def partition(list, low, high):
+    pivot = list[math.floor(low + (high - low) / 2)]
+    i = low - 1
+    j = high + 1
+    while True:
+        while True:
+            i += 1
+            a = list[i]
+            if a >= pivot:
+                break
+        
+        while True:
+            j -= 1
+            b = list[j]
+            if b <= pivot:
+                break
+        
+        if i >= j:
+            return list, j
+
+        list[i] = b
+        list[j] = a
+
+def test_partition():
+    new_list, p = partition([6, 3, 1, 8, 5, 2, 4, 7], 0, 7)
+    assert p == 6
+    assert new_list == [6, 3, 1, 7, 5, 2, 4, 8]
+
+def quicksort_recursive(list, low, high):
+    if low < high:
+        list, p = partition(list, low, high)
+        list = quicksort_recursive(list, low, p)
+        list = quicksort_recursive(list, p + 1, high)
+    return list
+
+def quicksort(list):
+    return quicksort_recursive(list, 0, len(list) - 1)
+
+def test_quicksort():
+    assert quicksort([6, 3, 1, 8, 5, 2, 4, 7]) == [1, 2, 3, 4, 5, 6, 7, 8]
+    assert quicksort([3, 8, 7, 5, 6, 4, 1, 2]) == [1, 2, 3, 4, 5, 6, 7, 8]
+    assert quicksort([7, 4, 3, 6, 8, 2, 5, 1]) == [1, 2, 3, 4, 5, 6, 7, 8]
+
 
 def main():
     nums = [1, 2, 3, 4, 5, 6, 7, 8]
     index = linear_search(nums, 3)
-    print(index)
+    print(f"Linear search: {index}")
 
     nums.sort()
     index = binary_search(nums, 3)
-    print(index)
+    print(f"Binary search: {index}")
 
     unsorted = [6, 3, 1, 8, 5, 2, 4, 7]
     sorted = bubble_sort(unsorted)
-    print(sorted)
+    print(f"Bubble sort: {sorted}")
 
     unsorted = [6, 3, 1, 8, 5, 2, 4, 7]
     sorted = insertion_sort(unsorted)
-    print(sorted)
+    print(f"Insertion sort: {sorted}")
+
+    unsorted = [6, 3, 1, 8, 5, 2, 4, 7]
+    sorted = quicksort(unsorted)
+    print(f"Quicksort: {sorted}")
 
 
 main()
