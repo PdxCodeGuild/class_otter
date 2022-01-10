@@ -9,6 +9,8 @@
 import random
 
 ticket_cost = 2
+balance = 0
+earnings = 0
 
 # dictionary containing the number of matches to the corresponding dollar amount of winnings
 winnings = {
@@ -29,28 +31,32 @@ def pick6():
         list.append(num)
     return list
 
-# define lists for the winning and ticket numbers
-winning_nums = pick6()
-ticket_nums = pick6()
-
-# print(winning_nums)
-# print(ticket_nums)
-
-# define a function to compare the winning numbers to the ticket numbers
 matches = 0
+# define a function to compare the winning numbers to the ticket numbers
 def num_matches(winning, ticket):
     matches = 0
     for i in range(7):
         if winning[i] == ticket[i]:
             matches += 1
-    
     return matches
 
-num_matches(winning_nums, ticket_nums)
 
-expenses = ticket_cost
-earnings = winnings[matches] - expenses
+
+for i in range (100000):
+    winning_nums = pick6()
+    ticket_nums = pick6()
+    matches = num_matches(winning_nums, ticket_nums)
+    earnings += winnings[matches]
+
+
+
+
+
+earnings = earnings - 200000
 print(f'{earnings} dollars earned.')
+
+
+
 
 
 # Version 2: The ROI is defined as (earnings - expenses)/expenses.
