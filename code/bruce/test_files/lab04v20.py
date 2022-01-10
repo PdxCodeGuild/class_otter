@@ -120,23 +120,6 @@ def test_determine_points_of_cards_with_ace_accomodation():
     assert determine_points_of_cards_with_ace_accomodation(['q','k','j']) == 30
     assert True == True
 
-# def double_list(list = []):
-#     '''Accepts a list argument [a, b]. Returns [a, b, a, b]. Function works for lists of strings as well as lists of integers.'''
-#     list.extend(list)
-#     return list
-
-# def test_double_list():
-#     # Extending an empty list results in empty list.
-#     assert double_list([]) == []
-#     # Works with single-element integer lists.
-#     assert double_list([1]) == [1, 1]
-#     # Since the returned object from double_list() is a list,
-#     # it doesn't matter if there are spaces after the ','s in the below assert statements.
-#     assert double_list([1, 2]) == [1,2,1,2]
-#     assert double_list([1, 2]) == [1, 2, 1, 2]
-#     # Works with double-element string lists.
-#     assert double_list(['a','b']) == ['a','b','a','b']
-
 def add_card_value_to_all_list_elements(card, list_of_point_values = [0]):
     '''Accepts card and list of integers. Returns list with the point value of the card added to all list members.'''
     for i in range(len(list_of_point_values)):
@@ -223,4 +206,4 @@ def main():
     # ''')
         
 
-main()
+# main()

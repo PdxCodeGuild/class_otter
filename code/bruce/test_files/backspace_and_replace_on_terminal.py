@@ -55,7 +55,7 @@ def main():
     for i, character in enumerate(print_string):
         # Create random time delay value.
         # This can be used to simulate real typing.
-        random_time_delay = generate_random_time_delay(.3)
+        random_time_delay = generate_random_time_delay(.25)
         # NOTE: Need the "end='', flush=True".
         print(character, end='', flush=True)
         time.sleep(random_time_delay)
