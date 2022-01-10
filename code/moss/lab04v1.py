@@ -1,6 +1,6 @@
 print('\nWelcome to the BlackJack Advisor\n')
 
-crd_val= {'1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':10, 'Q':10, "K":10, "A":1 }
+crd_val= {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':10, 'Q':10, "K":10 }
 
 usr_1 = input ('\nWhat is your first card?\n').upper()
 
