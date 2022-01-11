@@ -22,6 +22,7 @@ for i in range(len(cards)):
     if cards[i] in face_cards:
         print(cards[i],i)   
         cards[i] = face_cards[cards[i]]
+        
 #print(cards)
 
 total_card = 0
