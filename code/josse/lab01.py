@@ -38,7 +38,7 @@ metrics = {
 "kilometers" : 1000,
 "yard" : 0.9144,
 "inch" : 0.0254,
-
+"meter": 1
 }
 
 distance = float(input("what is your distance? "))
