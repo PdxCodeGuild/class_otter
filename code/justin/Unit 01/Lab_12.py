@@ -48,13 +48,21 @@ while True:
         break
     else:
         print('Command not recognized')
+
+
+Version 2
+Have the ATM maintain a list of transactions. Every time the user makes a
+deposit or withdrawal, add a string to a list saying 'user deposited $15'
+or 'user withdrew $15'. Add a new method print_transactions() to your
+class for printing out the list of transactions.
 '''
 import math
 
 class ATM():
     def __init__(self):
-        self.balance = 0
+        self.balance = 0.00
         self.interest_rate = 0.001
+        self.transactions = []
     
     # returns the account balance
     def check_balance(self):
@@ -62,7 +70,8 @@ class ATM():
 
     # deposits the given amount in the account
     def deposit(self, amount):
-        self.balance = round(self.balance + amount, 2)
+        self.balance = self.balance + amount
+        self.transactions.append(f'user deposited ${"%.2f" % amount}')
 
     # returns true if the withdrawn amount won't put the account in the negative
     def check_withdrawal(self, amount):
@@ -70,11 +79,19 @@ class ATM():
 
     # withdraws the amount from the account and returns it
     def withdraw(self, amount):
-        self.balance = round(self.balance - amount, 2)
+        self.balance = self.balance - amount
+        self.transactions.append(f'user withdrew ${"%.2f" % amount}')
 
     # returns the amount of interest calculated on the account
     def calc_interest(self):
         return round(self.balance * self.interest_rate, 2)
+
+    # returns a string representing the history of transactions
+    def print_transactions(self):
+        transaction_string = ''
+        for transaction in self.transactions:
+            transaction_string += f'{transaction}\n'
+        return transaction_string
 
 
 def test_ATM__init():
@@ -135,6 +152,16 @@ def test_calc_interest():
 
     assert atm.calc_interest() == 0.1
 
+def test_print_transactions():
+    atm = ATM()
+    assert atm.print_transactions() == ''
+
+    atm.deposit(500)
+    assert atm.print_transactions() == 'user deposited $500.00\n'
+
+    atm.withdraw(200)
+    assert atm.print_transactions() == 'user deposited $500.00\nuser withdrew $200.00\n'
+
 
 def main():
     atm = ATM() # create an instance of our class
@@ -159,12 +186,16 @@ def main():
             amount = atm.calc_interest() # call the calc_interest() method
             atm.deposit(amount)
             print(f'Accumulated ${amount} in interest')
+        elif command == 'history':
+            transaction_history =  atm.print_transactions()
+            print(f'### Transaction History ###\n{transaction_history}')
         elif command == 'help':
             print('Available commands:')
             print('balance  - get the current balance')
             print('deposit  - deposit money')
             print('withdraw - withdraw money')
             print('interest - accumulate interest')
+            print('history - get transaction history')
             print('exit     - exit the program')
         elif command == 'exit':
             break
