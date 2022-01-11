@@ -13,6 +13,7 @@ while count < 3:
     count += 1
 print(my_list)
 
+
 # Create a dictionary of cards with appropriate score
 card_score = {
     "A" : 11,
