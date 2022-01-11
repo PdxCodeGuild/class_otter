@@ -1,3 +1,10 @@
+ask = input("tell me a word: ")
+ask2 = input("encryption or decryption?: ")
+ask3 = int(input("amount of rotation used in the encryption/decryption: "))
+ask_list = [i for i in ask]
+# print(ask_list)
+
+
 #make a list of index contains 0 - 25
 index = []
 for num in range(0,26):
@@ -11,7 +18,15 @@ english = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
 #iterate through the index list and 
 rot = []
 
-for i in index:
-    i += 13
-    rot.append(english[i])
+for letter in ask_list:
+    letter_num = english.index(letter)
+    if ask2 == "encryption":
+        letter_num += ask3
+        rot.append(english[letter_num])
+    elif ask2 == "decryption":
+        letter_num -= ask3
+        rot.append(english[letter_num])
 print(rot)
+    
+
+            
