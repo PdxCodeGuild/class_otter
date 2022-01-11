@@ -1,7 +1,7 @@
 # **************************** #
 #   Lab 8: Peaks and Valleys   #
 #     Functions, Max, Min      #
-#         Version: 1.0         #
+#         Version: 2.0         #
 #     Author: Bruce Stull      #
 #          2022-01-11          #
 # **************************** #
@@ -76,4 +76,77 @@ def main():
     Peaks and Valleys: {peaks_and_valleys(peaks(topography), valleys(topography))}
     ''')
 
+    # I want to print 'X's the same number of times of the value of each element in the list.
+
+    # Two spaces are added between columns.
+
+    # Starting from the top down, it seems like we print empty space,
+    # and then start filling in the peaks.
+
+    # It seems we need to use the max() value of peaks() to start the print process.
+
+    
+
+    #                   X   
+    #                X  X  X
+    #             X  X  X  X  X
+    small_list = [1, 2, 3, 2, 1]
+    
+    
+    # Loop through rows:
+    for row in range(max(topography), 0, -1):
+        result = ' '
+        # Loop through the list:
+        for i in range(len(topography)):
+            # If row value is still above the list value: print space, else: print 'X'.
+                if row > topography[i]:
+                    result += ' '
+                else:
+                    result += 'X'
+                result += '  '
+        print(result)
+
+    print(topography)
+    # First row = 0 :
+    result  = ""
+    result += " "
+    result += "  "
+    result += " "
+    result += "  "
+    result += "X"
+
+    # Second row = 1 :
+    result  = ""
+    result += " "
+    result += "  "
+    result += "X"
+    result += "  "
+    result += "X"
+    result += "  "
+    result += "X"
+
+    # Third row = 2 :
+    result  = ""
+    result += "X"
+    result += "  "
+    result += "X"
+    result += "  "
+    result += "X"
+    result += "  "
+    result += "X"
+    result += "  "
+    result += "X"
+
+
+
+    row_01  = "      X"
+    row_02  = "   X  X  X"
+    row_03  = "X  X  X  X  X"
+    sm_list = [1, 2, 3, 2, 1]
+    # print(max(sm_list))
+
+    # if row number > list[i]: print space, add two spaces, if row number > list[i + 1]: print space, ...
+    #          X            X            X            X
+    row_i   = " " + "  " + " " + "  " + " " + "  " + " "
+    
 main()
