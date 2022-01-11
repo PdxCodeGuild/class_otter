@@ -1,7 +1,7 @@
 # ********************************* #
 #         Lab 7 - ROT Cipher        #
 #   Lists, Encryption, Decryption   #
-#            Version: 2.0           #
+#            Version: 2.1           #
 #        Author: Bruce Stull        #
 #             2022-01-10            #
 # ********************************* #
@@ -36,7 +36,24 @@ cipher_list = list(alphabet)
 # ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 # ['n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm']
 
-# TODO: Handle special characters like ',', '.', '!', '?', etc.
+# TODO: Add preservation of numbers, or, actually, encoding of numbers in addition to letters.
+
+# Added functionality to filter out special characters like ',' '.' '!' '?' etc.
+def filter_to_letters_and_spaces(input_string = ''):
+    '''Accepts a string. Returns the string with special characters removed, spaces should be preserved.'''
+    # Try to use list comprehension to filter out everything except for ascii letters and spaces.
+    filtered_list = [character.lower() for character in input_string if (character in string.ascii_letters) or (character == ' ')]
+    result_string = ''.join(filtered_list)
+    return result_string
+
+def test_filter_to_letters_and_spaces():
+    assert filter_to_letters_and_spaces() == ''
+    assert filter_to_letters_and_spaces("a!") == 'a'
+    assert filter_to_letters_and_spaces("a b") == 'a b'
+    assert filter_to_letters_and_spaces("!@g") == 'g'
+    assert filter_to_letters_and_spaces("!@ g") == ' g'
+    assert filter_to_letters_and_spaces("G") == 'g'
+    assert filter_to_letters_and_spaces(",/ G") == ' g'
 
 def encode_letter(code, schema = 13, list = cipher_list):
     '''Accepts arguments of code character, schema, and cipher list. Returns the coded letter.'''
@@ -86,6 +103,7 @@ def test_decode_letter():
 
 def encode_message(message, schema = 13, list = cipher_list):
     '''Accepts message, schema, and cipher list. Returns encoded message string.'''
+    message = filter_to_letters_and_spaces(message)
     encoded_message_as_list = [encode_letter(character, schema, list) for character in message]
     encoded_message_as_string = ''.join(encoded_message_as_list)
     return encoded_message_as_string
@@ -101,6 +119,7 @@ def test_encode_message():
 
 def decode_message(message, schema = 13, list = cipher_list):
     '''Accepts coded message, schema, and cipher list. Returns decoded message string.'''
+    message = filter_to_letters_and_spaces(message)
     decoded_message_as_list = [decode_letter(character, schema, list) for character in message]
     decoded_message_as_string = ''.join(decoded_message_as_list)
     return decoded_message_as_string
@@ -114,8 +133,8 @@ def test_decode_message():
     assert decode_message('dun', 5) == 'ypi'
 
 def main():
-    message = "goodbuy wurld"
-    rotation = 7
+    message = "Soopur, seKret mEssige!"
+    rotation = 13
     print(message)
     print(encode_message(message, rotation))
     print(decode_message(encode_message(message, rotation), rotation))
