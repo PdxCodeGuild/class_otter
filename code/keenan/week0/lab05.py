@@ -10,7 +10,7 @@ import random
 
 ticket_cost = 2
 balance = 0
-earnings = 0
+
 
 # dictionary containing the number of matches to the corresponding dollar amount of winnings
 winnings = {
@@ -40,24 +40,26 @@ def num_matches(winning, ticket):
             matches += 1
     return matches
 
-
-
 for i in range (100000):
     winning_nums = pick6()
     ticket_nums = pick6()
+    balance -= 2
     matches = num_matches(winning_nums, ticket_nums)
-    earnings += winnings[matches]
+    balance += winnings[matches]
 
 
+expenses = 100000 * ticket_cost
+earnings = 200000 + balance
+roi = (earnings - expenses) / expenses * 100
+roi = round(roi, 3)
 
 
+# print(f'{earnings} dollars earned.')
 
-earnings = earnings - 200000
-print(f'{earnings} dollars earned.')
+# # Version 2: The ROI is defined as (earnings - expenses)/expenses.
+# # Calculate your ROI and print it out along with earnings and expenses.
 
+print(f'\n${earnings} is your earnings')
+print(f'Expenses were $200000')
+print(f'Your return on investment was {roi}%')
 
-
-
-
-# Version 2: The ROI is defined as (earnings - expenses)/expenses.
-# Calculate your ROI and print it out along with earnings and expenses.
