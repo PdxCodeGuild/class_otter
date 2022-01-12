@@ -27,6 +27,8 @@ def is_even(a):
     if a % 2 == 0:
         # We KNOW KNOW KNOW that 'a' is even.
         print(a)
+        whats_the_mod = a % 2
+        print(whats_the_mod)
         print(a % 2)
         print(a % 2 == 0)
         # print(f'This is even: {a}')
