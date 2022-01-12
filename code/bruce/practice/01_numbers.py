@@ -9,11 +9,37 @@
 
 def is_even(a):
     '''Returns True when argument is even and returns False otherwise.'''
-    # How do we tell if an integer is even?
-    # We divide a by 2 and remainder is 0 if a is even.
-    # a % 2 == 0
-    result = a % 2 == 0
+    # put some logic here and make it 'result'.
+    # We have to use the parameter 'as' somewhere in this logic.
+    # If a is even == True
+    # list_of_evens = [0, 2, 4, 6, 8, 10, 12, 14]
+    # Cycles through list_of_evens.
+    # for even_number in list_of_evens:
+    #     # Compares the input value 'a' to even_number.
+    #     if a == even_number:
+    #         # We KNOW KNOW KNOW that a is even.
+    #         # How can we make is so 'result' = True
+    #         result = True
+    #     elif a != even_number:
+    #         result = False
+    # WE have a list of evens.
+    # Lets pick another way to see if a is in list_of_evens.
+    if a % 2 == 0:
+        # We KNOW KNOW KNOW that 'a' is even.
+        print(f'This is even: {a}')
+        result = True
+    elif a % 2 != 0:
+        result = False
     return result
+
+the_number = 6
+the_result_is = is_even(the_number)
+print(the_result_is)
+
+# print(is_even(57))
+
+
+
 
 def test_is_even():
     assert is_even(5) == False
@@ -21,6 +47,9 @@ def test_is_even():
     assert is_even(11) == False
     assert is_even(6) == True
     assert is_even(19) == False
+    assert is_even(30) == True
+    assert is_even(5344) == True
+    assert is_even(5001) == False
 
 # Ones Digit
 # Write a function that returns the ones digit of a number
