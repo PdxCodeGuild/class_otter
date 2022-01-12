@@ -47,36 +47,73 @@ import requests
 
 
 def request_quote():
-    response = requests.get('https://favqs.com/api/qotd', headers={'Accept': 'application/json'}).json()
+    response = requests.get('https://favqs.com/api/qotd', headers={'Content-Type': 'application/json'}).json()
     return response['quote']['body'], response['quote']['author']
 
 def get_quote_string(quote, author):
     return f'{quote}\n\t- {author}'
 
+def search_quote(search_term, page=1):
+    response = requests.get('https://favqs.com/api/quotes',
+                            params={
+                                'filter': search_term,
+                                'page': page},
+                            headers={
+                                'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"',
+                                'Content-Type': 'application/json'}
+                                ).json()
+    return SearchResults(response, search_term)
+
+
+class SearchResults:
+    def __init__(self, response, search_term):
+        self._results = []
+        for item in response['quotes']:
+            self._results.append([item['body'], item['author']])
+        self._search_term = search_term
+        self._current_index = 0
+        self._current_page = response['page']
+        self._is_last_page = response['last_page']
+
+    def next(self):
+        if self._current_index < len(self._results):
+            quote, author = self._results[self._current_index]
+            self._current_index += 1
+            return quote, author, self
+        else:
+            if self._is_last_page:
+                return None, None, None
+            else:
+                self = search_quote(self._search_term, self._current_page + 1)
+                return self.next()
+
+    def get_quote_count(self):
+        count = len(self._results)
+        if self._is_last_page:
+            return count
+        else:
+            if count >= 25:
+                return '25+'
+            else:
+                return count
+
 
 def main():
-    quote, author = request_quote()
-    print(get_quote_string(quote, author))
+    while True:
+        search_term = input("Search for a quote or [Q]uit: ")
+        if search_term.upper() == 'Q':
+            break
+        search_results = search_quote(search_term)
+        print(f'Found {search_results.get_quote_count()} quotes about "{search_term}"\n')
+        while True:
+            quote, author, search_results = search_results.next()
+            if quote == None:
+                print("\nSorry, no more quotes\n")
+                break
+            print(get_quote_string(quote, author))
+            should_continue = input("Get [N]ext quote or [D]one? ").upper() == 'N'
+            print(' ')
+            if not should_continue:
+                break
     
 main()
-
-
-
-"""
-{
-    "qotd_date":"2022-01-13T00:00:00.000+00:00",
-    "quote":{
-        "id":44671,
-        "dialogue":false,
-        "private":false,
-        "tags":["nature"],
-        "url":"https://favqs.com/quotes/johann-wolfgang-von-goethe/44671-nature-knows--",
-        "favorites_count":0,
-        "upvotes_count":1,
-        "downvotes_count":0,
-        "author":"Johann Wolfgang von Goethe",
-        "author_permalink":"johann-wolfgang-von-goethe",
-        "body":"Nature knows no pause in progress and development, and attaches her curse on all inaction."
-        }
-}
-"""
