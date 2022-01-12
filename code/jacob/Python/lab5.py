@@ -1,10 +1,6 @@
 """
-
 Lab 5: Pick 6
-
 Version 1 and 2
-
-
 """
 import random
 
