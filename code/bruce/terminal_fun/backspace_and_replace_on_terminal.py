@@ -49,7 +49,7 @@ def test_generate_random_index():
 def main():
 
     # Operation broken out into functions.
-    print_string = "The quick brown fox jumped over the lazy dog."
+    print_string = "The quick brown fox jumps over the lazy dog."
     # Use for loop to put time delay in between printing characters.
     # Use 'enumerate()' to generate the index values for use in randomly-placed '?'.
     for i, character in enumerate(print_string):

@@ -46,7 +46,7 @@ def give_me_a_random_integer():
     return
 
 def test_give_me_a_random_integer():
-
+    assert give_me_a_random_integer().isnumber()
 
 # What happens if we try to print out a print statement?
 # print(print())

@@ -47,26 +47,26 @@ def test_generate_winning_ticket():
 
 def how_many_matches(customer_ticket = [], winning_ticket = []):
     '''Returns how many ordered matches of customer_ticket in winning_ticket.'''
-    ### My solution ###
-    matches = 0
-    for i, number in enumerate(customer_ticket):
-        if number == winning_ticket[i]:
-            matches += 1
-    return matches
-    ###################
-
-    # ### Alternate solutions ###
-    # # https://github.com/PdxCodeGuild/class_otter/blob/bruce/code/merritt/22-jan/lab05.py
-    # # Uses zip().
+    # ### My solution ###
     # matches = 0
-    # # for i in range(len(winning)):
-    # #     if winning[i] == ticket[i]:
-    # #         matches += 1
-    # for customer_number, win_number in zip(customer_ticket, winning_ticket):
-    #     if customer_number == win_number:
+    # for i, number in enumerate(customer_ticket):
+    #     if number == winning_ticket[i]:
     #         matches += 1
     # return matches
-    # ###########################
+    # ###################
+
+    ### Alternate solutions ###
+    # https://github.com/PdxCodeGuild/class_otter/blob/bruce/code/merritt/22-jan/lab05.py
+    # Uses zip().
+    matches = 0
+    # for i in range(len(winning)):
+    #     if winning[i] == ticket[i]:
+    #         matches += 1
+    for customer_number, win_number in zip(customer_ticket, winning_ticket):
+        if customer_number == win_number:
+            matches += 1
+    return matches
+    ###########################
 
 def test_how_many_matches():
     assert how_many_matches() == 0
