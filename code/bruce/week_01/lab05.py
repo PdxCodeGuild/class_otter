@@ -12,44 +12,45 @@
 import random
 
 # Function to generate a list of 6 random numbers between and including 1 and 99.
-def generate_list(number_of_picks = 6, low = 1, hi = 99):
+def generate_ticket(number_of_picks = 6, low = 1, hi = 99):
     '''Function to generate list of 6 numbers between low and hi numbers.'''
-    list_of_numbers = []
-    for i in range(number_of_picks):
-        list_of_numbers.append(random.randint(low,hi))
-    return list_of_numbers
+    ticket = []
+    for _ in range(number_of_picks):
+        ticket.append(random.randint(low,hi))
+    return ticket
 
-def test_generate_list():
-    assert len(generate_list(7)) == 7
-    assert len(generate_list(6)) == 6
-    assert len(generate_list()) == 6
-    assert len(generate_list(5)) == 5
+def test_generate_ticket():
+    assert len(generate_ticket(7)) == 7
+    assert len(generate_ticket(6)) == 6
+    assert len(generate_ticket()) == 6
+    assert len(generate_ticket(5)) == 5
 
-def generate_customer_list(number_of_picks = 6):
-    '''Function to generate a customer list of numbers by using generate_list. Default is a list of 6 items.'''
-    return generate_list(number_of_picks)
+def generate_customer_ticket(number_of_picks = 6):
+    '''Function to generate a customer list of numbers by using generate_ticket. Default is a list of 6 items.'''
+    return generate_ticket(number_of_picks)
 
-def test_generate_customer_list():
-    assert len(generate_customer_list()) == 6
-    assert len(generate_customer_list(6)) == 6
-    assert len(generate_customer_list(7)) == 7
-    assert len(generate_customer_list(5)) == 5
+def test_generate_customer_ticket():
+    assert len(generate_customer_ticket()) == 6
+    assert len(generate_customer_ticket(6)) == 6
+    assert len(generate_customer_ticket(7)) == 7
+    assert len(generate_customer_ticket(5)) == 5
     
-def generate_winning_list(number_of_picks = 6):
-    '''Function to generate a winning list of numbers by using generate_list. Default is a list of 6 items.'''
-    return generate_list(number_of_picks)
+def generate_winning_ticket(number_of_picks = 6):
+    '''Function to generate a winning list of numbers by using generate_ticket. Default is a list of 6 items.'''
+    return generate_ticket(number_of_picks)
 
-def test_generate_winning_list():
-    assert len(generate_winning_list()) == 6
-    assert len(generate_winning_list(6)) == 6
-    assert len(generate_winning_list(7)) == 7
-    assert len(generate_winning_list(5)) == 5
+def test_generate_winning_ticket():
+    assert len(generate_winning_ticket()) == 6
+    assert len(generate_winning_ticket(6)) == 6
+    assert len(generate_winning_ticket(7)) == 7
+    assert len(generate_winning_ticket(5)) == 5
 
-def how_many_matches(customer_list = [], winning_list = []):
-    '''Returns how many ordered matches of customer_list in winning_list.'''
+# TODO: Rename customer_list to customer_ticket and winning_ticket to winning_ticket.
+def how_many_matches(customer_ticket = [], winning_ticket = []):
+    '''Returns how many ordered matches of customer_ticket in winning_ticket.'''
     matches = 0
-    for i, number in enumerate(customer_list):
-        if number == winning_list[i]:
+    for i, number in enumerate(customer_ticket):
+        if number == winning_ticket[i]:
             matches += 1
     return matches
 
@@ -93,32 +94,57 @@ def test_winnings_for_ticket():
     assert winnings_for_ticket(5) == 1000000
     assert winnings_for_ticket(6) == 25000000
 
+# TODO: Use a dictionary or list to keep track of how many wins of each type of match.
+number_of_matches = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+
 def main():
-    winning_list = generate_winning_list()
+    winning_ticket = generate_winning_ticket()
     initial_balance = 0
     balance = initial_balance
-    how_many_tickets_i_can_buy = 100000
+    how_many_tickets_i_can_buy = 1000000
 
     earnings = 0
     expenses = 0
 
-    for number_of_tickets in range(how_many_tickets_i_can_buy):
+    for _ in range(how_many_tickets_i_can_buy):
         # Buy a ticket
         balance -= 2
         expenses += 2
-        customer_list = generate_customer_list()
+        customer_ticket = generate_customer_ticket()
         # Determine winnings.
-        i_wish_this_wasnt_so_often_so_close_to_zero = winnings_for_ticket(how_many_matches(customer_list,winning_list))
+        i_wish_this_wasnt_so_often_so_close_to_zero = winnings_for_ticket(how_many_matches(customer_ticket,winning_ticket))
         earnings += i_wish_this_wasnt_so_often_so_close_to_zero
         balance += i_wish_this_wasnt_so_often_so_close_to_zero
+
+        number_of_matches[how_many_matches(customer_ticket, winning_ticket)] += 1
+    
 
     # LOL Calculate ROI.
     return_on_investment = (earnings - expenses) / expenses
 
     results = f"I started with ${initial_balance}.00, then bought {how_many_tickets_i_can_buy} tickets, and I now have ${balance}.00.\nExpenses: ${round(expenses)}\nEarnings: ${round(earnings)}\nA ROI of {return_on_investment}!!!"
     print(results)
+    print(number_of_matches)
 
 main()
 
 # LOL One test of 1000000 tickets:
 # I started with $0.00, then bought 10000000 tickets, and I now have $-17526075.00.
+
+# Time lapse in powershell:
+# Measure-Command { python .\lab05.py }
+
+# Best result I've seen:
+
+# 
+
+# I started with $0.00, then bought 1000000 tickets, and I now have $-1706576.00.
+# Expenses: $2000000
+# Earnings: $293424
+# A ROI of -0.853288!!!
+
+# I started with $0.00, then bought 1000000 tickets, and I now have $-1706621.00.
+# Expenses: $2000000
+# Earnings: $293379
+# A ROI of -0.8533105!!!
+# {0: 940679, 1: 57876, 2: 1425, 3: 19, 4: 1, 5: 0, 6: 0}

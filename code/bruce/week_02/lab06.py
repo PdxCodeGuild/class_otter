@@ -54,7 +54,7 @@ def remove_and_save_last_digit_of_list(nums = []):
         return check_digit, nums
     except IndexError:
         check_digit = 0
-    return check_digit, nums
+        return check_digit, nums
 
 def test_remove_and_save_last_digit_of_list():
     assert remove_and_save_last_digit_of_list() == (0, [])
@@ -74,7 +74,14 @@ def test_reverse_digit():
     assert reverse_digits() == []
 
 def double_every_other(nums = []):
+
     return [(num * 2 if i % 2 == 0 else num) for i, num in enumerate(nums)]
+    
+    # Multiply every other number, starting at '0', by 2.
+    # for i in range(0, len(nums), 2):
+    #     nums[i] *= 2
+    # return nums
+
     # nums[i]
     # return [(nums[i] * 2 if i % 2 == 0 else nums[i]) for i, num in enumerate(nums)] # Works as needed but I prefer above method.
 
