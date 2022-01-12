@@ -12,7 +12,6 @@ def convert(card):
 def numspace(num):
     return ' '.join(num)
 
-
 def doublenum(list):
     for num in range(0, len(list), 2):
         list[num] *= 2
@@ -51,8 +50,8 @@ def card_check(creditcard):
     print(check_digit)
 
     counter_check = sum_num % 10
-
-    print(checker(check_digit, counter_check))    
+    print(checker(check_digit, counter_check))
+    return check_digit == counter_check    
 
 card_check(creditcard)
 print()    
