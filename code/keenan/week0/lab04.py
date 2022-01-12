@@ -1,6 +1,12 @@
 # Lab 4: Blackjack Advice
-#Let's write a python program to give basic blackjack playing advice during a game by asking the player for cards. First, ask the user for three playing cards (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, or K). Then, figure out the point value of each card individually. Number cards are worth their number, all face cards are worth 10. At this point, assume aces are worth 1. Use the following rules to determine the advice:
+# Let's write a python program to give basic blackjack playing advice during a
+# game by asking the player for cards. First, ask the user for three playing
+# cards (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, or K). Then, figure out the point
+# value of each card individually. Number cards are worth their number, all
+# face cards are worth 10. At this point, assume aces are worth 1.
 
+
+# Use the following rules to determine the advice:
 # Less than 17, advise to "Hit"
 # Greater than or equal to 17, but less than 21, advise to "Stay"
 # Exactly 21, advise "Blackjack!"
@@ -41,9 +47,6 @@ i = 0
 while i < 3:
     value += value_dictionary[hand[i]]
     i += 1
-
-
-
 
 if value == 21:
     output = str(value) + ' Blackjack!'
