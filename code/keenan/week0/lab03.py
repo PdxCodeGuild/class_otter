@@ -17,7 +17,7 @@ output = ''
 
 single_digit = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 
-# special cases for ten, eleven, twelve, thirteen, 
+# special cases for ten, eleven, twelve, thirteen
 tens_digit = ['teen', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 
 if number == 0:
@@ -42,9 +42,9 @@ elif tens == 1:
     output += f'{single_digit[singles - 1]}teen'
 elif tens >= 2 and tens < 10:
     if singles == 0:
-        output += tens_digit[tens -1]
+        output += tens_digit[tens - 1]
     else:
-        output += f'{tens_digit[tens -1]}-{single_digit[singles - 1]}'
+        output += f'{tens_digit[tens - 1]}-{single_digit[singles - 1]}'
 
 
 print(output)
@@ -54,7 +54,6 @@ print(output)
 # do this in ranges?, - less than ten
 # could maybe make a function with optional parameters? to make the above cleaner? or nest it above so it's not in the body of the code 
 # could also be done with dictionaries
-
 
 
 # Version 3 (optional)

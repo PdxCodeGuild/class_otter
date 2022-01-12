@@ -3,7 +3,6 @@ Lab 3: Number to Phrase
 
 """
 
-
 """
 Version 1
 
@@ -24,31 +23,30 @@ ones_digit = number % 10
 for num in single:
     if num == number:
         print(single[number])
-
+        break
 for num in odds:
     if num == number:
         print(odds[number])
-
+        break
 for num in teens:
     if num == number:
         print(teens[number])
-
+        break
 for num in tens:
-    
-    if num == tens_digit:
+    if num == tens_digit and ones_digit == 0:
+        print(tens[tens_digit])
+        break
+    elif num == tens_digit:
         
         for num in single:
             print(tens[tens_digit]+ ' ' + single[ones_digit])
             break
 
 
-
-
 '''
-
 Version 2
-
 '''
+
 
 hundreds = {1: 'one hundred', 2: 'two hundred', 3: 'three hundred', 4: 'four hundred',
 5: 'five hundred', 6: 'six hundred', 7: 'seven hundred', 8: 'eight hundred',
@@ -59,9 +57,14 @@ hundred_tens_digit = ((number % 100) // 10)
 hundred_single_digit = (number % 10)
 hundred_odds_check = number % 100
 
-for num in hundreds:
 
-    if num == hundred_digit:
+for num in hundreds:
+    
+    if number == 100:
+        print(hundreds[hundred_digit])
+        break
+
+    elif num == hundred_digit:
 
         for num in tens:
 
@@ -73,14 +76,14 @@ for num in hundreds:
 
 for num in hundreds:
 
-    if hundred_odds_check >= 10 and hundred_odds_check <= 12:
+    if hundred_odds_check >= 10 and hundred_odds_check <= 12 and number > 99:
         
         print(hundreds[hundred_digit] + ' ' + odds[hundred_odds_check])
         break
 
 for num in hundreds:
 
-    if hundred_odds_check >= 13 and hundred_odds_check <= 19:
+    if hundred_odds_check >= 13 and hundred_odds_check <= 19 and number > 99:
         print(hundreds[hundred_digit] + ' ' + teens[hundred_odds_check])
         break        
 
@@ -89,15 +92,17 @@ for num in hundreds:
     
     if num == hundred_digit:
         
-        
         for num2 in tens:
             
             if num2 == hundred_tens_digit:
                 
                 for num3 in single:
                     
-                    print(hundreds[hundred_digit] + ' ' + tens[hundred_tens_digit]+ ' ' + single[hundred_single_digit]) 
-                    break
-
-
+                   
+                    if hundred_digit > 0 and hundred_tens_digit > 0 and hundred_single_digit == 0:
+                        print(hundreds[hundred_digit] + ' ' + tens[hundred_tens_digit])
+                        break
+                    elif hundred_tens_digit > 0:
+                        print(hundreds[hundred_digit] + ' ' + tens[hundred_tens_digit]+ ' ' + single[hundred_single_digit]) 
+                        break    
 print()
