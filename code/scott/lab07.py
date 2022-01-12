@@ -10,6 +10,5 @@ def rot13(ciph): #Define rot13(ciph) function
 
 ciph = input("Please enter some letters:")
 print(rot13(ciph))
-
-#print(rot13(rot13(ciph)))
+print(rot13(rot13(ciph)))
 
