@@ -58,10 +58,19 @@ def peaks_and_valleys(peaks = [], valleys = []):
     # We could extend() one onto the other then sort() them.
     # Or we could 'filter' the elements through each of the peaks() and valleys() functions
     # as we go through them. This doesn't really make sense, though. Don't think it could work that way.
-    peaks.extend(valleys)
-    # Create a new list from POIs in peaks (peaks currently includes both peaks and valleys).
-    peaks_and_valleys_list = peaks.copy()
-    peaks_and_valleys_list.sort()
+
+    # Make a 'working_list' from 'peaks' so we can work with it.
+    working_list = peaks.copy()
+
+    # Add 'valleys' on to the end of 'working_list'. Which is, essentially, adding 'valleys' to 'peaks'.
+    working_list.extend(valleys)
+
+    # Sort the 'working_list'.
+    working_list.sort()
+
+    # Set 'peaks_and_valleys_list' to 'working_list'.
+    peaks_and_valleys_list = working_list
+    
     return peaks_and_valleys_list
 
 def test_peaks_and_valleys():
@@ -92,22 +101,25 @@ def main():
     
     # Loop through rows:
     for row in range(max(topography), 0, -1):
-        # Add just a little space to move the image to line up over the display of 'topography' and 'index_list_ones'.
+        # Add just a little space to move the image to line up over the display of 'topography', 'index_list_tens', and 'index_list_ones'.
         result = ' '
         # Loop through the list:
         for i in range(len(topography)):
-            # If row value is still above the list value: print space, else: print 'X'.
+            # If row value is still above the list value: add ' ' to result string, else: add 'X' to result string.
                 if row > topography[i]:
                     result += ' '
                 else:
                     result += 'X'
+                # Add the two spaces between each column.
                 result += '  '
+        # Print the result string for current row.
         print(result)
 
     print(topography, "<== Value Row")
 
     # Make a list of integers, start at 0 and go until len(topography).
-    # Use % 10 to only use the ones digit. This will keep the 'index' row inline with value row.
+    # Use i // 10 to return the tens digit of the list index. This will keep the 'index' row inline with value row.
+    # Use i % 10 to return the ones digit. This will keep the 'index' row inline with value row.
     index_list_ones = []
     index_list_tens = []
     for i in range(len(topography)):
@@ -116,44 +128,5 @@ def main():
     print(index_list_tens, "<== Index Tens")
     print(index_list_ones, "<== Index Ones")
 
-    # # First row = 0 :
-    # result  = ""
-    # result += " "
-    # result += "  "
-    # result += " "
-    # result += "  "
-    # result += "X"
-
-    # # Second row = 1 :
-    # result  = ""
-    # result += " "
-    # result += "  "
-    # result += "X"
-    # result += "  "
-    # result += "X"
-    # result += "  "
-    # result += "X"
-
-    # # Third row = 2 :
-    # result  = ""
-    # result += "X"
-    # result += "  "
-    # result += "X"
-    # result += "  "
-    # result += "X"
-    # result += "  "
-    # result += "X"
-    # result += "  "
-    # result += "X"
-
-    # row_01  = "      X"
-    # row_02  = "   X  X  X"
-    # row_03  = "X  X  X  X  X"
-    # sm_list = [1, 2, 3, 2, 1]
-    # # print(max(sm_list))
-
-    # # if row number > list[i]: print space, add two spaces, if row number > list[i + 1]: print space, ...
-    # #          X            X            X            X
-    # row_i   = " " + "  " + " " + "  " + " " + "  " + " "
     
 main()
