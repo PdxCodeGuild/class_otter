@@ -67,7 +67,7 @@ def peaks_and_valleys(peaks = [], valleys = []):
 def test_peaks_and_valleys():
     assert peaks_and_valleys([1,5],[3,6]) == [1,3,5,6]
     assert peaks_and_valleys([1,5,8],[2,3,7]) == [1,2,3,5,7,8]
-    assert peaks_and_valleys(peaks(topography), valleys(topography)) == [6,9,14,17]
+    assert peaks_and_valleys([6,14], [9,17]) == [6,9,14,17]
 
 def main():
     print(f'''
@@ -85,16 +85,14 @@ def main():
 
     # It seems we need to use the max() value of peaks() to start the print process.
 
-    
-
     #                   X   
     #                X  X  X
     #             X  X  X  X  X
     small_list = [1, 2, 3, 2, 1]
     
-    
     # Loop through rows:
     for row in range(max(topography), 0, -1):
+        # Add just a little space to move the image to line up over the display of 'topography' and 'index_list_ones'.
         result = ' '
         # Loop through the list:
         for i in range(len(topography)):
@@ -106,47 +104,56 @@ def main():
                 result += '  '
         print(result)
 
-    print(topography)
-    # First row = 0 :
-    result  = ""
-    result += " "
-    result += "  "
-    result += " "
-    result += "  "
-    result += "X"
+    print(topography, "<== Value Row")
 
-    # Second row = 1 :
-    result  = ""
-    result += " "
-    result += "  "
-    result += "X"
-    result += "  "
-    result += "X"
-    result += "  "
-    result += "X"
+    # Make a list of integers, start at 0 and go until len(topography).
+    # Use % 10 to only use the ones digit. This will keep the 'index' row inline with value row.
+    index_list_ones = []
+    index_list_tens = []
+    for i in range(len(topography)):
+        index_list_tens.append(i // 10)
+        index_list_ones.append(i % 10)
+    print(index_list_tens, "<== Index Tens")
+    print(index_list_ones, "<== Index Ones")
 
-    # Third row = 2 :
-    result  = ""
-    result += "X"
-    result += "  "
-    result += "X"
-    result += "  "
-    result += "X"
-    result += "  "
-    result += "X"
-    result += "  "
-    result += "X"
+    # # First row = 0 :
+    # result  = ""
+    # result += " "
+    # result += "  "
+    # result += " "
+    # result += "  "
+    # result += "X"
 
+    # # Second row = 1 :
+    # result  = ""
+    # result += " "
+    # result += "  "
+    # result += "X"
+    # result += "  "
+    # result += "X"
+    # result += "  "
+    # result += "X"
 
+    # # Third row = 2 :
+    # result  = ""
+    # result += "X"
+    # result += "  "
+    # result += "X"
+    # result += "  "
+    # result += "X"
+    # result += "  "
+    # result += "X"
+    # result += "  "
+    # result += "X"
 
-    row_01  = "      X"
-    row_02  = "   X  X  X"
-    row_03  = "X  X  X  X  X"
-    sm_list = [1, 2, 3, 2, 1]
-    # print(max(sm_list))
+    # row_01  = "      X"
+    # row_02  = "   X  X  X"
+    # row_03  = "X  X  X  X  X"
+    # sm_list = [1, 2, 3, 2, 1]
+    # # print(max(sm_list))
 
-    # if row number > list[i]: print space, add two spaces, if row number > list[i + 1]: print space, ...
-    #          X            X            X            X
-    row_i   = " " + "  " + " " + "  " + " " + "  " + " "
+    # # if row number > list[i]: print space, add two spaces, if row number > list[i + 1]: print space, ...
+    # #          X            X            X            X
+    # row_i   = " " + "  " + " " + "  " + " " + "  " + " "
     
 main()
