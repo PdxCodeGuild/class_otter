@@ -34,12 +34,19 @@ more_numbers = [7,8,9]
 a_number = 6
 
 # Print out the value of the variable 'a_number'.
-print(a_number)
+# print(a_number)
 
 # Define a variable and assign a random integer between 0 and 10 to it.
 random_integer = random.randint(0,10)
 # Print out the value of the 'random_integer'.
-print(random_integer)
+# print(random_integer)
+
+def give_me_a_random_integer():
+    random.randint(0,10)
+    return
+
+def test_give_me_a_random_integer():
+    
 
 # What happens if we try to print out a print statement?
 # print(print())

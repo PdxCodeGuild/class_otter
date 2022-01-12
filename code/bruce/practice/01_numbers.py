@@ -26,7 +26,10 @@ def is_even(a):
     # Lets pick another way to see if a is in list_of_evens.
     if a % 2 == 0:
         # We KNOW KNOW KNOW that 'a' is even.
-        print(f'This is even: {a}')
+        print(a)
+        print(a % 2)
+        print(a % 2 == 0)
+        # print(f'This is even: {a}')
         result = True
     elif a % 2 != 0:
         result = False
@@ -34,7 +37,7 @@ def is_even(a):
 
 the_number = 6
 the_result_is = is_even(the_number)
-print(the_result_is)
+# print(the_result_is)
 
 # print(is_even(57))
 
