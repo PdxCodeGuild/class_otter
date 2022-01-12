@@ -16,10 +16,11 @@ payouts = {
 
 while count < 100000:
     def pick6(): # player ticket number selection
-        ticket = []
-        for _ in range(6):
-            ticket.append(random.randint(1, 99))
-        return ticket
+        return[random.randint(1,99) for _ in range(6)]
+        # ticket = []
+        # for _ in range(6):
+        #     ticket.append(random.randint(1, 99))
+        # return ticket
     def draw(): # House number selection
         nums = []
         for _ in range(6):
@@ -33,44 +34,44 @@ while count < 100000:
     for i in range(len(play)):
         if play[i] == house[i]:
             matches += 1
-
+#def matches(play, house)
+    # for win, tix in zip(winning, ticket):
+    # if win == tix:
+    #     matches +=
 ##subtract cost of ticket and add payout
     if matches == 0 and matches < 1:
         count = count + 1
-        winnings = winnings -2 + payouts.get(matches)
+        winnings = winnings + payouts.get(matches)
     elif matches == 1 and matches < 2:
         count = count + 1
         total_matched = total_matched + matches
-        winnings = winnings - 2 + payouts.get(matches)    
+        winnings = winnings + payouts.get(matches)    
     elif matches == 2 and matches < 3:
         count = count + 1
         total_matched = total_matched + matches
-        winnings = winnings - 2 + payouts.get(matches)    
+        winnings = winnings + payouts.get(matches)    
     elif matches == 3 and matches < 4:
         count = count + 1
         total_matched = total_matched + matches 
-        winnings = winnings - 2 + payouts.get(matches)       
+        winnings = winnings + payouts.get(matches)       
     elif matches == 4  and matches < 5:
         count = count + 1
         total_matched = total_matched + matches 
-        winnings = winnings - 2 + payouts.get(matches)
+        winnings = winnings + payouts.get(matches)
     elif matches == 5 and matches < 6:
         count = count + 1
         total_matched = total_matched + matches 
-        winnings = winnings - 2 + payouts.get(matches)
+        winnings = winnings + payouts.get(matches)
     elif matches == 6:
         count = count + 1
         total_matched = total_matched + matches 
-        winnings = winnings - 2 + payouts.get(matches)
-costs = int(count * 2 )        
-roi = int(winnings - costs / costs)
-
-
+        winnings = winnings + payouts.get(matches)
+costs = (count * 2 )
+roi = (winnings - costs)/ costs
 
 print ('\ntimes played' , count)
 print ('Cards Matched', total_matched)
 print ('Player Expenses $' , costs)
 print ('Player Earnings $' , winnings)
-print ('Your Return On Investment is $' , roi)
-       
-print ('\n')
+print ('Your Return On Investment is:' , roi)
+
