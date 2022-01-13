@@ -14,54 +14,17 @@ want to use for their capstone project or solve an actual problem they
 have. For a list of Python libraries to consider using in this project,
 check out https://awesome-python.com
 '''
-import pygame
-from Player import *
-from GameBoard import *
+from Game import *
+from Engine import *
+
+engine = Engine()
+game = Game()
 
 
-# Initialize pygame library
-pygame.init()
+def main():
+    engine.initialize()
+    engine.load_game(game)
+    engine.run()
 
-# Setup display window
-screenWidth = 640
-screenHeight = 480
-screenSize = (screenWidth, screenHeight)
-display = pygame.display.set_mode(screenSize)
-title = 'Tic-Tac-Toe'
-pygame.display.set_caption(title)
 
-# Background display and color
-backgroundColor = (255, 127, 64)
-background = pygame.Surface(screenSize)
-background.fill(backgroundColor)
-background = background.convert()
-display.blit(background, (0, 0))
-
-# Setup clock
-fps = 60
-frameTime = 0
-clock = pygame.time.Clock()
-
-# Main game loop
-isRunning = True
-while isRunning:
-    # Check for input events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            isRunning = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                isRunning = False
-
-    # Count up frame time and tick the clock no more than 60fps
-    frameTime += clock.tick(fps)
-
-    # Update FPS in titlebar
-    text = f'{title}    FPS: {clock.get_fps()}'
-    pygame.display.set_caption(text)
-
-    # Swap display buffers
-    pygame.display.flip()
-
-pygame.quit()
-
+main()
