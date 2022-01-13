@@ -54,11 +54,9 @@ class Engine:
         while is_running:
             self._clock.tick()
             is_running = self.process_input()
-            
             self._game.update()
             self._game.render()
-
-            self._display.update(self._game.title_text)
+            self.render()
         pygame.quit()
 
     def process_input(self):
@@ -73,5 +71,14 @@ class Engine:
                 if event.key == pygame.K_ESCAPE:
                     is_running = False
                     break
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    print(event.pos)
 
         return is_running
+    
+    def render(self):
+        self._display.update(self._game.title_text)
+        
+        for game_object in self._game._game_objects:
+            pygame.draw.rect(self._display.display, game_object._color, pygame.Rect(game_object._position.x, game_object._position.x, game_object._size.width, game_object._size.height))
