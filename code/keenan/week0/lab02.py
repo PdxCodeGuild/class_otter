@@ -1,4 +1,5 @@
 # Lab 02: Average Numbers
+# 01/06/2022
 
 # Version 1
 
@@ -10,7 +11,6 @@ total = 0
 for i in range(len(nums)):
     total += nums[i]
     i += 1
-
 
 # compute and output the average
 average = total / len(nums)
@@ -37,4 +37,4 @@ while True:
 
 
 
-    
+# Extra Version to practice list comprehensions
