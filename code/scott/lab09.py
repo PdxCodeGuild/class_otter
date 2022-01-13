@@ -1,7 +1,7 @@
 # Lab09.py Compute Automated Readability Index - 22-01-12
 
  
-#import re
+import re
 
 
 # def search_text():
@@ -9,8 +9,10 @@ with open('Gettysburg_Address.txt', 'r', encoding='utf-8') as f:
     contents = f.read()
     number_of_characters = len(contents)
     number_of_words = contents.split()
-    number_of_sentences = len(contents.split('[\n]'))
-    
+#    numbers_of_sentences = re.split('[_,][_,]',str)
+#    number_of_sentences = len(contents.split('[\n]'))
+#    number_of_sentences = re.findall(r' . ', f.read())
+    print(re.split('[\n]', contents))    
     # lines = 0
     # blanklines = 0
     # for line in contents:
@@ -22,7 +24,7 @@ with open('Gettysburg_Address.txt', 'r', encoding='utf-8') as f:
     #     sentences += line.count('.') + line.count('!') + line.count('?')
     print('\nNumber of characters in text file :', number_of_characters)    
     print('\nNumber of words in text file :', len(number_of_words))
-    print('\nNumber of number_of_sentences in text file:', number_of_sentences)
+#    print('\nNumber of Sentences in text file:', number_of_sentences)
 
 # (re.split('[.?!]', contents)) 
     # number_of_number_of_lines = contents.readnumber_of_lines()

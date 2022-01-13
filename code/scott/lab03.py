@@ -52,12 +52,18 @@ if num_div_ten == 0: # single digits
 elif num_div_ten == 1: # teens digits
     string_num = teen_digits.get(num)
     print (string_num)
-elif num_div_ten > 1 and num_div_ten < 11: # numbers 20 through 109
+elif num_div_ten > 1 and num_div_ten < 11 and num_remainder > 0: # numbers 20 through 109
     tens_string_num = tens_digits.get(num_div_ten)
     ones_string_num = ones_digits.get(num_remainder)
     string_num = str(tens_string_num) + "-" + str(ones_string_num)
     #string_num = "{}-{}".format(str(tens_string_num), str(ones_string_num))
     print(string_num)
+elif num_div_ten > 1 and num_div_ten < 11 and num_remainder < 1: # numbers 20 through 109
+    tens_string_num = tens_digits.get(num_div_ten)
+    ones_string_num = ones_digits.get(num_remainder)
+    string_num = str(tens_string_num)
+    #string_num = "{}-{}".format(str(tens_string_num), str(ones_string_num))
+    print(string_num)    
 elif num_div_ten%10 == 1 and num > 100: # teen numbers over 100
     teen_num = num - (num_div_ten - 1) * 10
     teen_string_num = teen_digits.get(teen_num)
