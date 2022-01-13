@@ -15,8 +15,10 @@ class Game:
         self.player_2 = Player('Player 2', 'O')
         self.title_text = ''
 
+
         self._game_objects.append(Token_X(Vector2(320, 240), Size(64, 64), (0, 128, 255)))
         self._game_objects.append(Token_Y(Vector2(320, 240), Size(64, 64), (0, 128, 255)))
+        self._game_objects.append(self._game_board)
 
     def update(self, time):
         for game_object in self._game_objects:

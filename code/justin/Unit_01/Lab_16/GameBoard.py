@@ -1,21 +1,13 @@
+import pygame
+
+
 class GameBoard:
     def __init__(self):
         self.board = []
         for _ in range(3):
             self.board.append([' ' for _ in range(3)])
 
-        self._separator = ' | '
-        self._border = ' +-----------+\n'
         self._positions_remaining = 9
-    
-    def __repr__(self):
-        result = self._border
-        for y in range(3):
-            for x in range(3):
-                result += f'{self._separator}{self.board[x][y]}'
-            result += f'{self._separator}\n'
-        result += self._border
-        return result
     
     def _is_position_available(self, x, y):
         return self.board[x][y] == ' '
@@ -90,6 +82,15 @@ class GameBoard:
         return self._positions_remaining <= 0
 
     def is_game_over(self):
-        is_full = self.is_full()
-        winner = self.calc_winner()
         return self.is_full() or self.calc_winner() != None
+
+    def update(self, time):
+        pass
+
+    def draw(self, surface):
+        black = (0, 0, 0)
+        pygame.draw.line(surface, black, (280, 120), (280, 360), 3)
+        pygame.draw.line(surface, black, (360, 120), (360, 360), 3)
+
+        pygame.draw.line(surface, black, (200, 200), (440, 200), 3)
+        pygame.draw.line(surface, black, (200, 280), (440, 280), 3)
