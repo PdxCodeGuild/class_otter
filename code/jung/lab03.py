@@ -50,11 +50,16 @@ hunds_dict = {
 number = input("0-999, choose a number: ")
 number = int(number)
  
-tens_digit = (number // 10) % 10
-tens_digit = tens_digit * 10
+tens_digit1 = (number // 10) % 10
+tens_digit2 = tens_digit1 * 10
 ones_digit = number % 10
-hunds_digit = number // 100
-hunds_digit = hunds_digit * 100
+hunds_digit1 = number // 100
+hunds_digit2 = hunds_digit1 * 100
+teens_digit = number % 100 
+# print(teens_digit)
+# print(tens_digit1)
+# print(tens_digit2)
+# print(hunds_digit1)
 
 if number < 100:
     if number in ones_dict:
@@ -63,13 +68,19 @@ if number < 100:
         print(teens_dict[number])
     elif number in tens_dict:
         print(tens_dict[number])
-    elif tens_digit in tens_dict and ones_digit in ones_dict:
-        print(f"{tens_dict[tens_digit]}-{ones_dict[ones_digit]}")
+    elif tens_digit2 in tens_dict and ones_digit in ones_dict:
+        print(f"{tens_dict[tens_digit2]}-{ones_dict[ones_digit]}")
 else:
-    if number in hunds_dict:
+    if number in hunds_dict: #if tens_digit == 0 and ones_digit == 0
         print(hunds_dict[number])
-    elif hunds_digit in hunds_dict and tens_digit in tens_dict and ones_digit in ones_dict:
-        print(f"{hunds_dict[hunds_digit]}-{tens_dict[tens_digit]}-{ones_dict[ones_digit]}")
+    elif tens_digit1 == 0:
+        print(f"{hunds_dict[hunds_digit2]}-{ones_dict[ones_digit]}")
+    elif tens_digit1 == 1:
+        print(f"{hunds_dict[hunds_digit2]}-{teens_dict[teens_digit]}") 
+    elif ones_digit == 0:   
+        print(f"{hunds_dict[hunds_digit2]}-{tens_dict[tens_digit2]}")            
+    elif hunds_digit2 in hunds_dict and tens_digit2 in tens_dict and ones_digit in ones_dict:
+        print(f"{hunds_dict[hunds_digit2]}-{tens_dict[tens_digit2]}-{ones_dict[ones_digit]}")
 
 
         
