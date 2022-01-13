@@ -57,18 +57,3 @@ elif usr_num >= 100 and usr_num <= 999 :
     elif tens_digit >= 2  and tens_digit <= 9 :
         num_cnvr_wrd = ones[hund_digit] + '-hundred and ' + tens[tens_digit * 10] + '-' + ones[ones_digit]
         print(f'\n{usr_num} is converted into: {num_cnvr_wrd}')
-  
-       
-    
-
-    
-   
-
-
-
-
-
-
-        
-    
-    
