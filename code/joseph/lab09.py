@@ -15,7 +15,7 @@ file.close()
 #define variables
 n_chars = len(re.findall(r'\w', text))
 n_words = len(re.findall(r'\w+', text))
-n_sents = len(re.findall(r'\.|\?|\!', text)) + 1
+n_sents = len(re.findall(r'\.|\?|\!', text))
 
 #define ari
 ari = math.ceil(4.71 * (n_chars / n_words) + 0.5 * (n_words / n_sents) - 21.43)
