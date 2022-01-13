@@ -149,23 +149,25 @@ def test_extract_person_info_from_a_line():
 # Do we need a separate function to loop through the elements of lines?
 # Well... Let's try it out.
 # Write a function to loop through the 1 - len() elements of the lines list and "do something" with that element.
-def do_something_to_each_element_of_list(lines = [], headers_list = [], friends_list = []):
-    '''Looks at each element of lines and does something to it.'''
+def create_list_of_friends_info_from_lines(lines = []):
+    '''Looks at each line in lines after the header and add it to a list.'''
+    friends_list = []
+    headers_list = extract_headers_from_lines(lines)
     for i in range(1, len(lines)):
         # What are we doing to each line?
         friend_list = extract_person_info_from_a_line(lines[i])
         # We have a person list now. What now?
         # Create the dictionary for that person?
+        # Need headers_list.
         friend_dictionary = create_individual_dictionary(headers_list, friend_list)
         # Add the friend_dictionary to the persons_list?
         friends_list = add_individual_dictionary_to_friends_list(friend_dictionary, friends_list)
     return friends_list
 
-def test_do_something_to_each_element_of_list():
-    assert do_something_to_each_element_of_list() == []
-    # It seems we may be able to use == on simple dictionaries. There needs to be caution with more complicated dictionaries. This test may fail someday on future expansion.
-    assert do_something_to_each_element_of_list(['a,b,c'],['h1','h2','h3'],[{'z':'1','y':'2','x':'3'}]) == [{'y':'2','z':'1','x':'3'},{'h1':'a','h2':'b','h3':'c'}]
-    assert do_something_to_each_element_of_list() == []
+def test_create_list_of_friends_info_from_lines():
+    assert create_list_of_friends_info_from_lines() == []
+    assert create_list_of_friends_info_from_lines(['h1,h2,h3','p1,l1,d1']) == [{'h1':'p1','h2':'l1','h3':'d1'}]
+    assert create_list_of_friends_info_from_lines(['h1,h2,h3','p1,l1,d1','p2,l2,d2']) == [{'h1':'p1','h2':'l1','h3':'d1'},{'h1':'p2','h2':'l2','h3':'d2'}]
 
 ###########################################################
 
@@ -219,7 +221,7 @@ def main():
     # STEP 08
     ###########################################################
     # Continue doing all the things.
-    contacts = do_something_to_each_element_of_list(lines, headers)
+    contacts = create_list_of_friends_info_from_lines(lines)
     
     # Maybe print the contacts list?
     print()
