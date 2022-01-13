@@ -4,29 +4,41 @@ import pygame
 class DisplayWindow:
     def __init__(self, screen_size, background_color):
         self.screen_size = screen_size
-        self.display = pygame.display.set_mode(screen_size)
+        self.surface = pygame.display.set_mode(screen_size)
+        self.background_color = background_color
+        self.screen = pygame.Surface(self.screen_size)
         
-        background = pygame.Surface(self.screen_size)
-        background.fill(background_color)
-        self.display.blit(background.convert(), (0, 0))
+        self._refresh()
+
+    def _refresh(self):
+        self.screen.fill(self.background_color)
+        self.screen = self.screen.convert()
+        self.surface.blit(self.screen, (0, 0))
 
     def update(self, title):
         # Update window title
         pygame.display.set_caption(title)
+        self._refresh()
 
+    def render(self):
         # Swap display buffers
         pygame.display.flip()
 
 
 class GameClock:
-    def __init__(self, fps=60):
-        self._frames_per_second = fps
+    def __init__(self, frames_per_second=144):
+        self._frames_per_second = frames_per_second
         self.frame_time = 0
+        self.delta_time = 0
+        self.tick_count = 0
         self.clock = pygame.time.Clock()
 
     def tick(self):
-        # Count up frame time and tick the clock no more than 60fps
+        # Count up frame time and tick the clock up to the given frames per second
         self.frame_time += self.clock.tick(self._frames_per_second)
+        self.delta_time = self.clock.get_time() / 1000
+        self.tick_count += 1
+
 
 
 class Engine:
@@ -40,7 +52,7 @@ class Engine:
         pygame.init()
 
         # Setup display window
-        self._display = DisplayWindow((640, 480), (255, 127, 64))
+        self._display = DisplayWindow((640, 480), (255, 128, 0))
 
         # Setup clock
         self._clock = GameClock()
@@ -54,8 +66,8 @@ class Engine:
         while is_running:
             self._clock.tick()
             is_running = self.process_input()
-            self._game.update()
-            self._game.render()
+            self._game.update(self._clock)
+            self._game.render(self._clock)
             self.render()
         pygame.quit()
 
@@ -79,6 +91,9 @@ class Engine:
     
     def render(self):
         self._display.update(self._game.title_text)
-        
+
+        surface = self._display.surface
         for game_object in self._game._game_objects:
-            pygame.draw.rect(self._display.display, game_object._color, pygame.Rect(game_object._position.x, game_object._position.x, game_object._size.width, game_object._size.height))
+            game_object.draw(surface)
+
+        self._display.render()

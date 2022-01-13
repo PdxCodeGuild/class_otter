@@ -1,3 +1,6 @@
+import pygame
+
+
 class Size:
     def __init__(self, width=1, height=1):
         self.width = width
@@ -14,5 +17,8 @@ class GameObject:
         self._size = size
         self._color = color
 
-    def update(self):
+    def update(self, time):
+        pass
+
+    def draw(self, surface):
         pass

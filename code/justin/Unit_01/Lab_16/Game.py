@@ -1,6 +1,7 @@
 from Player import *
 from GameBoard import *
 from GameObject import *
+from Token import *
 
 
 class Game:
@@ -14,14 +15,15 @@ class Game:
         self.player_2 = Player('Player 2', 'O')
         self.title_text = ''
 
-        self._game_objects.append(GameObject(Vector2(30, 30), Size(60, 60), (0, 128, 255)))
+        self._game_objects.append(Token_X(Vector2(320, 240), Size(64, 64), (0, 128, 255)))
+        self._game_objects.append(Token_Y(Vector2(320, 240), Size(64, 64), (0, 128, 255)))
 
-    def update(self):
+    def update(self, time):
         for game_object in self._game_objects:
-            game_object.update()
+            game_object.update(time)
 
-    def render(self):
-        # Update FPS in titlebar
+    def render(self, time):
+        # Update title bar
         name = self.player_1.name if self._is_player_1_turn else self.player_2.name
         token = self.player_1.token if self._is_player_1_turn else self.player_2.token
         self.title_text = f'{self._title}    {name}\'s turn -> {token}'
