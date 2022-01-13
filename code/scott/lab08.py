@@ -1,5 +1,4 @@
-# data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
-# Index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+#Lab08.py Peaks and Valleys - 22/01/11 - Scott Madden
 
 def peaks(elevation):
     peaks = []
@@ -24,7 +23,6 @@ def p_v_s(elevation):
     highs = peaks(elevation)
     lows = valleys(elevation)
     return sorted(highs + lows)
-
 
 if __name__ == '__main__':
     data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
