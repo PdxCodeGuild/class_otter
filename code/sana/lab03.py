@@ -7,7 +7,8 @@ tens_converter = {
     3 : 'thirty',
     2 : 'twenty',
     9 : 'ninety',
-    0 : ''
+    0 : '',
+    10 : 'ten'
 }
 ones_converter = {
     0 : 'zero',
@@ -64,7 +65,13 @@ def o_digits(y):
     # print(ones_digit)
     return ones_digit
 def th_digits(v):
-    th_digit = (v //100)//10
+    th_digit = (v //100)
+    th_digit = th_digit * 100
+    th_digit = (v - th_digit)
+    if th_digit == 10:
+        th_digit = 10
+        return th_digit
+    th_digit = th_digit//10
     # print(th_digit)
     return th_digit
 def h_digits(z):
@@ -72,7 +79,9 @@ def h_digits(z):
     # print(hundreds_digit)
     return hundreds_digit
 while True:
-    entered_number = input("number: ")
+    entered_number = input("enter your number or 'quit' to quit: ")
+    if entered_number == 'quit':
+        break
     entered_number = int(entered_number)
     if entered_number < 20 and entered_number > 10:
         print(teen_converter[entered_number])
@@ -95,4 +104,3 @@ while True:
             ones = zo_converter[o_digits(entered_number)]
             hundreds = h_converter[h_digits(entered_number)]
             print(f'{hundreds} {tens} {ones}')
-
