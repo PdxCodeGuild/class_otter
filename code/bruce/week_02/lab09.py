@@ -80,7 +80,7 @@ def test_get_number_of_sentences():
     assert get_number_of_sentences('a! bc3?') == 2
 
 def open_file_save_text_as_string_close_file(file, mode = 'r'):
-    '''Open 'file', read contents, save contents as 'contents', the close 'file'.'''
+    '''Open 'file', read contents, closes the 'file', and returns 'contents'.'''
     with open(file, mode) as the_file:
         contents = the_file.read()
     return contents
@@ -117,11 +117,11 @@ def calculate_ari_of_text(characters, words, sentences):
     return ari
 
 def main():
-    two_files = ["gettysburg_address_archive_org.txt", "gettysburg_address_umd_edu.txt"]
+    input_files = ["gettysburg_address_archive_org.txt", "gettysburg_address_umd_edu.txt", "medicine_info.txt"]
     # file_we_are_analyzing = "gettysburg_address_archive_org.txt"
     # file_we_are_analyzing = "gettysburg_address_umd_edu.txt"
 
-    for file in two_files:
+    for file in input_files:
         the_text_we_have = open_file_save_text_as_string_close_file(file)
         characters = get_number_of_characters(the_text_we_have)
         words = get_number_of_spaces(the_text_we_have)
@@ -131,8 +131,8 @@ def main():
         print(f'''
         ARI:        {the_ari}
         Filename:   {file}
-        Recommended grade level is {ari_scale[the_ari]['grade_level']}
-        Suitable ages for reading are {ari_scale[the_ari]['ages']}
+        Recommended grade level is {ari_scale[the_ari]['grade_level']}.
+        Suitable ages for reading are {ari_scale[the_ari]['ages']}.
         Characters: {characters}
         Words:      {words}
         Sentences:  {sentences}
