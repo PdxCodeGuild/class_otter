@@ -21,7 +21,3 @@ elif usr_point == 21:
 
 elif usr_point > 21:
     print(f'\n{usr_point}, ALREADY BUSTED!')
-
-
-
-
