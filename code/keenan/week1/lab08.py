@@ -1,11 +1,10 @@
 # Lab 8: Peaks and Valleys
+# 01/13/2022
+
 
 # Define the following functions:
-
 # peaks - Returns the indices of peaks. A peak has a lower number on both the left and the right.
-
 # valleys - Returns the indices of 'valleys'. A valley is a number with a higher number on both the left and the right.
-
 # peaks_and_valleys - uses the above two functions to compile a single list of the peaks and valleys in order of appearance in the original data.
 
 
