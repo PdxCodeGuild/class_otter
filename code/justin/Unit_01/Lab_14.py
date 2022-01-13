@@ -26,7 +26,7 @@ def request_joke():
     return response['joke']
 
 def search_joke(search_term, page=1):
-    response = requests.get('https://icanhazdadjoke.com/search', params={'term': search_term}, headers={'Accept': 'application/json'}).json()
+    response = requests.get('https://icanhazdadjoke.com/search', params={'term': search_term, 'page': page}, headers={'Accept': 'application/json'}).json()
     return SearchResults(response)
 
 
@@ -45,14 +45,13 @@ class SearchResults:
         if self._current_joke_index < len(self._results):
             joke = self._results[self._current_joke_index]
             self._current_joke_index += 1
-            return joke
+            return joke, self
         else:
             if self._current_page < self._page_count:
-                self = SearchResults(search_joke(self._search_term, self._current_page + 1))
+                self = search_joke(self._search_term, self._current_page + 1)
                 return self.next()
             else:
-                next_joke = None
-        return next_joke
+                return None, None
 
     def get_joke_count(self):
         return self._joke_count
@@ -67,7 +66,7 @@ def main():
         search_results = search_joke(search_term)
         print(f'Found {search_results.get_joke_count()} total jokes about "{search_term}"\n')
         while True:
-            dad_joke = search_results.next()
+            dad_joke, search_results = search_results.next()
             if dad_joke == None:
                 print("\nSorry, no more jokes\n")
                 break
