@@ -1,4 +1,6 @@
 # Lab 4: Blackjack Advice
+# 01/10/2022
+
 # Let's write a python program to give basic blackjack playing advice during a
 # game by asking the player for cards. First, ask the user for three playing
 # cards (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, or K). Then, figure out the point

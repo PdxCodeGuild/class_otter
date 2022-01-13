@@ -1,4 +1,6 @@
 # Lab 5: Pick6 Lottery Simulation
+# 01/10/2022
+
 # A ticket contains 6 numbers, 1 to 99, and the number of matches between the ticket and
 # the winning numbers determines the payoff. Order matters, if the winning numbers are 
 # [5, 10] and your ticket numbers are [10, 5] you have 0 matches. If the winning 
