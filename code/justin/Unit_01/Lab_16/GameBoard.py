@@ -1,4 +1,7 @@
 import pygame
+from pygame import Rect
+from pygame.math import Vector2
+from Utility import *
 
 
 class GameBoard:
@@ -9,18 +12,17 @@ class GameBoard:
 
         self._positions_remaining = 9
         self._tile_rects = []
-        self._tile_rects.append(pygame.Rect(202, 122, 77, 77))
-        self._tile_rects.append(pygame.Rect(282, 122, 77, 77))
-        self._tile_rects.append(pygame.Rect(362, 122, 77, 77))
-
-        self._tile_rects.append(pygame.Rect(202, 202, 77, 77))
-        self._tile_rects.append(pygame.Rect(282, 202, 77, 77))
-        self._tile_rects.append(pygame.Rect(362, 202, 77, 77))
-
-        self._tile_rects.append(pygame.Rect(202, 282, 77, 77))
-        self._tile_rects.append(pygame.Rect(282, 282, 77, 77))
-        self._tile_rects.append(pygame.Rect(362, 282, 77, 77))
-
+        rect_size = (80, 80)
+        half_size = [int(x / 2) for x in rect_size]
+        
+        position = Vector2(0, 0)
+        for x in range(-rect_size[0] - half_size[0], rect_size[0] - half_size[0] + 1, 80):
+            position.x = x
+            for y in range(-rect_size[1] - half_size[1], -rect_size[1] - half_size[1] + 1, 80):
+                position.y = y
+                self._tile_rects.append(pygame.Rect(position, rect_size))
+                print('a')
+        
         self._draw_tile = [False, False, False, False, False, False, False, False, False]
     
     def _is_position_available(self, x, y):
@@ -99,18 +101,21 @@ class GameBoard:
         return self.is_full() or self.calc_winner() != None
 
 
-    def update(self, time):
+    def update(self, time, display):
         mouse_pos = pygame.mouse.get_pos()
         for i in range(len(self._tile_rects)):
-            if self._tile_rects[i].collidepoint(mouse_pos):
+            rect = local_to_screen(display.screen_size, rect=self._tile_rects[i])
+            if rect.collidepoint(mouse_pos):
                 self._draw_tile[i] = True
             else:
                 self._draw_tile[i] = False
 
         
 
-    def draw(self, surface):
+    def draw(self, time, display):
+        surface = display.surface
         black = (0, 0, 0)
+        
         pygame.draw.line(surface, black, (280, 122), (280, 358), 3)
         pygame.draw.line(surface, black, (360, 122), (360, 358), 3)
 
@@ -118,6 +123,13 @@ class GameBoard:
         pygame.draw.line(surface, black, (202, 280), (438, 280), 3)
 
         red = (255, 0, 0)
+        screen_size = display.screen_size
+        position = Vector2()
+        size = Vector2()
         for i in range(len(self._tile_rects)):
             if self._draw_tile[i]:
-                pygame.draw.rect(surface, red, self._tile_rects[i], 2)
+                rect = self._tile_rects[i]
+                position = Vector2(rect.center)
+                size.x = rect.width
+                size.y = rect.height
+                pygame.draw.rect(surface, red, local_to_screen(screen_size, rect=Rect(position, size)), 2)

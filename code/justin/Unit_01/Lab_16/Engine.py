@@ -7,7 +7,6 @@ class DisplayWindow:
         self.surface = pygame.display.set_mode(screen_size)
         self.background_color = background_color
         self.screen = pygame.Surface(self.screen_size)
-        
         self._refresh()
 
     def _refresh(self):
@@ -64,12 +63,14 @@ class Engine:
         # Main game loop
         is_running = True
         while is_running:
+            # Update
             self._clock.tick()
             is_running = self.process_input()
-            self._game.update(self._clock)
-
+            self._game.update(self._clock, self._display)
+            
+            # Render
             self._display.update(self._game.title_text)
-            self._game.render(self._display.surface)
+            self._game.render(self._clock, self._display)
             self._display.render()
         pygame.quit()
 
