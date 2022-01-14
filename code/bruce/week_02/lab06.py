@@ -74,7 +74,8 @@ def test_reverse_digit():
     assert reverse_digits() == []
 
 def double_every_other(nums = []):
-
+    
+    # Execute the statement (num * 2 if i % 2 == 0 else num) for each i, num in enumerate(nums)
     return [(num * 2 if i % 2 == 0 else num) for i, num in enumerate(nums)]
     
     # Multiply every other number, starting at '0', by 2.
@@ -145,7 +146,8 @@ def main():
     valid_card = "4556737586899855"
     test_invalid_card_01 = "4556737585899855"
     test_invalid_card_01 = "4656737586899855"
-
-    print(card_valid(valid_card))
+    
+    is_card_valid = card_valid(valid_card)
+    print(is_card_valid)
 
 main()

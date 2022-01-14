@@ -10,9 +10,9 @@ import string
 import math
 import time
 
-list_of_letters = string.ascii_letters      # abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-list_of_punctuation = string.punctuation    # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-list_of_digits = string.digits              # 0123456789
+LIST_OF_LETTERS = string.ascii_letters      # abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+LIST_OF_PUNCTUATION = string.punctuation    # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+LIST_OF_DIGITS = string.digits              # 0123456789
 
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/bruce/1%20Python/labs/09%20ARI.md
@@ -40,7 +40,7 @@ def get_number_of_characters(text):
     # Convert text string to list so we can filter out everything but letters and numbers.
     text_as_list = list(text)
     # Use list comprehension to get list of letters and numbers. This filters out anything other than letters and numbers.
-    letters_and_numbers = [character for character in text_as_list if (character in list_of_letters or character in list_of_digits)]
+    letters_and_numbers = [character for character in text_as_list if (character in LIST_OF_LETTERS or character in LIST_OF_DIGITS)]
     # Use len() t0 get number of characters in list.
     count_of_letters_and_numbers = len(letters_and_numbers)
     return count_of_letters_and_numbers
