@@ -13,7 +13,7 @@
 # STEP 01
 ###########################################################
 # Use 'with open...' to see what kind of data we are receiving from the file.
-def open_file_return_contents(file = 'friends.csv', mode = 'r'):
+def open_file_return_contents(file = r'.\data\friends.csv', mode = 'r'):
     '''Accepts arguments of filename of csv file and file opening mode. Returns whole_text and lines (list).'''
     '''We don't necessarily need the whole text in one file, but I'm returning it in case it's needed.'''
     with open(file, mode) as file:
@@ -22,15 +22,15 @@ def open_file_return_contents(file = 'friends.csv', mode = 'r'):
     return whole_text_of_file, list_of_lines
 
 def test_open_file_return_contents():
-    text, lines = open_file_return_contents('empty_file.txt')
+    text, lines = open_file_return_contents(r'.\data\empty_file.txt')
     assert text == ''
     assert lines == ['']
 
-    text, lines = open_file_return_contents('headers_only.csv')
+    text, lines = open_file_return_contents(r'.\data\headers_only.csv')
     assert text == 'header_1,header_2,header_3'
     assert lines == ['header_1,header_2,header_3']
 
-    text, lines = open_file_return_contents('headers_and_one_line.csv')
+    text, lines = open_file_return_contents(r'.\data\headers_and_one_line.csv')
     assert text == 'header_a,header_b,header_c\nvalue_a,value_b,value_c'
     assert lines == ['header_a,header_b,header_c','value_a,value_b,value_c']
 ###########################################################
