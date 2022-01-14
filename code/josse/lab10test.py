@@ -11,9 +11,15 @@ key_list = new_list.pop(0)
 
 value_list = new_list
 
-dict_key = {}
+
+def convert_to_dict(a):
+    dict_key = {}
+    for keys in dict(key_list):
+        dict_key[key_list]
+        return dict_key
 
 
+print(convert_to_dict(key_list))
 # name = input("enter your name: ")
 # fav_color = input("enter your favorite color: ")
 # fav_fruit = input("enter your favorite fruit: ")

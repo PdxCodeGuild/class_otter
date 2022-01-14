@@ -1,4 +1,4 @@
-'''nums = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
+nums = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
 
   
 
@@ -20,11 +20,6 @@ def peaks(numbers):
 peaks(nums)
 
 #def valleys():
-#def peaks_and_valleys():'''
+#def peaks_and_valleys():
 
 
-def add(a,b):
-    answer = a+b
-    print(f'here is your answer: {answer}')
-
-print(add(5,6))
