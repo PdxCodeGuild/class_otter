@@ -8,6 +8,20 @@ class GameBoard:
             self.board.append([' ' for _ in range(3)])
 
         self._positions_remaining = 9
+        self._tile_rects = []
+        self._tile_rects.append(pygame.Rect(202, 122, 77, 77))
+        self._tile_rects.append(pygame.Rect(282, 122, 77, 77))
+        self._tile_rects.append(pygame.Rect(362, 122, 77, 77))
+
+        self._tile_rects.append(pygame.Rect(202, 202, 77, 77))
+        self._tile_rects.append(pygame.Rect(282, 202, 77, 77))
+        self._tile_rects.append(pygame.Rect(362, 202, 77, 77))
+
+        self._tile_rects.append(pygame.Rect(202, 282, 77, 77))
+        self._tile_rects.append(pygame.Rect(282, 282, 77, 77))
+        self._tile_rects.append(pygame.Rect(362, 282, 77, 77))
+
+        self._draw_tile = [False, False, False, False, False, False, False, False, False]
     
     def _is_position_available(self, x, y):
         return self.board[x][y] == ' '
@@ -84,13 +98,26 @@ class GameBoard:
     def is_game_over(self):
         return self.is_full() or self.calc_winner() != None
 
+
     def update(self, time):
-        pass
+        mouse_pos = pygame.mouse.get_pos()
+        for i in range(len(self._tile_rects)):
+            if self._tile_rects[i].collidepoint(mouse_pos):
+                self._draw_tile[i] = True
+            else:
+                self._draw_tile[i] = False
+
+        
 
     def draw(self, surface):
         black = (0, 0, 0)
-        pygame.draw.line(surface, black, (280, 120), (280, 360), 3)
-        pygame.draw.line(surface, black, (360, 120), (360, 360), 3)
+        pygame.draw.line(surface, black, (280, 122), (280, 358), 3)
+        pygame.draw.line(surface, black, (360, 122), (360, 358), 3)
 
-        pygame.draw.line(surface, black, (200, 200), (440, 200), 3)
-        pygame.draw.line(surface, black, (200, 280), (440, 280), 3)
+        pygame.draw.line(surface, black, (202, 200), (438, 200), 3)
+        pygame.draw.line(surface, black, (202, 280), (438, 280), 3)
+
+        red = (255, 0, 0)
+        for i in range(len(self._tile_rects)):
+            if self._draw_tile[i]:
+                pygame.draw.rect(surface, red, self._tile_rects[i], 2)

@@ -67,8 +67,10 @@ class Engine:
             self._clock.tick()
             is_running = self.process_input()
             self._game.update(self._clock)
-            self._game.render(self._clock)
-            self.render()
+
+            self._display.update(self._game.title_text)
+            self._game.render(self._display.surface)
+            self._display.render()
         pygame.quit()
 
     def process_input(self):
@@ -88,12 +90,3 @@ class Engine:
                     print(event.pos)
 
         return is_running
-    
-    def render(self):
-        self._display.update(self._game.title_text)
-
-        surface = self._display.surface
-        for game_object in self._game._game_objects:
-            game_object.draw(surface)
-
-        self._display.render()
