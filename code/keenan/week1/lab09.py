@@ -1,10 +1,11 @@
 # Lab 9: Compute Automated Readability Index
 # 01/13/2022
 
+# Description:
 # Compute the ARI for a given body of text loaded in from a file. The automated readability index 
 # (ARI) is a formula for computing the U.S. grade level for a given block of text. The general formula to compute the ARI is as follows:
 
-# 4.71 (characters / words) + 0.5(words/sentences) -21.43
+# 4.71(characters / words) + 0.5(words/sentences) -21.43
 
 # The score is computed by multiplying the number of characters divided by the number of words by 4.71, adding the number of words divided 
 # by the number of sentences multiplied by 0.5, and subtracting 21.43. If the result is a decimal, always round up. Scores greater than 14 
@@ -39,6 +40,20 @@
 
 # --------------------------------------------------------
 
+# need to import the regular expressions module and the ceil() function from the math module for rounding up
+import re
+import math
+
+
+file = input('Provide file to be reviewed: ')
+opened_file = open(file, "r", encoding="utf8")
+text = opened_file.read()
+
+# this was a Grade 3 level, 65 letters, 4 sentences, 14 words
+test_text = "Congratulations! Today is your day. You're off to Great Places! You're off and away!"
+
+# grade 5 from the coleman liau index.  The scoring in this is #3, or grade 2
+test_text2 = "Harry Potter was a highly unusual boy in many ways. For one thing, he hated the summer holidays more than any other time of year. For another, he really wanted to do his homework, but was forced to do it in secret, in the dead of the night. And he also happened to be a wizard."
 
 ari_scale = {
      1: {'ages':   '5-6', 'grade_level': 'Kindergarten'},
@@ -56,3 +71,48 @@ ari_scale = {
     13: {'ages': '17-18', 'grade_level':   '12th Grade'},
     14: {'ages': '18-22', 'grade_level':      'College'}
 }
+
+# count the number of characters.  Make sure to 
+def character_count(text):
+    char_list = re.findall(r'[a-zA-Z0-9]', text)
+    characters = len(char_list)
+    return characters
+
+characters = (character_count(text))
+
+
+# count the number of sentences by calculating the number of end puncuation marks: (.!?).  split creates an extra '' list item so there is a correction to factor for that
+def sentence_count(text):
+   sentence_list = re.split("[.?!]", text)
+   sentences = len(sentence_list)
+   return sentences - 1
+
+sentences = sentence_count(text)
+
+
+# count the number of words by counting spaces or hyphens, and then adding the number of sentences
+def word_count(text):
+    word_list = re.split(('[ -]'), text)
+    words = len(word_list)
+    return words
+
+words = word_count(text)
+
+ari_formula =  4.71 * (characters / words) + 0.5 * (words / sentences) - 21.43
+
+round_up_ari = math.ceil(ari_formula)
+
+# for nested dictionaries in f'strings make sure to use different '' and "" types f
+print(f'\nThe ARI for the {file} is {round_up_ari}.\nThis corresponds to a {ari_scale[round_up_ari]["grade_level"]} level of difficulty.\nThat is suitable for an average person of {ari_scale[round_up_ari]["ages"]} years old.')
+
+
+
+
+
+
+
+# can use the Coleman-Liau Index as well: - may not be necessary
+# index = 0.0588 * L - 0.296 * S - 15.8
+
+# L is the average number of letters per 100 words in the text
+# S is the average number of sentences per 100 words
