@@ -86,9 +86,9 @@ def open_file_save_text_as_string_close_file(file, mode = 'r'):
     return contents
 
 def test_open_file_save_text_as_string_close_file():
-    assert open_file_save_text_as_string_close_file('empty_file.txt') == ''
-    assert open_file_save_text_as_string_close_file('ten_char_file.txt') == '0123456789'
-    assert open_file_save_text_as_string_close_file('three_sentence_three_space_file.txt') == 'this. is three. sentences.'
+    assert open_file_save_text_as_string_close_file(r'.\data\empty_file.txt') == ''
+    assert open_file_save_text_as_string_close_file(r'.\data\ten_char_file.txt') == '0123456789'
+    assert open_file_save_text_as_string_close_file(r'.\data\three_sentence_three_space_file.txt') == 'this. is three. sentences.'
 
 def write_contents_to_file(file, text, mode = 'w'):
     '''Open 'file' whether it exists or not, overwrite 'text' to 'file', close 'file'.'''
@@ -96,15 +96,15 @@ def write_contents_to_file(file, text, mode = 'w'):
         the_file.write(text)
 
 def test_write_contents_to_file():
-    write_contents_to_file("write_file.txt", 'the text')
+    write_contents_to_file(r".\data\write_file.txt", 'the text')
     time.sleep(.1)
-    assert open_file_save_text_as_string_close_file("write_file.txt") == 'the text'
+    assert open_file_save_text_as_string_close_file(r".\data\write_file.txt") == 'the text'
 
     time.sleep(.1)
 
-    write_contents_to_file("write_file.txt", 'the new text')
+    write_contents_to_file(r".\data\write_file.txt", 'the new text')
     time.sleep(.1)
-    assert open_file_save_text_as_string_close_file("write_file.txt") == 'the new text'
+    assert open_file_save_text_as_string_close_file(r".\data\write_file.txt") == 'the new text'
 
 def calculate_ari_of_text(characters, words, sentences):
     '''Accepts parameters: characters, words, and sentences. Returns the ARI for provided parameters.'''
@@ -117,7 +117,7 @@ def calculate_ari_of_text(characters, words, sentences):
     return ari
 
 def main():
-    input_files = ["gettysburg_address_archive_org.txt", "gettysburg_address_umd_edu.txt", "medicine_info.txt"]
+    input_files = [r".\data\gettysburg_address_archive_org.txt", r".\data\gettysburg_address_umd_edu.txt", r".\data\medicine_info.txt"]
     # file_we_are_analyzing = "gettysburg_address_archive_org.txt"
     # file_we_are_analyzing = "gettysburg_address_umd_edu.txt"
 
