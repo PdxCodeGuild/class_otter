@@ -131,12 +131,10 @@ def test_create_record():
 def retrieve_record(friends_list = [{}], friend_name = '', header = 'name'):
     '''Gets the information for a given friend name, if it exists. Returns the index of the record and the record itself (i, dictionary).'''
     # Sometimes 'friends_list' and 'contacts' are used interchangeably. I think I'm using 'friends_list' in funtion definition and 'contacts' in function call (in main()).
-    # We want to look at the friends_list and return the specific info for given freind.
+    # We want to look at the friends_list and return the specific info for given friend.
     # friends_list is a list of dictionaries. Find the list item where the the value of the first key is 'friend_name'.
 
     just_the_names = list_of_names(friends_list)
-    # print(f"Just the names: {just_the_names}")
-    # print(f"Name: {friend_name}")
     
     for i, dictionary in enumerate(friends_list):
         if friend_name not in just_the_names:
@@ -169,12 +167,7 @@ def test_list_of_names():
 
 def update_record_return_friends_list(friends_list = [{}], name = '', new_name = '', new_favorite_programming_language = '', new_favorite_beverage = ''):
     '''Modifies the information in specific dictionary for given name.'''
-    # Record should be a dictionary. It may be an empty dictionary, though.
     i, record = retrieve_record(friends_list, name)
-    # We now have a record (dictionary), How do we update any of the entries?
-    # NOTE: We have access to the headers, since we have the dictionary. The dictionary keys ARE the headers from the CSV.
-    headers = record.keys() # dict_keys(['name', 'favorite programming language', 'favorite beverage'])
-    # But we don't even need to think about headers. We want to edit an entry (name, language, and/or beverage) of the record.
     if new_name != '':
         print(f"Update Name: {record.get('name')} to {new_name}")
         record.update({'name':new_name})
@@ -184,8 +177,6 @@ def update_record_return_friends_list(friends_list = [{}], name = '', new_name =
     if new_favorite_beverage != '':
         print(f"Update Beverage:  {record.get('favorite beverage')} to {new_favorite_beverage}")
         record.update({'favorite beverage':new_favorite_beverage})
-    # Add the changed record back to the friends_list, or replace it,
-    # or delete first and replace? REPLACE IT! This is a list so we can replace the element of the list.
     friends_list[i] = record
     return friends_list
 
@@ -196,32 +187,12 @@ def delete_record_return_friends_list(friends_list = [{}], name = ''):
     '''Deletes a record. Returns the modified friends_list.'''
     # print(f"Delete: List Length:{len(friends_list)} Name:{name}")
     i, record = retrieve_record(friends_list, name)
-    # print(f"Delete: i:{i} Record:{record}")
     if name == '':
-        # print(f"Delete: i:{i} Name:{name}")
         return friends_list
     else:
         print(f"Delete: i:{i} Name:{name}")
-        # print(f"Length:{len(friends_list)}")
         friends_list.pop(i)
-        # print(f"Length:{len(friends_list)}")
         return friends_list
-
-# def get_and_return_user_response():
-#     response_as_string = input("Choose: [C]reate, [R]etrieve, [U]pdate, [D]elete or [Q]uit: ")
-#     response = response_as_string.lower()
-#     if response == '':
-#         return ''
-#     return response
-
-# def test_get_and_return_user_response(monkeypatch):
-#     response = StringIO('a')
-#     monkeypatch.setattr('sys.stdin', response)
-#     assert get_and_return_user_response() == 'a'
-
-#     response = StringIO('A')
-#     monkeypatch.setattr('sys.stdin', response)
-#     assert get_and_return_user_response() == 'a'
 
 def prompt_user_for_name():
     response_as_string = input("Name: ").lower()
