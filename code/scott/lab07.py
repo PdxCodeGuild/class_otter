@@ -5,7 +5,7 @@ def rot13(ciph): #Define rot13(ciph) function
 #    print(abc)
    output_cipher = ""
    for char in ciph:
-       output_cipher += abc[(abc.find(char)+13)%26]
+      output_cipher += abc[(abc.find(char)+13)%26]
    return output_cipher
 
 ciph = input("Please enter some letters:")

@@ -1,14 +1,15 @@
 #Lab06.py - Credit Card Validation - Scott Madden
-#Request credit card input
+
+# Request credit card input
 cc = input("Please enter a 16 digit credit card number without spaces")
+
 nums = [eval(_) for _ in cc] # Convert string to a List
 nums_check = nums[-1] #slice off last number to be used as check number
 del nums[-1]#remove check number
 nums.reverse() #reverse List
-#print( "Your numbers reversed are:" , nums)
-every_second = nums[:]
+every_second = nums[:] # Every second number doubled from left to right
 every_second[::2] =[x*2 for x in every_second[::2]]
-#print("Every second number doubled from left to right:" , every_second)
+
 for i in range(len(nums)):
     if every_second[i] > 9:
         every_second[i] -= 9
