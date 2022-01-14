@@ -7,7 +7,8 @@ M-F 9:30 am – 4:30 pm
 
 ### Holidays
 
-
+- January 17th (MLK Day)
+- February 21st (Presidents Day)
 
 ### Staff
 
@@ -47,7 +48,7 @@ Lab 06 Mini-Capstone
 06 Personal Portfolio
 -->
 ## Python Labs Assigned:
-<!--
+
 01 Unit Converter  
 02 Average Numbers  
 03 Number To Phrase  
@@ -58,6 +59,7 @@ Lab 06 Mini-Capstone
 08 Peaks And Valleys  
 09 ARI  
 10 Contact List  
+<!--
 12 ATM  
 13 Tic-Tac-Toe  
 14 Dad Joke API  
