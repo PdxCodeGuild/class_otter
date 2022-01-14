@@ -34,7 +34,7 @@ def update_record(contacts, name, info, new):
     for i in contacts:
         if i['name'] == name:
             i[info] = new
-            #contacts.append(i[2])
+            
     return contacts
 
 def delete_record(contacts, name):
