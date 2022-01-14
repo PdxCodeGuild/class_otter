@@ -22,19 +22,41 @@ def main_dict(header, values):
 
 
 contacts = main_dict(key_list, new_list)
+# ----------------------------------------------------------------------------------------------------
 
-# name = input("enter your name: ")
-# fav_color = input("enter your favorite color: ")
-# fav_fruit = input("enter your favorite fruit: ")
+########################################################################################################
 
-# def create(user, answer):
+
+# ------------------------------------------------------------------------------------------------------
+
+
+name = input("enter your name: ")
+fav_color = input("enter your favorite color: ")
+fav_fruit = input("enter your favorite fruit: ")
+
+name_outputs = name, fav_fruit, fav_color
+
+
+# for final_list in contacts:
+#     if final_list
+
+
+def create(answer):
+    added_list = []
+    for user in answer:
+        added_list.append({
+            name_outputs})
+    return added_list
+
+
+print(create(contacts))
+
+# def create(answer):
 #     added_list = []
-#     for answer in answer:
+#     for user in answer:
 #         added_list.append(
-#             {user: name, user: fav_color, user: fav_fruit})
+#             {answer: name[0], answer: fav_color[1], answer: fav_fruit[2]})
 #     return added_list
-
-print(contacts)
 
 
 # new_dict = {}
