@@ -7,13 +7,34 @@
 # *********************** #
 
 # Make a list of dictionaries. See if we can use index() on it.
-list_of_dictionaries = [{'a':'1','b':'2'},{'a':'3','b':'4'},{'a':'5','b':'6'}]
+# working_string = ('h1,h2,h3\njules,joule,juicy juice\nkarl,kaleidoscope,kiss')
+# 'h1,h2,h3\njules,joule,juicy juice\nkarl,kaleidoscope,kiss'
 
-where_is_a3_b4 = list_of_dictionaries.index({'a':'3','b':'4'})
-print(where_is_a3_b4)
+list_of_dictionaries = [{'h1':'jules','h2':'joule','h3':'juicy juice'},{'h1':'karl','h2':'kaleidoscope','h3':'kiss'},{'h1':'lee','h2':'leeds','h3':'leachy'}]
 
-where_is_a3_b4 = list_of_dictionaries.index({'b':'2','a':'1'})
-print(where_is_a3_b4)
+def convert_contacts_to_comma_separated_values(list_of_dictionaries):
+    working_string = ''
+    for top_row_value in list_of_dictionaries[0].keys():
+        working_string += top_row_value + ','
+    # Remove the last comma added.
+    working_string = working_string[:-1]
+    
+    for dict in list_of_dictionaries:
+        working_string += '\n'
+        for i, value in dict.items():
+            working_string += value + ','
+        # Remove the last comma added.
+        working_string = working_string[:-1]
+    return working_string
 
-# It seems we can compare dictionaries.
-print(list_of_dictionaries[0] == {'a':'1','b':'2'})
+raw_csv = convert_contacts_to_comma_separated_values(list_of_dictionaries)
+print(raw_csv)
+
+def write_contents_to_file(file, text, mode = 'w'):
+    '''Open 'file' whether it exists or not, overwrite 'text' to 'file', close 'file'.'''
+    with open(file, mode) as the_file:
+        the_file.write(text)
+
+file_name_and_path = r".\data\safe_test.csv"
+write_contents_to_file(file_name_and_path, raw_csv, mode = 'w')
+
