@@ -4,7 +4,7 @@ def peaks():
     current = [i for i in data]
     previous = [i - 1 for i in data if data[i] >= 0]
     next = [i + 1 for i in data if data[i] >= 0]
-    previous[i],current[i],next[i]
+    
     
     
     # print(previous)
