@@ -10,9 +10,9 @@ import string
 import math
 import time
 
-list_of_letters = string.ascii_letters      # abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-list_of_punctuation = string.punctuation    # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-list_of_digits = string.digits              # 0123456789
+LIST_OF_LETTERS = string.ascii_letters      # abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+LIST_OF_PUNCTUATION = string.punctuation    # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+LIST_OF_DIGITS = string.digits              # 0123456789
 
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/bruce/1%20Python/labs/09%20ARI.md
@@ -40,7 +40,7 @@ def get_number_of_characters(text):
     # Convert text string to list so we can filter out everything but letters and numbers.
     text_as_list = list(text)
     # Use list comprehension to get list of letters and numbers. This filters out anything other than letters and numbers.
-    letters_and_numbers = [character for character in text_as_list if (character in list_of_letters or character in list_of_digits)]
+    letters_and_numbers = [character for character in text_as_list if (character in LIST_OF_LETTERS or character in LIST_OF_DIGITS)]
     # Use len() t0 get number of characters in list.
     count_of_letters_and_numbers = len(letters_and_numbers)
     return count_of_letters_and_numbers
@@ -86,9 +86,9 @@ def open_file_save_text_as_string_close_file(file, mode = 'r'):
     return contents
 
 def test_open_file_save_text_as_string_close_file():
-    assert open_file_save_text_as_string_close_file('empty_file.txt') == ''
-    assert open_file_save_text_as_string_close_file('ten_char_file.txt') == '0123456789'
-    assert open_file_save_text_as_string_close_file('three_sentence_three_space_file.txt') == 'this. is three. sentences.'
+    assert open_file_save_text_as_string_close_file(r'.\data\empty_file.txt') == ''
+    assert open_file_save_text_as_string_close_file(r'.\data\ten_char_file.txt') == '0123456789'
+    assert open_file_save_text_as_string_close_file(r'.\data\three_sentence_three_space_file.txt') == 'this. is three. sentences.'
 
 def write_contents_to_file(file, text, mode = 'w'):
     '''Open 'file' whether it exists or not, overwrite 'text' to 'file', close 'file'.'''
@@ -96,15 +96,15 @@ def write_contents_to_file(file, text, mode = 'w'):
         the_file.write(text)
 
 def test_write_contents_to_file():
-    write_contents_to_file("write_file.txt", 'the text')
+    write_contents_to_file(r".\data\write_file.txt", 'the text')
     time.sleep(.1)
-    assert open_file_save_text_as_string_close_file("write_file.txt") == 'the text'
+    assert open_file_save_text_as_string_close_file(r".\data\write_file.txt") == 'the text'
 
     time.sleep(.1)
 
-    write_contents_to_file("write_file.txt", 'the new text')
+    write_contents_to_file(r".\data\write_file.txt", 'the new text')
     time.sleep(.1)
-    assert open_file_save_text_as_string_close_file("write_file.txt") == 'the new text'
+    assert open_file_save_text_as_string_close_file(r".\data\write_file.txt") == 'the new text'
 
 def calculate_ari_of_text(characters, words, sentences):
     '''Accepts parameters: characters, words, and sentences. Returns the ARI for provided parameters.'''
@@ -117,7 +117,7 @@ def calculate_ari_of_text(characters, words, sentences):
     return ari
 
 def main():
-    input_files = ["gettysburg_address_archive_org.txt", "gettysburg_address_umd_edu.txt", "medicine_info.txt"]
+    input_files = [r".\data\gettysburg_address_archive_org.txt", r".\data\gettysburg_address_umd_edu.txt", r".\data\medicine_info.txt"]
     # file_we_are_analyzing = "gettysburg_address_archive_org.txt"
     # file_we_are_analyzing = "gettysburg_address_umd_edu.txt"
 
