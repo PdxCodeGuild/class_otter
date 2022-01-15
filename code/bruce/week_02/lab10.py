@@ -1,13 +1,17 @@
 # ********************************************** #
 #              Lab 10: Contact List              #
 #   Friends, Languages, Drinking, csv, I/O, IO   #
-#                  Version: 1.0                  #
+#                  Version: 3.0                  #
 #              Author: Bruce Stull               #
-#                   2022-01-13                   #
+#                   2022-01-14                   #
 # ********************************************** #
 
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/bruce/1%20Python/labs/10%20Contact%20List.md
+
+# from os import name
+from io import StringIO
+import time
 
 def open_file_return_contents(file = r'.\data\friends.csv', mode = 'r'):
     '''Accepts arguments of filename of csv file and file opening mode. Returns whole_text and lines (list).'''
@@ -110,16 +114,186 @@ def test_add_individual_dictionary_to_friends_list():
     assert add_individual_dictionary_to_friends_list({'c':'d'},[{'a':'b'}]) == [{'a':'b'},{'c':'d'}]
     assert add_individual_dictionary_to_friends_list({'c':'d','r':'j'},[{'a':'b','1':'2'}]) == [{'a':'b','1':'2'},{'c':'d','r':'j'}]
 
-def main():
-    whole_text, lines = open_file_return_contents()
-    contacts = create_list_of_friends_info_from_lines(lines)
+def create_record(friends_list = [], headers_list = [], name = '', favorite_programming_language = '', favorite_beverage = ''):
+    '''Add information (friend,favorite programming language,favorite beverage) to 'friends_list' (a list of dictionaries).'''
+    '''Reminder: This function only adds the friend to the contacts (friends_list). It does not write out the list to a file.'''
+    friend = create_individual_dictionary(headers_list, [name, favorite_programming_language, favorite_beverage])
+    friends_list = add_individual_dictionary_to_friends_list(friend, friends_list)
+    print(f"Add:{name}")
+    return friends_list
+
+def test_create_record():
+    assert create_record() == []
+    assert create_record([], ['h1','h2','h3'],'jimboe','jython','jersey juice') == [{'h1':'jimboe','h2':'jython','h3':'jersey juice'}]
+    assert create_record([{'h1':'karl','h2':'kornshell','h3':'kemby juice'}], ['h1','h2','h3'],'jimboe','jython','jersey juice') == [{'h1':'karl','h2':'kornshell','h3':'kemby juice'},{'h1':'jimboe','h2':'jython','h3':'jersey juice'}]
+
+# TODO: Add a field for reason for retrieve_record(). Update? Delete? Get the info?
+def retrieve_record(friends_list = [{}], friend_name = '', header = 'name'):
+    '''Gets the information for a given friend name, if it exists. Returns the index of the record and the record itself (i, dictionary).'''
+    # Sometimes 'friends_list' and 'contacts' are used interchangeably. I think I'm using 'friends_list' in funtion definition and 'contacts' in function call (in main()).
+    # We want to look at the friends_list and return the specific info for given friend.
+    # friends_list is a list of dictionaries. Find the list item where the the value of the first key is 'friend_name'.
+
+    just_the_names = list_of_names(friends_list)
     
-    # Maybe print the contacts list?
-    print()
-    print(contacts)
-    print()
-    for dict in contacts:
-        print(dict)
-    print()
+    for i, dictionary in enumerate(friends_list):
+        if friend_name not in just_the_names:
+            print('Please choose a different name.')
+            return i, {}
+        if dictionary.get(header) == friend_name:
+            print(f"Retrieve: Name: {dictionary.get('name')} i:{i} Dictionary:{dictionary}")
+            return i, dictionary
+
+# # TODO:  Fix testing. retrieve_record() seems to work functionally, but I'm not able to do effective testing yet.
+# def test_retrieve_record():
+#     i, friend = retrieve_record([{'n':'george','pl':'g-code','fb':'ginger ale'}],'chad')
+#     assert i == 0 and friend == {}
+#     assert retrieve_record() == (0,{})
+#     assert retrieve_record([{}]) == (0, {})
+#     assert retrieve_record([{}],'chad') == (0, {})
+#     assert retrieve_record([{'n':'george','pl':'g-code','fb':'ginger ale'}],'chad') == (0, {})
+#     assert retrieve_record([{'n':'alphi','pl':'a++','fb':'ale'},{'n':'george','pl':'g-code','fb':'ginger ale'}],'george','n') == (0,{'n':'george','pl':'g-code','fb':'ginger ale'})
+
+def list_of_names(friends_list = [{}]):
+    '''Accepts friends_list. Returns the name in each of the dictionaries.'''
+    just_the_names = []
+    for dictionary in friends_list:
+        just_the_names.append(dictionary.get('name'))
+    return just_the_names
+
+def test_list_of_names():
+    assert list_of_names([{'name':'sappy'}]) == ['sappy']
+    assert list_of_names([{'name':'constance', 'fpl': 'coldfusion'},{'name':'edgerton','fpl':'escher'}]) == ['constance','edgerton']
+
+def update_record_return_friends_list(friends_list = [{}], name = '', new_name = '', new_favorite_programming_language = '', new_favorite_beverage = ''):
+    '''Modifies the information in specific dictionary for given name.'''
+    i, record = retrieve_record(friends_list, name)
+    if new_name != '':
+        print(f"Update Name: {record.get('name')} to {new_name}")
+        record.update({'name':new_name})
+    if new_favorite_programming_language != '':
+        print(f"Update Programming Language: {record.get('favorite programming language')} to {new_favorite_programming_language}")
+        record.update({'favorite programming language':new_favorite_programming_language})
+    if new_favorite_beverage != '':
+        print(f"Update Beverage:  {record.get('favorite beverage')} to {new_favorite_beverage}")
+        record.update({'favorite beverage':new_favorite_beverage})
+    friends_list[i] = record
+    return friends_list
+
+def test_update_record_return_friends_list():
+    assert True
+
+def delete_record_return_friends_list(friends_list = [{}], name = ''):
+    '''Deletes a record. Returns the modified friends_list.'''
+    # print(f"Delete: List Length:{len(friends_list)} Name:{name}")
+    i, record = retrieve_record(friends_list, name)
+    if name == '':
+        return friends_list
+    else:
+        print(f"Delete: i:{i} Name:{name}")
+        friends_list.pop(i)
+        return friends_list
+
+def prompt_user_for_name():
+    response_as_string = input("Name: ").lower()
+    return response_as_string
+
+def prompt_user_for_favorite_programming_language():
+    response_as_string = input("Programming Language: ").lower()
+    return response_as_string
+
+def prompt_user_for_favorite_beverage():
+    response_as_string = input("Favorite Beverage: ").lower()
+    return response_as_string
+
+def write_contents_to_file(file, text, mode = 'w'):
+    '''Open 'file' whether it exists or not, overwrite 'text' to 'file', close 'file'.'''
+    with open(file, mode) as the_file:
+        the_file.write(text)
+
+def test_write_contents_to_file():
+    def open_file_save_text_as_string_close_file(file, mode = 'r'):
+        '''Open 'file', read contents, closes the 'file', and returns 'contents'.'''
+        with open(file, mode) as the_file:
+            contents = the_file.read()
+        return contents
+
+    write_contents_to_file(r".\data\write_file.txt", 'the text')
+    time.sleep(.1)
+    assert open_file_save_text_as_string_close_file(r".\data\write_file.txt") == 'the text'
+
+    time.sleep(.1)
+
+    write_contents_to_file(r".\data\write_file.txt", 'the new text')
+    time.sleep(.1)
+    assert open_file_save_text_as_string_close_file(r".\data\write_file.txt") == 'the new text'
+
+def convert_contacts_to_comma_separated_values(list_of_dictionaries):
+    working_string = ''
+    for top_row_value in list_of_dictionaries[0].keys():
+        working_string += top_row_value + ','
+    # Remove the last comma added.
+    working_string = working_string[:-1]
+    
+    for dict in list_of_dictionaries:
+        working_string += '\n'
+        for i, value in dict.items():
+            working_string += value + ','
+        # Remove the last comma added.
+        working_string = working_string[:-1]
+    return working_string
+
+def main():
+    # Get information from file and store in memory for use.
+    whole_text, lines = open_file_return_contents()
+    headers = extract_headers_from_lines(lines)
+    contacts = create_list_of_friends_info_from_lines(lines)
+    # Print list of names so user knows what names are available.
+    print(f"\nNames: {list_of_names(contacts)}")
+    
+    while True:
+        response_as_string = input("Choose: [C]reate, [R]etrieve, [U]pdate, [D]elete or [Q]uit (and save): ").lower()
+
+        # User has chosen to create a new record.
+        if response_as_string == 'c':
+            name = prompt_user_for_name()
+            favorite_programming_language = prompt_user_for_favorite_programming_language()
+            favorite_beverage = prompt_user_for_favorite_beverage()
+            # Create the record.
+            contacts = create_record(contacts, headers, name, favorite_programming_language, favorite_beverage)
+            
+        # User has chosen to view the record for a name to be provided.
+        if response_as_string == 'r':
+            name = prompt_user_for_name()
+            i, friend = retrieve_record(contacts, name)
+            for key in friend.keys():
+                print(f"{friend.get(key)}")
+        
+        # User has chosen to update a record for a name to be provided.
+        if response_as_string == 'u':
+            name = prompt_user_for_name()
+
+            # Prompt user for new information.
+            print('Enter new information below:')
+            new_name = prompt_user_for_name()
+            new_favorite_programming_language = prompt_user_for_favorite_programming_language()
+            new_favorite_beverage = prompt_user_for_favorite_beverage()
+            contacts = update_record_return_friends_list(contacts, name, new_name, new_favorite_programming_language, new_favorite_beverage)
+
+        if response_as_string == 'd':
+            name = prompt_user_for_name()
+            contacts = delete_record_return_friends_list(contacts, name)
+        
+        if response_as_string == 'q':
+            print(f"Names: {list_of_names(contacts)}\n")
+            # Convert the friends_list (contacts) into csv form.
+            raw_csv = convert_contacts_to_comma_separated_values(contacts)
+            # Write out raw csv to file.
+            file_name_and_path = r".\data\friends.csv"
+            write_contents_to_file(file_name_and_path, raw_csv, mode = 'w')
+            break
+
+        # Print list of names so user knows which names are still available.
+        print(f"Names: {list_of_names(contacts)}\n")
 
 main()
