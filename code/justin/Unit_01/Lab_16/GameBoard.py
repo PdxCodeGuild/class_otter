@@ -16,12 +16,11 @@ class GameBoard:
         half_size = [int(x / 2) for x in rect_size]
         
         position = Vector2(0, 0)
-        for x in range(-rect_size[0] - half_size[0], rect_size[0] - half_size[0] + 1, 80):
+        for x in range(-rect_size[0] - half_size[0], rect_size[0] - half_size[0] + 1, rect_size[0]):
             position.x = x
-            for y in range(-rect_size[1] - half_size[1], -rect_size[1] - half_size[1] + 1, 80):
+            for y in range(-rect_size[1] - half_size[1], rect_size[1] - half_size[1] + 1, rect_size[1]):
                 position.y = y
-                self._tile_rects.append(pygame.Rect(position, rect_size))
-                print('a')
+                self._tile_rects.append(pygame.Rect((position.x - half_size[0], position.y - half_size[1]), rect_size))
         
         self._draw_tile = [False, False, False, False, False, False, False, False, False]
     
@@ -124,12 +123,6 @@ class GameBoard:
 
         red = (255, 0, 0)
         screen_size = display.screen_size
-        position = Vector2()
-        size = Vector2()
         for i in range(len(self._tile_rects)):
             if self._draw_tile[i]:
-                rect = self._tile_rects[i]
-                position = Vector2(rect.center)
-                size.x = rect.width
-                size.y = rect.height
-                pygame.draw.rect(surface, red, local_to_screen(screen_size, rect=Rect(position, size)), 2)
+                pygame.draw.rect(surface, red, local_to_screen(screen_size, rect=self._tile_rects[i]), 2)
