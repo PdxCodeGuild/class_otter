@@ -26,6 +26,6 @@
 
 
 # can also use contacts = open('test.txt', 'r'), but with this we need to pair contacts.close()
-with open('contacts.csv', 'r') as file:
+with open('friends.csv', 'r') as file:
     lines = file.read().split('\n')
     print(lines)
