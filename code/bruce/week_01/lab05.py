@@ -112,7 +112,8 @@ def test_winnings_for_ticket():
 number_of_matches = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
 def main():
-    winning_ticket = generate_winning_ticket()
+    # winning_ticket = generate_winning_ticket()
+    winning_ticket = generate_ticket()
     initial_balance = 0
     balance = initial_balance
     how_many_tickets_i_can_buy = 1000000
@@ -124,7 +125,8 @@ def main():
         # Buy a ticket
         balance -= 2
         expenses += 2
-        customer_ticket = generate_customer_ticket()
+        # customer_ticket = generate_customer_ticket()
+        customer_ticket = generate_ticket()
         # Determine winnings.
         i_wish_this_wasnt_so_often_so_close_to_zero = winnings_for_ticket(how_many_matches(customer_ticket,winning_ticket))
         earnings += i_wish_this_wasnt_so_often_so_close_to_zero
@@ -148,9 +150,22 @@ main()
 # Time lapse in powershell:
 # Measure-Command { python .\lab05.py }
 
-# Best result I've seen:
+# Example Measure-Command output:
+# PS C:\Users\Bruce\programming\class_otter\code\bruce\week_01> Measure-Command { python .\lab05.py }
 
-# 
+# Days              : 0
+# Hours             : 0
+# Minutes           : 0
+# Seconds           : 10
+# Milliseconds      : 181
+# Ticks             : 101816043
+# TotalDays         : 0.000117842642361111
+# TotalHours        : 0.00282822341666667
+# TotalMinutes      : 0.169693405
+# TotalSeconds      : 10.1816043
+# TotalMilliseconds : 10181.6043
+
+# Best results I've seen:
 
 # I started with $0.00, then bought 1000000 tickets, and I now have $-1706576.00.
 # Expenses: $2000000
@@ -162,3 +177,9 @@ main()
 # Earnings: $293379
 # A ROI of -0.8533105!!!
 # {0: 940679, 1: 57876, 2: 1425, 3: 19, 4: 1, 5: 0, 6: 0}
+
+# I started with $0.00, then bought 1000000 tickets, and I now have $-1706992.00.
+# Expenses: $2000000
+# Earnings: $293008
+# A ROI of -0.853496!!!
+# {0: 940879, 1: 57626, 2: 1472, 3: 22, 4: 1, 5: 0, 6: 0}
