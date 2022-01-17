@@ -1,60 +1,85 @@
-def create_record(headers, contact):
+def create_record(headers, contacts):
     name = input('Please enter your first name:')
-    fruit = input('please enter your favorite fruit:')
-    color = input('please enter your favorit color:')
-    contact.append({headers[0]: name, headers[1]: fruit, headers[2]: color})
-    return contact
+    fruit = input('please enter your favorite_fruit:')
+    color = input('please enter your favorit_color:')
+    contacts.append({headers[0]: name, headers[1]: fruit, headers[2]: color})
+    return contacts
 
 def get_record(contacts):
     name = input('Please enter the first name of the person whose record you wish to retrieve:')
     for contact in contacts:
         if contact['name'] == name:
+            print(contact['name'])
             return contact
-    return 'not found'
-
-def update_record(contacts):
+   
+def updateDict(contacts):
     name = input('Please enter the first name of the person whose record you wish to update:')
-    for contact in contacts:
+    for index, contact in enumerate(contacts):
         if contact['name'] == name:
-        #     return contact
-        # print(contact)
-    # print('The Name you requested is:' + update_record(contacts))
-            key = input("Please enter the attribute; 'name', 'favorite fruit', 'favorite color' you wish to update:")
-            value = input("Please enter your 'new value':")
-    # for contact in contacts:
-            if contact['name'] == key:
-                contact.update({'name': value})
-                return contact
-            elif contact['favorite fruit'] == key:
-                contact.update({'favorite fruit': value})
-                return contact
-            elif contact['favorite color'] == key:
-                contact.update({'favorite fruit': value})
-                return contact
+            key = input("\nenter the key to change: 'name', 'favorite_fruit', 'favorite_color':") 
+            value = input("\nPlease enter new  - value:")
+            if key == ('name'):
+                contacts[index]['name'] = value
+                return contacts
+            elif key == ('favorite_fruit'):
+                contacts[index]['favorite_fruit'] = value
+                return contacts
+            elif key == ('favorite_color'):
+                contacts[index]['favorite_color'] = value
+                return contacts
             else:
-                return 'Not Found'
+                print('incorrect key')
+                return None
+        else:
+           continue
 
-with open('contacts.csv', 'r') as file:
-    lines = file.read().split('\n')
-#    print(lines)
-first_list = []
-for line in lines:
-    first_list.append(line.split(','))
-# print(first_list)
+        
+def del_record(contacts):
+    name = input('Please enter the first name of the person whose record you wish to delete:')
+    for index, contact in enumerate(contacts):
+        if contact['name'] == name:
+            contacts.pop(index)
+        else:
+            continue
+    return contacts
 
-headers = first_list.pop(0) # pop out headers list
-contact = []
-for item in first_list:
-    contact.append({headers[0]: item[0], headers[1]: item[1], headers[2]: item[2]})
-# print (contact) 
-# print(headers)
-contacts = (create_record(headers, contact)) #add new contact to contacts dict
-#print(contacts)
-#print("The original list is : " + str(contacts))
+        
+def run():
+    with open('f:\class_otter\code\scott\contacts.csv', 'r') as file:
+        lines = file.read().split('\n')
+    print('\n')
+    print('lines=:' + str(lines))
+    print('\n')
 
-#print(get_record(contacts))
+    first_list = []
+    for line in lines:
+        first_list.append(line.split(','))
+    print('first_list =' + str(first_list))
+    print('\n')
+
+    headers = first_list.pop(0) # pop out headers list
+    print('headers = ' + str(headers))
+    print('\n')
+    contacts = []
+    for item in first_list:
+        contacts.append({headers[0]: item[0], headers[1]: item[1], headers[2]: item[2]})
+
+    print('contact =' + str(contacts))
+    print('\n')
 
 
-            
-print(update_record(contacts))
-            
+    new_record = create_record(headers, contacts) #add new contact to contacts dict
+    print('contacts =' + str(new_record))
+
+    retrieved_record = get_record(contacts)
+    print('contacts = ' + str(retrieved_record))
+
+    updated_record = updateDict(contacts)
+    print('updated contacts = '+ str(updated_record))
+    
+    delete_record = del_record(contacts)
+    print('remaining_contacts ='+ str(delete_record))
+
+
+if __name__ == '__main__':
+    run()
