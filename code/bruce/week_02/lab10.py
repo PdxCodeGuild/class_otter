@@ -263,14 +263,14 @@ def main():
             contacts = create_record(contacts, headers, name, favorite_programming_language, favorite_beverage)
             
         # User has chosen to view the record for a name to be provided.
-        if response_as_string == 'r':
+        elif response_as_string == 'r':
             name = prompt_user_for_name()
             i, friend = retrieve_record(contacts, name)
             for key in friend.keys():
-                print(f"{friend.get(key)}")
+                print(f"{key}: {friend.get(key)}")
         
         # User has chosen to update a record for a name to be provided.
-        if response_as_string == 'u':
+        elif response_as_string == 'u':
             name = prompt_user_for_name()
 
             # Prompt user for new information.
@@ -280,11 +280,11 @@ def main():
             new_favorite_beverage = prompt_user_for_favorite_beverage()
             contacts = update_record_return_friends_list(contacts, name, new_name, new_favorite_programming_language, new_favorite_beverage)
 
-        if response_as_string == 'd':
+        elif response_as_string == 'd':
             name = prompt_user_for_name()
             contacts = delete_record_return_friends_list(contacts, name)
         
-        if response_as_string == 'q':
+        elif response_as_string == 'q':
             print(f"Names: {list_of_names(contacts)}\n")
             # Convert the friends_list (contacts) into csv form.
             raw_csv = convert_contacts_to_comma_separated_values(contacts)
@@ -292,8 +292,12 @@ def main():
             file_name_and_path = r".\data\friends.csv"
             write_contents_to_file(file_name_and_path, raw_csv, mode = 'w')
             break
-
+        
+        else:
+            # User choice is not valid so prompt user for valid input.
+            print("\nPlease enter one of the options.\n")
+        
         # Print list of names so user knows which names are still available.
-        print(f"Names: {list_of_names(contacts)}\n")
+        print(f"\nNames: {list_of_names(contacts)}\n")
 
 main()
