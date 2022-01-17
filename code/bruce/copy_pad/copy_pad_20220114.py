@@ -35,6 +35,6 @@ def write_contents_to_file(file, text, mode = 'w'):
     with open(file, mode) as the_file:
         the_file.write(text)
 
-file_name_and_path = r".\data\safe_test.csv"
-write_contents_to_file(file_name_and_path, raw_csv, mode = 'w')
+# file_name_and_path = r".\data\safe_test.csv"
+# write_contents_to_file(file_name_and_path, raw_csv, mode = 'w')
 

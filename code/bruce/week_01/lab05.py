@@ -116,7 +116,7 @@ def main():
     winning_ticket = generate_ticket()
     initial_balance = 0
     balance = initial_balance
-    how_many_tickets_i_can_buy = 1000000
+    how_many_tickets_i_can_buy = 10000000
 
     earnings = 0
     expenses = 0
