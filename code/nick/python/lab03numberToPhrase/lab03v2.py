@@ -34,7 +34,7 @@ elif 1000 > user_input:
         print(ones_place[hundreds_digit], 'hundred', ones_place[ones_digit])
     elif ones_digit == 0:
         print(ones_place[hundreds_digit], 'hundred', tens_place[tens_digit])
-    if tens_digit > 1:
+    if tens_digit > 1 and ones_digit > 0:
         print(ones_place[hundreds_digit], 'hundred', tens_place[tens_digit], ones_place[ones_digit])
     elif tens_digit == 1:
         print(ones_place[hundreds_digit], 'hundred', teens[ones_digit] )
