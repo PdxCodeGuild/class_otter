@@ -68,6 +68,10 @@ def return_second(the_input = ''):
 
 def test_return_second():
     assert return_second() == ''
+    assert return_second('a') == ''
+    assert return_second(1) == ''
+    assert return_second('ab') == 'b'
+    assert return_second(12) == '2'
     assert return_second('abc') == 'b'
     assert return_second('abcd') == 'b'
     assert return_second(123) == '2'
@@ -76,7 +80,8 @@ def test_return_second():
 def return_second_to_last(the_input = ''):
     '''Returns the second to last character of input string.'''
     the_input_as_string = str(the_input)
-    result = the_input_as_string[len(the_input_as_string) - 2:len(the_input_as_string) - 1]
+    # result = the_input_as_string[len(the_input_as_string) - 2:len(the_input_as_string) - 1]
+    result = the_input_as_string[-2:-1]
     return result
 
 def test_return_second_to_last():
@@ -103,6 +108,20 @@ def test_return_last_three_reversed():
     assert return_last_three_reversed(10) =='01'
     assert return_last_three_reversed('abcd') =='dcb'
     assert return_last_three_reversed(1234) =='432'
+
+def remove_first_character(the_input = ''):
+    the_input_as_string = str(the_input)
+    result = the_input_as_string[1::1]
+    return result    
+
+def test_remove_first_character():
+    assert remove_first_character() == ''
+    assert remove_first_character('a') == ''
+    assert remove_first_character(1) == ''
+    assert remove_first_character('ab') == 'b'
+    assert remove_first_character(12) == '2'
+    assert remove_first_character('abcd') == 'bcd'
+
 
 
 print_tests = True

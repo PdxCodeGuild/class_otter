@@ -9,7 +9,6 @@
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/bruce/1%20Python/labs/10%20Contact%20List.md
 
-# from os import name
 from io import StringIO
 import time
 
@@ -17,7 +16,9 @@ def open_file_return_contents(file = r'.\data\friends.csv', mode = 'r'):
     '''Accepts arguments of filename of csv file and file opening mode. Returns whole_text and lines (list).'''
     '''We don't necessarily need the whole text in one file, but I'm returning it in case it's needed.'''
     with open(file, mode) as file:
+        # Retrieves the whole file-string.
         whole_text_of_file = file.read()
+        # Splits the whole file-string into parts at the \n (line breaks)
         list_of_lines = whole_text_of_file.split('\n')
     return whole_text_of_file, list_of_lines
 
@@ -230,14 +231,21 @@ def test_write_contents_to_file():
 
 def convert_contacts_to_comma_separated_values(list_of_dictionaries):
     working_string = ''
-    for top_row_value in list_of_dictionaries[0].keys():
-        working_string += top_row_value + ','
-    # Remove the last comma added.
+    # The keys are the same for all dicionaries so we only need to grab the ones for the first record.
+    for the_keys in list_of_dictionaries[0].keys():
+        # Add the key and then a comma between each key.
+        working_string += the_keys + ','
+    # Remove the last comma added. Sometimes it's easier to loop through something and
+    # add some separator string at the end of each item, then remove the final separator at the end of the sequence of items.
     working_string = working_string[:-1]
     
+    # Now, we are going through each dictionary in the list.
     for dict in list_of_dictionaries:
+        # Add a new line at the end of the working_string.
         working_string += '\n'
+        # Go through each item in the dictionary.
         for i, value in dict.items():
+            # Add the dictionary value to the working_string, and append a comma-separator.
             working_string += value + ','
         # Remove the last comma added.
         working_string = working_string[:-1]
@@ -293,6 +301,7 @@ def main():
             write_contents_to_file(file_name_and_path, raw_csv, mode = 'w')
             break
         
+        # TODO: Add quit without saving.
         else:
             # User choice is not valid so prompt user for valid input.
             print("\nPlease enter one of the options.\n")
