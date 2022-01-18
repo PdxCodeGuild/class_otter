@@ -78,6 +78,7 @@ class Engine:
         is_running = True
 
         # Check for input events
+        screen_size = self._display.screen_size
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_running = False
@@ -86,8 +87,8 @@ class Engine:
                 if event.key == pygame.K_ESCAPE:
                     is_running = False
                     break
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
-                    print(event.pos)
+                    self._game.click(event.pos, screen_size)
 
         return is_running

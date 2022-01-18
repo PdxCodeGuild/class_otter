@@ -63,7 +63,22 @@ class GameBoard:
         return transposed_board_layout
 
 
-    def move(self, x, y, player):
+    def get_rect_center_at(self, screen_position, screen_size):
+        for i in range(len(self._tile_rects)):
+            rect = local_to_screen(screen_size, rect=self._tile_rects[i])
+            if rect.collidepoint(screen_position):
+                return rect.center
+
+    def move(self, screen_position, player, screen_size):
+        x = y = -1
+        for i in range(len(self._tile_rects)):
+            rect = local_to_screen(screen_size, rect=self._tile_rects[i])
+            if rect.collidepoint(screen_position):
+                x = i // 3
+                y = i % 3
+        if x == -1:
+            return False
+
         if self._is_position_available(x, y):
             self.board[x][y] = player.token
             self._positions_remaining -= 1
@@ -108,8 +123,6 @@ class GameBoard:
                 self._draw_tile[i] = True
             else:
                 self._draw_tile[i] = False
-
-        
 
     def draw(self, time, display):
         surface = display.surface

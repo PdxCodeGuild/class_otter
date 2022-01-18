@@ -13,7 +13,7 @@ class Token_X(GameObject):
     def draw(self, time, display):
         surface = display.surface
         pos = self._position
-        half_size = self._size.width / 2, self._size.height / 2
+        half_size = self._size[0] / 2, self._size[1] / 2
         pygame.draw.line(surface, self._color, (pos.x - half_size[0], pos.y - half_size[1]), (pos.x + half_size[0], pos.y + half_size[1]), 8)
         pygame.draw.line(surface, self._color, (pos.x + half_size[0], pos.y - half_size[1]), (pos.x - half_size[0], pos.y + half_size[0]), 8)
 
@@ -27,4 +27,4 @@ class Token_O(GameObject):
 
     def draw(self, time, display):
         surface = display.surface
-        pygame.draw.circle(surface, self._color, (self._position.x, self._position.y), self._size.width / 2, 6)
+        pygame.draw.circle(surface, self._color, (self._position.x, self._position.y), self._size[0] / 2, 6)
