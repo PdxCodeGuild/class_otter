@@ -27,7 +27,7 @@ def print_movie_ratings(username, *args, **kwargs):
 # # NOTE: 'Fargo' is not in '*args', and 'Transformers' is not in **kwargs. Yet we still get no error.
 # print_movie_ratings('jane', 'Sharknado', 'Frozen', 'Transformers', Sharknado=3, Frozen=2, Fargo=5)
 
-def create_film_and_rating_dictionary(username, *args, **kwargs):
+def create_film_and_rating_dictionary(username = '', *args, **kwargs):
     '''Accepts arguments of username, and *args and **kwargs. Returns a dictionary of film ratings.'''
     film_rating_dictionary = {}
     for arg in args:

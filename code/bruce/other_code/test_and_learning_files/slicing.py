@@ -6,9 +6,6 @@
 #          2022-01-17          #
 # **************************** #
 
-# Create a string to work with.
-the_string = 'abcdefghij'
-
 def reverse_the_input(the_input = ''):
     '''Accepts single argument. Converts argument to string and returns the reversed string.'''
     the_input_as_string = str(the_input)
@@ -47,7 +44,7 @@ def test_return_last_character():
     assert return_last_character('abcd') == 'd'
 
 def return_first_three_reversed(the_input = ''):
-    '''Accepts one argument. Returns the first three characters in reversed order.'''
+    '''Accepts one argument. Converts the_input to string and returns the first three characters in reversed order.'''
     the_input_as_string = str(the_input)
     result = the_input_as_string[2::-1]
     return result
@@ -58,7 +55,7 @@ def test_return_first_three_reversed():
     assert return_first_three_reversed('bad') == 'dab'
     assert return_first_three_reversed('abcd') == 'cba'
     assert return_first_three_reversed(1001) == '001'
-    assert return_first_three_reversed(1001) == '001'
+    assert return_first_three_reversed(1234) == '321'
 
 def return_second(the_input = ''):
     '''Returns the second character.'''
@@ -78,7 +75,7 @@ def test_return_second():
     assert return_second(1234) == '2'
 
 def return_second_to_last(the_input = ''):
-    '''Returns the second to last character of input string.'''
+    '''Accepts single argument. Converts the_input to string and returns the second to last character of input string.'''
     the_input_as_string = str(the_input)
     # result = the_input_as_string[len(the_input_as_string) - 2:len(the_input_as_string) - 1]
     result = the_input_as_string[-2:-1]
@@ -122,48 +119,62 @@ def test_remove_first_character():
     assert remove_first_character(12) == '2'
     assert remove_first_character('abcd') == 'bcd'
 
-
+# Create a string to work with.
+the_string = 'abcdefghij'
 
 print_tests = True
 
 if print_tests:
-    print('Printing the tests:')
+    print(f"Printing the tests on '{the_string}':")
     # Whole string:
-    print(the_string[:])
+    print(f"Whole string - the_string[:]: {the_string[:]}")
+
+    # Get whole string:
+    print(f"Whole string - the_string[:len(the_string)]: {the_string[:len(the_string)]}") # abcdefghij
+
+    # Get whole string:
+    print(f"Whole string - the_string[-len(the_string)::1]: {the_string[-len(the_string)::1]}")  # abcdefghij
+    print(f"Returns last character since start is -1 - the_string[-1::1]: {the_string[-1::1]}")  # j
 
     # Print last character:
-    print(the_string[-1::])
+    print(f"Last character - the_string[-1::]: {the_string[-1::]}")
 
     # Remove last character:
-    print(the_string[:-1])
+    print(f"Remove last character - the_string[:-1]: {the_string[:-1]}")
 
     # Remove last two characters:
-    print(the_string[:-2])
+    print(f"Remove last two characters - the_string[:-2]: {the_string[:-2]}")
 
     # Get first three characters:
-    print(the_string[0:3])
+    print(f"First three characters - the_string[0:3]: {the_string[0:3]}")
 
     # # Get and reverse the first three characters:
     # print(the_string[3:0:-1])   # dcb
 
-    # Get whole string:
-    print(the_string[:len(the_string)]) # abcdefghij
-
-    # Get whole string:
-    print(the_string[-len(the_string)::1])  # abcdefghij
-
     # Reverse whole string:
-    print(the_string[len(the_string)::-1])  # jihgfedcba
+    print(f"Reverse whole string - the_string[len(the_string)::-1]: {the_string[len(the_string)::-1]}")  # jihgfedcba
 
     # Get first three characters:
-    print(the_string[0:3])  # abc
+    print(f"First three characters - the_string[0:3]: {the_string[0:3]}")  # abc
 
-    print(the_string[3:0:-1])  # dcb
+    # Trying to figure out how to get last three characters reversed.
+    print(f"Trying to reverse first three - the_string[3:0:-1]: {the_string[3:0:-1]}")  # dcb
 
     # Get and return the reverse of first three characters:
-    print(the_string[2:-1:-1])  # <nothing>
+    print(f"Trying to reverse first three, returns empty string - the_string[2:-1:-1]: {the_string[2:-1:-1]}")  # <nothing>
     # Need to use an empty stop argument.
-    print(the_string[2::-1])  # cba
+    print(f"Trying to reverse first three, Use empty stop argument to reverse and return first three - the_string[2::-1]: {the_string[2::-1]}")  # cba
+    
+    # Experimenting with switching start/stop from above.
+    # print(f"Trying to reverse first three, Should return empty string: {the_string[:2:-1]}")
+    print(f": {the_string[:2:-1]}")
+    
+    # Not sure how/why this works this way.
+    print(f"Returns the reversed of fourth to end - the_string[:2:-1]: {the_string[:2:-1]}")
+
+
+    print(f"Returns empty string since arguments don't make sense - the_string[0:2:-1]: '{the_string[0:2:-1]}' {type(the_string[0:2:-1])}")
+
 else:
     print("Tests not printed.")
 

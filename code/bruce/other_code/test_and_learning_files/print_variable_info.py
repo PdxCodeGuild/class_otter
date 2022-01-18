@@ -12,3 +12,15 @@ def print_variable_and_description(variable_under_review, description_of_logic =
     string_result = f"{print_variable_and_description.__name__}: {description_of_logic}: {variable_under_review}"
     if print_logic_results:
         print(string_result)
+
+###################### Example use ######################
+the_string = ''
+for i in range(4):
+    print_variable_and_description(i,"The value of index 'i'",True)
+    the_string += str(i)
+    print_variable_and_description(the_string,"The value of the_string")
+    print_variable_and_description(str(i),"The value of str(i)")
+    print_variable_and_description(type(str(i)),"The value of type(str(i))")
+
+print(the_string)
+#########################################################

@@ -9,13 +9,11 @@
 # Resources:
 # https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/docs/10%20Functions.md
 
-from unittest import result
-
 
 def factorial(n = 0):
     if n == 0:
         return 1
-    return n*factorial(n-1)
+    return n * factorial(n-1)
 
 def test_factorial():
     assert factorial() == 1
@@ -37,6 +35,7 @@ def fibonacci(n = 1):
     return result
 
 def test_fibonacci():
+    assert fibonacci() == 1
     assert fibonacci(1) == 1
     assert fibonacci(2) == 1
     assert fibonacci(3) == 2
@@ -48,7 +47,7 @@ def test_fibonacci():
     assert fibonacci(11) == 89
 
 # 1, 1, 2, 3, 5, 8, 13, 21, 34
-def fibonacci_sequence(n = 1):
+def fibonacci_sequence_list(n = 1):
     '''Returns fibonacci sequence of n elements as a list.'''
     # How to append fib(1) then fib(2) etc?
     # range(4) 0, 1, 2, 3 ==> 1, 2, 3, 4
@@ -60,12 +59,13 @@ def fibonacci_sequence(n = 1):
         fibonacci_list.append(fibonacci(index))
     return fibonacci_list
 
-def test_fibonacci_sequence():
-    assert fibonacci_sequence(1) == [1]
-    assert fibonacci_sequence(2) == [1,1]
-    assert fibonacci_sequence(3) == [1,1,2]
-    assert fibonacci_sequence(4) == [1,1,2,3]
-    assert fibonacci_sequence(9) == [1,1,2,3,5,8,13,21,34]
+def test_fibonacci_sequence_list():
+    assert fibonacci_sequence_list() == [1]
+    assert fibonacci_sequence_list(1) == [1]
+    assert fibonacci_sequence_list(2) == [1,1]
+    assert fibonacci_sequence_list(3) == [1,1,2]
+    assert fibonacci_sequence_list(4) == [1,1,2,3]
+    assert fibonacci_sequence_list(9) == [1,1,2,3,5,8,13,21,34]
 
 # for i in range(5):
 #     print(i)

@@ -45,62 +45,64 @@ units = {
 welcome_string = "\nWelcome to convertinator 2022!\n"
 print(welcome_string)
 
-# Prompt user to provide input length.
-# Keep looping and requesting input as long as provided input is not valid.
 while True:
-    # Prompt user for input length and save to variable.
-    input_length_as_string = input("Please enter an input length: ")
-    # If user input is not numeric:
-    if not input_length_as_string.replace('.','').isnumeric():
-        # Notify user.
-        print("Please enter a numeric value.")
-        # Go back to beginning and prompt for input.
-        continue
-    else:
-        break
 
-# Print acctepted input units.
-print("Accepted input units: in/inch/\"/ft/feet/\'/yd/yard/m/meter/km/kilometer/mi/mile")
+    # Prompt user to provide input length.
+    # Keep looping and requesting input as long as provided input is not valid.
+    while True:
+        # Prompt user for input length and save to variable.
+        input_length_as_string = input("Please enter an input length: ")
+        # If user input is not numeric:
+        if not input_length_as_string.replace('.','').isnumeric():
+            # Notify user.
+            print("Please enter a numeric value.")
+            # Go back to beginning and prompt for input.
+            continue
+        else:
+            break
 
-# Loop to prompt user to input units. Keep looping as long as input is not valid.
-while True:
-    # Prompt user for input unit and save to variable.
-    input_unit = input("Please enter input length units: ")
-    # If user input is not one of the keys in the dictionary:
-    if not input_unit in units.keys():
-        # Inform user to input one of the choices.
-        print("Please enter one of the choices for input length units.")
-        # Go back to beginning of loop and prompt for input again.
-        continue
-    else:
-        input_unit = units[input_unit]
-        break
+    # Print accepted input units.
+    print("Accepted input units: in/inch/\"/ft/feet/\'/yd/yard/m/meter/km/kilometer/mi/mile")
 
-# Print accepted output units.
-print("Accepted output units: in/inch/\"/ft/feet/\'/yd/yard/m/meter/km/kilometer/mi/mile")
+    # Loop to prompt user to input units. Keep looping as long as input is not valid.
+    while True:
+        # Prompt user for input unit and save to variable.
+        input_unit = input("Please enter input length units: ")
+        # If user input is not one of the keys in the dictionary:
+        if not input_unit in units.keys():
+            # Inform user to input one of the choices.
+            print("Please enter one of the choices for input length units.")
+            # Go back to beginning of loop and prompt for input again.
+            continue
+        else:
+            input_unit = units[input_unit]
+            break
 
-# Loop to prompt user for output units. Keep looping as long as input is not valid.
-while True:
-    # Prompt user to enter output units.
-    output_unit = input("Please enter the output length units: ")
-    # If user input is not one of the keys in the dictionary:
-    if not output_unit in units.keys():
-        # Inform user to input one of the choices.
-        print("Please enter one of the choices for output length units.")
-        # Go back to beginning of loop and prompt for input again.
-        continue
-    else:
-        output_unit = units[output_unit]
-        break
+    # Print accepted output units.
+    print("Accepted output units: in/inch/\"/ft/feet/\'/yd/yard/m/meter/km/kilometer/mi/mile")
 
-# Convert the string-type input_length_as_string to int-type.
-input_length_as_float = float(input_length_as_string)
+    # Loop to prompt user for output units. Keep looping as long as input is not valid.
+    while True:
+        # Prompt user to enter output units.
+        output_unit = input("Please enter the output length units: ")
+        # If user input is not one of the keys in the dictionary:
+        if not output_unit in units.keys():
+            # Inform user to input one of the choices.
+            print("Please enter one of the choices for output length units.")
+            # Go back to beginning of loop and prompt for input again.
+            continue
+        else:
+            output_unit = units[output_unit]
+            break
 
-# Convert the input value to a value in output units.
-# X (m) = Y (ft) * (m) / (ft)
-output_length = input_length_as_float * conversion[output_unit] / conversion[input_unit]
+    # Convert the string-type input_length_as_string to int-type.
+    input_length_as_float = float(input_length_as_string)
 
-# Print results.
-print(f'''
-{input_length_as_float} {input_unit} is {round(output_length, 3)} {output_unit}
-''')
+    # Convert the input value to a value in output units.
+    # X (m) = Y (ft) * (m) / (ft)
+    output_length = input_length_as_float * conversion[output_unit] / conversion[input_unit]
+
+    # Print results.
+    print(f'''
+    {input_length_as_float} {input_unit} is {round(output_length, 3)} {output_unit}
+    ''')

@@ -22,7 +22,7 @@ alphabet = string.ascii_lowercase
 
 # Create list of alphabet letters.
 # ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-cipher_list = list(alphabet)
+cipher_list_alpha = list(alphabet)
 
 # schema 1:
 # ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -55,8 +55,8 @@ def test_filter_to_letters_and_spaces():
     assert filter_to_letters_and_spaces("G") == 'g'
     assert filter_to_letters_and_spaces(",/ G") == ' g'
 
-def encode_letter(code, schema = 13, list = cipher_list):
-    '''Accepts arguments of code character, schema, and cipher list. Returns the coded letter.'''
+def encode_letter(code, schema = 13, cipher_list = cipher_list_alpha):
+    '''Accepts arguments of code character, schema, and cipher cipher_list. Returns the coded letter.'''
     # Raw index of letter 'a' is 0.
     # Raw index of letter 'b' is 1.
     # code = 'a' >> letter = 'n'
@@ -84,8 +84,8 @@ def test_encode_letter():
     assert encode_letter('b', 5) == 'g'
     assert encode_letter('B', 5) == 'g'
 
-def decode_letter(code, schema = 13, list = cipher_list):
-    '''Accepts encoded character, schema, and cipher list. Returns decoded character.'''
+def decode_letter(code, schema = 13, cipher_list = cipher_list_alpha):
+    '''Accepts encoded character, schema, and cipher cipher_list. Returns decoded character.'''
     # Handle ' ' (space character).
     if code == ' ':
         return ' '
@@ -101,10 +101,10 @@ def test_decode_letter():
     assert decode_letter('r', 13) == 'e'
     assert decode_letter('a', 1) == 'z'
 
-def encode_message(message, schema = 13, list = cipher_list):
-    '''Accepts message, schema, and cipher list. Returns encoded message string.'''
+def encode_message(message, schema = 13, cipher_list = cipher_list_alpha):
+    '''Accepts message, schema, and cipher cipher_list. Returns encoded message string.'''
     message = filter_to_letters_and_spaces(message)
-    encoded_message_as_list = [encode_letter(character, schema, list) for character in message]
+    encoded_message_as_list = [encode_letter(character, schema, cipher_list) for character in message]
     encoded_message_as_string = ''.join(encoded_message_as_list)
     return encoded_message_as_string
 
@@ -117,10 +117,10 @@ def test_encode_message():
     assert encode_message('hi', 0) == 'hi'
     assert encode_message('hi ho', 5) == 'mn mt'
 
-def decode_message(message, schema = 13, list = cipher_list):
-    '''Accepts coded message, schema, and cipher list. Returns decoded message string.'''
+def decode_message(message, schema = 13, cipher_list = cipher_list_alpha):
+    '''Accepts coded message, schema, and cipher cipher_list. Returns decoded message string.'''
     message = filter_to_letters_and_spaces(message)
-    decoded_message_as_list = [decode_letter(character, schema, list) for character in message]
+    decoded_message_as_list = [decode_letter(character, schema, cipher_list) for character in message]
     decoded_message_as_string = ''.join(decoded_message_as_list)
     return decoded_message_as_string
 

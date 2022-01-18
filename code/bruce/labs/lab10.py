@@ -9,7 +9,7 @@
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/bruce/1%20Python/labs/10%20Contact%20List.md
 
-from io import StringIO
+# from io import StringIO
 import time
 
 def open_file_return_contents(file = r'.\data\friends.csv', mode = 'r'):
