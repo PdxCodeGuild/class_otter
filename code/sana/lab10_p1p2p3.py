@@ -1,4 +1,4 @@
-with open('pcontacts.csv', 'r') as file:
+with open('ncontacts.csv', 'r') as file:
     lines = file.read().split('\n')
     # print(lines)
 # print(len(lines))
@@ -26,7 +26,7 @@ while istart == 'y':
         start = ''
         newdata = []
         addlist = []
-        start = input('press c to create a new record\npress r to retrieve a record\npress u to update a record\npress d to delete a record\nPress key to implement action: ')
+        start = input('press c to create a new record\npress r to retrieve a record\npress u to update a record\npress d to delete a record\npress s to save to csv\nPress key to implement action: ')
         if start == 'c':
             newname = input('enter name: ')
             newfruit = input('enter fav fruit: ')
@@ -76,5 +76,13 @@ while istart == 'y':
                     del contacts[dindex]
                     print('Deleted Contact')
                     print(contacts)
+        elif start == 's':
+            saved = ''
+            for x in range(0, len(contacts)):
+                saved = saved + ',' + f"{contacts[x]['name']}"
+                saved = saved + ',' + f"{contacts[x]['favorite fruit']}"
+                saved = saved + ',' + f"{contacts[x]['favorite color']}"
+            with open('ncontacts.csv', 'a') as file:
+                file.write(','.join(saved))
         else:
-            continue
+            break
