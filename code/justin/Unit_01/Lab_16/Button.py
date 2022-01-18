@@ -1,5 +1,4 @@
 import pygame
-import pygame.freetype
 from GameObject import *
 from Utility import *
 from Engine import *
@@ -14,6 +13,7 @@ class Button(GameObject):
         self._disabled_color = self._calc_color(0.1)
         self._hover_color = self._calc_color(0.5)
         self._click_func = click_func
+
 
     def _calc_color(self, factor):
         r = int(clamp(self._color[0] * factor, 0, 255))
@@ -45,4 +45,9 @@ class Button(GameObject):
         else:
             color = self._disabled_color
         
-        pygame.draw.rect(display.surface, color, local_to_screen(display.screen_size, rect=self.get_rect()))
+        screen_rect = local_to_screen(display.screen_size, rect=self.get_rect())
+        pygame.draw.rect(display.surface, color, screen_rect)
+
+        text_rect = Engine._font.get_rect(self._message, size=Engine._font_size)
+        text_rect.center = screen_rect.center
+        Engine._font.render_to(display.surface, text_rect, self._message, (0, 0, 0))

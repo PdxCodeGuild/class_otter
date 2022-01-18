@@ -1,4 +1,5 @@
 import pygame
+import pygame.freetype
 
 
 class DisplayWindow:
@@ -42,15 +43,18 @@ class GameClock:
 
 class Engine:
     _game = None
-    
+    _font = None
+    _font_size = 24
+
     def __init__(self):
+        # Initialize pygame library
+        pygame.init()
+        Engine._font = pygame.freetype.SysFont(pygame.freetype.get_default_font(), Engine._font_size)
+
         self._display = None
         self._clock = None
 
     def initialize(self):
-        # Initialize pygame library
-        pygame.init()
-
         # Setup display window
         self._display = DisplayWindow((640, 480), (255, 128, 0))
 
