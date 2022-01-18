@@ -79,9 +79,12 @@ while istart == 'y':
         elif start == 's':
             saved = ''
             for x in range(0, len(contacts)):
-                saved = saved + ',' + f"{contacts[x]['name']}"
-                saved = saved + ',' + f"{contacts[x]['favorite fruit']}"
-                saved = saved + ',' + f"{contacts[x]['favorite color']}"
+                saved = saved + f"{contacts[x]['name']}"
+                saved = saved + ',\n'
+                saved = saved + f"{contacts[x]['favorite fruit']}"
+                saved = saved + ',\n'
+                saved = saved + f"{contacts[x]['favorite color']}"
+                saved = saved + '\n'
             with open('ncontacts.csv', 'a') as file:
                 file.write(','.join(saved))
         else:
