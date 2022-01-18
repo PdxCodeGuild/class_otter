@@ -119,6 +119,46 @@ def test_remove_first_character():
     assert remove_first_character(12) == '2'
     assert remove_first_character('abcd') == 'bcd'
 
+def everything_but_first_two_characters(the_input = ''):
+    the_input_as_string = str(the_input)
+    result = the_input_as_string[2:]
+    return result 
+
+def test_everything_but_first_two_characters():
+    assert everything_but_first_two_characters() == ''
+    assert everything_but_first_two_characters('a') == ''
+    assert everything_but_first_two_characters('ab') == ''
+    assert everything_but_first_two_characters('abc') == 'c'
+    assert everything_but_first_two_characters(1) == ''
+    assert everything_but_first_two_characters(12) == ''
+    assert everything_but_first_two_characters(123) == '3'
+
+def third_and_fourth_character(the_input = ''):
+    the_input_as_string = str(the_input)
+    result = the_input_as_string[2:4]
+    return result
+
+def test_third_and_fourth_character():
+    assert third_and_fourth_character() == ''
+    assert third_and_fourth_character('a') == ''
+    assert third_and_fourth_character('ab') == ''
+    assert third_and_fourth_character('abc') == 'c'
+    assert third_and_fourth_character('abcd') == 'cd'
+    assert third_and_fourth_character('abcde') == 'cd'
+    assert third_and_fourth_character('abcdef') == 'cd'
+    assert third_and_fourth_character(1) == ''
+    assert third_and_fourth_character(12) == ''
+    assert third_and_fourth_character(123) == '3'
+    assert third_and_fourth_character(1234) == '34'
+    assert third_and_fourth_character(12345) == '34'
+
+
+
+# slice index:      0 1 2 3 4 5 6 7 8 9
+# letter index:      0 1 2 3 4 5 6 7 8
+
+# Slice uses the sequence where the actual value used is one short of stop value. I think.
+
 # Create a string to work with.
 the_string = 'abcdefghij'
 
@@ -166,13 +206,11 @@ if print_tests:
     print(f"Trying to reverse first three, Use empty stop argument to reverse and return first three - the_string[2::-1]: {the_string[2::-1]}")  # cba
     
     # Experimenting with switching start/stop from above.
-    # print(f"Trying to reverse first three, Should return empty string: {the_string[:2:-1]}")
-    print(f": {the_string[:2:-1]}")
-    
     # Not sure how/why this works this way.
-    print(f"Returns the reversed of fourth to end - the_string[:2:-1]: {the_string[:2:-1]}")
-
-
+    print(f"Returns the reversed of fourth to end, slice doesn't include the 3rd (index = 2) character - the_string[:2:-1]: {the_string[:2:-1]}")    # jihgfed
+    # print(f"Trying to reverse first three, Should return empty string: {the_string[:2:-1]}")
+    print(f"This starts from end (since increment is -1) and goes to one short of 2 - the_string[:2:-1]: {the_string[:2:-1]}")   # jihgfed
+    
     print(f"Returns empty string since arguments don't make sense - the_string[0:2:-1]: '{the_string[0:2:-1]}' {type(the_string[0:2:-1])}")
 
 else:
