@@ -41,8 +41,9 @@ class GameClock:
 
 
 class Engine:
+    _game = None
+    
     def __init__(self):
-        self._game = None
         self._display = None
         self._clock = None
 
@@ -57,7 +58,7 @@ class Engine:
         self._clock = GameClock()
 
     def load_game(self, game_to_load):
-        self._game = game_to_load
+        Engine._game = game_to_load
 
     def run(self):
         # Main game loop
@@ -65,13 +66,14 @@ class Engine:
         while is_running:
             # Update
             self._clock.tick()
-            is_running = self.process_input()
-            self._game.update(self._clock, self._display)
+            is_running = self.process_input() and (not Engine._game._should_quit)
+            Engine._game.update(self._clock, self._display)
             
             # Render
             self._display.update(self._game.title_text)
-            self._game.render(self._clock, self._display)
+            Engine._game.render(self._clock, self._display)
             self._display.render()
+
         pygame.quit()
 
     def process_input(self):

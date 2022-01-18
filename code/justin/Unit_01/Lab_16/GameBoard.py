@@ -1,10 +1,10 @@
 import pygame
-from pygame import Rect
 from pygame.math import Vector2
 from Utility import *
+from GameObject import *
 
 
-class GameBoard:
+class GameBoard():
     def __init__(self):
         self.board = []
         for _ in range(3):
@@ -16,9 +16,9 @@ class GameBoard:
         half_size = [int(x / 2) for x in rect_size]
         
         position = Vector2(0, 0)
-        for x in range(-rect_size[0] - half_size[0], rect_size[0] - half_size[0] + 1, rect_size[0]):
+        for x in range(-rect_size[0], rect_size[0] + 1, rect_size[0]):
             position.x = x
-            for y in range(-rect_size[1] - half_size[1], rect_size[1] - half_size[1] + 1, rect_size[1]):
+            for y in range(-rect_size[1], rect_size[1] + 1, rect_size[1]):
                 position.y = y
                 self._tile_rects.append(pygame.Rect((position.x - half_size[0], position.y - half_size[1]), rect_size))
         
@@ -115,6 +115,9 @@ class GameBoard:
         return self.is_full() or self.calc_winner() != None
 
 
+    def click(self, click_position, screen_size):
+        pass
+    
     def update(self, time, display):
         mouse_pos = pygame.mouse.get_pos()
         for i in range(len(self._tile_rects)):
