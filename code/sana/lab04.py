@@ -28,7 +28,7 @@ if result == 21:
     print("21 Blackjack!")
 elif result < 17:
     print(f'{result} Advising to Hit')
-elif result <= 17 and result < 21:
+elif result >= 17 and result < 21:
     print(f'{result} Advising to Stay')
 elif result > 21:
     print(f'{result} Already Busted...')
