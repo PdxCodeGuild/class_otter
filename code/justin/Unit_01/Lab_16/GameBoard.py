@@ -27,17 +27,17 @@ class GameBoard():
     def _is_position_available(self, x, y):
         return self.board[x][y] == ' '
 
-    def _check_diagonal(self, board_layout):
-        first_position = board_layout[0][0]
-        if first_position == ' ':
+    def _check_diagonals(self, board_layout):
+        center_position = board_layout[1][1]
+        if center_position == ' ':
             return None
 
-        for x in range(2):
-            x += 1
-            if board_layout[x][x] != first_position:
-                return None
-        
-        return first_position
+        if board_layout[0][0] == center_position and board_layout[2][2] == center_position:
+            return center_position
+        elif board_layout[2][0] == center_position and board_layout[0][2] == center_position:
+            return center_position
+        else:
+            return None
 
     def _check_row(self, board_layout, row):
         first_position = board_layout[0][row]
@@ -87,7 +87,7 @@ class GameBoard():
 
     def calc_winner(self):
         current_board = self.board
-        winner = self._check_diagonal(current_board)
+        winner = self._check_diagonals(current_board)
         if winner != None:
             return winner
 
@@ -97,10 +97,6 @@ class GameBoard():
                 return winner
 
         transposed_board = self._transpose(current_board)
-        winner = self._check_diagonal(transposed_board)
-        if winner != None:
-            return winner
-
         for i in range(3):
             winner = self._check_row(transposed_board, i)
             if winner != None:
@@ -117,7 +113,7 @@ class GameBoard():
 
     def click(self, click_position, screen_size):
         pass
-    
+
     def update(self, time, display):
         mouse_pos = pygame.mouse.get_pos()
         for i in range(len(self._tile_rects)):

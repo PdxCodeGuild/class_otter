@@ -25,8 +25,8 @@ class Game:
         def play_func(self):
             self.reset()
 
-        self.play_button = Button("Play", Vector2(0, 130), (240, 40), (32, 255, 64), click_func=play_func)
-        self.quit_button = Button("Quit", Vector2(0, 175), (240, 40), (255, 64, 32), click_func=quit_func)
+        self.play_button = Button("Play", Vector2(0, 145), (240, 40), (32, 255, 64), click_func=play_func)
+        self.quit_button = Button("Quit", Vector2(0, 190), (240, 40), (255, 64, 32), click_func=quit_func)
 
         self._game_objects.append(self._game_board)
 
