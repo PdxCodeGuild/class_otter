@@ -33,7 +33,6 @@ def updateDict(contacts):
         else:
            continue
 
-        
 def del_record(contacts):
     name = input('Please enter the first name of the person whose record you wish to delete:')
     for index, contact in enumerate(contacts):
@@ -43,34 +42,23 @@ def del_record(contacts):
             continue
     return contacts
 
-        
 def run():
-    with open('f:\class_otter\code\scott\contacts.csv', 'r') as file:
+    with open('contacts.csv', 'r') as file:
         lines = file.read().split('\n')
-    print('\n')
-    print('lines=:' + str(lines))
-    print('\n')
 
     first_list = []
     for line in lines:
         first_list.append(line.split(','))
-    print('first_list =' + str(first_list))
-    print('\n')
 
     headers = first_list.pop(0) # pop out headers list
-    print('headers = ' + str(headers))
-    print('\n')
+    # print('headers = ' + str(headers))
     contacts = []
     for item in first_list:
         contacts.append({headers[0]: item[0], headers[1]: item[1], headers[2]: item[2]})
-
-    print('contact =' + str(contacts))
-    print('\n')
-
-
+        
     new_record = create_record(headers, contacts) #add new contact to contacts dict
     print('contacts =' + str(new_record))
-
+    
     retrieved_record = get_record(contacts)
     print('contacts = ' + str(retrieved_record))
 
@@ -79,7 +67,26 @@ def run():
     
     delete_record = del_record(contacts)
     print('remaining_contacts ='+ str(delete_record))
-
+    
+    # import csv       
+    # csv_columns = ['name','favorite_fruit','favorite_color']
+    # # csv_file = "contacts.csv"
+    # try:
+    #     with open('contacts.csv', 'w') as csvfile:
+    #         writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+    #         writer.writeheader()
+    #         writer.writerow(contacts)
+    # except IOError:
+    #     print("I/O error")
 
 if __name__ == '__main__':
     run()
+
+
+
+    
+
+
+
+    
+    
