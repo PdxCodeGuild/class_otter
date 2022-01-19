@@ -28,31 +28,31 @@ class ATM:
         self.account_number = account_number
     
     # TODO: Need the logic to select the balance of the specific account number.
-    def check_balance(self, account_number = 1):
+    def check_balance(self):
         '''Accepts account number and returns the current balance of the specific account.'''
         # print(f"Account number: {account_number}")
         return round(self.balance, 2)
     
-    def deposit(self, amount, account_number = 1):
+    def deposit(self, amount):
         '''Accepts account number, amount of deposit, and current balance. Returns new account balance.'''
         # print(round(self.balance, 2))
         self.balance += amount
         self.ledger.append(f"user deposited ${amount}")
         return amount
     
-    def check_withdrawal(self, amount, account_number = 1):
+    def check_withdrawal(self, amount):
         '''Accepts account number, withdrawal amount requested, and current balance. Returns True is withdrawal is authorized, otherwise returns False.'''
         if amount <= self.balance:
             return True
         return False
     
-    def withdraw(self, amount, account_number = 1):
+    def withdraw(self, amount):
         '''Accepts an account number, withdrawal amount requested, and curretn balance. Returns the withdrawal amount.'''
         self.balance -= amount
         self.ledger.append(f"user withdrew ${amount}")
         return amount
     
-    def calc_interest(self, account_number = 1):
+    def calc_interest(self):
         '''Accepts account number, interest rate, and balance. Returns the amount of interest earned on the account.'''
         # For now, we are going to use simple interest. Interest calculates per transaction. Not a good way, but will work temporarily.
         interest_earned = self.balance * self.interest_rate
