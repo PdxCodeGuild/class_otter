@@ -24,32 +24,51 @@ def score(a, b, c):
 
 advice = score(card1, card2, card3)
 
-while advice <= 21:
-      
+if (points[card1] == 10 and card2 == 'A') or (card1 == 'A' and points[card2] == 10):
+    advice = 21
+    print('21 Blackjack!')
+       
     
-    if points[card1] == 10 and card2 == 'A' or 'a':
-        print('21 Blackjack!')
-        break
-   
-    elif advice < 17:
-        print(f' {advice} Hit')
+elif (points[card1] == 10 and card2 == 'a') or (card1 == 'a' and points[card2] == 10):
+    advice = 21
+    print('21 Blackjack!')    
+
+elif advice > 21:
+    print(f'{advice} Busted')
+
+elif advice == 21:
+    print(f'{advice} Blackjack')
+
+while advice < 21:
+  
+
+    if advice < 17:
+        print(f' {advice} Hit!')
 
     elif advice >= 17 and advice < 21:
-        print(f' {advice} Stay')
+        print(f' {advice} Stay!')
         break
     
     elif advice > 21:
-        print(f' {advice} Busted')
+        print(f' {advice} Busted!')
 
-    else:
-        print(f' {advice} Blackjack!')
-        break
-    
-    if advice == 10 and card4 == 'A' or 'a':
-        print(f'{advice} Blackjack')
-        break
 
     card4 = input('What is your next card? ')
+    
+    if advice == 10 and card4 == 'A':
+        print(f'{advice} Blackjack!')
+        break
+ 
+    elif advice == 10 and card4 == 'a':
+        print(f'{advice} Blackjack!')
+        break
+    
+    elif (advice + points[card4]) > 21:
+        print(f'{(advice + points[card4])} Busted')
+
+    elif (advice + points[card4]) == 21:
+        print(f'{(advice + points[card4])} Blackjack!') 
+    
     advice += points[card4]       
 
 

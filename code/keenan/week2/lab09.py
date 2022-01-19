@@ -1,4 +1,4 @@
-# Lab 9: Compute Automated Readability Index
+# Lab 9: Compute Automated Readability Index (ARI)
 # 01/13/2022
 
 # Description:
