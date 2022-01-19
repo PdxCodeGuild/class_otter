@@ -3,16 +3,14 @@ from pygame.math import Vector2
 
 
 class GameObject:
-    def __init__(self, position=Vector2(), size=(0, 0), color=(255, 0, 255)):
-        self._position = position
-        self._size = size
-        self._color = color
+    def __init__(self, position=Vector2(), size=(0, 0), color=MAGENTA):
+        self.position = position
+        self.size = size
+        self.color = color
 
     def get_rect(self):
-        width = self._size[0]
-        height = self._size[1]
-        rect = Rect(self._position.x - (width / 2), self._position.y - (height / 2), width, height)
-        return rect
+        width, height = self.size
+        return Rect(self.position.x - (width / 2), self.position.y - (height / 2), width, height)
 
     def click(self, click_position, screen_size):
         pass

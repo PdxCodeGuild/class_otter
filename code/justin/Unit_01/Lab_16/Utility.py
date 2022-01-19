@@ -3,11 +3,21 @@ from pygame import Vector2
 from pygame import Rect
 
 
+# Color constants
+BLACK = (0, 0, 0)
+GRAY = (64, 64, 64)
+MAGENTA = (255, 0, 255)
+BRIGHT_GREEN = (32, 255, 64)
+BRIGHT_RED = (255, 64, 32)
+BRIGHT_ORANGE = (255, 128, 0)
+BRIGHT_BLUE = (0, 128, 255)
+
+
 def local_to_screen(screen_size, position=Vector2(), size=Vector2(), rect=None):
     x_offset = (screen_size[0] / 2)
     y_offset = (screen_size[1] / 2)
 
-    if rect == None:
+    if rect is None:
         x_offset -= (size[0] / 2)
         y_offset -= (size[1] / 2)
         new_rect = Rect(position.x + x_offset, position.y + y_offset, size[0], size[1])

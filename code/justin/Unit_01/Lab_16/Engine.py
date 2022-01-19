@@ -1,19 +1,25 @@
 import pygame
 import pygame.freetype
+from Utility import *
 
 
 class DisplayWindow:
     def __init__(self, screen_size, background_color):
         self.screen_size = screen_size
-        self.surface = pygame.display.set_mode(screen_size)
-        self.background_color = background_color
-        self.screen = pygame.Surface(self.screen_size)
+
+        self._background_screen = pygame.Surface(self.screen_size)
+        self.surface = pygame.display.set_mode(self.screen_size)
+        self.__background_color = background_color
+
         self._refresh()
 
-    def _refresh(self):
-        self.screen.fill(self.background_color)
-        self.screen = self.screen.convert()
-        self.surface.blit(self.screen, (0, 0))
+    def _refresh(self, background_color=None):
+        if background_color is not None:
+            self.__background_color = background_color
+
+        self._background_screen.fill(self.__background_color)
+        self._background_screen = self._background_screen.convert()
+        self.surface.blit(self._background_screen, (0, 0))
 
     def update(self, title):
         # Update window title
@@ -42,41 +48,41 @@ class GameClock:
 
 
 class Engine:
-    _game = None
-    _font = None
-    _font_size = 24
+    game = None
+    font = None
+    font_size = 24
 
     def __init__(self):
         # Initialize pygame library
         pygame.init()
-        Engine._font = pygame.freetype.SysFont(pygame.freetype.get_default_font(), Engine._font_size)
+        Engine.font = pygame.freetype.SysFont(pygame.freetype.get_default_font(), Engine.font_size)
 
-        self._display = None
-        self._clock = None
+        self.display = None
+        self.clock = None
 
     def initialize(self):
         # Setup display window
-        self._display = DisplayWindow((640, 480), (255, 128, 0))
+        self.display = DisplayWindow((640, 480), GRAY)
 
         # Setup clock
-        self._clock = GameClock()
+        self.clock = GameClock()
 
     def load_game(self, game_to_load):
-        Engine._game = game_to_load
+        Engine.game = game_to_load
 
     def run(self):
         # Main game loop
         is_running = True
         while is_running:
             # Update
-            self._clock.tick()
-            is_running = self.process_input() and (not Engine._game._should_quit)
-            Engine._game.update(self._clock, self._display)
+            self.clock.tick()
+            is_running = self.process_input() and not Engine.game._should_quit
+            Engine.game.update(self.clock, self.display)
             
             # Render
-            self._display.update(self._game.title_text)
-            Engine._game.render(self._clock, self._display)
-            self._display.render()
+            self.display.update(self.game.title_text)
+            Engine.game.render(self.clock, self.display)
+            self.display.render()
 
         pygame.quit()
 
@@ -84,7 +90,7 @@ class Engine:
         is_running = True
 
         # Check for input events
-        screen_size = self._display.screen_size
+        screen_size = self.display.screen_size
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_running = False
@@ -95,6 +101,6 @@ class Engine:
                     break
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
-                    self._game.click(event.pos, screen_size)
+                    self.game.click(event.pos, screen_size)
 
         return is_running
