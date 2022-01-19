@@ -10,7 +10,7 @@ class Game:
     def __init__(self):
         self.__game_board = GameBoard()
         self.__is_player_1_turn = True
-        self.__is_game_over = False
+        self.__is_game_over = True
         self.__title = 'Tic-Tac-Toe'
         self.__game_objects = []
         
@@ -20,16 +20,32 @@ class Game:
         self._winner = None
         self.title_text = ''
 
+        self._title_panel = Panel(self.__title, position=Vector2(0, -200), color=GRAY)
+
         def play_func(self):
             self.reset()
-        
+        self._play_button = Button("PLAY", Vector2(0, 145), Vector2(240, 40), mult_color(BRIGHT_GREEN, 0.9), click_func=play_func)
+
         def quit_func(self):
             self._should_quit = True
+        self._quit_button = Button("QUIT", Vector2(0, 195), Vector2(240, 40), mult_color(BRIGHT_RED, 0.9), click_func=quit_func)
 
-        self._play_button = Button("Play", Vector2(0, 145), (240, 40), BRIGHT_GREEN, click_func=play_func)
-        self._quit_button = Button("Quit", Vector2(0, 190), (240, 40), BRIGHT_RED, click_func=quit_func)
+        self._finish_game()
 
-        self.__game_objects.append(self.__game_board)
+    def _finish_game(self):
+        self.__game_objects.clear()
+        self.__game_objects.append(self._title_panel)
+        self.__game_objects.append(self._play_button)
+        self.__game_objects.append(self._quit_button)
+
+        winning_token = self.__game_board.calc_winner()
+        if winning_token == self._player_1.token:
+            self._winner = self._player_1
+        elif winning_token == self._player_2.token:
+            self._winner = self._player_2
+        else:
+            self._winner = None
+
 
     def reset(self):
         self.__game_objects.clear()
@@ -42,27 +58,24 @@ class Game:
         self._play_button.enable()
         self._quit_button.enable()
 
+        self.__game_objects.append(self._title_panel)
         self.__game_objects.append(self.__game_board)
 
     def update(self, time, display):
         if not self.__is_game_over:
             self.__is_game_over = self.__game_board.is_game_over()
             if self.__is_game_over:
-                self.__game_objects.clear()
-                self.__game_objects.append(self._play_button)
-                self.__game_objects.append(self._quit_button)
-
-                if self.__game_board.calc_winner() == 'X':
-                    self._winner = self._player_1
-                else:
-                    self._winner = self._player_2
+                self._finish_game()
 
         for game_object in self.__game_objects:
             game_object.update(time, display)
 
     def render(self, time, display):
         if self.__is_game_over:
-            self.title_text = f'{self.__title}    {self._winner.name} won!'
+            if self._winner is not None:
+                self.title_text = f'{self.__title}    {self._winner.name} won!'
+            else:
+                self.title_text = f'{self.__title}'
         else:
             # Update title bar
             name = self._player_1.name if self.__is_player_1_turn else self._player_2.name

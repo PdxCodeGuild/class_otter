@@ -1,20 +1,18 @@
 import pygame
 from GameObject import *
+from Panel import *
 from Utility import *
 from Engine import *
 
 
-class Button(GameObject):
-    def __init__(self, message="", position=Vector2(), size=(0, 0), color=MAGENTA, click_func=None):
-        super().__init__(position, size, color)
-        self.__message = message
+class Button(Panel):
+    def __init__(self, message="", position=Vector2(), size=Vector2(), color=MAGENTA, click_func=None):
+        super().__init__(message, position, size, color)
         self.__is_disabled = False
         self.__is_hovering = False
-        self.__disabled_color = self.mult_color(0.1)
-        self.__hover_color = self.mult_color(0.5)
+        self.__disabled_color = mult_color(self.color, 0.4)
+        self.__hover_color = mult_color(self.color, 0.6)
         self.__click_func = click_func
-        self.__text_rect = Engine.font.get_rect(self.__message, size=Engine.font_size)
-
 
     def _do_click(self):
         if not self.__is_disabled:
@@ -24,12 +22,6 @@ class Button(GameObject):
 
     def enable(self):
         self.__is_disabled = False
-
-    def mult_color(self, factor):
-        r = int(clamp(self.color[0] * factor, 0, 255))
-        g = int(clamp(self.color[1] * factor, 0, 255))
-        b = int(clamp(self.color[2] * factor, 0, 255))
-        return (r, g, b)
 
     def click(self, click_position, screen_size):
         if self._check_collision(screen_size, click_position):
@@ -41,8 +33,26 @@ class Button(GameObject):
     def draw(self, time, display):
         color = self.__disabled_color if self.__is_disabled else self.__hover_color if self.__is_hovering else self.color
         
-        screen_rect = local_to_screen(display.screen_size, rect=self.get_rect())
-        pygame.draw.rect(display.surface, color, screen_rect)
+        hover_offset = 0
+        if self.__is_hovering:
+            hover_offset += 1
 
-        self.__text_rect.center = screen_rect.center
-        Engine.font.render_to(display.surface, self.__text_rect, self.__message, BLACK)
+        button_rect = local_to_screen(display.screen_size, rect=self.get_rect())
+
+        shadow_color = mult_color(self.color, 0.3)
+        drop_shadow_bottom_rect = Rect(button_rect.left + 2 - hover_offset, button_rect.bottom, button_rect.width - 1 + hover_offset, 3)
+        pygame.draw.rect(display.surface, shadow_color, drop_shadow_bottom_rect)
+        drop_shadow_side_rect = Rect(button_rect.right, button_rect.top + 2 + hover_offset, 3 - hover_offset, button_rect.height + 1 - hover_offset)
+        pygame.draw.rect(display.surface, shadow_color, drop_shadow_side_rect)
+
+        button_rect.top += hover_offset
+        pygame.draw.rect(display.surface, color, button_rect)
+
+        text, text_rect = self._get_text()
+        text_rect = local_to_screen(display.screen_size, rect=text_rect)
+        text_shadow_rect = Rect(text_rect)
+        text_shadow_rect.centerx += 1
+        text_shadow_rect.centery += 1
+        Engine.font.render_to(display.surface, text_shadow_rect, text, BLACK)
+        Engine.font.render_to(display.surface, text_rect, text, WHITE)
+        

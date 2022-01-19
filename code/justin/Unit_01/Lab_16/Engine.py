@@ -62,7 +62,7 @@ class Engine:
 
     def initialize(self):
         # Setup display window
-        self.display = DisplayWindow((640, 480), GRAY)
+        self.display = DisplayWindow((640, 480), BRIGHT_GRAY)
 
         # Setup clock
         self.clock = GameClock()

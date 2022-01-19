@@ -3,7 +3,7 @@ from pygame.math import Vector2
 
 
 class GameObject:
-    def __init__(self, position=Vector2(), size=(0, 0), color=MAGENTA):
+    def __init__(self, position=Vector2(), size=Vector2(), color=MAGENTA):
         self.position = position
         self.size = size
         self.color = color
