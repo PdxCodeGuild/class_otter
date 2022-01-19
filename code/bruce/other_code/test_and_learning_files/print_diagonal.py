@@ -48,7 +48,10 @@ def print_lower_left_n(number_of_rows = 0):
     for i in range(number_of_rows):
         result_string += "X" + '  '
         result_list.append(result_string)
-        print(result_string)
+        # There exists an extra ' ' at end of string. How to remove?
+        # Use slice?
+        # print(f"'{result_string[:-2]}'")
+        print(f"{result_string[:-2]}")  # [:-2] cuts off the last character since [-1] is the last character.
     return result_list
 
 def test_print_lower_left_n():
@@ -57,7 +60,7 @@ def test_print_lower_left_n():
     assert print_lower_left_n(3) == ['X  ', 'X  X  ', 'X  X  X  ']
     assert print_lower_left_n(6) == ['X  ', 'X  X  ', 'X  X  X  ', 'X  X  X  X  ', 'X  X  X  X  X  ', 'X  X  X  X  X  X  ']
 
-
+# TODO: Add print_upper_right().
 def main():
     print_lower_left_n(7)
 

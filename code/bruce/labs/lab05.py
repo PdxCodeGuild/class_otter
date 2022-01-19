@@ -112,10 +112,11 @@ def test_winnings_for_ticket():
 number_of_matches = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
 def main():
-    winning_ticket = generate_winning_ticket()
+    # winning_ticket = generate_winning_ticket()
+    winning_ticket = generate_ticket()
     initial_balance = 0
     balance = initial_balance
-    how_many_tickets_i_can_buy = 1000000
+    how_many_tickets_i_can_buy = 10000000000
 
     earnings = 0
     expenses = 0
@@ -124,7 +125,8 @@ def main():
         # Buy a ticket
         balance -= 2
         expenses += 2
-        customer_ticket = generate_customer_ticket()
+        # customer_ticket = generate_customer_ticket()
+        customer_ticket = generate_ticket()
         # Determine winnings.
         i_wish_this_wasnt_so_often_so_close_to_zero = winnings_for_ticket(how_many_matches(customer_ticket,winning_ticket))
         earnings += i_wish_this_wasnt_so_often_so_close_to_zero
@@ -148,9 +150,22 @@ main()
 # Time lapse in powershell:
 # Measure-Command { python .\lab05.py }
 
-# Best result I've seen:
+# Example Measure-Command output:
+# PS C:\Users\Bruce\programming\class_otter\code\bruce\week_01> Measure-Command { python .\lab05.py }
 
-# 
+# Days              : 0
+# Hours             : 0
+# Minutes           : 0
+# Seconds           : 10
+# Milliseconds      : 181
+# Ticks             : 101816043
+# TotalDays         : 0.000117842642361111
+# TotalHours        : 0.00282822341666667
+# TotalMinutes      : 0.169693405
+# TotalSeconds      : 10.1816043
+# TotalMilliseconds : 10181.6043
+
+# Best results I've seen:
 
 # I started with $0.00, then bought 1000000 tickets, and I now have $-1706576.00.
 # Expenses: $2000000
@@ -162,3 +177,30 @@ main()
 # Earnings: $293379
 # A ROI of -0.8533105!!!
 # {0: 940679, 1: 57876, 2: 1425, 3: 19, 4: 1, 5: 0, 6: 0}
+
+# I started with $0.00, then bought 1000000 tickets, and I now have $-1706992.00.
+# Expenses: $2000000
+# Earnings: $293008
+# A ROI of -0.853496!!!
+# {0: 940879, 1: 57626, 2: 1472, 3: 22, 4: 1, 5: 0, 6: 0}
+
+######################## Large data sets ########################
+# I started with $0.00, then bought 10000000 tickets, and I now have $-17572943.00.
+# Expenses: $20000000
+# Earnings: $2427057
+# A ROI of -0.87864715!!!
+# {0: 9408595, 1: 576568, 2: 14655, 3: 182, 4: 0, 5: 0, 6: 0}
+
+# I started with $0.00, then bought 100000000 tickets, and I now have $-175014307.00.
+# Expenses: $200000000
+# Earnings: $24985693
+# A ROI of -0.875071535!!!
+# {0: 94086755, 1: 5763967, 2: 147275, 3: 1989, 4: 14, 5: 0, 6: 0}
+
+# I started with $0.00, then bought 1000000000 tickets, and I now have $-1748190431.00.
+# Expenses: $2000000000
+# Earnings: $251809569
+# A ROI of -0.8740952155!!!
+# {0: 940895299, 1: 57614127, 2: 1470323, 3: 20108, 4: 141, 5: 2, 6: 0}
+
+#################################################################
