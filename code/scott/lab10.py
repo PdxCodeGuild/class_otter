@@ -43,7 +43,8 @@ def del_record(contacts):
     return contacts
 
 def run():
-    with open('d:\class_otter\code\scott\contacts.csv', 'r') as file:
+    with open('contacts.csv', 'r') as file:
+        #contacts.csv = file.read()
         lines = file.read().split('\n')
 
     first_list = []
