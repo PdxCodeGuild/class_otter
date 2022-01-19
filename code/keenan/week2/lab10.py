@@ -21,7 +21,7 @@
 # opens the file without needing to be closed
 with open('contacts.csv', 'r') as file:
     lines = file.read().split('\n')
-    print(lines)
+    # print(lines)
 
 # this splits the dictionary at the first comma to save the key values
 dict_keys = lines[0].split(',')
@@ -51,7 +51,7 @@ def create_record(contacts):
     name = input("What is the name? ")
     food = input("What is their favorite food? ")
     color = input("What is their favorite color? ")
-    new_contact = {"name": name, "favorite fruit": food, "favorite color": color}
+    new_contact = {"name": name, "favorite food": food, "favorite color": color}
     contacts.append(new_contact)
     return contacts
 # create_record(contacts)
@@ -64,7 +64,9 @@ def retrieve_record(contacts):
     for contact in contacts:
         if contact['name'] == retrieve:
             return contact
+
 # print(retrieve_record(contacts))
+
 
 
 # function to update a record
@@ -78,9 +80,9 @@ def update_record(contacts):
 # update_record(contacts)
 # print(contacts)
 
-# function to delte a record
-def delete_records(contacts):
-    who_to_delete = input(" Who is the contact to delete? ")
+# function to delete a record
+def delete_record(contacts):
+    who_to_delete = input("Who is the contact to delete? ")
     for i in range(len(contacts)):
         if contacts[i]['name'] == who_to_delete:
             del contacts[i]
@@ -92,4 +94,23 @@ def delete_records(contacts):
 # Version 3: When REPL loop finishes, write the updated contact info to the CSV file to be saved. 
 # I highly recommend saving a backup contacts.csv because you likely won't write it correctly the first time.
 
-def update_csv(contacts,keys):
+def update_csv(contacts):
+    repl_ask = input("What would you like to do to the csv? (create, retrieve, update, or delete a record? ")
+    if repl_ask == 'create':
+        create_record(contacts)
+        return contacts
+    if repl_ask == 'retrieve':
+        print(retrieve_record(contacts))
+        return contacts
+    if repl_ask == 'update':
+        update_record(contacts)
+        return contacts
+    if repl_ask == 'delete':
+        delete_record(contacts)
+        return contacts
+    
+update_csv(contacts)
+
+# update the new contacts_test.csv file with the changes
+with open('contacts_test.csv', 'w') as update_file:
+     update_file.write(str(contacts))
