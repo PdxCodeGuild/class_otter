@@ -1,6 +1,6 @@
-with open('ncontacts.csv', 'r') as file:
+with open('contacts.csv', 'r') as file:
     lines = file.read().split('\n')
-    # print(lines)
+    print(lines)
 # print(len(lines))
 # print(lines[0])
 tcount = int(len(lines))
@@ -26,7 +26,7 @@ while istart == 'y':
         start = ''
         newdata = []
         addlist = []
-        start = input('press c to create a new record\npress r to retrieve a record\npress u to update a record\npress d to delete a record\npress s to save to csv\nPress key to implement action: ')
+        start = input('press c to create a new record\npress r to retrieve a record\npress u to update a record\npress d to delete a record\nPress key to implement action: ')
         if start == 'c':
             newname = input('enter name: ')
             newfruit = input('enter fav fruit: ')
@@ -76,16 +76,22 @@ while istart == 'y':
                     del contacts[dindex]
                     print('Deleted Contact')
                     print(contacts)
-        elif start == 's':
-            saved = ''
-            for x in range(0, len(contacts)):
-                saved = saved + f"{contacts[x]['name']}"
-                saved = saved + ',\n'
-                saved = saved + f"{contacts[x]['favorite fruit']}"
-                saved = saved + ',\n'
-                saved = saved + f"{contacts[x]['favorite color']}"
-                saved = saved + '\n'
-            with open('ncontacts.csv', 'a') as file:
-                file.write(','.join(saved))
         else:
             break
+
+# print(contacts)
+saved = ''
+entrylist= []
+for x in range(0, len(contacts)):
+    entry = []
+    entry.append(contacts[x]['name'])
+    entry.append(contacts[x]['favorite fruit'])
+    entry.append(contacts[x]['favorite color'])
+    # print(entry)
+    entrylist.append(','.join(entry))
+    # print(entrylist)
+saved = '\n'.join(entrylist)
+
+# print(saved)
+with open('contacts.csv', 'w') as file:
+     file.write(''.join(saved))

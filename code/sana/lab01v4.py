@@ -25,7 +25,9 @@ def unit_converter(output_units, distance):
     converted = distance * output_units
     return converted
 while True:
-    distance = input("What is the distance? : ")
+    distance = input("What is the distance? or 'done' to quit: ")
+    if distance == 'done':
+        break
     input_units = input("What are the input units? \n'ft' for feet \n'mi' for feet \n'm' for meters \n'km' for kilometer \n'yard' for yards \n'inch' for inches \nEnter the units: ")
     #got the distance from user
     #got the input units
