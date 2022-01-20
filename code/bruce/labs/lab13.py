@@ -19,11 +19,6 @@
 #  |O| 
 # O|X| 
 
-
-# # My own printing function:
-# from os import name
-
-
 def print_variable_and_description(variable_under_review, description_of_logic = '', print_logic_results = True):
     '''Accepts three arguments: A variable we are examining, a description of the logic we are examining, and a print flag.'''
     __name__ = print_variable_and_description
@@ -114,29 +109,77 @@ class Game:
     
     def calc_winner(self):
         '''Returns which token ('X' or 'O') has won, otherwise returns None.'''
-        def row_win():
+
+        def transpose_list_of_lists(list_of_lists = [[],[]]):
+            '''Accepts an argument of a list of lists. Returns a transposed version of the list. List has to be 'rectangular' (sub-lists are all same lenght) to work.'''
+            trasposed_list_of_lists = [[(list_of_lists[i][j]) for i in range(len(list_of_lists))] for j in range(len(list_of_lists[0]))]
+            return trasposed_list_of_lists
+        
+        # TODO: Add functionality where these 'token's can be referred by variable so that players can choose their own unique token.
+        # i.e. p1.token = 'B'
+        def row_win(board = self.board):
             '''Returns player token for a row win, otherwise returns None.'''
-            for row in self.board:
+            for row in board:
                 if row == ['X','X','X']:
                     return 'X'
-                elif row == ['Y','Y','Y']:
-                    return 'Y'
-                else:
-                    return None
+                elif row == ['O','O','O']:
+                    return 'O'
+            return None
         
         def column_win():
             '''Returns player token for a column win, otherwise returns None'''
-            for column in range(3):
-                for row in range(3):
+            board = transpose_list_of_lists(self.board)
+            result = row_win(board)
+            return result
+        
+        def diagonal_win():
+            '''Returns player token for diagonal win, otherwise returns None.'''
+            check_list = [self.board[i][i] for i in range(len(self.board))]
+            if check_list == ['X','X','X']:
+                return 'X'
+            elif check_list == ['O','O','O']:
+                return 'O'
+            return None
 
-            
-        return False
+        def diagonal_cross_win():
+            '''Returns player token for cross diagonal win, otherwise returns None.'''
+            # Can we use something similar to the comprehension from diagonal win?
+            # check_list = [self.board[i][i] for i in range(len(self.board))]
+            check_list = [self.board[0][2],self.board[1][1],self.board[2][0]]
+            if check_list == ['X','X','X']:
+                return 'X'
+            elif check_list == ['O','O','O']:
+                return 'O'            
+            return None
+
+        # Check for wins.
+        row_result = row_win()
+        if row_result:
+            return row_result
+
+        column_result = column_win()
+        if column_result:
+            return column_result
+        
+        diagonal_result = diagonal_win()
+        if diagonal_result:
+            return diagonal_result
+        
+        diagonal_cross_result = diagonal_cross_win()
+        if diagonal_cross_result:
+            return diagonal_cross_result
+        
+        return None
     
+    def print_player_info(self, player):
+        print(f"Player info: {player}")
+
     def is_full(self):
         '''Returns True if gameboard is full. Otherwise returns False.'''
+        # Is board full?
         if '-' not in self.board:
-            return False
-        return True
+            return True
+        return False
     
     def is_game_over(self):
         '''Returns True if game board is full or a player has won.'''
@@ -177,33 +220,86 @@ def main():
 
     p1 = Player('Dezzi', 'X')
     p2 = Player('Bunbun', 'O')
+
+    g1.print_player_info(p1)
+    g1.print_player_info(p2)
     
     # Set whos turn to player one.
     players = [p1, p2]
     players_turn = 0
 
     print(g1)
+    print()
 
     while True:
-        # Is game over.
 
-        # Prompt player n for their move.
-        print(f"{players[players_turn].token}:{players[players_turn].name}'s turn!")
-        desired_x_position = int(input(f"Choose your column: "))
-        desired_y_position = int(input(f"Choose your row: "))
-        # Move if available.
-        if not g1.move(desired_x_position, desired_y_position, players[players_turn].token):
-            continue
+        # Manual moves.
+        # g1.move(0,2,'O')
+        # g1.move(1,1,'O')
+        # g1.move(2,0,'O')
+
+        # g1.move(0,0,'O')
+        # g1.move(1,1,'O')
+        # g1.move(2,2,'O')
+
+        # g1.move(0,0,'X')
+        # g1.move(1,0,'X')
+        # g1.move(2,0,'X')
+
+        # g1.move(0,0,'O')
+        # g1.move(0,1,'O')
+        # g1.move(0,2,'O')
+
+        # No winner.
+        # g1.move(0,0,'O')
+        # g1.move(0,1,'X')
+        # g1.move(0,2,'O')
+
+        # ###### Prompt for input and attempt move ######
+        # while True:
+        #     # Prompt player n for their move.
+        #     print(f"{players[players_turn].token} : {players[players_turn].name}'s turn!")
+        #     y_input = input(f"Choose your row: ")
+        #     x_input = input(f"Choose your column: ")
+        #     # If not valid, go back and re-prompt.
+        #     if not x_input.isnumeric() or not y_input.isnumeric():
+        #         print("Please enter numeric values between 0 and 2.")
+        #         continue
+        #     desired_x_position = int(x_input)
+        #     desired_y_position = int(y_input)
+        #     break
+            
+        # # Move if available.
+        # if not g1.move(desired_x_position - 1, desired_y_position - 1, players[players_turn].token):
+        #     continue
+        # ###############################################
+
+        # ############ Check for winner ############
+        # print(f"g1.calc_winner(): {g1.calc_winner()}")
+        # calc_winner_result = g1.calc_winner()
+        # if calc_winner_result:
+        #     print(f"g1.calc_winner(): {calc_winner_result}")
+        # ##########################################
+        
+        ############### Test is_full() ###############
         print(g1)
-        # print(g1.board)
-        # Check for win.
-        # Is game over.
-        # Display board.
-        # Prompt player m for their move.
-        # Move if available.
-        # Check for win.
-        # Is game over.
-        # Display board.
+
+        g1.board = [['X','X','X'],['X','X','X'],['X','X','X']]
+        print(g1)
+        print(f"g1.is_full(): {g1.is_full()}")
+
+        g1.board = [['X','X','O'],['X','X','X'],['X','X','X']]
+        print(g1)
+        print(f"g1.is_full(): {g1.is_full()}")
+
+        g1.board = [['X','-','O'],['X','X','X'],['X','X','X']]
+        print(g1)
+        print(f"g1.is_full(): {g1.is_full()}")
+
+        break
+        ##############################################
+
+
         
         # Toggle player turn to other player.
         if players_turn == 0:
@@ -237,4 +333,4 @@ def main():
 
 
 
-main()
+# main()
