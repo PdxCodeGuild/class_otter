@@ -40,6 +40,7 @@ class atm:
     #     if amount !=  0:
     #         print('You deposited: $ ') + str(amount)
     #         print('Your New Balance is: ') + (self.balance)
+    
 
 atm = atm() # create an instance of our class
 print('Welcome to the ATM')

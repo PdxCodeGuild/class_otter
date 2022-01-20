@@ -24,7 +24,6 @@ for i in range(len(nums)):
     if every_second[i] > 9:
         every_second[i] -= 9
 
-
 result = sum(every_second) # sum all values
 second_digit = result % 10 #Second digit for validation check
 

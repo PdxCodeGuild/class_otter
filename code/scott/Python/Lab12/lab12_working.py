@@ -4,22 +4,18 @@ class atm:
         self.balance = balance
         self.interest_rate = interest_rate 
         self.activity = []
-
     def check_balance(self):
         #return the current balance
         return self.balance
-
     def deposit(self, amount):
         #add deposit to current balance and update the new balance
         self.balance += amount
-
     def check_withdrawal(self, amount):
         #returns true if withrawl amount is less than or equal to balance or false if more than balanceTrue
         if amount <= self.balance:
             return True
         else:
             return False
-
     def withdraw(self, amount):
         #withdraws the amount from account and returns the new balance
         if amount <= self.balance:
@@ -27,7 +23,6 @@ class atm:
             print('Your New Balance is:' + str(self.balance))
         else:
             print('insufficient funds')
-
     def calc_interest(self):
         # multiplies current balance * interest rate to return interest on account
         return self.balance * self.interest_rate

@@ -47,7 +47,6 @@ def read_contact(data, keys):
     #         data_results.append(contact)
 
     # data_results = [contact for contact in data if contact[key_input] == contact_input]
-    
     data_results = list(filter(lambda contact: contact[key_input] == contact_input, data))
 
     print(data_results)

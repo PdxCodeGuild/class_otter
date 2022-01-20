@@ -41,15 +41,6 @@ def updateDict(dictionary):
 dictionary = [{'name': 'sam', 'favorite_fruit': 'plum', 'favorite_color': 'red'}, {'name': 'sally', 'favorite_fruit': 'grape', 'favorite_color': 'yellow'}]
 print(updateDict(dictionary))
 
-# def Convert(a):
-#     it = iter(a)
-#     res_dct = dict(zip(it, it))
-#     return res_dct
-         
-# # Driver code
-# lst = ['a', 1, 'b', 2, 'c', 3]
-# print(Convert(lst))
-
 import csv       
     csv_columns = ['name','favorite_fruit','favorite_color']
     # csv_file = "contacts.csv"
@@ -63,3 +54,13 @@ import csv
         
     write_records = write_csv()
     print(write_records)
+    
+
+# def Convert(a):
+#     it = iter(a)
+#     res_dct = dict(zip(it, it))
+#     return res_dct
+         
+# # Driver code
+# lst = ['a', 1, 'b', 2, 'c', 3]
+# print(Convert(lst))

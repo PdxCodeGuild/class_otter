@@ -23,7 +23,6 @@ class game:
 
 
 
-
     #ask for player_name and select 1 or 2 to play as 'X' or 'O'
 
 game = game()
