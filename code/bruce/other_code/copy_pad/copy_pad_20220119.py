@@ -106,20 +106,21 @@
 # print(f"list_of_letters: {list_of_letters}")
 # #################################################
 
-############### DING DING DING!!! WINNER WINNER!!! ###############
-letters = [['a','b'],['c','d'],['e','f']]
-print(f"letters: {letters}")
-# list_of_letters = [[(letters[i][j]) for i in range(len(letters))] for j in range(len(letters[0]))]  # list_of_letters: [['a', 'c', 'e'], ['b', 'd', 'f']]
+# ############### DING DING DING!!! WINNER WINNER!!! ###############
+# letters = [['a','b'],['c','d'],['e','f']]
+# print(f"letters: {letters}")
+# # list_of_letters = [[(letters[i][j]) for i in range(len(letters))] for j in range(len(letters[0]))]  # list_of_letters: [['a', 'c', 'e'], ['b', 'd', 'f']]
 
-# Create the function which does the above list comprehension.
-def transpose_list_of_lists(list_of_lists):
-    list_of_letters = [[(list_of_lists[i][j]) for i in range(len(list_of_lists))] for j in range(len(list_of_lists[0]))]
-    return list_of_letters
+# # Create the function which does the above list comprehension.
+# def transpose_list_of_lists(list_of_lists):
+#     '''Accepts an argument of a list of lists. Returns a transposed version of the list.'''
+#     trasposed_list_of_lists = [[(list_of_lists[i][j]) for i in range(len(list_of_lists))] for j in range(len(list_of_lists[0]))]
+#     return trasposed_list_of_lists
 
-list_of_letters = transpose_list_of_lists(letters)
+# list_of_letters = transpose_list_of_lists(letters)
 
-print(f"list_of_letters: {list_of_letters}")
-##################################################################
+# print(f"list_of_letters: {list_of_letters}")
+# ##################################################################
 
 the_board = [['-','-','-'],['-','-','-'],['-','-','-']]
 num_board = [['1','2','3'],['4','5','6'],['7','8','9']]
@@ -131,4 +132,3 @@ the_board[0][0] = 'X'
 the_board[1][1] = 'X'
 
 print(f"the_board: {the_board}")
-print(f"num_board: {num_board}")
