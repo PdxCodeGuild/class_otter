@@ -38,15 +38,12 @@ with open(fname, 'r') as f:
         num_lines = a + b + c
         num_words += len(words)
         num_chars += len(line.replace(' ', ''))
-    # print(num_chars) 
-    # print(num_words)
-    # print(num_lines)    
+ 
     c_div_by_w = float(num_chars / num_words) 
     w_div_by_s = float(num_words / num_lines)
     test = float(x * c_div_by_w) + float(y * w_div_by_s) - z
     test = round(test)
-    # print(c_div_by_w)
-    # print(w_div_by_s)
+
 print('\nNumber of characters in text file :', num_chars)    
 print('\nNumber of words in text file :', num_words) 
 print('\nNumber of sentences in text file:', num_lines)

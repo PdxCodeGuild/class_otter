@@ -2,7 +2,6 @@
 
 # Request credit card input
 cc = input("Please enter a 16 digit credit card number without spaces")
-
 nums = [eval(_) for _ in cc] # Convert string to a List
 nums_check = nums[-1] #slice off last number to be used as check number
 del nums[-1]#remove check number
