@@ -1,7 +1,8 @@
 import pygame
+import engine.Color as Color
 from pygame.math import Vector2
-from Utility import *
-from GameObject import *
+from engine.core.GameObject import GameObject
+from engine.core.Engine import Engine
 
 
 class GameBoard():
@@ -65,17 +66,17 @@ class GameBoard():
         return self.__positions_remaining <= 0
 
 
-    def get_rect_center_at(self, screen_position, screen_size):
+    def get_rect_center_at(self, screen_position):
         for i in range(len(self.__tile_rects)):
-            rect = local_to_screen(screen_size, rect=self.__tile_rects[i])
+            rect = GameObject.local_to_screen(rect=self.__tile_rects[i])
             if rect.collidepoint(screen_position):
                 return rect.center
         return None
 
-    def move(self, screen_position, player, screen_size):
+    def move(self, screen_position, player):
         x = y = -1
         for i in range(len(self.__tile_rects)):
-            rect = local_to_screen(screen_size, rect=self.__tile_rects[i])
+            rect = GameObject.local_to_screen(rect=self.__tile_rects[i])
             if rect.collidepoint(screen_position):
                 x = i // 3
                 y = i % 3
@@ -113,28 +114,27 @@ class GameBoard():
         return self._is_full() or self.calc_winner() != None
 
 
-    def click(self, click_position, screen_size):
+    def click(self, click_position):
         pass
 
-    def update(self, time, display):
+    def update(self):
         mouse_pos = pygame.mouse.get_pos()
         for i in range(len(self.__tile_rects)):
-            rect = local_to_screen(display.screen_size, rect=self.__tile_rects[i])
+            rect = GameObject.local_to_screen(rect=self.__tile_rects[i])
             if rect.collidepoint(mouse_pos):
                 self.__draw_tile[i] = True
             else:
                 self.__draw_tile[i] = False
 
-    def draw(self, time, display):
-        surface = display.surface
+    def draw(self):
+        surface = Engine.display.surface
         
-        pygame.draw.line(surface, BLACK, (280, 122), (280, 358), 3)
-        pygame.draw.line(surface, BLACK, (360, 122), (360, 358), 3)
+        pygame.draw.line(surface, Color.BLACK, (280, 122), (280, 358), 3)
+        pygame.draw.line(surface, Color.BLACK, (360, 122), (360, 358), 3)
 
-        pygame.draw.line(surface, BLACK, (202, 200), (438, 200), 3)
-        pygame.draw.line(surface, BLACK, (202, 280), (438, 280), 3)
+        pygame.draw.line(surface, Color.BLACK, (202, 200), (438, 200), 3)
+        pygame.draw.line(surface, Color.BLACK, (202, 280), (438, 280), 3)
 
-        screen_size = display.screen_size
         for i in range(len(self.__tile_rects)):
             if self.__draw_tile[i]:
-                pygame.draw.rect(surface, BRIGHT_RED, local_to_screen(screen_size, rect=self.__tile_rects[i]), 2)
+                pygame.draw.rect(surface, Color.BRIGHT_RED, GameObject.local_to_screen(rect=self.__tile_rects[i]), 2)

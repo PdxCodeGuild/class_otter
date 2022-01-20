@@ -1,9 +1,11 @@
-from Player import *
-from GameBoard import *
-from GameObject import *
-from Token import *
-from Button import *
-from Utility import *
+import engine.Color as Color
+from Player import Player
+from Token import Token_X, Token_O
+from GameBoard import GameBoard
+from engine.core.GameObject import GameObject
+from engine.interface.Button import Button
+from engine.interface.Panel import Panel
+from pygame.math import Vector2
 
 
 class Game:
@@ -20,15 +22,15 @@ class Game:
         self._winner = None
         self.title_text = ''
 
-        self._title_panel = Panel(self.__title, position=Vector2(0, -200), color=GRAY)
+        self._title_panel = Panel(self.__title, position=Vector2(0, -200), color=Color.GRAY)
 
         def play_func(self):
             self.reset()
-        self._play_button = Button("PLAY", Vector2(0, 145), Vector2(240, 40), mult_color(BRIGHT_GREEN, 0.9), click_func=play_func)
+        self._play_button = Button("PLAY", Vector2(0, 145), Vector2(240, 40), Color.mult_color(Color.BRIGHT_GREEN, 0.9), click_func=play_func)
 
         def quit_func(self):
             self._should_quit = True
-        self._quit_button = Button("QUIT", Vector2(0, 195), Vector2(240, 40), mult_color(BRIGHT_RED, 0.9), click_func=quit_func)
+        self._quit_button = Button("QUIT", Vector2(0, 195), Vector2(240, 40), Color.mult_color(Color.BRIGHT_RED, 0.9), click_func=quit_func)
 
         self._finish_game()
 
@@ -61,16 +63,16 @@ class Game:
         self.__game_objects.append(self._title_panel)
         self.__game_objects.append(self.__game_board)
 
-    def update(self, time, display):
+    def update(self):
         if not self.__is_game_over:
             self.__is_game_over = self.__game_board.is_game_over()
             if self.__is_game_over:
                 self._finish_game()
 
         for game_object in self.__game_objects:
-            game_object.update(time, display)
+            game_object.update()
 
-    def render(self, time, display):
+    def render(self):
         if self.__is_game_over:
             if self._winner is not None:
                 self.title_text = f'{self.__title}    {self._winner.name} won!'
@@ -84,19 +86,19 @@ class Game:
 
         # Draw game objects
         for game_object in self.__game_objects:
-            game_object.draw(time, display)
+            game_object.draw()
 
-    def click(self, click_position, screen_size):
+    def click(self, click_position):
         for game_object in self.__game_objects:
-            game_object.click(click_position, screen_size)
+            game_object.click(click_position)
 
         if not self.__is_game_over:
             player = self._player_1 if self.__is_player_1_turn else self._player_2
-            rect_center = self.__game_board.get_rect_center_at(click_position, screen_size)
-            if self.__game_board.move(click_position, player, screen_size):
+            rect_center = self.__game_board.get_rect_center_at(click_position)
+            if self.__game_board.move(click_position, player):
                 if self.__is_player_1_turn:
-                    self.__game_objects.append(Token_X(Vector2(rect_center), Vector2(64, 64), BRIGHT_ORANGE))
+                    self.__game_objects.append(Token_X(Vector2(rect_center), Vector2(64, 64), Color.BRIGHT_ORANGE))
                 else:
-                    self.__game_objects.append(Token_O(Vector2(rect_center), Vector2(64, 64), BRIGHT_BLUE))
+                    self.__game_objects.append(Token_O(Vector2(rect_center), Vector2(64, 64), Color.BRIGHT_BLUE))
                 self.__is_player_1_turn = not self.__is_player_1_turn
 

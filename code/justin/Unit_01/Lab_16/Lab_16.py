@@ -14,16 +14,14 @@ want to use for their capstone project or solve an actual problem they
 have. For a list of Python libraries to consider using in this project,
 check out https://awesome-python.com
 '''
-from Game import *
-from Engine import *
-
-engine = Engine()
-game = Game()
+from Game import Game
+from engine.core.Engine import Engine
 
 
 def main():
+    engine = Engine()
     engine.initialize()
-    engine.load_game(game)
+    engine.load_game(Game())
     engine.run()
 
 
