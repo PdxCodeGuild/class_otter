@@ -20,5 +20,3 @@ u = input("\nEnter the input unit of distance: ")
 o = input("\Enter the output unit of distance:")
 total_distance = d * units_in_meters[u] / units_in_meters[o]
 print(total_distance, o)
-
-#U = input("\nEnter the unit of distance")

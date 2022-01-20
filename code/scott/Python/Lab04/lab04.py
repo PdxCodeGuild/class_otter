@@ -13,7 +13,7 @@ card_values = {
     'J': 10, 
     'Q': 10,  
     'K': 10
-    }
+}
 
 print("\n*** Card selection should be: 2 through 10, A, J, Q, K ***\n")
 

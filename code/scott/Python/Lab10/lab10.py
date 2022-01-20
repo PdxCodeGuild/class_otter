@@ -44,17 +44,17 @@ def del_record(contacts):
 
 def run():
     with open('contacts.csv', 'r') as file:
+        #contacts.csv = file.read()
         lines = file.read().split('\n')
-
     first_list = []
     for line in lines:
         first_list.append(line.split(','))
-
     headers = first_list.pop(0) # pop out headers list
     # print('headers = ' + str(headers))
     contacts = []
     for item in first_list:
         contacts.append({headers[0]: item[0], headers[1]: item[1], headers[2]: item[2]})
+
         
     new_record = create_record(headers, contacts) #add new contact to contacts dict
     print('contacts =' + str(new_record))
@@ -67,7 +67,18 @@ def run():
     
     delete_record = del_record(contacts)
     print('remaining_contacts ='+ str(delete_record))
-    
+
+    contacts_output = []
+    contacts_output.append(keys)
+    for contact in contacts:
+        contacts_output.append(list(contact.values()))
+    print(contacts_output)
+
+    contacts_output = [",".join(line) for line in contacts_output]
+    contacts_output = "\n".join(contacts_output)
+
+    with open('contacts.csv', 'w') as f:
+        f.write(contacts_output)
     # import csv       
     # csv_columns = ['name','favorite_fruit','favorite_color']
     # # csv_file = "contacts.csv"

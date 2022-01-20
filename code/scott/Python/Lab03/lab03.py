@@ -41,6 +41,7 @@ tens_digits = {
     90: "nine hundred",
 }
 
+
 num = []
 num = int(input("please enter a number between 0 and 999:"))
 num_div_ten = num // 10
