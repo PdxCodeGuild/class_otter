@@ -10,6 +10,9 @@ class Token_X(GameObject):
         super().__init__(position, size, color)
         self.half_size = self.size.x / 2, self.size.y / 2
 
+    def click(self, click_position):
+        pass
+
     def update(self):
         pass
 
@@ -25,6 +28,9 @@ class Token_O(GameObject):
         super().__init__(position, size, color)
         self.radius = self.size.x / 2
 
+    def click(self, click_position):
+        pass
+    
     def update(self):
         pass
 

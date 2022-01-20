@@ -31,6 +31,9 @@ class Panel(GameObject):
         if self.size.y < height:
             self.size.y = height
 
+    def click(self, click_position):
+        pass
+    
     def update(self):
         pass
 

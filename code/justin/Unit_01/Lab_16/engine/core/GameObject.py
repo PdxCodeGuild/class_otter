@@ -10,26 +10,25 @@ class GameObject:
         self.size = size
         self.color = color
 
+    def _check_collision(self, point):
+        rect = GameObject.local_to_screen(rect=self.get_rect())
+        return rect.collidepoint(point)
+
+
     def get_rect(self):
         width, height = self.size
         return Rect(self.position.x - (width / 2), self.position.y - (height / 2), width, height)
 
     def click(self, click_position):
-        pass
-
-    def _do_click(self):
-        pass
-
-    def _check_collision(self, point):
-        rect = GameObject.local_to_screen(rect=self.get_rect())
-        return rect.collidepoint(point)
+        raise NotImplementedError
 
     def update(self):
-        pass
+        raise NotImplementedError
 
     def draw(self):
-        pass
+        raise NotImplementedError
 
+    @classmethod
     def local_to_screen(position=Vector2(), size=Vector2(), rect=None):
         x_offset = (Engine.display.screen_size[0] / 2)
         y_offset = (Engine.display.screen_size[1] / 2)
