@@ -17,7 +17,7 @@ def black_Jack(a,b,c):
     total = a+b+c
     if total == 21:
         print('Black Jack!')
-    elif 21< total >= 17:
+    elif 21> total >= 17:
         print('Stay and Hold')
     elif total <17:
         print('Hit')
