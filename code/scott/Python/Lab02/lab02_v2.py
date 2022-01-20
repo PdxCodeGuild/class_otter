@@ -15,6 +15,7 @@ def sum(nums): #defining the function 'sum' with one parameter 'numbers'
     for num in nums:
         add = add + num
     return add
+
 x = sum(nums) #call the function
 avg = x / len(nums)
 print ("your average is:")

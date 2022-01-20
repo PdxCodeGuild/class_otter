@@ -4,6 +4,7 @@ count = 0 # Number of times tickets are matched to house
 winnings = 0 # Winnings total
 total_matched = 0 # total of numbers matched
 #Match payout amounts
+
 payouts = {
     0 : 0,
     1 : 4,
