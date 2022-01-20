@@ -116,7 +116,19 @@ def main():
     winning_ticket = generate_ticket()
     initial_balance = 0
     balance = initial_balance
-    how_many_tickets_i_can_buy = 10000000000
+    how_many_tickets_i_can_buy = 1000000000
+
+# number_of_tickets,execution_time_seconds
+# 100,.043
+# 1000,.048
+# 10000,.087
+# 100000,.495
+# 1000000,4.584
+# 10000000,45.282
+# 100000000,448.793
+# 1000000000,4543.273,1:15:43:273
+# 10000000000,
+# 
 
     earnings = 0
     expenses = 0
@@ -165,6 +177,7 @@ main()
 # TotalSeconds      : 10.1816043
 # TotalMilliseconds : 10181.6043
 
+
 # Best results I've seen:
 
 # I started with $0.00, then bought 1000000 tickets, and I now have $-1706576.00.
@@ -202,5 +215,14 @@ main()
 # Earnings: $251809569
 # A ROI of -0.8740952155!!!
 # {0: 940895299, 1: 57614127, 2: 1470323, 3: 20108, 4: 141, 5: 2, 6: 0}
+
+### One jackpot!!! ###
+# I'm guessing ~10 hours of program time.
+# I started with $0.00, then bought 10000000000 tickets, and I now have $-17462304601.00.
+# Expenses: $20000000000
+# Earnings: $2537695399
+# A ROI of -0.87311523005!!!
+# {0: 9409003668, 1: 576100701, 2: 14694285, 3: 199826, 4: 1509, 5: 10, 6: 1}
+######################
 
 #################################################################

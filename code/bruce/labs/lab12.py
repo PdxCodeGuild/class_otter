@@ -23,10 +23,14 @@ class ATM:
     # If I keep it, maybe use a 'dictionary' containing two accounts?
     def __init__(self, account_number = 1, balance = 0, interest_rate = .001):
         self.balance = balance
+        # TODO: Maybe use private variable for interest_rate?
         self.interest_rate = interest_rate
         self.ledger = []
         self.account_number = account_number
     
+    def __str__(self):
+        return f"[Account Number: {self.account_number}, Account Balance: {self.balance}]"
+
     # TODO: Need the logic to select the balance of the specific account number.
     def check_balance(self):
         '''Accepts account number and returns the current balance of the specific account.'''
@@ -52,6 +56,7 @@ class ATM:
         self.ledger.append(f"user withdrew ${amount}")
         return amount
     
+    # TODO: Maybe use private method for calculate interest?
     def calc_interest(self):
         '''Accepts account number, interest rate, and balance. Returns the amount of interest earned on the account.'''
         # For now, we are going to use simple interest. Interest calculates per transaction. Not a good way, but will work temporarily.
@@ -70,6 +75,7 @@ def main():
 ########## Use the REPL ##########
     atm = ATM() # create an instance of our class
     print('Welcome to the ATM')
+    print(f"Return value of dunder string: {atm}")
     while True:
         command = input('Enter a command: ')
         if command == 'balance':
