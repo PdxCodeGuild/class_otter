@@ -7,7 +7,7 @@ board = [["|   |" for x in range(3)] for y in range(3)]
 # print(board)
 board[token_x][token_y] = token_position
 
-while True:
+while True:#
     for i in board:
         print("----- ----- -----")
         print(" ".join(i))

@@ -1,4 +1,3 @@
-#import math
 class atm:     
     def __init__(self, balance = 0, interest_rate = .001):
         # initialize the class with balance = 0 and an interest rate = 0.1%

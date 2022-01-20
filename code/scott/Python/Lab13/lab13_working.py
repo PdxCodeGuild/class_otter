@@ -12,7 +12,7 @@ class player:
 
 
 class game:     
-    def __init__(self, board):
+    def __init__(self, board):#
         self.board = board
 
     def __repr__():
