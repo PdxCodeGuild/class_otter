@@ -9,12 +9,14 @@ class ATM: #An ATM class
             self.balance = self.balance + amount
             print(str(self.balance))
     def check_withdrawal(self, amount): #returns true if the withdrawn amount won't put the account in the negative
-            if amount < self.balance > 0:
+            if amount <= self.balance:
                 print(True)
+                return True
     def withdraw(self, amount): #withdraws the amount from the account and returns it
-            if amount < self.balance and self.balance > 0:
+            if amount <= self.balance:
                 self.balance = self.balance - amount
-                print(balance)
+                print(self.balance)
+                return self.balance
     def calc_interest(self, amount): #returns the amount of interest calculated on the account
             interest = (self.balance + amount) * self.interestrate
             print(interest)
