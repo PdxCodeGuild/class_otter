@@ -7,5 +7,5 @@
 # Returns the the result of adding num_01 to num_02
 
 # Function named print_the_result.
-# Accepts argument of any type.
+# Accepts argument, called input_argument, of any type.
 # Prints the value of the argument to console.
