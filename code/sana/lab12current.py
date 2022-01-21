@@ -21,6 +21,9 @@ class ATM: #An ATM class
                 print(amount)
                 self.transactions.append(f"withdrawal {amount}")
                 return amount
+    def log(self):
+        print(self.transactions)
+        return self.transactions
     def calc_interest(self): #returns the amount of interest calculated on the account
             interest = self.balance * self.interestrate
             print(interest)
@@ -54,6 +57,9 @@ while True:
         print('withdraw - withdraw money')
         print('interest - accumulate interest')
         print('exit     - exit the program')
+        print('log     - transaction')
+    elif command == 'log':
+        atm.log()
     elif command == 'exit':
         break
     else:
