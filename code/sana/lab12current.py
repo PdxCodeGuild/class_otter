@@ -15,11 +15,12 @@ class ATM: #An ATM class
     def withdraw(self, amount): #withdraws the amount from the account and returns it
             if amount <= self.balance:
                 self.balance = self.balance - amount
-                print(self.balance)
-                return self.balance
-    def calc_interest(self, amount): #returns the amount of interest calculated on the account
-            interest = (self.balance + amount) * self.interestrate
+                print(amount)
+                return amount
+    def calc_interest(self): #returns the amount of interest calculated on the account
+            interest = self.balance * self.interestrate
             print(interest)
+            return interest
 atm = ATM()
 while True:
     command = input('Enter a command: ')
