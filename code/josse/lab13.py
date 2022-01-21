@@ -38,8 +38,21 @@ class Game:
             return player.token
         else:
             return None
+# ----------------------------------------------------------------------------------------------
 
     def is_full(self):
+        while True:
+            game_board_token = ["x", "o"].lower()
+            full_game_list = 0
+            for i in range(len(self.board)):
+                if i in game_board_token:
+                    full_game_list += 1
+                if full_game_list == 9:
+                    print("game is full")
+
+
+# ------------------------------------------------------------------------------------------------
+
 
     def is_game_over(self):
 
