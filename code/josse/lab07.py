@@ -8,9 +8,16 @@ rot = ["n","o",	"p","q","r","s","t","u","v","w",
 
 user = input("please enter your message: ")
 
-if user == english[1]:
-    print(rot[1])
+for letter in english:
+        if  letter in rot:
+            print(letter, rot[letter])
 
 
 
-print(user)
+
+'''if user == english[1]:
+    print(rot[1])'''
+
+
+
+print(letter)
