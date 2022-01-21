@@ -14,13 +14,18 @@ class player:
 class game:     
     def __init__(self, board):#
         self.board = board
-
-    def __repr__():
-        print(board)
+        def __repr__():
+            print(board)
+            
+def board()
 
     def move(self, x, y, player)
 
-
+    def calc_winner(self):
+    
+    def is_full(self,board):
+        
+    def is_game_over(self):
 
 
     #ask for player_name and select 1 or 2 to play as 'X' or 'O'
