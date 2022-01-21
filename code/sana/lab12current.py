@@ -1,22 +1,35 @@
-class atm: #An ATM class
-    def __init__(self, balance=0, interestrate=0.1):
+class ATM: #An ATM class
+    def __init__(self, balance = 0, interestrate = 0.1):
         self.balance = balance
         self.interestrate = interestrate
-    def check_balance(self, balance): #returns the account balance
-            print(balance) 
-    def deposit(self, balance, amount): #deposits the given amount in the account
-            balance = balance + amount
-            print(balance)
-    def check_withdrawal(self, balance, amount): #returns true if the withdrawn amount won't put the account in the negative
-            if amount < balance > 0:
+        self.transactions = []
+    def check_balance(self): #returns the account balance
+            print(self.balance)
+            return self.balance
+    def deposit(self, amount): #deposits the given amount in the account
+            self.balance = self.balance + amount
+            print(str(self.balance))
+            self.transactions.append(f"deposit {amount}")
+            return self.balance
+    def check_withdrawal(self, amount): #returns true if the withdrawn amount won't put the account in the negative
+            if amount <= self.balance:
                 print(True)
-    def withdraw(self, balance, amount): #withdraws the amount from the account and returns it
-            if amount < balance > 0:
-                balance = balance - amount
-                print(balance)
-    def calc_interest(self, amount, balance, interestrate): #returns the amount of interest calculated on the account
-            interest = (balance + amount) * interestrate
+                return True
+    def withdraw(self, amount): #withdraws the amount from the account and returns it
+            if amount <= self.balance:
+                self.balance = self.balance - amount
+                print(amount)
+                self.transactions.append(f"withdrawal {amount}")
+                return amount
+    def log(self):
+        print(self.transactions)
+        return self.transactions
+    def calc_interest(self): #returns the amount of interest calculated on the account
+            interest = self.balance * self.interestrate
             print(interest)
+            self.transactions.append(f"deposit interest {amount}")
+            return interest
+atm = ATM()
 while True:
     command = input('Enter a command: ')
     if command == 'balance':
@@ -44,6 +57,9 @@ while True:
         print('withdraw - withdraw money')
         print('interest - accumulate interest')
         print('exit     - exit the program')
+        print('log     - transaction')
+    elif command == 'log':
+        atm.log()
     elif command == 'exit':
         break
     else:
