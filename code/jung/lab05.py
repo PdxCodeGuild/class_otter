@@ -13,7 +13,7 @@ def pick6():
 
 # Start your balance at 0
 balance = 0
-
+earnings = 0
 #Loop 100,000 times, for each loop:
 #Generate a list of 6 random numbers representing the ticket
 #Subtract 2 from your balance (you bought a ticket)
@@ -31,27 +31,31 @@ def num_matches(winning, ticket):
 for x in range(100000):
     my_pick = pick6()
     balance -= 2
+
     keep_track = num_matches(winning, my_pick)
     if keep_track == 1:
-        balance += 4
+        earnings += 4
     elif keep_track == 2:
-        balance += 7
+        earnings += 7
     elif keep_track == 3:
-        balance += 100
+        earnings += 100
     elif keep_track == 4:
-        balance += 50000
+        earnings += 50000
     elif keep_track == 5:
-        balance += 1000000
+        earnings += 1000000
     elif keep_track == 6:
-        balance += 25000000
+        earnings += 25000000
 print(f"Your final balance is: ${balance}")
 
 
-earnings = balance
 expenses = 2 * 100000
-
+balance = earnings - expenses
 roi = (earnings - expenses)/expenses
-print(roi)
+
+print(f"Earnings are {earnings}")
+print(f"Expenses are {expenses}")
+print(f"Balance is {balance}")
+print(f"ROI is {roi}")
 
 
 
