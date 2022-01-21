@@ -6,6 +6,9 @@
 #           2022-01-19          #
 # ***************************** #
 
+import random
+import time
+
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/labs/13%20Tic%20Tac%20Toe.md
 
@@ -18,6 +21,7 @@
 # X| | 
 #  |O| 
 # O|X| 
+
 
 def print_variable_and_description(variable_under_review, description_of_logic = '', print_logic_results = True):
     '''Accepts three arguments: A variable we are examining, a description of the logic we are examining, and a print flag.'''
@@ -267,21 +271,75 @@ def test_is_game_over():
 ###############################################
 
 
+
 def main():
+
+    # games = {}
+    # game_counter = 1
+    # ###
+    # Insert while loop start here. Indent rest of existing primary while loop.
+    # # run these at end of game when someone wants to play another.
+    # Will need to change 'g1' to 'games[game_counter]' to be using the current game.
+    # games[game_counter] = Game()
+    # game_counter += 1
+    # ###
 
     g1 = Game()
 
-    p1 = Player('Dezzi', 'X')
-    p2 = Player('Bunbun', 'O')
+    #############################################################################################
+    # See if we can figure out how to have users input the values for the Player object name.
+    # Also, Game object name. Probably not possible.
+    # Don't think it is possible or trivial for the Game instance. We could add a 'name' member variable for Game to identify each game.
+    # But should be able to prompt user for 'name' and 'token' for their instances.
+    #############################################################################################
+
+    # p1 = Player('Dezzi', 'X')
+    # p2 = Player('Bunbun', 'O')
+
+    # Allow user input for names and tokens.
+    print("First player:")
+    p1_name = input("Name: ")
+    p1_token = input("Enter your token symbol: ")
+
+    p1 = Player(p1_name,p1_token)
+
+    print("Second player:")
+    p2_name = input("Name: ")
+    p2_token = input("Enter your token symbol: ")
+
+    p2 = Player(p2_name,p2_token)
 
     g1.print_player_info(p1)
     g1.print_player_info(p2)
     
+    # A dictionary of player names and Player objects, used below in some logic.
     players = {p1.name: p1, p2.name: p2}
-    # Set first player turn to player one.
-    # TODO: Add functionality where a random generator picks who goes first.
-    players_turn = p1.name
 
+    # Added functionality where a random generator picks who goes first.
+    # Display candy to show the random selector is 'thining'.
+    print("Setting up board and choosing start player.")
+    cycle = 1
+    number_of_cycles = 3
+    while cycle <= number_of_cycles:
+        scanner_width = 45
+        # scanner_field = ' ' * scanner_width
+        time_delay = .005
+        # Draw the spaces.
+        for _ in range(scanner_width):
+            print(' ', end='', flush=True)
+            time.sleep(time_delay)
+        # Draw the backspaces.
+        for _ in range(scanner_width):
+            print('\b', end='', flush=True)
+            time.sleep(time_delay)
+        cycle += 1
+
+    # Using random to choose one of the players.
+    player_chosen = random.choice([p1.name, p2.name])
+    print(f"First up: {player_chosen}!")
+    players_turn = player_chosen
+
+    # Print the initial board.
     print(g1)
 
     while True:
@@ -290,19 +348,25 @@ def main():
         while True:
             # Prompt player n for their move.
             print()
-            print(f"{players[players_turn].token} : {players[players_turn].name}'s turn!")
+            print(f"{players[players_turn].token} : {players[players_turn].name}'s turn.")
             y_input = input(f"Choose your row: ")
             x_input = input(f"Choose your column: ")
+            # TODO: Move this logic to function, maybe?
+            # Verify numeric and in proper range.
             # If not valid, go back and re-prompt.
             if not x_input.isnumeric() or not y_input.isnumeric():
-                print("Please enter numeric values between and including 1 and 3.")
+                print("Please enter numeric values.")
                 continue
             desired_x_position = int(x_input)
             desired_y_position = int(y_input)
+            if not (1 <= desired_x_position <= 3) or not (1 <= desired_y_position <= 3):
+                print("Please enter numbers between and including 1 and 3.")
+                continue
             break
             
         # Move if available.
         if not g1.move(desired_x_position - 1, desired_y_position - 1, players[players_turn]):
+            print("Space already occupied. Please try another position.")
             continue
         ###############################################
 
@@ -315,7 +379,6 @@ def main():
             # Else:
                 # Proceed
         ############ Check for winner ############
-        # print(f"g1.calc_winner(): {g1.calc_winner(players[players_turn])}")
         calc_winner_result = g1.calc_winner(players[players_turn])
         if calc_winner_result:
             print(f"WINNER: {players[players_turn].token} : {players[players_turn].name}!!!")
@@ -330,7 +393,7 @@ def main():
                 # Proceed
         ##########################################
         if g1.is_full():
-            print("Game is a draw/cat.")
+            print("Game is a draw.\nCat's game! MEOW!!!")
             break
         ##########################################
 
