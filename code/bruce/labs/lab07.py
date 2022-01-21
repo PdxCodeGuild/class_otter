@@ -132,11 +132,60 @@ def test_decode_message():
     assert decode_message('dun', 0) == 'dun'
     assert decode_message('dun', 5) == 'ypi'
 
+
 def main():
-    message = "Soopur, seKret mEssige!"
-    rotation = 13
-    print(message)
-    print(encode_message(message, rotation))
-    print(decode_message(encode_message(message, rotation), rotation))
+    
+    # TODO: Add functionality where user can encode and decode as many messages as they want in the same session.
+    # ############ Hard coded text ############
+    # plain_text_message = "Soopur, seKret mEssige!"
+    # encryption_schema = 13
+    # rotation = encryption_schema
+    # print(f"Plain text message:             {plain_text_message}")
+    # print(f"Encoded message with schema {rotation}: {encode_message(plain_text_message, rotation)}")
+    # print(f"Decoded message with schema {rotation}: {decode_message(encode_message(plain_text_message, rotation), rotation)}")
+    # #########################################
+
+    ########### User provided message and schema ###########
+    # REPL
+    # Prompt user for choice of encode/decode.
+    # Start dialog for appropriate process.
+    # Prompt user for message.
+    # Process message according to user inputs.
+    # Display results of process.
+
+    while True:
+        decode_or_encode = input("Please choose [E]ncode or [D]ecode: ").lower()
+        if decode_or_encode not in ['e','d']:
+            continue
+        break
+    if decode_or_encode == 'e':
+        # User input of message and schema, and display of results:
+        while True:
+            plain_text_message = input("Please input message to be encryted: ")
+            while True:
+                encryption_schema_as_string = input("Please choose a numeric encryption schema (rotation): ")
+                if not encryption_schema_as_string.isnumeric():
+                    continue
+                else:
+                    encryption_schema = int(encryption_schema_as_string)
+                    break
+            rotation = encryption_schema
+            print(f"Plain text message: {plain_text_message}")
+            print(f"Encoded message with schema {rotation}: {encode_message(plain_text_message, rotation)}")
+            break
+    elif decode_or_encode == 'd':
+        encrypted_message = input("Please input message to be decryted: ")
+        while True:
+            encryption_schema_as_string = input("Please choose a numeric encryption schema (rotation): ")
+            if not encryption_schema_as_string.isnumeric():
+                continue
+            else:
+                encryption_schema = int(encryption_schema_as_string)
+                break
+        rotation = encryption_schema
+        print(f"Decoded message with schema {rotation}: {decode_message(encrypted_message, rotation)}")
+    # else:
+    #     continue
+    ########################################################
 
 main()
