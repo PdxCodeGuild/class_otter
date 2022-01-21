@@ -1,7 +1,7 @@
 # ***************************** #
 #      Lab 13: Tic-Tac-Toe      #
 #   classes methods variables   #
-#          Version: 1.0         #
+#          Version: 1.1         #
 #      Author: Bruce Stull      #
 #           2022-01-19          #
 # ***************************** #
@@ -58,7 +58,7 @@ class Game:
         self.__board = [['-','-','-'],['-','-','-'],['-','-','-']]    # This is without the '|'. The '|' can be added at end in a '|'.join().
         
         # TODO: This move_history will be used in future expansions. Keep a history of the game so it can be replayed.
-        # Store the Player.name, Player.token, Player.x, and Player.y as a list within a list.
+            # Store the Player.name, Player.token, Player.x, and Player.y as a list within a list.
         self.move_history = []
         
         ########################################## NOTE!!! ##########################################
@@ -98,17 +98,13 @@ class Game:
             trasposed_list_of_lists = [[(list_of_lists[i][j]) for i in range(len(list_of_lists))] for j in range(len(list_of_lists[0]))]
             return trasposed_list_of_lists
         
-        # TODO: Add functionality where these 'token's can be referred by variable so that players can choose their own unique token.
-        # i.e. p1.token = 'B'
+        # Added functionality where these 'token's can be referred by variable so that players can choose their own unique token.
+            # i.e. p1.token = 'B'
         def row_win(board = self.__board):
             '''Returns player token for a row win, otherwise returns None.'''
             for row in board:
                 if row[0] == row[1] == row[2] == player.token:
                     return player.token
-                # if row == ['X','X','X']:
-                #     return 'X'
-                # elif row == ['O','O','O']:
-                #     return 'O'
             return None
         
         def column_win():
@@ -122,23 +118,15 @@ class Game:
             check_list = [self.__board[i][i] for i in range(len(self.__board))]
             if check_list[0] == check_list[1] == check_list[2] == player.token:
                 return player.token
-            # if check_list == ['X','X','X']:
-            #     return 'X'
-            # elif check_list == ['O','O','O']:
-            #     return 'O'
             return None
 
         def diagonal_cross_win():
             '''Returns player token for cross diagonal win, otherwise returns None.'''
-            # Can we use something similar to the comprehension from diagonal win?
-            # check_list = [self.__board[i][i] for i in range(len(self.__board))]
+            # TODO: Can we use something similar to the comprehension from diagonal win?
+                # check_list = [self.__board[i][i] for i in range(len(self.__board))]
             check_list = [self.__board[0][2],self.__board[1][1],self.__board[2][0]]
             if check_list[0] == check_list[1] == check_list[2] == player.token:
                 return player.token
-            # if check_list == ['X','X','X']:
-            #     return 'X'
-            # elif check_list == ['O','O','O']:
-            #     return 'O'            
             return None
 
         # Check for wins.
@@ -160,7 +148,9 @@ class Game:
         
         return None
     
+    # TODO: Determine if we need this function or just use __str__(). This is probably more of a style decision than functional decision.
     def print_player_info(self, player):
+        '''Returns player info as string. This is probably redundant since it may duplicate work of Player.__str__().'''
         print(f"Player info: {player}")
 
     def is_full(self):
@@ -270,10 +260,27 @@ def test_is_game_over():
 
 ###############################################
 
-
+def display_scanner_candy(display_string = 'Thinking'):
+    '''Prints display_string to console, then displays elapsed time scanner for the widthe of the string argument.'''
+    print(display_string)
+    cycle = 1
+    number_of_cycles = 3
+    while cycle <= number_of_cycles:
+        scanner_width = len(display_string)
+        time_delay = .005
+        # Draw the spaces.
+        for _ in range(scanner_width):
+            print(' ', end='', flush=True)
+            time.sleep(time_delay)
+        # Draw the backspaces.
+        for _ in range(scanner_width):
+            print('\b', end='', flush=True)
+            time.sleep(time_delay)
+        cycle += 1
 
 def main():
-
+    
+    # TODO: Add logic to allow players to decide if they want to play another game. Below is some example code.
     # games = {}
     # game_counter = 1
     # ###
@@ -293,17 +300,28 @@ def main():
     # But should be able to prompt user for 'name' and 'token' for their instances.
     #############################################################################################
 
-    # p1 = Player('Dezzi', 'X')
-    # p2 = Player('Bunbun', 'O')
+    # p1 = Player('Dezzi', 'D')
+    # p2 = Player('Bunbun', 'B')
 
+    # Experimenting with lists or dictionaries to populate the user prompt print strings.
+    # name_and_token_prompts = ["Name: ", "Enter your token symbol: "]
+    # player_prompts = ["First player: ", "Second player: "]
+
+
+    # TODO: Fix a bug where user is allowed to choose '-'.
+        # Existence of '-' in board list is used in is_full() logic to determine if board is full. is_full() will never return True.
+        # So we need to exclude '-' from user choices.
+    # TODO: Fix a bug where user can choose more than one character for token.
+        # This will affect the presentation of the board. If user chooses token of more than one character,
+        # the columns don't line up properly on rendering.
     # Allow user input for names and tokens.
-    print("First player:")
+    print("First player: ")
     p1_name = input("Name: ")
     p1_token = input("Enter your token symbol: ")
 
     p1 = Player(p1_name,p1_token)
 
-    print("Second player:")
+    print("Second player: ")
     p2_name = input("Name: ")
     p2_token = input("Enter your token symbol: ")
 
@@ -315,26 +333,12 @@ def main():
     # A dictionary of player names and Player objects, used below in some logic.
     players = {p1.name: p1, p2.name: p2}
 
-    # Added functionality where a random generator picks who goes first.
-    # Display candy to show the random selector is 'thining'.
-    print("Setting up board and choosing start player.")
-    cycle = 1
-    number_of_cycles = 3
-    while cycle <= number_of_cycles:
-        scanner_width = 45
-        # scanner_field = ' ' * scanner_width
-        time_delay = .005
-        # Draw the spaces.
-        for _ in range(scanner_width):
-            print(' ', end='', flush=True)
-            time.sleep(time_delay)
-        # Draw the backspaces.
-        for _ in range(scanner_width):
-            print('\b', end='', flush=True)
-            time.sleep(time_delay)
-        cycle += 1
+    # Display candy to show the random selector is 'thinking'.
+    scanner_string = "Setting up board and choosing start player."
+    display_scanner_candy(scanner_string)
 
-    # Using random to choose one of the players.
+    # Added functionality where a random generator picks who goes first.
+    # Uses random.choice() to choose the start player.
     player_chosen = random.choice([p1.name, p2.name])
     print(f"First up: {player_chosen}!")
     players_turn = player_chosen
@@ -393,7 +397,10 @@ def main():
                 # Proceed
         ##########################################
         if g1.is_full():
+            # Idea for including "MEOW" in print string is copying Liz's work.
+            # They mentioned it was included in their game and I couldn't resist adding it to mine.
             print("Game is a draw.\nCat's game! MEOW!!!")
+            print("https://catexpedition.com/draw-in-tic-tac-toe-called-a-cats-game/")
             break
         ##########################################
 
