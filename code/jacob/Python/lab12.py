@@ -6,7 +6,7 @@ class ATM:
 
     def __init__(self):
         balance = 0
-        interest_rate = 0.1
+        interest_rate = 0.001
         list = []
         self.balance = balance
         self.interest_rate = interest_rate
