@@ -157,6 +157,10 @@ def test_third_and_fourth_character():
 # slice index:      0 1 2 3 4 5 6 7 8 9
 # letter index:      0 1 2 3 4 5 6 7 8
 
+# Show my visual model of understanding how slice works.
+print("slice index:      0 1 2 3 4 5 6 7 8 9")
+print("letter index:      0 1 2 3 4 5 6 7 8")
+
 # Slice uses the sequence where the actual value used is one short of stop value. I think.
 
 # Create a string to work with.
@@ -187,6 +191,9 @@ if print_tests:
 
     # Get first three characters:
     print(f"First three characters - the_string[0:3]: {the_string[0:3]}")
+
+    # Get first three characters:
+    print(f"First three characters - the_string[:3]: {the_string[:3]}")
 
     # # Get and reverse the first three characters:
     # print(the_string[3:0:-1])   # dcb

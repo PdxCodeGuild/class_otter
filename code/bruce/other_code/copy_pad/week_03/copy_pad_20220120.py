@@ -17,16 +17,17 @@ num_board = [['1','2','3'],['4','5','6'],['7','8','9']]
 # print(f"board: {board}")
 # print(f"num_board: {num_board}")
 ############################################################
-board[0][0] = 'o'
+board[0][0] = 'O'
 board[0][1] = 'O'
-board[0][2] = 'X'
+board[0][2] = 'O'
+
+print(f"\nboard before transpose: {board}\n")
 
 # Join the sub-lists by '|'.
 row_strings = ['|'.join(sub_list) for sub_list in board]
 # Join the lists by '\n'
 board_string = '\n'.join(row_strings)
 
-# print(f"board: {board}")
 print(board_string)
 
 board = transpose_list_of_lists(board)
@@ -36,30 +37,30 @@ row_strings = ['|'.join(sub_list) for sub_list in board]
 # Join the lists by '\n'
 board_string = '\n'.join(row_strings)
 
-# print(f"board: {board}")
 print()
+print(f"\nboard after transpose: {board}\n")
 print(board_string)
 
 ############################################################
 
 
 
-# These are checking if '-' is one of the sub-elements. That's why we get False when we expect True. The sub-elements are lists, not a string '_'.
+# These two print statements are checking if '-' is one of the sub-elements. That's why we get False when we expect True. The sub-elements are lists, not a string '_'.
 # print(f"'-' in board: {'-' in board}")
 # print(f"'-' not in board: {'-' not in board}")
 
-two_by_three = [['a','b'],['c','d'],['e','f']]
-
-row_strings = ['|'.join(sub_list) for sub_list in two_by_three]
-two_by_three_string = '\n'.join(row_strings)
-
-print()
-print(two_by_three_string)
-
-three_by_two = transpose_list_of_lists(two_by_three)
+three_by_two = [['a','b'],['c','d'],['e','f']]
 
 row_strings = ['|'.join(sub_list) for sub_list in three_by_two]
 three_by_two_string = '\n'.join(row_strings)
 
-print()
+print(f"\nthree_by_two: {three_by_two}\n")
 print(three_by_two_string)
+
+two_by_three = transpose_list_of_lists(three_by_two)
+
+row_strings = ['|'.join(sub_list) for sub_list in two_by_three]
+two_by_three_string = '\n'.join(row_strings)
+
+print(f"\ntwo_by_three: {two_by_three}\n")
+print(two_by_three_string)

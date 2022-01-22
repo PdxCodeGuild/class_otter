@@ -1,6 +1,12 @@
+# ******************************* #
+#          Transpose List         #
+#   for loop list comprehension   #
+#           Version: 0.0          #
+#       Author: Bruce Stull       #
+#            2022-01-22           #
+# ******************************* #
 
-import string
-
+# import string
 # print(string.ascii_letters)
 # print(string.punctuation)
 # print(string.digits)
@@ -10,13 +16,14 @@ def list_transpose_using_list_comp(input_list_of_lists):
     trasposed_list_of_lists = [[(input_list_of_lists[i][j]) for i in range(len(input_list_of_lists))] for j in range(len(input_list_of_lists[0]))]
     return trasposed_list_of_lists
 
+# Transpose function using for loop.
 def list_transpose_using_for(input_list_of_lists):
-    trasposed_list_of_lists = []
+    trasposed_list_of_lists = []    # This row is not needed for list-comprehension
     for j in range(len(input_list_of_lists[0])):
-        sub_list = []
+        sub_list = []   # This row is not needed for list-comprehension
         for i in range(len(input_list_of_lists)):
-            sub_list.append(input_list_of_lists[i][j])
-        trasposed_list_of_lists.append(sub_list)
+            sub_list.append(input_list_of_lists[i][j])  # This row is not needed for list-comprehension
+        trasposed_list_of_lists.append(sub_list)    # This row is not needed for list-comprehension
     return trasposed_list_of_lists
 
 board = [['-','-','-'],['-','-','-'],['-','-','-']]

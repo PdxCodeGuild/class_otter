@@ -62,9 +62,9 @@ class Game:
     def __str__(self) -> str:
         '''Returns a representation of the board status at a current point in the game.'''
         
-        # Join the sub-lists by '|'.
+        # Join the elements of sub-lists by '|'.
         row_strings = ['|'.join(sub_list) for sub_list in self.__board]
-        # Join the lists by '\n'
+        # Join the lists by '\n'.
         result_string = '\n'.join(row_strings)
         # return f"{'|'.join([column for column in self.__board[0]])}\n{'|'.join([column for column in self.__board[1]])}\n{'|'.join([column for column in self.__board[2]])}"
         return result_string
@@ -382,8 +382,8 @@ def main():
 
     # Added functionality where a random generator picks who goes first.
     # Uses random.choice() to choose the start player.
-    token_chosen = random.choice([p1.token, p2.token])
-    print(f"First up: {token_chosen}!")
+    token_turn = random.choice([p1.token, p2.token])
+    print(f"First up: {token_turn}!")
 
     # Print the initial board.
     print(g1)
@@ -394,7 +394,7 @@ def main():
         while True:
             # Prompt player n for their move.
             print()
-            print(f"{token_chosen} : {players_token_to_object[token_chosen].name}'s turn.")
+            print(f"{token_turn} : {players_token_to_object[token_turn].name}'s turn.")
             y_input = input(f"Choose your row: ")
             x_input = input(f"Choose your column: ")
             # TODO: Move this logic to function, maybe?
@@ -411,7 +411,7 @@ def main():
             break
             
         # Move if available.
-        if not g1.move(desired_x_position - 1, desired_y_position - 1, players_token_to_object[token_chosen]):
+        if not g1.move(desired_x_position - 1, desired_y_position - 1, players_token_to_object[token_turn]):
             print("Space already occupied. Please try another position.")
             continue
         ###############################################
@@ -461,10 +461,10 @@ def main():
         # Toggle player turn
         ##########################################
         # Toggle player turn to other player.
-        if token_chosen == p1.token:
-            token_chosen = p2.token
+        if token_turn == p1.token:
+            token_turn = p2.token
         else:
-            token_chosen = p1.token
+            token_turn = p1.token
         ##########################################
 
-main()
+# main()
