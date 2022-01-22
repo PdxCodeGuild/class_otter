@@ -24,6 +24,7 @@ class ATM:
         self.log = log
 
     # returns the account balance
+    # this could have been done using a private variables like __balance, __interest
     def check_balance(self):
         return self.balance
     
@@ -39,7 +40,10 @@ class ATM:
             return True
         else:
             return False
-            
+    # the above line could be written more succinctly
+    #   return <= self.balance
+
+
     # withdraws the amount from the account and returns it
     def withdraw(self, amount):
         self.balance -= amount
@@ -53,7 +57,7 @@ class ATM:
         self.log.append(f'User accrued ${paid} in interest')
         return paid
     def print_transactions(self):
-        print(self.log)
+        return self.log
 
 
 # create an instance of the class
@@ -86,7 +90,9 @@ while True:
         atm.deposit(amount)
         print(f'Accumulated ${amount} in interest')
     elif command == 'log':
-        atm.print_transactions()
+        log = atm.print_transactions()
+        log = "\n".join(log)
+        print(log)
     elif command == 'help':
         print('Available commands:')
         print('balance  - get the current balance')
