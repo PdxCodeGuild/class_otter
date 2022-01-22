@@ -135,10 +135,13 @@ class Game:
 
         def diagonal_cross_win():
             '''Returns player token for cross diagonal win, otherwise returns None.'''
-            # TODO: Can we use something similar to the comprehension from diagonal win?
-                # check_list = [self.__board[i][i] for i in range(len(self.__board))]
+            # We can use something similar to the comprehension from diagonal win.
             # Maybe zip tuples for 0,2 1,1 2,0
-            check_list = [self.__board[0][2],self.__board[1][1],self.__board[2][0]]
+            # check_list = [self.__board[0][2],self.__board[1][1],self.__board[2][0]] # Previous method.
+            # Compact length and functioned as needed but not flexible for arbitrary length lists.
+            # This was only tested with square lists of lists: len(self.__board) == len(self.__board[0]).
+            the_special_list_of_tuples = tuple(zip(range(len(self.__board) - 1, - 1, - 1),range(len(self.__board))))
+            check_list = [self.__board[x][y] for x, y in the_special_list_of_tuples]
             if '-' not in check_list and len(set(check_list)) == 1:
                 return check_list[0]
             return None
@@ -161,11 +164,6 @@ class Game:
             return diagonal_cross_result
         
         return None
-    
-    # TODO: Determine if we need this function or just use __str__(). This is probably more of a style decision than functional decision.
-    def print_player_info(self, player):
-        '''Returns player info as string. This is probably redundant since it may duplicate work of Player.__str__().'''
-        print(f"Player info: {player}")
 
     def is_full(self):
         '''Returns True if gameboard is full. Otherwise returns False.'''
@@ -267,6 +265,11 @@ def test_is_game_over():
     assert g3.is_game_over() == True
 
 ###############################################
+    
+def print_player_info(player):
+    '''Returns player info as string.'''
+    print(f"Player info: {player}")
+
 
 # Should this function be inside Game() since it's needed for Game() to function properly?
 def validate_user_token(user_input = ' '):
@@ -354,7 +357,7 @@ def main():
     # TODO: Fix a bug where user can choose more than one character for token.
         # This will affect the presentation of the board. If user chooses token of more than one character,
         # the columns don't line up properly on rendering.
-    # Allow user input for names and tokens.
+    # Allowed user input for names and tokens.
     print("First player: ")
     p1_name = input("Name: ")
     p1_token = input("Enter your token symbol: ")
@@ -464,4 +467,4 @@ def main():
             token_chosen = p1.token
         ##########################################
 
-main()
+# main()
