@@ -3,10 +3,22 @@ board = [['-','-','-'],['-','-','-'],['-','-','-']]
 
 # print(board)    # [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
 
+# Insert '|' between elements in sub-lists.
+row_strings = ['|'.join(sub_list) for sub_list in board]
+# Join the lists by '\n' for pretty print.
+result_string = '\n'.join(row_strings)
+print(f"\nBoard layout before adding 'O's:\n{result_string}")
+
 # Add 'O's in the positions I want to retreive.
 board[0][2] = 'O'
 board[1][1] = 'O'
 board[2][0] = 'O'
+
+# Insert '|' between elements in sub-lists.
+row_strings = ['|'.join(sub_list) for sub_list in board]
+# Join the lists by '\n' for pretty print.
+result_string = '\n'.join(row_strings)
+print(f"\nBoard layout after adding 'O's:\n{result_string}")
 
 # Print board which has the 'O's.
 # print(board)    # [['-', '-', 'O'], ['-', 'O', '-'], ['O', '-', '-']]
@@ -35,12 +47,6 @@ board[2][0] = 'O'
 # print(cross_diagonal)   # ['O', '-', '-', '-', 'O', '-', '-', '-', 'O']
 ############################################################################
 
-# Insert '|' between elements in sub-lists.
-row_strings = ['|'.join(sub_list) for sub_list in board]
-# Join the lists by '\n' for pretty print.
-result_string = '\n'.join(row_strings)
-print(f"\nBoard layout:\n{result_string}")
-
 
 # Need something like: [board[0][2],board[1][1],board[2][0]]
 
@@ -57,10 +63,10 @@ print(f"\nBoard layout:\n{result_string}")
 
 # These three options succeed in producing the needed list(s)/tuple(s).
 # the_special_list_of_tuples = list(zip(range(len(board)),range(len(board) - 1, - 1, - 1)))   # [(0, 2), (1, 1), (2, 0)]
-# the_special_list_of_tuples = list(zip(range(len(board) - 1, - 1, - 1),range(len(board))))   # [(2, 0), (1, 1), (0, 2)]
-the_special_list_of_tuples = tuple(zip(range(len(board) - 1, - 1, - 1),range(len(board))))   # ((2, 0), (1, 1), (0, 2))
-print(f"\nSpecial list of tuplez: {the_special_list_of_tuples}")
+# the_special_list_of_tuples = list(zip(range(len(board) - 1, - 1, - 1),range(len(board))))   # [(2, 0), (1, 1), (0, 2)]    # Uses list()
+the_special_list_of_tuples = tuple(zip(range(len(board) - 1, - 1, - 1),range(len(board))))   # ((2, 0), (1, 1), (0, 2)) # Uses tuple()
+print(f"\nGenerated the_special_list_of_tuples: {the_special_list_of_tuples}")
 
 cross_diagonal = [board[x][y] for x, y in the_special_list_of_tuples]
-print(f"\nList of the cross diagonal elements: {cross_diagonal}\n")   # ['O', 'O', 'O']
+print(f"\n[board[x][y] for x, y in the_special_list_of_tuples]: {cross_diagonal}\n")   # ['O', 'O', 'O']
 
