@@ -59,9 +59,9 @@ Lab 06 Mini-Capstone
 08 Peaks And Valleys  
 09 ARI  
 10 Contact List  
-<!--
 12 ATM  
 13 Tic-Tac-Toe  
+<!--
 14 Dad Joke API  
 15 Quotes API  
 16 Mini-Capstone  
