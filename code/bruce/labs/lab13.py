@@ -370,8 +370,8 @@ def main():
 
     p2 = Player(p2_name,p2_token)
 
-    g1.print_player_info(p1)
-    g1.print_player_info(p2)
+    print_player_info(p1)
+    print_player_info(p2)
     
     # A dictionary of player tokens and Player objects, used below in some logic.
     players_token_to_object = {p1.token: p1, p2.token: p2}
@@ -467,4 +467,4 @@ def main():
             token_chosen = p1.token
         ##########################################
 
-# main()
+main()
