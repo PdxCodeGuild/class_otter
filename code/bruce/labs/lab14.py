@@ -35,84 +35,120 @@ from requests.exceptions import HTTPError
     # Create a REPL that allows one to enter a search term and go through jokes one at a time.
     # You can also add support for multiple pages.
 
-# ############# Utilities #############
-# # These will be added to modules in the future, but we are hard-coding the function into this file for now.
 
-# def print_variable_and_description(variable_under_review, description_of_logic = '', print_logic_results = True):
-#     '''Accepts three arguments: A variable we are examining, a description of the logic we are examining, and a print flag.'''
-#     __name__ = print_variable_and_description
-#     string_result = f"{print_variable_and_description.__name__}: {description_of_logic}: {variable_under_review}"
-#     if print_logic_results:
-#         print(string_result)
-# #####################################
+############# Utilities #############
+# These will be added to modules in the future,
+# but we are hard-coding the function into this file for now.
 
-# ################## A simple request ##################
-# try:
-#     response = requests.get('https://icanhazdadjoke.com/', headers={'Accept': 'application/json'})
-#     # Does some error handling.
-#     response.raise_for_status()
+def print_variable_and_description(
+        variable_under_review,
+        description_of_logic='',
+        print_logic_results=True
+        ):
+    '''Accepts three arguments: A variable we are examining,
+    a description of the logic we are examining, and a print flag.
+    '''
+    __name__ = print_variable_and_description
+    string_result = f"{print_variable_and_description.__name__}: {description_of_logic}: {variable_under_review}"
+    if print_logic_results:
+        print(string_result)
+#####################################
 
-#     # access JSON content
-#     json_response = response.json()
 
-# except HTTPError as http_err:
-#     print(f'HTTP error occurred: {http_err}')
-# except Exception as err:
-#     print(f'Other error occurred: {err}')
-# ######################################################
-# ##################### How to 'get' the joke #####################
-# # Print the response so we can see what stuff it includes.
-# print(json_response)    # {'id': 'fNZTCdFBImb', 'joke': 'Why did the house go to the doctor? It was having window panes.', 'status': 200}
-
-# # This is how we get the 'joke' from the 'response' since 'joke' is a key.
-# the_joke = json_response['joke']
-# print(the_joke)
-# #################################################################
-
-####################### How to get a 'search' response #######################
-# Add 'search?term={search_term}' to the request string.
-search_term = "hipster"
-
-def submit_search_request_get_json(search_term):
-    '''Accepts argument of search term. Submits search_term to website and, hopefully, returns json object.'''
+def submit_request_get_json(url='https://icanhazdadjoke.com/', **kwargs):
+    '''Accepts argument of search term and search_word. Submits request to website and, hopefully, returns json object.'''
     try:
-        response = requests.get(f"https://icanhazdadjoke.com/search?term={search_term}", headers= {"Accept":"application/json"})
-        # Does some error handling.
+        # Get response object.
+        response = requests.get(
+            f"{url}",
+            headers={"Accept":"application/json"}
+            )
+        # Check for error handling.
         response.raise_for_status()
-        # Get json response and save as json_response.
+        # If response is successful, format response to json dictionary.
         json_response = response.json()
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')
-    except Exception as err:
-        print(f'Other error occurred: {err}')
+    except HTTPError as http_error:
+        print(f'HTTP error occurred: {http_error}')
+    except Exception as error:
+        print(f'Other error occurred: {error}')
     return json_response
 
-# # Example response.
-# json_response = submit_search_request_get_json('hipster')
-# print(json_response)
-# # {'current_page': 1, 'limit': 20, 'next_page': 1, 'previous_page': 1, 'results': [{'id': 'xc21Lmbxcib', 'joke': 'How did the hipster burn the roof of his mouth? He ate the pizza before it was cool.'}, {'id': 'GlGBIY0wAAd', 'joke': 'How much does a hipster weigh? An instagram.'}, {'id': 'NRuHJYgaUDd', 'joke': "How many hipsters does it take to change a lightbulb? Oh, it's a really obscure number. You've probably never heard of it."}], 'search_term': 'hipster', 'status': 200, 'total_jokes': 3, 'total_pages': 1}
 
-# # Lots of information, so let's get the keys first.
-# json_response = submit_search_request_get_json('hipster')
-# json_search_response_keys = json_response.keys()
-# print(json_search_response_keys)   # dict_keys(['current_page', 'limit', 'next_page', 'previous_page', 'results', 'search_term', 'status', 'total_jokes', 'total_pages'])
+def submit_search_request_get_json(url, search_word, **kwargs):
+    '''Accepts argument of search term and search_word. Submits request to website and, hopefully, returns json object.'''
+    try:
+        # Get response object.
+        response = requests.get(
+            f"{url}{search_word}",
+            headers={"Accept":"application/json"}
+            )
+        # Check for error handling.
+        response.raise_for_status()
+        # If response is successful, format response to json dictionary.
+        json_response = response.json()
+    except HTTPError as http_error:
+        print(f'HTTP error occurred: {http_error}')
+    except Exception as error:
+        print(f'Other error occurred: {error}')
+    return json_response
 
-# 'results' is where the 'joke's are.
-# Provides a list of 'joke' dictionaries. Keys are 'id' and 'joke'.
-json_response = submit_search_request_get_json('dog')
-the_jokes_list = json_response['results']
-# Displays a list, which contains several dictionaries, which each have an 'id' and 'joke'.
-# print(the_jokes_list)
-# [{'id': 'xc21Lmbxcib', 'joke': 'How did the hipster burn the roof of his mouth? He ate the pizza before it was cool.'}, {'id': 'GlGBIY0wAAd', 'joke': 'How much does a hipster weigh? An instagram.'}, {'id': 'NRuHJYgaUDd', 'joke': "How many hipsters does it take to change a lightbulb? Oh, it's a really obscure number. You've probably never heard of it."}]
 
-for joke in the_jokes_list:
-    print(joke['joke'])
+def console_display_scanner(
+        time_delay = .007,
+        number_of_cycles = 3,
+        scanner_width = 45
+        ):
+    '''Eye candy. Accepts arguments of time_delay, number_of_cycles, and scanner_width.
+    Moves the console cursor back and forth at time_delay and length scanner_width.
+    '''
+    cycle = 1
+    while cycle <= number_of_cycles:
 
-##############################################################################
+        # Draw the spaces.
+        for _ in range(scanner_width):
+            print(' ', end='', flush=True)
+            time.sleep(time_delay)
 
+        # Draw the backspaces.
+        for _ in range(scanner_width):
+            print('\b', end='', flush=True)
+            time.sleep(time_delay)
+        
+        cycle += 1
 
 
 def main():
+
+    # Get the json-formatted-dictionary response.
+    json_response = submit_request_get_json()
+
+    # Print response to review what we have.
+    # print(json_response)
+    # The request to https://icanhazdadjoke.com/ seems to result in a dictionary with keys 'id', 'joke', and 'status'.
+    # {'id': '6MR79MJ6h', 'joke': 'My boss told me to have a good day... so I went home.', 'status': 200}
+
+    string_to_print = f'''
+        Joke ID: {json_response['id']}
+        Joke: {json_response['joke']}
+        '''
+    
+    print(string_to_print)
+    # ########## Uses search word ##########
+    # i_can_haz_search_url = 'https://icanhazdadjoke.com/search?term='
+    # search_term = "hipster"
+    
+    # # 'results' is where the 'joke's are.
+    # # Provides a list of 'joke' dictionaries. Keys are 'id' and 'joke'.
+    # json_response = submit_search_request_get_json(i_can_haz_search_url, search_term)
+    # #
+    # the_jokes_list = json_response['results']
+
+    # for joke in the_jokes_list:
+    #     print(joke['joke'])
+
+    # print(i_can_haz_search_url + search_term)  # https://icanhazdadjoke.com/search?term=hipster
+    # ######################################
+
     pass
 
 main()
