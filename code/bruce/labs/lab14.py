@@ -74,12 +74,15 @@ def submit_request_get_json(url='https://icanhazdadjoke.com/', **kwargs):
     return json_response
 
 
-def submit_search_request_get_json(url, search_word, **kwargs):
+# 'https://icanhazdadjoke.com/' + 'search?term=' + search_word
+def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/', **kwargs):
     '''Accepts argument of search term and search_word. Submits request to website and, hopefully, returns json object.'''
+    string_between_url_and_search_term = 'search?term='
+
     try:
         # Get response object.
         response = requests.get(
-            f"{url}{search_word}",
+            f"{url}{string_between_url_and_search_term}{search_word}",
             headers={"Accept":"application/json"}
             )
         # Check for error handling.
@@ -94,9 +97,9 @@ def submit_search_request_get_json(url, search_word, **kwargs):
 
 
 def console_display_scanner(
-        time_delay = .007,
-        number_of_cycles = 3,
-        scanner_width = 45
+        scanner_width = 45,
+        number_of_cycles = 2,
+        time_delay = .007                
         ):
     '''Eye candy. Accepts arguments of time_delay, number_of_cycles, and scanner_width.
     Moves the console cursor back and forth at time_delay and length scanner_width.
@@ -118,37 +121,76 @@ def console_display_scanner(
 
 
 def main():
+    # ########## A simple request ##########
+    # # Get the json-formatted-dictionary response.
+    # json_response = submit_request_get_json()
 
-    # Get the json-formatted-dictionary response.
-    json_response = submit_request_get_json()
+    # # Print response to review what we have.
+    # # print(json_response)
+    # # The request to https://icanhazdadjoke.com/ seems to result in a dictionary with keys 'id', 'joke', and 'status'.
+    # # {'id': '6MR79MJ6h', 'joke': 'My boss told me to have a good day... so I went home.', 'status': 200}
 
-    # Print response to review what we have.
-    # print(json_response)
-    # The request to https://icanhazdadjoke.com/ seems to result in a dictionary with keys 'id', 'joke', and 'status'.
-    # {'id': '6MR79MJ6h', 'joke': 'My boss told me to have a good day... so I went home.', 'status': 200}
-
-    string_to_print = f'''
-        Joke ID: {json_response['id']}
-        Joke: {json_response['joke']}
-        '''
+    # string_to_print = f'''
+    #     Joke ID: {json_response['id']}
+    #     Joke: {json_response['joke']}
+    #     '''
     
-    print(string_to_print)
-    # ########## Uses search word ##########
-    # i_can_haz_search_url = 'https://icanhazdadjoke.com/search?term='
-    # search_term = "hipster"
-    
-    # # 'results' is where the 'joke's are.
-    # # Provides a list of 'joke' dictionaries. Keys are 'id' and 'joke'.
-    # json_response = submit_search_request_get_json(i_can_haz_search_url, search_term)
-    # #
-    # the_jokes_list = json_response['results']
-
-    # for joke in the_jokes_list:
-    #     print(joke['joke'])
-
-    # print(i_can_haz_search_url + search_term)  # https://icanhazdadjoke.com/search?term=hipster
+    # print(string_to_print)
     # ######################################
+
+        ########## Uses search word ##########
+    while True:
+        # Welcome user and tell them what we're doing here.
+        welcome_string = "\nWelcome to icanhazdadjoke searcherator 2000!"
+        i_can_haz_request_url = 'https://icanhazdadjoke.com/'
+        what_we_are_doing_here_string = f"Let's get some jokes from {i_can_haz_request_url}.\n"
+        print(welcome_string)
+        print(what_we_are_doing_here_string)
+
+        # Prompt user to enter their search term.
+        prompt_string = "What kind of dad joke ya lookin for? "
+        while True:
+            search_word = input(prompt_string)
+            if search_word != '':
+                break
+            else:
+                print("To get the jokes, you gotta give us a word!")
+                continue
+        # Add blank line for visual clarity.
+        print()
+
+        # Display some eye candy.
+        length_of_scanner = len(prompt_string + search_word)
+        console_display_scanner(length_of_scanner)
+
+        # Get the response from the API and return dictionary.
+        json_response = submit_search_request_get_json(search_word)
+
+        # The jokes are in the 'results' key.
+        the_jokes_list = json_response['results']
+
+        # print(f"{type(the_jokes_list)}{the_jokes_list}")
+
+        # TODO: Add while loop here to allow user to view each result joke, one at a time.
+
+        while the_jokes_list:
+            # Loop and display the jokes to user.
+            # Don't delete or pop the jokes, allow user to recycle
+                # through them if they wish.
+            for i in range(len(the_jokes_list)):
+                print(the_jokes_list[i]['joke'])
+                print()
+                input("Press any key to continue. ")
+                print()
+            break
+
+
+            
+        print()
+        break
+        ######################################
 
     pass
 
-main()
+if __name__ == '__main__':
+    main()
