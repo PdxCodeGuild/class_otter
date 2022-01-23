@@ -56,11 +56,12 @@ print(f"\nBoard layout after adding 'O's:\n{result_string}")
 # print(cross_diagonal)   # ['O', 'O', 'O']
 
 # Found how to get a programatically obtained ((0,2),(1,1),(2,0)) of arbitrary length.
-# This method results in list of tuples, but still functions as needed. TODO: Figure out how to make it a tuple of tuples.
+# This method results in list of tuples, but still functions as needed. Figure out how to make it a tuple of tuples. Wrap a zip() in a tuple().
 # Either of these will work, one is just the reversed list of the other.
 # range(len(board) - 1, - 1, - 1) ==>> (2, 1, 0)
 # range(len(board)) ==>> (0, 1, 2)
 
+############ DING DING DING!!! WINNER WINNER WINNER!!! ############
 # These three options succeed in producing the needed list(s)/tuple(s).
 # the_special_list_of_tuples = list(zip(range(len(board)),range(len(board) - 1, - 1, - 1)))   # [(0, 2), (1, 1), (2, 0)]
 # the_special_list_of_tuples = list(zip(range(len(board) - 1, - 1, - 1),range(len(board))))   # [(2, 0), (1, 1), (0, 2)]    # Uses list()
@@ -69,4 +70,5 @@ print(f"\nGenerated the_special_list_of_tuples: {the_special_list_of_tuples}")
 
 cross_diagonal = [board[x][y] for x, y in the_special_list_of_tuples]
 print(f"\n[board[x][y] for x, y in the_special_list_of_tuples]: {cross_diagonal}\n")   # ['O', 'O', 'O']
+###################################################################
 

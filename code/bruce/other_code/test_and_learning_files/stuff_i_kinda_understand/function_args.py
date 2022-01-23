@@ -37,7 +37,11 @@ def create_film_and_rating_dictionary(username = '', *args, **kwargs):
     print(film_rating_dictionary)
     return film_rating_dictionary
 
-create_film_and_rating_dictionary('jane', 'Sharknado', 'Frozen', 'Transformers', Sharknado=3, Frozen=2, Fargo=5)
+# create_film_and_rating_dictionary('jane', 'Sharknado', 'Frozen', 'Transformers', Sharknado=3, Frozen=2, Fargo=5)
+movies = ['jane', 'Sharknado', 'Frozen', 'Transformers']
+movie_ratings = {'Sharknado':3, 'Frozen':2, 'Fargo':5}
+create_film_and_rating_dictionary(*movies, **movie_ratings)
+# {'Sharknado': 3, 'Frozen': 2}
 
 def create_kittens_dictionary(*args,**kwargs):
     '''Creates dictionary of kittens and their color.'''
@@ -49,8 +53,10 @@ def create_kittens_dictionary(*args,**kwargs):
     print(kittens)
     return kittens
 
+kittens = ['dezzi', 'greta', 'bunbun']
+kitten_attributes = {'dezzi':'grey', 'bunbun':'tortoise', 'shinx':'black'}
 def test_create_kittens_dictionary():
-    assert create_kittens_dictionary('dezzi', 'greta', 'bunbun', dezzi='grey', bunbun='tortoise', shinx='black') == {'dezzi':'grey','bunbun':'tortoise'}
+    assert create_kittens_dictionary(*kittens, **kitten_attributes) == {'dezzi':'grey','bunbun':'tortoise'}
 
-
-create_kittens_dictionary('dezzi', 'greta', 'bunbun', dezzi='grey', bunbun='tortoise', shinx='black')
+create_kittens_dictionary(*kittens, **kitten_attributes)
+# {'dezzi': 'grey', 'bunbun': 'tortoise'}

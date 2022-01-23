@@ -74,12 +74,12 @@ from requests.exceptions import HTTPError
 search_term = "hipster"
 
 def submit_search_request_get_json(search_term):
-    '''Accepts argument of search term. Submits search_term  to website and, hopefully, returns json object.'''
+    '''Accepts argument of search term. Submits search_term to website and, hopefully, returns json object.'''
     try:
         response = requests.get(f"https://icanhazdadjoke.com/search?term={search_term}", headers= {"Accept":"application/json"})
         # Does some error handling.
         response.raise_for_status()
-        # access JSON content
+        # Get json response and save as json_response.
         json_response = response.json()
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
