@@ -18,15 +18,15 @@ def valley(data):
     return(valley)
 print(valley(data))
 
-def peak_and_valley(data):
+def peaks_and_valleys(data):
     peak_and_valley = []
     for i in range(1, len(data)-1):
         if data[i]<data[i + 1] and data[i - 1]> data[i]:
             peak_and_valley.append(i)
-    
+
     for i in range(1, len(data)-1):
         if data[i]>data[i + 1] and data[i - 1]< data[i]:
             peak_and_valley.append(i)
-    return(peak_and_valley)
-
-print(peak_and_valley(data))
+    peak_and_valley.sort()
+    return peak_and_valley
+print(peaks_and_valleys(data))

@@ -40,12 +40,14 @@ def payout(number_of_matches):
     elif number_of_matches == 1:
         return 4
     elif number_of_matches == 2:
-        return 100
+        return 7
     elif number_of_matches == 3:
-        return 50000
+        return 100
     elif number_of_matches == 4:
-        return 1000000
+        return 50000
     elif number_of_matches == 5:
+        return 1000000
+    elif number_of_matches == 6:
         return 25000000
 
 
@@ -63,7 +65,7 @@ def main():
         number_of_matches = matching_num(winning_numbers,guessed_numbers)
         pure_winnings += payout(number_of_matches)
         loop_counter += 1
-        print(pure_winnings, expenses)
+    print(pure_winnings, expenses)
     print(f'you baught 100,000 tickets . your ROI is {(pure_winnings-expenses)/expenses}')
 
 main()
