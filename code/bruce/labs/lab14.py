@@ -1,7 +1,7 @@
 # ********************************** #
 #        Lab 14: Dad Joke API        #
 #   request http GET response json   #
-#            Version: 1.0            #
+#            Version: 2.0            #
 #        Author: Bruce Stull         #
 #             2022-01-22             #
 # ********************************** #
@@ -74,16 +74,36 @@ def submit_request_get_json(url='https://icanhazdadjoke.com/', **kwargs):
     return json_response
 
 
-# 'https://icanhazdadjoke.com/' + 'search?term=' + search_word
-def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/', **kwargs):
-    '''Accepts argument of search term and search_word. Submits request to website and, hopefully, returns json object.'''
-    string_between_url_and_search_term = 'search?term='
+def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/search', search_limit=5, **kwargs):
+    '''Accepts argument of search term and search_word.
+    Submits request to website and, hopefully, returns dictionary object.
+    The result dictionary object is a dictionary with mostly integer values,
+    except the 'results' value is a list of joke dictionaries with keys of 'id' and 'joke'.
+    '''
+    # add_search_term = f"term='{search_word}'"
+    # add_search_limit = f"limit={search_limit}"
+    # add_search_page = f"page=1"
+    # query_string = f"{url}{add_search_term}&{add_search_limit}&{add_search_page}"
+
+    params={
+        'term': search_word,
+        'limit': search_limit
+    }
+
+    headers = {
+        'Accept': 'application/json',
+        'User-Agent': 'https://github.com/brucestull'}
 
     try:
         # Get response object.
         response = requests.get(
-            f"{url}{string_between_url_and_search_term}{search_word}",
-            headers={"Accept":"application/json"}
+            url,
+            headers=headers,
+            params=params
+            # headers={"Accept":"application/json", 'User-Agent': 'https://github.com/brucestull'}
+            # kwargs
+            # headers={"Accept":"application/json"}
+            # headers
             )
         # Check for error handling.
         response.raise_for_status()
@@ -127,7 +147,8 @@ def main():
 
     # # Print response to review what we have.
     # # print(json_response)
-    # # The request to https://icanhazdadjoke.com/ seems to result in a dictionary with keys 'id', 'joke', and 'status'.
+    # # The request to https://icanhazdadjoke.com/ seems to result
+    #     # in a dictionary with keys 'id', 'joke', and 'status'.
     # # {'id': '6MR79MJ6h', 'joke': 'My boss told me to have a good day... so I went home.', 'status': 200}
 
     # string_to_print = f'''
@@ -138,7 +159,7 @@ def main():
     # print(string_to_print)
     # ######################################
 
-        ########## Uses search word ##########
+    ########## Uses search word ##########
     while True:
         # Welcome user and tell them what we're doing here.
         welcome_string = "\nWelcome to icanhazdadjoke searcherator 2000!"
@@ -171,16 +192,31 @@ def main():
 
         # print(f"{type(the_jokes_list)}{the_jokes_list}")
 
-        # TODO: Add while loop here to allow user to view each result joke, one at a time.
+        print(f"search_term: {json_response['search_term']}")
+        print(f"Number of 'results' returned: {len(json_response['results'])}")
+        print()
+        print(f"total_pages: {json_response['total_pages']}")
+        print(f"previous_page: {json_response['previous_page']}")
+        print(f"current_page: {json_response['current_page']}")
+        print(f"next_page: {json_response['next_page']}")
+        print(f"status: {json_response['status']}")
+        print(f"total_jokes: {json_response['total_jokes']}")
+        print(f"limit: {json_response['limit']}")
+        print()
 
         while the_jokes_list:
             # Loop and display the jokes to user.
-            # Don't delete or pop the jokes, allow user to recycle
+            # Don't delete or pop the jokes, allow user to cycle
                 # through them if they wish.
             for i in range(len(the_jokes_list)):
                 print(the_jokes_list[i]['joke'])
                 print()
-                input("Press any key to continue. ")
+                while i < len(the_jokes_list) - 1:
+                    input("Press <Enter> to continue to next joke. ")
+                    break
+                if i == len(the_jokes_list) - 2:
+                    print()
+                    print("And, finally:")
                 print()
             break
 
@@ -188,7 +224,7 @@ def main():
             
         print()
         break
-        ######################################
+    ######################################
 
     pass
 
