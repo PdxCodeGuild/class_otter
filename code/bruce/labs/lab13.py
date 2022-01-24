@@ -8,6 +8,7 @@
 
 import random
 import time
+import string
 
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/labs/13%20Tic%20Tac%20Toe.md
@@ -21,14 +22,6 @@ import time
 # X| | 
 #  |O| 
 # O|X| 
-
-
-def print_variable_and_description(variable_under_review, description_of_logic = '', print_logic_results = True):
-    '''Accepts three arguments: A variable we are examining, a description of the logic we are examining, and a print flag.'''
-    __name__ = print_variable_and_description
-    string_result = f"{print_variable_and_description.__name__}: {description_of_logic}: {variable_under_review}"
-    if print_logic_results:
-        print(string_result)
 
 # It seems we keep player position in Game rather than Player?
 #################### The Player ####################
@@ -90,7 +83,7 @@ class Game:
             return True
         return False
     
-    def calc_winner(self, player):
+    def calc_winner(self):
         '''Returns which token ('X' or 'O') has won, otherwise returns None.'''
 
         def transpose_list_of_lists(list_of_lists = [[],[]]):
@@ -99,12 +92,31 @@ class Game:
             return trasposed_list_of_lists
         
         # Added functionality where these 'token's can be referred by variable so that players can choose their own unique token.
-            # i.e. p1.token = 'B'
+        # TODO: Modify functions so they return the actual token and then use dictionary in main() logic to determine winner from token.
         def row_win(board = self.__board):
             '''Returns player token for a row win, otherwise returns None.'''
             for row in board:
-                if row[0] == row[1] == row[2] == player.token:
-                    return player.token
+                # Possible method for checking all elements in list are same:
+                # https://www.geeksforgeeks.org/python-check-if-all-elements-in-a-list-are-same/
+                if '-' not in row and len(set(row)) == 1:
+                    return row[0]
+
+                # A TERRIBLE TERRIBLE solution!!!
+                # if '-' not in row:
+                #     # Check if all elements in row are the same.
+                #     for i in range(1, len(row)):
+                #         if row[i] != row[i - 1]:
+                #             # If any two elements are not same: return None
+                #             return None
+                #         # Else: continue
+                #         else:
+                #             continue
+                #     # All three elements are the same.
+                #     return row[0]
+                
+                # This is actually a decent solution, but the above one using set() allows for arbitrary length lists.
+                # if row[0] == row[1] == row[2] != '-':
+                #     return row[0]
             return None
         
         def column_win():
@@ -115,18 +127,20 @@ class Game:
         
         def diagonal_win():
             '''Returns player token for diagonal win, otherwise returns None.'''
+            # Build a list of the elements and find if they are equal.
             check_list = [self.__board[i][i] for i in range(len(self.__board))]
-            if check_list[0] == check_list[1] == check_list[2] == player.token:
-                return player.token
+            if '-' not in check_list and len(set(check_list)) == 1:
+                return check_list[0]
             return None
 
         def diagonal_cross_win():
             '''Returns player token for cross diagonal win, otherwise returns None.'''
             # TODO: Can we use something similar to the comprehension from diagonal win?
                 # check_list = [self.__board[i][i] for i in range(len(self.__board))]
+            # Maybe zip tuples for 0,2 1,1 2,0
             check_list = [self.__board[0][2],self.__board[1][1],self.__board[2][0]]
-            if check_list[0] == check_list[1] == check_list[2] == player.token:
-                return player.token
+            if '-' not in check_list and len(set(check_list)) == 1:
+                return check_list[0]
             return None
 
         # Check for wins.
@@ -162,9 +176,9 @@ class Game:
                     return False
         return True
 
-    def is_game_over(self, player):
+    def is_game_over(self):
         '''Returns True if game board is full or a player has won.'''
-        if self.is_full() or self.calc_winner(player) != None:
+        if self.is_full() or self.calc_winner() != None:
             return True
         return False
     
@@ -221,53 +235,79 @@ def test_is_full():
 
 def test_calc_winner():
     g1 = Game()
-    p1 = Player('JakeBrake','X')
     g1._Game__board = [['X','X','X'],['-','-','-'],['-','-','-']]
-    assert g1.calc_winner(p1) == 'X'
+    assert g1.calc_winner() == 'X'
 
     g2 = Game()
-    p2 = Player('Olander','O')
     g2._Game__board = [['O','O','O'],['-','-','-'],['-','-','-']]
-    assert g2.calc_winner(p2) == 'O'
+    assert g2.calc_winner() == 'O'
 
     g3 = Game()
-    p3 = Player('Cobb','O')
     g3._Game__board = [['O','-','-'],['O','-','-'],['O','-','-']]
-    assert g3.calc_winner(p3) == 'O'
+    assert g3.calc_winner() == 'O'
 
     g4 = Game()
-    p4 = Player('Yennifer','O')
     g4._Game__board = [['O','-','-'],['-','O','-'],['-','-','O']]
-    assert g4.calc_winner(p4) == 'O'
+    assert g4.calc_winner() == 'O'
 
     g5 = Game()
-    p5 = Player('Petra','O')
     g5._Game__board = [['-','-','O'],['-','O','-'],['O','-','-']]
-    assert g5.calc_winner(p5) == 'O'
+    assert g5.calc_winner() == 'O'
 
 def test_is_game_over():
     g1 = Game()
-    p1 = Player('Cavill','X')
-    assert g1.is_game_over(p1) == False
+    assert g1.is_game_over() == False
 
     g2 = Game()
     g2._Game__board = [['O','-','-'],['-','O','-'],['-','-','O']]
-    assert g2.is_game_over(p1) == False
+    assert g2.is_game_over() == True
 
     g3 = Game()
     g3._Game__board = [['X','X','X'],['X','X','X'],['X','X','X']]
-    assert g3.is_game_over(p1) == True
+    assert g3.is_game_over() == True
 
 ###############################################
 
+# Should this function be inside Game() since it's needed for Game() to function properly?
+def validate_user_token(user_input = ' '):
+    '''Accepts string input from user. Ensures token is one character long,
+    and ensures token is not ' ' or '-'. '-' is used in game logic. ' ' wouldn't make sense visually.'''
+    # print(string.ascii_letters)
+    # print(string.punctuation)
+    # print(string.digits)
+    if len(user_input) > 1:
+        print("Please enter only one character.")
+        return False
+    if user_input == '-':
+        print("'-' is one of the few restricted tokens. Please choose another.")
+        return False
+    if user_input == ' ':
+        print("' ' is one of the few restricted tokens. Please choose another.")
+        return False
+    if user_input not in string.ascii_letters + string.punctuation + string.digits:
+        print("We aren't sure if your token is valid. Please choose a letter, number, or punctuation character.")
+        return False
+    return user_input
+
+def test_validate_user_token():
+    assert validate_user_token() == False
+    assert validate_user_token(' ') == False
+    assert validate_user_token('-') == False
+    assert validate_user_token('--') == False
+    assert validate_user_token('bb') == False
+    assert validate_user_token('a') == 'a'
+    assert validate_user_token('1') == '1'
+    assert validate_user_token('$') == '$'
+
+# Function for some display candy. Purely aesthetic.
 def display_scanner_candy(display_string = 'Thinking'):
-    '''Prints display_string to console, then displays elapsed time scanner for the widthe of the string argument.'''
+    '''Prints display_string to console, then displays elapsed time scanner for the width of the string argument.'''
     print(display_string)
     cycle = 1
     number_of_cycles = 3
+    scanner_width = len(display_string)
+    time_delay = .005
     while cycle <= number_of_cycles:
-        scanner_width = len(display_string)
-        time_delay = .005
         # Draw the spaces.
         for _ in range(scanner_width):
             print(' ', end='', flush=True)
@@ -277,7 +317,7 @@ def display_scanner_candy(display_string = 'Thinking'):
             print('\b', end='', flush=True)
             time.sleep(time_delay)
         cycle += 1
-
+  
 def main():
     
     # TODO: Add logic to allow players to decide if they want to play another game. Below is some example code.
@@ -330,8 +370,8 @@ def main():
     g1.print_player_info(p1)
     g1.print_player_info(p2)
     
-    # A dictionary of player names and Player objects, used below in some logic.
-    players = {p1.name: p1, p2.name: p2}
+    # A dictionary of player tokens and Player objects, used below in some logic.
+    players_token_to_object = {p1.token: p1, p2.token: p2}
 
     # Display candy to show the random selector is 'thinking'.
     scanner_string = "Setting up board and choosing start player."
@@ -339,9 +379,8 @@ def main():
 
     # Added functionality where a random generator picks who goes first.
     # Uses random.choice() to choose the start player.
-    player_chosen = random.choice([p1.name, p2.name])
-    print(f"First up: {player_chosen}!")
-    players_turn = player_chosen
+    token_chosen = random.choice([p1.token, p2.token])
+    print(f"First up: {token_chosen}!")
 
     # Print the initial board.
     print(g1)
@@ -352,7 +391,7 @@ def main():
         while True:
             # Prompt player n for their move.
             print()
-            print(f"{players[players_turn].token} : {players[players_turn].name}'s turn.")
+            print(f"{token_chosen} : {players_token_to_object[token_chosen].name}'s turn.")
             y_input = input(f"Choose your row: ")
             x_input = input(f"Choose your column: ")
             # TODO: Move this logic to function, maybe?
@@ -369,7 +408,7 @@ def main():
             break
             
         # Move if available.
-        if not g1.move(desired_x_position - 1, desired_y_position - 1, players[players_turn]):
+        if not g1.move(desired_x_position - 1, desired_y_position - 1, players_token_to_object[token_chosen]):
             print("Space already occupied. Please try another position.")
             continue
         ###############################################
@@ -383,9 +422,9 @@ def main():
             # Else:
                 # Proceed
         ############ Check for winner ############
-        calc_winner_result = g1.calc_winner(players[players_turn])
-        if calc_winner_result:
-            print(f"WINNER: {players[players_turn].token} : {players[players_turn].name}!!!")
+        winning_token = g1.calc_winner()
+        if winning_token:
+            print(f"WINNER: {winning_token} : {players_token_to_object[winning_token].name}!!!")
             break
         ##########################################
 
@@ -411,7 +450,7 @@ def main():
             # Else:
                 # Proceed
         ##########################################
-        if g1.is_game_over(players[players_turn]):
+        if g1.is_game_over():
             print("Game over!")
             break
         ##########################################
@@ -419,12 +458,10 @@ def main():
         # Toggle player turn
         ##########################################
         # Toggle player turn to other player.
-        if players_turn == p1.name:
-            players_turn = p2.name
-        # elif players_turn == p2.name:
-        #     players_turn = p1.name
+        if token_chosen == p1.token:
+            token_chosen = p2.token
         else:
-            players_turn = p1.name
+            token_chosen = p1.token
         ##########################################
 
 main()
