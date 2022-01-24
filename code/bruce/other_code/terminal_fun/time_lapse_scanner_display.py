@@ -8,8 +8,15 @@
 
 import time
 
-def console_display_scanner(time_delay = .007, number_of_cycles = 3, scanner_width = 45):
-    '''Accepts arguments of time_delay, number_of_cycles, and scanner_width. Moves the console cursor back and forth at time_delay and length scanner_width.'''
+def console_display_scanner(
+        scanner_width = 45,
+        number_of_cycles = 3,
+        time_delay = .007
+        ):
+    '''Accepts arguments of scanner_width, number_of_cycles,
+    and time_delay. Moves the console cursor back and
+    forth at time_delay and length scanner_width.
+    '''
     cycle = 1
     while cycle <= number_of_cycles:
 
@@ -27,15 +34,15 @@ def console_display_scanner(time_delay = .007, number_of_cycles = 3, scanner_wid
 
 def main():
 
-    console_display_scanner(.003,1,80)
-    console_display_scanner(.003,1,40)
-    console_display_scanner(.003,1,20)
-    console_display_scanner(.003,1,10)
-    console_display_scanner(.003,1,5)
-    console_display_scanner(.003,1,2)
+    console_display_scanner(80, 1, .003)
+    console_display_scanner(40, 1, .003)
+    console_display_scanner(20, 1, .003)
+    console_display_scanner(10, 1, .003)
+    console_display_scanner(5, 1, .003)
+    console_display_scanner(2, 1, .003)
     
     print_string = "A string to obtain a length."
     print(print_string)
-    console_display_scanner(.003, 2, len(print_string))
+    console_display_scanner(len(print_string), 2, .003)
 
 main()

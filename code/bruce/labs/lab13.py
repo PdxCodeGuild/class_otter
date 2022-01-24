@@ -180,97 +180,13 @@ class Game:
             return True
         return False
     
-################################################
-
-
-################### Testing ###################
-def test_position_available():
-    g1 = Game()
-    assert g1.position_available(0, 0) == True
-
-    g2 = Game()
-    g2._Game__board[0][0] = 'X'
-    assert g2.position_available(0, 0) == False
-
-    g3 = Game()
-    g3._Game__board[0][0] = 'O'
-    assert g3.position_available(0, 0) == False
-
-def test_move():
-    g1 = Game()
-    p1 = Player('Cornelius','C')
-
-    g1._Game__board[1][1] = 'X'
-    assert g1.move(1, 1, p1) == False
-
-    g2 = Game()
-    assert g2.move(1, 1, p1) == True
-
-def test_is_full():
-    g1 = Game()
-    g1._Game__board = [['X','X','X'],['X','X','X'],['X','X','X']]
-    assert g1.is_full() == True
-
-    g2 = Game()
-    g2._Game__board = [['O','O','O'],['O','O','O'],['O','O','O']]
-    assert g2.is_full() == True
-
-    g3 = Game()
-    g3._Game__board = [['-','-','-'],['-','-','-'],['-','-','-']]
-    assert g3.is_full() == False
-
-    g4 = Game()
-    g4._Game__board = [['X','X','X'],['X','X','-'],['X','X','X']]
-    assert g4.is_full() == False
-
-    g5 = Game()
-    g5._Game__board = [['X','-','X'],['X','X','X'],['X','X','X']]
-    assert g5.is_full() == False
-
-    g6 = Game()
-    g6._Game__board = [['X','X','X'],['X','X','X'],['X','X','-']]
-    assert g6.is_full() == False
-
-def test_calc_winner():
-    g1 = Game()
-    g1._Game__board = [['X','X','X'],['-','-','-'],['-','-','-']]
-    assert g1.calc_winner() == 'X'
-
-    g2 = Game()
-    g2._Game__board = [['O','O','O'],['-','-','-'],['-','-','-']]
-    assert g2.calc_winner() == 'O'
-
-    g3 = Game()
-    g3._Game__board = [['O','-','-'],['O','-','-'],['O','-','-']]
-    assert g3.calc_winner() == 'O'
-
-    g4 = Game()
-    g4._Game__board = [['O','-','-'],['-','O','-'],['-','-','O']]
-    assert g4.calc_winner() == 'O'
-
-    g5 = Game()
-    g5._Game__board = [['-','-','O'],['-','O','-'],['O','-','-']]
-    assert g5.calc_winner() == 'O'
-
-def test_is_game_over():
-    g1 = Game()
-    assert g1.is_game_over() == False
-
-    g2 = Game()
-    g2._Game__board = [['O','-','-'],['-','O','-'],['-','-','O']]
-    assert g2.is_game_over() == True
-
-    g3 = Game()
-    g3._Game__board = [['X','X','X'],['X','X','X'],['X','X','X']]
-    assert g3.is_game_over() == True
-
-###############################################
     
 def print_player_info(player):
     '''Returns player info as string.'''
     print(f"Player info: {player}")
 
 
+# TODO: Fix bug where users can choose same token character. This can cause errors when deterimining winner.
 # Should this function be inside Game() since it's needed for Game() to function properly?
 def validate_user_token(user_input = ' '):
     '''Accepts string input from user. Ensures token is one character long,
@@ -291,16 +207,6 @@ def validate_user_token(user_input = ' '):
         print("We aren't sure if your token is valid. Please choose a letter, number, or punctuation character.")
         return False
     return user_input
-
-def test_validate_user_token():
-    assert validate_user_token() == False
-    assert validate_user_token(' ') == False
-    assert validate_user_token('-') == False
-    assert validate_user_token('--') == False
-    assert validate_user_token('bb') == False
-    assert validate_user_token('a') == 'a'
-    assert validate_user_token('1') == '1'
-    assert validate_user_token('$') == '$'
 
 # Function for some display candy. Purely aesthetic.
 def display_scanner_candy(display_string = 'Thinking'):
@@ -467,4 +373,97 @@ def main():
             token_turn = p1.token
         ##########################################
 
-# main()
+
+def test_validate_user_token():
+    assert validate_user_token() == False
+    assert validate_user_token(' ') == False
+    assert validate_user_token('-') == False
+    assert validate_user_token('--') == False
+    assert validate_user_token('bb') == False
+    assert validate_user_token('a') == 'a'
+    assert validate_user_token('1') == '1'
+    assert validate_user_token('$') == '$'
+
+def test_position_available():
+    g1 = Game()
+    assert g1.position_available(0, 0) == True
+
+    g2 = Game()
+    g2._Game__board[0][0] = 'X'
+    assert g2.position_available(0, 0) == False
+
+    g3 = Game()
+    g3._Game__board[0][0] = 'O'
+    assert g3.position_available(0, 0) == False
+
+def test_move():
+    g1 = Game()
+    p1 = Player('Cornelius','C')
+
+    g1._Game__board[1][1] = 'X'
+    assert g1.move(1, 1, p1) == False
+
+    g2 = Game()
+    assert g2.move(1, 1, p1) == True
+
+def test_is_full():
+    g1 = Game()
+    g1._Game__board = [['X','X','X'],['X','X','X'],['X','X','X']]
+    assert g1.is_full() == True
+
+    g2 = Game()
+    g2._Game__board = [['O','O','O'],['O','O','O'],['O','O','O']]
+    assert g2.is_full() == True
+
+    g3 = Game()
+    g3._Game__board = [['-','-','-'],['-','-','-'],['-','-','-']]
+    assert g3.is_full() == False
+
+    g4 = Game()
+    g4._Game__board = [['X','X','X'],['X','X','-'],['X','X','X']]
+    assert g4.is_full() == False
+
+    g5 = Game()
+    g5._Game__board = [['X','-','X'],['X','X','X'],['X','X','X']]
+    assert g5.is_full() == False
+
+    g6 = Game()
+    g6._Game__board = [['X','X','X'],['X','X','X'],['X','X','-']]
+    assert g6.is_full() == False
+
+def test_calc_winner():
+    g1 = Game()
+    g1._Game__board = [['X','X','X'],['-','-','-'],['-','-','-']]
+    assert g1.calc_winner() == 'X'
+
+    g2 = Game()
+    g2._Game__board = [['O','O','O'],['-','-','-'],['-','-','-']]
+    assert g2.calc_winner() == 'O'
+
+    g3 = Game()
+    g3._Game__board = [['O','-','-'],['O','-','-'],['O','-','-']]
+    assert g3.calc_winner() == 'O'
+
+    g4 = Game()
+    g4._Game__board = [['O','-','-'],['-','O','-'],['-','-','O']]
+    assert g4.calc_winner() == 'O'
+
+    g5 = Game()
+    g5._Game__board = [['-','-','O'],['-','O','-'],['O','-','-']]
+    assert g5.calc_winner() == 'O'
+
+def test_is_game_over():
+    g1 = Game()
+    assert g1.is_game_over() == False
+
+    g2 = Game()
+    g2._Game__board = [['O','-','-'],['-','O','-'],['-','-','O']]
+    assert g2.is_game_over() == True
+
+    g3 = Game()
+    g3._Game__board = [['X','X','X'],['X','X','X'],['X','X','X']]
+    assert g3.is_game_over() == True
+
+
+if __name__ == '__main__':
+    main()
