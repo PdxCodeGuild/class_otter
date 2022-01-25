@@ -1,43 +1,48 @@
-conversion = {0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
-              7: "seven", 8: "eight", 9: "nine"}
+ones = {0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
+        7: "seven", 8: "eight", 9: "nine"}
 
-conversion_2 = {10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen", 16: "sixteen",
-                17: "seventeen", 18: "eighteen", 19: "nineteen"}
+teens = {10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen", 16: "sixteen",
+         17: "seventeen", 18: "eighteen", 19: "nineteen"}
 
-conversion_3 = {20: "twenty", 30: "thirty", 40: "fourty", 50: "fifty", 60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety",
-                100: "hundred"}
-
-
-def nums_to_phrase(user_num):
-    for i in user_num:
-        if user_num == i//10:
-            return conversion_2
-        elif user_num == i % 10:
-            return conversion_3
+tens = {2: "twenty", 3: "thirty", 4: "fourty", 5: "fifty", 6: "sixty", 7: "seventy", 8: "eighty", 9: "ninety",
+        }
 
 
 user = int(input("please enter a number: "))
+# 0-9
+if user < 10:
+    print(ones[user])
+# 10-19
+if user >= 10 and user <= 19:
+    print(teens[user])
+# 20-90
+if user >= 20 and user <= 99:
+    tens_digit = user//10
+    ones_digit = user % 10
+    if ones_digit == 0:
+        print(tens[tens_digit])
+    else:
+        # print(tens_digit, ones_digit)
+        print(tens[tens_digit] + "-" + ones[ones_digit])
+# 100-999
+if user >= 100 and user <= 999:
+    hundreds_digit = user//100
+    # remove hundreds from input number
+    hundreds_in_num = hundreds_digit * 100
+    shortened = user - hundreds_in_num
+    tens_digit = shortened//10
+    ones_digit = shortened % 10
 
-if user == 0:
-    print(conversion[0])
-elif user == 1:
-    print(conversion[1])
-elif user == 2:
-    print(conversion[2])
-elif user == 3:
-    print(conversion[3])
-elif user == 4:
-    print(conversion[4])
-elif user == 5:
-    print(conversion[5])
-elif user == 6:
-    print(conversion[6])
-elif user == 7:
-    print(conversion[7])
-elif user == 8:
-    print(conversion[8])
-elif user == 9:
-    print(conversion[9])
+    if hundreds_digit >= 1 and tens_digit == 0 and ones_digit == 0:
+        print(ones[hundreds_digit] + " hundred ")
 
+    if tens_digit != 0 and ones_digit == 0:
+        print(ones[hundreds_digit] + " hundred " + tens[tens_digit])
 
-print(nums_to_phrase(user))
+    if ones_digit >= 1:
+        print(ones[hundreds_digit] + " hundred " +
+              tens[tens_digit] + "-" + ones[ones_digit])
+
+    # print(hundreds_digit[ones_digit]  tens_digit, ones[ones_digit] + "hundred")
+    # print(ones[hundreds_digit] + " hundred " + tens[tens_digit] + "-" +
+    #       ones[ones_digit])
