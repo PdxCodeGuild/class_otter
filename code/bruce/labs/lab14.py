@@ -74,7 +74,7 @@ def submit_request_get_json(url='https://icanhazdadjoke.com/', **kwargs):
     return json_response
 
 
-def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/search', search_limit=5, **kwargs):
+def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/search', search_limit=3, page=1, **kwargs):
     '''Accepts argument of search term and search_word.
     Submits request to website and, hopefully, returns dictionary object.
     The result dictionary object is a dictionary with mostly integer values,
@@ -87,18 +87,16 @@ def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/
 
     params={
         'term': search_word,
-        'limit': search_limit
-    }
-
-    headers = {
-        'Accept': 'application/json',
-        'User-Agent': 'https://github.com/brucestull'}
+        'limit': search_limit,
+        'page': page
+        }
 
     try:
         # Get response object.
         response = requests.get(
             url,
-            headers=headers,
+            headers=kwargs,
+            # kwargs,
             params=params
             # headers={"Accept":"application/json", 'User-Agent': 'https://github.com/brucestull'}
             # kwargs
@@ -160,9 +158,10 @@ def main():
     # ######################################
 
     ########## Uses search word ##########
+    page_requested = 1
     while True:
         # Welcome user and tell them what we're doing here.
-        welcome_string = "\nWelcome to icanhazdadjoke searcherator 2000!"
+        welcome_string = "\nWelcome to icanhazdadjoke Searcherator 2022!"
         i_can_haz_request_url = 'https://icanhazdadjoke.com/'
         what_we_are_doing_here_string = f"Let's get some jokes from {i_can_haz_request_url}.\n"
         print(welcome_string)
@@ -184,49 +183,72 @@ def main():
         length_of_scanner = len(prompt_string + search_word)
         console_display_scanner(length_of_scanner)
 
-        # Get the response from the API and return dictionary.
-        json_response = submit_search_request_get_json(search_word)
+        headers = {
+            'Accept': 'application/json',
+            'User-Agent': 'https://github.com/brucestull'
+            }
+        
+        # search_limit = 3
+        # page = page_requested
+        # params={
+        #     'term': search_word,
+        #     'limit': search_limit,
+        #     'page': page
+        #     }
+        
+        # While loop to list the jokes on current page.
+        while True:
+            # Get the response from the API and return dictionary.
+            json_response = submit_search_request_get_json(search_word, page=page_requested, **headers)
 
-        # The jokes are in the 'results' key.
-        the_jokes_list = json_response['results']
+            # The jokes are in the 'results' key.
+            the_jokes_list = json_response['results']
 
-        # print(f"{type(the_jokes_list)}{the_jokes_list}")
-
-        print(f"search_term: {json_response['search_term']}")
-        print(f"Number of 'results' returned: {len(json_response['results'])}")
-        print()
-        print(f"total_pages: {json_response['total_pages']}")
-        print(f"previous_page: {json_response['previous_page']}")
-        print(f"current_page: {json_response['current_page']}")
-        print(f"next_page: {json_response['next_page']}")
-        print(f"status: {json_response['status']}")
-        print(f"total_jokes: {json_response['total_jokes']}")
-        print(f"limit: {json_response['limit']}")
-        print()
-
-        while the_jokes_list:
-            # Loop and display the jokes to user.
-            # Don't delete or pop the jokes, allow user to cycle
-                # through them if they wish.
-            for i in range(len(the_jokes_list)):
-                print(the_jokes_list[i]['joke'])
+            if page_requested == 1:
+                print(f"search_term: {json_response['search_term']}")
+                print(f"Number of 'results' returned: {len(json_response['results'])}")
                 print()
-                while i < len(the_jokes_list) - 1:
-                    input("Press <Enter> to continue to next joke. ")
-                    break
-                if i == len(the_jokes_list) - 2:
+                print(f"total_pages: {json_response['total_pages']}")
+                print(f"previous_page: {json_response['previous_page']}")
+                print(f"current_page: {json_response['current_page']}")
+                print(f"next_page: {json_response['next_page']}")
+                print(f"status: {json_response['status']}")
+                print(f"total_jokes: {json_response['total_jokes']}")
+                print(f"limit: {json_response['limit']}")
+                print()
+            # While loop to list the jokes.
+            while the_jokes_list:
+                # Loop and display the jokes to user.
+                # Don't delete or pop the jokes, allow user to cycle
+                    # through them if they wish.
+                for i in range(len(the_jokes_list)):
+                    print(the_jokes_list[i]['joke'])
                     print()
-                    print("And, finally:")
-                print()
-            break
-
-
+                    while i < len(the_jokes_list) - 1:
+                        input("Press <Enter> to continue to next joke. ")
+                        if i == len(the_jokes_list) - 2:
+                            print()
+                            print()
+                            print("And, last joke on current page:")                    
+                        break
+                    print()
+                break
             
-        print()
+            # If there are more pages, prompt user to decide if they want to view next page.
+            if json_response['total_pages'] > 1 and page_requested < json_response['total_pages']:
+                get_the_next_page = input("Type [Y] to get the next page of jokes, anything else to quit: ").upper()
+                print()
+                if get_the_next_page == 'Y':
+                    # Load next page.
+                    page_requested += 1
+                else:
+                    break
+                continue
+            else:
+                break
+        print("Thanks for using icanhazdadjoke Searcherator 2022!")
         break
     ######################################
-
-    pass
 
 if __name__ == '__main__':
     main()

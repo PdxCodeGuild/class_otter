@@ -47,6 +47,7 @@ def create_kittens_dictionary(*args,**kwargs):
     '''Creates dictionary of kittens and their color.'''
     kittens = {}
     for arg in args:
+        print(f"the_kwargs: {kwargs}")
         if arg in kwargs:
             kitten, color = arg, kwargs[arg]
             kittens[kitten] = color
