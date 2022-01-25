@@ -117,7 +117,17 @@ def calculate_ari_of_text(characters, words, sentences):
     return ari
 
 def main():
-    input_files = [r".\data\gettysburg_address_archive_org.txt", r".\data\gettysburg_address_umd_edu.txt", r".\data\medicine_info.txt"]
+    # Either style of slash works on my Windows PC.
+    input_files = [r"./data/gettysburg_address_archive_org.txt", r"./data/gettysburg_address_umd_edu.txt", r"./data/medicine_info.txt"]
+    # input_files = [r".\data\gettysburg_address_archive_org.txt", r".\data\gettysburg_address_umd_edu.txt", r".\data\medicine_info.txt"]
+
+    # Modified since '”' not registering properly. Doesn't seem to register as 'double quote' '"'.
+    # But seems to 'render' properly after replacing '”' with '"'.
+    # input_files = [r"./data/gettysburg_address_archive_org.txt", r"./data/gettysburg_address_umd_edu.txt", r"./data/medicine_info.txt"]
+
+    # As provided by Liz:
+    # input_files = [r”./data/gettysburg_address_archive_org.txt”, r”./data/gettysburg_address_umd_edu.txt”, r”./data/medicine_info.txt”]
+
     # file_we_are_analyzing = "gettysburg_address_archive_org.txt"
     # file_we_are_analyzing = "gettysburg_address_umd_edu.txt"
 
