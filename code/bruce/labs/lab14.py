@@ -8,6 +8,7 @@
 
 import time
 import requests
+import pprint
 from requests.exceptions import HTTPError
 
 # Assignment:
@@ -75,6 +76,7 @@ def submit_request_get_json(url='https://icanhazdadjoke.com/', **kwargs):
 
 
 def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/search', search_limit=3, page=1, **kwargs):
+# def submit_search_request_get_json(url='https://icanhazdadjoke.com/search', headers={}, params={}):
     '''Accepts argument of search term and search_word.
     Submits request to website and, hopefully, returns dictionary object.
     The result dictionary object is a dictionary with mostly integer values,
@@ -111,6 +113,7 @@ def submit_search_request_get_json(search_word, url='https://icanhazdadjoke.com/
         print(f'HTTP error occurred: {http_error}')
     except Exception as error:
         print(f'Other error occurred: {error}')
+    # TODO: Add some sort of status check.
     return json_response
 
 

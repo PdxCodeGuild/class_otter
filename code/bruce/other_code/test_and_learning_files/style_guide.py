@@ -53,10 +53,16 @@ else:
 
 the_thing = 143
 if isinstance(the_thing, int):
-    print(the_thing)
+    print(f"An int: {the_thing}")
 else:
     print("not an int")
 # 143
+
+the_thing = {}
+if isinstance(the_thing, dict):
+    print(f"A dict: {the_thing}")
+else:
+    print("not an int")
 
 
 # Empty sequences return False.
