@@ -17,9 +17,7 @@ def another_way_to_add_two_numbers(c,d):
     result = c + d
     return result
 
-# These are some foundational concepts. If you can breeze through these, you will be good.
-# Some tasks for you:
-# Try to understand how to use the two adding functions above. Do they actually do the same thing? Why? How?
+# Understand how to use the two adding functions above. Do they actually do the same thing? Why? How?
 
 # Call the function one_way_to_add_two_numbers() with parameters/arguments of 4 and 5, but don't do anything with the result.
 
@@ -47,7 +45,7 @@ the_sum_of_the_numbers = sum(1,2,3)
 print(the_sum_of_the_numbers)
 
 # We need to understand how to use the above functions and variables to further process the information and eventually do more complicated tasks.
-# Some more tasks for you:
+# Some more tasks:
 # 1. Multiply the_sum_of_the_numbers by 6 and assign the result to a variable named 'the_sum_of_the_numbers_times_6'.
 
 # 2. Define a function named 'multiply_by_six' which accepts one parameter 'input_number' and returns the value of 'input_number' times 6.

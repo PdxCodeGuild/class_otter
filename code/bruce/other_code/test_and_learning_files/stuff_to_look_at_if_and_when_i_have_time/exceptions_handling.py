@@ -93,17 +93,17 @@
 # ##########################################
 
 
-############ else and finally ############
-try:
-    f = open('file.txt')
-    contents = f.read()
-    print(contents)
-except (IOError, OSError) as e:
-    print(e)
-except NameError:
-    print("NameError encountered.")
-else:
-    print('no exception occurred')
-finally:
-    f.close()
-##########################################
+# ############ else and finally ############
+# try:
+#     f = open('file.txt')
+#     contents = f.read()
+#     print(contents)
+# except (IOError, OSError) as e:
+#     print(e)
+# except NameError:
+#     print("NameError encountered.")
+# else:
+#     print('no exception occurred')
+# finally:
+#     f.close()
+# ##########################################

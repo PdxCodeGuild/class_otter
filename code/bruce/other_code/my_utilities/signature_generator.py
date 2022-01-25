@@ -24,6 +24,9 @@ project_subtitle = input("Please enter project subtitle: ")
 # Prompt user for version number.
 version_number = input("Please enter version number: ")
 
+# Add blank line.
+print()
+
 # TODO: Add functionality where user decides whether to auto-populate current date or use manually entered date.
 from datetime import date
 current_date = date.today()
@@ -37,17 +40,18 @@ print(field_list)
 field_sizes = []
 for item in field_list:
     field_sizes.append(len(str(item)))
-print(field_sizes)
+print(f"Field sizes: {field_sizes}")
 
 # Create variable for how much padding to place on sides of longest character in signature_list.
-padding = 4
+padding = 2
 
-#
 pound_sign = '#'
 asterisk = '*'
 
-required_width = max(field_sizes) + padding
-print(required_width)
+required_width = max(field_sizes) + padding*2
+print(f"Required width: {required_width}")
+# Add blank line.
+print()
 
 print(pound_sign, asterisk * required_width, pound_sign)
 for item in field_list:

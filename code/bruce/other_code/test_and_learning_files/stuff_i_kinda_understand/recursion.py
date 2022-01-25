@@ -24,9 +24,11 @@ def test_factorial():
 
 # Try making fibonacci function.
 # 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610
-def fibonacci(n = 1):
+def fibonacci(n):
     '''Returns the nth fibonacci number.'''
-    if n == 1:
+    if n < 1:
+        result = None
+    elif n == 1:
         result = 1
     elif n == 2:
         result = 1
@@ -35,7 +37,6 @@ def fibonacci(n = 1):
     return result
 
 def test_fibonacci():
-    assert fibonacci() == 1
     assert fibonacci(1) == 1
     assert fibonacci(2) == 1
     assert fibonacci(3) == 2
@@ -53,7 +54,8 @@ def fibonacci_sequence_list(n = 1):
     # range(4) 0, 1, 2, 3 ==> 1, 2, 3, 4
     # range(3) 0, 1, 2 ==> 1, 2, 3
     # range(2) 0, 1 ==> 1, 2
-
+    if n < 1:
+        return None
     fibonacci_list = []
     for index in range(1, n + 1):
         fibonacci_list.append(fibonacci(index))
@@ -75,16 +77,22 @@ def test_fibonacci_sequence_list():
 # # 3
 # # 4
 
-# fibonacci_list = []
+fibonacci_list = []
 
-# print(fibonacci(1))
-# print(fibonacci(2))
-# print(fibonacci(3))
-# print(fibonacci(4))
+print(fibonacci(1))
+print(fibonacci(2))
+print(fibonacci(3))
+print(fibonacci(4))
+# 1
+# 1
+# 2
+# 3
 
-# print(fibonacci_list)
-# fibonacci_list.append(fibonacci(1))
-# fibonacci_list.append(fibonacci(2))
-# fibonacci_list.append(fibonacci(3))
-# fibonacci_list.append(fibonacci(4))
-# print(fibonacci_list)
+print(fibonacci_list)
+fibonacci_list.append(fibonacci(1))
+fibonacci_list.append(fibonacci(2))
+fibonacci_list.append(fibonacci(3))
+fibonacci_list.append(fibonacci(4))
+print(fibonacci_list)
+# []
+# [1, 1, 2, 3]

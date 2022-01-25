@@ -12,7 +12,7 @@
 
 def add_number(num_01, num_02):
     answer = num_01 + num_02
-    print_the_result(f"result of addition: {answer}") # <<== Don't really need to make our own function since python alreacy includes print().
+    print_the_result(f"result of addition: {answer}") # <<== Don't really need to make our own function since python already includes print().
     return answer
 
 def print_the_result(input_argument):

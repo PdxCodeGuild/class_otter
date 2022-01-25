@@ -116,7 +116,7 @@ def main():
     winning_ticket = generate_ticket()
     initial_balance = 0
     balance = initial_balance
-    how_many_tickets_i_can_buy = 1000000000
+    how_many_tickets_i_can_buy = 1000000    # 1000000 should run ~4 seconds.
 
 # number_of_tickets,execution_time_seconds
 # 100,.043

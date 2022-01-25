@@ -16,7 +16,9 @@ def print_variable_and_description(variable_under_review, description_of_logic =
 ###################### Example use ######################
 the_string = ''
 for i in range(4):
+    print()
     print_variable_and_description(i,"The value of index 'i'",True)
+    print_variable_and_description(i)
     the_string += str(i)
     print_variable_and_description(the_string,"The value of the_string")
     print_variable_and_description(str(i),"The value of str(i)")

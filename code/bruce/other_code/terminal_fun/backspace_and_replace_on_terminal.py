@@ -55,12 +55,18 @@ def main():
     for i, character in enumerate(print_string):
         # Create random time delay value.
         # This can be used to simulate real typing.
-        random_time_delay = generate_random_time_delay(.15)
+        random_time_delay = generate_random_time_delay(.25)
         # NOTE: Need the "end='', flush=True".
         print(character, end='', flush=True)
         time.sleep(random_time_delay)
         # Loop to add a randomly-placed delete of character and replace with '?'.
+
+        # This line could produce less '?' per execution of the file than the next example since the generated indices may be less than the current 'i' value.
         if i == generate_random_index(print_string):
+
+        # # This line could produce more '?' per execution of the file then the previous since it is generating indices between current 'i' and len() of string.
+        # if i == random.randint(i, len(print_string)):
+
             print('\b', end='', flush=True)
             time.sleep(random_time_delay)
             print('?', end='', flush=True)
