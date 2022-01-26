@@ -1,3 +1,16 @@
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*         Lab 10 - Contact List             *
+*            13/January/2022                *
+*                                           *
+*********************************************
+'''
+
+
 def create_record(headers, contacts):
     name = input('Please enter your first name:')
     fruit = input('please enter your favorite_fruit:')
@@ -69,7 +82,7 @@ def run():
     print('remaining_contacts ='+ str(delete_record))
 
     contacts_output = []
-    contacts_output.append(keys)
+    contacts_output.append(headers)
     for contact in contacts:
         contacts_output.append(list(contact.values()))
     print(contacts_output)
@@ -79,16 +92,7 @@ def run():
 
     with open('contacts.csv', 'w') as f:
         f.write(contacts_output)
-    # import csv       
-    # csv_columns = ['name','favorite_fruit','favorite_color']
-    # # csv_file = "contacts.csv"
-    # try:
-    #     with open('contacts.csv', 'w') as csvfile:
-    #         writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
-    #         writer.writeheader()
-    #         writer.writerow(contacts)
-    # except IOError:
-    #     print("I/O error")
+        
 
 if __name__ == '__main__':
     run()

@@ -1,4 +1,14 @@
-# Lab09.py Compute Automated Readability Index - 22-01-12
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*              Lab 09 - ARI                 *
+*             12/January/2022               *
+*                                           *
+*********************************************
+'''
 ari_scale = {
      1: {'ages':   '5-6', 'grade_level': 'Kindergarten'},
      2: {'ages':   '6-7', 'grade_level':    '1st Grade'},

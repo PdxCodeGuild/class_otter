@@ -1,5 +1,21 @@
-#Lab 02 Average Nunmbers Version 2 - Scott Madden
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*      Lab 02(V2) - Average Numbers         *
+*            05/January/2022                *
+*                                           *
+*********************************************
+'''
 nums = []
+def sum(nums): #defining the function 'sum' with one parameter 'numbers'
+    add = 0 
+    for num in nums:
+        add = add + num
+    return add
+
 entry = True
 while entry:
     num = input(""" please enter a number between 0 and 5 to continue
@@ -9,12 +25,6 @@ while entry:
     else:
         nums.append(int(num))
         entry = True
-
-def sum(nums): #defining the function 'sum' with one parameter 'numbers'
-    add = 0 
-    for num in nums:
-        add = add + num
-    return add
 
 x = sum(nums) #call the function
 avg = x / len(nums)
