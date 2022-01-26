@@ -8,7 +8,7 @@
 
 def increment_population(population_list):
     for i in range(len(population_list) - 1, 0, -1):
-        population_list[i] = population_list[i-1]
+        population_list[i] = population_list[i - 1]
     population_list[0] = 0
     return population_list
 
