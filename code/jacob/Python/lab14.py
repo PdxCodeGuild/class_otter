@@ -28,4 +28,4 @@ while type_selection != 'done':
     for result in data['results']:
         print(result['joke'])
 
-    
+
