@@ -1,4 +1,14 @@
-# Lab13 Tic-Tac-Toe  -  Scott Madden 22-01-22
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*           Lab 13 - Tic-Tac-Toe            *
+*              22/January/2022              *
+*                                           *
+*********************************************
+'''
 
 
 

@@ -1,4 +1,15 @@
-#Lab07.py "ROT Cipher" - 22-01-10 - Scott Madden
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*             Lab 07 - ROT13                *
+*            10/January/2022                *
+*                                           *
+*********************************************
+'''
+
 import string
 def rot13(ciph): #Define rot13(ciph) function
    abc = string.ascii_letters
