@@ -25,7 +25,7 @@ print('\n')
 
 # this response is a json string that looks like a dictionary
 # print(response.text)
-# is this a dictionary response already? if we use the .json()
+# this is not a dictionary if we use the .json() method it just looks like a dictionary
 # print(response.json())
 
 # pprint.pprint(response.json())
