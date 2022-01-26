@@ -3,7 +3,6 @@ import pprint
 while True:
 
     keyword_search = input("please enter a keyword or done to exit: ")
-    # page_search = input("please enter a page: ")
 
     page = 1
 
