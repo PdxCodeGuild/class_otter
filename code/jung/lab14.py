@@ -1,29 +1,22 @@
 import requests
 import json
-import time
 
 
+while True:
+    term = input("Enter a search term or exit: ")
+    if term == "exit":
+        break
+    else:
+        response = requests.get('https://icanhazdadjoke.com/search', params = {"term": term}, headers = {"Accept": "application/json"})
 
-term = input("Enter a search term: ")
+        data = json.loads(response.text)
 
-# # printing the start time
-# print("The time of code execution begin is : ", end="")
-# print(time.ctime())
+        quote_data = data["results"] 
 
-# # using sleep() to hault the code execution
-# time.sleep(6)
+        if quote_data == []:
+            print("No record found.")
+        else:
+            for result in quote_data:
+                joke = result["joke"]
+                print(joke)
 
-# # printing the end time
-# print("The time of code execution end is : ", end="")
-# print(time.ctime())
-
-response = requests.get('https://icanhazdadjoke.com/search', params = {"term": term}, headers = {"Accept": "application/json"})
-
-# print(response.text)
-
-data = json.loads(response.text)
-print(data)
-
-
-for result in data["results"]:
-    print(result["joke"])
