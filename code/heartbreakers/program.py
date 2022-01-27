@@ -35,12 +35,15 @@ def increment_population_age(population_list):
             result_list.append(jackalope)
     return result_list
 
+def create_jackalope():
+    return {'name': random.choice(string.ascii_uppercase), 'age': 0, 'gender': random.choice('mf'), 'pregnant': False}
+
 
 # Gestation of year.
 gestation_period = 1
 
 # population = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-population = [{'name': random.choice(string.ascii_uppercase), 'age': 0, 'gender': 'm', 'pregnant': False}, {'name': 'a', 'age': 0, 'gender': 'f', 'pregnant': False}]
+population = [{'name': random.choice(string.ascii_uppercase), 'age': 0, 'gender': 'm', 'pregnant': False}, {'name': random.choice(string.ascii_uppercase), 'age': 0, 'gender': 'f', 'pregnant': False}]
 
 year_counter = 0
 
@@ -54,12 +57,10 @@ while len(population) < 1000 and year_counter < 100:
     temp_population = []
     for jackalope in population:
         if jackalope['pregnant']:
-            # Create a jackalope
-            baby_jackalope = {'name': random.choice(string.ascii_uppercase),
-                'age': 0, 'gender': random.choice('mf'), 'pregnant': False}
             jackalope['pregnant'] = False
-            # Add the jackalope to population
-            temp_population.append(baby_jackalope)
+            # Create two baby jackalopes and add them to the population
+            temp_population.append(create_jackalope())
+            temp_population.append(create_jackalope())
 
     print(f'New babies: {len(temp_population)}')
     population.extend(temp_population)
