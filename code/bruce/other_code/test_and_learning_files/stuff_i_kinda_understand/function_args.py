@@ -15,6 +15,7 @@ from requests.exceptions import HTTPError
 # https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/docs/10%20Functions.md
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # def print_movie_ratings(username, *args, **kwargs):
 #     """Update the user’s ratings for movies.
 #     Update movies from *args that are keys in **kwargs.
@@ -188,6 +189,8 @@ pprint.pprint(json_response)
 #               'joke': 'Do I enjoy making courthouse puns? Guilty'}]
 
 =======
+=======
+>>>>>>> Stashed changes
 
 def print_movie_ratings(username, *args, **kwargs):
     """Update the user’s ratings for movies.
@@ -263,5 +266,8 @@ def print_the_kwargs(**kwargs):
 
 a_test_dictionary = {'a': 1, 'b': 2}
 print_the_kwargs(**a_test_dictionary)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 

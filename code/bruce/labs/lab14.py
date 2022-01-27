@@ -143,7 +143,10 @@ def main():
 
     ########## Uses search word ##########
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     page_requested = 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     while True:
