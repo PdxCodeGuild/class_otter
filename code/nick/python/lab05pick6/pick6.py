@@ -59,7 +59,7 @@ def main():
     expenses = 0
     loop_counter = 0
     while loop_counter < 100000:
-        expenses -= 2
+        expenses += 2
         winning_numbers = pick6()
         guessed_numbers = this_guess()
         number_of_matches = matching_num(winning_numbers,guessed_numbers)
