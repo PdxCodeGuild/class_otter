@@ -211,6 +211,7 @@ Don't consider an assignment 'finished' until it's been thoroughly tested. Try m
 
 Once you've finished a lab, or a major portion of a lab, commit and push your work. Unless you have a good reason (building's on fire), only commit working code.
 
+**EDIT Jan 21st:** Labs have a soft due date of Friday the week they are assigned, unless otherwised noted by the instructor. They must be completed and turned in 14 days after they are first assigned.
 
 ### Pair, Group, & Mob Programming
 

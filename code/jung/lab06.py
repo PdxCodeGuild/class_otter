@@ -16,6 +16,7 @@ number.reverse()
 
 # Double every other element in the reversed list (starting with the first number in the list).
 reversed_list = [(number[i] * 2 if i % 2 == 0 else number[i]) for i in range(len(number))]
+# print(reversed_list)
 
 # print(reversed_list)
 # Subtract nine from numbers over nine.
@@ -31,11 +32,11 @@ for i in reversed_list:
 sum = 0
 for j in subtract_list:
     sum += j
-# print(sum)
+print(sum)
 
 # Take the second digit of that sum.
-second_digit = int(str(sum))
-if second_digit[1] == check_digit:
+ones_digit = sum % 10
+if ones_digit == check_digit:
     print("Valid")
 else:
     print("Invalid")

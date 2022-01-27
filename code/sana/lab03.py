@@ -8,7 +8,16 @@ tens_converter = {
     2 : 'twenty',
     9 : 'ninety',
     0 : '',
-    10 : 'ten'
+    10 : 'ten',
+    11 : 'eleven',
+    12 : 'twelve',
+    13 : 'thirteen',
+    14 : 'forteen',
+    15 : 'fifteen',
+    16 : 'sixteen',
+    17 : 'seventeen',
+    18 : 'eighteen',
+    19 : 'nineteen'
 }
 ones_converter = {
     0 : 'zero',
@@ -68,10 +77,12 @@ def th_digits(v):
     th_digit = (v //100)
     th_digit = th_digit * 100
     th_digit = (v - th_digit)
-    if th_digit == 10:
-        th_digit = 10
+    # print(th_digit)
+    if th_digit >= 10 and th_digit < 20:
+        # print(th_digit)
         return th_digit
-    th_digit = th_digit//10
+    elif th_digit >= 20 or th_digit < 10:
+        th_digit = th_digit//10
     # print(th_digit)
     return th_digit
 def h_digits(z):
@@ -99,8 +110,13 @@ while True:
             teens = teen_converter[entered_number]
             hundreds = h_converter[h_digits(entered_number)]
             print(f'{hundreds} {teens}')
-        elif th_digits != 1:
+        elif th_digits(entered_number) != 1:
             tens = tens_converter[th_digits(entered_number)]
-            ones = zo_converter[o_digits(entered_number)]
             hundreds = h_converter[h_digits(entered_number)]
-            print(f'{hundreds} {tens} {ones}')
+            test = entered_number // 100
+            test = entered_number - (test * 100)
+            if test >= 20 or test < 10:
+                ones = zo_converter[o_digits(entered_number)]
+                print(f'{hundreds} {tens} {ones}')
+            else:
+                print(f'{hundreds} {tens}')

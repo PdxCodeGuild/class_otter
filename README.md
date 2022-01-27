@@ -20,52 +20,64 @@ M-F 9:30 am – 4:30 pm
 
 ## Capstone Dates:
 
-Capstone proposal due: TBD  
+Capstone proposal due: March 24th, 2022  
 Presentation Day: April 15th, 2022  
 
-<!-- ## Django Labs Assigned:
+## Django Labs Assigned:
 
-Lab 01 Todo List
-Lab 02 URL Shortener
-Lab 03 Chirp
-Lab 06 Students API
-Lab 07 Pokedex
+| Lab   | Name                   | Date Assigned | Due By Start Of Class | Hard Due Date |
+| ----- | ---------------------- | ------------- | --------------------- | ------------- |
+| 00    | Polls                  | Feb 15th      | Feb 18th              |               |
+| 01    | Todo List              | Feb 18th      | Feb 28th              | Mar 4th       |
+| 02    | URL Shortener          | Feb 23nd      | Feb 28th              | Mar 9th       |
+| 03    | Chirp                  | Feb 25th      | Mar 3rd               | Mar 11th      |
+| 04    | Students API           | Mar 21st      | Mar 24th              | Apr 4th       |
+| 05    | Pokedex                | Mar 22nd      | Mar 24th              | Apr 5th       |
 
 ## JavaScript Labs Assigned:
 
-Lab 01-03 Pick 3
-Lab 04 Vue Todos
-Lab 05 Quotes in Vue
-Lab 06 Mini-Capstone
+| Lab   | Name                   | Date Assigned | Due By Start Of Class | Hard Due Date |
+| ----- | ---------------------- | ------------- | --------------------- | ------------- |
+| 01    | Pick 3                 | Mar 3rd       | Mar 10th              | Mar 17th      |
+| 02    | Pick 3                 | Mar 3rd       | Mar 10th              | Mar 17th      |
+| 03    | Pick 3                 | Mar 3rd       | Mar 10th              | Mar 17th      |
+| Group | Todo List              | Mar 9th       | Mar 10th              | Mar 23rd      |
+| 04    | Vue Todos              | Mar 10th      | Mar 21st              | Mar 24th      |
+| 05    | Quotes in Vue          | Mar 14th      | Mar 21st              | Mar 28th      |
+| 06    | Mini-Capstone          | Mar 16th      | Mar 21st              | Mar 30th      |
 
 ## HTML/CSS Labs Assigned:
 
-01 Bio  
-02 Blog  
-03 Company  
-04 Burrito Order Form  
-05 Flask Redo
-06 Personal Portfolio
--->
+| Lab   | Name                   | Date Assigned | Due By Start Of Class | Hard Due Date |
+| ----- | ---------------------- | ------------- | --------------------- | ------------- |
+| 01    | Bio                    | Feb 1st       | Feb 7th               | Feb 15th      |
+| 02    | Company Landing Page   | Feb 3rd       | Feb 7th               | Feb 17th      |
+| 03    | Blog                   | Feb 4th       | Feb 8th               | Feb 18th      |
+| 04    | Burrito Order Form     | Feb 8th       | Feb 14th              | Feb 22nd      |
+| Group | Flask Todos            | Feb 9th       | Feb 11th              | Feb 23rd      |
+| 06    | Personal Portfolio     | Feb 11th      | Feb 15th              | Feb 25th      |
+
 ## Python Labs Assigned:
 
-01 Unit Converter  
-02 Average Numbers  
-03 Number To Phrase  
-04 Blackjack Advice  
-05 Pick 6  
-06 Credit Card Validation  
-07 ROT13  
-08 Peaks And Valleys  
-09 ARI  
-10 Contact List  
-<!--
-12 ATM  
-13 Tic-Tac-Toe  
-14 Dad Joke API  
-15 Quotes API  
-16 Mini-Capstone  
--->
+| Lab   | Name                   | Date Assigned | Due By Start Of Class | Hard Due Date |
+| ----- | ---------------------- | ------------- | --------------------- | ------------- |
+| 01    | Unit Converter         | Jan 4th       | Jan 10th              | Jan 18th      |
+| 02    | Average Numbers        | Jan 5th       | Jan 10th              | Jan 19th      |
+| 03    | Number To Phrase       | Jan 5th       | Jan 10th              | Jan 19th      |
+| 04    | Blackjack Advice       | Jan 6th       | Jan 10th              | Jan 20th      |
+| 05    | Pick 6                 | Jan 6th       | Jan 10th              | Jan 20th      |
+| 06    | Credit Card Validation | Jan 10th      | Jan 18th              | Jan 24th      |
+| 07    | ROT13                  | Jan 10th      | Jan 18th              | Jan 24th      |
+| 08    | Peaks And Valleys      | Jan 11th      | Jan 18th              | Jan 25th      |
+| 09    | ARI                    | Jan 12th      | Jan 18th              | Jan 26th      |
+| 10    | Contact List           | Jan 13th      | Jan 18th              | Jan 27th      |
+| 12    | ATM                    | Jan 18th      | Jan 24th              | Feb 1st       |
+| 13    | Tic-Tac-Toe            | Jan 19th      | Jan 24th              | Feb 2nd       |
+| 14    | Dad Joke API           | Jan 24th      | Jan 31th              | Feb 7th       |
+| Group | Jackalope              | Jan 25th      | Jan 26th              | Feb 8th       |
+| 15    | Quotes API             | Jan 25th      | Jan 31th              | Feb 8th       |
+| 16    | Mini-Capstone          | Jan 27th      | Feb 1st               | Feb 10th      |
+
 
 ## Student Presentations
 
