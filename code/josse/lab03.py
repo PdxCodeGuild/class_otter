@@ -33,13 +33,19 @@ if user >= 100 and user <= 999:
     tens_digit = shortened//10
     ones_digit = shortened % 10
 
-    if hundreds_digit >= 1 and tens_digit == 0 and ones_digit == 0:
+    if tens_digit == 0 and ones_digit == 0:
         print(ones[hundreds_digit] + " hundred ")
 
-    if tens_digit != 0 and ones_digit == 0:
+    elif tens_digit == 0:
+        print(ones[hundreds_digit] + " hundred " + ones[ones_digit])
+
+    elif tens_digit == 1:
+        print(ones[hundreds_digit] + " hundred " + teens[shortened])
+
+    elif tens_digit != 0 and ones_digit == 0:
         print(ones[hundreds_digit] + " hundred " + tens[tens_digit])
 
-    if ones_digit >= 1:
+    elif ones_digit >= 1:
         print(ones[hundreds_digit] + " hundred " +
               tens[tens_digit] + "-" + ones[ones_digit])
 

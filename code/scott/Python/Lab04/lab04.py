@@ -1,4 +1,14 @@
-# BlackJack Advice lab04 - Scott Madden
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*         Lab 04 - Blackjack Advise         *
+*             06/January/2022               *
+*                                           *
+*********************************************
+'''
 card_values = {
     'A': 1, 
     '2': 2, 

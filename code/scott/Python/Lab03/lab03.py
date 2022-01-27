@@ -1,4 +1,14 @@
-# Lab03 - Scott Madden
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*         Lab 03 - Number to Phrase         *
+*             05/January/2022               *
+*                                           *
+*********************************************
+'''
 ones_digits = {1: "one", 
     2: "two", 
     3: "three", 
@@ -46,6 +56,7 @@ num = []
 num = int(input("please enter a number between 0 and 999:"))
 num_div_ten = num // 10
 num_remainder = num % 10
+num_div_hundred = num // 100
 
 if num_div_ten == 0: # single digits
     string_num = ones_digits.get(num)
@@ -76,7 +87,14 @@ elif num%100 == 0: #numbers divisible by 100
     hundred_num = (num // 100) * 10 
     string_num = tens_digits.get(hundred_num)
     print(string_num)
-elif num_div_ten > 11 and num_div_ten < 100 and num_div_ten%10 != 1 and num%100 != 0: #numbers over 100 excluding teens
+elif num_div_ten > 11 and num_div_ten < 100 and num_div_ten%10 > 1 and num_div_ten%10 < 10 and num%100 != 0 and num_remainder == 0: #numbers over 100 excluding teens
+    hundred_num = (num // 100) * 10 
+    hundred_string_num = tens_digits.get(hundred_num)
+    tens_num = num_div_ten%10
+    tens_string_num = tens_digits.get(tens_num)
+    string_num = str(hundred_string_num) + " " +(tens_string_num)
+    print(string_num)
+elif num_div_ten > 11 and num_div_ten < 100 and num_div_ten%10 != 1 and num%100 != 0 and num_remainder > 0 : #numbers over 100 excluding teens
     hundred_num = (num // 100) * 10 
     hundred_string_num = tens_digits.get(hundred_num)
     tens_num = num_div_ten%10

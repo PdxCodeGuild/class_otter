@@ -1,4 +1,14 @@
-#Lab08.py Peaks and Valleys - 22/01/11 - Scott Madden
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*        Lab 08 - Peaks And Valleys         *
+*              11/January/2022                *
+*                                           *
+*********************************************
+'''
 
 def peaks(elevation):
     peaks = []

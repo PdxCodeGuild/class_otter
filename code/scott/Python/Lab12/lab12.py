@@ -1,3 +1,15 @@
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*              Lab 12 - ATM                 *
+*              18/January/2022              *
+*                                           *
+*********************************************
+'''
+
 class atm:     
     def __init__(self, balance = 0, interest_rate = .001):
         # initialize the class with balance = 0 and an interest rate = 0.1%

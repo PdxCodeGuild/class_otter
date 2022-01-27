@@ -1,3 +1,15 @@
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*         Lab 05 V1 & V2 - Pick 6           *
+*             06/January/2022               *
+*                                           *
+*********************************************
+'''
+
 # Pick 6 Lab05 Version 1 and 2 - Scott Madden
 import random
 count = 0 # Number of times tickets are matched to house

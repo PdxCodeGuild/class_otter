@@ -24,7 +24,8 @@ page = 1
 keyword = input('Enter a keyword to search for quotes: ')
 while page_selection != 'done':
         
-    response = requests.get('https://favqs.com/api/quotes', params = {'filter': keyword, 'page': page}, headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'})
+    response = requests.get('https://favqs.com/api/quotes', params = {'page': page, 'filter': keyword}, headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'})
+
     data = json.loads(response.text)
     print()
 

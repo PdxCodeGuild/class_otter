@@ -1,4 +1,14 @@
-#Lab06.py - Credit Card Validation - Scott Madden
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*      Lab 06 - Credit Card Validation      *
+*             10/January/2022               *
+*                                           *
+*********************************************
+'''
 
 # Request credit card input
 cc = input("Please enter a 16 digit credit card number without spaces")
