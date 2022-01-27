@@ -49,7 +49,7 @@ reproductive_age_high = 9
 
 while len(population) < 1000 and year_counter < 100:
     year_counter += 1
-
+    print(f'\n\nYear: {year_counter}\n')
     # We create babies.
     temp_population = []
     for jackalope in population:
@@ -61,10 +61,12 @@ while len(population) < 1000 and year_counter < 100:
             # Add the jackalope to population
             temp_population.append(baby_jackalope)
 
+    print(f'New babies: {len(temp_population)}')
     population.extend(temp_population)
 
     # increment population age groups
     population = increment_population_age(population)
+    print(f'Current population: {len(population)}')
 
     # calculate population in reproductive range
     # Need to get population of idices 4 through 8 inclusive.
@@ -88,6 +90,7 @@ while len(population) < 1000 and year_counter < 100:
     for i in range(5):
         reproductive_population[i] = min(number_reproductive_males[i], number_reproductive_females[i])
 
+    print(f'Mating jackalopes - Male: {len(number_reproductive_males)} Female: {len(number_reproductive_females)}')
     temp_counter = sum(reproductive_population)
     for jackalope in population:
         if temp_counter <= 0:
