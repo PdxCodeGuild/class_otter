@@ -92,13 +92,16 @@ while len(population) < 1000 and year_counter < 100:
         reproductive_population[i] = min(number_reproductive_males[i], number_reproductive_females[i])
 
     print(f'Mating jackalopes - Male: {len(number_reproductive_males)} Female: {len(number_reproductive_females)}')
+    print(f'Mating jackalopes - Male: {sum(number_reproductive_males)} Female: {sum(number_reproductive_females)}')
     temp_counter = sum(reproductive_population)
+    # print(f"Current reproductive population: {reproductive_population}")
     for jackalope in population:
         if temp_counter <= 0:
             break
         elif jackalope['gender'] == 'f':
             jackalope['pregnant'] = True
             temp_counter -= 1
+    print(f"Number pregnant jackalopes: {len([jackalope for jackalope in population if (jackalope['gender'] == 'f' and jackalope['pregnant'] == True)])}")
 
 # Let's get the final population:
 print(f'''
