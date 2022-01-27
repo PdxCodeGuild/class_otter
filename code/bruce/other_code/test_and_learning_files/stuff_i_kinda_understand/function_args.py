@@ -14,6 +14,7 @@ from requests.exceptions import HTTPError
 # Resources:
 # https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/docs/10%20Functions.md
 
+<<<<<<< Updated upstream
 # def print_movie_ratings(username, *args, **kwargs):
 #     """Update the user’s ratings for movies.
 #     Update movies from *args that are keys in **kwargs.
@@ -186,4 +187,81 @@ pprint.pprint(json_response)
 #              {'id': '2gFIBX82Etc',
 #               'joke': 'Do I enjoy making courthouse puns? Guilty'}]
 
+=======
+
+def print_movie_ratings(username, *args, **kwargs):
+    """Update the user’s ratings for movies.
+    Update movies from *args that are keys in **kwargs.
+    """
+    # '*args' results in a tuple within the function.
+    # '**kwargs', as input, asssigns dictionary values to the 'key's in '*args'.
+    # One utility of this functional usage is there are no errors if there are missing '*arg' or '**kwargs'.
+    film_and_ratings = {}
+    for film in args:  # Loop through the tuple `args`
+        if film in kwargs:  # Loop through keys of the `kwargs` dictionary
+            a_key, a_value = film, kwargs[film]
+            film_and_ratings[a_key] = a_value
+            print(a_key, a_value)
+    print(film_and_ratings)
+
+
+# # NOTE: 'Fargo' is not in '*args', and 'Transformers' is not in **kwargs. Yet we still get no error.
+# print_movie_ratings('jane', 'Sharknado', 'Frozen', 'Transformers', Sharknado=3, Frozen=2, Fargo=5)
+
+def create_film_and_rating_dictionary(username = '', *args, **kwargs):
+    '''Accepts arguments of username, and *args and **kwargs. Returns a dictionary of film ratings.'''
+    film_rating_dictionary = {}
+    for arg in args:
+        if arg in kwargs:
+            film, rating = arg, kwargs[arg]
+            film_rating_dictionary[film] = rating
+    print(film_rating_dictionary)
+    return film_rating_dictionary
+
+
+# create_film_and_rating_dictionary('jane', 'Sharknado', 'Frozen', 'Transformers', Sharknado=3, Frozen=2, Fargo=5)
+movies = ['jane', 'Sharknado', 'Frozen', 'Transformers']
+movie_ratings = {'Sharknado':3, 'Frozen':2, 'Fargo':5}
+create_film_and_rating_dictionary(*movies, **movie_ratings)
+# {'Sharknado': 3, 'Frozen': 2}
+
+
+def create_kittens_dictionary(*args,**kwargs):
+    '''Creates dictionary of kittens and their color.'''
+    kittens = {}
+    for arg in args:
+        if arg in kwargs:
+            kitten, color = arg, kwargs[arg]
+            kittens[kitten] = color
+    print(kittens)
+    return kittens
+
+
+kittens = ['dezzi', 'greta', 'bunbun']
+kitten_attributes = {'dezzi':'grey', 'bunbun':'tortoise', 'shinx':'black'}
+def test_create_kittens_dictionary():
+    assert create_kittens_dictionary(*kittens, **kitten_attributes) == {'dezzi':'grey','bunbun':'tortoise'}
+
+create_kittens_dictionary(*kittens, **kitten_attributes)
+# {'dezzi': 'grey', 'bunbun': 'tortoise'}
+
+
+# # Returns empty dictionary.
+# def return_the_kwargs(dummy='', **kwargs):
+#     return kwargs
+# a_test_dictionary = {'a': 1, 'b': 2}
+# print(return_the_kwargs(a_test_dictionary))
+# {}
+
+# I forgot to add the '**' in front of the **kwargs parameter.
+# Now, trying function with the '**' added in front of a_test_dictionary.
+def print_the_kwargs(**kwargs):
+    print(kwargs)
+    for key in kwargs:
+        print(f"{key}: {kwargs[key]}")
+
+
+a_test_dictionary = {'a': 1, 'b': 2}
+print_the_kwargs(**a_test_dictionary)
+>>>>>>> Stashed changes
 
