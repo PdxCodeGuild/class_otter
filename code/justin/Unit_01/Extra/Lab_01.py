@@ -30,7 +30,6 @@ city_to_accessible_cities_with_travel_time = {
   'Philadelphia': {'New York': 9},
 }
 '''
-import sys
 
 
 city_to_accessible_cities_with_travel_time = {
@@ -41,17 +40,63 @@ city_to_accessible_cities_with_travel_time = {
   'Philadelphia': {'New York': 9},
 }
 
-def get_connected_cities(city, hops=1):
-    all_connected_cities = {}
-    connected_cities = city_to_accessible_cities_with_travel_time[city]
+def update_with_least(dictionary_a, dictionary_b):
+    for key, value in dictionary_b.items():
+        if key not in dictionary_a:
+            dictionary_a[key] = value
+        else:
+            current_value = dictionary_a[key]
+            dictionary_a[key] = current_value if current_value < value else value
+    return dictionary_a
 
-    for _ in range(0, hops):
-        for next_city, distance in connected_cities.items():
-            if next_city in all_connected_cities:
-                all_connected_cities[next_city] += distance
+def get_shortest_local_travel_times(city):
+    connected_cities = {}
+    connected_cities[city] = 0
+    connected_cities.update(city_to_accessible_cities_with_travel_time[city])
+    
+    shortest_travel_times = {}
+    for connected_city, travel_time in connected_cities.items():
+        next_cities = city_to_accessible_cities_with_travel_time[connected_city]
+        cities_to_add = {}
+        for next_city, next_travel_time in next_cities.items():
+            next_travel_time += travel_time
+            if next_city not in cities_to_add:
+                cities_to_add[next_city] = next_travel_time
             else:
-                all_connected_cities[next_city] = distance
+                this_travel_time = cities_to_add[next_city]
+                cities_to_add[next_city] = this_travel_time if this_travel_time < next_travel_time else next_travel_time
+
+        shortest_travel_times = update_with_least(shortest_travel_times, cities_to_add)
+    return shortest_travel_times
+
+def get_connected_city_travel_times(city, hops=1):
+    hops = 1 if hops < 1 else hops
+    hops = 3 if hops > 3 else hops
+
+    all_connected_cities = {}
+    
+    if hops == 1:
+        all_connected_cities = city_to_accessible_cities_with_travel_time[city]
+    elif hops == 2:
+        all_connected_cities = get_shortest_local_travel_times(city)
+    elif hops == 3:
+        shortest_travel_times = {}
+        local_travel_times = city_to_accessible_cities_with_travel_time[city]
         
+        distant_travel_times = {}
+        for next_city, local_time in local_travel_times.items():
+            if next_city not in shortest_travel_times:
+                shortest_travel_times[next_city] = local_time
+            else:
+                current_time = shortest_travel_times[next_city]
+                shortest_travel_times[next_city] = current_time if current_time < local_time else local_time
+
+            cities_to_check = get_shortest_local_travel_times(next_city)
+            for city_to_check, time_to_update in cities_to_check.items():
+                cities_to_check[city_to_check] = time_to_update + local_time
+            distant_travel_times = update_with_least(distant_travel_times, cities_to_check)
+            shortest_travel_times = update_with_least(shortest_travel_times, distant_travel_times)
+        all_connected_cities = dict(shortest_travel_times)
 
     if city in all_connected_cities:
         all_connected_cities.pop(city)
@@ -60,8 +105,8 @@ def get_connected_cities(city, hops=1):
 
 def pretty_string(cities):
     result = ''
-    for city in cities:
-        result += f'{city} - {cities[city]}, '
+    for city, time in cities.items():
+        result += f'{city} - {time}, '
 
     return result[:-2]
 
@@ -69,21 +114,23 @@ def main():
     is_running = True
     
     while is_running:
-        city = input('\n\tAlbany\n\tBoston\n\tNew York\n\tPhiladelphia\n\tPortland\nEnter a city: ').title()
+        city = input('\n\tAlbany\n\tBoston\n\tNew York\n\tPhiladelphia\n\tPortland\n\tQuit\nEnter a city: ').title()
         if city in city_to_accessible_cities_with_travel_time:
-            hop_count = ''
-            try:
-                hop_count = input('Number of hops: ')
-                num_hops = int(hop_count)
-                
-                nearby_cities = get_connected_cities(city)
-                print(f'\nNearby cities: {pretty_string(nearby_cities)}')
+            num_hops = 0
+            while num_hops < 1 or num_hops > 3:
+                hop_count = input('Number of hops [1 - 3]: ')
+                try:
+                    num_hops = int(hop_count)
+                except:
+                    num_hops = 0
+            
+            nearby_cities = get_connected_city_travel_times(city)
+            print(f'\nNearby cities: {pretty_string(nearby_cities)}\n')
 
-                # distant_cities = get_connected_cities(city, num_hops)
-                # print(f'Within {num_hops} hops: {pretty_string(distant_cities)}')
-            except Exception as e:
-                print(f'\nInvalid hop count [{hop_count}]')
-                print(sys.exc_info()[0])
+            if num_hops > 1:
+                distant_cities = get_connected_city_travel_times(city, num_hops)
+                print(f'Within {num_hops} hops: {pretty_string(distant_cities)}\n')
+
         elif city == 'Q' or city == 'Quit':
             is_running = False
         else:
