@@ -1,7 +1,7 @@
 # Lab 6: Credit Card Validation
 
 
-Let's write a function which returns whether a string containing a credit card number is valid as a boolean. The steps are as follows:
+Let's write a function `credit_card_validator` which returns whether a string containing a credit card number is valid as a boolean. The steps are as follows:
 
 1. Convert the input string into a list of ints
 2. Slice off the last digit.  That is the **check digit**.
@@ -23,4 +23,4 @@ For example, the worked out steps would be:
 5. `1  8  9  9  7  6  7  5  5  3  5  6  1  5  8`
 6. 85
 7. 5
-8. Valid!
+8. `True` Valid!
