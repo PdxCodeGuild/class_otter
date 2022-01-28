@@ -1,6 +1,5 @@
 # Version 1 of Lab
 import requests
-
 url = 'https://favqs.com/api/qotd'
 
 response = requests.get(url)
