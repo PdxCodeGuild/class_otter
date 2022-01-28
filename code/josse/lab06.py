@@ -7,7 +7,10 @@ def main(credit_card_number):
     for i in (credit_card_number):
         list_ints.append(int(i))
     check_digit = list_ints.pop()
-    print(list_ints)
+    list_ints.reverse()
+    for numbers in list_ints:
+        numbers * 2
+        print(numbers)
 
 
 main(user)
