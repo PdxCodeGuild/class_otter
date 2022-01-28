@@ -11,7 +11,7 @@
         # https://click.palletsprojects.com/en/8.0.x/
     # Packages can be used:
         # https://click.palletsprojects.com/en/8.0.x/setuptools/
-        # pip install --editable .
+        # pipenv install --editable .
             # It seems we need to reinstall when editing function names.
     # https://stackoverflow.com/questions/46330327/how-are-pipfile-and-pipfile-lock-used
         # https://pipenv-fork.readthedocs.io/en/latest/basics.html#specifying-versions-of-a-package
@@ -19,7 +19,7 @@
 from setuptools import setup
 
 setup(
-    name='ButterscotchPi',
+    name='butterscotch_pi',
     version='0.1.0',
     py_modules=[
         'basic_math',
@@ -31,8 +31,11 @@ setup(
     entry_points={
         'console_scripts': [
             'hello = strings:greeting',
+            'plus = basic_math:add',
+            'minus = basic_math:subtract',
             'multiply = basic_math:multiply',
             'divide = basic_math:divide',
+            
         ],
     },
 )

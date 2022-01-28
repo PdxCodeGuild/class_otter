@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 requests = "~=2.27"
 click = "*"
+butterscotchpi = {editable = true, path = "."}
 
 [dev-packages]
 
