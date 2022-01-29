@@ -4,12 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "~=2.27"
-click = "*"
-butterscotch-pi = {editable = true, path = "."}
-scipy = "*"
-matplotlib = "*"
-numpy = "*"
 
 [dev-packages]
 

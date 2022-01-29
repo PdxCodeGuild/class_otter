@@ -22,20 +22,25 @@ setup(
     name='butterscotch_pi',
     version='0.1.0',
     py_modules=[
-        'basic_math',
         'strings',
+        'basic_math',
+        'trig_math',
+        'linear_equations',
         ],
     install_requires=[
-        'Click',
+        'click',
     ],
     entry_points={
         'console_scripts': [
             'hello = strings:greeting',
-            'plus = basic_math:add',
-            'minus = basic_math:subtract',
+            'add = basic_math:add',
+            'subtract = basic_math:subtract',
             'multiply = basic_math:multiply',
             'divide = basic_math:divide',
-            
+            'linear_ps = linear_equations:linear_ps',
+            'basic_math = basic_math:the_maths',
+            'trig_math = trig_math:the_trig_maths',
+            'linear_math = linear_equations:the_linear_maths',
         ],
     },
 )
