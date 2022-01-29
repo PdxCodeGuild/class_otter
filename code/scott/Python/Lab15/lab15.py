@@ -12,7 +12,7 @@
 #Version 1 Complete
 import requests
 
-"""
+# """
 url = 'https://favqs.com/api/qotd'
 response = requests.get(url)
 print(response)
@@ -21,12 +21,12 @@ data = response.json()
 random_quote = data['quote']['body']
 author = data['quote']['author']
 print(random_quote, author)
-"""
+# """
 
 #Version 2 Complete
 
 headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}
-welcome = input('Welcome to the Quotes, would you like to continue? (yes/no): ')
+welcome = input("Welcome to 'Quotes', would you like to continue? (yes/no): ")
 parameters = {'page' : 1}
 # page = 1
 url = (f"https://favqs.com/api/quotes?page={parameters['page']}&filter=")
@@ -65,6 +65,7 @@ while welcome == 'yes':
 
 
     welcome = input('Would you like to see more Quotes?(yes/no): ')
+
 
 print('Good Bye!')
 
