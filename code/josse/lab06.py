@@ -2,19 +2,28 @@
 user = input("please enter your number:  ")
 
 
-def main(credit_card_number):
+def validator(credit_card_number):
     list_ints = []
     for i in (credit_card_number):
         list_ints.append(int(i))
     check_digit = list_ints.pop()
     list_ints.reverse()
-    for numbers in list_ints:
-        numbers * 2
-        print(numbers)
+    list_ints = double_every_other(list_ints)
+
+    return list_ints
 
 
-main(user)
+def double_every_other(list_ints):
+    for i in range(len(list_ints)):
+        if (i % 2) == 0:
+            list_ints[i] = list_ints[i] * 2
+    return list_ints
 
+
+print(validator(user))
+
+
+# print(double_every_other([1, 2, 3, 4]))
 # def remove_last_digit(credit_card_number):
 #     for i in list_ints:
 #     new_list = []
