@@ -32,7 +32,7 @@ for items in tickers_list:
     for item in items:
         tickers.append(item)
 
-tickers = tickers[0:10] # I only need 10 tickers from "What's Moiving" in CNN BUSINESS
+tickers = tickers[0:10] # I only need 10 companies from "What's Moiving" in CNN BUSINESS
 # pprint.pprint(tickers)
 
 
@@ -43,7 +43,7 @@ tickers_price = tickers_price[0:30]
 # pprint.pprint(tickers_price)
 
 price_index = [0,3,6,9,12,15,18,21,24,27]
-change_index = [1,4,7,11,13,16,19,22,25,28]
+change_index = [1,4,7,10,13,16,19,22,25,28]
 per_change_index = [2,5,8,11,14,17,20,23,26,29]
 
 
@@ -73,7 +73,6 @@ for change_price in changes:
         for change_p in change_pri:
             # print(change_p)
             for ch_p in change_p:
-                # print(ch_p)
                 # print(ch_p)
                 change_data.append(ch_p)
 # print(change_data)

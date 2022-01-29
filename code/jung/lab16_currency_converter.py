@@ -1,4 +1,5 @@
 import requests
+import pprint
 
 amount = int(input("Amount: "))
 to_currency = input("what currency do you want to convert to?: ").upper()
@@ -7,6 +8,7 @@ from_currency = "USD"
 class Currency_converter():
     def __init__(self, url):
         self.data = requests.get(url).json()
+        # pprint.pprint(self.data)
         self.currencies = self.data["rates"]
 
     def convert(self, from_currency, to_currency, amount):
@@ -21,6 +23,3 @@ converter = Currency_converter(url)
 print(f"{amount} {to_currency} = {converter.convert(to_currency, from_currency, amount)} US dollars")
 
 
-
-# awesome python
-# 
