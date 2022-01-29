@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "706f1beb39469a2f052003c99045d61a7a21e19bbbbac7da93990d233d584b70"
+            "sha256": "52007c5822993916b6f96766341d90adb4c344f661184578562918bcc984cc77"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,10 +16,6 @@
         ]
     },
     "default": {
-        "butterscotch-pi": {
-            "editable": true,
-            "path": "."
-        },
         "certifi": {
             "hashes": [
                 "sha256:78884e7c1d4b00ce3cea67b44566851c4343c120abd683433ce934a68ea58872",

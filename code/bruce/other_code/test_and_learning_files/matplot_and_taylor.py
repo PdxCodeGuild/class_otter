@@ -11,6 +11,7 @@ for degree in np.arange(1, 15, step=2):
     sin_taylor = approximate_taylor_polynomial(np.sin, 0, degree, 1,
                                                order=degree + 2)
     plt.plot(x, sin_taylor(x), label=f"degree={degree}")
+print(len(sin_taylor))    
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left',
            borderaxespad=0.0, shadow=True)
 plt.tight_layout()

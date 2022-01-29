@@ -4,11 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "~=2.27"
+requests = "*"
 click = "*"
-scipy = "*"
-matplotlib = "*"
-numpy = "*"
 
 [dev-packages]
 

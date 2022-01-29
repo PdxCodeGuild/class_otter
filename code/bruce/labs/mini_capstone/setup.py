@@ -19,7 +19,7 @@
 from setuptools import setup
 
 setup(
-    name='butterscotch-pi',
+    name='butterscotch_pi',
     version='0.1.0',
     py_modules=[
         'strings',
