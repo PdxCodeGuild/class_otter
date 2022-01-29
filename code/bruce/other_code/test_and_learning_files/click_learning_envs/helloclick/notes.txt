@@ -1,3 +1,15 @@
 Notes for basic click project
 
-pipenv install click
+Resources:
+    https://www.youtube.com/watch?v=kNke39OZ2k0
+
+Using 'pipenv install --editable .' DOES NOT add dependency 'click' (in setup.py) to Pipfile. Click is installed but not added to Pipfile.
+Using 'pipenv install click' DOES add 'click' to Pipfile.
+
+# No packages in Pipfile, 'click' and 'hello-click' not installed yet:
+    # Install the hello-click package.
+    pipenv install --editable .
+    # 'click' and 'hello-click' now installed.
+    # Pipfile packages only lists 'hello-click'.
+# Need to install click separately to have it added to Pipfile.
+    pipenv install click

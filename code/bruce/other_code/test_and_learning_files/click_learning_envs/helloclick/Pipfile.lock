@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9883f987371b6f1f2587dcedc207e1dfbd19ad9465b00082d002fa3a272c34ce"
+            "sha256": "4b7506e80ae9af9caf8b0ce8e65d2e7ef1f081ddc340f9fedbd7597d4eb2c3a0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,10 @@
             ],
             "markers": "platform_system == 'Windows'",
             "version": "==0.4.4"
+        },
+        "hello-click": {
+            "editable": true,
+            "path": "."
         }
     },
     "develop": {}
