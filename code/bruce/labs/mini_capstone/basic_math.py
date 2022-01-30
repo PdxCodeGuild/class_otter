@@ -17,58 +17,51 @@ def the_maths():
 @click.command()
 @click.option('-n1', '--number_01',
     type=float,
-    prompt='First number: ',
+    prompt='First number',
     help='The first number in addition process.')
 @click.option('-n2', '--number_02',
     type=float,
-    prompt='Second number: ',
+    prompt='Second number',
     help='The second number in addition process.')
-@click.option('-p', '--precision',
-    type=int,
-    prompt='Level of precision: ',
-    help='The number of decimal digits to round the result by.')
-def add(number_01, number_02, precision):
-    '''Accepts three arguments. Returns the value of N1 + N2, with the answer rounded to PRECISION digits.'''
-    click.echo(f"{number_01} + {number_02} = {round(number_01 + number_02, precision)}")
+def add(number_01, number_02):
+    '''Adds N1 and N2. Returns the value of N1 + N2.'''
+    click.echo(f"{number_01} + {number_02} = {number_01 + number_02}")
 
 # # TODO: Figure out if we can add an arbitrary amount of numbers.
+# # How to use *args and **kwargs with 'click'.
 # @click.command()
 
 
 @click.command()
 @click.option('-n1', '--number_01',
     type=float,
-    prompt='First number: ',
+    prompt='First number',
     help='The first number in subtraction process.')
 @click.option('-n2', '--number_02',
     type=float,
-    prompt='Second number: ',
+    prompt='Second number',
     help='The second number in subtraction process.')
-@click.option('-p', '--precision',
-    type=int,
-    prompt='Level of precision: ',
-    help='The number of decimal digits to round the result by.')
-def subtract(number_01, number_02, precision):
-    '''Accepts three arguments. Returns the value of first N1 - N2, with the answer rounded to PRECISION digits.'''
-    click.echo(f"{number_01} - {number_02} = {round(number_01 - number_02, precision)}")
+def subtract(number_01, number_02):
+    '''Subtracts N2 from N1. Returns the value of N1 - N2.'''
+    click.echo(f"{number_01} - {number_02} = {number_01 - number_02}")
 
 @click.command()
 @click.option('-n1', '--number_01',
     # Default value is shown when displaying the input prompt.
     # The default value also specifies a 'type'.
     type=float,
-    prompt='First number: ',
+    prompt='First number',
     help='The first number in multiplication operation.')
 @click.option('-n2', '--number_02',
     type=float,
-    prompt='Second number: ',
+    prompt='Second number',
     help='The second number in multiplication operation.')
 @click.option('-p', '--precision',
     type=int,
-    prompt='Level of precision: ',
+    prompt='Level of precision',
     help='The number of decimal digits to round the result by.')
 def multiply(number_01, number_02, precision):
-    '''Accepts three numeric arguments. Returns the product (multiplication) of arguments N1 and N2, with the answer rounded to PRECISION digits.'''
+    '''Multiplies N1 and N2. Returns the product (multiplication) of arguments N1 and N2, with the answer rounded to PRECISION digits.'''
     # Don't seem to need error handling, here, for non numeric.
     # # Error: Invalid value for '-n1', '--number_01': 'a' is not a valid integer.
     click.echo(f"{number_01} * {number_02} = {round(number_01 * number_02, precision)}")
@@ -77,18 +70,18 @@ def multiply(number_01, number_02, precision):
 @click.command()
 @click.option('-n1', '--number_01',
     type=float,
-    prompt='First number: ',
+    prompt='First number',
     help='The first number (dividend) in division operation.')
 @click.option('-n2', '--number_02',
     type=float,
-    prompt='First number: ',
+    prompt='First number',
     help='The second number (divisor) in division operation.')
 @click.option('-p', '--precision',
     type=int,
-    prompt='Level of precision: ',
+    prompt='Level of precision',
     help='The number of decimal digits to round the result by.')
 def divide(number_01, number_02, precision):
-    '''Accepts three numeric arguments. Returns the result of division of the two arguments N1 and N2, with the answer rounded to PRECISION digits.'''
+    '''Divides N1 by N2. Returns the result of division of the two arguments N1 and N2, with the answer rounded to PRECISION digits.'''
     if number_02 != 0:
         click.echo(f"{number_01} / {number_02} = {round(number_01 / number_02, precision)}")
     else:

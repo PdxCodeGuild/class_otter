@@ -32,16 +32,26 @@ setup(
     ],
     entry_points={
         'console_scripts': [
+            # Greetings and strings.
             'hello = strings:greeting',
+
+            # Commands to get to the module/page.
+            # 'basic_math = basic_math:the_maths',
+            # 'trig_math = trig_math:the_trig_maths',
+            # 'linear_math = linear_equations:the_linear_maths',
+
+            'basic = basic_math:the_maths',
+            'trig = trig_math:the_trig_maths',
+            'linear = linear_equations:the_linear_maths',
+
+            # Commands to get to the specific function.
             'add = basic_math:add',
             'subtract = basic_math:subtract',
             'multiply = basic_math:multiply',
             'divide = basic_math:divide',
-            'linear_ps = linear_equations:linear_ps',
-            'basic_math = basic_math:the_maths',
-            'trig_math = trig_math:the_trig_maths',
             'sine = trig_math:sine',
-            'linear_math = linear_equations:the_linear_maths',
+            'cosine = trig_math:cosine',
+            'linear_ps = linear_equations:linear_ps',
         ],
     },
 )
