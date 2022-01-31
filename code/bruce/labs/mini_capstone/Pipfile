@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 butterscotch-pi = {editable = true, path = "."}
+sympy = "*"
+numpy = "*"
+click = "*"
+matplotlib = "*"
 
 [dev-packages]
 
