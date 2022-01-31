@@ -6,7 +6,7 @@ import math
 
 
 ##### My modified #####
-m = -.5
+m = .5
 x1 = 1
 y1 = 1
 line_label = f"{m} * (x - {x1}) + {y1}"

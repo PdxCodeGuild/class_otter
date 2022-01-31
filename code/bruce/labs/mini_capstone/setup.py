@@ -62,6 +62,8 @@ setup(
 
             # Linear equations.
             'linear_ps = linear_math:linear_ps',
+            'linear_si = linear_math:linear_si',
+            'linear_pp = linear_math:linear_pp',
         ],
     },
 )

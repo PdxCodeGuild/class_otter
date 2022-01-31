@@ -34,18 +34,18 @@ specform_dict = {
 # Maybe use option to specify type of equation.
 # We are just using the point-slope form for now.
 # One of several options:
-    # point-slope
-    # slope-intercept
-    # point-point
+    # point-slope       : y - y1 = m (x - x1)
+    # slope-intercept   : y = m x + b
+    # point-point       : y - y1 = (y2 - y1) / (x2 - x1) * (x - x1)
 @the_linear_maths.command()
 @click.option('-x1', '--x1',
     type=float,
-    prompt='x-coord',
-    help='x-coordinate of the point.')
+    prompt='x-value',
+    help='x-value of the point.')
 @click.option('-y1', '--y1',
     type=float,
-    prompt='y-coord',
-    help='y-coordinate of the point.')
+    prompt='y-value',
+    help='y-value of the point.')
 @click.option('-m', '--slope',
     type=float,
     prompt='slope',
@@ -66,21 +66,71 @@ def linear_ps(x1, y1, slope, xvalue):
     y = 0
     x = xvalue
     y = slope * (x - x1) + y1
-    click.echo(f'Linear equation: y = {slope} * (x - {x1}) + {y1}')
+    click.echo(f'Point-Slope form: y - {y1} = {slope} * (x - {x1})')
     click.echo(f"Your values: x:{x}, y:{y}")
 
 
-# Solve [0 = m * (x - x1) + y1 - y] for x: (m*x1 + y - y1)/m
-# Solve [0 = m * (x - x1) + y1 - y] for y: m*x - m*x1 + y1
-# Solve [0 = m * (x - x1) + y1 - y] for m: (y - y1)/(x - x1)
-# Solve [0 = m * (x - x1) + y1 - y] for x1: (m*x - y + y1)/m
-# Solve [0 = m * (x - x1) + y1 - y] for y1: -m*x + m*x1 + y
+@the_linear_maths.command()
+@click.option('-m', '--slope',
+    type=float,
+    prompt='slope',
+    help='Slope of the line, typically written "m".')
+@click.option('-yint', '--yint',
+    type=float,
+    prompt='y-intercept',
+    help='Value of y-intercept.')
+@click.option('-x', '--xvalue',
+    type=float,
+    prompt='xvalue',
+    help='x value of the statement.')
+def linear_si(slope, yint, xvalue):
+    """Prints slope-intercept form of linear equation."""
+    # slope-intercept   : y = m x + b
+    x = xvalue
+    y = slope * x + yint
+    click.echo(f"Slope-Intercept form: y = {slope} * x + {yint}")
+    click.echo(f"Your values: x:{x}, y:{y}")
 
+
+@the_linear_maths.command()
+@click.option('-x1', '--x1',
+    type=float,
+    prompt='x-value',
+    help='x-value of the first point.')
+@click.option('-y1', '--y1',
+    type=float,
+    prompt='y-value',
+    help='y-value of the first point.')
+@click.option('-x2', '--x2',
+    type=float,
+    prompt='x-value',
+    help='x-value of the second point.')
+@click.option('-y2', '--y2',
+    type=float,
+    prompt='y-value',
+    help='y-value of the second point.')
+@click.option('-x', '--xvalue',
+    type=float,
+    prompt='xvalue',
+    help='x value of the statement.')
+def linear_pp(x1, y1, x2, y2, xvalue):
+    """Prints Point-Point form of linear equation."""
+    # point-point       : y - y1 = (y2 - y1) / (x2 - x1) * (x - x1)
+    x = xvalue
+    y = (y2 - y1) / (x2 - x1) * (x - x1) + y1
+    click.echo(f"Point-Point form: y - {y1} = ({y2} - {y1}) / ({x2} - {x1}) * (x - {x1})")
+    click.echo(f"Your values: x:{x}, y:{y}")
+
+
+# NOTE: Maybe provide three groups of inputs and present the linear
+    # equation of one type?
 
 
 # @click.option('-i', '--intercept')
 
 the_linear_maths.add_command(linear_ps)
+the_linear_maths.add_command(linear_si)
+the_linear_maths.add_command(linear_pp)
 
 if __name__ == '__main__':
     the_linear_maths()

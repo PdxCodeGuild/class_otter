@@ -111,7 +111,7 @@ def divide(number_01, number_02, precision):
 @click.command()
 @click.option('-n', '--number',
     type=int,
-    prompt='Number to calculator factorial of:',
+    prompt='Number to calculator factorial of',
     help='The number to process I!.')
 @click.option('-p', '--precision',
     type=int,
@@ -130,7 +130,7 @@ def factorial_n(number):
 @click.command()
 @click.option('-n', '--number',
     type=float,
-    prompt='Number to be the denominator:',
+    prompt='Number to be the denominator',
     help='The number in the bottom of the fraction.')
 @click.option('-p', '--precision',
     type=int,
@@ -146,7 +146,7 @@ def inverse(number, precision):
 @click.command()
 @click.option('-n', '--number',
     type=float,
-    prompt='Radicand:',
+    prompt='Radicand',
     help='Number inside the square root (radicand)')
 @click.option('-p', '--precision',
     type=int,
@@ -160,11 +160,11 @@ def sqroot(number, precision):
 @click.command()
 @click.option('-n', '--number',
     type=float,
-    prompt='Base number:',
+    prompt='Base number',
     help='The base number to be raised to nth power.')
 @click.option('-pow', '--power',
     type=float,
-    prompt='Power:',
+    prompt='Power',
     help='The nth powerwhich the base number is being raised to.')
 @click.option('-p', '--precision',
     type=int,
@@ -178,11 +178,11 @@ def nth_power(number, power, precision):
 @click.command()
 @click.option('-n', '--number',
     type=float,
-    prompt='Argument:',
+    prompt='Argument',
     help='NUMBER to calculate log of.')
 @click.option('-b', '--base',
     type=float,
-    prompt='Base:',
+    prompt='Base',
     help='BASE of the log to calculate.')
 @click.option('-p', '--precision',
     type=int,
