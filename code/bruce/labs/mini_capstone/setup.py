@@ -28,6 +28,7 @@ setup(
         # 'trig_math',
         # 'linear_math',
         ],
+    package_dir = {'': 'the_logic'},
     install_requires=[
         'click',
         'sympy',

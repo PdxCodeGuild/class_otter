@@ -112,8 +112,8 @@ print(f"Equation: 0 = (y2 - y1) / (x2 - x1) * (x - x1) - (y - y1)")
 for var in tuple_of_symbols:
     sol = solve(expr, var)
     print(f"Solve for {var}: {sol[0]}")
-    # print(f"var: {type(var)} : {var}")
-# print(f"sol: {type(sol)} : {sol}")
+    print(f"var: {type(var)} : {var}")
+print(f"sol: {type(sol)} : {sol}")
 
 # Solve for x: (x1*y - x1*y2 - x2*y + x2*y1)/(y1 - y2)
 # Solve for y: (x*y1 - x*y2 + x1*y2 - x2*y1)/(x1 - x2)

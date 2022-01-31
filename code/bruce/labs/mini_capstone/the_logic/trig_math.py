@@ -116,9 +116,9 @@ def tan(my_pass_thing, angle, precision):
     click.echo(f"""tan({angle} <{my_pass_thing.chosen_units}>) = {
         round(result, precision)}""")
 
-the_trig_maths.add_command(sine)
-the_trig_maths.add_command(cosine)
-the_trig_maths.add_command(tan)
+# the_trig_maths.add_command(sine)
+# the_trig_maths.add_command(cosine)
+# the_trig_maths.add_command(tan)
 
 
 if __name__ == '__main__':

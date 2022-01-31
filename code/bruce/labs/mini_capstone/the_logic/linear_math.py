@@ -55,7 +55,7 @@ specform_dict = {
     prompt='xvalue',
     help='x value of the statement.')
 def linear_ps(x1, y1, slope, xvalue):
-    """Prints point-slope form of linear equation."""
+    """Prints Point-Slope form of linear equation."""
     # tuple_of_symbols = symbols('x1,y,m,x')
     # x1,y,m,x = tuple_of_symbols
     # TODO: Create an option so that linear_ps displays the general
@@ -84,7 +84,7 @@ def linear_ps(x1, y1, slope, xvalue):
     prompt='xvalue',
     help='x value of the statement.')
 def linear_si(slope, yint, xvalue):
-    """Prints slope-intercept form of linear equation."""
+    """Prints Slope-Intercept form of linear equation."""
     # slope-intercept   : y = m x + b
     x = xvalue
     y = slope * x + yint
@@ -128,9 +128,9 @@ def linear_pp(x1, y1, x2, y2, xvalue):
 
 # @click.option('-i', '--intercept')
 
-the_linear_maths.add_command(linear_ps)
-the_linear_maths.add_command(linear_si)
-the_linear_maths.add_command(linear_pp)
+# the_linear_maths.add_command(linear_ps)
+# the_linear_maths.add_command(linear_si)
+# the_linear_maths.add_command(linear_pp)
 
 if __name__ == '__main__':
     the_linear_maths()
