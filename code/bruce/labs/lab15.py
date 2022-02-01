@@ -77,7 +77,7 @@ def main():
         if get_next_group == True and on_last_page == False:
             page += 1
             print("That's the end of this group of pages.")
-            done_with_group_want_another_batch = input(f"Do you want to fetch another batch for this same word, '{search_term}', <Enter> or [Q]uit? ").upper()
+            done_with_group_want_another_batch = input(f"Do you want to fetch another batch for this same word, '{search_term}' <Enter>, or [Q]uit? ").upper()
             print()
             if done_with_group_want_another_batch == 'Q':
                 break
@@ -120,6 +120,18 @@ def main():
             quotes_per_page = 5
         else:
             quotes_per_page = int(quotes_per_page)
+        
+        # TODO: Enclose this loop in a function. Understand how many arguments are needed.
+        # Function name:
+        # quotes_per_page
+        # json_response
+            # just_the_quotes
+            # Key: 'quotes'
+            # Key: 'body'
+
+        # Returned items:
+        # get_next_group
+        
         
         # Loop through the returned quotes.
         for i in range(len(just_the_quotes)):

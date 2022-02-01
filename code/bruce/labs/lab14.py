@@ -37,27 +37,8 @@ from requests.exceptions import HTTPError
     # You can also add support for multiple pages.
 
 
-############# Utilities #############
-# These will be added to modules in the future,
-# but we are hard-coding the function into this file for now.
-
-def print_variable_and_description(
-        variable_under_review,
-        description_of_logic='',
-        print_logic_results=True
-        ):
-    '''Accepts three arguments: A variable we are examining,
-    a description of the logic we are examining, and a print flag.
-    '''
-    __name__ = print_variable_and_description
-    string_result = f"{print_variable_and_description.__name__}: {description_of_logic}: {variable_under_review}"
-    if print_logic_results:
-        print(string_result)
-#####################################
-
-
 def submit_request_get_json(url='https://icanhazdadjoke.com/', **kwargs):
-    '''Accepts argument of search term and search_word. Submits request to website and, hopefully, returns json object.'''
+    '''Accepts argument of url. Submits request to website and, hopefully, returns json object.'''
     try:
         # Get response object.
         response = requests.get(
@@ -161,7 +142,13 @@ def main():
     # ######################################
 
     ########## Uses search word ##########
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     page_requested = 1
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     while True:
         # Welcome user and tell them what we're doing here.
         welcome_string = "\nWelcome to icanhazdadjoke Searcherator 2022!"
@@ -171,7 +158,7 @@ def main():
         print(what_we_are_doing_here_string)
 
         # Prompt user to enter their search term.
-        prompt_string = "What kind of dad joke ya lookin for? "
+        prompt_string = "What kind of dad jokes ya lookin for? "
         while True:
             search_word = input(prompt_string)
             if search_word != '':
@@ -186,6 +173,7 @@ def main():
         length_of_scanner = len(prompt_string + search_word)
         console_display_scanner(length_of_scanner)
 
+<<<<<<< Updated upstream
         headers = {
             'Accept': 'application/json',
             'User-Agent': 'https://github.com/brucestull'
@@ -203,10 +191,39 @@ def main():
         while True:
             # Get the response from the API and return dictionary.
             json_response = submit_search_request_get_json(search_word, page=page_requested, **headers)
+=======
+        # Get the response from the API and return dictionary.
+        json_response = submit_search_request_get_json(search_word)
+
+        # Need to remember the keys for pages etc.
+        # current_page : 1
+        # limit : 20
+        # next_page : 2
+        # previous_page : 1
+        # search_term : the
+        # status : 200
+        # total_jokes : 390
+        # total_pages : 20
+
+        # Display how many results and how many pages.
+        search_results_display_string = f'''
+        Search term: {json_response['search_term']}
+        Total number of jokes: {json_response['total_jokes']}
+        Pages total: {json_response['total_pages']}
+        '''
+        
+        print(search_results_display_string)
+
+        # The jokes are 'list' in the 'results' key.
+        the_jokes_list = json_response['results']
+
+        # print(f"{type(the_jokes_list)}{the_jokes_list}")
+>>>>>>> Stashed changes
 
             # The jokes are in the 'results' key.
             the_jokes_list = json_response['results']
 
+<<<<<<< Updated upstream
             if page_requested == 1:
                 print(f"search_term: {json_response['search_term']}")
                 print(f"Number of 'results' returned: {len(json_response['results'])}")
@@ -252,6 +269,29 @@ def main():
         print("Thanks for using icanhazdadjoke Searcherator 2022!")
         break
     ######################################
+=======
+        while the_jokes_list:
+            # Loop and display the jokes to user.
+            # Don't delete or pop the jokes, allow user to recycle
+                # through them if they wish.
+            for i in range(len(the_jokes_list)):
+                print(f"Joke <{i + 1}>:")
+                print(f"Joke ID: {the_jokes_list[i]['id']}")
+                print(the_jokes_list[i]['joke'])
+                print()
+                # Display this 'continue' prompt until reaching the last joke.
+                if i < len(the_jokes_list) - 1:
+                    input("Press <Enter> to continue to next joke. ")
+                print()
+            break
+
+        print(f"Sorry, out of jokes for search term: '{json_response['search_term']}'.")
+        print()
+        break
+    ######################################
+
+    pass
+>>>>>>> Stashed changes
 
 if __name__ == '__main__':
     main()
