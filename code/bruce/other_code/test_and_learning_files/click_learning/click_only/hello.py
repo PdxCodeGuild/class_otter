@@ -30,6 +30,9 @@ if __name__ == '__main__':
 # Since we didn't 'install' this module, these are some commands which
 # run the python file and allow passing of options into the function:
 
+# Will show partial (first sentence?) of docstring, and 'option's.
+# python hello.py --help
+
 # This will prompt for NAME, and use default COUNT:
 # 'python hello.py'
 
