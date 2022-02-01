@@ -41,3 +41,7 @@ if __name__ == '__main__':
 
 # This will use the provided NAME and default COUNT:
 # 'python hello.py --name Ashton'
+
+# NOTE: Once the package is installed, and entry points specified, the
+# calling of 'hello()' in 'if __name__ == '__main__':' will no longer be needed.
+# Click will take care of calling the functions through the entry points, I think.
