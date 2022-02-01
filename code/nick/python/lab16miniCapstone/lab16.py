@@ -37,7 +37,6 @@ combined_wb = xw.Book()
 for excel_file in excel_files:
        wb = xw.Book(excel_file)
        for sheet in wb.sheets:
-              sheet.name=f'nba_{year}'
               sheet.api.Copy(After=combined_wb.sheets[0].api)
        wb.close()
 
