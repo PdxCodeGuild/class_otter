@@ -23,7 +23,9 @@ author = data['quote']['author']
 print(random_quote, author)
 # """
 
+
 #Version 2 Complete
+
 
 headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}
 welcome = input("Welcome to 'Quotes', would you like to continue? (yes/no): ")
@@ -40,6 +42,14 @@ while welcome == 'yes':
     data = response.json()
     # print(data)
     num = 0
+
+
+
+    data = response.json()
+    # print(data)
+    num = 0
+    # quote = data['quotes'][num]['body']
+    # author = data['quotes'][num]['author']
 
     for i in data['quotes']:
         print(f"{data['quotes'][num]['body']}")
@@ -64,8 +74,16 @@ while welcome == 'yes':
                 break
 
 
+tt
     welcome = input('Would you like to see more Quotes?(yes/no): ')
 
 
 print('Good Bye!')
+
+
+    welcome = input('Would you like to see more?(yes/no): ')
+
+print('Good Bye!')
+
+# print(random_quote,author)
 
