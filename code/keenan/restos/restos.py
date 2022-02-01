@@ -3,12 +3,9 @@
 # 01/27/2022
 # Keenan Tabusa
 
-# installed the beautifulsoup4 library for this project
-# could have used json - we've used this in the past to parse HTML files, bs4 is an alternative
 
-# using beautifulsoup to pull restaurant category data from yelp
-# can output to a csv showing restaurant name and categories?
-# graph it
+
+# I wanted to use beautifulsoup to pull restaurant category data from yelp and graph it
 
 # note: case sensitive BeautifulSoup and Counter
 from bs4 import BeautifulSoup
@@ -17,11 +14,7 @@ import lxml
 from collections import Counter
 from matplotlib import pyplot as plt
 
-# open the webpage
-# save the 'restaurant' as an individual variable (searching by class) [didn't use the resto names for this version]
-# scatter plot by category/color, x and y: cost and rating
 
-# this will just ping the page
 page = requests.get('https://www.yelp.com/search?find_desc=Restaurants&find_loc=Portland%2C+OR&ns=1')
 # This takes the page and converts it to text
 page_text = page.text
@@ -46,23 +39,19 @@ soup_page3 = BeautifulSoup(page3_text, 'lxml')
 
 
 # This section pulls the names of the restaurants from the first page.
-# This should be the parse info we want? class = "css-1422juy"
-# name = "lechon" is what we want to print for each instance
-# the first instance of this class is just a 'portland' button, the second is 'restaurants'
+
+
 # restaurants = soup_page.find_all("a", class_="css-1422juy")
 # print(restaurants)
-# print(len(restaurants))
-# print('\n')
 
 # this is able to pull all of the class css items, that have the attribute 'name', in order to filter out the generic link buttons
 # for restaurant in restaurants:
 #    if restaurant.has_attr("name"):
 #        print(restaurant)
 #        print(restaurant.contents)
-
-
 # print(restaurants)
-print('\n')
+# print('\n')
+
 categories = soup_page.find_all('p', class_ ="css-1p8aobs")
 categories2 = soup_page2.find_all('p', class_ ="css-1p8aobs")
 categories3 = soup_page3.find_all('p', class_ ="css-1p8aobs")
@@ -93,36 +82,39 @@ for cats in categories3:
 # for cats in categories5:
 #      category_list.append(cats.get_text())
 
-# print(category_list)
-print(len(category_list))
-# Counter creates a specific counter class of dictionary
-count = Counter(category_list)
-# print(count)
 
-# casting the Counter data type to a regular dictionary
+# Counter creates a specific counter class of dictionary so we cast the Counter data type to a regular dictionary
+count = Counter(category_list)
 count_dict = dict(count)
-print(count_dict)
-print('\n')
 
 # the dictionary needs to be updated with .items() to update the dict key value pairs to a list of tuples
 count_list = count_dict.items()
+
 # can add the  reverse=True, parameter to reverse the order of the category headers
 count_list = sorted(count_list)
 
+
 # using a * before count_list fixes this from a "x, y = zip(count_list) ValueError: too many values to unpack (expected 2)"
-# need to look in to why, it may just remove the 'dict_items()' bracket from the count_list?
+# need to look in to why, it may just remove the 'dict_items()' bracket from the count_list
 x, y = zip(*count_list)
 
-# .barh for horizontal barchart.
+
+# Graphing using maplotlib
 plt.bar(x,y)
 plt.xlabel('Retaurant Categories')
 plt.xticks(rotation=45, ha='right')
 plt.ylabel('Frequency')
-plt.title('The Frequency of Restaurant Categories in Yelp')
+plt.title('The Frequency of Restaurant Categories for the Top 30 Restaurants in Yelp')
 plt.show()
+
+
+# scatter plot by category/color, x and y: cost and rating
 
 # can adjust the below string to search by other locations
 # https://www.yelp.com/search?find_desc=Restaurants&find_loc=Portland%2C+OR&ns=1
+
+# can output to a csv showing restaurant name and categories?
+
 
 
 # In order to sort a list by the second variable we can use this function to sort them in place
