@@ -10,7 +10,8 @@
 # https://www.symbolab.com/solver/linear-equation-calculator/simplify%20y%20%3D%20-1%5Cleft(x%20-%201%5Cright)%20%2B%201?or=input
 
 import click
-from sympy import symbols, solve
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 @click.group()
@@ -68,6 +69,7 @@ def linear_ps(x1, y1, slope, xvalue):
     y = slope * (x - x1) + y1
     click.echo(f'Point-Slope form: y - {y1} = {slope} * (x - {x1})')
     click.echo(f"Your values: x:{x}, y:{y}")
+    plot_a_line(slope,x1,y1,x,y)
 
 
 @the_linear_maths.command()
@@ -90,6 +92,7 @@ def linear_si(slope, yint, xvalue):
     y = slope * x + yint
     click.echo(f"Slope-Intercept form: y = {slope} * x + {yint}")
     click.echo(f"Your values: x:{x}, y:{y}")
+    plot_a_line(slope,0,yint,x,y)
 
 
 @the_linear_maths.command()
@@ -120,6 +123,31 @@ def linear_pp(x1, y1, x2, y2, xvalue):
     y = (y2 - y1) / (x2 - x1) * (x - x1) + y1
     click.echo(f"Point-Point form: y - {y1} = ({y2} - {y1}) / ({x2} - {x1}) * (x - {x1})")
     click.echo(f"Your values: x:{x}, y:{y}")
+    plot_a_line((y2 - y1) / (x2 - x1),x1,y1,x,y)
+
+
+def plot_a_line(slope, ex, wye, ux, uy):
+    ##### My modified #####
+    m = slope
+    x1 = ex
+    y1 = wye
+    line_label = f"{m} * (x - {x1}) + {y1}"
+
+    x = np.linspace(-5, 5, 100)
+    y = m * (x - x1) + y1
+    fig, ax = plt.subplots()
+    ax.plot(ux, uy, 'go', label=f'User Point: {ux},{uy}')
+    ax.plot(x, y, label=line_label)
+    ax.set_aspect('equal')
+    ax.grid(True, which='both')
+
+    ax.axhline(y=0, color='k')
+    ax.axvline(x=0, color='k')
+
+    # loc= 'best', 'upper right', 'upper left', 'lower left', 'lower right', 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
+    plt.legend(loc='best', shadow=True)
+    plt.show()
+    #######################
 
 
 # NOTE: Maybe provide three groups of inputs and present the linear

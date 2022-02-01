@@ -1,69 +1,22 @@
+click
+setuptools-setup
+math
+sympy
+numpy
+matplotlib
 
-
-
-Using 'pipenv install --editable .' DOES NOT add dependency 'click' (in setup.py) to Pipfile. Click is installed but not added to Pipfile.
-Using 'pipenv install click' DOES add 'click' to Pipfile.
-
-# No packages in Pipfile, 'click' and 'hello-click' not installed yet:
-    # Install the hello-click package.
-    pipenv install --editable .
-    # 'click' and 'hello-click' now installed.
-    # Pipfile packages only lists 'hello-click'.
-# Need to install click separately to have it added to Pipfile.
-    pipenv install click
-
-
-## setup.py:
-    install_requires=[
-        'click',
-    ],
-
-## pip list:
-Package    Version
----------- -------
-colorama   0.4.4
-pip        21.3.1
-setuptools 60.2.0
-wheel      0.37.1
-
-## Pipfile:
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
-
-[packages]
-
-[dev-packages]
-
-[requires]
-python_version = "3.10"
-
-# Try this to see if it adds 'click' to 'Pipfile':
-    pipenv install -e .
-
-## pip list:
-Package     Version Editable project location
------------ ------- -------------------------------------------------------------------------------------------------------------------
-click       8.0.3
-colorama    0.4.4
-hello-click 0.1.0   c:\users\bruce\programming\class_otter\code\bruce\other_code\test_and_learning_files\click_learning_envs\helloclick
-pip         21.3.1
-setuptools  60.2.0
-wheel       0.37.1
-
-## Pipfile:
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
-
-[packages]
-hello-click = {editable = true, path = "."}
-
-[dev-packages]
-
-[requires]
-python_version = "3.10"
-
-### Installs 'hello-click' (my package) and 'click' but adds only 'hello-click' to the Pipfile.
+1. Wanted to use some CLI module.
+2. Click was mentioned so I checked it out.
+3. It does several things.
+    a. Eliminates need to type 'python file.py.
+    b. Add decorators so functions can be called with options
+    c. Provides a way to pass objects between functions in a module.
+    d. Provides framework so I just add to each function:
+        1. option
+        2. help text
+        3. prompt text
+        4. type
+        5. default values
+4. Used setuptools-setup to build the package and set up entry points
+    a. Entry points are the commands used to run the functions.
+    b. The use of entry points allows use of options.

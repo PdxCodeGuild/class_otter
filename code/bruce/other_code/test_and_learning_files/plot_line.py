@@ -4,27 +4,37 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
+def plot_a_line(slope, ex, wye, ux, uy):
+    ##### My modified #####
+    m = slope
+    x1 = ex
+    y1 = wye
+    line_label = f"{m} * (x - {x1}) + {y1}"
 
-##### My modified #####
+    x = np.linspace(-5, 5, 100)
+    y = m * (x - x1) + y1
+    fig, ax = plt.subplots()
+    ax.plot(ux, uy, 'go', label='User Point')
+    ax.plot(x, y, label=line_label)
+    ax.set_aspect('equal')
+    ax.grid(True, which='both')
+
+    ax.axhline(y=0, color='k')
+    ax.axvline(x=0, color='k')
+
+    # loc= 'best', 'upper right', 'upper left', 'lower left', 'lower right', 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
+    plt.legend(loc='best', shadow=True)
+    plt.show()
+    #######################
+
+
 m = .5
 x1 = 1
 y1 = 1
-line_label = f"{m} * (x - {x1}) + {y1}"
+userx = 1
+usery = 1 
+plot_a_line(m,x1,y1,userx,usery)
 
-x = np.linspace(-5, 5, 100)
-y = m * (x - x1) + y1
-fig, ax = plt.subplots()
-ax.plot(x, y, label=line_label)
-ax.set_aspect('equal')
-ax.grid(True, which='both')
-
-ax.axhline(y=0, color='k')
-ax.axvline(x=0, color='k')
-
-# loc= 'best', 'upper right', 'upper left', 'lower left', 'lower right', 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
-plt.legend(loc='best', shadow=True)
-plt.show()
-#######################
 
 
 # x = np.linspace(-10.0, 10.0, num=100)
