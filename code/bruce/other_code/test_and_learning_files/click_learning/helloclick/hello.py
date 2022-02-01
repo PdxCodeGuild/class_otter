@@ -80,3 +80,6 @@ def say(my_pass_variable, name, repeat, out):
         # This line writes to the file using .write(), which is not a 'click' function.
         # 'file=out' writes the string to OUT.
         click.echo(f"Greetings, {name}!", file=out)
+
+if __name__ == '__main__':
+    cli()

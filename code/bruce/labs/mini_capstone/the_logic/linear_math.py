@@ -24,11 +24,11 @@ def the_linear_maths():
     pass
 
 
-specform_dict = {
-    'ps': 'point-slope',
-    'si': 'slope-intercept',
-    'pp': 'point-point',
-}
+# specform_dict = {
+#     'ps': 'point-slope',
+#     'si': 'slope-intercept',
+#     'pp': 'point-point',
+# }
 
 
 # Prompt for three variables to create a linear equation.
@@ -39,6 +39,10 @@ specform_dict = {
     # slope-intercept   : y = m x + b
     # point-point       : y - y1 = (y2 - y1) / (x2 - x1) * (x - x1)
 @the_linear_maths.command()
+@click.option('-plot', '--do_plot',
+    default=False,
+    is_flag=True,
+    help='Flag for displaying plot using "numpy" and "matplotlib"')
 @click.option('-x1', '--x1',
     type=float,
     prompt='x-value',
@@ -55,7 +59,7 @@ specform_dict = {
     type=float,
     prompt='xvalue',
     help='x value of the statement.')
-def linear_ps(x1, y1, slope, xvalue):
+def linear_ps(x1, y1, slope, xvalue, do_plot):
     """Prints Point-Slope form of linear equation."""
     # tuple_of_symbols = symbols('x1,y,m,x')
     # x1,y,m,x = tuple_of_symbols
@@ -69,10 +73,15 @@ def linear_ps(x1, y1, slope, xvalue):
     y = slope * (x - x1) + y1
     click.echo(f'Point-Slope form: y - {y1} = {slope} * (x - {x1})')
     click.echo(f"Your values: x:{x}, y:{y}")
-    plot_a_line(slope,x1,y1,x,y)
+    if do_plot:
+        plot_a_line(slope,x1,y1,x,y)
 
 
 @the_linear_maths.command()
+@click.option('-plot', '--do_plot',
+    default=False,
+    is_flag=True,
+    help='Flag for displaying plot using "numpy" and "matplotlib"')
 @click.option('-m', '--slope',
     type=float,
     prompt='slope',
@@ -85,17 +94,22 @@ def linear_ps(x1, y1, slope, xvalue):
     type=float,
     prompt='xvalue',
     help='x value of the statement.')
-def linear_si(slope, yint, xvalue):
+def linear_si(slope, yint, xvalue, do_plot):
     """Prints Slope-Intercept form of linear equation."""
     # slope-intercept   : y = m x + b
     x = xvalue
     y = slope * x + yint
     click.echo(f"Slope-Intercept form: y = {slope} * x + {yint}")
     click.echo(f"Your values: x:{x}, y:{y}")
-    plot_a_line(slope,0,yint,x,y)
+    if do_plot:
+        plot_a_line(slope,0,yint,x,y)
 
 
 @the_linear_maths.command()
+@click.option('-plot', '--do_plot',
+    default=False,
+    is_flag=True,
+    help='Flag for displaying plot using "numpy" and "matplotlib"')
 @click.option('-x1', '--x1',
     type=float,
     prompt='x-value',
@@ -116,14 +130,15 @@ def linear_si(slope, yint, xvalue):
     type=float,
     prompt='xvalue',
     help='x value of the statement.')
-def linear_pp(x1, y1, x2, y2, xvalue):
+def linear_pp(x1, y1, x2, y2, xvalue, do_plot):
     """Prints Point-Point form of linear equation."""
     # point-point       : y - y1 = (y2 - y1) / (x2 - x1) * (x - x1)
     x = xvalue
     y = (y2 - y1) / (x2 - x1) * (x - x1) + y1
     click.echo(f"Point-Point form: y - {y1} = ({y2} - {y1}) / ({x2} - {x1}) * (x - {x1})")
     click.echo(f"Your values: x:{x}, y:{y}")
-    plot_a_line((y2 - y1) / (x2 - x1),x1,y1,x,y)
+    if do_plot:
+        plot_a_line((y2 - y1) / (x2 - x1),x1,y1,x,y)
 
 
 def plot_a_line(slope, ex, wye, ux, uy):
@@ -159,11 +174,10 @@ def plot_a_line(slope, ex, wye, ux, uy):
     # equation of one type?
 
 
-# @click.option('-i', '--intercept')
-
 # the_linear_maths.add_command(linear_ps)
 # the_linear_maths.add_command(linear_si)
 # the_linear_maths.add_command(linear_pp)
+
 
 if __name__ == '__main__':
     the_linear_maths()

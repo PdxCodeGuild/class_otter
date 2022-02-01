@@ -195,7 +195,9 @@ def log(number, base, precision):
     else:
         click.echo(f'log base {base} of {number} = {round(math.log(number, base), precision)}')
 
-
+# In lieu of using 'the_maths.add_command(<command>)' here,
+# we could use a decorator '@the_maths.command()' at each function above.
+# See 'trig_math.py' for '@the_trig_maths.command()'.
 the_maths.add_command(add)
 the_maths.add_command(subtract)
 the_maths.add_command(multiply)

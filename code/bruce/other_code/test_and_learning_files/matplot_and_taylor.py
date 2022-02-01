@@ -5,6 +5,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.interpolate import approximate_taylor_polynomial
+
 x = np.linspace(-10.0, 10.0, num=100)
 plt.plot(x, np.sin(x), label="sin curve")
 for degree in np.arange(1, 15, step=2):

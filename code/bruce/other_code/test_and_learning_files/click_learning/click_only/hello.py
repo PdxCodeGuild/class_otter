@@ -9,9 +9,16 @@
 import click
 
 @click.command()
-@click.option('--count', default=1, help='Number of greetings.')
-@click.option('--name', prompt='Your name',
-              help='The person to greet.')
+@click.option('-c', '--count',
+            # No 'prompt' used here, we could have it if it suits UX.
+            # But, in this case, not having 'prompt' keeps user from
+            # being forced to either choose a value or press enter to
+            # accept the default.
+            default=1,
+            help='Number of greetings.')
+@click.option('-n', '--name',
+            prompt='Your name',
+            help='The person to greet.')
 def hello(count, name):
     """Simple program that greets NAME for a total of COUNT times."""
     for _ in range(count):

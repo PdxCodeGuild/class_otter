@@ -5,18 +5,55 @@ sympy
 numpy
 matplotlib
 
-1. Wanted to use some CLI module.
-2. Click was mentioned so I checked it out.
-3. It does several things.
-    a. Eliminates need to type 'python file.py.
-    b. Add decorators so functions can be called with options
-    c. Provides a way to pass objects between functions in a module.
-    d. Provides framework so I just add to each function:
-        1. option
-        2. help text
-        3. prompt text
-        4. type
-        5. default values
-4. Used setuptools-setup to build the package and set up entry points
-    a. Entry points are the commands used to run the functions.
-    b. The use of entry points allows use of options.
+- What 'click' and 'setuptools' do:
+- What I do:
+
+- Demonstration commands:
+    - git
+    - git --help
+    - git status --help     NOTE: Will open help file in browser.
+    - pip list
+    - bpi
+    - bpi list-modules
+    - trig-math
+    - trig-math sine --help     NOTE: There is a bug here.
+    - sine --help
+    - sine -a .524
+    - divide -n1 1 -n2 3
+    - linear-si
+
+- Wanted to use some CLI module.
+- Click was mentioned so I checked it out.
+    - @click.group()
+    - @click.command()
+    - @click.option(<stuff>)
+    - click.echo()
+    - .add_command(<command>)
+    - class PassClass(object):
+        - my_pass_object = click.make_pass_decorator(PassClass, ensure=True)
+        - @my_pass_object
+    - @<group function name>.command() # can be used in place of .add_command(<command>)
+- It does several things.
+    - Allows use of command options.
+    - Eliminates need to type 'python file.py.
+    - Add decorators so functions can be called with options
+    - Provides a way to pass objects between functions in a module.
+    - Provides framework so I just add to each function:
+        - option
+            - help text
+            - prompt text
+            - type
+            - default values
+        - commands
+- Used setuptools-setup to build the package and set up entry points
+    - Entry points are the commands used to run the functions.
+    - The use of entry points allows use of options.
+
+- Next steps:
+    - How to use same options for more than one command.
+    - How to modify CLI display colors etc.
+    - Figure out why/how pass object works,
+        why decorator can have different name than function arg.
+    - Learn how to use subcommands.
+    - Bugs:
+        - trig-math sine --help

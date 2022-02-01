@@ -31,7 +31,11 @@ x1 = 1
 y1 = 1
 userx = 1
 usery = 1 
-plot_a_line(m,x1,y1,userx,usery)
+# plot_a_line(m,x1,y1,userx,usery)
+
+
+if __name__ == '__main__':
+    plot_a_line()
 
 
 

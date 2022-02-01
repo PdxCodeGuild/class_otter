@@ -50,8 +50,8 @@ def the_trig_maths(my_pass_thing,units):
 #     help='The number which we are calculating the sine of.')
 @click.option('-p', '--precision',
     type=int,
-    default=0,
-    prompt='Level of precision',
+    default=3,
+    # prompt='Level of precision',
     help='The number of decimal digits to round the result by.')
 @my_pass_object
 def sine(my_pass_thing, angle, precision):
@@ -75,8 +75,8 @@ def sine(my_pass_thing, angle, precision):
     help='The number which we are calculating the cosine of.')
 @click.option('-p', '--precision',
     type=int,
-    default=0,
-    prompt='Level of precision',
+    default=3,
+    # prompt='Level of precision',
     help='The number of decimal digits to round the result by.')
 @my_pass_object
 def cosine(my_pass_thing, angle, precision):
@@ -100,8 +100,8 @@ def cosine(my_pass_thing, angle, precision):
     help='The number which we are calculating the tangent of.')
 @click.option('-p', '--precision',
     type=int,
-    default=0,
-    prompt='Level of precision',
+    default=3,
+    # prompt='Level of precision',
     help='The number of decimal digits to round the result by.')
 @my_pass_object
 def tan(my_pass_thing, angle, precision):
@@ -115,6 +115,7 @@ def tan(my_pass_thing, angle, precision):
         click.echo("Something isn't working properly.")
     click.echo(f"""tan({angle} <{my_pass_thing.chosen_units}>) = {
         round(result, precision)}""")
+
 
 # the_trig_maths.add_command(sine)
 # the_trig_maths.add_command(cosine)

@@ -39,11 +39,12 @@ setup(
         'console_scripts': [
             # Greetings and strings.
             'hello = strings:greeting',
+            'bpi = strings:bpi',
 
             # Commands to get to the module/page.
-            'basic_math = basic_math:the_maths',
-            'trig_math = trig_math:the_trig_maths',
-            'linear_math = linear_math:the_linear_maths',
+            'basic-math = basic_math:the_maths',
+            'trig-math = trig_math:the_trig_maths',
+            'linear-math = linear_math:the_linear_maths',
 
             # Commands to get to the specific function.
             'add = basic_math:add',
@@ -62,9 +63,9 @@ setup(
             'tan = trig_math:tan',
 
             # Linear equations.
-            'linear_ps = linear_math:linear_ps',
-            'linear_si = linear_math:linear_si',
-            'linear_pp = linear_math:linear_pp',
+            'linear-ps = linear_math:linear_ps',
+            'linear-si = linear_math:linear_si',
+            'linear-pp = linear_math:linear_pp',
         ],
     },
 )
