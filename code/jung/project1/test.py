@@ -76,3 +76,5 @@ for symbol_string in symbol_strings:
 
 
 data = requests.get(bathc_api_call_url).json()
+for symbol in symbol_string.split(", "):
+    print(symbol)
