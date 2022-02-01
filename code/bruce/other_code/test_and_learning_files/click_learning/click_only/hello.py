@@ -21,13 +21,20 @@ if __name__ == '__main__':
     hello()
 
 ########################################################
-# Since we didn't 'install' this module, these are some commands:
+# If the package is installed, only the 'command' (with any 'options')
+# is needed to be typed in CLI:
+
+# 'hello'
+# 'hello --name <NAME> --count <COUNT>'
+
+# Since we didn't 'install' this module, these are some commands which
+# run the python file and allow passing of options into the function:
 
 # This will prompt for NAME, and use default COUNT:
-# python hello.py
+# 'python hello.py'
 
 # This will use the provided NAME and COUNT values:
-# python hello.py --count 3 --name Ashton
+# 'python hello.py --count 3 --name Ashton'
 
 # This will use the provided NAME and default COUNT:
-# python hello.py --name Ashton
+# 'python hello.py --name Ashton'
