@@ -14,15 +14,6 @@
 population_list = [0,0]
 year = 0
 
-# while year < 12:
-#     for i in range(0,len(population_list)-1):
-#         # for ele in population_list:
-
-#             # if ele == 10:
-#         if 10 in population_list:  
-#             population_list.remove(10)
-#             # pass
-#         elif population_list[i] >= 4 and population_list[i]<9:
 while len(population_list) < 1000:
     for jack in population_list:
         if jack >= 4 and jack<=8:
@@ -39,26 +30,3 @@ while len(population_list) < 1000:
     year += 1
 
     print(year)
-
-        # elif population_list[i] == 10:
-            # population_list.remove(10)
-
-    # population_list[i] += 1
-
-        # if age in population_list > 4 and age in population_list < 9:
-        #     population_list.append(0)
-        # if age > 3 and age < 9, new age 0 jackalopes is increased by 2 * the number of pairs in this age bracket
-        # if age > 8, then no reproductive activity
-    #     # if age > 9  population -= the pairs
-    # population_list[i] += 1
-    # print(population_list)
-
-    # year += 1 
-    # print('\nYear:', year)
-
-    # print(population_list)
-    # print('\npopulation:',len(population_list)) 
-    # print('\nYear:', year)
-
-
-# Version 2
