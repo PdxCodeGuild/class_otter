@@ -5,7 +5,6 @@ import numpy as np
 import math
 
 def plot_a_line(slope, ex, wye, ux, uy):
-    ##### My modified #####
     m = slope
     x1 = ex
     y1 = wye
@@ -25,7 +24,6 @@ def plot_a_line(slope, ex, wye, ux, uy):
     # loc= 'best', 'upper right', 'upper left', 'lower left', 'lower right', 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
     plt.legend(loc='best', shadow=True)
     plt.show()
-    #######################
 
 
 m = .5

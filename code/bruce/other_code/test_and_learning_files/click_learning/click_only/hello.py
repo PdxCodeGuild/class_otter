@@ -19,3 +19,15 @@ def hello(count, name):
 
 if __name__ == '__main__':
     hello()
+
+########################################################
+# Since we didn't 'install' this module, these are some commands:
+
+# This will prompt for NAME, and use default COUNT:
+# python hello.py
+
+# This will use the provided NAME and COUNT values:
+# python hello.py --count 3 --name Ashton
+
+# This will use the provided NAME and default COUNT:
+# python hello.py --name Ashton

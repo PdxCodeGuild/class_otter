@@ -127,7 +127,8 @@ def linear_pp(x1, y1, x2, y2, xvalue):
 
 
 def plot_a_line(slope, ex, wye, ux, uy):
-    ##### My modified #####
+    '''Plots a line from provided 'slope', and a points' 'x' and 'y' values.
+        Also plots a single point from provided 'ux' and uy'.'''
     m = slope
     x1 = ex
     y1 = wye
@@ -136,18 +137,22 @@ def plot_a_line(slope, ex, wye, ux, uy):
     x = np.linspace(-5, 5, 100)
     y = m * (x - x1) + y1
     fig, ax = plt.subplots()
+    # Plot the user-defined point.
     ax.plot(ux, uy, 'go', label=f'User Point: {ux},{uy}')
+    # Plot the line from y = m * (x - x1) + y1
     ax.plot(x, y, label=line_label)
     ax.set_aspect('equal')
+    # Display the grid.
     ax.grid(True, which='both')
 
+    # Plot the axes.
     ax.axhline(y=0, color='k')
     ax.axvline(x=0, color='k')
 
     # loc= 'best', 'upper right', 'upper left', 'lower left', 'lower right', 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
+    # Display the legend in 'best' position.
     plt.legend(loc='best', shadow=True)
     plt.show()
-    #######################
 
 
 # NOTE: Maybe provide three groups of inputs and present the linear
