@@ -38,8 +38,9 @@ setup(
     entry_points={
         'console_scripts': [
             # Greetings and strings.
-            'hello = strings:greeting',
             'bpi = strings:bpi',
+            'hello = strings:greeting',
+            'list-modules = strings:list_modules',
 
             # Commands to get to the module/page.
             'basic-math = basic_math:the_maths',
