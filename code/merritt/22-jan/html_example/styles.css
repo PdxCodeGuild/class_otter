@@ -1,0 +1,27 @@
+p {
+    color: red;
+    background-color: aqua;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: cadetblue;
+}
+
+body li {
+    color: orange;
+}
+
+ol > li {
+    color: purple;
+}
+
+.blue {
+    color: blue;
+    background-color: brown;
+}
+
+#second-paragraph {
+    color: green;
+    background-color: black;
+}
