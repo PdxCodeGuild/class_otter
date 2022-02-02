@@ -38,8 +38,9 @@ setup(
     entry_points={
         'console_scripts': [
             # Greetings and strings.
-            'hello = strings:greeting',
             'bpi = strings:bpi',
+            'hello = strings:greeting',
+            'list-modules = strings:list_modules',
 
             # Commands to get to the module/page.
             'basic-math = basic_math:the_maths',
@@ -54,7 +55,7 @@ setup(
             'factorial = basic_math:factorial',
             'inverse = basic_math:inverse',
             'sqroot = basic_math:sqroot',
-            'nth_power = basic_math:nth_power',
+            'nth-power = basic_math:nth_power',
             'log = basic_math:log',
 
             # Trigonometric calculations.
