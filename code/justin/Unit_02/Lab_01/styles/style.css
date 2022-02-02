@@ -1,21 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+:root {
+    --primary-color: rgb(234, 241, 234);
+    --secondary-color: rgb(183, 189, 183);
+    --accent-color: rgb(174, 149, 189);
+    --text-color: rgb(64, 55, 70);
+    --link-color: rgb(136, 58, 180);
+    --visited-color: rgb(197, 138, 49);
+    --hover-color: rgb(181, 76, 241);
+    --active-color: rgb(111, 49, 146);
+    --shadow-color: rgba(104, 96, 109, 0.75);
+}
+
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-color);
     background-image: url('../img/background.png');
+    color: var(--text-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: var(--link-color)
+}
+
+a:visited {
+    color: var(--visited-color)
+}
+
+a:hover {
+    color: var(--hover-color)
+}
+
+a:active {
+    color: var(--active-color)
 }
 
 .main-content {
     max-width: 1600px;
-    margin: 10px auto;
+    margin: 6px auto auto;
     column-count: 2;
     column-gap: 60px;
-    column-rule: 4px dotted rgba(112, 189, 112, 1);
+    column-rule: 4px dotted var(--accent-color);
 }
 
 .content-column {
-    max-width: 628px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 900px;
 }
 
 .content-title > h1, .content-title > p {
@@ -26,7 +61,32 @@ body {
 
 .content-title {
     padding: 10px;
-    background-color: rgb(170, 189, 170);
+    background-color: var(--secondary-color);
+}
+
+.portrait {
+    padding: 20px 0px;
+    min-height: 738px;
+    display: flex;
+    align-items: center;
+}
+
+.introduction {
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+}
+
+.places-lived {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.quote {
+    min-height: 240px;
+    display: flex;
+    align-items: center;
 }
 
 p, q {
@@ -38,21 +98,24 @@ p {
     text-align: justify;
 }
 
-hr {
-    border: none;
-    height: 2px;
-    background-image: linear-gradient(to right, rgba(112, 189, 112, 0), rgba(112, 189, 112, 0.5), rgba(112, 189, 112, 0.75), rgba(112, 189, 112, 0.5), rgba(112, 189, 112, 0));
+img {
+    display: block;
+    background: var(--secondary-color);
+    padding: 6px;
+    border: 1px solid var(--accent-color);
+    box-shadow: 10px 10px 10px var(--shadow-color);
+    border-radius: 6px;
 }
 
-/* .introduction {
-    
-} */
+ul {
+    list-style: none;
+}
 
-/* .places-lived {
-
-} */
-
-/* .quote {
-
-} */
-
+ul li::before {
+    content: "\25C6";
+    color: var(--accent-color);
+    /* font-weight: bold; */
+    display: inline-block;
+    width: 2.5em;
+    margin-left: -1.75em;
+}
