@@ -31,4 +31,4 @@ while len(jackalope_list) <= 1000:
     # print(jackalope_list)
     # print(len(jackalope_list))
     year += 1
-    print(year)
+print(f"It took {year} years to have a pop of 1000")
