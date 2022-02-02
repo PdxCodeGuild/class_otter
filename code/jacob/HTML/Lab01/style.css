@@ -1,0 +1,36 @@
+body{
+    background-image: url("https://wallpapercave.com/wp/lAA016h.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+p.p1 {
+    color :rgb(0, 0, 255);
+    text-align: center;
+    margin:  auto;
+    width: 750px;
+    text-indent: 50px;
+}
+
+img{
+    border: 5px solid black;   
+}
+
+p.p2{
+    color: white;
+}
+
+ul{
+    color: white;
+    list-style-type: upper-roman;    
+}
+
+p.p3{
+    color:gold;
+    font-style: oblique;    
+}
+
+.p4{
+    color: turquoise;
+    font-style: normal;
+}
