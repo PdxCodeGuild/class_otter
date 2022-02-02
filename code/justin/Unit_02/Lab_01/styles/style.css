@@ -1,5 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('../img/background.png');
+}
+
 .main-content {
-    column-count: 2
+    max-width: 1600px;
+    margin: 10px auto;
+    column-count: 2;
+    column-gap: 60px;
+    column-rule: 4px dotted rgba(112, 189, 112, 1);
+}
+
+.content-column {
+    max-width: 628px;
+    margin: auto;
+}
+
+.content-title > h1, .content-title > p {
+    text-align: center;
+    padding: 2px;
+    margin: 0px;
+}
+
+.content-title {
+    padding: 10px;
+    background-color: rgb(170, 189, 170);
+}
+
+p, q {
+    padding: 2px;
+    margin: 8px;
+}
+
+p {
+    text-align: justify;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(112, 189, 112, 0), rgba(112, 189, 112, 0.5), rgba(112, 189, 112, 0.75), rgba(112, 189, 112, 0.5), rgba(112, 189, 112, 0));
 }
 
 /* .introduction {
