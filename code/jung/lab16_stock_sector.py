@@ -65,4 +65,4 @@ df = pd.DataFrame(data)
 df["Stock Sectors"] = tickers
 df["%Change"] = per_change_data
 
-# print(df)
+print(df)
