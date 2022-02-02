@@ -54,7 +54,7 @@ setup(
             'factorial = basic_math:factorial',
             'inverse = basic_math:inverse',
             'sqroot = basic_math:sqroot',
-            'nth_power = basic_math:nth_power',
+            'nth-power = basic_math:nth_power',
             'log = basic_math:log',
 
             # Trigonometric calculations.
