@@ -22,12 +22,13 @@ div.transbox {
     /* Use rgba to create a white-ish overlay of background
     (alpha close to 1.0) to cover up the background image. */
     /* Part 3: Add background color. */
-    background-color: rgba(238, 202, 177, 0.8);
+    background-color: rgba(238, 219, 177, 0.83);
 }
 
 /* Select by tag */
 h1 {
-font-size:30px;
+    margin-top: 30px;
+    font-size:30px;
 }
 
 /* Set some margins for paragraphs. */
@@ -54,17 +55,29 @@ img {
     border-radius: 25px;
 }
 
+.locations {
+    /* text-align: center; */
+}
+
 span {
     margin-left: 25%;
     margin-right: 25%;
 }
 
+/* How to create a box, which is centered on main page, then put the ul inside the box and the ul is aligned left to keep the rows lined up. */
+
 ul {
-    /* Part 3: Change bullet points to squares. */
-    list-style-type: square;
-    text-align: left;
-    margin-left: 35em;
-    margin-right: 35em;
+    margin: auto;
+    /* Part 3: Change bullet points. */
+    list-style-type: none;
+    /* text-align: left; */
+    /* margin-left: 35em;
+    margin-right: 35em; */
+}
+
+li::before {
+    /* Add some custom bullets for location list. */
+    content: "=>";
 }
 
 a[href] {
