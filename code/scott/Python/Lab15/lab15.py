@@ -73,17 +73,5 @@ while welcome == 'yes':
             else:
                 break
 
-
-tt
     welcome = input('Would you like to see more Quotes?(yes/no): ')
-
-
 print('Good Bye!')
-
-
-    welcome = input('Would you like to see more?(yes/no): ')
-
-print('Good Bye!')
-
-# print(random_quote,author)
-
