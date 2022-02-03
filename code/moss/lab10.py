@@ -25,8 +25,8 @@ def create(contact_list,key_list):
     
     for i, key in enumerate(key_list):
         add_contact[key] = input(f"What is your contact's {key_list[i]}? ")
-        contact_list.append(add_contact)
-        return add_contact
+    contact_list.append(add_contact)
+    return add_contact
 
 # print(create(contact_list,key_list))
 
