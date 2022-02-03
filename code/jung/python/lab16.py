@@ -15,6 +15,7 @@ soup = BeautifulSoup(response.content, "html.parser") # Using bs4 to make HTML l
 # print(soup)
 
 tickers_sec = soup.find_all('td',{'class':'wsod_firstCol'}) # Find information from "What's Moving" in CNN BUSINESS
+# print(tickers_sec)
 # pprint.pprint(tickers_sec)
 
 
@@ -31,6 +32,7 @@ tickers = []
 for items in tickers_list:
     for item in items:
         tickers.append(item)
+# pprint.pprint(tickers)
 
 tickers = tickers[0:10] # I only need 10 companies from "What's Moiving" in CNN BUSINESS
 # pprint.pprint(tickers)
@@ -99,8 +101,8 @@ data = []
 
 df = pd.DataFrame(data)
 df["Gainers & Losers"] = tickers
-df["price"] = price_data
-df["change"] = change_data
-df["%change"] = per_change_data
+df["Price"] = price_data
+df["Change"] = change_data
+df["%Change"] = per_change_data
 
 print(df)
