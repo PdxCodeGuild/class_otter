@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root {
+    /* Colors */
+    --primary-color: rgb(234, 241, 234);
+    --secondary-color: rgb(183, 189, 183);
+    --accent-color: rgb(174, 149, 189);
+    --text-color: rgb(64, 55, 70);
+    --link-color: rgb(136, 58, 180);
+    --visited-color: rgb(197, 138, 49);
+    --hover-color: rgb(181, 76, 241);
+    --active-color: rgb(111, 49, 146);
+    --shadow-color: rgba(104, 96, 109, 0.75);
+
+    /* Fonts */
+    
+}
+
