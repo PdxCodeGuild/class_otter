@@ -54,8 +54,8 @@ class Calculator:
         
         self.operations = {"/": "\u00F7", "*": "\u00D7", "-": "-", "+": "+"} # Dict maps python arithmatic operations to the operation symbols; "\u00f7" is the Hex representation of Divide -->>
         # and "\u00D7" Hex for Multiply.
-        self.buttons_frame = self.create_buttons_frame()  #Variable for Create Buttons Frame
         
+        self.buttons_frame = self.create_buttons_frame()  #Variable for Create Buttons Frame
         self.buttons_frame.rowconfigure(0, weight=1) # Non zero weight allows for expansion equivalent to 1 part of the total expandable area
         
         for x in range(1, 5): #Loop through rows and columns within the Button Frame giving them an even weight of 1 for equal allowed expansion
@@ -181,8 +181,8 @@ class Calculator:
     def evaluate(self): # Method to conduct evaluation (the eval function evaluates and returns the value of a python expression).
         self.total += self.current_op # Make self.total = self.total + self.current_op.
         self.update_total_label() # Call Method to update total_label.
+
         try: #Try loop to handle exceptions like 'Divide by Zero Error' without erroring out of the program.
-            
             self.current_op = str(eval(self.total)) # Self.current_op is equal to the evaluated string value of self.total.
             self.total = "" # Set self.total to an empty string
         except Exception as _: # If exception occurs
