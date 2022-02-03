@@ -1,0 +1,73 @@
+/* https://github.com/PdxCodeGuild/class_otter/blob/main/2%20Flask%20%2B%20HTML%20%2B%20CSS/docs/03%20CSS%20Overview.md#css-syntax */
+/** 
+    *'h1' is 'selector',
+    *'font-size' is 'propery',
+    *'80px' is 'value'.
+*/
+
+/* Select 'body' */
+body {
+    /* Part 2: Center content. */
+    text-align: center;
+    /* Part 2: Use custom font. */
+    font-family: 'DM Serif Display', serif;
+    background-color: #cccccc;
+    /* Add background image here. Will cover with semi-transparent
+    white in div.transbox. */
+    /* Part 2: Add background image. */
+    background-image: url("BubbleChamber.jpg");
+}
+
+div.transbox {
+    /* Use rgba to create a white-ish overlay of background
+    (alpha close to 1.0) to cover up the background image. */
+    /* Part 3: Add background color. */
+    background-color: rgba(238, 202, 177, 0.8);
+}
+
+/* Select by tag */
+h1 {
+font-size:30px;
+}
+
+/* Set some margins for paragraphs. */
+/* Select by tag */
+p {
+    /* Part 2: Add padding to pragraphs. */
+    padding-left: 5px;
+    padding-right: 5px;
+    /* Part 2: Add margin to pragraphs. */
+    margin-left: 5%;
+    margin-right: 5%;
+    /* Part 3: Modify body text. */
+    color: rgb(70,45,20);
+}
+
+q {
+    font-size: 20px;
+    /* Part 3: Change typeface of quote. */
+    font-family: 'PT Mono', monospace;
+}
+
+img {
+    /* Part 3: Add roudned corners to image. */
+    border-radius: 25px;
+}
+
+span {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+ul {
+    /* Part 3: Change bullet points to squares. */
+    list-style-type: square;
+    text-align: left;
+    margin-left: 35em;
+    margin-right: 35em;
+}
+
+a[href] {
+    /* Part 3: Modify web link text color. */
+    color:navy;
+}
