@@ -1,3 +1,24 @@
+/* Color Theme Swatches in Hex */
+.guitar_colorful-1-hex { color: #B36A7E; }
+.guitar_colorful-2-hex { color: #C6D984; }
+.guitar_colorful-3-hex { color: #D9AB82; }
+.guitar_colorful-4-hex { color: #D97373; }
+.guitar_colorful-5-hex { color: #595959; }
+
+/* Color Theme Swatches in RGBA */
+.guitar_colorful-1-rgba { color: rgba(179, 106, 126, 1); }
+.guitar_colorful-2-rgba { color: rgba(198, 217, 132, 1); }
+.guitar_colorful-3-rgba { color: rgba(217, 171, 130, 1); }
+.guitar_colorful-4-rgba { color: rgba(217, 115, 115, 1); }
+.guitar_colorful-5-rgba { color: rgba(89, 89, 89, 1); }
+
+/* Color Theme Swatches in HSLA */
+.guitar_colorful-1-hsla { color: hsla(343, 32, 55, 1); }
+.guitar_colorful-2-hsla { color: hsla(73, 52, 68, 1); }
+.guitar_colorful-3-hsla { color: hsla(28, 53, 68, 1); }
+.guitar_colorful-4-hsla { color: hsla(0, 57, 65, 1); }
+.guitar_colorful-5-hsla { color: hsla(0, 0, 34, 1); }
+
 /* https://github.com/PdxCodeGuild/class_otter/blob/main/2%20Flask%20%2B%20HTML%20%2B%20CSS/labs/02%20Company.md */
 
 /* *'h1' is 'selector',
@@ -40,6 +61,11 @@ body {
     /* font-family: 'Baloo 2', cursive;; */
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
+    background-color: rgba(217, 171, 130, .50);
+}
+
+.an-item-of-stuff h3 {
+    font-size: 1.3em;
 }
 
 footer {
@@ -65,6 +91,7 @@ footer {
 }
 
 @media (min-width: 1100px) {
+
     .an-item-of-stuff {
         width: 33.33%;
     }
@@ -86,6 +113,15 @@ footer {
     /* Align the page links to the right. */
     nav {
         text-align: right;
+    }
+}
+
+/* We should set a max width. If user uses a really large display width, we want the site to stay within reason. If the site had a design where the items could keep accumulating and teh header would look good, we could still allow display width to grow. */
+@media (min-width: 1400px) {
+    header, main, footer {
+        max-width: 1350px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
