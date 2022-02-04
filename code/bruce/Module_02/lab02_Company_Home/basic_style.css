@@ -25,5 +25,18 @@ img {
 /* Create a margin for the primary blocks (tags) inside 'body'('header', 'main', and 'footer'). This may or may not affect the margins of the items in "all-the-stuff". We will see when we get there. 'margin' is the space outside of the element which we want to have either nothing there or other items' margins.*/
 /* Reference: https://www.w3schools.com/cssref/css_selectors.asp */
 header, main, footer {
-    margin: 10px;
+    margin: 15px;
+}
+
+/* NOTE: We now have the images staying withing the width of the diesplay. There is a little bit of a margin around the primary elements. Since the 'items' are within 'main', the 'margin' of 'main' provides the 'margin' on the sides of '<div class="all-the-stuff">'. The 'margin' is the 'main's margin, so the sub-items may not need 'margin'.*/
+
+/* Let's align the text of the header to 'center'. This will affect a <div> and a <nav>, which are in the <header>. */
+header {
+    text-align: center;
+}
+
+/* Now: Let's change the font for all text in 'body'. */
+body {
+    /* font-family: 'Baloo 2', cursive;; */
+    font-family: 'Montserrat', sans-serif;
 }
