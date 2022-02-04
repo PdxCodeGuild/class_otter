@@ -1,3 +1,10 @@
+# ************************************************************** #
+#                      copy_pad_20220124.py                      #
+#   requests exceptions errors response get HTTPError response   #
+#                          Version: 0.0                          #
+#                      Author: Bruce Stull                       #
+#                           2022-01-26                           #
+# ************************************************************** #
 
 import pprint
 import requests

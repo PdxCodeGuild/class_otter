@@ -307,7 +307,8 @@ def main():
     write_to_db(contacts_list, file_name)
 
 
-main()
+if __name__ == '__main__':
+    main()
 
 '''sample_contacts.csv
 name, favorite fruit, favorite color

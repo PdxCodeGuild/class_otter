@@ -11,6 +11,7 @@
 
 
 def factorial(n = 0):
+    '''Accepts an integer argument. Returns N! (N factorial).'''
     if n == 0:
         return 1
     return n * factorial(n-1)
@@ -21,6 +22,8 @@ def test_factorial():
     assert factorial(1) == 1
     assert factorial(2) == 2
     assert factorial(3) == 6
+    assert factorial(9) == 362880
+    assert factorial(11) == 39916800
 
 # Try making fibonacci function.
 # 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610
