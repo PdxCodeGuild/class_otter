@@ -2,15 +2,16 @@
 
 :root {
     /* Colors */
-    --primary-color: rgb(234, 241, 234);
-    --secondary-color: rgb(183, 189, 183);
-    --accent-color: rgb(174, 149, 189);
-    --text-color: rgb(64, 55, 70);
-    --link-color: rgb(136, 58, 180);
-    --visited-color: rgb(197, 138, 49);
-    --hover-color: rgb(181, 76, 241);
-    --active-color: rgb(111, 49, 146);
-    --shadow-color: rgba(104, 96, 109, 0.75);
+    --background-color: rgb(233, 222, 205);
+    --primary-color: rgb(78, 99, 76);
+    --secondary-color: rgb(45, 60, 44);
+    --accent-color: rgb(211, 210, 205);
+    --text-color: rgb(57, 64, 83);
+    --link-color: rgb(116, 111, 70);
+    --visited-color: rgb(116, 111, 70);
+    --hover-color: rgb(163, 153, 118);
+    --active-color: rgb(163, 153, 118);
+    --shadow-color: rgba(163, 153, 118, 0.75);
 
     /* Fonts */
     
