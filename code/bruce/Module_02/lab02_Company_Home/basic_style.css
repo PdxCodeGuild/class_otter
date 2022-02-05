@@ -17,7 +17,9 @@
 .guitar_colorful-2-hsla { color: hsla(73, 52, 68, 1); }
 .guitar_colorful-3-hsla { color: hsla(28, 53, 68, 1); }
 .guitar_colorful-4-hsla { color: hsla(0, 57, 65, 1); }
+/* Alt: #BF6565 */
 .guitar_colorful-5-hsla { color: hsla(0, 0, 34, 1); }
+/* Alt: #474747 */
 
 /* https://github.com/PdxCodeGuild/class_otter/blob/main/2%20Flask%20%2B%20HTML%20%2B%20CSS/labs/02%20Company.md */
 
@@ -54,6 +56,9 @@ header, main, footer {
 /* Let's align the text of the header to 'center'. This will affect a <div> and a <nav>, which are in the <header>. */
 header {
     text-align: center;
+    /* background-color: #B36A7E; */
+    /* background-color: #CC788F; */
+    background-color: #BF6565;
 }
 
 /* Now: Let's change the font for all text in 'body'. */
@@ -61,7 +66,9 @@ body {
     /* font-family: 'Baloo 2', cursive;; */
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
+    color: #474747;
     background-color: rgba(217, 171, 130, .50);
+    border-top: 25px solid #474747;
 }
 
 .an-item-of-stuff h3 {
@@ -123,5 +130,9 @@ footer {
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+header {
+    margin-top: 0;
 }
 
