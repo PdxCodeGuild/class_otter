@@ -6,35 +6,86 @@ html {
 }
 
 img {
-    border: 3px solid red;
+    border: 3px solid grey;
     display: block;
     max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    box-shadow:
+    max-height: 100%;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    border-radius: 5%;
 }
 
-header, main, footer {
-    border: 3px solid red;
-    margin: 12px;    
+header, h1, h2, h3, p, nav, main, footer {
+    border: 3px solid grey;
+    margin: 16px;
+    /* text-align:center;  */
 }
-header {
-    border: 3px solid red;
-    text-align:center;  
-   
-}
+
 body {
-    border: 3px solid red;
+    border: 3px solid grey;
     font-family: Arial, Helvetica, sans-serif;
-    /* background-image: */
-    
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    /* background-image: */  
 }
-.logo{
-    border : 3px solid red;
+
+/* main {
+    text-align: center;
+} */
+
+.logo {
+    border : 3px solid grey;
     display: block;
     margin-left: auto;
     margin-right: auto;
     max-width: 50%;
+    
 }
+
+
+    @media (min-width: 750px) {
+    header, main, footer{ 
+        margin: 32px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    nav p {
+        margin: 12px
+    }
+
+    .logo img {
+        display: block;
+        margin: auto;
+        max-width: 100%
+        
+    }
+
+    img {
+        display:block;
+        width: 300px;
+        height: 300px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+
+    }
+
+    .container {
+        border : 3px solid grey; 
+        display: flex;
+        
+        
+
+    }
+}
+        
+
+
+
+
+
+
+
