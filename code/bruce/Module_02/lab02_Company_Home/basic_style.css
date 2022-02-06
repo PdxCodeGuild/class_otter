@@ -1,25 +1,23 @@
 /* Color Theme Swatches in Hex */
-.guitar_colorful-1-hex { color: #B36A7E; }
-.guitar_colorful-2-hex { color: #C6D984; }
-.guitar_colorful-3-hex { color: #D9AB82; }
-.guitar_colorful-4-hex { color: #D97373; }
-.guitar_colorful-5-hex { color: #595959; }
+.guitar_splitComplimentary-1-hex { color: #628C7C; }
+.guitar_splitComplimentary-2-hex { color: #8DD9BC; }
+.guitar_splitComplimentary-3-hex { color: #D9AB82; }
+.guitar_splitComplimentary-4-hex { color: #465B8C; }
+.guitar_splitComplimentary-5-hex { color: #7794D9; }
 
 /* Color Theme Swatches in RGBA */
-.guitar_colorful-1-rgba { color: rgba(179, 106, 126, 1); }
-.guitar_colorful-2-rgba { color: rgba(198, 217, 132, 1); }
-.guitar_colorful-3-rgba { color: rgba(217, 171, 130, 1); }
-.guitar_colorful-4-rgba { color: rgba(217, 115, 115, 1); }
-.guitar_colorful-5-rgba { color: rgba(89, 89, 89, 1); }
+.guitar_splitComplimentary-1-rgba { color: rgba(98, 140, 124, 1); }
+.guitar_splitComplimentary-2-rgba { color: rgba(141, 217, 188, 1); }
+.guitar_splitComplimentary-3-rgba { color: rgba(217, 171, 130, 1); }
+.guitar_splitComplimentary-4-rgba { color: rgba(70, 91, 140, 1); }
+.guitar_splitComplimentary-5-rgba { color: rgba(119, 148, 217, 1); }
 
 /* Color Theme Swatches in HSLA */
-.guitar_colorful-1-hsla { color: hsla(343, 32, 55, 1); }
-.guitar_colorful-2-hsla { color: hsla(73, 52, 68, 1); }
-.guitar_colorful-3-hsla { color: hsla(28, 53, 68, 1); }
-.guitar_colorful-4-hsla { color: hsla(0, 57, 65, 1); }
-/* Alt: #BF6565 */
-.guitar_colorful-5-hsla { color: hsla(0, 0, 34, 1); }
-/* Alt: #474747 */
+.guitar_splitComplimentary-1-hsla { color: hsla(157, 17, 46, 1); }
+.guitar_splitComplimentary-2-hsla { color: hsla(157, 50, 70, 1); }
+.guitar_splitComplimentary-3-hsla { color: hsla(28, 53, 68, 1); }
+.guitar_splitComplimentary-4-hsla { color: hsla(222, 33, 41, 1); }
+.guitar_splitComplimentary-5-hsla { color: hsla(222, 56, 65, 1); }
 
 /* https://github.com/PdxCodeGuild/class_otter/blob/main/2%20Flask%20%2B%20HTML%20%2B%20CSS/labs/02%20Company.md */
 
@@ -48,7 +46,7 @@ img {
 /* Create a margin for the primary blocks (tags) inside 'body'('header', 'main', and 'footer'). This may or may not affect the margins of the items in "all-the-stuff". We will see when we get there. 'margin' is the space outside of the element which we want to have either nothing there or other items' margins.*/
 /* Reference: https://www.w3schools.com/cssref/css_selectors.asp */
 header, main, footer {
-    margin: 1em;
+    margin: 0 1em;
 }
 
 /* NOTE: We now have the images staying withing the width of the diesplay. There is a little bit of a margin around the primary elements. Since the 'items' are within 'main', the 'margin' of 'main' provides the 'margin' on the sides of '<div class="all-the-stuff">'. The 'margin' is the 'main's margin, so the sub-items may not need 'margin'.*/
@@ -56,19 +54,16 @@ header, main, footer {
 /* Let's align the text of the header to 'center'. This will affect a <div> and a <nav>, which are in the <header>. */
 header {
     text-align: center;
-    /* background-color: #B36A7E; */
-    /* background-color: #CC788F; */
-    background-color: #BF6565;
+    background-color: hsla(157, 17%, 46%, 1);
 }
 
 /* Now: Let's change the font for all text in 'body'. */
 body {
-    /* font-family: 'Baloo 2', cursive;; */
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
-    color: #474747;
-    background-color: rgba(217, 171, 130, .50);
-    border-top: 25px solid #474747;
+    color: hsla(222, 33%, 30%, 1);
+    background-color: hsla(28, 53%, 68%, .6);
+    border-top: 25px solid hsla(222, 33%, 41%, 1);
 }
 
 .an-item-of-stuff h3 {
@@ -130,9 +125,5 @@ footer {
         margin-left: auto;
         margin-right: auto;
     }
-}
-
-header {
-    margin-top: 0;
 }
 
