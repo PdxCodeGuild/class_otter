@@ -25,6 +25,10 @@
 *'font-size' is 'propery',
 *'80px' is 'value'. */
 
+:root {
+    --header_brown: #944E4E;
+  }
+
 html {
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
     box-sizing: border-box;
@@ -50,6 +54,20 @@ header, main, footer {
     padding: 0 1em;
 }
 
+
+/* Try to add a little brown border to header */
+header {
+    border-top: .25em solid var(--header_brown);
+}
+
+body > header > nav > p > a {
+    /* color: #D97373; */
+    color: var(--header_brown);
+    /* color: #B36A7E; */
+    /* color: #595959; */
+    /* color: #D9AB82; */
+}
+
 /* NOTE: We now have the images staying withing the width of the diesplay. There is a little bit of a margin around the primary elements. Since the 'items' are within 'main', the 'margin' of 'main' provides the 'margin' on the sides of '<div class="all-the-stuff">'. The 'margin' is the 'main's margin, so the sub-items may not need 'margin'.*/
 
 /* Let's align the text of the header to 'center'. This will affect a <div> and a <nav>, which are in the <header>. */
@@ -71,13 +89,6 @@ nav {
     padding-bottom: 0.5em;
 }
 
-body > header > nav > p > a {
-    /* color: #D97373; */
-    /* color: #B36A7E; */
-    /* color: #595959; */
-    color: #D9AB82;
-}
-
 /* Now: Let's change the font for all text in 'body'. */
 body {
     font-family: 'Montserrat', sans-serif;
@@ -97,11 +108,6 @@ footer {
 
 /* Switch to tablet mode when display width reaches 700px. */
 @media (min-width: 700px) {
-    /* Increase margin to 2em since we have more space. */
-    header, main, footer {
-        margin: 0 0;
-    }
-
     nav {
         padding-bottom: 0.5em;
     }
