@@ -46,7 +46,8 @@ img {
 /* Create a margin for the primary blocks (tags) inside 'body'('header', 'main', and 'footer'). This may or may not affect the margins of the items in "all-the-stuff". We will see when we get there. 'margin' is the space outside of the element which we want to have either nothing there or other items' margins.*/
 /* Reference: https://www.w3schools.com/cssref/css_selectors.asp */
 header, main, footer {
-    margin: 0 1em;
+    margin: 0 0;
+    padding: 0 1em;
 }
 
 /* NOTE: We now have the images staying withing the width of the diesplay. There is a little bit of a margin around the primary elements. Since the 'items' are within 'main', the 'margin' of 'main' provides the 'margin' on the sides of '<div class="all-the-stuff">'. The 'margin' is the 'main's margin, so the sub-items may not need 'margin'.*/
@@ -55,6 +56,26 @@ header, main, footer {
 header {
     text-align: center;
     background-color: hsla(157, 17%, 46%, 1);
+}
+
+h1 {
+    padding-top: .5em;
+    margin: 0;
+}
+
+h2 {
+    margin-top: 1.2em;
+}
+
+nav {
+    padding-bottom: 0.5em;
+}
+
+body > header > nav > p > a {
+    /* color: #D97373; */
+    /* color: #B36A7E; */
+    /* color: #595959; */
+    color: #D9AB82;
 }
 
 /* Now: Let's change the font for all text in 'body'. */
@@ -78,7 +99,11 @@ footer {
 @media (min-width: 700px) {
     /* Increase margin to 2em since we have more space. */
     header, main, footer {
-        margin: 2em;
+        margin: 0 0;
+    }
+
+    nav {
+        padding-bottom: 0.5em;
     }
 
     .all-the-stuff {
