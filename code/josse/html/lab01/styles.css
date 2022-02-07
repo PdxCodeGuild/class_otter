@@ -52,3 +52,13 @@ ol{
     color : white
 
 }
+
+
+div.trans-box{
+
+    background-color: rgba(0, 0, 0, 0.479);
+}
+
+a {
+    color : pink;
+}
