@@ -6,7 +6,7 @@ html {
 }
 
 img {
-    border: 3px solid grey;
+    /* border: 3px solid grey; */
     display: block;
     max-width: 100%;
     max-height: 100%;
@@ -16,34 +16,44 @@ img {
 }
 
 header, h1, h2, h3, p, nav, main, footer {
-    border: 3px solid grey;
-    margin: 16px;
-    /* text-align:center;  */
+    /* border: 3px solid grey; */
+    margin: 16px;  
+}
+
+header img { 
+    display: block;
+    margin: auto;
+    max-width: 25%;
+    max-height: 25%;
+}
+
+p {
+    background-color: rgb(240, 240, 240);
 }
 
 body {
-    border: 3px solid grey;
+    /* border: 3px solid grey; */
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     background-color: rgb(240, 240, 240);
     /* background-image: */  
 }
 
-/* main {
-    text-align: center;
-} */
-
 .logo {
-    border : 3px solid grey;
+    /* border : 3px solid grey; */
     display: block;
     margin-left: auto;
     margin-right: auto;
-    max-width: 50%;
+    max-width: 25%;
+    background-color: rgb(206, 197, 197)
     
 }
 
+.title{
+    font-weight: bolder;
+}
 
-    @media (min-width: 750px) {
+    @media (min-width: 700px) {
     header, main, footer{ 
         margin: 32px;
     }
@@ -57,31 +67,56 @@ body {
         margin: 12px
     }
 
-    .logo img {
-        display: block;
-        margin: auto;
-        max-width: 100%
-        
-    }
-
     img {
-        display:block;
+        display: block;
         width: 300px;
         height: 300px;
-        margin-top: 25px;
-        margin-bottom: 25px;
+        margin: auto;
+
+    }
+
+    header img {
+        display: block;
+        margin: auto;
+        max-width: 50%;
+        max-height: 50%;
+    }
+
+    .card {
+        display: block;
+        width: 33.33%;
+        object-fit: cover;
+        /* margin-left: auto;
+        margin-right: auto; */
+        margin: 16px;
 
     }
 
     .container {
-        border : 3px solid grey; 
+        /* border: 3px solid grey;  */
         display: flex;
-        
-        
-
+        margin: 0px;
     }
 }
-        
+
+@media (min-width: 1300px) {
+    header, main, footer{ 
+        margin: 64px;
+    }
+
+
+    header {
+        font-size: larger;
+    }
+
+    body p {
+        font-size: large;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%
+    }
 
 
 
@@ -89,3 +124,4 @@ body {
 
 
 
+}
