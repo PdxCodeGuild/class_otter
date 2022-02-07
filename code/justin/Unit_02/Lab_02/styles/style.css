@@ -7,7 +7,7 @@ header {
     display: flex;
     justify-content: space-between;
     background-color: var(--primary-color);
-    padding: 16px 4px;
+    padding: 12px 8px 4px 8px;
     margin-bottom: 8px;
 }
 
@@ -31,13 +31,8 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--secondary-color)
 }
 
-h3, h4, header > nav {
+h3, h4 {
     text-align: right;
-}
-
-header > h1 {
-    max-width: 33%;
-    color: var(--accent-color);
 }
 
 a:link {
@@ -62,8 +57,27 @@ a:active {
     color: var(--active-color);
 }
 
-ul {
-    list-style: none;
+header > h1 {
+    max-width: 33%;
+    color: var(--accent-color);
+    margin: 4px 2px;
+}
+
+header > nav {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 4px 0px;
+}
+
+header a:link {
+    background-color: var(--background-color);
+    padding: 1px 4px;
+    margin-bottom: 1px;
+}
+
+header a:visited {
+    background-color: var(--background-color);
 }
 
 footer > h1, footer > nav {
@@ -78,25 +92,25 @@ footer > a {
 }
 
 footer > a:link {
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
     font-weight: bold;
     font-style: normal;
 }
 
 footer > a:visited {
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
     font-weight: bold;
     font-style: italic;
 }
 
 footer > a:hover {
-    background-color: var(--background-color);
+    background-color: var(--accent-color);
     font-weight: normal;
     font-style: normal;
 }
 
 footer > a:active {
-    background-color: var(--background-color);
+    background-color: var(--accent-color);
     font-weight: normal;
     font-style: normal;
 }
@@ -108,14 +122,8 @@ section > h2 {
     color: var(--accent-color);
 }
 
-section > div {
+section > div, section > div p, section > div h4 {
     padding: 0px 8px;
-}
-
-#media div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
 }
 
 .game-tile-container {
@@ -136,6 +144,12 @@ section > div {
     max-width: inherit;
 }
 
+#media div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
 #media img {
     max-width: 140px;
 }
@@ -151,3 +165,44 @@ section > div {
     padding: 0px 8px;
 }
 
+
+@media (min-width: 700px) {
+    header > nav {
+        flex-direction: row;
+        align-items: center;
+        margin: 4px 0px;
+    }
+
+    header a:link {
+        padding: 0px 8px;
+        margin-bottom: 0px;
+        margin-right: 1px;
+    }
+
+    header a:visited {
+        padding: 0px 4px;
+        margin-bottom: 0px;
+        margin-right: 1px;
+        vertical-align: middle;
+    }
+
+    #next-game > div > img {
+        max-width: 100%;
+        padding-top: 8px;
+    }
+
+    section > div {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: baseline;
+    }
+
+    section > div > article {
+        max-width: 300px;
+    }
+
+    h4 {
+        text-align: left;
+    }
+}
