@@ -30,6 +30,8 @@
   }
 
 html {
+    /* If you want to create the gap by shrinking the content, set the box-sizing property to border-box (i.e. box-sizing: border-box). */
+    /* https://blog.hubspot.com/website/css-margin-vs-padding */
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
     box-sizing: border-box;
 }
