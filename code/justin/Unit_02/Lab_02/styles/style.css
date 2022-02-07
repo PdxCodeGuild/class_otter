@@ -80,7 +80,7 @@ header a:visited {
     background-color: var(--background-color);
 }
 
-footer > h1, footer > nav {
+footer > nav {
     display: none;
 }
 
@@ -204,5 +204,38 @@ section > div, section > div p, section > div h4 {
 
     h4 {
         text-align: left;
+    }
+
+    .content-sections > section {
+        margin-bottom: 64px;
+    }
+}
+
+@media (min-width: 1000px) {
+    footer > a {
+        display: none;
+    }
+
+    footer > nav {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    footer > nav > a {
+        margin: 0px 16px;
+        padding: 2px 16px;
+    }
+
+    footer > nav > a:link {
+        background-color: var(--background-color);
+    }
+    
+    footer > nav > a:visited {
+        background-color: var(--background-color);
+    }
+
+    .content-sections > section {
+        margin-bottom: 128px;
     }
 }
