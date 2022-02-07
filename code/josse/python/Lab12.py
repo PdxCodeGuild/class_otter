@@ -11,11 +11,11 @@ class ATM:
         self.balance += amount
         self.transactions.append(f" user deposited: {amount}")
 
-    def check_withdrawl(self, amount):
+    def check_withdraw(self, amount):
         if self.balance >= amount:
             return True
 
-    def withdrawl(self, amount):
+    def withdraw(self, amount):
         self.balance -= amount
         self.transactions.append(f" user withdrew: {amount}")
 
