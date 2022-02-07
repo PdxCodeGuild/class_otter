@@ -26,7 +26,7 @@
 *'80px' is 'value'. */
 
 :root {
-    --header_brown: #944E4E;
+    --header_border_brown: #944E4E;
   }
 
 html {
@@ -59,12 +59,13 @@ header, main, footer {
 
 /* Try to add a little brown border to header */
 header {
-    border-top: .25em solid var(--header_brown);
+    border-top: .25em solid var(--header_border_brown);
+    width: 100%;
 }
 
-body > header > nav > p > a {
+nav > p > a {
     /* color: #D97373; */
-    color: var(--header_brown);
+    color: var(--header_border_brown);
     /* color: #B36A7E; */
     /* color: #595959; */
     /* color: #D9AB82; */
@@ -75,6 +76,11 @@ body > header > nav > p > a {
 /* Let's align the text of the header to 'center'. This will affect a <div> and a <nav>, which are in the <header>. */
 header {
     text-align: center;
+    background-color: hsla(157, 17%, 46%, 1);
+}
+
+.full-width-header {
+    width: 100%;
     background-color: hsla(157, 17%, 46%, 1);
 }
 
