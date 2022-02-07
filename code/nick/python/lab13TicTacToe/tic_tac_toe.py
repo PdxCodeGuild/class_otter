@@ -20,41 +20,83 @@ class Game:
         return b
         
     def move(self, x, y, token):
-        if self.board[y][x] != ' ':
+        if self.board[x][y] != ' ':
             return 'invalid move'
         else:
             self.board[x][y] = token
     
     def calc_winner(self):
-        if self.board[0][0]==self.board[0][1]==self.board==[0][2]:
-            return self.board[0][0]
+        if (self.board[0][0]==self.board[0][1]==self.board[0][2]) and self.board[0][0] != ' ':
+            return self.board[0][0] #top row
+        if (self.board[1][0]==self.board[1][1]==self.board[1][2]) and self.board[1][2] != ' ':
+            return self.board[1][0] #middle row
+        if (self.board[2][0]==self.board[2][1]==self.board[2][2]) and self.board[2][0] != ' ':
+            return self.board[2][0] #bottom row
+        if (self.board[0][0]==self.board[1][0]==self.board[2][0]) and self.board[0][0] != ' ':
+            return self.board[0][0] #left col
+        if (self.board[0][1]==self.board[1][1]==self.board[2][1]) and self.board[0][1] != ' ':
+            return self.board[0][1] #middle col
+        if (self.board[0][2]==self.board[1][2]==self.board[2][2]) and self.board[0][2] != ' ':
+            return self.board[0][2] #right col
+        if (self.board[0][0]==self.board[1][1]==self.board[2][2]) and self.board[0][0] != ' ':
+            return self.board[0][0] #diagnol 1
+        if (self.board[0][2]==self.board[1][1]==self.board[2][0]) and self.board[0][2] != ' ':
+            return self.board[0][2] #diagnol 2
 
 
+    def is_full(self):
+        game_space = 9
+        for i in range(len(self.board)):
+            if i != ' ':
+                game_space -= 1
+        if game_space == 0:
+            return True
+        else:
+            return False
+
     
-    # def is_full():
-    
-    # def is_game_over():
+    def is_game_over(self):
+            return self.calc_winner() or self.is_full()
   
-
-
 # player_1 = Player(input('player 1 name: '), 'X')
 # player_2 = Player(input('Player 2 name: '), 'O')
 # print(player_1.name,player_1.token)
 # print(player_2.name,player_2.token)
 # print(repr(game.move(0,0, player_1.token)))
 # print(repr(game))
+'''
+'0,0'|'0,1'|'0,2'
+-----|-----|-----
+'1,0'|'1,1'|'1,2'
+-----|-----|-----
+'2,0'|'2,1'|'2,2'
+
+'''
 
 while True:
+    spots = {
+        1:(0,0), 2:(0,1), 3:(0,2), 
+        4:(1,0), 5:(1,1), 6:(1,2), 
+        7:(2,0), 8:(2,1), 9:(2,2)}
     board = Game()
-    first = Player(input('player one: '),'X')
-    second = Player(input('player two: '),'O')
-    print(first.name, first.token)
-    print(second.name, second.token)
-    print('Coordinates are 0, 1, and 2.\n0,0 being the top left of the board. ')
-    while True:
-        x = input('enter coordinates x: ').strip()
-        y = input('enter coordinate y: ').strip()
-        x=int(x)
-        y=int(y)
-        board.move(x,y,first.token)
-        print(repr(board))
+    first_player = Player(input('player one: '),'X')
+    second_player = Player(input('player two: '),'O')
+    print(first_player.name, first_player.token)
+    print(second_player.name, second_player.token)
+    rounds  = 1
+
+    while not board.is_game_over():
+        current_player = first_player if rounds % 2 else second_player
+        
+        while True:
+            move = input(f'{current_player.name}: enter your move: ').strip()
+            move = int(move)
+            x,y = spots[move]
+            move = board.move(x,y,current_player.token)
+            print(repr(board))
+            rounds +=1
+            break
+    if board.is_full():
+            print('tie game')
+    if board.is_game_over():
+        print(board.calc_winner(),f'{current_player.name} won')
