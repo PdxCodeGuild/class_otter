@@ -59,7 +59,6 @@ header, main, footer {
 
 /* Try to add a little brown border to header */
 header {
-    border-top: .25em solid var(--header_border_brown);
     width: 100%;
 }
 
@@ -82,6 +81,7 @@ header {
 .full-width-header {
     width: 100%;
     background-color: hsla(157, 17%, 46%, 1);
+    border-top: .25em solid var(--header_border_brown);
 }
 
 h1 {
