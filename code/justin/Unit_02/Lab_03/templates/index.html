@@ -11,37 +11,41 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
     </head>
     <body>
-        <header>
-            <h1>The Blog</h1>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Resources</a>
-                <a href="#">Archives</a>
-            </nav>
-        </header>
-        
-        <div class="main-content">
-            {% for post in posts %}
-            <article>
-                <h2><a href="#">{{post['title']}}</a></h2>
-                <div>
-                    <h3>{{post['date']}}</h3>
-                    <h3>{{post['author']}}</h3>
-                </div>
-                <p>{{post['body']}}</p>
-            </article>
-            <hr>
-            {% endfor %}
-        </div>
+        <div class="wrapper">
+            <header>
+                <h1>The Blog</h1>
+                <nav>
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Resources</a>
+                    <a href="#">Archives</a>
+                </nav>
+            </header>
+            
+            <div class="main-content">
+                {% for post in posts %}
+                <article>
+                    <h2><a href="#">{{post['title']}}</a></h2>
+                    <div>
+                        <h3>{{post['date']}}</h3>
+                        <h3>{{post['author']}}</h3>
+                    </div>
+                    <p>{{post['body']}}</p>
+                </article>
+                <hr>
+                {% endfor %}
 
-        <footer>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Resources</a>
-                <a href="#">Archives</a>
-            </nav>
-        </footer>
+                <footer>
+                    <nav>
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Resources</a>
+                        <a href="#">Archives</a>
+                    </nav>
+                </footer>
+            </div>
+
+            
+        </div>
     </body>
 </html>
