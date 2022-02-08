@@ -12,7 +12,7 @@
     </head>
     <body>
         <header>
-            <h2>The Blog</h2>
+            <h1>The Blog</h1>
             <nav>
                 <a href="#">Home</a>
                 <a href="#">About</a>
@@ -24,11 +24,24 @@
         <div class="main-content">
             {% for post in posts %}
             <article>
-                <h1><a href="#">{{post['title']}}</a></h1>
-                <p>{{post['date']}}</p>
-                <p>{{post['author']}}</p>
+                <h2><a href="#">{{post['title']}}</a></h2>
+                <div>
+                    <h3>{{post['date']}}</h3>
+                    <h3>{{post['author']}}</h3>
+                </div>
+                <p>{{post['body']}}</p>
             </article>
+            <hr>
             {% endfor %}
         </div>
+
+        <footer>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Resources</a>
+                <a href="#">Archives</a>
+            </nav>
+        </footer>
     </body>
 </html>

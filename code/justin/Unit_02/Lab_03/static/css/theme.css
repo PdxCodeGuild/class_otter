@@ -1,19 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&family=Roboto:wght@300&display=swap');
+
 
 :root {
     /* Colors */
-    --background-color: rgb(233, 222, 205);
-    --primary-color: rgb(78, 99, 76);
-    --secondary-color: rgb(45, 60, 44);
-    --accent-color: rgb(211, 210, 205);
-    --text-color: rgb(57, 64, 83);
-    --link-color: rgb(116, 111, 70);
-    --visited-color: rgb(116, 111, 70);
-    --hover-color: rgb(163, 153, 118);
-    --active-color: rgb(163, 153, 118);
-    --shadow-color: rgba(163, 153, 118, 0.75);
-
-    /* Fonts */
-    
+    --background-color: #fffdfd;
+    --primary-color: #681A0A;
+    --secondary-color: #807474;
+    --accent-color: #e05048;
+    --text-color: #8C2008;
+    --link-color: #61180E;
+    --visited-color: #61180E;
+    --hover-color: #e05048;
+    --active-color: #8C2008;
 }
 
