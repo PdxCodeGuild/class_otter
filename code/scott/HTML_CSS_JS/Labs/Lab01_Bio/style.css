@@ -178,7 +178,7 @@ h1 {
 #quote1 {
     color: #FFFF4D;
     background: none;
-    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #003322;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #e9bd92, 0 -18px 40px #F00;color: #003322;
     text-decoration: bold;
     text-align: justify;
     text-justify: inter-word;
@@ -190,6 +190,7 @@ h1 {
 
 .center {
     display: block;
+
       border-radius: 50%;
     margin-left: auto;
     margin-right: auto;
