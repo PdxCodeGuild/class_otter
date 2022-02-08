@@ -21,19 +21,19 @@ nav {
     padding-bottom: 6px;
 }
 
+aside {
+    display: none
+}
+
 main {
     margin: 32px 4px;
     padding: 2px;
-    border-width: 3px;
-    border-color: var(--primary-color);
-    border-style: outset;
+    border: 3px outset var(--primary-color);
 }
 
 main > form {
     margin: 0px;
-    border-width: 4px;
-    border-color: var(--secondary-color);
-    border-style: dotted dotted dotted dotted;
+    border: 4px dotted var(--secondary-color);
 }
 
 footer {
@@ -95,8 +95,26 @@ textarea {
     margin-top: 24px;
 }
 
-/* @media (min-width: 700px) {
+@media (min-width: 700px) {
+    aside {
+        display: flex;
+        margin: 32px 4px;
+        flex: 1;
+    }
+
+    img {
+        max-width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 3px 6px 4px var(--shadow-color);
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
-@media (min-width: 1000px) {
+/*@media (min-width: 1000px) {
 } */

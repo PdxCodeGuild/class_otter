@@ -20,105 +20,110 @@
                 <a href="#">Menu</a>
             </nav>
         </header>
-        <main>
-            <form action="https://webhook.site/b6a5187f-b69c-47f0-9087-834d4a8e02b3" method="post">
-                <div>
-                    <input type="text" name="order_name" id="order_name" required />
-                    <label for="order_name">Order Name</label><br>
-                </div>
+        <div class="main-content">
+            <aside>
+                <img src="img/burrito.png" alt="A picture of a burrito" />
+            </aside>
+            <main>
+                <form action="https://webhook.site/b6a5187f-b69c-47f0-9087-834d4a8e02b3" method="post">
+                    <div>
+                        <input type="text" name="order_name" id="order_name" required />
+                        <label for="order_name">Order Name</label><br>
+                    </div>
 
-                <div>
-                    <input type="password" name="password" id="password" required />
-                    <label for="password">Password</label><br>
-                </div>
-                
-                
-                <h3>Tortilla:</h3>
-                <div class="burrito_options">
                     <div>
-                        <input type="radio" name="tortilla" id="white_flour" value="white_flour" checked />
-                        <label for="white_flour">White Flour</label>
+                        <input type="password" name="password" id="password" required />
+                        <label for="password">Password</label><br>
                     </div>
-                    <div>
-                        <input type="radio" name="tortilla" id="wheat_flour" value="wheat_flour"/>
-                        <label for="wheat_flour">Wheat Flour</label>
+                    
+                    
+                    <h3>Tortilla:</h3>
+                    <div class="burrito_options">
+                        <div>
+                            <input type="radio" name="tortilla" id="white_flour" value="white_flour" checked />
+                            <label for="white_flour">White Flour</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="tortilla" id="wheat_flour" value="wheat_flour"/>
+                            <label for="wheat_flour">Wheat Flour</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="tortilla" id="spinach" value="spinach"/>
+                            <label for="spinach">Spinach</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="tortilla" id="corn" value="corn"/>
+                            <label for="corn">Corn</label>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" name="tortilla" id="spinach" value="spinach"/>
-                        <label for="spinach">Spinach</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="tortilla" id="corn" value="corn"/>
-                        <label for="corn">Corn</label>
-                    </div>
-                </div>
 
-                <h3>Rice:</h3>
-                <div class="burrito_options">
-                    <div>
-                        <input type="radio" name="rice" id="white_rice" value="white_rice" checked />
-                        <label for="white_rice">White Rice</label>
+                    <h3>Rice:</h3>
+                    <div class="burrito_options">
+                        <div>
+                            <input type="radio" name="rice" id="white_rice" value="white_rice" checked />
+                            <label for="white_rice">White Rice</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="rice" id="brown_rice" value="brown_rice"/>
+                            <label for="brown_rice">Brown Rice</label>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" name="rice" id="brown_rice" value="brown_rice"/>
-                        <label for="brown_rice">Brown Rice</label>
-                    </div>
-                </div>
 
-                <h3>Beans:</h3>
-                <div class="burrito_options">
-                    <div>
-                        <input type="radio" name="beans" id="black_beans" value="black_beans" checked />
-                        <label for="black_beans">Black Beans</label>
+                    <h3>Beans:</h3>
+                    <div class="burrito_options">
+                        <div>
+                            <input type="radio" name="beans" id="black_beans" value="black_beans" checked />
+                            <label for="black_beans">Black Beans</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="beans" id="pinto_beans" value="pinto_beans"/>
+                            <label for="pinto_beans">Pinto Beans</label>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" name="beans" id="pinto_beans" value="pinto_beans"/>
-                        <label for="pinto_beans">Pinto Beans</label>
-                    </div>
-                </div>
 
-                <h3>Protein:</h3>
-                <div class="burrito_options">
-                    <div>
-                        <input type="radio" name="protein" id="carnitas" value="carnitas" checked />
-                        <label for="carnitas">Carnitas</label>
+                    <h3>Protein:</h3>
+                    <div class="burrito_options">
+                        <div>
+                            <input type="radio" name="protein" id="carnitas" value="carnitas" checked />
+                            <label for="carnitas">Carnitas</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="protein" id="chicken" value="chicken"/>
+                            <label for="chicken">Chicken</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="protein" id="sofritas" value="sofritas"/>
+                            <label for="sofritas">Sofritas</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="protein" id="none" value="none"/>
+                            <label for="none">None</label>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" name="protein" id="chicken" value="chicken"/>
-                        <label for="chicken">Chicken</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="protein" id="sofritas" value="sofritas"/>
-                        <label for="sofritas">Sofritas</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="protein" id="none" value="none"/>
-                        <label for="none">None</label>
-                    </div>
-                </div>
 
-                <h3>Additional Ingredients:</h3>
-                <div class="burrito_options">
-                    <div>
-                        <input type="checkbox" name="cheese" id="cheese">
-                        <label for="cheese">Cheese</label>
+                    <h3>Additional Ingredients:</h3>
+                    <div class="burrito_options">
+                        <div>
+                            <input type="checkbox" name="cheese" id="cheese">
+                            <label for="cheese">Cheese</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="sour_cream" id="sour_cream">
+                            <label for="sour_cream">Sour Cream</label>
+                        </div>
                     </div>
+
                     <div>
-                        <input type="checkbox" name="sour_cream" id="sour_cream">
-                        <label for="sour_cream">Sour Cream</label>
+                        <textarea name="delivery_instructions" id="delivery_instructions" placeholder="Add notes for your delivery driver here"></textarea>
+                        <label for="delivery_instructions">Delivery Instructions</label>
                     </div>
-                </div>
 
-                <div>
-                    <textarea name="delivery_instructions" id="delivery_instructions" placeholder="Add notes for your delivery driver here"></textarea>
-                    <label for="delivery_instructions">Delivery Instructions</label>
-                </div>
-
-                <div id=order_button>
-                    <button type="submit">Order Now!</button>
-                </div>
-            </form>
-        </main>
+                    <div id=order_button>
+                        <button type="submit">Order Now!</button>
+                    </div>
+                </form>
+            </main>
+        </div>
         <footer>
             <nav>
                 <a href="#">Home</a>

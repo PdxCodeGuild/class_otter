@@ -13,5 +13,7 @@
     --visited-color: #718520;
     --hover-color: #95b321;
     --active-color: #e6c923;
+
+    --shadow-color: rgba(32, 32, 32, 0.5);
 }
 
