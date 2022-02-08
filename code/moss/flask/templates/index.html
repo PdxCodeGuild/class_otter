@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+
+<body>
+    
+    <header>
+        <title></title>
+        <nav></nav>
+    </header>
+    
+    <main>
+        <ul>
+        {% for post in posts%} 
+        <li>{{ post['title'] }} <br> {{ post['author'] }} <br> {{ post['date'] }} <br> {{ post['body'] }} </li>
+        {% endfor %}
+        </ul>
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    
+
+
+</body>
+
+
+
+
+</html>
