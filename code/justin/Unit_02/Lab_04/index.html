@@ -32,52 +32,81 @@
                     <label for="password">Password</label><br>
                 </div>
                 
-                <div>
-                    <h3>Tortilla:</h3>
-                    <input type="radio" name="tortilla" id="white_flour" value="white_flour" checked />
-                    <label for="white_flour">White Flour</label>
-                    <input type="radio" name="tortilla" id="wheat_flour" value="wheat_flour"/>
-                    <label for="wheat_flour">Wheat Flour</label>
-                    <input type="radio" name="tortilla" id="spinach" value="spinach"/>
-                    <label for="spinach">Spinach</label>
-                    <input type="radio" name="tortilla" id="corn" value="corn"/>
-                    <label for="corn">Corn</label>
+                
+                <h3>Tortilla:</h3>
+                <div class="burrito_options">
+                    <div>
+                        <input type="radio" name="tortilla" id="white_flour" value="white_flour" checked />
+                        <label for="white_flour">White Flour</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="tortilla" id="wheat_flour" value="wheat_flour"/>
+                        <label for="wheat_flour">Wheat Flour</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="tortilla" id="spinach" value="spinach"/>
+                        <label for="spinach">Spinach</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="tortilla" id="corn" value="corn"/>
+                        <label for="corn">Corn</label>
+                    </div>
                 </div>
 
-                <div>
-                    <h3>Rice:</h3>
-                    <input type="radio" name="rice" id="white_rice" value="white_rice" checked />
-                    <label for="white_rice">White Rice</label>
-                    <input type="radio" name="rice" id="brown_rice" value="brown_rice"/>
-                    <label for="brown_rice">Brown Rice</label>
+                <h3>Rice:</h3>
+                <div class="burrito_options">
+                    <div>
+                        <input type="radio" name="rice" id="white_rice" value="white_rice" checked />
+                        <label for="white_rice">White Rice</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="rice" id="brown_rice" value="brown_rice"/>
+                        <label for="brown_rice">Brown Rice</label>
+                    </div>
                 </div>
 
-                <div>
-                    <h3>Beans:</h3>
-                    <input type="radio" name="beans" id="black_beans" value="black_beans" checked />
-                    <label for="black_beans">Black Beans</label>
-                    <input type="radio" name="beans" id="pinto_beans" value="pinto_beans"/>
-                    <label for="pinto_beans">Pinto Beans</label>
+                <h3>Beans:</h3>
+                <div class="burrito_options">
+                    <div>
+                        <input type="radio" name="beans" id="black_beans" value="black_beans" checked />
+                        <label for="black_beans">Black Beans</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="beans" id="pinto_beans" value="pinto_beans"/>
+                        <label for="pinto_beans">Pinto Beans</label>
+                    </div>
                 </div>
 
-                <div>
-                    <h3>Protein:</h3>
-                    <input type="radio" name="protein" id="carnitas" value="carnitas" checked />
-                    <label for="carnitas">Carnitas</label>
-                    <input type="radio" name="protein" id="chicken" value="chicken"/>
-                    <label for="chicken">Chicken</label>
-                    <input type="radio" name="protein" id="sofritas" value="sofritas"/>
-                    <label for="sofritas">Sofritas</label>
-                    <input type="radio" name="protein" id="none" value="none"/>
-                    <label for="none">None</label>
+                <h3>Protein:</h3>
+                <div class="burrito_options">
+                    <div>
+                        <input type="radio" name="protein" id="carnitas" value="carnitas" checked />
+                        <label for="carnitas">Carnitas</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="protein" id="chicken" value="chicken"/>
+                        <label for="chicken">Chicken</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="protein" id="sofritas" value="sofritas"/>
+                        <label for="sofritas">Sofritas</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="protein" id="none" value="none"/>
+                        <label for="none">None</label>
+                    </div>
                 </div>
 
-                <div>
-                    <h3>Additional Ingredients:</h3>
-                    <input type="checkbox" name="cheese" id="cheese">
-                    <label for="cheese">Cheese</label>
-                    <input type="checkbox" name="sour_cream" id="sour_cream">
-                    <label for="sour_cream">Sour Cream</label>
+                <h3>Additional Ingredients:</h3>
+                <div class="burrito_options">
+                    <div>
+                        <input type="checkbox" name="cheese" id="cheese">
+                        <label for="cheese">Cheese</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="sour_cream" id="sour_cream">
+                        <label for="sour_cream">Sour Cream</label>
+                    </div>
                 </div>
 
                 <div>
@@ -85,7 +114,9 @@
                     <label for="delivery_instructions">Delivery Instructions</label>
                 </div>
 
-                <button type="submit">Order Now!</button>
+                <div id=order_button>
+                    <button type="submit">Order Now!</button>
+                </div>
             </form>
         </main>
         <footer>

@@ -3,14 +3,15 @@
 
 :root {
     /* Colors */
-    --background-color: #fffdfd;
-    --primary-color: #681A0A;
-    --secondary-color: #807474;
-    --accent-color: #e05048;
-    --text-color: #8C2008;
-    --link-color: #61180E;
-    --visited-color: #61180E;
-    --hover-color: #e05048;
-    --active-color: #8C2008;
+    --background-color: #efdeb2;
+    --primary-color: #ef4507;
+    --secondary-color: #7e9e00;
+    --accent-color: #e6c923;
+    --text-color: 	#3b2523;
+
+    --link-color: #718520;
+    --visited-color: #718520;
+    --hover-color: #95b321;
+    --active-color: #e6c923;
 }
 

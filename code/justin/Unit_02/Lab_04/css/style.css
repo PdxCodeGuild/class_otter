@@ -1,3 +1,99 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFFFFF;
+    color: var(--text-color);
+}
+
+header {
+    background-color: var(--background-color);
+}
+
+header > h1 {
+    text-align: center;
+    padding: 16px 0px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 48px;
+    padding-bottom: 6px;
+}
+
+main {
+    margin: 32px 4px;
+    padding: 2px;
+    border-width: 3px;
+    border-color: var(--primary-color);
+    border-style: outset;
+}
+
+main > form {
+    margin: 0px;
+    border-width: 4px;
+    border-color: var(--secondary-color);
+    border-style: dotted dotted dotted dotted;
+}
+
+footer {
+    background-color: var(--accent-color);
+}
+
+h1 {
+    margin: 0px;
+}
+
+h3 {
+    margin: 6px 8px;
+    padding-top: 12px;
+}
+
+a:link {
+    color: var(--link-color);
+}
+
+a:visited {
+    color: var(--visited-color);
+}
+
+a:hover {
+    color: var(--hover-color);
+}
+
+a:active {
+    color: var(--active-color);
+}
+
+form > div {
+    margin: 6px 8px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.burrito_options {
+    padding-bottom: 12px;
+}
+
+form > div > div {
+    padding: 2px 8px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 64px;
+}
+
+#order_name, #password {
+    width: 100%;
+}
+
+#order_button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
 
 /* @media (min-width: 700px) {
 }
