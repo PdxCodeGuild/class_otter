@@ -1,4 +1,3 @@
-/* Colors from Edwin VanCleef */
 /* Color Theme Swatches in Hex */
 .theme_fishing_cat_Muted-1-hex { color: #8C8303; }
 .theme_fishing_cat_Muted-2-hex { color: #D9D26C; }
@@ -35,6 +34,15 @@ html {
     box-sizing: inherit;
 }
 
+header, main, footer {
+    margin: 0 0;
+    padding: 0 1em;
+}
+
+header {
+    width: 100%;
+}
+
 body {
     border-top: 3em solid rgba(115, 82, 54, 1);
     color: rgba(114, 81, 54, 0.967);
@@ -49,6 +57,7 @@ header {
 
 main {
     background-color: rgba(242, 231, 174, 0.816);
+    display: block;
     padding-bottom: 12px;
 }
 
@@ -146,6 +155,14 @@ main > section > h2 {
     .top-nav {
         padding-top: 6px;
         text-align: right;
+    }
+}
+
+@media (min-width: 1400px) {
+    header, main, footer {
+        max-width: 1350px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
