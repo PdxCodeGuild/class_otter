@@ -63,6 +63,41 @@ a {
     background-color: #8C4842;
 } */
 
+#email {
+    color: coral;
+    background-color: cornflowerblue;
+    width: 500px;
+    height: 100px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3em;
+}
+
+#email:hover {
+    background-color: aliceblue;
+    width: 300px;
+}
+
+#email:focus {
+    background-color: #8C4842;
+}
+
+#email:active {
+    background-color: black;
+}
+
+input::placeholder {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input[type="submit"] {
+    border: 5px solid coral;
+    border-radius: 0;
+}
+
+input[type="submit"]:active {
+    box-shadow: 0 0 5px black;
+}
+
 @media (min-width: 750px) {
     header, main, footer {
         padding: 2em;
