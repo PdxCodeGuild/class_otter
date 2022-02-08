@@ -6,14 +6,18 @@ html {
 }
 
 header {
-    h
+    font-family: 'Astro World', sans-serif;
+    ;
+
+    font-size: 100px;
+                                                
 }
 
 body{
-    background-color: rgb(59, 56, 56);
+    background-color: rgb(31, 202, 46);
 }
 
-header, body { color: rgba(95, 158, 218, 0.993);
+header, body { color: rgb(231, 18, 125);
 
                 padding: 100px;
 
