@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunbun's Burritos</title>
+</head>
+<body>
+    <div>
+        <header>
+            <h1>
+                Bunbun's Burritos!
+            </h1>
+            <nav>
+
+            </nav>
+        </header>
+        <main>
+            <section>
+                <h2>
+                    Make your important decisions about ingredients:
+                </h2>
+            </section>
+            <article>
+                <form action="https://webhook.site/f7337193-976d-48c7-b5e9-c445ec66ae6e" method="post">
+                    <div class="customer-info">
+                        <h3>Customer Information</h3>
+                        <label for="first_name">First Name</label>
+                        <input type="text" name="first_name" id="first_name" placeholder="Required" required>
+                        <label for="last_name">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" placeholder="Required" required>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Required" required>
+                    </div>
+
+                    <div class="wrap">
+                        <h3>Wrap Choice</h3>
+                        <p><input type="radio" name="wrap" value="white_flour_tortilla" id="white_flour_tortilla"><label for="white_flour_tortilla">White Flour Tortilla</label></p>
+                        <p><input type="radio" name="wrap" value="wheat_flour_tortilla" id="wheat_flour_tortilla"><label for="wheat_flour_tortilla">Wheat Flour Tortilla</label></p>
+                        <p><input type="radio" name="wrap" value="spinach_wrap" id="spinach_wrap"><label for="spinach_wrap">Spinach</label></p>
+                        <p><input type="radio" name="wrap" value="romaine_wrap" id="romaine_wrap"><label for="romaine_wrap">Romaine</label></p>
+                        <p><input type="radio" name="wrap" value="corn_tortilla" id="corn_tortilla"><label for="corn_tortilla">Corn Tortilla</label></p>
+                        <p><input type="radio" name="wrap" value="cheese_wrap" id="cheese_wrap"><label for="cheese_wrap">Cheese Wrap</label></p>
+                    </div>
+
+                    <div class="rice">
+                        <h3>Rice</h3>
+                        <p><input type="radio" name="rice" value="white_rice" id="white_rice"><label for="white_rice">White</label></p>
+                        <p><input type="radio" name="rice" value="brown_rice" id="brown_rice"><label for="brown_rice">Brown</label></p>
+                        <p><input type="radio" name="rice" value="jasmin_rice" id="jasmin_rice"><label for="jasmin_rice">Jasmin</label></p>
+                    </div>
+                    
+                    <div class="beans">
+                        <h3>Beans</h3>
+                        <p><input type="radio" name="beans" value="black_beans" id="black_beans"><label for="black_beans">Black</label></p>
+                        <p><input type="radio" name="beans" value="pinto_beans" id="pinto_beans"><label for="pinto_beans">Pinto</label></p>
+                        <p><input type="radio" name="beans" value="white_beans" id="white_beans"><label for="white_beans">White</label></p>
+                    </div>
+
+                    <div class="protein">
+                        <h3>Protein</h3>
+                        <p><input type="radio" name="protein" value="carnitas" id="carnitas"><label for="carnitas">Carnitas</label></p>
+                        <p><input type="radio" name="protein" value="chicken" id="chicken"><label for="chicken">Chicken</label></p>
+                        <p><input type="radio" name="protein" value="sofritas" id="sofritas"><label for="sofritas">Sofritas</label></p>
+                        <p><input type="radio" name="protein" value="barbacoa" id="barbacoa"><label for="barbacoa">barbacoa</label></p>
+                        <p><input type="radio" name="protein" value="no_protein" id="no_protein"><label for="no_protein">None</label></p>
+                    </div>
+
+                    <div class="additional-items">
+                        <h3>Additonal Items</h3>
+                        <p><input type="checkbox" name="cheese" value="cheese" id="cheese"><label for="cheese">Cheese</label></p>
+                        <p><input type="checkbox" name="sour_cream" value="sour_cream" id="sour_cream"><label for="sour_cream">Sour Cream</label></p>
+                        <p><input type="checkbox" name="lettuce" value="lettuce" id="lettuce"><label for="lettuce">Lettuce</label></p>
+                        <p><input type="checkbox" name="guacamole" value="guacamole" id="guacamole"><label for="guacamole">Guacamole</label></p>
+                        <p><input type="checkbox" name="extra_salsa" value="extra_salsa" id="extra_salsa"><label for="extra_salsa">Extra Salsa</label></p>
+                    </div>
+
+                    <div>
+                        <h3>Delivery Instructions</h3>
+                        <p><textarea type="text" name="delivery_instructions" placeholder="optional" id="delivery_instructions"></textarea></p>
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit Order" id="submit">
+                    </div>
+                </form>
+            </article>
+        </main>
+    </div>
+    <footer>
+        <p>
+            Butterscotch Pi 2022
+        </p>
+    </footer>
+</body>
+</html>
