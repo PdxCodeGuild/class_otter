@@ -115,6 +115,17 @@ h2 > a {
     }
 }
 
-/* @media (min-width: 1000px) {
+@media (min-width: 1000px) {
+    .wrapper {
+        flex-direction: column;
+    }
 
-} */
+    header {
+        justify-content: flex-start;
+        min-height: 240px;
+    }
+    
+    header > nav {
+        flex-direction: row;
+    }
+}
