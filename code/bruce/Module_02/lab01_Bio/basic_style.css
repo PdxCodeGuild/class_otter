@@ -27,8 +27,8 @@ div.transbox {
 
 /* Select by tag */
 h1 {
-    margin-top: 30px;
-    font-size:30px;
+    padding-top: 25px;
+    font-size: 30px;
 }
 
 /* Set some margins for paragraphs. */
@@ -41,7 +41,7 @@ p {
     margin-left: 5%;
     margin-right: 5%;
     /* Part 3: Modify body text. */
-    color: rgb(70,45,20);
+    color: rgb(70, 45, 20);
 }
 
 q {
@@ -82,5 +82,5 @@ li::before {
 
 a[href] {
     /* Part 3: Modify web link text color. */
-    color:navy;
+    color: navy;
 }
