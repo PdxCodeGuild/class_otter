@@ -16,10 +16,18 @@ todo_list = db.get('todos')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    
     if request.method == 'POST':
-        # 
-        contact_name = request.form['input_text']
-        print(contact_name)
+        
+        todo = request.form['text']
+        priority = request.form['priority']
+        print(todo)
+        print(priority)
+        todo_list.set('','')
+        # creating dictionary line 22,23 
+        # add dictionary to todolist
+        # save list using todolist.set
+        
 
     return render_template('index.html', todo_list=todo_list)
 
