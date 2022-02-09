@@ -1,0 +1,7 @@
+body{
+    color: var(--primary-color);
+    margin: 16px;
+}
+main{
+    color: var(--secondary-color);
+}
