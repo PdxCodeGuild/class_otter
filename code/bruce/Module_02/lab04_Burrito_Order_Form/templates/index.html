@@ -4,22 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/386a044235.js" crossorigin="anonymous"></script>
+    <!--  -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!--  -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!--  -->
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+    <!--  -->
     <title>Bunbun's Burritos</title>
 </head>
 <body>
     <div>
         <header>
-            <h1>
-                Bunbun's Burritos!
+            <h1 class="our-name">
+                Bunbun's Burritos
             </h1>
+            <div class="paw-print">
+                <i class="fa-solid fa-paw fa-5x"></i>
+            </div>
             <nav>
-
+                <p><a href="#">Create Account</a></p>
+                <p><a href="#">Refer a Friend</a></p>
+                <p><a href="#">Careers</a></p>
+                <p><a href="#">History of the Burrito</a></p>
             </nav>
         </header>
         <main>
             <section>
                 <h2>
-                    Make your important decisions about ingredients:
+                    Make the important decisions about your ingredients:
                 </h2>
             </section>
             <article>
