@@ -10,11 +10,12 @@
 *********************************************
 '''
 
-class atm:     
-    def __init__(self, balance = 0, interest_rate = .001):
+class ATM:     
+    def __init__(self, balance = 0, interest_rate = .001, log=[]):
         # initialize the class with balance = 0 and an interest rate = 0.1%
         self.balance = balance
-        self.interest_rate = interest_rate 
+        self.interest_rate = interest_rate
+        self.log = log 
 
     def check_balance(self):
         #return the current balance
@@ -23,9 +24,11 @@ class atm:
     def deposit(self, amount):
         #add deposit to current balance and update the new balance
         self.balance += amount
+        self.log.append(f'User deposited ${amount}')
         if amount !=  0:
             print('You deposited: $ ' + str(amount))
             print('Your New Balance is: ' + str(self.balance))
+        return self.balance
 
     def check_withdrawal(self, amount):
         #returns true if withrawl amount is less than or equal to balance or false if more than balanceTrue
@@ -36,28 +39,25 @@ class atm:
 
     def withdraw(self, amount):
         #withdraws the amount from account and returns the new balance
-        if amount <= self.balance:
-            self.balance -= amount
-            if amount !=  0:
-                print('You withdrew: $ ' + str(amount))
-            print('Your New Balance is:' + str(self.balance))
-        else:
-            print('insufficient funds')
+        self.balance -= amount
+        self.log.append(f'User withdrew ${amount}')
+        return self.balance
+
 
     def calc_interest(self):
         # multiplies current balance * interest rate to return interest on account
-        return self.balance * self.interest_rate
+        accrued =self.balance * self.interest_rate
+        self.log.append(f'User accrued ${accrued} in interest')
+        return accrued
 
-    # def print_transaction(self):
-    #     if amount !=  0:
-    #         print('You deposited: $ ') + str(amount)
-    #         print('Your New Balance is: ') + (self.balance)
+    def print_transaction(self):
+        return self.log
     
 
-atm = atm() # create an instance of our class
+atm = ATM() # create an instance of our class
 print('Welcome to the ATM')
 while True:
-    command = input("Enter a command - 'balance', 'deposit', 'withdraw', 'interest' or 'help': \n")
+    command = input("Enter a command - 'balance', 'deposit', 'withdraw', 'interest', 'log', or 'help': \n")
     if command == 'balance':
         balance = atm.check_balance() # call the check_balance() method
         print(f'Your balance is ${balance}')
@@ -76,6 +76,11 @@ while True:
         amount = atm.calc_interest() # call the calc_interest() method
         atm.deposit(amount)
         print(f'Accumulated ${amount} in interest')
+    elif command == 'log':
+        log = atm.print_transaction()
+        log = "\n".join(log)
+        print("Your Transaction for this ATM session are:\n" + log)
+    
     elif command == 'help':
         print('Available commands:')
         print('balance  - get the current balance')
@@ -83,7 +88,9 @@ while True:
         print('withdraw - withdraw money')
         print('interest - accumulate interest')
         print('exit     - exit the program')
+        print('log      - print a list of logged transactions')
     elif command == 'exit':
         break
     else:
         print('Command not recognized')
+

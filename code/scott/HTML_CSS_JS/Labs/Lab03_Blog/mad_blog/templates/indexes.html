@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"
+</head>
+<body>
+    <p>Hello {{name}}</p>
+
+    {% if temperature < 50 %}
+    <p>cold</p>
+    {% elif temperature < 80 %}
+    <p>warm</p>
+    {% else %}
+    <p>hot</p>
+    {% endif %}
+
+    <ul>
+    {% for item in posts %}
+    <li>{{ item["title"] }}<br>author? {{ item["author"] }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

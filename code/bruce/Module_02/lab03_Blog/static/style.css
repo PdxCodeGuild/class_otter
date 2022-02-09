@@ -1,0 +1,168 @@
+/* Color Theme Swatches in Hex */
+.theme_fishing_cat_Muted-1-hex { color: #8C8303; }
+.theme_fishing_cat_Muted-2-hex { color: #D9D26C; }
+.theme_fishing_cat_Muted-3-hex { color: #F2E7AE; }
+.theme_fishing_cat_Muted-4-hex { color: #735236; }
+.theme_fishing_cat_Muted-5-hex { color: #A68572; }
+.theme_fishing_cat_Muted-5-hex { color: #192026; }
+
+/* Color Theme Swatches in RGBA */
+.theme_fishing_cat_Muted-1-rgba { color: rgba(140, 131, 3, 1); }
+.theme_fishing_cat_Muted-2-rgba { color: rgba(217, 210, 108, 1); }
+.theme_fishing_cat_Muted-3-rgba { color: rgba(242, 231, 174, 1); }
+.theme_fishing_cat_Muted-4-rgba { color: rgba(115, 82, 54, 1); }
+.theme_fishing_cat_Muted-5-rgba { color: rgba(166, 133, 114, 1); }
+
+/* Color Theme Swatches in HSLA */
+.theme_fishing_cat_Muted-1-hsla { color: hsla(56, 95, 28, 1); }
+.theme_fishing_cat_Muted-2-hsla { color: hsla(56, 58, 63, 1); }
+.theme_fishing_cat_Muted-3-hsla { color: hsla(50, 72, 81, 1); }
+.theme_fishing_cat_Muted-4-hsla { color: hsla(27, 36, 33, 1); }
+.theme_fishing_cat_Muted-4-hsla { color: rgba(114, 81, 54, 0.323); }
+.theme_fishing_cat_Muted-5-hsla { color: hsla(21, 22, 54, 1); }
+
+
+html {
+    /* If you want to create the gap by shrinking the content, set the box-sizing property to border-box (i.e. box-sizing: border-box). */
+    /* https://blog.hubspot.com/website/css-margin-vs-padding */
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
+    box-sizing: border-box;
+}
+
+/* Make everything inherit the box-sizing. */
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+header, main, footer {
+    margin: 0 0;
+    padding: 0 1em;
+}
+
+header {
+    width: 100%;
+}
+
+body {
+    border-top: 3em solid rgba(115, 82, 54, 1);
+    color: rgba(114, 81, 54, 0.967);
+}
+
+header {
+    background-color: rgba(217, 210, 108, 1);
+    border-top: .5em solid rgba(140, 131, 3, 1);
+    border-bottom: .5em solid rgba(140, 131, 3, 1);
+
+}
+
+main {
+    background-color: rgba(242, 231, 174, 0.816);
+    display: block;
+    padding-bottom: 12px;
+}
+
+footer {
+    background-color: rgba(166, 133, 114, 1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #192026e9;
+}
+
+footer {
+    font-family: 'Ubuntu', sans-serif;
+    color: #192026e9;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-weight: 500;
+    text-align: right;
+}
+
+a[href] {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    color: rgb(106, 99, 3);
+}
+
+.blog-post {
+    font-family: 'Ubuntu', sans-serif;
+    list-style-type: none;
+}
+
+.post-title, .post-author, .post-date {
+    color: rgb(90, 84, 3);
+    font-weight: 500;
+    margin: 4px 12px;
+}
+
+.post-date {
+    font-size: 80%;
+}
+
+.post-date {
+    text-align: right;
+}
+
+.post-body {
+    margin-top: 4px;
+    margin-bottom: 20px;
+
+}
+
+header, main, footer {
+    margin: 0 0;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.top-nav > p {
+    margin: 4px auto;
+}
+
+.top-nav {
+    padding-bottom: 8px;
+}
+
+header > div, header > nav, main > section > h2 {
+    text-align: center;
+}
+
+main > section > h2 {
+    padding-top: 12px;
+    margin-top: 0;
+}
+    
+.author-date {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+@media (min-width: 700px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .author-date {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .top-nav {
+        padding-top: 6px;
+        text-align: right;
+    }
+}
+
+@media (min-width: 1400px) {
+    header, main, footer {
+        max-width: 1350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+

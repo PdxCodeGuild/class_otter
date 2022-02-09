@@ -1,7 +1,18 @@
-#Quotes API Lab
-
+'''
+*********************************************
+*              PDXCode Guild                *
+*  Full-Stack Python/JavaScript Day Class   *
+*               Class_Otter                 *
+*              Scott Madden                 *
+*           Lab 15 - Quotes API             *
+*              26/January/2022              *
+*                                           *
+*********************************************
+'''
+#Version 1 Complete
 import requests
-"""
+
+# """
 url = 'https://favqs.com/api/qotd'
 response = requests.get(url)
 print(response)
@@ -10,13 +21,14 @@ data = response.json()
 random_quote = data['quote']['body']
 author = data['quote']['author']
 print(random_quote, author)
-"""
-#Version 1 Complete
+# """
 
-#Version 2 Beginning
+
+#Version 2 Complete
+
 
 headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}
-welcome = input('Welcome to the Quotes, would you like to continue? (yes/no): ')
+welcome = input("Welcome to 'Quotes', would you like to continue? (yes/no): ")
 parameters = {'page' : 1}
 # page = 1
 url = (f"https://favqs.com/api/quotes?page={parameters['page']}&filter=")
@@ -27,12 +39,18 @@ while welcome == 'yes':
 
     response = requests.get(final_url, headers=headers)
     # print(response)
+    data = response.json()
+    # print(data)
+    num = 0
+
+
 
     data = response.json()
     # print(data)
     num = 0
     # quote = data['quotes'][num]['body']
     # author = data['quotes'][num]['author']
+
     for i in data['quotes']:
         print(f"{data['quotes'][num]['body']}")
         print('')
@@ -55,9 +73,5 @@ while welcome == 'yes':
             else:
                 break
 
-
-    welcome = input('Would you like to see more?(yes/no): ')
-
+    welcome = input('Would you like to see more Quotes?(yes/no): ')
 print('Good Bye!')
-
-# print(random_quote,author)

@@ -1,5 +1,6 @@
 # Lab 10: Contact List
 # 01/14/2022
+#
 
 # Let's build a program to manage a list of contacts. To start, we'll build a CSV ('comma separated values') together, and go over how to load that file. Headers might consist of name, favorite fruit, favorite color. Open the CSV, convert the lines of text into a list of dictionaries, one dictionary for each user. The text in the header represents the keys, the text in the other lines represent the values.
 
@@ -26,10 +27,23 @@ with open('contacts.csv', 'r') as file:
 # this splits the dictionary at the first comma to save the key values
 dict_keys = lines[0].split(',')
 contacts = []
-
 # print(dict_keys)
+# you could also split lines = contacts.csv.split('\n') to separate each as a line item
+# you sould also split each of these lines, into a list of 9 string items
+
+# long version -- 
+# csv_lines = data_csv.split('\n')
+# data_csv = []
+# for line in csv_lines:
+#   data_csv/appelnd(line.split(','))
+
+# list comprehension version -- data_csv = [line.split(',') for line in data_csv.split('\n')]
+# keys = data_csv[0]
+# data = [dict(zip(keys, values)) for values in data_csv[1::]]
+
 
 # for each comma, this splits the list, and then zips it together to form a new dictionary with the dict_keys.  needs the -1 modifier because of how split works
+## --- Could this be done in a list comprehension? 
 for i in range(1, len(lines) - 1):
     data = lines[i].split(',')
     contact = dict(zip(dict_keys, data))
@@ -47,6 +61,7 @@ print(contacts)
 
 
 # function to add a new contact to the list of contacts
+# can add a f'string for the categories to shorten up this fxn
 def create_record(contacts):
     name = input("What is the name? ")
     food = input("What is their favorite food? ")
@@ -56,6 +71,11 @@ def create_record(contacts):
     return contacts
 # create_record(contacts)
 # print(contacts)
+
+## dictionary comprehension version
+# def create_contact(data,keys):
+    data.append({key: input(f"What is your new contact's {key}? ") for key in keys})
+
 
 
 # function to retrieve data for a name
@@ -67,10 +87,20 @@ def retrieve_record(contacts):
 
 # print(retrieve_record(contacts))
 
+# update this with a function to read and search for a specific entry by term.
+# check to see if this would return 2 names if they have the same.                 
+# 
+# 
+# Merritt example:                                                                                                                                                              
+# def read_contact(data, keys):
+#     key_string = '\n' + '\n'.join(keys) + '\n'
+#     key_input = input(f"What would you like to search by? Choose from: {key_string} ")
+#     contact_input = input(" what is your search term? ")
+#     data_results = list(filter(lambda contact: contact[key_input] == contact_input, data))
 
 
 # function to update a record
-## this currently has not functionality to check if the update field is not a correct category.
+## this currently has not functionality to check if the update field is not a correct category. ie food vs favorite food..
 def update_record(contacts):
     who_to_update = retrieve_record(contacts)
     what_to_update = input("What would you like to update? ")
@@ -93,6 +123,7 @@ def delete_record(contacts):
 
 # Version 3: When REPL loop finishes, write the updated contact info to the CSV file to be saved. 
 # I highly recommend saving a backup contacts.csv because you likely won't write it correctly the first time.
+# 
 
 def update_csv(contacts):
     repl_ask = input("What would you like to do to the csv? (create, retrieve, update, or delete a record? ")

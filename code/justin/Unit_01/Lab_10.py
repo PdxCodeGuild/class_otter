@@ -43,10 +43,10 @@ backup contacts.csv because you likely won't write it correctly the first time.
 '''
 
 def load_lines_from_file(file_name):
-    base_path = os.path.dirname(__file__)
-    lines = []
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    lines = None
     try:
-        with open(f'{base_path}\\{file_name}', 'r') as file:
+        with open(f'{os.path.join(base_path, file_name)}', 'r') as file:
             lines = file.read().split('\n')
     except FileNotFoundError as exception:
         print(f'{exception.strerror}: {exception.filename}')
@@ -307,7 +307,8 @@ def main():
     write_to_db(contacts_list, file_name)
 
 
-main()
+if __name__ == '__main__':
+    main()
 
 '''sample_contacts.csv
 name, favorite fruit, favorite color

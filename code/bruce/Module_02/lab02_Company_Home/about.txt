@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Montserrat Alternates
+- Font Author: Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
+- Font Source: http://fonts.gstatic.com/s/montserratalternates/v16/mFTkWacfw6zH4dthXcyms1lPpC8I_b0juU057p91BrxD-GVxk3Nd.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
