@@ -45,8 +45,8 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        contact_name = request.form['input_text']
-        print(contact_name)
+        # contact_name = request.form['input_text']
+        
         # handle data here
         return redirect('/')
     return render_template('index.html')
