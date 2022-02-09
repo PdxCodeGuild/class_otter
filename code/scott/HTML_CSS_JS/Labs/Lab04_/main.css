@@ -1,0 +1,266 @@
+/* #BF9BA2 light red/purple
+#111C26 purplish black
+#8195A6 steel blue
+#C2E0F2 baby blue
+#2E4021 dark forest green */
+
+html {
+    box-sizing: border-box;
+    background: url("mex_back.jpg") no-repeat center center fixed;z-index: -1; 
+    background-color: #f3e8e8;
+    -webkit-background-size:cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size:cover;
+    /* background-repeat: repeat; */
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+img {
+    display: block;
+    width: 200px;
+    height: 200px;    
+}
+
+nav p{font-family: 'Permanent Marker', cursive;
+    font-weight: 400;
+    color:#ff0;
+}
+
+a {padding: 5px;}
+
+a {transition: all ease-in-out 125ms;
+    color: #BFB39B;}
+
+a:hover {
+    text-shadow: 0 0 4px white;
+    transition: all ease-in-out 125ms;
+}
+
+header > article {order: 1; width: 100%; flex:2;}
+
+header {display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+.header-background {width: 100%;
+    max-height:auto;
+    background-color: #995E4C;
+    height:10vw;
+    background-position: top;
+}
+
+/* h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+} */
+
+h1 {font-family: 'Permanent Marker', cursive;
+    font-size: 2em;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #463232;
+    font-weight: 500;
+}
+
+h2 {font-family: Permanent Marker, 'cursive';
+    color:rgb(78, 70, 70);
+    font-weight: 400;
+}
+
+h3 {font-family: Permanent Marker, 'cursive';
+    color: #121718;
+    /* background: #FFFFFF; */
+    text-shadow: 0 1px #808d93, -1px 0 #cdd2d5, -1px 2px #808d93, -2px 1px #cdd2d5, -2px 3px #808d93, -3px 2px #cdd2d5, -3px 4px #808d93, -4px 3px #cdd2d5, -4px 5px #808d93, -5px 4px #cdd2d5, -5px 6px #808d93, -6px 5px #cdd2d5, -6px 7px #808d93, -7px 6px #cdd2d5, -7px 8px #808d93, -8px 7px #cdd2d5;
+    font-weight: 300;
+}
+
+h4 {font-family: 'Permanent Marker', cursive;
+    color:#4F657E;
+    font-size:xx-large;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #463232;
+    font-weight: 250;
+}
+
+h6 {font-family: 'Permanent Marker', cursive;
+    /* background: #912C22; */
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #463232;
+    font-weight: 200;
+}
+
+main {
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    border-style: inset;
+    /* justify-content:center; */
+    width: 100%;
+    min-height:60vw;
+    /* justify-content: center; */
+    /* height:10vw; */
+    /* position: absolute;
+    top: 20;
+    padding: 5px; */
+    /* vertical-align:top; */
+}
+
+main nav {
+    /* display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center; */
+    max-width: 25%;
+    min-height:25vw;
+    min-width:fit-content;
+    /* height:10vw; */
+    /* position:absolute; */
+    /* justify-content: center;; */
+}
+
+main p {
+    text-align: justify;
+}
+
+form {
+    background-color: rgb(82, 97, 124);z-index: -1;
+    border: 5px solid #2E4021;
+    padding: 1em;
+    width: 500px;
+    margin: auto;
+    align-content:space-around;
+    text-align:justify;
+    justify-content:space-evenly;
+    align-items: flex-start;
+}
+
+footer p {
+    font-family: Permanent Marker, 'cursive'; 
+}
+form p {
+    font-family: Permanent Marker, 'cursive';
+    font-size: medium;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #311e1e;
+    font-weight: 200;
+}
+form label {
+    font-family: Permanent Marker, 'cursive';
+    font-size: medium;
+    color: #860404;
+    text-shadow: 0 1px #808d93, -1px 0 #cdd2d5, -1px 2px #808d93, -2px 1px #cdd2d5, -2px 3px #808d93, -3px 2px #cdd2d5, -3px 4px #808d93, -4px 3px #cdd2d5, -4px 5px #808d93, -5px 4px #cdd2d5, -5px 6px #808d93, -6px 5px #cdd2d5, -6px 7px #808d93, -7px 6px #cdd2d5, -7px 8px #808d93, -8px 7px #cdd2d5;
+    font-weight: 150;
+    transition: .125s ease-in-out all;
+}
+
+form textarea {
+    background-color: rgb(50, 75, 121);
+    width: 250px;
+    height: 60px;
+    line-height: 1;
+    margin:0%;
+    padding: 0%;
+}
+
+input::placeholder {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#email:active {
+    background-color: black;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="tel"] {
+    background-color:rgb(50, 75, 121);
+    width: 150px;
+}
+
+input[type="text"]:hover,
+input[type="tel"]:hover,
+input[type="email"]:hover {
+    color: rgb(250, 235, 235);
+    background-color: black;
+    transition: .125s ease-in-out all;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
+    color: white;
+    background-color: green;
+    transition: .125s ease-in-out all;
+}
+
+button[type="submit"] {
+    background-color: #111C26;
+    color: #8195A6;
+    border-radius: 20px;
+    border: 4px solid #BF9BA2;
+    transition: .1s ease-in-out all;
+}
+
+input[type="submit"] {
+    border: 5px solid coral;
+    border-radius: 0;
+}
+
+input[type="submit"]:active {
+    box-shadow: 0 0 5px black;
+    transition: .1s ease-in-out all;
+}
+
+@media (min-width: 320px){
+    /* Too narrow to support three columns */
+  main { flex-flow: column;
+      align-self: center;
+      text-align:center;
+  }
+
+  main > article, main > nav, main > aside {
+      /* Return them to document order  */
+      order: 0; width: auto;}
+
+  header {max-height: min-content;
+      flex-direction: row;
+      text-align:center;}
+
+  nav {padding: 10px;
+      /* flex-direction: row; */
+  }
+}
+@media (min-width: 750px) {
+   /* Too narrow to support three columns  */
+  main {
+      text-align:center;
+      flex-flow: column; } 
+}
+  /* main > article, main > nav, main > aside {
+      order: 0; width: auto;} Return them to document order */
+  /* header, main, form, footer {padding: 2em;}
+  .gallery-item {width: 33.33%;}
+  .gallery-item1 {width: 33.33%;} */
+
+@media (min-width: 1100px) {
+  header, main, form, footer {
+      max-width: 100%;}
+  /* .gallery-item {
+      width: 33.33%;}
+
+  .gallery-item1 {
+      width: 33.33%;} */
+
+  /* header {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;} */
+
+  /* header > div > h1, header > div > h3 {
+      margin: 0;} */
+}
+
+@media (min-width: 1400px) {
+  header, main, form, footer {
+      max-width: 100%;
+  }
+}
