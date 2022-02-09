@@ -45,16 +45,19 @@
                     Make the important decisions about your ingredients:
                 </h2>
             </section>
-            <article>
-                <form action="https://webhook.site/f7337193-976d-48c7-b5e9-c445ec66ae6e" method="post">
-                    <div class="customer-info">
-                        <h3>Customer Information</h3>
-                        {% for field in customer %}
+            
+            <form action="https://webhook.site/f7337193-976d-48c7-b5e9-c445ec66ae6e" method="post">
+                <h3>Customer Information</h3>
+                <div class="customer-info">
+                    {% for field in customer %}
+                    <p>
                         <label for="{{ field['item_key'] }}">{{ field['description'] }}</label>
                         <input type="{{ field['type'] }}" name="{{ field['item_key'] }}" id="{{ field['item_key'] }}" placeholder="Required" required>                        
+                    </p>
                         {% endfor %}
-                    </div>
+                </div>
 
+                <article class="menu-choices">
                     <div class="wrap">
                         <h3>Wrap Choice</h3>
                         {% for field in menu_wrap %}
@@ -84,22 +87,22 @@
                     </div>
 
                     <div class="additional-items">
-                        <h3>Additonal Items</h3>
+                        <h3>Additional Items</h3>
                         {% for field in menu_add %}
                         <p><input type="checkbox" name="{{ field['item_key'] }}" value="{{ field['item_key'] }}" id="{{ field['item_key'] }}"><label for="{{ field['item_key'] }}">{{ field['description'] }}</label></p>
                         {% endfor %}
                     </div>
 
-                    <div>
+                    <div class="delivery-instructions">
                         <h3>Delivery Instructions</h3>
-                        <p><textarea type="text" name="delivery_instructions" placeholder="optional" id="delivery_instructions"></textarea></p>
+                        <p><textarea class="text-area" type="text" name="delivery_instructions" placeholder="optional" id="delivery_instructions"></textarea></p>
                     </div>
-                    
-                    <div>
-                        <input type="submit" value="Submit Order" id="submit">
-                    </div>
-                </form>
-            </article>
+                </article>
+                <div class="submit-button">
+                    <input type="submit" value="Submit Order" id="submit">
+                </div>
+            </form>
+
         </main>
     </div>
     <footer>
