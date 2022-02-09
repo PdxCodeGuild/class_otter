@@ -1,9 +1,9 @@
+from flask import Flask, render_template, request, redirect
+from flask import request
 from jsondb import JsonDB
 db = JsonDB()
 db.load()
 
-from flask import request
-from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
 
 
@@ -12,18 +12,22 @@ app = Flask(__name__)
 # db.set('x', x)
 # db.save()
 
-@app.route('/')
-def index():
-    return render_template('index.html', todos=db['todos'])
+# @app.route('/')
+# def index():
+#     return render_template('index.html', todos=db['todos'])
 
 
-
-@app.route('/create', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def create():
     if request.method == 'POST':
-        db['todos'].append({
+        data = db.get('todos')
+        data.append({
             'text': request.form['text'],
-            'priority'
+            'priority': request.form['priority']
         })
+        db.save()
         return redirect('/')
     return render_template('index.html')
+
+
+app.run(debug=True)
