@@ -18,10 +18,13 @@
         <main>
             <ul>
             {% for task in task_list %}
-                <li>{{ task['text'] }} ({{ task['priority'] }})</li>
+                <li>
+                    <p>{{ task['text'] }}<span class="{{ task['priority'] }}">{{ task['priority'] }}</span></p>
+                </li>
             {% endfor %}
             </ul>
         </main>
+        <hr>
         <aside>
             <form action="" method="post">
                 <select name="priority" id="priority" required>

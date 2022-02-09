@@ -9,8 +9,8 @@
     --accent-color: #e05048;
     --text-color: #8C2008;
     --link-color: #61180E;
-    --visited-color: #61180E;
-    --hover-color: #e05048;
-    --active-color: #8C2008;
+    --high-color: #ff0000;
+    --medium-color: #f79502;
+    --low-color: #b2f11c;
 }
 

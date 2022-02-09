@@ -5,3 +5,20 @@ body{
 main{
     color: var(--secondary-color);
 }
+/* li{
+    display: flex;
+} */
+
+.high{
+    background-color: var(--high-color);
+}
+.medium{
+    background-color: var(--medium-color);
+}
+.low{
+    background-color: var(--low-color);
+}
+hr{
+    height: 2px;
+    color: var(--primary-color);
+}
