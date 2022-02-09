@@ -25,6 +25,14 @@ aside {
     display: none
 }
 
+.main_img {
+    display: none;
+}
+
+.other_img {
+    display: none;
+}
+
 main {
     margin: 32px 4px;
     padding: 2px;
@@ -102,6 +110,10 @@ textarea {
         flex: 1;
     }
 
+    .main_img {
+        display: flex;
+    }
+
     img {
         max-width: 100%;
         object-fit: cover;
@@ -116,5 +128,20 @@ textarea {
     }
 }
 
-/*@media (min-width: 1000px) {
-} */
+@media (min-width: 1000px) {
+    aside {
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .other_img {
+        display: flex;
+    }
+
+    img {
+        width: 480px;
+        height: 360px;
+        margin: 8px 2px;
+    }
+}
