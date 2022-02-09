@@ -36,20 +36,10 @@
 # Part 2
 # Using a form, allow the user to save a new todo item to the database. This should include a input for text, a select for the priority, and a button for submitting the form.
 
-<<<<<<< HEAD
-
-# import jsondb
 from jsondb import JsonDB
-=======
-from jsondb import JsonDB 
->>>>>>> b36e2449f1b32062f00d23b84eaab90c4f18795c
-db = JsonDB('db.json')
-db.load()
-x = db.get('x', 0)
-x += 1
-db.set('x', x)
-db.save()
 from flask import Flask, render_template , request, redirect
+
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -60,3 +50,14 @@ def index():
         # handle data here
         return redirect('/')
     return render_template('index.html')
+
+
+
+
+
+# db = JsonDB('db.json')
+# db.load()
+# x = db.get('x', 0)
+# x += 1
+# db.set('x', x)
+# db.save()
