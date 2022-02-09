@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title>todolist</title>
   </head>
   <header>
@@ -12,14 +13,23 @@
 
   <body>
     <p>your todolist data</p>
-    <ol>
-      {%for i in data %}
-      <li>{{i}}</li>
+    <table>
+      <tr>
+        <th>priority</th>
+        <th>text</th>
+      </tr>
+      {%for item in data %}
+      <tr>
+      <td>{{item["priority"]}}</td>
+      <td>{{item["text"]}}</td>
+      </tr>
       {%endfor%}
-    </ol>
+    </table>
+
+
     <form action=" " method="post">
-      <input type="text" name="text" id="text" />
-      <label for="text">input text</label><br />
+      <label for="text">Input Text</label>
+      <input type="text" name="text" id="text"><br/>
 
       <label for="priority">Priority</label>
       <select name="priority" id="priority">

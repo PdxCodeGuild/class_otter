@@ -43,6 +43,10 @@
         {
             "priority": "High",
             "text": "scoop"
+        },
+        {
+            "priority": "Medium",
+            "text": "VINTAGE HOUSE"
         }
     ]
 }

@@ -1,8 +1,5 @@
-from typing import Text
 from flask import Flask, render_template, request, redirect
-from flask import request
 from jsondb import JsonDB
-import json
 db = JsonDB()
 db.load()
 
