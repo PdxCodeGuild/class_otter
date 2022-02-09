@@ -18,6 +18,8 @@ def index():
     if request.method == 'POST':
         contact_name = request.form['input_text']
         print(contact_name)
+        # handle data here
+        return redirect('/')
     return render_template('index.html')
 ```
 
@@ -48,5 +50,6 @@ def temperature():
     print(request.form) # {'person_name': 'Jane', 'person_age': 34}
     person_name = request.form['person_name'] # Jane
     person_age = request.form['person_age'] # 34
+    # handle data here
     return redirect('/')
 ```

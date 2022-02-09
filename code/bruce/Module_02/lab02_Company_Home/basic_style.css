@@ -1,0 +1,168 @@
+/* Color Theme Swatches in Hex */
+.guitar_splitComplimentary-1-hex { color: #628C7C; }
+.guitar_splitComplimentary-2-hex { color: #8DD9BC; }
+.guitar_splitComplimentary-3-hex { color: #D9AB82; }
+.guitar_splitComplimentary-4-hex { color: #465B8C; }
+.guitar_splitComplimentary-5-hex { color: #7794D9; }
+
+/* Color Theme Swatches in RGBA */
+.guitar_splitComplimentary-1-rgba { color: rgba(98, 140, 124, 1); }
+.guitar_splitComplimentary-2-rgba { color: rgba(141, 217, 188, 1); }
+.guitar_splitComplimentary-3-rgba { color: rgba(217, 171, 130, 1); }
+.guitar_splitComplimentary-4-rgba { color: rgba(70, 91, 140, 1); }
+.guitar_splitComplimentary-5-rgba { color: rgba(119, 148, 217, 1); }
+
+/* Color Theme Swatches in HSLA */
+.guitar_splitComplimentary-1-hsla { color: hsla(157, 17, 46, 1); }
+.guitar_splitComplimentary-2-hsla { color: hsla(157, 50, 70, 1); }
+.guitar_splitComplimentary-3-hsla { color: hsla(28, 53, 68, 1); }
+.guitar_splitComplimentary-4-hsla { color: hsla(222, 33, 41, 1); }
+.guitar_splitComplimentary-5-hsla { color: hsla(222, 56, 65, 1); }
+
+/* https://github.com/PdxCodeGuild/class_otter/blob/main/2%20Flask%20%2B%20HTML%20%2B%20CSS/labs/02%20Company.md */
+
+/* *'h1' is 'selector',
+*'font-size' is 'propery',
+*'80px' is 'value'. */
+
+:root {
+    --header_border_brown: #944E4E;
+  }
+
+html {
+    /* If you want to create the gap by shrinking the content, set the box-sizing property to border-box (i.e. box-sizing: border-box). */
+    /* https://blog.hubspot.com/website/css-margin-vs-padding */
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
+    box-sizing: border-box;
+}
+
+/* Make everything inherit the box-sizing. */
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* We want the images (things that have <img> tag) to fit within any display regardless of their size. So set width to 100%. */
+img {
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/display */
+    display: block;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/max-width */
+    max-width: 100%;
+}
+
+/* Create a margin for the primary blocks (tags) inside 'body'('header', 'main', and 'footer'). This may or may not affect the margins of the items in "all-the-stuff". We will see when we get there. 'margin' is the space outside of the element which we want to have either nothing there or other items' margins.*/
+/* Reference: https://www.w3schools.com/cssref/css_selectors.asp */
+header, main, footer {
+    margin: 0 0;
+    padding: 0 1em;
+}
+
+
+/* Try to add a little brown border to header */
+header {
+    width: 100%;
+}
+
+nav > p > a {
+    /* color: #D97373; */
+    color: var(--header_border_brown);
+    /* color: #B36A7E; */
+    /* color: #595959; */
+    /* color: #D9AB82; */
+}
+
+/* NOTE: We now have the images staying withing the width of the diesplay. There is a little bit of a margin around the primary elements. Since the 'items' are within 'main', the 'margin' of 'main' provides the 'margin' on the sides of '<div class="all-the-stuff">'. The 'margin' is the 'main's margin, so the sub-items may not need 'margin'.*/
+
+/* Let's align the text of the header to 'center'. This will affect a <div> and a <nav>, which are in the <header>. */
+header {
+    text-align: center;
+    background-color: hsla(157, 17%, 46%, 1);
+}
+
+.full-width-header {
+    width: 100%;
+    background-color: hsla(157, 17%, 46%, 1);
+    border-top: .25em solid var(--header_border_brown);
+}
+
+h1 {
+    padding-top: .5em;
+    margin: 0;
+}
+
+h2 {
+    margin-top: 1.2em;
+}
+
+nav {
+    padding-bottom: 0.5em;
+}
+
+/* Now: Let's change the font for all text in 'body'. */
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: hsla(222, 33%, 30%, 1);
+    background-color: hsla(28, 53%, 68%, .6);
+    border-top: 25px solid hsla(222, 33%, 41%, 1);
+}
+
+.an-item-of-stuff h3 {
+    font-size: 1.3em;
+}
+
+footer {
+    text-align: right;
+}
+
+/* Switch to tablet mode when display width reaches 700px. */
+@media (min-width: 700px) {
+    nav {
+        padding-bottom: 0.5em;
+    }
+
+    .all-the-stuff {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .an-item-of-stuff {
+        width: 50%;
+        padding: 1em;
+    }
+}
+
+@media (min-width: 1100px) {
+
+    .an-item-of-stuff {
+        width: 33.33%;
+    }
+    
+    /* We now want to flex the title/subtitle and the links. */
+    /* The heading and subtitle are in 'header'. One is <div> and the other is <nav>. But they are children of <header> so we flex <header>. */
+    header {
+        display: flex;
+        /* Put title/subtitle to left and links to right. */
+        /* We will align the text within those next. */
+        justify-content: space-between;
+    }
+
+    /* Align the page heading/title to the left. */
+    .title-and-subtitle h1, .title-and-subtitle h2 {
+        text-align: left;
+    }
+
+    /* Align the page links to the right. */
+    nav {
+        text-align: right;
+    }
+}
+
+/* We should set a max width. If user uses a really large display width, we want the site to stay within reason. If the site had a design where the items could keep accumulating and teh header would look good, we could still allow display width to grow. */
+@media (min-width: 1400px) {
+    header, main, footer {
+        max-width: 1350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
