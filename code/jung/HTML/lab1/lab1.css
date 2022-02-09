@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a:link {
+    color: white;
+}
+a:visited{
+    color: yellow;
+}
+h2 {
+    padding-top: 1.5cm;
+}
+img {
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: url("https://bs-uploads.toptal.io/blackfish-uploads/components/seo/content/og_image_file/og_image/738014/image_0-c39fc1cab5c34425e8dc3f5ac720f57b.png");
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+.container {
+    padding: 40px;
+}
+img:not(.warren) {
+    margin-top: 50px;
+    border-radius: 50%;
+    width:  600px;
+    height: 500px;
+    object-fit: cover;
+}
+ul {
+    list-style-type: upper-roman;
+    list-style-position: inside;
+}
+p {
+    font-size: 15px;
+    margin: auto;
+    width: 600px;
+    padding-bottom: 80px;
+}
+q {
+    quotes: auto;
+}
