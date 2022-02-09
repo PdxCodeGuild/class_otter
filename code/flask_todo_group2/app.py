@@ -25,7 +25,8 @@
 #     }
 #   ]
 # }
-# Next, write a Flask app that uses the JsonDB class to load the database and render a template containing the information. The resulting HTML should look something like this, but feel free to use a table or divs instead.
+# Next, write a Flask app that uses the JsonDB class to load the database and render a template containing the information.
+# The resulting HTML should look something like this, but feel free to use a table or divs instead.
 
 # <ul>
 #   <li>walk the dog (high)</li>
@@ -42,22 +43,22 @@ from flask import Flask, render_template , request, redirect
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        # contact_name = request.form['input_text']
-        
-        # handle data here
-        return redirect('/')
-    return render_template('index.html')
+db = JsonDB('db.json')
+db.load()
 
-
-
-
-
-# db = JsonDB('db.json')
-# db.load()
 # x = db.get('x', 0)
 # x += 1
 # db.set('x', x)
 # db.save()
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    todo = db.get('todos')
+    
+    if request.method == 'POST':
+        # contact_name = request.form['input_text']
+
+        # handle data here
+        return redirect('/')
+    return render_template('index.html', task_list=todo)
