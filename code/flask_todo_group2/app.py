@@ -46,19 +46,15 @@ app = Flask(__name__)
 db = JsonDB('db.json')
 db.load()
 
-# x = db.get('x', 0)
-# x += 1
-# db.set('x', x)
-# db.save()
-
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    todo = db.get('todos')
-    
+    todos = db.get('todos')
     if request.method == 'POST':
-        # contact_name = request.form['input_text']
+        # task = {'priority': request.form['priority'], 'text': request.form['task']}
+        # todos.append(task)
+        # db.set('todos', todos)
+        # db.save()
 
         # handle data here
         return redirect('/')
-    return render_template('index.html', task_list=todo)
+    return render_template('index.html', task_list=todos)
