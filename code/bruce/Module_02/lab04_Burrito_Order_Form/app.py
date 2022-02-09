@@ -7,6 +7,14 @@
 # ******************************************** #
 
 from flask import Flask, render_template
+from customer_info import customer
+from menu_info import menu_wrap as menu_wrap
+from menu_info import menu_rice as menu_rice
+from menu_info import menu_beans as menu_beans
+from menu_info import menu_protein as menu_protein
+from menu_info import menu_add as menu_add
+
+
 
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/bruce/2%20Flask%20%2B%20HTML%20%2B%20CSS/labs/04%20Burrito%20Order%20Form.md
@@ -18,7 +26,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', customer=customer, menu_wrap=menu_wrap, menu_rice=menu_rice, menu_beans=menu_beans, menu_protein=menu_protein, menu_add=menu_add)
 
 
 
