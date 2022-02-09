@@ -36,10 +36,8 @@
 # Part 2
 # Using a form, allow the user to save a new todo item to the database. This should include a input for text, a select for the priority, and a button for submitting the form.
 
-
-import from jsondb
-import JsonDB
-db = JsonDB('database.json')
+from jsondb import JsonDB 
+db = JsonDB('db.json')
 db.load()
 x = db.get('x', 0)
 x += 1
