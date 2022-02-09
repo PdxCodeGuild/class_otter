@@ -1,4 +1,5 @@
 header{
+    padding-top: 24px;
     color: white;
     text-align: center;
     justify-content: center;
@@ -19,6 +20,7 @@ a{
 }
 main{
     background-color: yellow;
+    font-family: Roboto;
 }
 
 .menu{
