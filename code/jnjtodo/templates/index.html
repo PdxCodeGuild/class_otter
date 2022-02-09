@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>todolist</title>
-  </head>
-  <header>
-    <h1>todolist</h1>
-  </header>
 
-  <body>
-    <p>your todolist data</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css' ) }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Rock+3D&display=swap" rel="stylesheet">
+  <title>To do list </title>
+</head>
+<header>
+  <h1> your to do list</h1>
+</header>
+
+<body>
+  <div class="output">
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
     <table>
       <tr>
         <th>priority</th>
@@ -20,25 +31,31 @@
       </tr>
       {%for item in data %}
       <tr>
-      <td>{{item["priority"]}}</td>
-      <td>{{item["text"]}}</td>
+        <td>{{item["priority"]}}</td>
+        <td>{{item["text"]}}</td>
       </tr>
       {%endfor%}
     </table>
+  </div>
 
+
+  <div class="buttons">
 
     <form action=" " method="post">
       <label for="text">Input Text</label>
-      <input type="text" name="text" id="text"><br/>
+      <input type="text" name="text" id="text"><br />
 
       <label for="priority">Priority</label>
       <select name="priority" id="priority">
         <option value="High">High</option>
         <option value="Medium">Medium</option>
-        <option value="Low">Low</option></select
-      ><br />
+        <option value="Low">Low</option>
+      </select><br />
 
-      <button type="submit">sumbit</button>
+      <button type="submit">submit</button>
+
     </form>
-  </body>
+  </div>
+</body>
+
 </html>

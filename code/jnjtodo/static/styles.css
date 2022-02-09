@@ -1,0 +1,38 @@
+header{ text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    color: whitesmoke;
+    background-color: black;
+    margin: 0px 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+h1{
+
+    background-color: black;
+    margin-top: 0px;
+    border-top: 0px;
+}
+
+
+body { background-color:coral;}
+
+.output {
+    text-align: center;
+    display: flex;
+justify-content: center;
+align-items: center;
+
+  
+    
+
+}
+
+.buttons { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
