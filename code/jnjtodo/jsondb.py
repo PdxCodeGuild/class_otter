@@ -1,14 +1,14 @@
-
-# A simple JSON-based database that can be used with Flask.
+'''
+A simple JSON-based database that can be used with Flask.
 Usage:
 import from jsondb import JsonDB
-db = JsonDB('db.json')
+db = JsonDB('database.json')
 db.load()
-x = db.get('x', 0)
+x = db.get('todos', 0)
 x += 1
-db.set('x', x)
+db.set('todos', x)
 db.save()
-
+'''
 
 import json
 

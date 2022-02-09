@@ -3,7 +3,20 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    name = 'bob'
-    temperature = 67
-    nums = [1, 2, 3]  
-    return render_template('index.html', name=name, temperature=temperature, nums=nums)
+    {
+    "todos":[
+      {
+        "text": "walk the dog",
+        "priority": "high"
+      },{
+        "text":"butter the cat",
+        "priority":"medium"
+      },{
+        "text":"wash dishes",
+        "priority":"low"
+      }
+    ]
+  }
+    return render_template('index.html', todos = todos)
+
+app.run(debug=True)
