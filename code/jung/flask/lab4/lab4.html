@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="lab4.css">
+    <title>Burrito</title>
+</head>
+<body>
+    <header>
+        <div class="top">
+            <div class="title">
+                <h1>Welcome to Cali Burrito</h1>
+            </div>
+            <div class="img">
+                <img src="https://caliburritoexpress.com/files/2015/05/logo.png" alt="caliburrito">
+            </div>
+        </div>
+    </header>
+    <form action="https://webhook.site/29c49307-82f3-4f77-bb55-ca1cc74fbba7" method="post">
+        <h3>Customize Your Perfect Burrito!</h3>
+
+        
+        <!-- username -->
+        <label for="Username">Username</label>
+        <input type="text" name="Username" id="Username" placeholder="required" required minlength="6"><br>
+        
+        <!-- password -->
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="required" required minlength="6"><br>
+        
+        <!-- name -->
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="required" required><br>
+
+        <!-- email -->
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="optional" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"><br>
+
+        <!-- phone -->
+        <label for="phone">Phone Number</label>
+        <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="optional"><br>
+
+        <!-- date of birth -->
+        <label for="Date of Birth">Date of Birth</label>
+        <input type="date" name="Date of Birth" id="Date of Birth" placeholder="optional"><br>
+        
+        <!-- Social Security Number -->
+        <label for="ssn">Social Security Number</label>
+        <input type="text" name="ssn" id="ssn" pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}" placeholder="optional"><br>
+
+
+        <!-- address -->
+
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address"><br>
+
+        <label for="city">City</label>
+        <input type="text" name="city" id="city" placeholder="required" required><br>
+
+        <label for="state">State</label>
+        <select name="state" id="state">
+          <option value="AL">AL</option>
+          <option value="AK">AK</option>
+          <option value="AR">AR</option>	
+          <option value="AZ">AZ</option>
+          <option value="CA">CA</option>
+          <option value="CO">CO</option>
+          <option value="CT">CT</option>
+          <option value="DC">DC</option>
+          <option value="DE">DE</option>
+          <option value="FL">FL</option>
+          <option value="GA">GA</option>
+          <option value="HI">HI</option>
+          <option value="IA">IA</option>	
+          <option value="ID">ID</option>
+          <option value="IL">IL</option>
+          <option value="IN">IN</option>
+          <option value="KS">KS</option>
+          <option value="KY">KY</option>
+          <option value="LA">LA</option>
+          <option value="MA">MA</option>
+          <option value="MD">MD</option>
+          <option value="ME">ME</option>
+          <option value="MI">MI</option>
+          <option value="MN">MN</option>
+          <option value="MO">MO</option>	
+          <option value="MS">MS</option>
+          <option value="MT">MT</option>
+          <option value="NC">NC</option>	
+          <option value="NE">NE</option>
+          <option value="NH">NH</option>
+          <option value="NJ">NJ</option>
+          <option value="NM">NM</option>			
+          <option value="NV">NV</option>
+          <option value="NY">NY</option>
+          <option value="ND">ND</option>
+          <option value="OH">OH</option>
+          <option value="OK">OK</option>
+          <option value="OR" selected>OR</option>
+          <option value="PA">PA</option>
+          <option value="RI">RI</option>
+          <option value="SC">SC</option>
+          <option value="SD">SD</option>
+          <option value="TN">TN</option>
+          <option value="TX">TX</option>
+          <option value="UT">UT</option>
+          <option value="VT">VT</option>
+          <option value="VA">VA</option>
+          <option value="WA">WA</option>
+          <option value="WI">WI</option>	
+          <option value="WV">WV</option>
+          <option value="WY">WY</option>
+        </select><br>
+
+        <label for="zip">Zip</label>
+        <input type="text" name="zip" id="zip"><br>
+
+
+        <!-- tortilla -->
+        <p>Please select your tortilla:</p>
+        <input type="radio" id="White Flour" name="tortilla" value="White Flour">
+        <label for="White Flour">White Flour</label><br>
+        <input type="radio" id="Wheat Flour" name="tortilla" value="Wheat Flour">
+        <label for="Wheat Flour">Wheat Flour</label><br>
+        <input type="radio" id="Spinach" name="tortilla" value="Spinach">
+        <label for="Spinach">Spinach</label><br>
+        <input type="radio" id="Corn" name="tortilla" value="Corn">
+        <label for="Corn">Corn</label><br>
+
+
+        <!-- rice -->
+        <p>Please select your rice:</p>
+        <input type="radio" id="White Rice" name="Rice" value="White Rice">
+        <label for="White Rice">White Rice</label><br>
+        <input type="radio" id="Brown Rice" name="Rice" value="Brown Rice">
+        <label for="Brown Rice">Brown Rice</label><br>
+
+        <!-- beans -->
+        <p>Please select your beans:</p>
+        <input type="radio" id="Black Beans" name="Beans" value="Black Beans">
+        <label for="Black Beans">Black Beans</label><br>
+        <input type="radio" id="Pinto Beans" name="Beans" value="Pinto Beans">
+        <label for="Pinto Beans">Pinto Beans</label><br>
+        
+        <!-- protein -->
+        <p>Please select your protein:</p>
+        <input type="radio" id="Carnitas" name="Protein" value="Carnitas">
+        <label for="Carnitas">Carnitas</label><br>
+        <input type="radio" id="Chicken" name="Protein" value="Chicken">
+        <label for="Chicken">Chicken</label><br>
+        <input type="radio" id="Sofritas" name="Protein" value="Sofritas">
+        <label for="Sofritas">Sofritas</label><br>
+        <input type="radio" id="None" name="Protein" value="None">
+        <label for="None">None</label><br>
+
+        <!-- Additional Ingredients -->
+        <p>Additional Ingredients:</p>
+        <input type="radio" id="Cheese" name="Ingredients" value="Cheese">
+        <label for="Cheese">Cheese</label><br>
+        <input type="radio" id="Sour Cream" name="Ingredients" value="Sour Cream">
+        <label for="Sour Cream">Sour Cream</label><br><br>
+
+        <!-- Delivery Instructions -->
+        <label for="Instructions">Delivery Instructions:</label><br>
+        <textarea id="Instructions" name="Instructions" rows="4" cols="50"></textarea><br>
+
+        <button type="submit">sumbit</button>
+    </form>
+    
+</body>
+</html>
