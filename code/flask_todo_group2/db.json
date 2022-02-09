@@ -11,6 +11,14 @@
         {
             "priority": "low",
             "text": "wash dishes"
+        },
+        {
+            "priority": "low",
+            "text": "save the dog"
+        },
+        {
+            "priority": "high",
+            "text": "walk the cat"
         }
     ]
 }

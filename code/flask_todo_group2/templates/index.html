@@ -20,8 +20,15 @@
             {% endfor %}
             </ul>
 
-            <form action="/" method="post">
-                <input type="text" name="input_text" placeholder="enter some text"/>
+            <form action="" method="post">
+                <select name="priority" id="priority" required>
+                    <option value="">Select</option>
+                    <option value="high">High</option>
+                    <option value="med">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <label for="box">Task to do:</label>
+                <input type="text" id="box" name="input_text" placeholder="To do description" required>
                 <button type="submit">submit</button>
             </form>              
         </main>
