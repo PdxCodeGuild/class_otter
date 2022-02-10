@@ -3,7 +3,7 @@ from rotation_cipher import RotationCipher
 
 
 app = Flask(__name__)
-max_rotation = RotationCipher.allowed_characters_size
+max_rotation = RotationCipher.allowed_characters_size - 1
 
 @app.route('/')
 def index():

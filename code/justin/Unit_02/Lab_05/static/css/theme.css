@@ -3,14 +3,13 @@
 
 :root {
     /* Colors */
-    --background-color: #fffdfd;
-    --primary-color: #681A0A;
-    --secondary-color: #807474;
-    --accent-color: #e05048;
-    --text-color: #8C2008;
-    --link-color: #61180E;
-    --visited-color: #61180E;
-    --hover-color: #e05048;
-    --active-color: #8C2008;
+    --background-color: rgb(230, 226, 230);
+    --background-offset-color: rgb(227, 222, 227);
+    --primary-color: #e0d348;
+    --secondary-color: #948812;
+    --text-color: #3d2194;
+    --link-color: #6c47e0;
+    --hover-color: #906bff;
+    --active-color: #3d2194;
 }
 

@@ -11,27 +11,36 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
     </head>
     <body>
-        <header></header>
-        
+        <header>
+            <h1>Encode a Message</h1>
+        </header>
+
         <div class="main-content">
             <main>
-                <h1>Encode a Message</h1>
-                <hr>
                 <form action="/encode/" method="post" oninput="range_value.value=parseInt(rotation_value.value)">
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" placeholder="Enter a message to encode here." required></textarea>
-                    <label for="rotation">Rotation:</label>
-                    <input type="range" name="rotation_value" min="2" max="{{ max_rotation }}" step="1" value="13">
-                    <output name="range_value" for="rotation_value">13</output>
+                    <div>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" placeholder="Enter a message to encode here." required></textarea>
+                    </div>
+                    <div>
+                        <label for="rotation">Rotation:</label>
+                        <div class="slider">
+                            <input type="range" name="rotation_value" min="1" max="{{ max_rotation }}" step="1" value="13">
+                            <output name="range_value" for="rotation_value">13</output>
+                        </div>
+                    </div>
                     <button type="submit">Encode!</button>
                 </form>
-                <hr>
-                <p class="{{ should_hide }}">
+            </main>
+
+            <aside>
+                <label for="encoded_message">Encoded Message:</label>
+                <p name="encoded_message" class="{{ should_hide }}">
                     {{ encoded_message }}
                 </p>
-            </main>
+            </aside>
         </div>
-        
+
         <footer></footer>
     </body>
 </html>
