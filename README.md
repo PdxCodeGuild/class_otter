@@ -54,7 +54,8 @@ Presentation Day: April 15th, 2022
 | 02    | Company Landing Page   | Feb 3rd       | Feb 7th               | Feb 17th      |
 | 03    | Blog                   | Feb 4th       | Feb 8th               | Feb 18th      |
 | 04    | Burrito Order Form     | Feb 8th       | Feb 14th              | Feb 22nd      |
-| Group | Flask Todos            | Feb 9th       | Feb 11th              | Feb 23rd      |
+| Group | Flask Todos            | Feb 9th       | Feb 10th              | Feb 23rd      |
+| 05    | Flask Redo             | Feb 10th      | Feb 14th              | Feb 24rd      |
 | 06    | Personal Portfolio     | Feb 11th      | Feb 15th              | Feb 25th      |
 
 ## Python Labs Assigned:
