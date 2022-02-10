@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- fontawesome -->
+    <!-- fontawesome for the cat paw -->
     <script src="https://kit.fontawesome.com/386a044235.js" crossorigin="anonymous"></script>
     <!--  -->
+    <!--  -->
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!--  -->
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +25,8 @@
     <title>Bunbun's Burritos</title>
 </head>
 <body>
-    <div>
+    <!-- Will use this <div> to flex the header to the left side on wider screens and leaves the footer alone. Actually, this may not be necessary, we may be able to put <header>, <main>, and <footer> in same container and have same results.  -->
+    <div class="header-and-main">
         <header>
             <h1 class="our-name">
                 Bunbun's Burritos

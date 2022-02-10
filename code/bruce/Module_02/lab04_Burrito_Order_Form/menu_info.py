@@ -15,7 +15,7 @@ menu_wrap = [
     },
     {
         'item_key':'wheat_flour_tortilla',
-        'description': 'Wheat Flour Tortilla'
+        'description': 'Whole Wheat Flour Tortilla'
     },
     {
         'item_key':'spinach_wrap',

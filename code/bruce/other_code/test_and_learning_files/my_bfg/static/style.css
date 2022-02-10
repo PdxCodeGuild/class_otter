@@ -1,0 +1,50 @@
+.guitar_splitComplimentary-1-rgba { color: rgba(98, 140, 124, 1); }
+.guitar_splitComplimentary-2-rgba { color: rgba(141, 217, 188, 1); }
+.guitar_splitComplimentary-3-rgba { color: rgba(217, 171, 130, 1); }
+.guitar_splitComplimentary-4-rgba { color: rgba(70, 91, 140, 1); }
+.guitar_splitComplimentary-5-rgba { color: rgba(119, 148, 217, 1); }
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body{
+    border: 3px black;
+    background-color:rgba(98, 140, 124, 0.473);
+    padding: 24px
+}
+
+header{
+    background-color:rgba(70, 91, 140, 1);
+     
+}
+
+h1{
+    -webkit-text-stroke: 1px rgba(119, 148, 217, 1);
+    
+}
+
+h2{
+    margin:0;
+}
+
+ul{
+    padding:12px;
+}
+
+.form-input{
+    margin:0;
+    padding:6px;
+}
+
+li{
+    padding:4px;
+}
+
+    
+
+
+
