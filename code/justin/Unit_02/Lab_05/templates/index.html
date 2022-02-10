@@ -17,9 +17,12 @@
             <main>
                 <h1>Encode a Message</h1>
                 <hr>
-                <form action="/encode/" method="post">
+                <form action="/encode/" method="post" oninput="range_value.value=parseInt(rotation_value.value)">
                     <label for="message">Message:</label>
                     <textarea id="message" name="message" placeholder="Enter a message to encode here." required></textarea>
+                    <label for="rotation">Rotation:</label>
+                    <input type="range" name="rotation_value" min="2" max="{{ max_rotation }}" step="1" value="13">
+                    <output name="range_value" for="rotation_value">13</output>
                     <button type="submit">Encode!</button>
                 </form>
                 <hr>
