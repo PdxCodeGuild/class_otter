@@ -246,7 +246,6 @@ input[type="submit"]:active {
       max-width: 100%;}
   /* .gallery-item {
       width: 33.33%;}
-
   .gallery-item1 {
       width: 33.33%;} */
 
@@ -261,6 +260,5 @@ input[type="submit"]:active {
 
 @media (min-width: 1400px) {
   header, main, form, footer {
-      max-width: 100%;
-  }
-}
+      max-width: 100%;}
+} 
