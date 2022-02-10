@@ -2,15 +2,15 @@ body{
     color: var(--primary-color);
     margin: 16px;
     font-family: 'Roboto', sans-serif;
+    font-weight: bold;
 }
 main{
     color: var(--secondary-color);
     font-weight: bold;
 }
-ul{
-    display: flex;
-    flex-direction: column;
-    padding: 3px 6px;
+.outer{
+    display:inline-block;
+    min-width: 200px;
 }
 .ptag{
     color: var(--background-color);
@@ -48,4 +48,8 @@ ul li::before {
     /* font-weight: bold; */
     width: 1em;
     margin-left: -1em;
+}
+li{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

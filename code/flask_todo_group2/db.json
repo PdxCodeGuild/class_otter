@@ -23,6 +23,10 @@
         {
             "priority": "high",
             "text": "butter the dog"
+        },
+        {
+            "priority": "med",
+            "text": "learn css learn java learn programming get better at life"
         }
     ]
 }

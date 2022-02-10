@@ -19,7 +19,8 @@
             <ul>
             {% for task in task_list %}
                 <li>
-                    <span class="outer">{{ task['text'] }}<span class="ptag {{ task['priority'] }}">{{ task['priority'] }}</span></span>
+                    <span class="ptag {{ task['priority'] }}">{{ task['priority'] }}</span>
+                    <span class="outer">{{ task['text'] }}</span>
                 </li>
             {% endfor %}
             </ul>
