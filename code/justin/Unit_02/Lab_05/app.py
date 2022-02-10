@@ -1,3 +1,4 @@
+from email import message
 from flask import Flask, request, render_template, redirect
 from rotation_cipher import RotationCipher
 
@@ -16,7 +17,9 @@ def index():
 
 @app.route('/encode/', methods=['POST'])
 def encode():
-    encoded_message = RotationCipher.encrypt(request.form['message'], int(request.form['rotation_value']))
+    message_to_encode = request.form['message']
+    message_to_encode = message_to_encode.replace('\n', '')
+    encoded_message = RotationCipher.encrypt(message_to_encode, int(request.form['rotation_value']))
     return redirect(f'/?encoded_message={encoded_message}')
 
 
