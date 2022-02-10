@@ -19,32 +19,18 @@ def index():
     
     if request.method == 'POST':
         
-        todo = request.form['text']
+        todo_text = request.form['text']
         priority = request.form['priority']
-        print(todo)
+        print(todo_text)
         print(priority)
-        todo_list.set('','')
-        # creating dictionary line 22,23 
-        # add dictionary to todolist
-        # save list using todolist.set
+        temp_dict_to_add = {'text': todo_text, 'priority': priority}
+        todo_list.append(temp_dict_to_add)
+        db.set('todos', todo_list)
+        db.save()
+        db.clear()
         
-
     return render_template('index.html', todo_list=todo_list)
-
-
 
 app.run(debug=True)
 
 
-
-
-######################################
-
-# # Get a todo from the database.
-# todo_list = db.get('todos')
-
-# print(todo_list)
-
-# # i is each todo in the list. WE are printing the priority.
-# for i in range(len(todo_list)):
-#     print(todo_list[i]['priority'])
