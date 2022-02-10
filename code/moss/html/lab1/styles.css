@@ -1,3 +1,9 @@
+/* html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+} */
 
 body {
     max-width: 100%;
@@ -22,7 +28,8 @@ a {
 }
 
 img {
-    border-radius: 15px
+    border-radius: 15px;
+
 }
 
 ul {
@@ -30,16 +37,14 @@ ul {
     list-style-position: inside;
     list-style-type: square;
     background-color: black;
-    margin-left: 35em;
-    margin-right: 35em;
+    margin-left: 20em;
+    margin-right: 20em;
     padding: 0 ;
     border-radius: 15px
 }
-
+ 
 q {
     font-family: serif;
     background-color: black;
     border-radius: 15px;
-    
-   
 }
