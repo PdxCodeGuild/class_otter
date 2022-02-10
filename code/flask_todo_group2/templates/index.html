@@ -14,12 +14,12 @@
         <header>
             <h1>Todo List</h1>
         </header>
-
+        <hr>
         <main>
             <ul>
             {% for task in task_list %}
                 <li>
-                    <p>{{ task['text'] }}<span class="{{ task['priority'] }}">{{ task['priority'] }}</span></p>
+                    <span class="outer">{{ task['text'] }}<span class="ptag {{ task['priority'] }}">{{ task['priority'] }}</span></span>
                 </li>
             {% endfor %}
             </ul>

@@ -1,14 +1,24 @@
 body{
     color: var(--primary-color);
     margin: 16px;
+    font-family: 'Roboto', sans-serif;
 }
 main{
     color: var(--secondary-color);
+    font-weight: bold;
 }
-/* li{
+ul{
     display: flex;
-} */
-
+    flex-direction: column;
+    padding: 3px 6px;
+}
+.ptag{
+    color: var(--background-color);
+    font-weight: bold;
+    border-radius: 3px;
+    margin: 8px;
+    padding: 3px 6px;
+}
 .high{
     background-color: var(--high-color);
 }
@@ -21,4 +31,21 @@ main{
 hr{
     height: 2px;
     color: var(--primary-color);
+}
+button{
+    background-color: var(--button-color);
+    font-weight: bold;
+    border-radius: 3px;
+    margin: 8px;
+    padding: 3px 6px;
+}
+ul{
+    list-style: none;
+}
+ul li::before {
+    content: "\25EF";
+    color: var(--secondary-color);
+    /* font-weight: bold; */
+    width: 1em;
+    margin-left: -1em;
 }
