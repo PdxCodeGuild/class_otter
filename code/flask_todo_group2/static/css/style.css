@@ -1,55 +1,63 @@
-body{
+body {
     color: var(--primary-color);
+    background-color: var(--background-color);
     margin: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
-main{
+
+main {
     color: var(--secondary-color);
     font-weight: bold;
 }
-.outer{
+
+.ptag {
     display:inline-block;
-    min-width: 200px;
-}
-.ptag{
+    min-width: 70px;
+    text-align: center;
     color: var(--background-color);
     font-weight: bold;
     border-radius: 3px;
     margin: 8px;
     padding: 3px 6px;
 }
-.high{
+
+.high {
     background-color: var(--high-color);
 }
-.medium{
+
+.medium {
     background-color: var(--medium-color);
 }
-.low{
+
+.low {
     background-color: var(--low-color);
 }
-hr{
+
+hr {
     height: 2px;
     color: var(--primary-color);
 }
-button{
+
+button {
     background-color: var(--button-color);
     font-weight: bold;
     border-radius: 3px;
     margin: 8px;
     padding: 3px 6px;
 }
-ul{
+
+ul {
     list-style: none;
+    padding-inline-start: 0px;
 }
-ul li::before {
-    content: "\25EF";
-    color: var(--secondary-color);
-    /* font-weight: bold; */
-    width: 1em;
-    margin-left: -1em;
-}
-li{
+
+li {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+label {
+    display:inline-block;
+    min-width: 70px;
 }

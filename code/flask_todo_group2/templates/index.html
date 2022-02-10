@@ -28,15 +28,16 @@
         <hr>
         <aside>
             <form action="" method="post">
+                <label for="priority">Priority:</label>
                 <select name="priority" id="priority" required>
-                    <option value="">Select</option>
+                    <option value=""> --Select-- </option>
                     <option value="high">High</option>
-                    <option value="med">Medium</option>
+                    <option value="medium">Medium</option>
                     <option value="low">Low</option>
                 </select>
                 <br>
-                <label for="box">Task to do:</label>
-                <input type="text" id="box" name="input_text" placeholder="To do description" required>
+                <label for="box">To do:</label>
+                <input type="text" id="box" name="input_text" placeholder="Enter a description..." required>
                 <button type="submit">submit</button>
             </form>              
         </aside>
