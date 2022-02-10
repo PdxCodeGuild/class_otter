@@ -1,0 +1,69 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+header,main {
+    margin: 24px;
+}
+
+h1 { 
+    font-family: 'Rock 3D', cursive;
+}
+
+img {
+    width: 200px;
+}
+
+main {
+    font-family: 'Noto Sans', sans-serif;
+    text-align: justify;
+}
+
+.group{
+    flex-direction: row;
+}
+
+
+@media (min-width: 750px) {
+    header,main {
+        margin: 48px;
+    }
+
+    nav{ 
+        display: flex;
+        /* text-align: center; */
+        /* flex-wrap: wrap-reverse; */
+        justify-content: space-between;
+    }
+
+}
+
+@media (min-width: 960px) {
+    header, main {
+        margin: 96px;
+    }
+
+    body{
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN7lZVM2SRENFAO9MuwZo1o3NGZSkagiC9pnMU-v_rz94BHCg8u39gu5NFgvQ2sodoieM&usqp=CAU);
+        
+    
+    }
+
+    main{
+        text-emphasis-color: black;
+
+    }
+
+
+    nav{
+        
+    }
+
+
+
+
+}
+    

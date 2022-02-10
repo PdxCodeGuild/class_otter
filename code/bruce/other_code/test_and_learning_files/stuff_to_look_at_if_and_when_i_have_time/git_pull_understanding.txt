@@ -1,0 +1,58 @@
+# Summary:
+'git pull' - 'fetch'es the remote state and then 'merge's them with current branch.
+'git fetch' - 'fetch'es the remote state but doesn't update local branches.
+
+Branches:
+-main
+-bruce
+
+Remotes:
+-origin
+
+Compare:
+-'git pull origin main' while current branch is 'bruce'. Does the pull update 'bruce' and 'main'?
+
+
+########
+# A change has been made to 'main':
+PS C:\Users\Bruce\Programming\test_pull_current_branch> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean
+PS C:\Users\Bruce\Programming\test_pull_current_branch> Get-ChildItem
+    Directory: C:\Users\Bruce\Programming\test_pull_current_branch
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           1/30/2022    05:01           1928 .gitignore
+-a---           1/30/2022    05:01           1088 LICENSE
+-a---           1/30/2022    05:01             92 README.md
+-a---           1/30/2022    05:10              0 test_text.txt
+
+
+# Change isn't part of 'bruce' yet:
+PS C:\Users\Bruce\Programming\test_pull_current_branch> git status
+On branch bruce
+nothing to commit, working tree clean
+PS C:\Users\Bruce\Programming\test_pull_current_branch> Get-ChildItem     
+    Directory: C:\Users\Bruce\Programming\test_pull_current_branch
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           1/30/2022    05:01           1928 .gitignore
+-a---           1/30/2022    05:01           1088 LICENSE
+-a---           1/30/2022    05:01             92 README.md
+
+# What does 'git pull origin main' do while in this state?
+# It seems that the current branch get the update from the specified remote branch.
+# I think 'git fetch' will get the updates but not merge them with current branch.
+# https://www.atlassian.com/git/tutorials/syncing/git-fetch
+PS C:\Users\Bruce\Programming\test_pull_current_branch> git status
+On branch bruce
+nothing to commit, working tree clean
+PS C:\Users\Bruce\Programming\test_pull_current_branch> Get-ChildItem
+    Directory: C:\Users\Bruce\Programming\test_pull_current_branch
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           1/30/2022    05:01           1928 .gitignore
+-a---           1/30/2022    05:01           1088 LICENSE
+-a---           1/30/2022    05:01             92 README.md
+-a---           1/30/2022    05:13              0 test_text.txt

@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap');
+
+
+header {
+    background-color: #E7A977;
+}
+
+
+body {
+    /* background-image: url(https://about.proquest.com/globalassets/proquest/media/images/decrotive/oldbooks.jpg); */
+    /* background-attachment: fixed; */
+    /* background-size: 100% 100%; */
+    /* height: 10vh; */
+    background-color: #D8BFAA;
+}
+
+
+/* #D8BFAA #E7A977 */
+.container-fluid {
+    background-color: #EFEFF0;
+    color: black;
+}
+
+header > h1 {
+    display: flex;
+    justify-content: center;
+    color: black;
+    /* margin: 3vh; */
+    padding: 2rem;
+}
+
+h2 {
+    display: flex;
+    padding: 1rem;
+    margin-top: 10px;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    padding: 1rem;
+}
+
+.accordion-body {
+    background-color: #D8BFAA;
+    /* display: flex;
+    flex-wrap: wrap; */
+    justify-content: center;
+}
+
+article {
+    padding: 1rem;
+    margin: 3px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+article > img {
+    border: 2px solid black;
+    /* width: 58%; */
+}
+
+
+a {
+    display: flex;
+    justify-content: center;
+}
+
+a:link {
+    color: black;
+}
+
+.carousel-inner {
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+.review {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.author {
+    padding: 0;
+    margin: 0;
+}
+
+
+a:visited{
+    color: #550527;
+}
+
+body > img {
+    width: 69%;
+    /* height: 40vh; */
+    padding: 1rem;
+    margin-left: 3.2rem;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    background-color: #5A2328;
+    color: white;
+    display: flex;
+    padding-left: 4px;
+    justify-content: center;
+}
+
+p > a {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+p > a:link {
+    color: #48639C;
+}
+
+p > a:visited {
+    color: #EBF5EE;
+}
+/* EXTRA SMALL SCREEN WIDTH */
+/* smartphones in portrait-mode, devices less than 576px wide */
+
+@media (min-width: 576px) {
+/* 1. Use your browser's responsive design mode to view your webpage
+in smartphone-portrait mode.  Fill in the css below until it looks right. */
+
+/* SMALL SCREEN WIDTH */
+/* smartphones in landscape-mode, devices less than 768 px wide */
+
+
+body > img {
+    width: 30%;
+    height: 53vh;
+    padding: 0;
+    margin: 8px;
+}
+
+
+	/* 2.  Switch to smartphone-landscape mode on your browser.  Add any
+	necessary css changes for landscape-width here. */
+}
+
+@media (min-width: 768px) {
+    /* MEDIUM SCREEN WIDTH */
+	/* tablets, devices less than 992px wide */
+    body > img {
+        width: 31%;
+        padding: 1rem;
+    }
+
+    p {
+        font-size: 4vh;
+    }
+	/* 3.  Switch to tablet mode on your browser.  Add any necessary css
+	for tablet-width here. */
+}
+
+@media (min-width: 992px) {
+	/* LARGE SCREEN WIDTH */
+	/* laptops, desktops, devices less than 1200px wide */
+    body > img {
+        width: 61%;
+        height: 53vh;
+        padding: 1rem;
+        margin-left: 12rem;
+    }
+	/* 4. Turn off responsive design mode on your desktop.  Add any css
+	here to make your page look good on your desktop. */
+}
+
+@media (min-width: 1200px) {
+	/* EXTRA LARGE SCREEN WIDTH */
+	/* large desktops, devices 1200px or wider */
+    body > img {
+        width: 31%;
+        margin-left: 24px;
+        padding: 0;
+        margin-right: 0;
+    }
+    
+    p {
+        font-size: 2vh;
+    }
+
+    .accordion-body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+
+	/* 5. Even smaller desktops can emulate extra-wide monitors
+	in responsive design mode.  Often desktop-width is sufficient
+	for ultra-wide screens, but as more and more internet users
+	have larger screens, developers are beginning to style websites
+	for those users. Add that css here. */
+}

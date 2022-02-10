@@ -29,7 +29,10 @@ def index():
         db.save()
         db.clear()
         
+<<<<<<< HEAD
         
+=======
+>>>>>>> bfg
     return render_template('index.html', todo_list=todo_list)
 
 app.run(debug=True)
