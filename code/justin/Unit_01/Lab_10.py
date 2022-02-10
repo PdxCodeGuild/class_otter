@@ -236,9 +236,9 @@ def test_table_to_csv_string():
     assert table_to_csv_string(sample_table) == 'header a,header b,header c,header d\n1,5,3,9\n2,4,5,6\n3,5,2,0\n4,4,2,6\n5,2,5,2\n6,7,4,9'
 
 def write_to_db(table, file_name):
-    base_path = os.path.dirname(__file__)
+    base_path = os.path.dirname(os.path.abspath(__file__))
     try:
-        with open(f'{base_path}\\{file_name}', 'w') as file:
+        with open(f'{os.path.join(base_path, file_name)}', 'w') as file:
             file.write(table_to_csv_string(table))
     except FileNotFoundError as exception:
         print(f'{exception.strerror}: {exception.filename}')
