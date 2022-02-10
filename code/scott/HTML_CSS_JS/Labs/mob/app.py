@@ -1,8 +1,9 @@
-# Import JsonDB 'class' from jsondb 'module'.
-from jasondb import JsonDB
 
 # Import some stuff from flask.
 from flask import Flask, render_template, request, redirect
+
+# Import JsonDB 'class' from jsondb 'module'.
+from jasondb import JsonDB
 
 # Create Flask object.
 app = Flask(__name__)
