@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resizer.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+    </head>
+    <body>
+        <header></header>
+        
+        <div class="main-content">
+            <main>
+                <h1>Encode a Message</h1>
+                <hr>
+                <form action="/encode/" method="post">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="Enter a message to encode here." required></textarea>
+                    <button type="submit">Encode!</button>
+                </form>
+                <hr>
+                <p class="{{ should_hide }}">
+                    {{ encoded_message }}
+                </p>
+            </main>
+        </div>
+        
+        <footer></footer>
+    </body>
+</html>
