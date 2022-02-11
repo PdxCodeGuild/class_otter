@@ -1,0 +1,81 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="lab5" content="width-device-width" , initialscale="1.0" />
+        <meta lang="en" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/> 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://necolas.github.io/normalize.css/8.0.1/normalize.csshttps://fonts.googleapis.com">
+        <link rel='stylesheet' type="text/css" href="{{url_for('static', filename='style.css') }}"/>
+        <title>Flask Redo</title>
+    </head>
+
+    <body class='black'>
+        <div id='main' class='container grey lighten-2'>
+            <h3 id='top-header' class="center-align">Password Generator</h1>
+            <form class='row grey lighten-2' action="{{url_for('index')}}" method="post">
+                <div class="input-field col s12 m12 l4   offset-l1">
+                    <label class='active' for='uppercase-letters'>UpperCase letters</label>
+                    <input value='0' type="text" name="uppercase" id='uppercase-letters' placeholder="0">
+                </div>
+                <div class="input-field col s12 m12 l4   offset-l2">
+                    <label class='active' for='lowercase-letters'>LowerCase letters</label>
+                    <input value='0' type="text" name="lowercase" id='lowercase-letters' placeholder="0">
+                </div>
+                <div class="input-field col s12 m12 l4   offset-l1">
+                    <label class='active' for='punct-characters'>Punctuation Characters</label>
+                    <input value='0' type="text" name="punctuation" id='punct-characters' placeholder="0">
+                </div>
+                <div class="input-field col s12 m12 l4   offset-l2">
+                    <label class='active' for="number-characters">Number Characters</label>
+                    <input value='0' type="text" name="numbers" id='number-characters' placeholder="0">
+                </div>
+                <div class='col s8 m4 l4  offset-m7 offset-l7 white flow-text right-align ' id='new-password'>
+                    {{password}}
+                </div>
+                <div class='col s4 m4 l4 offset-s6 offset-m9 offset-l9'>
+                    <button class='btn waves-effect waves-white right-align' id='generator' type='submit' name='action'>Generate
+                        <i class='material-icons right'>autorenew</i>
+                    </button>
+
+                </div>
+                
+
+
+
+
+            </form>
+            
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
+    </body>
+
+
+
+</html>
