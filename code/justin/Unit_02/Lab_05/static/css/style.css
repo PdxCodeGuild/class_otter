@@ -34,8 +34,11 @@ form > div {
 .slider {
     display: flex;
     flex-direction: column;
-    min-width: 260px;
     align-items: center;
+}
+
+.slider > input {
+    min-width: 220px;
 }
 
 label {
@@ -70,7 +73,7 @@ aside {
     margin-top: 32px;
 }
 
-.message_box {
+.message-box {
     border: 1px solid var(--text-color);
     background-color: var(--background-offset-color);
     min-height: 120px;
@@ -107,8 +110,28 @@ button:active {
     text-align: justify;
 }
 
-/* @media (min-width: 700px) {
+@media (min-width: 700px) {
+    #main-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #main-content > * {
+        padding: 0px 8px;
+        flex: 1;
+    }
+
+    form {
+        border: none;
+        padding: 0px;
+    }
+
+    label {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 }
 
-@media (min-width: 1000px) {
+/* @media (min-width: 1000px) {
 } */

@@ -16,13 +16,13 @@
             <h1>Encode a Message</h1>
         </header>
 
-        <div id="main-content">
-            <aside>
-                <div id="app-instructions">
-                    <p>This message encoding app uses a basic rotation cipher to encode messages. You can select the rotation value with the slider. After pressing the <strong>ENCODE</strong> button your encoded message will appear below.</p>
-                </div>
-            </aside>
+        <aside>
+            <div id="app-instructions">
+                <p>This message encoding app uses a basic rotation cipher to encode messages. You can select the rotation value with the slider. After pressing the <strong>ENCODE</strong> button your encoded message will appear below.</p>
+            </div>
+        </aside>
 
+        <div id="main-content">
             <main>
                 <form action="/encode/" method="post" oninput="range_value.value=parseInt(rotation_value.value)">
                     <div>
@@ -42,7 +42,7 @@
 
             <aside class="{{ should_hide }}">
                 <label for="encoded_message">Encoded Message:</label>
-                <p class="message_box" name="encoded_message">
+                <p class="message-box" name="encoded_message">
                     {{ encoded_message }}
                 </p>
             </aside>
