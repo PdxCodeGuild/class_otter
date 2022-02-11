@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>Unit Converter</title>
+  </head>
+
+  <body>
+    <h1>{{ metrics }}</h1>
+    <h1>{{ data }}</h1>
+    <h2>Enter the distance and units</h2>
+    <form action="" method="post">
+      <input type="number" name="number" />
+      <select name="Unit" id="Unit">
+        <option value="ft">feet</option>
+        <option value="in">inches</option>
+        <option value="mi">miles</option>
+        <option value="m">meters</option>
+        <option value="km">kilometers</option>
+      </select>
+      <button type="submit">Convert</button>
+    </form>
+  </body>
+</html>
