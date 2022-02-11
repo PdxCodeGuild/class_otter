@@ -60,7 +60,7 @@
                 <input type="number" step="any" name="input-length" id="input-length" placeholder="input number" required>
                 
                 <div class="submit-button-block">
-                    <input type="submit" value="Submit Length and Input Units" id="submit-button">
+                    <input type="submit" value="Press here to submit Length and Input Units to get results" id="submit-button">
                 </div>
             </div>
         </form>
@@ -68,10 +68,10 @@
     </div>
     <div class="display-results-block">
         {% if input_values is defined %}
-        <span>{{ input_values['length'] }} {{ input_values['units'] }}</span><span> = </span>
+        <a>{{ input_values['length'] }} {{ input_values['units'] }}</a><a> = </a>
         {% endif %}
         {% if output_values is defined %}
-        <span>{{ output_values['length'] }} {{ output_values['units'] }}</span>
+        <a>{{ output_values['length'] }} {{ output_values['units'] }}</a>
         {% endif %}
     </div>
     <footer>
