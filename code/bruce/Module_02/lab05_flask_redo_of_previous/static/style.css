@@ -21,7 +21,6 @@
 .theme_fishing_cat_muted-5-hsla { color: hsla(27, 35, 77, 1); }
 
 html {
-    border: 2px solid red;
     box-sizing: border-box;
 }
 
@@ -40,7 +39,6 @@ body {
     font-family: 'Courier Prime', monospace;
     font-weight: 700;
 
-    border: 2px solid red;
     display: grid;
     grid-template-columns: 20% 80%;
     grid-template-rows: 30% 30% 20% 20%;
@@ -57,13 +55,11 @@ body {
 
 div.available-units {
     border-right: 2px solid rgba(140, 95, 55, 1);
-    border: 2px solid red;
     grid-area: 1 / 1 / 4 / 2;
     margin: auto;
 }
 
 div.user-input-block {
-    border: 2px solid red;
     grid-area: 1 / 2 / 2 / 3;
     margin: 6px auto;
 }
@@ -97,7 +93,6 @@ div.input-and-submit-block > * {
 
 
 div.display-results-block {
-    border: 2px solid red;
     grid-area: 2 / 2 / 3 / 3;
     margin: auto;
     padding: auto;
