@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&family=Roboto:wght@300&display=swap');
+
+
+:root {
+    /* Colors */
+    --background-color: rgb(230, 226, 230);
+    --background-offset-color: rgb(227, 222, 227);
+    --primary-color: #e0d348;
+    --secondary-color: #948812;
+    --text-color: #3d2194;
+    --button-color: #6c47e0;
+    --hover-color: #906bff;
+    --active-color: #3d2194;
+}
+
