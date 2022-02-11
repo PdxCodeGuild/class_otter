@@ -21,7 +21,6 @@
 .theme_fishing_cat_muted-5-hsla { color: hsla(27, 35, 77, 1); }
 
 html {
-    /* border: 2px solid red; */
     box-sizing: border-box;
 }
 
@@ -35,76 +34,27 @@ table.available-units-table, th, td {
 }
 
 body {
-    color: rgba(25, 32, 38, 1);
-    background-color: rgba(217, 195, 176, 1);
-    font-family: 'Courier Prime', monospace;
-    font-weight: 700;
-
-    /* border: 2px solid red; */
     display: grid;
-    grid-template-columns: 20% 80%;
-    grid-template-rows: 30% 30% 20% 20%;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 45% 45% 10%;
     padding: 24px;
-    
-    min-width:900px;        /* Suppose you want minimum width of 900px */
-    width: auto !important;  /* Firefox will set width as auto */
-    width:900px;            /* As IE6 ignores !important it will set width as 900px; */
-
-    min-height:600px;        /* Suppose you want minimum height of 600px */
-    height: auto !important;  /* Firefox will set height as auto */
-    height:600px;            /* As IE6 ignores !important it will set height as 600px; */    
 }
 
 div.available-units {
-    border-right: 2px solid rgba(140, 95, 55, 1);
-    border: 2px solid red;
-    grid-area: 1 / 1 / 4 / 2;
-    margin: auto;
+    grid-area: 1 / 1 / 3 / 2;
 }
 
 div.user-input-block {
-    /* border: 2px solid red; */
     grid-area: 1 / 2 / 2 / 3;
-    margin: 6px auto;
 }
-
-div.unit-choice-block {
-    margin: 6px auto;
-}
-
-div.unit-choice-block > * {
-    padding: 6px 0;
-    margin: 6px;
-}
-
-div.input-and-submit-block {
-    padding: 6px 0;
-
-}
-
-div.input-and-submit-block > * {
-    padding: 6px 0;
-    margin: 6px auto;
-}
-
-.submit-button-block {
-    text-align: center;
-}
-
 
 div.display-results-block {
-    /* border: 2px solid red; */
     grid-area: 2 / 2 / 3 / 3;
-    margin: auto;
-    font-size: 36px;
-    background-color: rgba(191, 144, 86, 1);
 }
 
-div.display-results-block > span {
-    padding: 16px;
-
+main > p {
+    grid-area: 3 / 1 / 4 / 3;
 }
-
 
 /* Center the available units. */
 table.available-units-table {
@@ -114,11 +64,3 @@ table.available-units-table {
 th, td {
     padding: 6px;
 }
-
-footer {
-    /* border: 2px solid red; */
-    grid-area: 3 / 2 / 4 / 3;
-    margin: auto;
-}
-
-
