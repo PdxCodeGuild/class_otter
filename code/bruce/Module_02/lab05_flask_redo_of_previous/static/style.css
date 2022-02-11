@@ -42,13 +42,13 @@ body {
 
     /* border: 2px solid red; */
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 20% 80%;
     grid-template-rows: 30% 30% 20% 20%;
-    padding: 12px;
+    padding: 24px;
     
-    min-width:700px;        /* Suppose you want minimum width of 700px */
+    min-width:900px;        /* Suppose you want minimum width of 900px */
     width: auto !important;  /* Firefox will set width as auto */
-    width:700px;            /* As IE6 ignores !important it will set width as 700px; */
+    width:900px;            /* As IE6 ignores !important it will set width as 900px; */
 
     min-height:600px;        /* Suppose you want minimum height of 600px */
     height: auto !important;  /* Firefox will set height as auto */
@@ -100,8 +100,8 @@ div.display-results-block {
     background-color: rgba(191, 144, 86, 1);
 }
 
-div.display-results-block > * {
-    padding: 12px;
+div.display-results-block > span {
+    padding: 16px;
 
 }
 

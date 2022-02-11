@@ -10,14 +10,16 @@
 
 # Create dictionary of equal-length items. Used https://duckduckgo.com/?q=how+many+feet+in+km&ia=answer for conversion factors.
 conversion = {
-    'in': 39370.08,
-    'ft': 3280.84,
-    'yd': 1093.613,
-    'm': 1000,
-    'fathom': 546.806649169,
-    'nmi': 1.852,
-    'km': 1,
-    'mi': .6213712,
+    'inch': 39370.08,
+    'foot': 3280.84,
+    'yard': 1093.613,
+    'meter': 1000,
+    'fathom': 546.806,
+    'chain': 49.709,
+    'nautical mile': 1.852,
+    'klick': 1,
+    'kilometer': 1,
+    'mile': .6213712,
     # 'league': 0.179986,
 }
 
