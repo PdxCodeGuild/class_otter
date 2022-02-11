@@ -10,3 +10,51 @@
     <option value="medium">Medium</option>
     <option value="high">High</option>
 </select>
+
+
+# Form without <div>s:
+        <form action="" method="post">
+            <label for="input-length">Input Length</label>
+            <input type="number" step="any" name="input-length" id="input-length" placeholder="input number" required>
+            <label for="input-unit">Input Unit</label>
+            <select name="input-unit" id="input-unit">
+                {% for key in conversion %}
+                <option value="{{ key }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+            <label for="output-unit">Output Unit</label>
+            <select name="output-unit" id="output-unit">
+                {% for key in conversion %}
+                <option value="{{ key }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit Length and Input Units" id="submit">
+        </form>
+
+
+# Form with <div>s:
+        <form action="" method="post">
+            <div class="input-and-submit-block">
+                <label for="input-length">Input Length</label>
+                <input type="number" name="input-length" id="input-length" placeholder="input number" required>
+                
+                <div class="submit-button">
+                    <input type="submit" value="Submit Length and Input Units" id="submit">
+                </div>
+            </div>
+            <div class="unit-choice-block">
+                <label for="input-unit">Input Unit</label>
+                <select name="input-unit" id="input-unit">
+                    {% for key in conversion %}
+                    <option value="{{ key }}">{{ key }}</option>
+                    {% endfor %}
+                </select>
+                
+                <label for="output-unit">Output Unit</label>
+                <select name="output-unit" id="output-unit">
+                    {% for key in conversion %}
+                    <option value="{{ key }}">{{ key }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>

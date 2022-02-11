@@ -9,11 +9,15 @@
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
     <!-- My style.css, using flask to determine 'soft' location. -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <!-- favicon -->
     <title>Length Converter</title>
 </head>
 <body>
-    <div class="available-units">
+    <div class="available-units-block">
         <table class="available-units-table">
             <tr>
                 <th>Available Units</th>
@@ -29,15 +33,8 @@
     </div>
     <!-- <form action="https://webhook.site/f7337193-976d-48c7-b5e9-c445ec66ae6e?" method="post" class="user-input"> -->
     <div class="user-input-block">
-        <!-- <form action="" method="post">
-            <div class="input-and-submit-block">
-                <label for="input-length">Input Length</label>
-                <input type="number" name="input-length" id="input-length" placeholder="input number" required>
-                
-                <div class="submit-button">
-                    <input type="submit" value="Submit Length and Input Units" id="submit">
-                </div>
-            </div>
+        <h1>Length Converter</h1>
+        <form action="" method="post">
             <div class="unit-choice-block">
                 <label for="input-unit">Input Unit</label>
                 <select name="input-unit" id="input-unit">
@@ -53,34 +50,27 @@
                     {% endfor %}
                 </select>
             </div>
-        </form> -->
-        <form action="" method="post">
-            <label for="input-length">Input Length</label>
-            <input type="number" name="input-length" id="input-length" placeholder="input number" required>
-            <label for="input-unit">Input Unit</label>
-            <select name="input-unit" id="input-unit">
-                {% for key in conversion %}
-                <option value="{{ key }}">{{ key }}</option>
-                {% endfor %}
-            </select>
-            <label for="output-unit">Output Unit</label>
-            <select name="output-unit" id="output-unit">
-                {% for key in conversion %}
-                <option value="{{ key }}">{{ key }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Submit Length and Input Units" id="submit">
+            <div class="input-and-submit-block">
+                <label for="input-length">Input Length</label>
+                <input type="number" step="any" name="input-length" id="input-length" placeholder="input number" required>
+                
+                <div class="submit-button-block">
+                    <input type="submit" value="Submit Length and Input Units" id="submit-button">
+                </div>
+            </div>
         </form>
+
     </div>
     <div class="display-results-block">
         {% if input_values is defined %}
-        <span>{{ input_values['length'] }} {{ input_values['units'] }}</span><span> is </span>
+        <span>{{ input_values['length'] }} {{ input_values['units'] }}</span><span> = </span>
         {% endif %}
         {% if output_values is defined %}
         <span>{{ output_values['length'] }} {{ output_values['units'] }}</span>
         {% endif %}
     </div>
-    <p>Butterscotch Pi 2022</p>
-    
+    <footer>
+        <p>Butterscotch Pi 2022</p>
+    </footer>
 </body>
 </html>
