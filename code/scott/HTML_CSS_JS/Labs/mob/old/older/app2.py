@@ -10,7 +10,7 @@ def make_pass(upper,lower,punct,nums):
     new_pass = []
 
     total = upper + lower + punct + nums
-    if total > 10:
+    if total > 16:#10#
         return "Password cannot exceed 10 characters"
     check = 0
 
