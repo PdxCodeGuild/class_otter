@@ -8,7 +8,7 @@
     <!-- 'normalize css first' -->
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
     <!-- My style.css, using flask to determine 'soft' location. -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_new.css') }}">
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,18 +60,21 @@
                 <input type="number" step="any" name="input-length" id="input-length" placeholder="input number" required>
                 
                 <div class="submit-button-block">
-                    <input type="submit" value="Press here to submit Length and Input Units to get results" id="submit-button">
+                    <!-- <input type="submit" value="Press here to submit Length and Input Units then get results" id="submit-button"> -->
+                    <input type="submit" value="Submit" id="submit-button">
                 </div>
             </div>
         </form>
 
     </div>
-    <div class="display-results-block">
+    <div class="display-results-border">
         {% if input_values is defined %}
-        <a>{{ input_values['length'] }} {{ input_values['units'] }}</a><a> = </a>
-        {% endif %}
         {% if output_values is defined %}
-        <a>{{ output_values['length'] }} {{ output_values['units'] }}</a>
+        <div class="display-results-block">
+            <a>{{ input_values['length'] }} {{ input_values['units'] }}</a><a> = </a>
+            <a>{{ output_values['length'] }} {{ output_values['units'] }}</a>
+        </div>
+        {% endif %}
         {% endif %}
     </div>
     <footer>
