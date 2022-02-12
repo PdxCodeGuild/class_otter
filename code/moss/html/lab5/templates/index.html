@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+    <title>Unit Converter</title>
+    
+  </head>
+  
+  <body>
+    
+    <header>
+      <h1>UNIT CONVERTER</h1>
+    </header>
+
+    <form action='' method='post'>
+      
+      <div class='form_input'>
+        
+        <label for='dist'>Distance</label>
+        <input type='number' name='distance' id='dist' placeholder='required' required/>
+      
+      </div>
+
+      <div class='form_input'>
+        
+        <label for='in_uni'>Units</label>
+        <select name='in_units' id='in_uni'>
+          <option value='inches'>inches</option>
+          <option value='feet'>feet</option>
+          <option value='yards'>yards</option>
+          <option value='miles'>miles</option>
+          <option value='meters'>meters</option>
+          <option value='kilometers'>kilometers</option>
+        </select>
+    
+      </div>
+      
+      <div class='form_input'>
+        
+        <label for='out-uni'>Units</label>
+        <select name='out_unit' id='out-uni'>
+          <option value='inches'>inches</option>
+          <option value='feet'>feet</option>
+          <option value='yards'>yards</option>
+          <option value='miles'>miles</option>
+          <option value='meters'>meters</option>
+          <option value='kilometers'>kilometers</option>
+        </select>
+    
+      </div>
+
+      <button type='submit'>SUBMIT</button>
+
+    </form>
+
+      {% if user_dist is defined%}
+      <p>{{user_dist}} {{user_unit}} converts to {{m_convr_out}} {{user_out_unit}}</p>
+      {% endif%}
+     
+
+
+  
+  </body>
+
+  <footer>
+
+  </footer>
+
+</html>
