@@ -45,14 +45,10 @@ class Game:
 
 
     def is_full(self):
-        game_space = 9
-        for i in range(len(self.board)):
-            if i != ' ':
-                game_space -= 1
-        if game_space == 0:
-            return True
-        else:
-            return False
+        for row in self.board:
+            if any(item==' ' for item in row):
+                return False
+        return True
 
     
     def is_game_over(self):
@@ -97,6 +93,6 @@ while True:
             rounds +=1
             break
     if board.is_full():
-            print('tie game')
-    if board.is_game_over():
+        print('full board new game. ')
+    elif board.is_game_over():
         print(board.calc_winner(),f'{current_player.name} won')
