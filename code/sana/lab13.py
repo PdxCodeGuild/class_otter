@@ -17,8 +17,7 @@ player1 = Player('Player 1', p1token)
 player2 = Player('Player 2', p2token)
 print(player1)
 print(player2)
-# print(p1token)
-# print(p2token)
+
 class Game:
     def __init__(self):
         self.board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ',]]
