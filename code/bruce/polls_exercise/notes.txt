@@ -1,0 +1,11 @@
+# Resources:
+    # https://github.com/PdxCodeGuild/class_otter/tree/main/3%20Django/docs
+
+# Activate virtual environment:
+    # BASH:
+        # source C:/Users/Bruce/.virtualenvs/polls-sSv472B-/Scripts/activate
+    # PS:
+        # C:\Users\Bruce\.virtualenvs\polls-sSv472B-\Scripts\activate.ps1
+
+
+Question.objects.all()
