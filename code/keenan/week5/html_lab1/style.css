@@ -1,27 +1,27 @@
 html{
     color-scheme: grey;
-
 }
 title{
     font-size: 20pt;
 }
 h2{
-    font-size: 14pt;
+    font-size: 10pt;
 }
 body{
     color: rgba(165, 42, 42, 0.548);
     font-family: 'Optima', sans-serif;
     text-align: center;
     padding: 30px;
-
 }
 .Content{
-    background-color: rgba(224, 226, 191, 0.842);
+    background-color: rgba(224, 226, 191, 0.95);
     border-radius: 12px;
     width: 60%;
     height: 80%;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .Background_Image{
     background-image: url("https://www.tilytravels.com/uploads/3/7/7/1/37712685/1530658_orig.jpg");
@@ -33,7 +33,7 @@ li{
     font-family:'Times New Roman', Times, serif;
 }
 img {
-    width: 300px;
+    width: 400px;
     border: inset;
     border-width: 5px;
     border-radius: 30px;
