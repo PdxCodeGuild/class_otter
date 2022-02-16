@@ -24,6 +24,13 @@ def main_dict(header, values):
 contacts = main_dict(key_list, new_list)
 
 print(contacts)
+
+#Create a cred repl using a while loop.
+#inside while loop 
+#create print statement inside cred to show what input was selected. for each selection
+
+def create():
+
 # ----------------------------------------------------------------------------------------------------
 
 ########################################################################################################
