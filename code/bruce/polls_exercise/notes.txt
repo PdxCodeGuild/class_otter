@@ -1,11 +1,174 @@
 # Resources:
-    # https://github.com/PdxCodeGuild/class_otter/tree/main/3%20Django/docs
+    https://github.com/PdxCodeGuild/class_otter/tree/main/3%20Django/docs
 
 # Activate virtual environment:
     # BASH:
-        # source C:/Users/Bruce/.virtualenvs/polls-sSv472B-/Scripts/activate
+        source C:/Users/Bruce/.virtualenvs/polls-sSv472B-/Scripts/activate
     # PS:
-        # C:\Users\Bruce\.virtualenvs\polls-sSv472B-\Scripts\activate.ps1
+        C:\Users\Bruce\.virtualenvs\polls-sSv472B-\Scripts\activate.ps1
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<path to virtual environment>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<path to virtual environment>\Scripts\activate.ps1
+
+# Start Django server:
+    python manage.py runserver <optional 8008>
+
+# Interactive shell:
+    python manage.py shell
+
+# Imports for testing
+from polls.models import Choice, Question
+from django.utils import timezone
 
 
+#### Return all the 'Choice's or 'Question's ####
 Question.objects.all()
+Choice.objects.all()
+
+
+
+
+# Instantiate a new question:
+q = Question(arg1,arg2)
+
+# Save the instantiated, after adding data, question to db:
+q.save()
+
+c = Choice(question_id=1, choice_text="Of course!!", votes=2000)
+c.save()
+
+>>> Question.objects.get(id=3)
+<Question: Question object (3)>
+
+>>> Question.objects.get(id=3).question_text
+'Ya know, cats are best?
+
+# Get the object/memory location:
+>>> Question.objects.get(id=3).choices
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x000001A5E3503CD0>
+
+# Get the QuerySet:
+>>> Question.objects.get(id=3).choices.all()
+<QuerySet [<Choice: Choice object (2)>]>
+
+# Get the text:
+Question.objects.get(id=3).choices.all().choice_text
+>>> Question.objects.get(id=3).choices.all().choice_text
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'choice_text'
+
+Question.objects.get(id=3).choices.all()[0]
+>>> Question.objects.get(id=3).choices.all()[0]
+<Choice: Choice object (2)>
+
+Question.objects.get(id=3).choices.all()[0].choice_text
+>>> Question.objects.get(id=3).choices.all()[0].choice_text
+'Of course!!'
+
+>>> Question.objects.all()
+<QuerySet [<Question: Question object (1)>, <Question: Question object (2)>, <Question: Question object (3)>]>
+>>> Question.objects.all()[1]
+<Question: Question object (2)>
+>>> Question.objects.all()[1].question_text
+"I'm gonna ask one more time... HOW AWESOME ARE CATS???"
+
+
+
+############ Get all questions ############
+Question.objects.all()
+
+############ filter - can return more than one ############
+Question.objects.filter(id=1)
+
+Question.objects.filter(question_text__contains='are')
+Question.objects.filter(question_text__contains='Ya')
+# Case insensitive:
+Question.objects.filter(question_text__contains='ya')
+
+Question.objects.filter(question_text__startswith='h')
+Question.objects.filter(question_text__startswith='m')
+
+Question.objects.filter(pub_date__year=2022)
+Question.objects.filter(pub_date__year='2022')
+
+############### get - can only return one ###############
+Question.objects.get(id=2)
+Question.objects.get(pk=2)
+
+
+Question.objects.filter(id=1)[0].was_published_recently()
+
+######### Try to edit a question #########
+q = Question.objects.get(pk=5)
+q.question_text="Isss BunBun Purrfect?"
+q.save()
+q.question_text
+'Isss BunBun Purrfect?'
+
+
+c = Choice.objects.get(id=2)
+c.choice_text  # 'Of course!!'
+c.save()
+
+############ Change question_id for a choice ############
+c = Choice.objects.get(id=2)
+c.question_id = 4
+c.save()
+c.choice_text  # 'Absolutely!'
+
+
+>>> q = Question.objects.get(pk=2)
+>>> q.id
+2
+>>> q.question_text
+"I'm gonna ask one more time... HOW AWESOME ARE CATS???"
+>>> q.pub_date
+datetime.datetime(2022, 2, 16, 2, 22, 40, 519017, tzinfo=<UTC>)
+>>> q.pub_date.year
+2022
+>>> q.pub_date.month
+2
+>>> q.pub_date.day
+16
+
+########### Create Choice ###########
+# Requires a provided 'q', assigned above.
+c = Choice(question=q, choice_text='Some choice', votes=3)
+-- OR --
+Choice.objects.create(question=q, choice_text="An extra choice")
+
+Choice.objects.create(question=q, choice_text="choice 01")
+
+c3 = q.choices.create(choice_text="the text")
+
+>>> q.choices.all()
+<QuerySet [<Choice: choice 01>, <Choice: choice 01>, <Choice: choice 01>]>
+
+q.choices.all()
+c.question
+
+
+# Instantly updates DB.
+# returns a variable to use.
+c4 = q.choices.create(choice_text="I resist!")
+# Doesn't return a variable to use.
+Choice.objects.create(question=q, choice_text="Really???")
+
+
+# TODO: How to get the ids for items?
+
+
+#### two ways ####
+len(q.choices.all())  # 2
+q.choices.count()  # 2
+
+
+q.question_text='the text'
+q.save()
+
+#### Instant delete ####
+c.delete()
