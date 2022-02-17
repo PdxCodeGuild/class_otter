@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-# from django.template import loader
+from django.shortcuts import get_object_or_404, render
 
-from .models import Question
+from .models import Question, Choice
+
 
 def index(request):
     # '-pub_date' will order by pub_date descending:
@@ -11,23 +11,35 @@ def index(request):
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
 
-    # return HttpResponse(latest_question_list)
-    # output = '<h1>Polls</h1>' + "</h2><h2>".join(q.question_text for q in latest_question_list) + "</h2>"
-    # return HttpResponse(output)
-
-    # template = loader.get_template('polls/indes.html')
-    # context = {
-    #     'latest_question_list': latest_question_list
-    # }
-    # return HttpResponse(template.render(context, request))
-
-    # return HttpResponse("Welcome to CATS 2000!")
 
 def detail(request, question_id):
-    return HttpResponse(f"You're viewing question {question_id}.")
+    # Old way of getting 'Question':
+        # question = Question.objects.get(pk=question_id)
+    # A better way, from tutorial:
+    question = get_object_or_404(Question, pk=question_id)
+    context = {'question': question}
+    return render(request, 'polls/detail.html', context)
+
 
 def results(request, question_id):
-    return HttpResponse(f"You're viewing results of question {question_id}.")
+    '''Display the 'choice's and votes for a question?'''
+    question = Question.objects.get(pk = question_id)
+    choices_list = question.choices.all()
+    context = {'choices_list': choices_list}
+    print(choices_list)
+    return render(request, 'polls/results.html', context)
+
 
 def vote(request, question_id):
-    return HttpResponse(f"You're voting on question {question_id}.")
+    '''Allow user to increment the vote number of a choice by one.'''
+    question = Question.objects.get(pk = question_id) 
+    choices_list = question.choices.all()
+    context = {'choices_list': choices_list}
+    if request.method == 'GET':
+        print("it's a GET!")
+        print(request)
+        return render(request, 'polls/vote.html', context)
+
+    print("it's a POST!")
+    # Do logic to increment vote count:
+    return render(request, 'polls/results.html', context)

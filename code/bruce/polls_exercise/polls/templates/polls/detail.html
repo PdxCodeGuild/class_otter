@@ -1,0 +1,17 @@
+{% if question %}
+<h1>{{ question.question_text }}</h1>
+<ul style="list-style: none">
+    {% for choice in question.choices.all %}
+    <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+
+{% comment %} {% if question %}
+    <p>{{ question.id }}: {{ question.question_text }}</p>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %} {% endcomment %}

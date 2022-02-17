@@ -1,4 +1,5 @@
 # Resources:
+    https://docs.djangoproject.com/en/4.0/intro/tutorial03/
     https://github.com/PdxCodeGuild/class_otter/tree/main/3%20Django/docs
 
 # Activate virtual environment:

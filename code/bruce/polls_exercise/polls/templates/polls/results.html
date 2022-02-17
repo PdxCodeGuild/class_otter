@@ -1,0 +1,9 @@
+{% if choices_list %}
+    <ul style="list-style: none">
+    {% for choice in choices_list %}
+        <li>{{choice.id}}: {{ choice.votes }} - {{ choice.choice_text }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
