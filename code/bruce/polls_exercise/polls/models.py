@@ -20,7 +20,7 @@ class Question(models.Model):
         return self.question_text
 
 
-# Choice has two required arguments.
+# Choice has two required arguments: 'choice_text' and 'question'.
 class Choice(models.Model):
     question = models.ForeignKey(Question, related_name="choices", on_delete=models.CASCADE)
     votes = models.IntegerField(default=0)
