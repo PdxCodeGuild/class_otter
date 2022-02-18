@@ -4,10 +4,10 @@
 # Keenan Tabusa
 
 
-
-# I wanted to use beautifulsoup to pull restaurant category data from yelp and graph it
+# Create a project to use beautifulsoup to scrape restaurant category data from yelp and graph it using matplotlib
 
 # note: case sensitive BeautifulSoup and Counter
+
 from bs4 import BeautifulSoup
 import requests
 import lxml
@@ -16,10 +16,10 @@ from matplotlib import pyplot as plt
 
 
 page = requests.get('https://www.yelp.com/search?find_desc=Restaurants&find_loc=Portland%2C+OR&ns=1')
-# This takes the page and converts it to text
 page_text = page.text
-# this converts the page to a bs4 object, 
+# this converts the page to a bs4 object 
 soup_page = BeautifulSoup(page_text, 'lxml')
+
 
 # for multiple pages can change the start #,  https://www.yelp.com/search?find_desc=Restaurants&find_loc=Portland%2C+OR&ns=1&start=0
 # ugly to get the next 4 pages but need the data
@@ -82,9 +82,11 @@ for cats in categories3:
 # for cats in categories5:
 #      category_list.append(cats.get_text())
 
+print(category_list)
 
 # Counter creates a specific counter class of dictionary so we cast the Counter data type to a regular dictionary
 count = Counter(category_list)
+print(count)
 count_dict = dict(count)
 
 # the dictionary needs to be updated with .items() to update the dict key value pairs to a list of tuples
@@ -108,7 +110,12 @@ plt.title('The Frequency of Restaurant Categories for the Top 30 Restaurants in 
 plt.show()
 
 
+# Check using the yelp API
+# runtime - is it keeping all 5 pages open throughout? is there a way to open and close, API will likely address?
+# before making runtime changes see if there is a VScode runtime addon or feature to see if we can check each change
+# manually update the user agent header to a chrome browser or similar
 # scatter plot by category/color, x and y: cost and rating
+
 
 # can adjust the below string to search by other locations
 # https://www.yelp.com/search?find_desc=Restaurants&find_loc=Portland%2C+OR&ns=1
@@ -125,3 +132,4 @@ plt.show()
 
 # print(count_list)
 # print(sort_second(count_list))
+# import pprint
