@@ -1,0 +1,15 @@
+{% comment %} this would normally be a placeholder index page for the polls app
+for the purposes of the exercise we're going to shorthand it {% endcomment %}
+
+{% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+        {% comment %} the url command below, will use django to populate the url without hardcoding it from the urls.html file {% endcomment %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <p> No Polls are available. </p>
+
+{% endif %}
