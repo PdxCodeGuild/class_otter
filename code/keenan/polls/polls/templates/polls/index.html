@@ -1,5 +1,8 @@
 {% comment %} this would normally be a placeholder index page for the polls app
 for the purposes of the exercise we're going to shorthand it {% endcomment %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
 {% if latest_question_list %}
     <ul>
@@ -10,6 +13,6 @@ for the purposes of the exercise we're going to shorthand it {% endcomment %}
     </ul>
 
 {% else %}
-    <p> No Polls are available. </p>
+    <p> No polls are available. </p>
 
 {% endif %}
