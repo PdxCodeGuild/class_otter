@@ -24,6 +24,66 @@ def main_dict(header, values):
 contacts = main_dict(key_list, new_list)
 
 print(contacts)
+
+
+# create a record
+def create_friend_dictionary(name, fruit, color):
+    '''create friend dictionary from input'''
+    friend_dict = {
+        "name": name,
+        "favorite fruit": fruit,
+        "favorite color": color
+    }
+    return friend_dict
+
+
+def add_friend_dict_to_list(dict, list):
+    '''Combine dictionary of friend to contacts'''
+    list.append(dict)
+    return list
+
+
+new_friend = create_friend_dictionary("Bruce", "Mango", "purple")
+# print(new_friend)
+
+new_contacts = add_friend_dict_to_list(new_friend, contacts)
+# print(new_contacts)
+
+
+def user_input_dict(contacts_list):
+    '''prompt user for name, favorite fruit, favorite color and append to contacts list'''
+    name = input("please enter a name: ")
+    fruit = input("please enter your favorite fruit: ")
+    color = input("please enter your favorite color: ")
+    dictionary = create_friend_dictionary(name, fruit, color)
+    new_contacts = add_friend_dict_to_list(dictionary, contacts_list)
+    return new_contacts
+
+
+print(contacts)
+new_contacts = user_input_dict(contacts)
+print(new_contacts)
+
+
+# retrieve a record
+
+def find_record(list):
+    '''retrieve record from list'''
+    record = input("what word would you like to find? ")
+
+    return list.get(record)
+
+
+find = find_record(new_contacts)
+print(find)
+
+
+# Create a cred repl using a while loop.
+# inside while loop
+# create print statement inside cred to show what input was selected. for each selection
+
+# def create():
+
 # ----------------------------------------------------------------------------------------------------
 
 ########################################################################################################
