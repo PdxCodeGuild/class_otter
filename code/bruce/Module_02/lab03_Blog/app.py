@@ -9,6 +9,9 @@
 # Assignment:
 # https://github.com/PdxCodeGuild/class_otter/blob/bruce/2%20Flask%20+%20HTML%20+%20CSS/labs/03%20Blog.md
 
+# Run Flask app:
+# python app.py
+
 from flask import Flask, render_template
 import blog
 

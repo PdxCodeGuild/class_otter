@@ -50,13 +50,14 @@ def index():
         input_values = {'length': input_length, 'units': input_unit}
 
         # Calculate the output length:
+        precision = 2
         output_length = round(
             length_converter(
                 float(input_length),
                 input_unit,
                 output_unit,
                 conversion),
-                3)
+                precision)
         
         # Create a dictionary of the output length and output units:
         output_values = {'length': output_length, 'units': output_unit}

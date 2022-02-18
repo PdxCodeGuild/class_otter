@@ -1,0 +1,12 @@
+{% if latest_question_list %}
+    <ul style="list-style: none">
+    {% for question in latest_question_list %}
+        {% comment %} Hard-coded url. {% endcomment %}
+        {% comment %} <li><a href="/polls/{{ question.id }}/">{{question.id}}: {{ question.question_text }}</a></li> {% endcomment %}
+        {% comment %} Added 'polls:' in front of 'detail'. This matches with "app_name = 'polls'" in polls/urls.py. Something about 'namespace'. Allows use of 'name="detail"' in more than one path() (i.e. have 'detail' in more than one app.).{% endcomment %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{question.id}}: {{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
