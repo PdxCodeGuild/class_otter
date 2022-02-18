@@ -1,3 +1,6 @@
+# Old code, before generic:
+https://github.com/PdxCodeGuild/class_otter/tree/ee3ddea944d53a859c7c7a0372da2c60ae9b6796/code/bruce/polls_exercise
+
 # Resources:
     https://docs.djangoproject.com/en/4.0/intro/tutorial03/
     https://github.com/PdxCodeGuild/class_otter/tree/main/3%20Django/docs
@@ -16,6 +19,9 @@
 
 # Start Django server:
     python manage.py runserver <optional 8008>
+
+# Link to application:
+http://127.0.0.1:8000/polls/
 
 # Interactive shell:
     python manage.py shell
@@ -173,3 +179,29 @@ q.save()
 
 #### Instant delete ####
 c.delete()
+
+############### Testing in command line ###############
+# Command line testing in 'python manage.py shell':
+
+from django.test.utils import setup_test_environment
+setup_test_environment()
+
+from django.test import Client
+client = Client()
+response = client.get("/")
+# Not Found: /
+
+from django.urls import reverse
+response = client.get(reverse('polls:index'))
+response.content
+response.status_code
+response.context
+response.context['latest_question_list']
+#######################################################
+
+# Can use decimal 'days':
+>>> datetime.timedelta(days=.5)
+datetime.timedelta(seconds=43200)
+>>> datetime.timedelta(days=.24) 
+datetime.timedelta(seconds=20736)
+
