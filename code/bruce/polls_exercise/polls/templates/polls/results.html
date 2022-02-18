@@ -1,4 +1,24 @@
-{% if choices_list %}
+{% comment %} 'for', 'endfor', 'endif', 'pluralize', and 'url' are 'template tag'. {% endcomment %}
+{% comment %} https://docs.djangoproject.com/en/4.0/ref/templates/builtins/ {% endcomment %}
+<h1>{{ question.question_text }}</h1>
+<ul style="list-style: none">
+{% for choice in question.choices.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% if choices_list %}
     <ul style="list-style: none">
     {% for choice in choices_list %}
         <li>{{choice.id}}: {{ choice.votes }} - {{ choice.choice_text }}</li>
@@ -6,4 +26,4 @@
     </ul>
 {% else %}
     <p>No polls are available.</p>
-{% endif %}
+{% endif %} {% endcomment %}

@@ -9,9 +9,11 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField()
 
-    def c(self):
+    def was_published_recently(self):
         '''Returns true if question published in last 24 hours.'''
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        # return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def  __str__(self):
         '''Returns string representation of Question (i.e. the 'question_text'.'''
