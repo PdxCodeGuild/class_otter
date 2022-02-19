@@ -116,11 +116,6 @@ while True:
     x_move = int(x_move)
     y_move = input("Enter column coordinate: ")
     y_move = int(y_move)
-    print("O player move enter coorindate ie (0,0) is top left: ")
-    cx_move = input("Enter row coordinate: ")
-    cx_move = int(cx_move)
-    cy_move = input("Enter column coordinate: ")
-    cy_move = int(cy_move)
     if p1token == 'X':
         if start.move(x_move, y_move, p1token) == True:
             start.move(x_move, y_move, p1token)
@@ -131,6 +126,23 @@ while True:
             start.move(x_move, y_move, p1token)
         elif start.move(x_move, y_move, p1token) == False:
             print('Invalid Input')
+    print(start)
+    if start.is_game_over() == True:
+        print('Is the Game over?\nTrue')
+    if start.calc_winner(p1token) == True:
+        print('Player 1 Wins!')
+        break
+    if start.calc_winner(p2token) == True:
+        print('Player 2 Wins!')
+        break
+    if start.is_full() == True:
+        print('Tie')
+        break
+    print("O player move enter coorindate ie (0,0) is top left: ")
+    cx_move = input("Enter row coordinate: ")
+    cx_move = int(cx_move)
+    cy_move = input("Enter column coordinate: ")
+    cy_move = int(cy_move)
     if p2token == 'X':
         if start.move(cx_move, cy_move, p2token) == True:
             start.move(cx_move, cy_move, p2token)
@@ -141,7 +153,7 @@ while True:
             start.move(cx_move, cy_move, p2token)
         elif start.move(cx_move, cy_move, p2token) == False:
             print('Invalid Input')
-    print(start)
+        print(start)
     if start.is_game_over() == True:
         print('Is the Game over?\nTrue')
     if start.calc_winner(p1token) == True:
