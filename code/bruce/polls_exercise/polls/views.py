@@ -22,31 +22,18 @@ class IndexView(generic.ListView):
         return latest_question_list
 
 
-def detail(request, question_id):
-    # Old way of getting 'Question':
-        # question = Question.objects.get(pk=question_id)
-    # A better way, from tutorial:
-    # Adds error handling of 404, returns the 'Question', otherwise.
-    question = get_object_or_404(
-        Question.objects.filter(pub_date__lte=timezone.now()),
-        pk=question_id)
-    context = {'question': question}
-    return render(request, 'polls/detail.html', context)
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'polls/detail.html'
 
-# class DetailView(generic.DetailView):
-#     model = Question
-#     template_name = 'polls/detail.html'
+    def get_queryset(self):
+        question = Question.objects.filter(pub_date__lte=timezone.now())
+        return question
 
-def results(request, question_id):
-    question = get_object_or_404(
-        Question.objects.filter(pub_date__lte=timezone.now()),
-        pk=question_id)
-    context = {'question': question}
-    return render(request, 'polls/results.html', context)
 
-# class ResultsView(generic.DetailView):
-#     model = Question
-#     template_name = 'polls/results.html'
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
 
 
 def vote(request, question_id):
