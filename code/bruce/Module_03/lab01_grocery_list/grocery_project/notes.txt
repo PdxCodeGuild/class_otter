@@ -182,7 +182,12 @@ datetime.datetime(2022, 2, 18, 22, 45, 25, 408210, tzinfo=<UTC>)
 >>> GroceryItem.objects.get(pk=2)  
 <GroceryItem: GroceryItem object (2)>
 
+Did you rename groceryitem.is_completed to groceryitem.completed (a BooleanField)? [y/N] y
 
+g = GroceryItem.objects.create(description="Cat Nip - Super Premium!", created_date=timezone.now())
+g = GroceryItem(description="Kat Fude - Moist, of course!", created_date=timezone.now())
+
+g = GroceryItem.objects.get(pk=2)
 
 
 

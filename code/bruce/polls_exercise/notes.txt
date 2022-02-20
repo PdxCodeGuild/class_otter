@@ -13,9 +13,9 @@ https://github.com/PdxCodeGuild/class_otter/tree/ee3ddea944d53a859c7c7a0372da2c6
 
 # Activate virtual environment:
     # BASH:
-        source C:/Users/Bruce/.virtualenvs/<path to virtual environment>/Scripts/activate
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
     # PS:
-        C:\Users\Bruce\.virtualenvs\<path to virtual environment>\Scripts\activate.ps1
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
 
 # Start Django server:
     python manage.py runserver <optional 8008>
@@ -141,6 +141,35 @@ datetime.datetime(2022, 2, 16, 2, 22, 40, 519017, tzinfo=<UTC>)
 2
 >>> q.pub_date.day
 16
+
+
+########### Create a Question ###########
+q1 = Question.objects.create(question_text="Are cats better than dogs?", pub_date=timezone.now())
+
+## Add some Choices ##
+c1 = Choice.objects.create(question=q, choice_text="Are you serious?")
+c2 = Choice.objects.create(question=q, choice_text="Of course!")
+c3 = Choice.objects.create(question=q, choice_text="In every universe!")
+
+q2 = Question.objects.create(question_text="Are dogs acceptable?", pub_date=timezone.now())
+c4 = Choice.objects.create(question=q2, choice_text="As long as they are named Shaler!")
+c5 = Choice.objects.create(question=q2, choice_text="Only if they're a Blue Tick Beagle.")
+c6 = Choice.objects.create(question=q2, choice_text="")
+#########################################
+
+
+######### Test has_two_or_more_choices() #########
+q_37 = Question.objects.get(pk=37)
+q_38 = Question.objects.get(pk=38)
+
+q_37.has_two_or_more_choices()
+True
+q_38.has_two_or_more_choices()
+False
+
+q_37.has_only_one_obvious_choice()
+q_38.has_only_one_obvious_choice()
+
 
 ########### Create Choice ###########
 # Requires a provided 'q', assigned above.
