@@ -86,7 +86,7 @@ class QuestionModelTests(TestCase):
         has_only_one_obvious_answer() returns False if question has zero 'choice's.
         """
         question = create_question()
-        print_current_status_of_questions_and_choices()
+        # print_current_status_of_questions_and_choices()
         self.assertFalse(question.has_only_one_obvious_choice())
 
     def test_has_only_one_obvious_choice_with_one_choice(self):
@@ -95,7 +95,7 @@ class QuestionModelTests(TestCase):
         """
         question = create_question()
         create_choice(question)
-        print_current_status_of_questions_and_choices()
+        # print_current_status_of_questions_and_choices()
         self.assertTrue(question.has_only_one_obvious_choice())        
 
     def test_has_only_one_obvious_choice_with_more_then_one_choice(self):
@@ -105,7 +105,7 @@ class QuestionModelTests(TestCase):
         question = create_question()
         create_choice(question)
         create_choice(question)
-        print_current_status_of_questions_and_choices()
+        # print_current_status_of_questions_and_choices()
         self.assertFalse(question.has_only_one_obvious_choice()) 
 
 

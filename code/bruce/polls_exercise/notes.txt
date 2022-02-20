@@ -31,10 +31,32 @@ from polls.models import Choice, Question
 from django.utils import timezone
 
 
-#### Return all the 'Choice's or 'Question's ####
+########### Return all the 'Choice's or 'Question's ###########
 Question.objects.all()
 Choice.objects.all()
+###############################################################
 
+
+########### Create 'Question's and 'Choice's ###########
+q1 = Question.objects.create(question_text="Are cats better than dogs?", pub_date=timezone.now())
+
+## Add some Choices ##
+c1 = Choice.objects.create(question=q, choice_text="Are you serious?")
+c2 = Choice.objects.create(question=q, choice_text="Of course!")
+c3 = Choice.objects.create(question=q, choice_text="In every universe!")
+
+q2 = Question.objects.create(question_text="Are dogs acceptable?", pub_date=timezone.now())
+c4 = Choice.objects.create(question=q2, choice_text="As long as they are named Shaler!")
+c5 = Choice.objects.create(question=q2, choice_text="Only if they're a Blue Tick Beagle.")
+c6 = Choice.objects.create(question=q2, choice_text="")
+########################################################
+
+
+######### Delete 'Question's or 'Choice's #########
+# 'delete()'-ing a question will delete the choices via CASCADE.
+q = <get or instantiate some question>
+q.delete()
+###################################################
 
 
 
@@ -84,9 +106,6 @@ Question.objects.get(id=3).choices.all()[0].choice_text
 "I'm gonna ask one more time... HOW AWESOME ARE CATS???"
 
 
-
-############ Get all questions ############
-Question.objects.all()
 
 ############ filter - can return more than one ############
 Question.objects.filter(id=1)
@@ -142,20 +161,6 @@ datetime.datetime(2022, 2, 16, 2, 22, 40, 519017, tzinfo=<UTC>)
 >>> q.pub_date.day
 16
 
-
-########### Create a Question ###########
-q1 = Question.objects.create(question_text="Are cats better than dogs?", pub_date=timezone.now())
-
-## Add some Choices ##
-c1 = Choice.objects.create(question=q, choice_text="Are you serious?")
-c2 = Choice.objects.create(question=q, choice_text="Of course!")
-c3 = Choice.objects.create(question=q, choice_text="In every universe!")
-
-q2 = Question.objects.create(question_text="Are dogs acceptable?", pub_date=timezone.now())
-c4 = Choice.objects.create(question=q2, choice_text="As long as they are named Shaler!")
-c5 = Choice.objects.create(question=q2, choice_text="Only if they're a Blue Tick Beagle.")
-c6 = Choice.objects.create(question=q2, choice_text="")
-#########################################
 
 
 ######### Test has_two_or_more_choices() #########

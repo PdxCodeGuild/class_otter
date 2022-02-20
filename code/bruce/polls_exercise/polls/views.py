@@ -9,6 +9,8 @@ from django.utils import timezone
 # Use generic views:
 # https://docs.djangoproject.com/en/4.0/intro/tutorial04/
 
+max_number_of_questions_to_display = 5
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -19,7 +21,7 @@ class IndexView(generic.ListView):
         # 'latest_question_list' can be any variable, it doesn't seem to be a required naming convention for Django. We use it above since that's what we already have on the template html.
         latest_question_list = Question.objects.filter(
             pub_date__lte=timezone.now()
-            ).order_by('-pub_date')[:5]
+            ).order_by('-pub_date')[:max_number_of_questions_to_display]
         return latest_question_list
 
 
@@ -33,7 +35,7 @@ class DetailView(generic.DetailView):
 
 
 # Is 'ResultsView' a required class name?
-# Does 'TheResultsView' work?
+# Does 'TheResultsView' work? It seems it does work.
 class TheResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
@@ -54,8 +56,8 @@ def vote(request, question_id):
             request,
             'polls/detail.html',
             {
-            'question': question,
-            'error_message': "You didn't select a choice.",
+                'question': question,
+                'error_message': "You didn't select a choice.",
             })
     else:
         print(f"Choice votes: {selected_choice.votes}")
@@ -64,90 +66,104 @@ def vote(request, question_id):
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
+max_number_of_choices_to_add = 5
 
-def add_question(request):
+def add_question(request, max_number_of_choices_to_add=max_number_of_choices_to_add):
     try:
-        # print(f"type(request): {type(request)}")
-        # print(f"request: {request}")
-
         question_text = request.POST['question']
-        # print(f"question_text: {question_text}")
-
         q = Question.objects.create(question_text=question_text, pub_date=timezone.now())
-        
-        choice_keys = [
-        'choice1',
-        'choice2',
-        'choice3',
-        'choice4',
-        'choice5',
-        ]
-        
+
+        choice_keys = [f"choice{i + 1}" for i in range(max_number_of_choices_to_add)]
+        # print(choice_keys)
         choices = [request.POST[choice] for choice in choice_keys if request.POST[choice] != '']
 
-        # print(f"len(choices): {len(choices)}")
-
         for choice in choices:
-            # print("Start")
-            # print(type(choice))
-            # print(choice)
-            # print(f"choice.isascii(): {choice.isascii()}")
-            # print(f"choice.isalpha(): {choice.isalpha()}")
-            # print(f"choice.isalnum(): {choice.isalnum()}")
-            # print(f"IsEmptyString: {choice == ''}")
-            # print(f"IsNotEmptyString: {choice != ''}")
-            # print("Done!")
             Choice.objects.create(question=q, choice_text=choice)
-        #####################
 
-
-        # for choice in choice_keys:
-        #     choice = request.POST[choice]
-        #     if choice != '':
-        #         choices.append(choice)
-
-        # choice1 = request.POST['choice1']
-        # print(f"choice1: '{choice1}'")
-        # choice2 = request.POST['choice2']
-        # print(f"choice2: '{choice2}'")
-        # choice3 = request.POST['choice3']
-        # print(f"choice3: '{choice3}'")
-        # choice4 = request.POST['choice4']
-        # print(f"choice4: '{choice4}'")
-        # choice5 = request.POST['choice5']
-        # print(f"choice5: '{choice5}'")
-
-
-        # # Create each question using the question 'q':
-        # choice1 = request.POST['choice1']
-        # print(f"choice1: {choice1}")
-        # Choice.objects.create(question=q, choice_text=choice1)
-        
-        # choice2 = request.POST['choice2']
-        # print(f"choice2: {choice2}")
-        # Choice.objects.create(question=q, choice_text=choice2)
-        
-        # choice3 = request.POST['choice3']
-        # print(f"choice3: {choice3}")
-        # Choice.objects.create(question=q, choice_text=choice3)
-        
-        # choice4 = request.POST['choice4']
-        # print(f"choice4: {choice4}")
-        # Choice.objects.create(question=q, choice_text=choice4)
-        
-        # choice5 = request.POST['choice5']
-        # print(f"choice5: {choice5}")
-        # Choice.objects.create(question=q, choice_text=choice5)
-
-        # Add a message to say question added.
-        # --OR--
-        # Route user to 'detail' view.
-        # print(q.pk)
+        # Question has been added.
+        print("Added: True")
         return HttpResponseRedirect(reverse('polls:detail', args=(q.pk,)))
+
     # No question added.
     except:
-        return HttpResponseRedirect(reverse('polls:action'))
+        print("Added: False")
+        return HttpResponseRedirect(reverse('polls:add'))
 
-def action(request):
-    context = {'number_choices': range(5)}
-    return render(request, 'polls/action.html', context)
+def add(request, max_number_of_choices_to_add=max_number_of_choices_to_add):
+    """
+    Route user to page where they can create a question with up to max_number_of_choices_to_add 'choice's.
+    
+    Default value is given in function signature.
+    """
+    context = {'number_choices': range(max_number_of_choices_to_add)}
+    return render(request, 'polls/add.html', context)
+
+
+class DeleteView(generic.ListView):
+    template_name = 'polls/delete.html'
+    context_object_name = 'question_list'
+    def get_queryset(self):
+        """
+        Return the questions.
+        """
+        question_list = Question.objects.filter(
+            pub_date__lte=timezone.now()
+            ).order_by('-pub_date')[:max_number_of_questions_to_delete]
+        # question_list = Question.objects.all()
+        return question_list
+
+
+def delete_single_question(request):
+    try:
+        pk = request.POST['question_single']
+        print(pk)
+        question = Question.objects.get(pk=pk)
+        print(question)
+        print(Question.objects.all())
+        print(question.delete())
+        print(Question.objects.all())
+
+        # Question has been deleted.
+        return HttpResponseRedirect(reverse('polls:index'))
+
+    # No question deleted.
+    except:
+        return HttpResponseRedirect(reverse('polls:delete'))
+
+max_number_of_questions_to_delete = max_number_of_questions_to_display
+
+def delete_multiple_questions(request, max_number_of_questions_to_delete=max_number_of_questions_to_delete):
+    question_keys = [f"question_id_{i + 1}" for i in range(max_number_of_questions_to_delete)]
+    # print(f"question_keys: {question_keys}")
+
+    working_list = []
+    # 'try' to delete the questions:
+    try:
+        # Get list of keys of questions to delete:
+        for key in question_keys:
+            # 'try' to get the value from request object.
+            try:
+                working_list.append(request.POST[key])
+            # 'except' if item doesn't exist.
+            except:
+                continue
+        
+        # For loop to 'try' to delete each question selected:
+        for question_id in working_list:
+            try:
+                # print(Question.objects.get(pk=question_id))
+                print(f"Deleted: {Question.objects.get(pk=question_id).delete()}")
+            except:
+                continue
+
+        # print(f"working_list to delete: {working_list}")
+        # Question has been Deleted.
+        print("Deleted: True")
+        return HttpResponseRedirect(reverse('polls:index'))
+
+    # No question Deleted.
+    except:
+        print("Deleted: False")
+        return HttpResponseRedirect(reverse('polls:delete'))
+
+
