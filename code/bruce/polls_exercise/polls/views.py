@@ -9,7 +9,7 @@ from django.utils import timezone
 # Use generic views:
 # https://docs.djangoproject.com/en/4.0/intro/tutorial04/
 
-max_number_of_questions_to_display = 5
+max_number_of_questions_to_display = 10
 
 
 class IndexView(generic.ListView):
@@ -47,10 +47,10 @@ def vote(request, question_id):
         # 'request.POST['choice']' returns the id for the 'choice' which was chosen in the form.
         # type(selected_choice) is <class 'polls.models.Choice'>.
         selected_choice = question.choices.get(pk=request.POST['choice'])
-        print(f"request type: {type(request)}")
-        print(f"Choice 'id': {request.POST['choice']}")
-        print(f"Choice type: {type(selected_choice)}")
-        print(f"Choice __str__: {selected_choice}")
+        # print(f"request type: {type(request)}")
+        # print(f"Choice 'id': {request.POST['choice']}")
+        # print(f"Choice type: {type(selected_choice)}")
+        # print(f"Choice __str__: {selected_choice}")
     except (KeyError, Choice.DoesNotExist):
         return render(
             request,
@@ -60,9 +60,9 @@ def vote(request, question_id):
                 'error_message': "You didn't select a choice.",
             })
     else:
-        print(f"Choice votes: {selected_choice.votes}")
+        # print(f"Choice votes: {selected_choice.votes}")
         selected_choice.votes += 1
-        print(f"Choice votes: {selected_choice.votes}")
+        # print(f"Choice votes: {selected_choice.votes}")
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
@@ -71,13 +71,52 @@ max_number_of_choices_to_add = 5
 def add_question(request, max_number_of_choices_to_add=max_number_of_choices_to_add):
     try:
         question_text = request.POST['question']
+        # print(f"question_text: {question_text}")
+
+
+        # choice_text = request.POST['choice2']
+        # print(f"choice_text: {choice_text}")
+
         q = Question.objects.create(question_text=question_text, pub_date=timezone.now())
+        # print(f"q: {q}")
 
-        choice_keys = [f"choice{i + 1}" for i in range(max_number_of_choices_to_add)]
-        # print(choice_keys)
-        choices = [request.POST[choice] for choice in choice_keys if request.POST[choice] != '']
+        # choice_text = request.POST['choice1']
+        # # print(f"choice_text: {choice_text}")
+        # c = Choice.objects.create(question=q, choice_text=choice_text)
+        # # print(c.choice_text)
 
-        for choice in choices:
+
+        possible_choice_keys = [f"choice{i + 1}" for i in range(max_number_of_choices_to_add)]
+        # print(f"possible_choice_keys: {possible_choice_keys}")
+
+
+        ################### Comment out these two lines to pass the line in tests ###################
+        # NOTE: The list comprehension fails when using tests, and the except block is run: 'polls:add'
+        # choices = [request.POST[choice] for choice in choice_keys if request.POST[choice] != '']
+        # print(f"choices: {choices}")
+        ########## self.assertRedirects(post_response, reverse('polls:detail', args=(1,)), status_code=302) <-- Passes! TEST LINE
+        #############################################################################################
+
+        # ################### UNCOMMENT out these two lines to pass the line in tests ###################
+        # # NOTE: The list comprehension works for adding to db but fails in tests: 'polls:detail'
+        # choices = [request.POST[choice] for choice in choice_keys if request.POST[choice] != '']
+        # print(f"choices: {choices}")
+        # ########## self.assertRedirects(post_response, reverse('polls:add'), status_code=302) <-- Passes! TEST LINE
+        # #############################################################################################
+
+        choice_texts = []
+        # Try to build choices:
+        for key in possible_choice_keys:
+            try:
+                if request.POST[key] != '':
+                    choice_texts.append(request.POST[key])
+            except:
+                continue
+        print(f"choice_texts: {choice_texts}")
+
+        print("Build choices:")
+        for choice in choice_texts:
+            # print(f"choice: {choice}")
             Choice.objects.create(question=q, choice_text=choice)
 
         # Question has been added.
@@ -116,12 +155,16 @@ class DeleteView(generic.ListView):
 def delete_single_question(request):
     try:
         pk = request.POST['question_single']
-        print(pk)
+        # print(pk)
         question = Question.objects.get(pk=pk)
-        print(question)
-        print(Question.objects.all())
-        print(question.delete())
-        print(Question.objects.all())
+        print(f"Deleting: {question}")
+        # print(Question.objects.all())
+        
+        # Delete the question.
+        result = question.delete()
+        print(f"Deleted: {result}")
+
+        # print(Question.objects.all())
 
         # Question has been deleted.
         return HttpResponseRedirect(reverse('polls:index'))
@@ -152,6 +195,7 @@ def delete_multiple_questions(request, max_number_of_questions_to_delete=max_num
         for question_id in working_list:
             try:
                 # print(Question.objects.get(pk=question_id))
+                print(f"To delete: {Question.objects.get(pk=question_id)}")
                 print(f"Deleted: {Question.objects.get(pk=question_id).delete()}")
             except:
                 continue

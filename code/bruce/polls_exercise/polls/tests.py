@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from .models import Question, Choice
 
+
 def create_question_with_days(question_text, days):
     # 'timezone' and 'datetime' seem to have same format.
     time = timezone.now() + datetime.timedelta(days=days)
@@ -24,6 +25,7 @@ def print_current_status_of_questions_and_choices():
         print(f"len(Question.objects.all()): {len(Question.objects.all())}")
         print(f"Choice.objects.all(): {Choice.objects.all()}")
         print(f"len(Choice.objects.all()): {len(Choice.objects.all())}")
+
 
 class QuestionModelTests(TestCase):
 
@@ -112,12 +114,18 @@ class QuestionModelTests(TestCase):
 class IndexViewTests(TestCase):
     
     def test_no_questions(self):
+        """
+        IndexView() returns 'No polls are available.' with a 200 status when no questions are available.
+        """
         response = self.client.get(reverse('polls:index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No polls are available.")
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
     
     def test_past_question(self):
+        """
+        IndexView() returns a question which was published in the past.
+        """
         question = create_question_with_days(question_text="Past question.", days=-10)
         # print(reverse('polls:index'))  # /polls/
         # print(reverse('polls:detail', args=[question.id]))  # /polls/1/
@@ -126,12 +134,19 @@ class IndexViewTests(TestCase):
         self.assertQuerysetEqual(response.context['latest_question_list'], [question])
     
     def test_future_question(self):
+        """
+        IndexView() returns 'No polls are available.' with a 200 status when all pub_date's are in future.
+        """
         create_question_with_days(question_text="Future question.", days=10)
         response = self.client.get(reverse('polls:index'))
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No polls are available.")
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
     
     def test_future_question_and_past_question(self):
+        """
+        IndexView() returns only past published questions when both past and future pub_date's are available.
+        """
         past_question = create_question_with_days(question_text="Past question.", days=-10)
         future_question = create_question_with_days(question_text="Future question", days=10)
         response = self.client.get(reverse('polls:index'))
@@ -140,6 +155,9 @@ class IndexViewTests(TestCase):
         self.assertQuerysetEqual(response.context['latest_question_list'], [past_question])
     
     def test_two_past_questions(self):
+        """
+        IndexView() returns multiple questions which have pub_dates in the past.
+        """
         first_past_question = create_question_with_days(question_text="First past question.", days=-10)
         second_past_question = create_question_with_days(question_text="Second past question.", days=-31)
         response = self.client.get(reverse('polls:index'))
@@ -151,17 +169,59 @@ class IndexViewTests(TestCase):
 
 class DetailViewTests(TestCase):
     def test_future_question(self):
+        """
+        DetailView() returns 404 when there are no past pub_date questions.
+        """
         future_question = create_question_with_days(question_text="Future question.", days=1)
         # Using list for 'args='
         response = self.client.get(reverse('polls:detail', args=[future_question.id]))
         self.assertEqual(response.status_code, 404)
 
     def test_past_question(self):
+        """
+        DetailView() returns a question which has a past pub_date.
+        """
         past_question = create_question_with_days(question_text="Past question", days=-1)
         # Using tuple for 'args='
         response = self.client.get(reverse('polls:detail', args=(past_question.id,)))
         self.assertContains(response, past_question.question_text)
         self.assertEqual(response.context['question'], past_question)
 
-    
+
+class AddQuestionViewTests(TestCase):
+    def test_add_question_and_view_on_index_page(self):
+        """
+        add_question() adds 'question' to database, and 'question' displays on 'index' page.
+        """
+        # Create dictionary to submit with POST request:
+        question_and_choices = {"question": "The question", "choice1": "The first choice", "choice2": "The second choice"}
+
+        # Submit the POST request:
+        self.client.post(reverse('polls:add_question'), question_and_choices)
+        # Get the resonse:
+        index_response = self.client.get(reverse('polls:index'))
+        # print(index_response.content)
+        # GET response from 'index' should show 'question':
+        self.assertContains(index_response, "The question")
+
+    def test_add_question_and_view_on_detail_page(self):
+        """
+        add_question() adds 'question' and 'choice's to database, and 'question' and 'choice's display on 'detail' view.
+        """
+        # Create dictionary to submit with POST request:
+        question_and_choices = {"question": "The question", "choice1": "The first choice", "choice2": "The second choice", "choice3": "The third choice"}
+
+        # Submit the POST request:
+        self.client.post(reverse('polls:add_question'), question_and_choices)
+
+        # Response from GET request to 'detail' view:
+        detail_response = self.client.get(reverse('polls:detail', args=[1]))
+        # print(detail_response.content)
+
+        # Response should contain the 'question' and 'choice's:
+        self.assertContains(detail_response, "The question")
+        self.assertContains(detail_response, "The first choice")
+        self.assertContains(detail_response, "The second choice")
+        self.assertContains(detail_response, "The third choice")
+
 
