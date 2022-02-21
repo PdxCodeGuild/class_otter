@@ -309,4 +309,5 @@ def main():
         # Print list of names so user knows which names are still available.
         print(f"\nNames: {list_of_names(contacts)}\n")
 
-main()
+if __name__ == '__main__':
+    main()

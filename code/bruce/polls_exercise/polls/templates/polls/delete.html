@@ -20,7 +20,7 @@
     {% endif %}
 
     </fieldset>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Delete a single question">
 </form>
 <form action="{% url 'polls:delete_multiple_questions' %}"  method="post">
     {% csrf_token %}
@@ -41,7 +41,7 @@
     {% endif %}
 
     </fieldset>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Delete multiple questions">
 </form>
 
 <p><a href="{% url 'polls:index' %}">Go to home</a></p>

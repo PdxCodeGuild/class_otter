@@ -188,7 +188,7 @@ class DetailViewTests(TestCase):
         self.assertEqual(response.context['question'], past_question)
 
 
-class AddQuestionViewTests(TestCase):
+class AddViewTests(TestCase):
     def test_add_question_and_view_on_index_page(self):
         """
         add_question() adds 'question' to database, and 'question' displays on 'index' page.
@@ -198,7 +198,7 @@ class AddQuestionViewTests(TestCase):
 
         # Submit the POST request:
         self.client.post(reverse('polls:add_question'), question_and_choices)
-        # Get the resonse:
+        # GET the resonse:
         index_response = self.client.get(reverse('polls:index'))
         # print(index_response.content)
         # GET response from 'index' should show 'question':
@@ -206,7 +206,7 @@ class AddQuestionViewTests(TestCase):
 
     def test_add_question_and_view_on_detail_page(self):
         """
-        add_question() adds 'question' and 'choice's to database, and 'question' and 'choice's display on 'detail' view.
+        add_question() adds 'question' and 'choice's to database, and then 'question' and 'choice's display on 'detail' view.
         """
         # Create dictionary to submit with POST request:
         question_and_choices = {"question": "The question", "choice1": "The first choice", "choice2": "The second choice", "choice3": "The third choice"}
@@ -225,3 +225,73 @@ class AddQuestionViewTests(TestCase):
         self.assertContains(detail_response, "The third choice")
 
 
+class DeleteViewTests(TestCase):
+    def test_delete_single_question(self):
+        """
+        delete_single_question() deletes a single 'question' and 'question' no longer shows on 'index' view.
+
+        We are not checking whether the choices are added here. That should be, maybe, done in different test? We are only checking if question is added and deleted. That test was performed with test_add_question_and_view_on_detail_page().
+        """
+        ## Create a question ##
+        # Create dictionary to submit with POST request:
+        question_and_choices = {"question": "The question", "choice1": "The first choice", "choice2": "The second choice"}
+        # Submit the POST request:
+        self.client.post(reverse('polls:add_question'), question_and_choices)
+
+        ## Check question shows on 'index' view ##
+        # GET the resonse:
+        index_response = self.client.get(reverse('polls:index'))
+        # Verify the question is in response:
+        self.assertContains(index_response, "The question")
+        # Verify, for fun, that a similar question ISN'T in the response:
+        self.assertNotContains(index_response, "The question!")
+
+        # How to get the value for the key of the question to be deleted?
+        # Not needed. Need to think on this some more.
+        # print(index_response.content)      
+
+        ## Delete the question ##
+        question_key_dict = {"question_single": 1}
+        self.client.post(reverse('polls:delete_single_question'), question_key_dict)
+
+        ## Verify question no longer shows on 'index' view ##
+        index_response = self.client.get(reverse('polls:index'))
+        # Verify that question ISN'T in the response since it's been deleted:
+        self.assertNotContains(index_response, "The question")
+
+    def test_delete_multiple_questions(self):
+        """
+        delete_multiple_questions() deletes multiple 'question's and 'question's no longer show on 'index' view.
+
+        We are not checking whether the 'choice's are added here. That should be, maybe, done in different test? We are only checking if question is added and deleted.
+        """
+        ## Create a first question ##
+        # Create dictionary to submit with POST request:
+        first_question_and_choices = {"question": "The first question", "choice1": "Q1: first choice", "choice2": "Q1: second choice"}
+        # Submit the POST request:
+        self.client.post(reverse('polls:add_question'), first_question_and_choices)
+
+        ## Create a second question ##
+        # Create dictionary to submit with POST request:
+        second_question_and_choices = {"question": "The second question", "choice1": "Q2: first choice", "choice2": "Q2: second choice"}
+        # Submit the POST request:
+        print(f"reverse('polls:add_question'): {reverse('polls:add_question')}")
+        self.client.post(reverse('polls:add_question'), second_question_and_choices)
+
+        ## Check questions show on 'index' view ##
+        # GET the resonse:
+        index_response = self.client.get(reverse('polls:index'))
+        # Verify the question is in response:
+        self.assertContains(index_response, "The first question")
+        self.assertContains(index_response, "The second question")
+
+        ## Delete the question ##
+        question_key_dict = {"question_id_1": 1, "question_id_2": 2}
+        self.client.post(reverse('polls:delete_multiple_questions'), question_key_dict)
+
+        ## Verify question no longer shows on 'index' view ##
+        index_response = self.client.get(reverse('polls:index'))
+        # Verify that question ISN'T in the response since it's been deleted:
+
+        self.assertNotContains(index_response, "The first question")
+        self.assertNotContains(index_response, "The second question")

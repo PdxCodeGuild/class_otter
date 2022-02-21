@@ -71,23 +71,9 @@ max_number_of_choices_to_add = 5
 def add_question(request, max_number_of_choices_to_add=max_number_of_choices_to_add):
     try:
         question_text = request.POST['question']
-        # print(f"question_text: {question_text}")
-
-
-        # choice_text = request.POST['choice2']
-        # print(f"choice_text: {choice_text}")
-
         q = Question.objects.create(question_text=question_text, pub_date=timezone.now())
-        # print(f"q: {q}")
-
-        # choice_text = request.POST['choice1']
-        # # print(f"choice_text: {choice_text}")
-        # c = Choice.objects.create(question=q, choice_text=choice_text)
-        # # print(c.choice_text)
-
 
         possible_choice_keys = [f"choice{i + 1}" for i in range(max_number_of_choices_to_add)]
-        # print(f"possible_choice_keys: {possible_choice_keys}")
 
 
         ################### Comment out these two lines to pass the line in tests ###################
@@ -112,20 +98,19 @@ def add_question(request, max_number_of_choices_to_add=max_number_of_choices_to_
                     choice_texts.append(request.POST[key])
             except:
                 continue
-        print(f"choice_texts: {choice_texts}")
+        # print(f"choice_texts: {choice_texts}")
 
-        print("Build choices:")
+        # print("Build choices:")
         for choice in choice_texts:
-            # print(f"choice: {choice}")
             Choice.objects.create(question=q, choice_text=choice)
 
         # Question has been added.
-        print("Added: True")
+        # print("Added: True")
         return HttpResponseRedirect(reverse('polls:detail', args=(q.pk,)))
 
     # No question added.
     except:
-        print("Added: False")
+        # print("Added: False")
         return HttpResponseRedirect(reverse('polls:add'))
 
 def add(request, max_number_of_choices_to_add=max_number_of_choices_to_add):
@@ -148,36 +133,40 @@ class DeleteView(generic.ListView):
         question_list = Question.objects.filter(
             pub_date__lte=timezone.now()
             ).order_by('-pub_date')[:max_number_of_questions_to_delete]
-        # question_list = Question.objects.all()
         return question_list
 
-
+# TODO: There is a bug where clicking the 'Submit' for 'Delete single question', when no radio buttons are selected, and view stays on same page 'delete' view. Cliking the 'Submit' for 'Delete multiple questions', when no checkboxes are selected results in view loading for 'index'.
 def delete_single_question(request):
+    """
+    Delete a single 'question'.
+    """
     try:
+        # Get the primary key from the POST request variable 'question_single':
         pk = request.POST['question_single']
-        # print(pk)
+        # Get the question for the primary key received from POST request:
         question = Question.objects.get(pk=pk)
-        print(f"Deleting: {question}")
-        # print(Question.objects.all())
+        # print(f"Deleting: {question}")
         
-        # Delete the question.
+        # Delete the question and save returned value to display below:
         result = question.delete()
-        print(f"Deleted: {result}")
-
-        # print(Question.objects.all())
+        # print(f"Deleted: {result}")
 
         # Question has been deleted.
+        # print("Question deleted.")
         return HttpResponseRedirect(reverse('polls:index'))
 
     # No question deleted.
     except:
+        # print("No question deleted.")
         return HttpResponseRedirect(reverse('polls:delete'))
 
 max_number_of_questions_to_delete = max_number_of_questions_to_display
 
 def delete_multiple_questions(request, max_number_of_questions_to_delete=max_number_of_questions_to_delete):
+    """
+    Delete multiple 'question's.
+    """
     question_keys = [f"question_id_{i + 1}" for i in range(max_number_of_questions_to_delete)]
-    # print(f"question_keys: {question_keys}")
 
     working_list = []
     # 'try' to delete the questions:
@@ -191,12 +180,14 @@ def delete_multiple_questions(request, max_number_of_questions_to_delete=max_num
             except:
                 continue
         
+        # print(f"working_list: {working_list}")
+
         # For loop to 'try' to delete each question selected:
         for question_id in working_list:
             try:
                 # print(Question.objects.get(pk=question_id))
-                print(f"To delete: {Question.objects.get(pk=question_id)}")
-                print(f"Deleted: {Question.objects.get(pk=question_id).delete()}")
+                print(f"To delete {question_id}: {Question.objects.get(pk=question_id)}")
+                print(f"Deleted {question_id}: {Question.objects.get(pk=question_id).delete()}")
             except:
                 continue
 
