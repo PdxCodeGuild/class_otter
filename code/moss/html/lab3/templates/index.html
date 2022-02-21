@@ -21,40 +21,40 @@
         </nav>
     </header>
 
-    <div class="sidebar">
-        <div class="months">
-            <p><a href="#">January</a></p>
-            <p><a href="#">February</a></p>
-            <p><a href="#">March</a></p>
-            <p><a href="#">April</a></p>
-            <p><a href="#">May</a></p>
-            <p><a href="#">June</a></p>
-            <p><a href="#">July</a></p>
-            <p><a href="#">August</a></p>
-            <p><a href="#">September</a></p>
-            <p><a href="#">October</a></p>
-            <p><a href="#">November</a></p>
-            <p><a href="#">December</a></p>
-        </div>
-    </div>
-
-    
     <main>
-       <div class="container"> 
-            {% for post in posts %}
-            <div class="posts-card">
-                <div class="posts-info">
-                    {{ post['title'] }}<br> 
-                    {{ post['author'] }}<br> 
-                    {{ post['date'] }}<br> 
+        <div class="main-container">
+        
+            <div class="posts-container"> 
+                {% for post in posts %}
+                <div class="posts-card">
+                    <div class="posts-info">
+                        {{ post['title'] }}<br> 
+                        {{ post['author'] }}<br> 
+                        {{ post['date'] }}<br> 
+                    </div>
+                    {{ post['body'] }}
+                    <hr></hr>
                 </div>
-                {{ post['body'] }}
-                <hr></hr>
+                {% endfor %}
             </div>
-            {% endfor %}
-        
+
+            <div class="sidebar">
+                
+                <p><a href="#">January</a></p>
+                <p><a href="#">February</a></p>
+                <p><a href="#">March</a></p>
+                <p><a href="#">April</a></p>
+                <p><a href="#">May</a></p>
+                <p><a href="#">June</a></p>
+                <p><a href="#">July</a></p>
+                <p><a href="#">August</a></p>
+                <p><a href="#">September</a></p>
+                <p><a href="#">October</a></p>
+                <p><a href="#">November</a></p>
+                <p><a href="#">December</a></p>
+                
+            </div> 
         </div>
-        
     </main>
 
     <footer>
