@@ -24,7 +24,6 @@ convr_unit_m = {
 
 unit_scale = convr_unit_m[user_unit]
 
-
 unit_convr = user_dist * unit_scale
 
 unit_scale_out = convr_unit_m[user_out_unit]

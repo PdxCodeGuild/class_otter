@@ -1,10 +1,10 @@
 .window{
-    color: rgb(43, 42, 42);
+    color: rgb(216, 19, 19);
     word-wrap: normal;       
     
 }
 .blog{
-    border-bottom: 5px solid rgba(250, 26, 26, 0.39);
+    border-bottom: 5px solid rgba(90, 7, 7, 0.39);
     margin: 5px;
     padding: 10px;
 }
@@ -14,9 +14,17 @@
 }
 
 .author{
-    color: rgb(241, 209, 25);
+    color: rgba(243, 209, 17, 0.966);
 }
 
+h1,h2 {
+    padding-left: 25px;
+    margin: 10px;
+}
+
+footer p {
+    margin: 10px;
+}
 @media (min-width: 750px){
     body{
         margin: 24px;
@@ -27,8 +35,8 @@
     }
 
     header{
-      grid-area: 1 / 1 / 2 / 2;   /* This syntax Row Start / Column Start / Row End / Column End */
-      background-color: rgba(233, 174, 238, 0.582);
+      grid-area: 1 / 1 / 2 / 2;   /* row start / column start / row End / column End */
+      background-color: rgba(69, 133, 111, 0.582);
     }
 
     nav p a{
@@ -37,7 +45,7 @@
     }
     footer{
         grid-area: 2 / 1 / 3 / 2;
-        background-color: rgba(233, 174, 238, 0.582);
+        background-color: rgba(62, 64, 163, 0.582);
     }
 
      .blog{
