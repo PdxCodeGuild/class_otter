@@ -21,7 +21,6 @@
 .theme_fishing_cat_muted-5-hsla { color: hsla(27, 35, 77, 1); }
 
 html {
-    /* border: 2px solid red; */
     box-sizing: border-box;
 }
 
@@ -40,7 +39,6 @@ body {
     font-family: 'Courier Prime', monospace;
     font-weight: 700;
 
-    /* border: 2px solid red; */
     display: grid;
     grid-template-columns: 20% 80%;
     grid-template-rows: 30% 30% 20% 20%;
@@ -50,20 +48,18 @@ body {
     width: auto !important;  /* Firefox will set width as auto */
     width:900px;            /* As IE6 ignores !important it will set width as 900px; */
 
-    min-height:600px;        /* Suppose you want minimum height of 600px */
+    min-height:900px;        /* Suppose you want minimum height of 750px */
     height: auto !important;  /* Firefox will set height as auto */
-    height:600px;            /* As IE6 ignores !important it will set height as 600px; */    
+    height:900px;            /* As IE6 ignores !important it will set height as 750px; */    
 }
 
 div.available-units {
     border-right: 2px solid rgba(140, 95, 55, 1);
-    border: 2px solid red;
     grid-area: 1 / 1 / 4 / 2;
     margin: auto;
 }
 
 div.user-input-block {
-    /* border: 2px solid red; */
     grid-area: 1 / 2 / 2 / 3;
     margin: 6px auto;
 }
@@ -91,17 +87,23 @@ div.input-and-submit-block > * {
     text-align: center;
 }
 
+.submit-button-block > input {
+    padding: 12px;
+}
+
 
 div.display-results-block {
-    /* border: 2px solid red; */
     grid-area: 2 / 2 / 3 / 3;
     margin: auto;
+    padding: auto;
+    /* margin: 10px; */
+    /* padding: 10px; */
     font-size: 36px;
     background-color: rgba(191, 144, 86, 1);
 }
 
-div.display-results-block > span {
-    padding: 16px;
+div.display-results-block > a > * {
+    padding: 24px;
 
 }
 

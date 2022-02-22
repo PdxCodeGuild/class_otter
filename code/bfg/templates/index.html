@@ -18,13 +18,15 @@
         <div>
             <article class="todo-list">
 
-                <ui>
+                <ul>
+            
                     {% for todo in todo_list %}
                     <li>
                         <a>{{ todo['priority'] }} : {{ todo['text'] }}</a>
                     </li>
                     {% endfor %}
-                </ui>
+                </ul>
+                
 
             </article>
             <hr>

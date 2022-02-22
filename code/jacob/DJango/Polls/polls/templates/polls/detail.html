@@ -6,6 +6,11 @@
     {% endfor %}
 </ul> {% endcomment %}
 
+<header>
+    <nav>
+        <a href="/polls">Home</a>
+</header>
+
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
     <fieldset>
