@@ -19,10 +19,13 @@
         {% for i in number_choices %}
         {% comment %} The below 'for=' matches with 'id='. {% endcomment %}
         {% comment %} Need 'name=' below since it will be used to get the associated 'value=' at server. {% endcomment %}
+        {% comment %} Resource: https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#cycle {% endcomment %}
+        {% comment %} Make first two 'choice' inputs 'required' {% endcomment %}
         {% if i < 2%}
         <label for="choice{{ forloop.counter }}">Choice-{{ forloop.counter }} (Required)</label>
         <input type="text" name="choice{{ forloop.counter }}" id="choice{{ forloop.counter }}" required><br>
         {% else %}
+        {% comment %} Remaining 'choice' inputs are optional. {% endcomment %}
         <label for="choice{{ forloop.counter }}">Choice-{{ forloop.counter }}</label>
         <input type="text" name="choice{{ forloop.counter }}" id="choice{{ forloop.counter }}"><br>
         {% endif %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'grocery_list' is specified in <app>/apps.py.name
     'grocery_list.apps.GroceryListConfig',
 ]
 

@@ -23,8 +23,6 @@ class Question(models.Model):
         now = timezone.now()
         result = now - datetime.timedelta(days=1) <= self.pub_date <= now
         return result
-        # return "Method was changed during active 'python manage.py shell'"
-        # # ^ Shell needs restart.
 
     def has_two_or_more_choices(self):
         '''
@@ -37,7 +35,8 @@ class Question(models.Model):
         '''
         Returns True if question has only one choice.
 
-        This is for comedic effect. When a question 'obviously' only has one answer.
+        This is for comedic effect. When a question 'obviously' only has
+        one answer.
         '''
         result = len(self.choices.all()) == 1
         return result

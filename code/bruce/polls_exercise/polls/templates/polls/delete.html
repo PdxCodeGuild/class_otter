@@ -12,25 +12,27 @@
         <input type="radio" name="question_single" id="question_single_{{ forloop.counter }}" value="{{ question.id }}">
         {% comment %} The below 'for=' matches with 'id=' above.{% endcomment %}
         {% comment %} 'for="question_single_{{ forloop.counter }}"' matches with 'id="question_single_{{ forloop.counter }}"'. Used so user can click or select the label to focus on the input.{% endcomment %}
+        {% comment %} Resource: https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#cycle {% endcomment %}
         <label for="question_single_{{ forloop.counter }}">{{ question.id }}: {{ question.question_text }}</label><br>
-
+        
         {% endfor %}
-    {% else %}
+        {% else %}
         <p>No polls are available.</p>
-    {% endif %}
-
+        {% endif %}
+        
     </fieldset>
     <input type="submit" value="Delete a single question">
 </form>
 <form action="{% url 'polls:delete_multiple_questions' %}"  method="post">
     {% csrf_token %}
     <fieldset>
-
+        
         <legend><h1>Delete multiple questions</h1></legend>
-
+        
         {% if question_list %}
         {% for question in question_list %}
         {% comment %} Need 'name=' attributes used below since they will be used to get the associated 'value=' at server. {% endcomment %}
+        {% comment %} Resource: https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#cycle {% endcomment %}
         <input type="checkbox" name="question_id_{{ forloop.counter }}" id="question_id_{{ forloop.counter }}" value="{{ question.id }}">
         {% comment %} The below 'for=' matches with 'id=' above. {% endcomment %}
         <label for="question_id_{{ forloop.counter }}">{{ question.id }}: {{ question.question_text }}</label><br>
