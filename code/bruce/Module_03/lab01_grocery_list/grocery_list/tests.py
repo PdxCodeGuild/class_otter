@@ -1,3 +1,5 @@
+import datetime
+
 from django.test import TestCase
 from django.utils import timezone
 
@@ -20,20 +22,39 @@ class GroceryListModelTests(TestCase):
         """
         # Create a GroceryItem:
         grocery_item = GroceryItem(description="A grocery item")
-        # This next test is, technically, not needed since it was tested above.
-        # TODO: Decide if 'self.assertFalse(grocery_item.is_completed())' should be removed.
-        # Verify item is not completed (is_completed() == False):
-        self.assertFalse(grocery_item.is_completed())
-        # Complete the GroceryItem:
+        # Set 'grocery_item.completed' to True:
         grocery_item.completed = True
-        # print(f"grocery_item.completed:{grocery_item.completed} ?==? grocery_item.is_completed():{grocery_item.is_completed()}")
         # Verify item is completed (is_completed() == True):
         self.assertTrue(grocery_item.is_completed())
 
     def test_complete_item(self):
         """
-        complete_item() sets 'completed_date' to current time and 'completed' to True. 
+        complete_item() sets 'completed_date' to 'near' current time and 'completed' to True. 
         """
         # Create a GroceryItem:
         grocery_item = GroceryItem(description="A grocery item")
+        # Complete the item:
+        grocery_item.complete_item()
+        # Verify grocery_item is completed:
+        self.assertTrue(grocery_item.completed)
+        # Verify grocery_item.completed_date 'near' (within ~1hour) now:
+        self.assertLess(grocery_item.completed_date, timezone.now() + datetime.timedelta(days=.05))
+
+    def test_uncomplete_item(self):
+        """
+        uncomplete_item() sets 'completed_date' to 'None' and 'completed' to False.
+        """
+        # Create GroceryItem:
+        grocery_item = GroceryItem(description="A grocery item")
+        # Complete the grocery_item:
+        grocery_item.complete_item()
+        # Verify 'grocery_item.completed' is True:
+        self.assertTrue(grocery_item.completed)
+        # Use the uncomplete_item() function:
+        grocery_item.uncomplete_item()
+        # Verify grocery_item is uncompleted:
+        self.assertFalse(grocery_item.completed)
+        # Verify 'grocery_item.completed_date' is 'None':
+        self.assertIsNone(grocery_item.completed_date)
+        
 

@@ -186,6 +186,13 @@ def delete_multiple_questions(request, max_number_of_questions_to_delete=max_num
     # TODO: Figure out how to automagically produce 'question_keys'.
     # Resource: https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#cycle
     # Generate keys in a view then 'cycle' through those same keys in template?
+    
+    # TODO: Use 'request.POST.keys()' to get keys from request.POST. Extract the question pks.
+    # print(request.POST)
+    print(request.POST.keys())
+    # Some sort of .startswith() or .remove(csrf...) or .filter() or list comp.
+    
+
     question_keys = [f"question_id_{i + 1}" for i in range(max_number_of_questions_to_delete)]
 
     working_list = []
@@ -208,7 +215,9 @@ def delete_multiple_questions(request, max_number_of_questions_to_delete=max_num
                 Question.objects.get(pk=question_id)
                 # to_delete = Question.objects.get(pk=question_id)
                 # print(f"To delete {question_id}: {to_delete}")
+
                 Question.objects.get(pk=question_id).delete()
+
                 # deleted = Question.objects.get(pk=question_id).delete()
                 # print(f"Deleted {question_id}: {deleted}")
             except:
