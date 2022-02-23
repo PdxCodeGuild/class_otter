@@ -29,5 +29,6 @@ def update(request, item_id):
     return HttpResponseRedirect(reverse('GroceryList:index'))
 
 def delete(request, item_id):
-    # item = get_object_or_404(GroceryItem, pk=item_id)
+    item = get_object_or_404(GroceryItem, pk=item_id)
+    item.delete()
     return HttpResponseRedirect(reverse('GroceryList:index'))
