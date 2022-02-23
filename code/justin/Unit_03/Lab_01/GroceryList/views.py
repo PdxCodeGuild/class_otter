@@ -14,7 +14,9 @@ class IndexView(generic.ListView):
         return GroceryItem.objects.all().order_by('created_at')
 
 def create(request):
-    # request.POST['description']
+    item_description = request.POST['description']
+    item = GroceryItem(description=item_description)
+    item.save()
     return HttpResponseRedirect(reverse('GroceryList:index'))
 
 def update(request, item_id):
