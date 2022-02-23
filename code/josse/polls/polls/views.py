@@ -38,6 +38,6 @@ def vote(request, question_id):
     selected_choice.save()
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
-# def my_page(request):
-#     pass_variable = "hello world"
-#     return render(request, 'polls/my_page.html',{"pass_variable" : pass_variable })
+def my_page(request):
+    pass_variable = "hello Bruce"
+    return render(request, 'polls/my_page.html',{"pass_variable" : pass_variable })
