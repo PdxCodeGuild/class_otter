@@ -1,0 +1,4 @@
+<form action="{% 'glist:additem' grocery_item_id %}" method="post">
+    {% csrf_token %}
+    <select name="grocery_item_id">
+        {}
