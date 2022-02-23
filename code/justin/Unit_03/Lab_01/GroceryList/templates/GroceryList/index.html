@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Grocery List</title>
+    </head>
+    <body>
+        <div>
+            <h1>Need:</h1>
+            <form action="{% url 'GroceryList:create' %}" method='post'>
+                {% csrf_token %}
+                <input type='text' name='description'>
+                <label for='description'>Item Description</label>
+                <input type="submit" value="Add">
+            </form>
+        
+            {% for item in grocery_item_list %}
+                {% if not item.is_completed %}
+                    <div>
+                        <form action="{% url 'GroceryList:update' item.id %}" method='post'>
+                            {% csrf_token %}
+                            <button name="item_completed" value="True">Complete</button>
+                        </form>
+                        <p>{{ item.description }}</p>
+                        <form action="{% url 'GroceryList:delete' item.id %}" method='post'>
+                            {% csrf_token %}
+                            <button>Delete</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Purchased:</h1>
+            {% for item in grocery_item_list %}
+                {% if item.is_completed %}
+                    <div>
+                        <form action="{% url 'GroceryList:update' item.id %}" method='post'>
+                            {% csrf_token %}
+                            <button name="item_completed" value="False">Not Complete</button>
+                        </form>
+                        <p>{{ item.description }}</p>
+                        <form action="{% url 'GroceryList:delete' item.id %}" method='post'>
+                            {% csrf_token %}
+                            <button>Delete</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </body>
+</html>
