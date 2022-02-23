@@ -5,6 +5,9 @@ from django.utils import timezone
 # The user should be presented with an input field and a button (in a form). When the clicks the button, it should save the data to the server and show the newly-added item in the list. The user should be presented with a list of incomplete items and a list of complete items. THe user should be able to mark an item complete/incomplete and be able to delete an item.
 
 class GroceryItem(models.Model):
+    """
+    Python class for grocery items in a grocery list.
+    """
     description = models.CharField(max_length=200)
 
     created_date = models.DateTimeField('date created', auto_now_add=True)
@@ -20,9 +23,17 @@ class GroceryItem(models.Model):
     # Can use 'self.completed_date = None' in 'uncomplete_item()'.
     completed_date = models.DateTimeField('date completed', null=True, blank=True)
 
-
     # 'completed' is a boolean. Database holds '0' for 'False' and '1' for 'True'.
     completed = models.BooleanField(default=False)
+
+    # 'to_be_completed' - attribute used in 'complete' view to 'complete' items:
+    to_be_completed = models.BooleanField(default=False)
+
+    # 'to_be_uncompleted' - attribute used in 'complete' view to 'uncomplete' items:
+    to_be_uncompleted = models.BooleanField(default=False)
+
+    # Adding 'deleted' attribute here. May or may not use it.
+    deleted = models.BooleanField(default=False)
 
     def __str__(self):
         '''The first triple-quote comment string.'''

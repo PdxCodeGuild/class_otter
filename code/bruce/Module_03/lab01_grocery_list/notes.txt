@@ -50,7 +50,7 @@ path('grocery_list/', include('grocery_list.urls')),
 
 # 8 #
 # Test server:
-# http://127.0.0.1:8000/grocery_list/
+# http://127.0.0.1:8000/grocery-list/
 python manage.py runserver
     # Options:
     python manage.py runserver 8080
@@ -189,7 +189,16 @@ g = GroceryItem(description="Kat Fude - Moist, of course!", created_date=timezon
 
 g = GroceryItem.objects.get(pk=2)
 
+# 17 #
+python manage.py shell
+# Imports
+from grocery_list.models import GroceryItem as GI
+from django.utils import timezone
 
+# Migrations:
+python manage.py makemigrations grocery_list
+python manage.py sqlmigrate grocery_list 0002
+python manage.py migrate
 
 
 

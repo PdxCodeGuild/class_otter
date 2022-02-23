@@ -1,0 +1,48 @@
+{% load static %}
+
+{% comment %} <link rel="stylesheet" href="{% static 'grocery_list/style.css' %}"> {% endcomment %}
+
+{% comment %} <form action=""  method="post"> {% endcomment %}
+<form action="{% url 'grocery_list:complete' %}"  method="post">
+    {% csrf_token %}
+    <fieldset>
+        
+        <legend><h1>Grocery Items</h1></legend>
+        
+        {% if list_of_groceries %}
+
+        {% for item in list_of_groceries %}
+        {% comment %} Need 'name=' attributes used below since they will be used to get the associated 'value=' at server. {% endcomment %}
+        {% comment %} 'checked' if 'item.completed' {% endcomment %}
+        <input type="checkbox" name="{{ item.id }}" id="{{ item.id }}" value="{{ item.id }}" {% if item.completed %}checked{% endif %}>
+        {% comment %} The below 'for=' matches with 'id=' above. {% endcomment %}
+        <label for="{{ item.id }}">{{ item.id }}: {{ item.description }}{% if item.completed %} -- (completed){% endif %}</label><br>
+        {% endfor %}
+
+        {% else %}
+        <p>No grocery items available.</p>
+
+        {% endif %}
+
+    </fieldset>
+    <input type="submit" value="Complete items">
+</form>
+
+<form action="{% url 'grocery_list:add' %}"  method="post">
+    {% csrf_token %}
+    <fieldset>
+        
+        <legend><h1>Add Grocery Item</h1></legend>
+
+        {% comment %} Need 'name=' attributes used below since they will be used to get the associated 'value=' at server. {% endcomment %}
+        {% comment %} The below 'for=' matches with 'id=' below. {% endcomment %}
+        <label for="description">Item Description</label><br>
+        <input type="text" name="description" id="description" placeholder="new item" >
+
+    </fieldset>
+    <input type="submit" value="Add item to list">
+</form>
+
+{% comment %} <p class="nuttin">{{ message }}</p> {% endcomment %}
+
+
