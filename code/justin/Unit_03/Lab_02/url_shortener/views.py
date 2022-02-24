@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.shortcuts import render, redirect
+from .models import Link
 
-# Create your views here.
+
+def index(request):
+    return render(request, 'url_shortener/index.html')
+
+def generate_code():
+    return 'fake_code'
+
+def create(request):
+    link = Link.objects.create(url=request.POST['url'], short_code=generate_code())
+    return HttpResponseRedirect(reverse('url_shortener:index'))
+
+def link_through(request, short_code):
+    link_list = Link.objects.filter(short_code__exact=short_code)
+    if len(link_list) <= 0:
+        return HttpResponseRedirect(reverse('url_shortener:index'))
+    else:
+        return redirect(link_list[0].url)
