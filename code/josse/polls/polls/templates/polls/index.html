@@ -1,3 +1,8 @@
+{% load static %}
+
+<link rel='stylesheet' href="{%static 'polls/styles.css' %}">
+
+
 {% if latest_question_list %}
     <ul>
         {% for question in latest_question_list %}
@@ -8,3 +13,5 @@
 {% else %}
     <p>no polls are available</p>
 {% endif %}
+
+<a href="{% url 'polls:my_page'  %}">my page</a>

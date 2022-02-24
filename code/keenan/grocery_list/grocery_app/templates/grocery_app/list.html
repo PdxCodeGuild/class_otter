@@ -1,0 +1,13 @@
+<h1> Hello  </h1>
+
+
+
+
+{% comment %}
+{{ item.item_text }}
+<ul>
+{% for item in question.choices.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul> 
+{% endcomment %}

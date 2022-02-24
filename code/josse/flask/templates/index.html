@@ -13,26 +13,28 @@
 
 </head>
 
-<header>
-    <h1>My Blog</h1>
-</header>
+
 
 <body>
-    <!-- {%for post in posts%}
-    <p>{{post}}</p>
-    <hr>
-    {%endfor%} -->
+    
+    <header>
+        <h1>My Blog</h1>
+    </header>
 
-    {%for post in posts%}
-    <h1>{{post["title"]}}</h1><br>
-    <h3>{{post["author"]}}</h3><br>
-    <h4>{{post["date"]}}</h4><br>
-    <p>{{post["body"]}}</p><br>
-    <hr>
-    {%endfor%}
+    <div class="forloop">
+        {%for post in posts%}
+        <h2>{{post["title"]}}</h2><br>
+        <h3>{{post["author"]}}</h3><br>
+        <h4>{{post["date"]}}</h4><br>
+        <p>{{post["body"]}}</p><br>
+        <hr>
+        {%endfor%}
+    </div>
+
+    <footer>
+        <h5> © 2002–2022 The ipsum Company LLC.</h5>
+    </footer>
+    
 </body>
-<footer>
-    <h5> © 2002–2022 The ipsum Company LLC.</h5>
-</footer>
 
 </html>
