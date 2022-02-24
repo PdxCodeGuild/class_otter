@@ -7,10 +7,10 @@ from .models import Link
 def index(request):
     return render(request, 'url_shortener/index.html')
 
-def generate_code():
-    return 'fake_code'
-
 def create(request):
+    def generate_code():
+        return 'fake_code'
+
     link = Link.objects.create(url=request.POST['url'], short_code=generate_code())
     return HttpResponseRedirect(reverse('url_shortener:index'))
 
