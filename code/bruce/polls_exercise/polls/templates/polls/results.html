@@ -1,4 +1,4 @@
-{% comment %} 'for', 'endfor', 'endif', 'pluralize', and 'url' are 'template tag'. {% endcomment %}
+{% comment %} 'for', 'endfor', 'endif', 'pluralize', and 'url' are 'template tag's. {% endcomment %}
 {% comment %} https://docs.djangoproject.com/en/4.0/ref/templates/builtins/ {% endcomment %}
 <h1>{{ question.question_text }}</h1>
 <ul style="list-style: none">
@@ -8,22 +8,5 @@
 </ul>
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+<p><a href="{% url 'polls:index' %}">Go to home</a></p>
 
-
-
-
-
-
-
-
-
-
-{% comment %} {% if choices_list %}
-    <ul style="list-style: none">
-    {% for choice in choices_list %}
-        <li>{{choice.id}}: {{ choice.votes }} - {{ choice.choice_text }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %} {% endcomment %}

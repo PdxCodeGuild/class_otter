@@ -13,29 +13,11 @@
         {% comment %} Need 'name=' below since it will be used to get the associated 'value=' at server. {% endcomment %}
         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
         {% comment %} The below 'for=' matches with 'id=' above. {% endcomment %}
+        {% comment %} "choice{{ forloop.counter }}" is okay to use for 'choice's. The 'id=' and 'for=' only need to match here, and nowhere else, to link up the 'input' and 'label'. It's technically 'hard-coding', but okay since info is only used here, sorta.{% endcomment %}
         <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
         {% endfor %}
 
     </fieldset>
     <input type="submit" value="Vote">
 </form>
-
-
-
-
-
-
-
-{% comment %} <h1>{{ question.question_text }}</h1>
-<ul style="list-style: none">
-    <lh style="font-size: 1.5em">Available Choices:</lh>
-    {% for choice in question.choices.all %}
-    <li>{{ choice.choice_text }}</li>
-    {% endfor %}
-</ul> {% endcomment %}
-
-{% comment %} {% if question %}
-    <p>{{ question.id }}: {{ question.question_text }}</p>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %} {% endcomment %}
+<p><a href="{% url 'polls:index' %}">Go to home</a></p>

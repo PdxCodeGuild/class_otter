@@ -1,0 +1,64 @@
+{% load static %}
+
+{% comment %} <link rel="stylesheet" href="{% static 'grocery_list/style.css' %}"> {% endcomment %}
+
+<fieldset>
+    <legend><h1>Uncompleted Grocery Items</h1></legend>
+    {% if uncompleted_groceries %}
+    {% for item in uncompleted_groceries %}
+    <form action="{% url 'grocery_list:complete' item.id %}"  method="post">
+        {% csrf_token %}
+        <input type="submit" value="Complete item"><br>
+        <label for="{{ item.id }}">{{ item.id }} : {{ item.description }}</label><br>
+    </form>
+    {% endfor %}
+    {% else %}
+    <p>No grocery items available.</p>
+    {% endif %}
+</fieldset>
+
+<fieldset>
+    <legend><h1>Add Grocery Item</h1></legend>
+    <form action="{% url 'grocery_list:add' %}"  method="post">
+        {% csrf_token %}
+        <label for="description">Item Description</label><br>
+        <input type="text" name="description" id="description" placeholder="new item" ><br>
+        <input type="submit" value="Add item to list">
+    </form>
+</fieldset>
+
+<fieldset>
+    <legend><h1>Completed Grocery Items</h1></legend>
+    {% if completed_groceries %}
+    {% for item in completed_groceries %}
+    <form action="{% url 'grocery_list:uncomplete' item.id %}"  method="post">
+        {% csrf_token %}
+        <input type="submit" value="Uncomplete item"><br>
+        <label for="{{ item.id }}">{{ item.id }} : {{ item.description }}</label><br>
+    </form>
+    {% endfor %}
+    {% else %}
+    <p>No grocery items available.</p>
+    {% endif %}
+</fieldset>
+
+{% comment %} The <label>'for=' matches with <input>'id='. {% endcomment %}
+
+<fieldset>
+    <legend><h1>Delete Grocery Items</h1></legend>
+    {% if deletable_groceries %}
+    {% for item in deletable_groceries %}
+    <form action="{% url 'grocery_list:delete' item.id %}"  method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete"><br>
+        <label for="{{ item.id }}">{{ item.id }} : {{ item.description }}{% if item.completed %} -- (completed){% endif %}</label><br>
+    </form>
+    {% endfor %}
+    {% else %}
+    <p>No grocery items available.</p>
+    {% endif %}
+</fieldset>
+
+<p><a href="{% url 'grocery_list:index' %}">Go to home</a></p>
+<p><a href="{% url 'admin:index' %}">Go to Admin</a></p>
+

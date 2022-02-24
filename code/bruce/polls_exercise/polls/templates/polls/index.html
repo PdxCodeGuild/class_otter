@@ -1,3 +1,8 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+
 {% if latest_question_list %}
     <ul style="list-style: none">
     {% for question in latest_question_list %}
@@ -10,3 +15,6 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+<p><a href="{% url 'polls:add' %}">Go to add a question</a></p>
+<p><a href="{% url 'polls:delete' %}">Go to Delete Page</a></p>
+<p><a href="{% url 'admin:index' %}">Go to Admin Page</a></p>
