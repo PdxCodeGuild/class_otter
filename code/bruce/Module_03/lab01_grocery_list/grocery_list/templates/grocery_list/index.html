@@ -7,16 +7,16 @@
     {% csrf_token %}
     <fieldset>
         
-        <legend><h1>Grocery Items</h1></legend>
+        <legend><h1>Uncompleted Grocery Items</h1></legend>
         
-        {% if list_of_groceries %}
+        {% if uncompleted_groceries %}
 
-        {% for item in list_of_groceries %}
+        {% for item in uncompleted_groceries %}
         {% comment %} Need 'name=' attributes used below since they will be used to get the associated 'value=' at server. {% endcomment %}
         {% comment %} 'checked' if 'item.completed' {% endcomment %}
-        <input type="checkbox" name="{{ item.id }}" id="{{ item.id }}" value="{{ item.id }}" {% if item.completed %}checked{% endif %}>
+        <input type="checkbox" name="{{ item.id }}" id="{{ item.id }}" value="{{ item.id }}">
         {% comment %} The below 'for=' matches with 'id=' above. {% endcomment %}
-        <label for="{{ item.id }}">{{ item.id }}: {{ item.description }} -- {{item.completed}}{% if item.completed %} -- (completed){% endif %}</label><br>
+        <label for="{{ item.id }}">{{ item.description }}{% if item.completed %} -- (completed){% endif %}</label><br>
         {% endfor %}
 
         {% else %}
@@ -25,7 +25,7 @@
         {% endif %}
 
     </fieldset>
-    <input type="submit" value="Complete/Uncomplete items">
+    <input type="submit" value="Complete items">
 </form>
 
 <form action="{% url 'grocery_list:add' %}"  method="post">
@@ -43,20 +43,46 @@
     <input type="submit" value="Add item to list">
 </form>
 
+<form action="{% url 'grocery_list:uncomplete' %}"  method="post">
+    {% csrf_token %}
+    <fieldset>
+        
+        <legend><h1>Completed Grocery Items</h1></legend>
+        
+        {% if completed_groceries %}
+
+        {% for item in completed_groceries %}
+        {% comment %} Need 'name=' attributes used below since they will be used to get the associated 'value=' at server. {% endcomment %}
+        {% comment %} 'checked' if 'item.completed' {% endcomment %}
+        <input type="checkbox" name="{{ item.id }}" id="{{ item.id }}" value="{{ item.id }}">
+        {% comment %} The below 'for=' matches with 'id=' above. {% endcomment %}
+        <label for="{{ item.id }}">{{ item.description }}{% if item.completed %} -- (completed){% endif %}</label><br>
+        {% endfor %}
+
+        {% else %}
+        <p>No grocery items available.</p>
+
+        {% endif %}
+
+    </fieldset>
+    <input type="submit" value="Uncomplete items">
+</form>
+
+{% comment %} <form action="{% url 'grocery_list:delete' item.id %}"  method="post"> {% endcomment %}
 <form action="{% url 'grocery_list:delete' %}"  method="post">
     {% csrf_token %}
     <fieldset>
         
         <legend><h1>Delete Grocery Items</h1></legend>
         
-        {% if list_of_groceries %}
+        {% if deletable_groceries %}
 
-        {% for item in list_of_groceries %}
+        {% for item in deletable_groceries %}
         {% comment %} Need 'name=' attributes used below since they will be used to get the associated 'value=' at server. {% endcomment %}
         {% comment %} 'checked' if 'item.completed' {% endcomment %}
-        <input type="checkbox" name="{{ item.id }}" id="{{ item.id }}" value="{{ item.id }}" {% if item.completed %}checked{% endif %}>
+        <input type="checkbox" name="{{ item.id }}" id="{{ item.id }}" value="{{ item.id }}">
         {% comment %} The below 'for=' matches with 'id=' above. {% endcomment %}
-        <label for="{{ item.id }}">{{ item.id }}: {{ item.description }}{% if item.completed %} -- (completed){% endif %}</label><br>
+        <label for="{{ item.id }}">{{ item.description }}{% if item.completed %} -- (completed){% endif %}</label><br>
         {% endfor %}
 
         {% else %}
@@ -67,6 +93,10 @@
     </fieldset>
     <input type="submit" value="Delete item from list">
 </form>
+
+{% comment %} {% for message in messages%}
+<p>{{ text.description }}</p>
+{% endfor %} {% endcomment %}
 
 {% comment %} <p class="nuttin">{{ message }}</p> {% endcomment %}
 <p><a href="{% url 'grocery_list:index' %}">Go to home</a></p>

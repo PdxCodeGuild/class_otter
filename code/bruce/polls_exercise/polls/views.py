@@ -48,14 +48,7 @@ class TheResultsView(generic.DetailView):
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
-        # 'request.POST['choice']' returns the id for the 'choice' which
-        # was chosen in the form.
-        # type(selected_choice) is <class 'polls.models.Choice'>.
         selected_choice = question.choices.get(pk=request.POST['choice'])
-        # print(f"request type: {type(request)}")
-        # print(f"Choice 'id': {request.POST['choice']}")
-        # print(f"Choice type: {type(selected_choice)}")
-        # print(f"Choice __str__: {selected_choice}")
     except (KeyError, Choice.DoesNotExist):
         return render(
             request,
@@ -65,9 +58,7 @@ def vote(request, question_id):
                 'error_message': "You didn't select a choice.",
             })
     else:
-        # print(f"Choice votes: {selected_choice.votes}")
         selected_choice.votes += 1
-        # print(f"Choice votes: {selected_choice.votes}")
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
@@ -81,21 +72,6 @@ def add_question(request, max_number_of_choices_to_add=max_number_of_choices_to_
         # TODO: I am hard-coding these here. How to automagically produce them?
         # Possible resource: https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#cycle
         possible_choice_keys = [f"choice{i + 1}" for i in range(max_number_of_choices_to_add)]
-
-
-        ################### Comment out these two lines to pass the line in tests ###################
-        # NOTE: The list comprehension fails when using tests, and the except block is run: 'polls:add'
-        # choices = [request.POST[choice] for choice in choice_keys if request.POST[choice] != '']
-        # print(f"choices: {choices}")
-        ########## self.assertRedirects(post_response, reverse('polls:detail', args=(1,)), status_code=302) <-- Passes! TEST LINE
-        #############################################################################################
-
-        # ################### UNCOMMENT out these two lines to pass the line in tests ###################
-        # # NOTE: The list comprehension works for adding to db but fails in tests: 'polls:detail'
-        # choices = [request.POST[choice] for choice in choice_keys if request.POST[choice] != '']
-        # print(f"choices: {choices}")
-        # ########## self.assertRedirects(post_response, reverse('polls:add'), status_code=302) <-- Passes! TEST LINE
-        # #############################################################################################
 
         choice_texts = []
         # Try to build choices:

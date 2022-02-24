@@ -10,5 +10,7 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('add/', views.add, name='add'),
     path('complete/', views.complete, name='complete'),
+    # path('complete/<int:pk>/', views.complete, name='complete'),
+    path('uncomplete/', views.uncomplete, name='uncomplete'),
     path('delete/', views.delete, name='delete'),
 ]

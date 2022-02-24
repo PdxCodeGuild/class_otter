@@ -36,7 +36,6 @@ class GroceryItem(models.Model):
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        '''The first triple-quote comment string.'''
         '''Added extra information to dunder string for use while building and debugging.'''
         return f"{self.id}: {self.description} - Completed[{self.completed}]"
 
@@ -56,7 +55,13 @@ class GroceryItem(models.Model):
         # This will set the database value to 'NULL'.
         self.completed_date = None
         # 'completed' is a boolean. Database holds '0' for 'False' and '1' for 'True'.
-        self.completed = False        
+        self.completed = False
 
-
-
+    def delete(self):
+        '''Set the "deleted" attribute to 'True'.'''
+        self.deleted = True
+    
+    def undelete(self):
+        '''Set the "deleted" attribute to 'False'. Also uncompletes the item.'''
+        self.uncomplete_item()
+        self.deleted = False
