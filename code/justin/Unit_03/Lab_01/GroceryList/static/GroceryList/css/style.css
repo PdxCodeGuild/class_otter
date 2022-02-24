@@ -1,0 +1,25 @@
+body {
+    color: #ab47bc
+}
+
+.input-field input[type]:not([readonly])+label,
+.input-field textarea:not([readonly])+label {
+    color: #ce93d8;
+}
+
+.input-field input[type]:not([readonly]),
+.input-field textarea:not([readonly]) {
+    border-bottom: 1px solid #ab47bc;
+    box-shadow: 0 1px 0 0 #6a1b9a;
+}
+
+.input-field input[type]:focus:not([readonly]),
+.input-field textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #ab47bc;
+    box-shadow: 0 1px 0 0 #6a1b9a;
+}
+
+.input-field input[type]:focus:not([readonly])+label,
+.input-field textarea:focus:not([readonly])+label {
+    color: #ab47bc;
+}

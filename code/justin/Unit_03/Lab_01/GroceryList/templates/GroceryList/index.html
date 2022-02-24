@@ -4,52 +4,82 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'GroceryList/css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'GroceryList/css/style.css' %}"  media="screen,projection">
+
         <title>Grocery List</title>
     </head>
     <body>
-        <div>
-            <h1>Need:</h1>
+        <div class="container">
             <form action="{% url 'GroceryList:create' %}" method='post'>
                 {% csrf_token %}
-                <input type='text' name='description'>
-                <label for='description'>Item Description</label>
-                <input type="submit" value="Add">
-            </form>
-        
-            {% for item in grocery_item_list %}
-                {% if not item.is_completed %}
-                    <div>
-                        <form action="{% url 'GroceryList:update' item.id %}" method='post'>
-                            {% csrf_token %}
-                            <button name="item_completed" value="True">Complete</button>
-                        </form>
-                        <p>{{ item.description }}</p>
-                        <form action="{% url 'GroceryList:delete' item.id %}" method='post'>
-                            {% csrf_token %}
-                            <button>Delete</button>
-                        </form>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input id="item_description" type="text" name="description" required>
+                        <label for="item_description">Item Description</label>
                     </div>
+                    <div class="col s1">
+                        <button class="waves-effect waves-light btn purple lighten-1 tooltipped" data-position="bottom" data-tooltip="Add new grocery item"><i class="material-icons">add_task</i></button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <ul class="collection col s12">
+                    <li class="collection-header"><h4>Need:</h4></li>
+                {% for item in grocery_item_list %}
+                {% if not item.is_completed %}
+                    <li class="collection-item">
+                        <div class="row">
+                            <span class="col s6">{{ item.description }}</span>
+                            <form class="col s2" action="{% url 'GroceryList:update' item.id %}" method='post'>
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn-small green darken-1 tooltipped" data-position="bottom" data-tooltip="Item purchased" name="item_completed" value="True"><i class="tiny material-icons">task_alt</i></button>
+                            </form>
+                            <form class="col s2 push-s1" action="{% url 'GroceryList:delete' item.id %}" method='post'>
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn-small red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete item"><i class="tiny material-icons">delete_forever</i></button>
+                            </form>
+                        </div>
+                    </li>
                 {% endif %}
-            {% endfor %}
+                {% endfor %}
+                </ul>
+
+                <ul class="collection col s12">
+                    <li class="collection-header"><h4>Purchased:</h4></li>
+                {% for item in grocery_item_list %}
+                {% if item.is_completed %}
+                    <li class="collection-item">
+                        <div class="row">
+                            <span class="col s6">{{ item.description }}</span>
+                            <form class="col s2" action="{% url 'GroceryList:update' item.id %}" method='post'>
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn-small orange darken-1 tooltipped" data-position="bottom" data-tooltip="Item still needed" name="item_completed" value="False"><i class="tiny material-icons">remove_done</i></button>
+                            </form>
+                            <form class="col s2 push-s1" action="{% url 'GroceryList:delete' item.id %}" method='post'>
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn-small red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete item"><i class="tiny material-icons">delete_forever</i></button>
+                            </form>
+                        </div>
+                    </li>
+                {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
         </div>
 
-        <div>
-            <h1>Purchased:</h1>
-            {% for item in grocery_item_list %}
-                {% if item.is_completed %}
-                    <div>
-                        <form action="{% url 'GroceryList:update' item.id %}" method='post'>
-                            {% csrf_token %}
-                            <button name="item_completed" value="False">Not Complete</button>
-                        </form>
-                        <p>{{ item.description }}</p>
-                        <form action="{% url 'GroceryList:delete' item.id %}" method='post'>
-                            {% csrf_token %}
-                            <button>Delete</button>
-                        </form>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="{% static 'GroceryList/js/materialize.min.js' %}"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.tooltipped');
+            var instances = M.Tooltip.init(elems);
+          });
+    </script>
+
     </body>
 </html>
