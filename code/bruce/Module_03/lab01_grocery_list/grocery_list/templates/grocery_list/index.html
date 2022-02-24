@@ -8,12 +8,12 @@
     {% for item in uncompleted_groceries %}
     <form action="{% url 'grocery_list:complete' item.id %}"  method="post">
         {% csrf_token %}
-        <input type="submit" value="Complete item"><br>
+        <input type="submit" value="Complete item">
         <label for="{{ item.id }}">{{ item.id }} : {{ item.description }}</label><br>
     </form>
     {% endfor %}
     {% else %}
-    <p>No grocery items available.</p>
+    <p>No uncompleted grocery items available.</p>
     {% endif %}
 </fieldset>
 
@@ -33,7 +33,7 @@
     {% for item in completed_groceries %}
     <form action="{% url 'grocery_list:uncomplete' item.id %}"  method="post">
         {% csrf_token %}
-        <input type="submit" value="Uncomplete item"><br>
+        <input type="submit" value="Uncomplete item">
         <label for="{{ item.id }}">{{ item.id }} : {{ item.description }}</label><br>
     </form>
     {% endfor %}
@@ -50,12 +50,12 @@
     {% for item in deletable_groceries %}
     <form action="{% url 'grocery_list:delete' item.id %}"  method="post">
         {% csrf_token %}
-        <input type="submit" value="Delete"><br>
+        <input type="submit" value="Delete">
         <label for="{{ item.id }}">{{ item.id }} : {{ item.description }}{% if item.completed %} -- (completed){% endif %}</label><br>
     </form>
     {% endfor %}
     {% else %}
-    <p>No grocery items available.</p>
+    <p>No deletable grocery items available.</p>
     {% endif %}
 </fieldset>
 
