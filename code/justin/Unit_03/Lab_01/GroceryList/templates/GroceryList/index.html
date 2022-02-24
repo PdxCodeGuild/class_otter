@@ -17,11 +17,11 @@
             <div class="row">
                 <form action="{% url 'GroceryList:create' %}" method='post'>
                     {% csrf_token %}
-                    <div class="input-field col s6 m4">
+                    <div class="input-field col s6 m4 l3">
                         <input id="item_description" type="text" name="description" required>
                         <label for="item_description">Item Description</label>
                     </div>
-                    <div class="col s1 push-s3 push-m6">
+                    <div class="col s1 push-s4 push-m7 push-l8">
                         <button class="waves-effect waves-light btn purple lighten-1 tooltipped" data-position="bottom" data-tooltip="Add new grocery item"><i class="material-icons">add_task</i></button>
                     </div>
                 </form>
