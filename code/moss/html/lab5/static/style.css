@@ -4,3 +4,67 @@ html {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
+body {
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/350/538/370/texture-numbers-measuring-tape-closeup-wallpaper-preview.jpg');
+    background-size: cover;
+    object-fit: cover;
+    margin: 24px;
+    font-weight: bolder;
+
+}
+header {
+    /* border: 2px solid black; */
+    background-color: #F2E291;
+    text-align: center;
+    width: 33.33%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: rgba(.5, .5, .5, .5) 0px 0px 5px 5px;   
+    display: block;
+    justify-content: center;
+}
+
+main{
+    background-color: #F2E291;
+    box-shadow: rgba(.5, .5, .5, .5) 0px 0px 5px 5px;   
+}
+
+/* .from-container {
+    border: 2px solid black;
+    padding-left: 10px;
+}
+
+.to-container {
+    border: 2px solid black;
+    padding-left: 10px;
+}
+
+.submit-container {
+    padding-left: 10px;
+
+    
+} */
+
+button {
+    background-color:#BF1F2C;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+
+}
+
+.outcome {
+    background-color: #F2E291;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.form-input {
+    padding: 5px;
+}
+
+/* footer {
+    
+} */
+
