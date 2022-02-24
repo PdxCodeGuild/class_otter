@@ -7,6 +7,11 @@
         <title>Shorturl</title>
     </head>
     <body>
-        
+        <form action="{% url 'url_shortener:create' %}" method="post">
+            {% csrf_token %}
+            <input type="text" id="url_field" name="url" required>
+            <label for="url_field">URL to shorten</label>
+            <button>Submit</button>
+        </form>
     </body>
 </html>
