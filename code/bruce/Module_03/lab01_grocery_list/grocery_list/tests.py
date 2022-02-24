@@ -143,17 +143,17 @@ class IndexViewTests(TestCase):
         self.assertContains(response, 'Another New Grocery Item')
 
     # TODO: Actually test the 'complete' view and not the model method.
-    def test_complete(self):
-        item = new_grocery_item("A grocery item")
-        # NOTE: Big Dummy!!! Forgot to 'item.save()'
-        item.complete_item()
-        # LOL Remember to save.
-        item.save()
-        response = self.client.get(reverse('grocery_list:index'))
-        # Getting info from database.
-        self.assertEquals(item.completed, True)
-        # What value is being sent to template.
-        self.assertEquals(response.context['completed_groceries'][0].completed, True )
+    # def test_complete(self):
+    #     item = new_grocery_item("A grocery item")
+    #     # NOTE: Big Dummy!!! Forgot to 'item.save()'
+    #     item.complete_item()
+    #     # LOL Remember to save.
+    #     item.save()
+    #     response = self.client.get(reverse('grocery_list:index'))
+    #     # Getting info from database.
+    #     self.assertEquals(item.completed, True)
+    #     # What value is being sent to template.
+    #     self.assertEquals(response.context['completed_groceries'][0].completed, True )
 
     def test_add_view(self):
         """
@@ -182,9 +182,20 @@ class IndexViewTests(TestCase):
         response = self.client.get(reverse('grocery_list:index'))
         # Verify item 'A grocery item' shows up in 'response':
         self.assertContains(response, "A grocery item")
+
+        print(f"response.context['deletable_groceries']: {response.context['deletable_groceries']}")
+        # response.context['deletable_groceries']: <QuerySet [<GroceryItem: 1: A grocery item - Completed[False]>]>
+        print(f"response.context['deletable_groceries'][0]: {response.context['deletable_groceries'][0]}")
+        # response.context['deletable_groceries'][0]: 1: A grocery item - Completed[False]
+        print(f"response.context['deletable_groceries'][0].pk: {response.context['deletable_groceries'][0].pk}")
+        # response.context['deletable_groceries'][0].pk: 1
+
+        key_to_delete = response.context['deletable_groceries'][0].pk
+
         # Delete the grocery item:
         grocery_item_to_delete = {'1': 1}
-        self.client.post(reverse('grocery_list:delete'), grocery_item_to_delete)
+        # self.client.post(reverse('grocery_list:delete'), grocery_item_to_delete)
+        self.client.post(reverse('grocery_list:delete', args=[key_to_delete]))
         # GET the response:
         response = self.client.get(reverse('grocery_list:index'))
         # Response should contain text 'No grocery items available.':
