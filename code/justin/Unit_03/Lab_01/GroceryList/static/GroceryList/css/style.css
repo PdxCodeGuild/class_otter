@@ -23,3 +23,15 @@ body {
 .input-field textarea:focus:not([readonly])+label {
     color: #ab47bc;
 }
+
+
+/* Custom Classes */
+.button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.button-group > form {
+    margin: 2px 4px;
+}

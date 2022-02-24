@@ -14,18 +14,18 @@
     </head>
     <body>
         <div class="container">
-            <form action="{% url 'GroceryList:create' %}" method='post'>
-                {% csrf_token %}
-                <div class="row">
-                    <div class="input-field col s9">
+            <div class="row">
+                <form action="{% url 'GroceryList:create' %}" method='post'>
+                    {% csrf_token %}
+                    <div class="input-field col s6 m4">
                         <input id="item_description" type="text" name="description" required>
                         <label for="item_description">Item Description</label>
                     </div>
-                    <div class="col s1 push-s1">
+                    <div class="col s1 push-s3 push-m6">
                         <button class="waves-effect waves-light btn purple lighten-1 tooltipped" data-position="bottom" data-tooltip="Add new grocery item"><i class="material-icons">add_task</i></button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
 
             <div class="row">
                 <ul class="collection col s12">
@@ -34,15 +34,19 @@
                 {% if not item.is_completed %}
                     <li class="collection-item">
                         <div class="row">
-                            <span class="col s6">{{ item.description }}</span>
-                            <form class="col s2" action="{% url 'GroceryList:update' item.id %}" method='post'>
-                                {% csrf_token %}
-                                <button class="waves-effect waves-light btn-small green darken-1 tooltipped" data-position="bottom" data-tooltip="Item purchased" name="item_completed" value="True"><i class="tiny material-icons">task_alt</i></button>
-                            </form>
-                            <form class="col s2 push-s1" action="{% url 'GroceryList:delete' item.id %}" method='post'>
-                                {% csrf_token %}
-                                <button class="waves-effect waves-light btn-small red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete item"><i class="tiny material-icons">delete_forever</i></button>
-                            </form>
+                            <span class="col s6 m4">{{ item.description }}</span>
+                            <div class="col s4 push-s2 push-m4">
+                                <div class="button-group">
+                                    <form action="{% url 'GroceryList:update' item.id %}" method='post'>
+                                        {% csrf_token %}
+                                        <button class="waves-effect waves-light btn-small green darken-1 tooltipped" data-position="bottom" data-tooltip="Item purchased" name="item_completed" value="True"><i class="tiny material-icons">task_alt</i></button>
+                                    </form>
+                                    <form action="{% url 'GroceryList:delete' item.id %}" method='post'>
+                                        {% csrf_token %}
+                                        <button class="waves-effect waves-light btn-small red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete item"><i class="tiny material-icons">delete_forever</i></button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 {% endif %}
@@ -55,15 +59,19 @@
                 {% if item.is_completed %}
                     <li class="collection-item">
                         <div class="row">
-                            <span class="col s6">{{ item.description }}</span>
-                            <form class="col s2" action="{% url 'GroceryList:update' item.id %}" method='post'>
-                                {% csrf_token %}
-                                <button class="waves-effect waves-light btn-small orange darken-1 tooltipped" data-position="bottom" data-tooltip="Item still needed" name="item_completed" value="False"><i class="tiny material-icons">remove_done</i></button>
-                            </form>
-                            <form class="col s2 push-s1" action="{% url 'GroceryList:delete' item.id %}" method='post'>
-                                {% csrf_token %}
-                                <button class="waves-effect waves-light btn-small red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete item"><i class="tiny material-icons">delete_forever</i></button>
-                            </form>
+                            <span class="col s6 m4">{{ item.description }}</span>
+                            <div class="col s4 push-s2 push-m4">
+                                <div class="button-group">
+                                    <form action="{% url 'GroceryList:update' item.id %}" method='post'>
+                                        {% csrf_token %}
+                                        <button class="waves-effect waves-light btn-small orange darken-1 tooltipped" data-position="bottom" data-tooltip="Item still needed" name="item_completed" value="False"><i class="tiny material-icons">remove_done</i></button>
+                                    </form>
+                                    <form action="{% url 'GroceryList:delete' item.id %}" method='post'>
+                                        {% csrf_token %}
+                                        <button class="waves-effect waves-light btn-small red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete item"><i class="tiny material-icons">delete_forever</i></button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 {% endif %}
@@ -72,14 +80,13 @@
             </div>
         </div>
 
-    <!-- JavaScript -->
-    <script type="text/javascript" src="{% static 'GroceryList/js/materialize.min.js' %}"></script>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.tooltipped');
-            var instances = M.Tooltip.init(elems);
-          });
-    </script>
-
+        <!-- JavaScript -->
+        <script type="text/javascript" src="{% static 'GroceryList/js/materialize.min.js' %}"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.tooltipped');
+                var instances = M.Tooltip.init(elems);
+            });
+        </script>
     </body>
 </html>
