@@ -1,0 +1,18 @@
+{% for shortcode_set in the_url_sets %}
+{% comment %} <span>{{ shortcode_set }}</span> {% endcomment %}
+<a href="{% url 'short:index' %}{{ shortcode_set.code }}">{% url 'short:index' %}{{ shortcode_set.code }}</a>
+<a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a><br>
+{% endfor %}
+
+
+{% comment %} Sample local link {% endcomment %}
+{% comment %} <a href="{% url 'short:index' %}">Go to Short Home</a> {% endcomment %}
+{% comment %} Routes to: http://127.0.0.1:8000/short/ {% endcomment %}
+{% comment %} So, I want to route: {% endcomment %}
+{% comment %} http://127.0.0.1:8000/short/<short_code>/ {% endcomment %}
+{% comment %} ---TO--- {% endcomment %}
+{% comment %} <the_real_url> {% endcomment %}
+
+{% comment %} <a href="{% url 'short:accept_code_route_to_page' '1234567' %}">{% url 'short:accept_code_route_to_page' '1234567' %}</a>
+<a href="{{ url }}">{{ url }}</a><span>{{ code }}</span> {% endcomment %}
+

@@ -1,0 +1,72 @@
+# Assignment:
+https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab02-url-shortener.md
+
+# Resources:
+https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+https://docs.djangoproject.com/en/4.0/intro/tutorial01/
+URLField:
+https://docs.djangoproject.com/en/4.0/ref/models/fields/#urlfield
+
+# 1 #
+# Install pipenv and Django version 3.2:
+pipenv install django==3.2
+
+# 2 #
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/lab02_url_shortener-zO0gRMS_/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\lab02_url_shortener-zO0gRMS_\Scripts\activate.ps1
+
+# 3 #
+# Create Django Project
+django-admin startproject short_project .
+
+# 4 #
+# Create Django App
+python manage.py startapp short
+
+# 5 #
+# Test the server: check for the green rocket.
+python .\manage.py runserver
+
+# 6 #
+# Create urls.py in the app:
+https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md#create-a-route-to-the-view-
+
+# 7 #
+# Add include() to project urls.py
+
+# 8 #
+# Add 'index' view to views.py
+
+# 9 #
+# Add 'index.html' to 'short' directory inside 'templates' directory inside app directory.
+# Put temporary text in 'index.html'.
+
+# 10 #
+# Migrations:
+python .\manage.py makemigrations short
+python manage.py sqlmigrate short 0001
+python manage.py migrate
+
+# 11 #
+# Add some dummy data:
+python manage.py shell
+
+# Examples:
+https://bit.ly/3hePGlL | http://flynntknapp.com/
+
+https://bit.ly/3LYwt65 : http://google.com/
+
+https://bit.ly/3hePGlL : http://flynntknapp.com/
+
+https://bit.ly/3JMsuHM : http://brucestull.com/ : 7654321
+
+http://brucestull.com/ : 1234567
