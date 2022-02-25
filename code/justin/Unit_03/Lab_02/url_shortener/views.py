@@ -24,7 +24,8 @@ class ShortCodeGenerator:
         return ''.join(code)
 
 def create(request):
-    link = Link.objects.create(url=request.POST['url'], short_code=ShortCodeGenerator.get())
+    clean_url = str(request.POST['url']).replace('http://', '').replace('https://', '')
+    link = Link.objects.create(url=clean_url, short_code=ShortCodeGenerator.get())
     return HttpResponseRedirect(reverse('url_shortener:detail', args=(link.short_code,)))
 
 def detail(request, short_code):

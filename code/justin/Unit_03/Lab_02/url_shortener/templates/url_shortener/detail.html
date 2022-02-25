@@ -4,9 +4,24 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Shorturl</title>
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'url_shortener/css/materialize.min.css' %}"  media="screen,projection"/>
+
+        <title>{{link.short_code}} details</title>
     </head>
     <body>
-        Detail View - {{link}}
+        <header>
+            <nav>
+                <h1>{{link.short_code}}</h1>
+            </nav>
+        </header>
+
+        <div class="container">
+            <h4>Here's your new shorturl for {{link.url}}</h4>
+            <a href='https://{{link.url}}'>{{request.META.HTTP_HOST}}/{{link.short_code}}</a>
+        </div>
+
+        <!-- JavaScript -->
+        <script type="text/javascript" src="{% static 'url_shortener/js/materialize.min.js' %}"></script>
     </body>
 </html>
