@@ -33,7 +33,7 @@ def detail(request, short_code):
     if len(link_list) <= 0:
         return HttpResponseRedirect(reverse('url_shortener:index'))
     else:
-        clicks = Click.objects.filter(link__exact=link_list[0].id)
+        clicks = Click.objects.filter(link__exact=link_list[0].id).order_by('-created_at')
         context = {'link': link_list[0], 'clicks': clicks}
         return render(request, 'url_shortener/detail.html', context)
 

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         {% load static %}
         <link type="text/css" rel="stylesheet" href="{% static 'url_shortener/css/materialize.min.css' %}"  media="screen,projection"/>
 
@@ -17,19 +18,25 @@
         </header>
 
         <div class="container">
-            <h4>Here's your new shorturl for {{link.url}}</h4>
+            <h4>Here's your new shorturl for <strong>{{link.url}}</strong></h4>
             <a href='http://{{request.META.HTTP_HOST}}/{{link.short_code}}'>{{request.META.HTTP_HOST}}/{{link.short_code}}</a>
         </div>
 
         <div class="container">
-            <h5>Clicks:</h5>
+            <h5>Clicks:<span class="right">{{clicks|length}}</span></h5>
             {% for click in clicks %}
-                <div class="card">
-                    Created: {{click.created_at}}
-                    Referer: {{click.referer}}
-                    IP_Addr: {{click.remote_addr}}
-                    Language: {{click.language}}
-                    Agent: {{click.user_agent}}
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <span class="card-title activator">{{click.referer}}<i class="material-icons right">more_vert</i></span>
+                        <div>Created: {{click.created_at}}</div>
+                        <br>
+                    </div>
+                    
+                    <div class="card-reveal">
+                        <span class="card-title">IP_Addr: {{click.remote_addr}}<i class="material-icons right">close</i></span>
+                        <div>Language: {{click.language}}</div>
+                        <div>Agent: {{click.user_agent}}</div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
