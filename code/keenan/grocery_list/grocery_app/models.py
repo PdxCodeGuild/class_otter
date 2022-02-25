@@ -16,3 +16,4 @@ class GroceryItem(models.Model):
         return self.item_text
 
 # Ask Merritt/Liz: action completed at 1107pm was showing as the next morning at 7:06am.  + 8 hours of time for admin page....
+# adding and removing 'eggs' shows as the history for a single item, but it doesn't show the deleted action in the admin page
