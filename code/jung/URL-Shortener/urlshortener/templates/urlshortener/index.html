@@ -1,0 +1,33 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'grocery/styles.css' %}">
+    <title>URL Shortener</title>
+</head>
+<body>
+    <h1> URL Shortener: </h1>
+
+    <form action="{% url 'urlshortener:index' %}" method="post">
+        {% csrf_token %}
+        <label for="url">URL</label>
+        <input type="text" name="url" id="url" required/>
+        <button type="submit">Save</button>
+    </form>
+
+    {% if short_url %}
+        <h3>Old URL</h3>
+            <p>{{long_url}}</p>
+
+        <h3>New URL</h3>
+            <a href= "{% url 'urlshortener:redirect' short_url %}">
+                <p>{{short_url}}</p> 
+            </a>
+    {% endif %}
+</body>
+</html>
