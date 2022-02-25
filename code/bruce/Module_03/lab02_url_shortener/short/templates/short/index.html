@@ -1,18 +1,30 @@
-{% for shortcode_set in the_url_sets %}
-{% comment %} <span>{{ shortcode_set }}</span> {% endcomment %}
-<a href="{% url 'short:index' %}{{ shortcode_set.code }}">{% url 'short:index' %}{{ shortcode_set.code }}</a>
-<a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a><br>
-{% endfor %}
+
+<fieldset>
+    <legend><h2>Shorten a URL</h2></legend>
+    {% comment %} This form sends the value input, via key 'long-url', as post request. {% endcomment %}
+    {% comment %} We get the value of the key using 'request.POST['long-url']'. {% endcomment %}
+    <form action="{% url 'short:add' %}" method="post">
+        {% csrf_token %}
+        <label for="short-desc-link-id">URL Description</label><br>
+        <input type="text" name="url-description" id="short-desc-link-id" placeholder="URL description" size="100"><br>
+        <label for="short-url-link-id">Long URL</label><br>
+        <input type="text" name="long-url" id="short-url-link-id" placeholder="looooong URL" size="100"><br>
+        <input type="submit" value="Shorten the URL">
+    </form>
+</fieldset>
+
+<fieldset>
+    <legend><h2>List of shortened URLs</h2></legend>
+    {% for shortcode_set in the_url_sets %}
+    {% if shortcode_set.url_description %}<span>{{ shortcode_set.url_description }}</span><br>{% endif %}
+    <input type='text' value="http://127.0.0.1:8000{% url 'short:index' %}sc/{{ shortcode_set.code }}" size="35">
+    <a href="{% url 'short:index' %}sc/{{ shortcode_set.code }}">{% url 'short:index' %}sc/{{ shortcode_set.code }}</a>
+    <a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a><br><br>
+    {% endfor %}
+</fieldset>
 
 
-{% comment %} Sample local link {% endcomment %}
-{% comment %} <a href="{% url 'short:index' %}">Go to Short Home</a> {% endcomment %}
-{% comment %} Routes to: http://127.0.0.1:8000/short/ {% endcomment %}
-{% comment %} So, I want to route: {% endcomment %}
-{% comment %} http://127.0.0.1:8000/short/<short_code>/ {% endcomment %}
-{% comment %} ---TO--- {% endcomment %}
-{% comment %} <the_real_url> {% endcomment %}
-
-{% comment %} <a href="{% url 'short:accept_code_route_to_page' '1234567' %}">{% url 'short:accept_code_route_to_page' '1234567' %}</a>
-<a href="{{ url }}">{{ url }}</a><span>{{ code }}</span> {% endcomment %}
-
+<fieldset>
+    <legend><h2>Links to other views</h2></legend>
+    <a href="{% url 'admin:index' %}">Admin Page</a>
+</fieldset>

@@ -1,6 +1,6 @@
 import random, string
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render
 
@@ -23,29 +23,37 @@ def index(request):
     """
     Displays the current shortened URLs and allows user to create a new one.
     """
-    the_url_sets = ShortCode.objects.all()
-    # # 'the_url_sets' is of type 'QuerySet'.
-    # print(the_url_sets)
-    # # <QuerySet [<ShortCode: 1234567 : http://brucestull.com/>, <ShortCode: 3LYwt65 : http://google.com/>, <ShortCode: 3hePGlL : http://flynntknapp.com/>, <ShortCode: 7654321 : https://bit.ly/3JMsuHM>]>
-    # print(the_url_sets[0].code)
-    # # 1234567
-    # print(the_url_sets[0].url)
-    # # http://brucestull.com/
+    the_url_sets = ShortCode.objects.all().order_by('-created_date')
 
     context = {
         'the_url_sets': the_url_sets
     }
     return render(request, 'short/index.html', context)
 
-def accept_code_route_to_page(request, code):
+def click_link_route_to_page(request, code):
     """
     Gets a short code from url and routes user to new page.
     """
-    # We are able to get the short 'code' from the url, now we need to process/find the code in the database to get the associated url.
     print(code)
     shortcode_set = get_object_or_404(ShortCode, code=code)
     print(shortcode_set.url)
     print(shortcode_set.code)
-
-    # return render(request, 'short/index.html', context)
+    # Redirect user to the 'url' paired with the shortened link displayed:
     return HttpResponseRedirect(shortcode_set.url)
+
+def add(request):
+    """
+    Gets 'url' from user, generates new 'code', adds 'url' and 'code' to database, redirects user to index.
+    """
+    url_to_shorten = request.POST['long-url']
+    the_url_description = request.POST['url-description']
+    print(url_to_shorten)
+    print(the_url_description)
+    # Create a short 'code' to use with above 'url':
+    new_short_code = create_short_code()
+    # Add the 'url' and 'code' to database:
+    ShortCode.objects.create(code=new_short_code, url=url_to_shorten, url_description=the_url_description)
+    # NOTE: I successfully added 'url=asdfasdfsf' and 'code=4p8YIaD', without error. The entered 'url' is not valid. It seems that models.URLField(), which is the 'url' field type, only validates when using admin console?
+
+    return HttpResponseRedirect(reverse('short:index'))
+

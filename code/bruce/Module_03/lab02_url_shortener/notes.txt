@@ -70,3 +70,6 @@ https://bit.ly/3hePGlL : http://flynntknapp.com/
 https://bit.ly/3JMsuHM : http://brucestull.com/ : 7654321
 
 http://brucestull.com/ : 1234567
+
+# Link for application:
+http://127.0.0.1:8000/short/
