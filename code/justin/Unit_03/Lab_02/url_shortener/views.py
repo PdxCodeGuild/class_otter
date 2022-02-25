@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from .models import Link
+from .models import Link, Click
 import random
 import string
 
@@ -33,7 +33,8 @@ def detail(request, short_code):
     if len(link_list) <= 0:
         return HttpResponseRedirect(reverse('url_shortener:index'))
     else:
-        context = {'link': link_list[0]}
+        clicks = Click.objects.filter(link__exact=link_list[0].id)
+        context = {'link': link_list[0], 'clicks': clicks}
         return render(request, 'url_shortener/detail.html', context)
 
 def link_through(request, short_code):
@@ -41,4 +42,5 @@ def link_through(request, short_code):
     if len(link_list) <= 0:
         return HttpResponseRedirect(reverse('url_shortener:index'))
     else:
-        return redirect(link_list[0].url)
+        click = Click.objects.create(link=link_list[0], referer=request.META.get('HTTP_REFERER'), remote_addr=request.META.get('REMOTE_ADDR'), language=request.META.get('HTTP_ACCEPT_LANGUAGE'), user_agent=request.META.get('HTTP_USER_AGENT'))
+        return redirect('https://'+link_list[0].url)

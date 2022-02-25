@@ -18,7 +18,20 @@
 
         <div class="container">
             <h4>Here's your new shorturl for {{link.url}}</h4>
-            <a href='https://{{link.url}}'>{{request.META.HTTP_HOST}}/{{link.short_code}}</a>
+            <a href='http://{{request.META.HTTP_HOST}}/{{link.short_code}}'>{{request.META.HTTP_HOST}}/{{link.short_code}}</a>
+        </div>
+
+        <div class="container">
+            <h5>Clicks:</h5>
+            {% for click in clicks %}
+                <div class="card">
+                    Created: {{click.created_at}}
+                    Referer: {{click.referer}}
+                    IP_Addr: {{click.remote_addr}}
+                    Language: {{click.language}}
+                    Agent: {{click.user_agent}}
+                </div>
+            {% endfor %}
         </div>
 
         <!-- JavaScript -->
