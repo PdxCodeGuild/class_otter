@@ -8,4 +8,7 @@ class GroceryItem(models.Model):
     completed = models.BooleanField()
 
     def __str__(self):
-        return self.description # The other variables above will follow
+        return self.description # The other variables above will follow.
+
+# Terminal, run command, python manage.py makemigrations. Creates migration folder in grocery app.
+# Run commnand, python manage.py migrate.
