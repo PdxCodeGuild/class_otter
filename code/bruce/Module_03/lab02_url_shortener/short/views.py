@@ -6,18 +6,23 @@ from django.shortcuts import get_object_or_404, render
 
 from .models import ShortCode
 
+SOURCE_OF_CHARACTERS = string.ascii_letters + string.digits
 
 default_code_size = 7
 # Helper function for creating short code:
 def create_short_code(number_of_characters=default_code_size):
     """
-    Generate and return an alphanumeric sequence of length NUMBER_OF_CHARACTERS.
+    Generate and return an alphanumeric sequence of length
+    NUMBER_OF_CHARACTERS.
     """
-    source_of_characters = string.ascii_letters + string.digits
-    random.choice(source_of_characters)
-    code_sequence_list = [random.choice(source_of_characters) for _ in range(number_of_characters)]
-    code_sequence = ''.join(code_sequence_list)
-    return code_sequence
+    # Use list comprehension to generate a list of length 'number_of_characters'
+    # of characters 'SOURCE_OF_CHARACTERS'.
+    code_sequence_list = (
+        [random.choice(SOURCE_OF_CHARACTERS) for _ in range(number_of_characters)]
+        )
+    # .join() the list 'code_sequence_list' into a string 'code_sequence_string'.
+    code_sequence_string = ''.join(code_sequence_list)
+    return code_sequence_string
 
 def index(request):
     """
@@ -30,10 +35,11 @@ def index(request):
     }
     return render(request, 'short/index.html', context)
 
-def click_link_route_to_page(request, code):
+def redirect_to_page(request, code):
     """
     Gets a short code from url and routes user to new page.
     """
+    # 'request' type if 'GET'.
     print(code)
     shortcode_set = get_object_or_404(ShortCode, code=code)
     print(shortcode_set.url)
@@ -43,17 +49,19 @@ def click_link_route_to_page(request, code):
 
 def add(request):
     """
-    Gets 'url' from user, generates new 'code', adds 'url' and 'code' to database, redirects user to index.
+    Gets 'url' from user, generates new 'code', adds 'url' and 'code'
+    to database, redirects user to index.
     """
     url_to_shorten = request.POST['long-url']
     the_url_description = request.POST['url-description']
-    print(url_to_shorten)
-    print(the_url_description)
     # Create a short 'code' to use with above 'url':
     new_short_code = create_short_code()
     # Add the 'url' and 'code' to database:
     ShortCode.objects.create(code=new_short_code, url=url_to_shorten, url_description=the_url_description)
-    # NOTE: I successfully added 'url=asdfasdfsf' and 'code=4p8YIaD', without error. The entered 'url' is not valid. It seems that models.URLField(), which is the 'url' field type, only validates when using admin console?
+    # NOTE: I successfully added 'url=asdfasdfsf' and 'code=4p8YIaD',
+    # without error. The entered 'url' is not valid. It seems that
+    # models.URLField(), which is the 'url' field type, only validates
+    # when using admin console?
 
     return HttpResponseRedirect(reverse('short:index'))
 

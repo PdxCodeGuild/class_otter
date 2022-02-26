@@ -1,30 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome for the cat paw -->
+    <!--  -->
+    <!--  -->
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <!-- CSS -->
+    <!-- Fonts -->
 
-<fieldset>
-    <legend><h2>Shorten a URL</h2></legend>
-    {% comment %} This form sends the value input, via key 'long-url', as post request. {% endcomment %}
-    {% comment %} We get the value of the key using 'request.POST['long-url']'. {% endcomment %}
-    <form action="{% url 'short:add' %}" method="post">
-        {% csrf_token %}
-        <label for="short-desc-link-id">URL Description</label><br>
-        <input type="text" name="url-description" id="short-desc-link-id" placeholder="URL description" size="100"><br>
-        <label for="short-url-link-id">Long URL</label><br>
-        <input type="text" name="long-url" id="short-url-link-id" placeholder="looooong URL" size="100"><br>
-        <input type="submit" value="Shorten the URL">
-    </form>
-</fieldset>
-
-<fieldset>
-    <legend><h2>List of shortened URLs</h2></legend>
-    {% for shortcode_set in the_url_sets %}
-    {% if shortcode_set.url_description %}<span>{{ shortcode_set.url_description }}</span><br>{% endif %}
-    <input type='text' value="http://127.0.0.1:8000{% url 'short:index' %}sc/{{ shortcode_set.code }}" size="35">
-    <a href="{% url 'short:index' %}sc/{{ shortcode_set.code }}">{% url 'short:index' %}sc/{{ shortcode_set.code }}</a>
-    <a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a><br><br>
-    {% endfor %}
-</fieldset>
+    <!--  -->
+    <!-- favicon -->
+    <!--  -->
+    <title>URL Shortener</title>
+</head>
+<body>
 
 
-<fieldset>
-    <legend><h2>Links to other views</h2></legend>
-    <a href="{% url 'admin:index' %}">Admin Page</a>
-</fieldset>
+    <fieldset>
+        <legend><h2>Shorten a URL</h2></legend>
+        <form action="{% url 'short:add' %}" method="post">
+            {% csrf_token %}
+            <label for="short-desc-link-id">URL Description</label><br>
+            <input type="text" name="url-description" id="short-desc-link-id" placeholder="URL description" size="100"><br>
+            <label for="short-url-link-id">Long URL</label><br>
+            <input type="url" name="long-url" id="short-url-link-id" placeholder="looooong URL" size="100"><br>
+            <input type="submit" value="Shorten the URL">
+        </form>
+    </fieldset>
+
+    <fieldset>
+        <legend><h2>List of shortened URLs</h2></legend>
+        {% if the_url_sets %}
+        {% for shortcode_set in the_url_sets %}
+        {% if shortcode_set.url_description %}<span>{{ shortcode_set.url_description }}</span><br>{% endif %}
+
+        <span>{{ shortcode_set.pk }} </span><input type='text' value="http://127.0.0.1:8000{% url 'short:index' %}short/{{ shortcode_set.code }}" size="30">
+        <a href="{% url 'short:index' %}short/{{ shortcode_set.code }}">{% url 'short:index' %}short/{{ shortcode_set.code }}</a>
+        
+        <a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a><br><br>
+        {% endfor %}
+        {% else %}
+        <p>No shortened urls available</p>
+        {% endif %}
+    </fieldset>
+
+
+    <fieldset>
+        <legend><h2>Links to other views</h2></legend>
+        <a href="{% url 'admin:index' %}">Admin Page</a>
+    </fieldset>
+
+</body>
+</html>

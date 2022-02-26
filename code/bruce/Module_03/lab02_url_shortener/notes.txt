@@ -60,6 +60,10 @@ python manage.py migrate
 # Add some dummy data:
 python manage.py shell
 
+# 12 #
+# Imports in the shell:
+from short.models import ShortCode as SC
+
 # Examples:
 https://bit.ly/3hePGlL | http://flynntknapp.com/
 
@@ -73,3 +77,4 @@ http://brucestull.com/ : 1234567
 
 # Link for application:
 http://127.0.0.1:8000/short/
+
