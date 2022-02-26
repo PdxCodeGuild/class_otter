@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from django.shortcuts import render, redirect
+from django.core import serializers
 from .models import Link, Click
 import random
 import string
@@ -33,8 +34,11 @@ def detail(request, short_code):
     if len(link_list) <= 0:
         return HttpResponseRedirect(reverse('url_shortener:index'))
     else:
-        clicks = Click.objects.filter(link__exact=link_list[0].id).order_by('-created_at')
-        context = {'link': link_list[0], 'clicks': clicks}
+        sorted_clicks = Click.objects.filter(link__exact=link_list[0].id)
+        serialized_clicks = serializers.serialize("json", sorted_clicks)
+        sorted_clicks.order_by('-created_at')
+        
+        context = {'link': link_list[0], 'clicks': sorted_clicks, 'serialized_clicks': serialized_clicks}
         return render(request, 'url_shortener/detail.html', context)
 
 def link_through(request, short_code):

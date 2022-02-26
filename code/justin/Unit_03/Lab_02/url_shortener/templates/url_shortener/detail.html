@@ -23,6 +23,10 @@
         </div>
 
         <div class="container">
+            <canvas id="clicks_chart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="container">
             <h5>Clicks:<span class="right">{{clicks|length}}</span></h5>
             {% for click in clicks %}
                 <div class="card hoverable">
@@ -43,5 +47,75 @@
 
         <!-- JavaScript -->
         <script type="text/javascript" src="{% static 'url_shortener/js/materialize.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'url_shortener/js/chart.min.js' %}"></script>
+        {{serialized_clicks|json_script:"all-click-data"}}
+        <script>
+            window.onpageshow = function() {
+                const ctx = document.getElementById('clicks_chart').getContext('2d');
+                const bg_color_list = [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ];
+
+                const bd_color_list = [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ];
+
+                const all_clicks = JSON.parse(JSON.parse(document.getElementById('all-click-data').textContent));
+                let click_map = {};
+                for (let i = 0; i < all_clicks.length; i++) {
+                    if (click_map[all_clicks[i].fields.referer] == null) {
+                        click_map[all_clicks[i].fields.referer] = 0;
+                    }
+                    click_map[all_clicks[i].fields.referer] += 1;
+                }
+
+                let click_labels = [];
+                let click_data = [];
+                let bg_colors = [];
+                let bd_colors = [];
+                let color_counter = 0;
+                Object.keys(click_map).forEach(function(key) {
+                    click_labels.push(key);
+                    click_data.push(click_map[key]);
+                    bg_colors.push(bg_color_list[color_counter]);
+                    bd_colors.push(bd_color_list[color_counter]);
+                    color_counter += 1;
+                    if (color_counter >= 6) {
+                        color_counter = 0
+                    }
+                });
+
+                const clicks_chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: click_labels,
+                        datasets: [{
+                            label: '# of Clicks',
+                            data: click_data,
+                            backgroundColor: bg_colors,
+                            borderColor: bd_colors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        </script>
     </body>
 </html>
