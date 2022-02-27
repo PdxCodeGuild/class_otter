@@ -110,6 +110,7 @@
                         <button onclick="myFunction({{ shortcode_set.pk }})" class="btn waves-effect waves-light" type="submit" name="action">Copy short URL
                             <i class="material-icons right">send</i>
                         </button>
+                        {% comment %} <button onclick="myFunction({{ shortcode_set.pk }})">Copy short URL</button> {% endcomment %}
                         <input type='text' id={{ shortcode_set.pk }} value="http://127.0.0.1:8000{% url 'short:index' %}short/{{ shortcode_set.code }}" size="30">
                     </div>
                 {% endfor %}
