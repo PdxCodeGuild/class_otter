@@ -66,6 +66,7 @@ class AddViewTests(TestCase):
         """
         new_short_code()
         response = self.client.get(reverse('short:index'))
+        self.assertEqual(response.status_code, 200)
         self.assertEquals(len(response.context['the_url_sets']), 1)
         self.assertContains(response, 'Django website')
         self.assertContains(response, '1234zyx')
