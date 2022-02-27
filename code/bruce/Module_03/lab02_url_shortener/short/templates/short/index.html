@@ -1,15 +1,23 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- fontawesome for the cat paw -->
         <!--  -->
-        <!--  -->
+        <!-- Normalize  -->
         <link rel="stylesheet"
               href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
         <!-- CSS -->
+              <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        {% comment %} non-'min' version for production {% endcomment %}
+        {% comment %} 'min' version for development {% endcomment %}
+        <link type="text/css" rel="stylesheet" href={% static "short/css/materialize.min.css" %}  media="screen,projection"/>
         <!-- Fonts -->
         <!--  -->
         <!-- favicon -->
@@ -17,25 +25,57 @@
         <title>URL Shortener</title>
     </head>
     <body>
+        <nav class="light-blue lighten-1" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo">URL Shortenerator</a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="{% url 'admin:index' %}">Admin Page</a>
+                    </li>
+                </ul>
+                <ul id="nav-mobile" class="sidenav">
+                    <li>
+                        <a href="{% url 'admin:index' %}">Admin Page</a>
+                    </li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+        <div class="section no-pad-bot" id="index-banner">
+            {% comment %} <div class="container">
+                <br>
+                <br>
+                <h1 class="header center orange-text">Starter Template</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                </div>
+                <div class="row center">
+                    <a href="http://materializecss.com/getting-started.html"
+                       id="download-button"
+                       class="btn-large waves-effect waves-light orange">Get Started</a>
+                </div>
+                <br>
+                <br>
+            </div> {% endcomment %}
         <fieldset>
             <legend>
                 <h2>Shorten a URL</h2>
             </legend>
             <form action="{% url 'short:add' %}" method="post">
                 {% csrf_token %}
-                <label for="short-desc-link-id">URL Description</label>
+                <label for="url-desc-link-id">URL Description</label>
                 <br>
                 <input type="text"
                        name="url-description"
-                       id="short-desc-link-id"
+                       id="url-desc-link-id"
                        placeholder="URL description"
                        size="100">
                 <br>
-                <label for="short-url-link-id">Long URL</label>
+                <label for="long-url-link-id">Long URL</label>
                 <br>
                 <input type="url"
                        name="long-url"
-                       id="short-url-link-id"
+                       id="long-url-link-id"
                        placeholder="looooong URL"
                        size="100">
                 <br>
@@ -49,28 +89,24 @@
             {% if the_url_sets %}
                 {% for shortcode_set in the_url_sets %}
                     {% if shortcode_set.url_description %}
-                        <span>{{ shortcode_set.url_description }}</span>
-                        <br>
+                        <div>{{ shortcode_set.url_description }}</div>
                     {% endif %}
-                    <span>{{ shortcode_set.pk }} </span><input type='text' value="http://127.0.0.1:8000{% url 'short:index' %}short/{{ shortcode_set.code }}" size="30" id={{ shortcode_set.pk }}>
-                    <button onclick="myFunction({{ shortcode_set.pk }})">Copy short URL</button>
-                    <a href="{% url 'short:index' %}short/{{ shortcode_set.code }}">{% url 'short:index' %}short/{{ shortcode_set.code }}</a>
-                    <a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a>
-                    <br>
-                    <br>
+                    {% comment %} <div>{{ shortcode_set.pk }} </div> {% endcomment %}
+                    <div>
+                        <a href="{% url 'short:index' %}short/{{ shortcode_set.code }}">{% url 'short:index' %}short/{{ shortcode_set.code }}</a><br>
+                        <a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a><br>
+                        <button onclick="myFunction({{ shortcode_set.pk }})">Copy short URL</button>
+                        <input type='text' id={{ shortcode_set.pk }} value="http://127.0.0.1:8000{% url 'short:index' %}short/{{ shortcode_set.code }}" size="30">
+                    </div>
                 {% endfor %}
             {% else %}
-                <p>
+                <div>
                     No shortened urls available
-                </p>
+                </div>
             {% endif %}
         </fieldset>
-        <fieldset>
-            <legend>
-                <h2>Links to other views</h2>
-            </legend>
-            <a href="{% url 'admin:index' %}">Admin Page</a>
-        </fieldset>
+        <h4>Links to other views</h4>
+        <a href="{% url 'admin:index' %}">Admin Page</a>
         {% comment %} Resources for this JavaScript {% endcomment %}
         {% comment %} https://www.w3schools.com/howto/howto_js_copy_clipboard.asp {% endcomment %}
         {% comment %} https://www.w3schools.com/js/js_function_parameters.asp {% endcomment %}
@@ -90,5 +126,7 @@
           alert("Copied the text: " + copyText.value);
         }
         </script>
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src={% static "short/js/materialize.min.js" %} ></script>
     </body>
 </html>
