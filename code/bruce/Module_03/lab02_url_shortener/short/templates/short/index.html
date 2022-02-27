@@ -27,7 +27,7 @@
     <body>
         <nav class="light-blue lighten-1" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="#" class="brand-logo">URL Shortenerator</a>
+                <a id="logo-container" class="brand-logo">URL Shortenerator</a>
                 <ul class="right hide-on-med-and-down">
                     <li>
                         <a href="{% url 'admin:index' %}">Admin Page</a>
@@ -57,10 +57,8 @@
                 <br>
                 <br>
             </div> {% endcomment %}
-        <fieldset>
-            <legend>
-                <h2>Shorten a URL</h2>
-            </legend>
+        <div class="container">
+            <h2>Shorten a URL</h2>
             <form action="{% url 'short:add' %}" method="post">
                 {% csrf_token %}
                 <label for="url-desc-link-id">URL Description</label>
@@ -81,11 +79,9 @@
                 <br>
                 <input type="submit" value="Shorten the URL">
             </form>
-        </fieldset>
-        <fieldset>
-            <legend>
-                <h2>List of shortened URLs</h2>
-            </legend>
+        </div>
+        <div class="container">
+            <h2>List of shortened URLs</h2>
             {% if the_url_sets %}
                 {% for shortcode_set in the_url_sets %}
                     {% if shortcode_set.url_description %}
@@ -104,9 +100,25 @@
                     No shortened urls available
                 </div>
             {% endif %}
-        </fieldset>
-        <h4>Links to other views</h4>
-        <a href="{% url 'admin:index' %}">Admin Page</a>
+        </div>
+        <footer class="page-footer orange">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Personal Bio</h5>
+                        <p class="grey-text text-lighten-4">
+                            US Navy veteran - Excelling in full-stack Python development at <a href="https://pdxcodeguild.com/courses/day">PDX Code Guild</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    Made by <a class="orange-text text-lighten-3" href="http://brucestull.com">BruceStull 2022</a><br>
+                    Assignment <a class="orange-text text-lighten-3" href="https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab02-url-shortener.md">Lab 02 : URL Shortener</a>
+                </div>
+            </div>
+        </footer>
         {% comment %} Resources for this JavaScript {% endcomment %}
         {% comment %} https://www.w3schools.com/howto/howto_js_copy_clipboard.asp {% endcomment %}
         {% comment %} https://www.w3schools.com/js/js_function_parameters.asp {% endcomment %}
