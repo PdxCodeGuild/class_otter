@@ -35,6 +35,29 @@ def index(request):
     }
     return render(request, 'short/index.html', context)
 
+def index_cards(request):
+    """
+    Displays the current shortened URLs and allows user to create a new one.
+    """
+    the_url_sets = ShortCode.objects.all().order_by('-created_date')
+
+    context = {
+        'the_url_sets': the_url_sets
+    }
+    return render(request, 'short/index_cards.html', context)
+
+def index_wide(request):
+    """
+    Displays the current shortened URLs and allows user to create a new one.
+    """
+    the_url_sets = ShortCode.objects.all().order_by('-created_date')
+
+    context = {
+        'the_url_sets': the_url_sets
+    }
+    # return render(request, 'short/index_with_materialize.html', context)
+    return render(request, 'short/index.html', context)
+
 def redirect_to_page(request, code):
     """
     Gets a short code from url and routes user to new page.
@@ -52,8 +75,11 @@ def add(request):
     Gets 'url' from user, generates new 'code', adds 'url' and 'code'
     to database, redirects user to index.
     """
+    print(request.POST.keys())
     url_to_shorten = request.POST['long-url']
     the_url_description = request.POST['url-description']
+    where_we_came_from = request.POST['our-origin']
+    print(where_we_came_from)
     # Create a short 'code' to use with above 'url':
     new_short_code = create_short_code()
     # Add the 'url' and 'code' to database:
@@ -62,6 +88,11 @@ def add(request):
     # without error. The entered 'url' is not valid. It seems that
     # models.URLField(), which is the 'url' field type, only validates
     # when using admin console?
-
-    return HttpResponseRedirect(reverse('short:index'))
+    where_to_return_to = 'short:index'
+    where_to_return_to_dict = {
+        'index': 'short:index',
+        'index_cards': 'short:index_cards',
+    }
+    return HttpResponseRedirect(reverse(where_to_return_to_dict[where_we_came_from]))
+    # return HttpResponseRedirect(reverse('short:index_cards'))
 
