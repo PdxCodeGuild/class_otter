@@ -30,15 +30,15 @@
                 <a id="logo-container" class="brand-logo">URL Shortenerator</a>
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a href="{% url 'admin:index' %}">Admin Page</a>
+                        <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
                     </li>
                 </ul>
                 <ul id="nav-mobile" class="sidenav">
                     <li>
-                        <a href="{% url 'admin:index' %}">Admin Page</a>
+                        <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
                     </li>
                 </ul>
-                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger" target="_blank"><i class="material-icons">menu</i></a>
             </div>
         </nav>
         <div class="section no-pad-bot" id="index-banner">
@@ -89,8 +89,8 @@
                     {% endif %}
                     {% comment %} <div>{{ shortcode_set.pk }} </div> {% endcomment %}
                     <div>
-                        <a href="{% url 'short:index' %}short/{{ shortcode_set.code }}">{% url 'short:index' %}short/{{ shortcode_set.code }}</a><br>
-                        <a href="{{ shortcode_set.url }}">{{ shortcode_set.url }}</a><br>
+                        <a href="{% url 'short:index' %}short/{{ shortcode_set.code }}" target="_blank">{% url 'short:index' %}short/{{ shortcode_set.code }}</a><br>
+                        <a href="{{ shortcode_set.url }}" target="_blank">{{ shortcode_set.url }}</a><br>
                         <button onclick="myFunction({{ shortcode_set.pk }})">Copy short URL</button>
                         <input type='text' id={{ shortcode_set.pk }} value="http://127.0.0.1:8000{% url 'short:index' %}short/{{ shortcode_set.code }}" size="30">
                     </div>
@@ -114,8 +114,8 @@
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    Made by <a class="orange-text text-lighten-3" href="http://brucestull.com">BruceStull 2022</a><br>
-                    Assignment <a class="orange-text text-lighten-3" href="https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab02-url-shortener.md">Lab 02 : URL Shortener</a>
+                    Made by <a class="orange-text text-lighten-3" href="http://brucestull.com" target="_blank">BruceStull 2022</a><br>
+                    Assignment <a class="orange-text text-lighten-3" href="https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab02-url-shortener.md" target="_blank">Lab 02 : URL Shortener</a>
                 </div>
             </div>
         </footer>
