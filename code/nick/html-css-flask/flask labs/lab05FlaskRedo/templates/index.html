@@ -11,12 +11,9 @@
   </head>
 
   <body>
-    <h1>{{ metrics }}</h1>
-    <h1>{{ output }}</h1>
-    <h2>Enter the distance and units</h2>
+    <h1>What are the units you are converting from?</h1>
     <form action="" method="post">
       <input type="number" name="number" />
-      <label for="number"> feet</label><br />
       <select name="unit" id="unit">
         <option value="ft">feet</option>
         <option value="in">inches</option>
@@ -25,7 +22,9 @@
         <option value="km">kilometers</option>
         <option value="yd">yards</option>
       </select>
+      <label for="number"></label><br />
       <button type="submit">Convert</button>
+      <h2>{{ output }} meters</h2>
     </form>
   </body>
 </html>
