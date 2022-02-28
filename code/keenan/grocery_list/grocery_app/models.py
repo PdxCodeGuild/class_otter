@@ -8,8 +8,8 @@ from django.utils import timezone
 class GroceryItem(models.Model):
     # the created date will be created when the item is added
     item_text = models.CharField(max_length=200)
-    created_date = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField()
+    completed_date = models.DateTimeField(null=True, blank=True)
     completed_field = models.BooleanField(default=False)
     
     def __str__(self):
