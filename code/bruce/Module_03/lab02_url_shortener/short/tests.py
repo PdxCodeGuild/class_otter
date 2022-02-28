@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from .models import ShortCode
 
-from . import views
+from . import utils
 
 # Helper function to create new ShortCode.
 def new_short_code(
@@ -27,23 +27,36 @@ class ShortCodeModelTests(TestCase):
         self.assertEquals(db_short_code.code, '1234zyx')
 
 
-class CreateShortCodeTests(TestCase):
+class ShortCodesUtilsTests(TestCase):
+
     def test_create_short_code_with_eight_characters(self):
+        """
+        create_short_code() creates short code of specified length 'number_of_characters = 8'.
+        """
         number_of_characters = 8
-        short_code = views.create_short_code(number_of_characters)
+        short_code = utils.create_short_code(number_of_characters)
         self.assertEquals(len(short_code), number_of_characters)
 
     def test_create_short_code_with_default_seven_characters(self):
+        """
+        create_short_code() creates short code of default length '7'.
+        """
         default_number_of_characters = 7
-        short_code = views.create_short_code()
+        short_code = utils.create_short_code()
         self.assertEquals(len(short_code), default_number_of_characters)
     
     def test_create_short_code_returns_string(self):
-        short_code = views.create_short_code()
+        """
+        create_short_code() returns a string.
+        """
+        short_code = utils.create_short_code()
         self.assertIsInstance(short_code, str)
 
     def test_create_short_code_returns_alphanumeric(self):
-        short_code = views.create_short_code()
+        """
+        create_short_code() returns an 'alphanumeric' string.
+        """
+        short_code = utils.create_short_code()
         self.assertTrue(short_code.isalnum())
 
 
@@ -51,34 +64,33 @@ class IndexViewTests(TestCase):
 
     def test_no_short_codes_available(self):
         """
-        index() returns 'No shortened urls available' and a 200 status when no short codes are available.
+        index() response contains 'No shortened urls available' and a 200 status when no short codes are available.
         """
         response = self.client.get(reverse('short:index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No shortened urls available")
 
-
-class AddViewTests(TestCase):
-
-    def test_add_one_shortened_url(self):
+    def test_one_shortened_url_available(self):
         """
-        index() returns response which contains one ShortCode object.
+        index() response contains the the attributes of 'one' ShortCode
+        object when there is 'one' in the database.
         """
         new_short_code()
         response = self.client.get(reverse('short:index'))
-        self.assertEqual(response.status_code, 200)
         self.assertEquals(len(response.context['the_url_sets']), 1)
         self.assertContains(response, 'Django website')
         self.assertContains(response, '1234zyx')
         self.assertContains(response, 'https://www.djangoproject.com/')
 
-    def test_add_two_shortened_urls(self):
+    def test_two_shortened_urls_available(self):
         """
-        index() returns response which contains one ShortCode object.
+        index() response contains the attributes of 'two' ShortCode
+        objects when 'two' are in the database.
         """
         new_short_code()
         new_short_code('https://stackoverflow.com/', 'gfedcba', 'Stack Overflow')
         response = self.client.get(reverse('short:index'))
+        # response 'context' contains 'two' 'ShortCode' objects' attributes in 'the_url_sets'.
         self.assertEquals(len(response.context['the_url_sets']), 2)
         self.assertContains(response, 'Django website')
         self.assertContains(response, '1234zyx')
@@ -92,7 +104,7 @@ class RedirectToPageViewTests(TestCase):
 
     def test_redirect_to_page_succeeds_for_existent_code(self):
         """
-        redirect_to_page() redirects and returns status_code '302' for existing short code.
+        redirect_to_page() redirects to 'shortcode_set.url' and 'response' 'status_code' is '302' for existent short code.
         """
         new_short_code()
         response = self.client.get(reverse('short:redirect_to_page', args=['1234zyx']))
@@ -107,3 +119,17 @@ class RedirectToPageViewTests(TestCase):
         self.assertEquals(response.status_code, 404)
 
 
+class AddViewTests(TestCase):
+
+    def test_add_view_function(self):
+        """
+        add() gets 'url' and 'url_description' from user, generates 'code', adds 'url_description', 'url' and 'code' to database, sends user back to the same template they sent request from.
+        """
+        new_attributes_and_our_origin_to_send = {
+            'url-description': "Test long URL description",
+            'long-url': "subdomain.domain",
+            'our-origin': "index_cards",
+        }
+        # NOTE: Need to specify 'post()' function here. 'get()' will fail. Since we are not actually using a 'form' 'button', which would have the 'POST' method specified in the tag, we need to use the proper client function 'post()'.
+        # self.client.get(reverse('short:add'), new_attributes_and_our_origin_to_send) # Fails on "KeyError: 'long-url'"
+        self.client.post(reverse('short:add'), new_attributes_and_our_origin_to_send)

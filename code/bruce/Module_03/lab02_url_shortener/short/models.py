@@ -8,5 +8,5 @@ class ShortCode(models.Model):
     created_date = models.DateTimeField('created date', auto_now_add=True)
 
     def __str__(self):
-        return f"{self.url_description} : {self.pk}"
+        return f"{self.pk} : {self.code} : {self.url_description}"
 
