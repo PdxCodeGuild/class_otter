@@ -27,6 +27,7 @@ a {
   width: 250px;
 }
 @media only screen and (min-width: 430px) and (max-width: 768px) {
+
   #debt {
     margin-top: 5px;
   }
@@ -54,4 +55,36 @@ a {
     grid-column-gap: 30px;
     grid-row-gap: 15px;
   }
+}
+
+@media only screen and (min-width: 770px) {
+  body{
+    background-color: black;
+  }
+  #debt{
+    padding: 10% ;
+
+  }
+  .container-1{
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-column-gap: 100px;
+    margin: 20px;
+  }
+  .container-2{
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-column-gap: 100px;
+  }
+  .container-3{
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+  }
+  .container-4{
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+  }
+
+
+
 }
