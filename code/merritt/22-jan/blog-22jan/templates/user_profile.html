@@ -2,7 +2,10 @@
 
 {% block content %}
 
-    {% for post in object_list %}
+    <h1>{{ user_profile.username }}</h1>
+    <h5><em>Writing stuff since {{ user_profile.date_joined }}!</em></h5>
+
+    {% for post in user_profile.posts.all %}
         <div class="post-entry">
             <h2><a href="{% url 'posts:detail' post.pk %}">{{ post.title }}</a></h2>
             <h4><em><a href="{% url 'users:profile' post.author.username %}">{{ post.author.username }}</a></em></h4>
