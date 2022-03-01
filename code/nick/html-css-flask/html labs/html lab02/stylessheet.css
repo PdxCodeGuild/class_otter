@@ -1,0 +1,90 @@
+body {
+  text-align: center;
+  background-color: #bf2121;
+  font-family: "Barlow", sans-serif;
+}
+p,
+ul,
+footer {
+  color: #f2ae30;
+}
+h1,
+h2 {
+  color: #f25116;
+}
+nav {
+  background-color: #f25116;
+  text-align: center;
+}
+a {
+  color: #f2ae30;
+}
+#debt,
+#creditscore,
+#mortgage,
+#bank,
+#finance {
+  width: 250px;
+}
+@media only screen and (min-width: 430px) and (max-width: 768px) {
+
+  #debt {
+    margin-top: 5px;
+  }
+  .container-1 {
+    display: grid;
+    grid-template-columns: 350px 400px;
+  }
+  .container-2 {
+    display: grid;
+    grid-template-columns: 250px 250px;
+    grid-column-gap: 50px;
+  }
+  .container-3 {
+    display: grid;
+    text-align: justify;
+    margin-left: 100px;
+    grid-template-columns: 200px 250px;
+    grid-column-gap: 20px;
+  }
+  .container-4 {
+    margin: 50px;
+    display: grid;
+    text-align: justify;
+    grid-template-columns: repeat(2, 250px);
+    grid-column-gap: 30px;
+    grid-row-gap: 15px;
+  }
+}
+
+@media only screen and (min-width: 770px) {
+  body{
+    background-color: black;
+  }
+  #debt{
+    padding: 10% ;
+
+  }
+  .container-1{
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-column-gap: 100px;
+    margin: 20px;
+  }
+  .container-2{
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-column-gap: 100px;
+  }
+  .container-3{
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+  }
+  .container-4{
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+  }
+
+
+
+}
