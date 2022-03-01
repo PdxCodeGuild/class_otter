@@ -1,13 +1,54 @@
-<h1> Hello  </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% comment %} <meta http-equiv="X=UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% endcomment %}
+    <title> Grocery List </title>
+</head>
+<body>
+    <h1>Grocery List</h1>
 
+    <h2>Incomplete Items</h2>
+    <ul>
+        {% for item in incomplete_items %}
+            <li>{{ item.item_text }}
+                <form action="{% url 'grocery_list:complete' item.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Complete">
+                </form>
+                <form action="{% url 'grocery_list:delete' item.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
 
+    <h2>Add New Grocery Item </h2>
+        <form action="{% url 'grocery_list:new' %}"  method="post">
+        {% csrf_token %}
+        <label for="description">Item Description</label><br>
+        <input type="text" name="item.item_text" id="description" placeholder="new item" ><br>
+        <input type="submit" value="Add item to list">
+        </form>
 
+    
+    <h2>Completed</h2>
+        <ul>
+        {% for item in completed_items %}
+            <li>{{ item.item_text }}
+                <form action="{% url 'grocery_list:complete' item.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Mark incomplete">
+                </form>
+                <form action="{% url 'grocery_list:delete' item.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+</body>
+</html>
 
-{% comment %}
-{{ item.item_text }}
-<ul>
-{% for item in question.choices.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul> 
-{% endcomment %}
