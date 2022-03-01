@@ -25,7 +25,7 @@
 <body>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" class="brand-logo">URL Shortenerator</a>
+            <a id="logo-container" class="brand-logo" href='short:index_cards'>URL Shortenerator</a>
             <ul class="right hide-on-med-and-down">
                 <li>
                     <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
@@ -67,6 +67,25 @@
                     {% comment %} <input type="submit" value="Shorten the URL"> {% endcomment %}
                     <input type="hidden" name="our-origin" value="index_cards">
                 </form>
+                {% if newest_url_set %}
+                
+                <h3>Your shortened URL</h3>
+                {% comment %} <p>New PK: {{ newest_url_set.pk }}</p> {% endcomment %}
+                {% if newest_url_set.url_description %}
+                    <h5>{{ newest_url_set.url_description }}</h5>
+                {% endif %}
+                {% comment %} <div>{{ newest_url_set.pk }} </div> {% endcomment %}
+                <div>
+                    <a href="{% url 'short:index' %}short/{{ newest_url_set.code }}" target="_blank">{% url 'short:index' %}short/{{ newest_url_set.code }}</a><br>
+                    <a href="{{ newest_url_set.url }}" target="_blank">{{ newest_url_set.url }}</a><br>
+                    <button onclick="myFunction({{ newest_url_set.pk }})" class="btn waves-effect waves-light btn-small" type="submit" name="action">Copy  your short URL
+                        <i class="material-icons right">send</i>
+                    </button>
+                    {% comment %} <button onclick="myFunction({{ newest_url_set.pk }})">Copy short URL</button> {% endcomment %}
+                    <input type='text' id={{ newest_url_set.pk }} value="http://127.0.0.1:8000{% url 'short:index' %}short/{{ newest_url_set.code }}" size="30">
+                </div>
+
+            {% endif %}
             </div>
         </div>
         <div class="section">

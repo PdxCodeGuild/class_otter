@@ -23,6 +23,12 @@ def print_meta_data_to_console_return_meta_data_dictionary(request, print_stuff=
     """
     Prints the request.META key and value pairs to console.
     """
+    request_subset = 'META'
+    request_subset_dictionary = {
+        'META': "",
+        'GET': "",
+    }
+    
     meta_data = request.META
     # print(type(meta_data))
     # # <class 'dict'>

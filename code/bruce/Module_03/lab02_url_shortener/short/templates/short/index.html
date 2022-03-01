@@ -25,9 +25,10 @@
         <title>URL Shortener</title>
     </head>
     <body>
+        <!-- 'nav' section -->
         <nav class="light-blue lighten-1" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" class="brand-logo">URL Shortenerator</a>
+                <a id="logo-container" class="brand-logo" href='{% url 'short:index' %}'>URL Shortenerator</a>
                 <ul class="right hide-on-med-and-down">
                     <li>
                         <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
@@ -53,8 +54,9 @@
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger" target="_blank"><i class="material-icons">menu</i></a>
             </div>
         </nav>
-        <div class="section no-pad-bot" id="index-banner">
-            {% comment %} <div class="container">
+        <!-- materialize template header -->
+        {% comment %} <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
                 <br>
                 <br>
                 <h1 class="header center orange-text">Starter Template</h1>
@@ -68,9 +70,11 @@
                 </div>
                 <br>
                 <br>
-            </div> {% endcomment %}
+            </div>
+        </div> {% endcomment %}
+        <!-- Create a short code section -->
         <div class="container">
-            <h2>Shorten a URL</h2>
+            <h3>Shorten a URL</h3>
             <form action="{% url 'short:add' %}" method="post">
                 {% csrf_token %}
                 <label for="url-desc-link-id">URL Description</label>
@@ -95,9 +99,30 @@
                 {% comment %} <input type="submit" value="Shorten the URL"> {% endcomment %}
                 <input type="hidden" name="our-origin" value="index">
             </form>
+
+            {% if newest_url_set %}
+                
+                <h3>Your shortened URL</h3>
+                {% comment %} <p>New PK: {{ newest_url_set.pk }}</p> {% endcomment %}
+                {% if newest_url_set.url_description %}
+                    <h5>{{ newest_url_set.url_description }}</h5>
+                {% endif %}
+                {% comment %} <div>{{ newest_url_set.pk }} </div> {% endcomment %}
+                <div>
+                    <a href="{% url 'short:index' %}short/{{ newest_url_set.code }}" target="_blank">{% url 'short:index' %}short/{{ newest_url_set.code }}</a><br>
+                    <a href="{{ newest_url_set.url }}" target="_blank">{{ newest_url_set.url }}</a><br>
+                    <button onclick="myFunction({{ newest_url_set.pk }})" class="btn waves-effect waves-light btn-small" type="submit" name="action">Copy  your short URL
+                        <i class="material-icons right">send</i>
+                    </button>
+                    {% comment %} <button onclick="myFunction({{ newest_url_set.pk }})">Copy short URL</button> {% endcomment %}
+                    <input type='text' id={{ newest_url_set.pk }} value="http://127.0.0.1:8000{% url 'short:index' %}short/{{ newest_url_set.code }}" size="30">
+                </div>
+
+            {% endif %}
+
         </div>
         <div class="container">
-            <h2>List of shortened URLs</h2>
+            <h3>List of shortened URLs</h3>
             {% if the_url_sets %}
                 {% for shortcode_set in the_url_sets %}
                     {% if shortcode_set.url_description %}
