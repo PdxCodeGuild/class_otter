@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for post in object_list %}
+        <div>
+            <h2>{{ post.user }} {{ post.created }}</h2>
+            <p>{{ post.whistle|linebreaksbr }}</p>
+
+        </div>
+    {% endfor %}
+{% endblock content %}    
