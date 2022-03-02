@@ -129,12 +129,5 @@ python manage.py createsuperuser
 # 12 #
 # Add data via admin interface.
 
-# Link to a 'detail' Chirp:
-http://127.0.0.1:8005/chirp/1/
 
-# Link to 'home':
-http://127.0.0.1:8005/chirp/
-
-# Link to 'hatch' a new chirp:
-http://127.0.0.1:8005/chirp/hatch/
 

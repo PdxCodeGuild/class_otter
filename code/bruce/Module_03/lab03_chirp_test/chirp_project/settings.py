@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q*_3becpxvs1&cb2=y((3z0hk*+9dzcu##5%n13hz8(nece_kt'
+SECRET_KEY = 'django-insecure-vqhfmd)do&eor0x9il5aastteqcjymni4gb-paoxo^g7ca2z$='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'chirp_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/New_York'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -125,6 +125,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-STATICFILES_DIRS = [BASE_DIR / 'static']

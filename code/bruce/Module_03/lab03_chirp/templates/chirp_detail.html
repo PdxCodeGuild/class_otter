@@ -3,15 +3,16 @@
 {% block content %}
 
 <div class="col s12 m7">
-    <h4 class="header">One tiny Chirp</h4>
+    <h4 class="header">One Tiny Chirp</h4>
     <div class="card horizontal">
 
         <div class="card-stacked">
             <div class="card-action">
-                <span><a href="#">{{ chirp.author }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
+                <span><a href="#">{{ chirp.author.username }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
             </div>
             <div class="card-content">
-                <p>{{ chirp.tiny_body }}</p>
+                <p>{{ chirp.tiny_body | linebreaksbr }}</p>
+                <p><a href="{% url 'chirps:moderate' chirp.pk %}">Moderate this Chirp</a>
             </div>
         </div>
 

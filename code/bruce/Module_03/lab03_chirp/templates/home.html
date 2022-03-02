@@ -2,34 +2,28 @@
 
 {% block content %}
 
-    <div class="section">
+    <div class="col s12 m7">
+        <h4 class="header">All the Chirps</h4>
 
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>All the Chirps</h4></li>
-            {% for chirp in chirp_list %}
-                <li class="collection-item">
-                    <div>
-                        <span>Hatched on: <em>{{ chirp.created}}</em></span><span><a href="#!" class="secondary-content"><i>{{ chirp.author }}</i></a></span>
-                    </div>
-                    <div>
-                        {{ chirp.tiny_body }}
-                        
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+        {% for chirp in chirp_list %}
+
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-action">
+                    <span>Hatched on: <a href="{% url 'chirps:detail' chirp.pk %}"><em>{{ chirp.created}}</em></a></span><span><a href="#!" class="secondary-content"><i>{{ chirp.author.username }}</i></a></span>
+                </div>
+                <div class="card-content">
+                    <p>{{ chirp.tiny_body | linebreaksbr }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
 
     </div>
 
 {% endblock content %}
 
+{% comment %} Can use, in loop above: {% for chirp in object_list %} {% endcomment %}
+{% comment %} 'ListView' provides both 'chirp_list' ('modelName_list') and 'object_list' as context variables. {% endcomment %}
 
-
-
-
-
-
-{% comment %} <div class="collection-item">
-    <h3>{{ chirp.author}}</h3>
-    <h4>{{ chirp.tiny_body}}</h4>
-</div> {% endcomment %}
