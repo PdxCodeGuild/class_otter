@@ -19,4 +19,4 @@ Your project will also need to have the following functionality:
 
 ## Optional advanced version
 
-Make an Instagram clone! Your posts will need an associated image, check out the [instruction guide](../docs/06%20-%20Media%20Files.md).
+Make an Instagram clone! Your posts will need an associated image, check out the [instruction guide](../docs/08%20Uploading%20Files.md).
