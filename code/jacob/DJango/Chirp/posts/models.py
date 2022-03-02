@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -10,4 +11,8 @@ class Post(models.Model):
     def __str__(self):
         return self.whistle
 
+    class Meta:
+        ordering = ['-created']   #'-' sorts in reverse order
+    # def get_absolute_url(self):      ###this would require a detail page being created.
+    #     return reverse("chirp:detail", args={"pk": self.pk})
     
