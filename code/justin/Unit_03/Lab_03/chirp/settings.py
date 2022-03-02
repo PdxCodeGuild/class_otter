@@ -15,11 +15,12 @@ from pathlib import Path
 
 
 env = environ.Env()
-dir = Path(__file__).resolve().parent
-environ.Env.read_env(os.path.join(dir, '.env'))
+PROJECT_DIR = Path(__file__).resolve().parent
+
+environ.Env.read_env(os.path.join(PROJECT_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = PROJECT_DIR.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('SECRET_KEY')
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'chirp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [PROJECT_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,3 +126,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_DIRS = [PROJECT_DIR / STATIC_URL]
+
+LOGIN_REDIRECT_URL = 'posts:home'
+LOGOUT_REDIRECT_URL = 'posts:home'
+
+LOGIN_URL = 'login'

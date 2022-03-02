@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'url_shortener/css/materialize.min.css' %}"  media="screen,projection"/>
+        {% comment %} <link type="text/css" rel="stylesheet" href="{% static 'url_shortener/css/style.css' %}"  media="screen,projection"> {% endcomment %}
+
+        <title>Chirp</title>
+    </head>
+    <body>
+        <header>
+            <div class="nav-left">
+                <h1><a href="{% url 'posts:home' %}">Chirp</a></h1>
+            </div>
+            <div class="nav-right">
+                {% if user.is_authenticated %}
+                    <p>Hello, <a href="{% url 'users:profile' user.username %}">{{ user.username }}</a>!</p>
+                    <p><a href="{% url 'logout' %}">Logout</a></p>
+                    <p><a href="{% url 'posts:new' %}">+ New Post</a></p>
+                {% else %}
+                    <p><a href="{% url 'login' %}">Login</a></p>
+                    <p><a href="{% url 'users:signup' %}">Sign Up</a></p>
+                {% endif %}
+            </div>
+        </header>
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>
