@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="section">
+
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>All the Chirps</h4></li>
+            {% for chirp in chirp_list %}
+                <li class="collection-item">
+                    <div>
+                        <span>Hatched on: <em>{{ chirp.created}}</em></span><span><a href="#!" class="secondary-content"><i>{{ chirp.author }}</i></a></span>
+                    </div>
+                    <div>
+                        {{ chirp.tiny_body }}
+                        
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+{% comment %} <div class="collection-item">
+    <h3>{{ chirp.author}}</h3>
+    <h4>{{ chirp.tiny_body}}</h4>
+</div> {% endcomment %}

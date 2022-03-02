@@ -1,0 +1,93 @@
+# Assignment:
+https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab03-chirp.md
+
+# Resources:
+
+    # Django Project Setup:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+
+    # Django admin documentation generator:
+    https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+
+    # Docutils:
+    # TODO: Need to finish setup of docutils!
+    https://docutils.sourceforge.io/
+
+    # Django tutorial:
+    https://docs.djangoproject.com/en/4.0/intro/tutorial01/
+
+
+#### IMPORTANT ####
+# Ensure we are not in an existing virtual environment.
+#### IMPORTANT ####
+# Open new terminal in default python environment.
+
+# 01 #
+# Create virtual environment and install 'Django' and 'docutils':
+pipenv install django==3.2 docutils==0.18.1
+
+# 2 #
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/lab03_chirp-joLf1SIb/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\lab03_chirp-joLf1SIb\Scripts\activate.ps1
+
+# 03 #
+# Create Django project:
+django-admin startproject $PROJECT_NAME .
+django-admin startproject chirp_project .
+
+# 04 #
+# Create Django App
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp chirps
+
+# 05 #
+# Check server runs, check for the green rocket:
+python .\manage.py runserver 8005
+
+# 06 #
+# add "'chirps.apps.ChirpsConfig'" to 'INSTALLED_APPS' in chirp_project/settings.py.
+INSTALLED_APPS = [
+    ...,
+    'chirps.apps.ChirpsConfig',
+]
+
+# 07 #
+# Create: route in urls.py and view in views.py.
+# Add path(<>, include()) and import to chirp_project.urls.py
+from django.urls import include
+path('', include('chirps.urls'))
+# Add path() to chirps.urls.py
+path('', views.home, name='home'),
+
+# 08 #
+# Test server response:
+python .\manage.py runserver 8005
+http://127.0.0.1:8005/
+
+# 09 #
+# Create the 'Chirp" in chirps.models.py.
+
+# 10 #
+# Migrations:
+python manage.py makemigrations <appname>
+python .\manage.py makemigrations chirps
+
+python manage.py sqlmigrate chirps 0001
+python manage.py migrate
+
+# 11 #
+# Create superuser
+python manage.py createsuperuser
+
+# 12 #
+# Add data via admin interface.
+

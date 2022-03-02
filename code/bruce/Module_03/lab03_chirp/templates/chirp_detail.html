@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col s12 m7">
+    <h4 class="header">One tiny Chirp</h4>
+    <div class="card horizontal">
+
+        <div class="card-stacked">
+            <div class="card-action">
+                <span><a href="#">{{ chirp.author }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
+            </div>
+            <div class="card-content">
+                <p>{{ chirp.tiny_body }}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
