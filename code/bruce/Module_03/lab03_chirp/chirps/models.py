@@ -14,3 +14,7 @@ class Chirp(models.Model):
     def get_absolute_url(self):
         return reverse('chirps:detail', args=(self.pk,))
     
+    # Need this to order the Chirps on 'home' page.
+    class Meta:
+        ordering = ['-created']
+    
