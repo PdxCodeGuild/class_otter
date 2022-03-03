@@ -25,12 +25,10 @@ def index(request):
 
 # this creates a new grocery item 
 def new(request):
-    # the post was description before
-    
     description = request.POST['item.item_text']
-    # can use item = Grocery item ....
-    # then do the .save
-    GroceryItem.objects.create(description=description, created_date=timezone.now(), completed_field=False)
+    # the description above is a temp variable that links to the description in line 31, 
+    # the kwargs here need to match the variable names in the model itself
+    GroceryItem.objects.create(item_text=description, created_date=timezone.now(), completed_field=False)
     return HttpResponseRedirect(reverse('grocery_list:list'))
 
 def complete(request, pk):
