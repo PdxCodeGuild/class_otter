@@ -179,3 +179,6 @@ python manage.py migrate
 
 
 grey-fuzziness : 1234test
+
+
+overflow: hidden; white-space: nowrap;
