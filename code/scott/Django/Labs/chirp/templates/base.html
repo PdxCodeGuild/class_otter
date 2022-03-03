@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Chirps</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="w3-sidebar w3-bar-block" style="width:25%;height:15em;right:0">
+            <h1><a href="{% url 'chirps:home' %}">Mad Chirps</a></h1>
+            {% if user.is_authenticated %}
+                <p>Hello: <a href="{% url 'users:profile' user.username %}">{{ user.username }}</a>!</p>
+                <h6><em>Chirping Since: <a href="{% url 'users:profile' user.date_joined %}">{{ user.date_joined }}</a></em></h6>
+                <p><a href="{% url 'logout' %}">Logout</a></p>
+                <p><a href="{% url 'chirps:new' %}">+New Chirp</a></p>
+            {% else %}
+                <p><a href="{% url 'login' %}">Login</a></p>
+                <p><a href="{% url 'users:signup' %}">Sign Up</a></p>
+            {% endif %}
+        </div>
+        <div class="w3-sidebar w3-bar-block" style="width:25%;height:15em;left:0">
+            <img src="https://c.tenor.com/XNnOBXW3a58AAAAi/bird-animation.gif" alt="My logo" width="150" height="150">
+        </div>
+    </header>
+    <main>
+        <div class="w3-sidebar w3-bar-block" style="width:75%;height:40em;margin-top:15%;margin-left:10px">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+</body>
+</html>

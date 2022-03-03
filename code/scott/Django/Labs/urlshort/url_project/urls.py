@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')), #to add the use of docutils to the admin page
     path('admin/', admin.site.urls),
     path('', include('urlshortener.urls'))
 ]
