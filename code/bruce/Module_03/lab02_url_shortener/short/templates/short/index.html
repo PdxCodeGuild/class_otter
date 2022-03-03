@@ -17,10 +17,14 @@
         <!--Import materialize.css-->
         {% comment %} non-'min' version for production {% endcomment %}
         {% comment %} 'min' version for development {% endcomment %}
-        <link type="text/css" rel="stylesheet" href={% static "short/css/materialize.min.css" %}  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static "short/css/materialize.min.css" %}"  media="screen,projection"/>
         <!-- Fonts -->
         <!--  -->
         <!-- favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static "short/images/apple-touch-icon.png" %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static "short/images/favicon-32x32.png" %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static "short/images/favicon-16x16.png" %}">
+        <link rel="manifest" href="{% static "short/images/site.webmanifest" %}">
         <!--  -->
         <title>URL Shortener</title>
     </head>

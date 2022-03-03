@@ -9,9 +9,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--Import materialize.css-->
-    {% comment %} <link type="text/css" rel="stylesheet" href="/static/css/materialize.min.css"  media="screen,projection"/> {% endcomment %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "images/apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "images/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "images/favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "images/site.webmanifest" %}">
+    
     <!-- My styling -->
     <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}"  media="screen,projection"/>
 
@@ -79,7 +84,7 @@
                 <div class="col l6 s12">
                     <h5 class="white-text">Personal Bio</h5>
                     <p class="grey-text text-lighten-4">
-                        US Navy veteran - Excelling in full-stack Python development at <a href="https://pdxcodeguild.com/courses/day" target="_blank">PDX Code Guild</a>
+                        US Navy veteran - Python developer - Tech accessibility fan - Excelling in full-stack Python development at <a href="https://pdxcodeguild.com/courses/day" target="_blank">PDX Code Guild</a>
                     </p>
                 </div>
             </div>
