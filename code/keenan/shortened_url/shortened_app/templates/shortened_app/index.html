@@ -8,6 +8,13 @@
         <title>TITLE</title>
     </head>
     <body>
-        <h1>TITLE</h1>
+        <h1>URL Shortener</h1>
+        {% comment %} this will need a link to my urls.py urlpatterns like path('url_shortener', views.create, name='create') {% endcomment %}
+        <form action="{% url 'shortened_app:create' %}" method="post">
+         {% csrf_token %}
+        <input type="text" id="url_text" name="url" required>
+        <label for="url_text">URL to be shortened</label>
+        <button>Submit</button>
+
     </body>
 </html>

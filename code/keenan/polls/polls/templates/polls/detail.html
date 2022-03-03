@@ -1,10 +1,5 @@
 {% comment %} this is a new detail file {% endcomment %}
-{% comment %} <h1> {{ question.question_text }} </h1>
-<ul>
-    {% for choice in question.choices.all %}
-        <li>{{ choice.choice_text }}</li>
-    {%endfor%}
-</ul> {% endcomment %}
+
 
 <form action="{% url 'polls:vote' question.id %}" method='post'>
     {% csrf_token %}

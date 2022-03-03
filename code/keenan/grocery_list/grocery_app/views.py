@@ -11,6 +11,7 @@ from .models import GroceryItem
 
 # Create your views here.
 def index(request):
+    # is this below line of code even necessary?
     item_list = GroceryItem.objects.all()
     # do not have a completed_date aspect to sort by
     completed_items = GroceryItem.objects.filter(completed_field=True).order_by('completed_date')

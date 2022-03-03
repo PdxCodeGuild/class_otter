@@ -16,6 +16,7 @@ import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# the BASE_DIR contains manage.py
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
