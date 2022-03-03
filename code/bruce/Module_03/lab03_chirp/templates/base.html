@@ -25,26 +25,44 @@
         <div class="nav-wrapper container">
             <a id="logo-container" class="brand-logo" href="{% url 'chirps:home' %}">Chirp</a>
             <ul class="right hide-on-med-and-down">
+                {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
+                    <a href="{% url 'users:profile' user.username %}">{{ user.username }}</a>
                 </li>
                 <li>
                     <a href="{% url 'chirps:hatch' %}">Hatch an egg</a>
                 </li>
                 <li>
-                    <a href="">Maybe, some other function?</a>
+                    <a href="{% url 'logout' %}">Logout</a>
                 </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'users:signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
             </ul>
             <ul id="nav-mobile" class="sidenav">
+                {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
+                    <span>Welcome, {{ user.username }}</span>
                 </li>
                 <li>
                     <a href="{% url 'chirps:hatch' %}">Hatch an egg</a>
                 </li>
                 <li>
-                    <a href="">Maybe, some other function?</a>
+                    <a href="{% url 'logout' %}">Logout</a>
                 </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'users:signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger" target="_blank"><i class="material-icons">menu</i></a>
         </div>
@@ -71,8 +89,17 @@
                 Made by <a class="orange-text text-lighten-3" href="http://brucestull.com" target="_blank">BruceStull 2022</a><br>
                 Assignment <a class="orange-text text-lighten-3" href="https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab03-chirp.md" target="_blank">Lab 03 : Chirp (Twitter Clone)</a><br>
                 <a id="logo-container" class="brand-logo" href="{% url 'chirps:home' %}">Chirp</a><br>
+                
+                {% if user.is_authenticated %}
+                <a href="{% url 'users:profile' user.username %}">{{ user.username }}</a><br>
                 <a href="{% url 'chirps:hatch' %}">Hatch an egg</a><br>
-                <a href="">Yet, Another Link</a>
+                <a href="{% url 'logout' %}">Logout</a><br>
+                {% else %}
+                <a href="{% url 'login' %}">Login</a><br>
+                <a href="{% url 'users:signup' %}">Sign Up</a><br>
+                {% endif %}
+                <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a><br>
+
             </div>
         </div>
     </footer>

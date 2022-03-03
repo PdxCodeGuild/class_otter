@@ -8,11 +8,14 @@
 
         <div class="card-stacked">
             <div class="card-action">
-                <span><a href="#">{{ chirp.author.username }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
+                <span><a href="{% url 'users:profile' chirp.author %}">{{ chirp.author.username }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
             </div>
             <div class="card-content">
                 <p>{{ chirp.tiny_body | linebreaksbr }}</p>
+                {% if user == chirp.author %}
                 <p><a href="{% url 'chirps:moderate' chirp.pk %}">Moderate this Chirp</a>
+                <p><a href="{% url 'chirps:delete' chirp.pk %}">Delete this Chirp</a>
+                {% endif %}
             </div>
         </div>
 

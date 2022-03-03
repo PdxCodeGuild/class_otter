@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chirps.apps.ChirpsConfig',
+    'users.apps.UsersConfig',
     'django.contrib.admindocs',
 ]
 
@@ -128,3 +129,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+LOGIN_REDIRECT_URL = 'chirps:home'
+LOGOUT_REDIRECT_URL = 'chirps:home'
+
+# Redirects user to login page if they are not logged in and type in url to create new Chirp.
+LOGIN_URL = 'login'

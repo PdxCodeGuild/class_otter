@@ -129,12 +129,38 @@ python manage.py createsuperuser
 # 12 #
 # Add data via admin interface.
 
-# Link to a 'detail' Chirp:
-http://127.0.0.1:8005/chirp/1/
-
 # Link to 'home':
 http://127.0.0.1:8005/chirp/
 
-# Link to 'hatch' a new chirp:
+# Link to a 'detail' Chirp:
+http://127.0.0.1:8005/chirp/1/
+
+# Link to 'hatch' a new Chirp:
 http://127.0.0.1:8005/chirp/hatch/
 
+# Link to 'moderate' a Chirp:
+http://127.0.0.1:8005/chirp/1/moderate
+
+# Login link:
+http://127.0.0.1:8005/login/
+
+# Logout link:
+http://127.0.0.1:8005/logout/
+
+
+
+# 13 #
+# Completed some steps which were copy-paste.
+# Now, to create the Users app.
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp users
+
+# Migrations:
+python manage.py makemigrations <appname>
+python .\manage.py makemigrations users
+
+python manage.py sqlmigrate users 0001
+python manage.py migrate
+
+
+grey-fuzziness : 1234test

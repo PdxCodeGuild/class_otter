@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col s12 m7">
+    
+    <div class="card horizontal">
+        <div class="card-stacked">
+            <div class="card-action">
+                <h2 class="header"><em>{{ user_profile.username }}'s Chirps</em></h2>
+                <h6><em>Since: {{ user_profile.date_joined}}</em><h6>
+            </div>
+        </div>
+    </div>
+
+    {% for chirp in user_profile.chirps.all %}
+
+    <div class="card horizontal">
+        <div class="card-stacked">
+            <div class="card-action">
+                <span>Hatched on: <a href="{% url 'chirps:detail' chirp.pk %}"><em>{{ chirp.created}}</em></a></span><span><a href="{% url 'users:profile' user_profile %}" class="secondary-content"><i>{{ chirp.author.username }}</i></a></span>
+            </div>
+            <div class="card-content">
+                <p>{{ chirp.tiny_body | linebreaksbr }}</p>
+            </div>
+        </div>
+    </div>
+
+        {% endfor %}
+
+</div>
+
+{% endblock content %}
