@@ -1,0 +1,493 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Google Icons -->
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+              rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
+
+        <!-- Jquery -->
+        <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+        <title>Hello, world!</title>
+        <style>
+            .box {
+                width: 150px;
+                height: 150px; 
+                border-radius: 70%;
+                overflow: hidden;
+            }
+            .profile {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;}
+
+            .modal_overlay {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(1.5px);
+                -webkit-backdrop-filter: blur(1.5px);
+            }
+
+            .modal_window {
+                background: white;
+                backdrop-filter: blur(13.5px);
+                -webkit-backdrop-filter: blur(13.5px);
+                border-radius: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                width: 800px;
+                height: 600px;
+                position: relative;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"
+             style="position: fixed;
+                    width: 100%;">
+            <div class="container-fluid"
+                 style="justify-content: space-between;
+                        flex-wrap: nowrap;
+                        min-width: 1000px;">
+                <a class="navbar-brand" href="#">
+                    <img style="width: 100px"
+                         src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+                         alt="instagram">
+                </a>
+                <input class="form-control me-2"
+                       style="width: 400px"
+                       type="search"
+                       placeholder="Search"
+                       aria-label="Search">
+                <div>
+                    <span class="material-icons">home</span>
+                    <span class="material-icons-outlined">send</span>
+                    <span id="nav_bar_add_box" class="material-icons-outlined">add_box</span>
+                    <span class="material-icons-outlined">explore</span>
+                    <span class="material-icons-outlined">favorite_border</span>
+                </div>
+            </div>
+        </nav>
+        <!-- Main Body -->
+        <div style="display: flex;
+                    flex-direction: row;
+                    text-align: center;
+                    justify-content: center;
+                    padding-top: 57px;
+                    background-color: rgba(var(--b3f,250,250,250),1);">
+            <!-- Body Left -->
+            <div>
+                {% for feed in feeds %}
+                <div class="feed_box">
+                    <div style="width: 500px;
+                                min-width: 500px;
+                                padding-bottom:30px;
+                                margin-right: 300px;">
+                        <div style="border: 1px solid lightgray; background-color: white;">
+                            <div style="display: flex;
+                                        flex-direction: row;
+                                        align-items: center;
+                                        margin-left: 5px;">
+                                <div class="box" style="width: 40px; height: 40px;">
+                                    <img class="profile"
+                                        src="{{ feed.profile_image }}">
+                                </div>
+                                <div style="margin-left: 5px;">{{ feed.user_id }}</div>
+                            </div>
+                            <div>
+                                <img style="width: 100%;"
+                                    src="{% get_media_prefix %}{{ feed.image }}">
+                            </div>
+                            <div style="display:flex;
+                                        flex-direction:row;
+                                        justify-content: space-between;
+                                        margin-top: 15px;">
+                                <div>
+                                    <span class="material-icons-outlined" style="margin-left: 10px;">favorite_border</span>
+                                    <span class="material-icons-outlined" style="margin-left: 10px;">chat_bubble_outline</span>
+                                    <span class="material-icons-outlined" style="margin-left: 10px;">send</span>
+                                </div>
+                                <div>
+                                    <span class="material-icons-outlined" style="margin: 0 10px;">bookmark_border</span>
+                                </div>
+                            </div>
+                            <div style="text-align: left;
+                                        display:flex;
+                                        flex-direction:row;
+                                        align-items:center;
+                                        margin: 0 10px;">
+                                <div class="box" style="width: 28px; height: 28px;">
+                                    <img class="profile"
+                                        src="https://media.istockphoto.com/photos/boy-draws-with-a-brush-a-big-light-bulb-concept-of-innovation-and-picture-id1133176165?k=20&m=1133176165&s=612x612&w=0&h=j7J93Lkm7npuBWfww93Gkg9z4rko2FXJ4ThFGGrVzDE=">
+                                </div>
+                                Liked by &nbsp <b>Instagram</b> &nbsp and &nbsp <b>{{ feed.like_count }} others</b>
+                            </div>
+                            <div style= "text-align: left; margin: 0 10px; ">
+                                <b>{{ feed.user_id }}</b> {{ feed.content}}
+                            </div>
+                            <div style= "text-align: left; margin: 0 10px; font-size: 14px;">
+                                <b>aaaa</b> I wanna go there too!
+                            </div>
+                            <div style= "text-align: left; margin: 0 10px; font-size: 14px;">
+                                <b>whoau</b> Like your pics :)
+                            </div>
+                            <div>
+                                <input type="email"
+                                    class="form-control"
+                                    id="exampleFormControlInput1"
+                                    placeholder="comment here"
+                                    style="box-shadow: none;
+                                            outline: none;
+                                            border-top: 1px solid lightgray;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Body Right -->
+            <div style="width: 400px; height: 1000px; position: fixed; left: 62%;">
+                <div style="display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            margin-left: 5px;">
+                    <div class="box" style="width: 60px; height: 60px;">
+                        <img class="profile"
+                             src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg">
+                    </div>
+                    <div style="margin-left: 10px; text-align: left;">
+                        <div>
+                            <b>doing_lab3</b>
+                        </div>
+                        <div style="color:gray;">
+                            Jung
+                        </div>
+                    </div>
+                </div>
+                <div style="border: 1px solid lightgray; margin-top: 20px; padding:10px;">
+                    <div style='display:flex; flex-direction:row; justify-content: space-between; '>
+                        <div style="color: gray; font-weight: bold;">
+                            Suggestions For You
+                        </div>
+                        <div>
+                            <a href='#'
+                               style="text-decoration: none;
+                                      color:black;
+                                      font-weight:bold;">See All</a>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items: center; margin-left: 5px; justify-content: space-between">
+                        <div style="display:flex; flex-direction:row;">
+                            <div class="box" style="width: 35px; height: 35px;">
+                                <img class="profile"
+                                     src="https://www.hopkinsmedicine.org/-/media/images/health/3_-wellness/food-and-nutrition/gluten-free-diet-teaser.ashx">
+                            </div>
+                            <div style="margin-left: 10px; text-align: left; font-size: 15px;">
+                                <div>
+                                    <b>apple_yum</b>
+                                </div>
+                                <div style="color:gray; font-size: 14px">
+                                    New to Instagram
+                                </div>
+                            </div>
+                        </div>
+                        <div style="color:#009aee; font-weight:bold;">
+                            Follow
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items: center; margin-left: 5px; justify-content: space-between">
+                        <div style="display:flex; flex-direction:row;">
+                            <div class="box" style="width: 35px; height: 35px;">
+                                <img class="profile"
+                                     src="https://static.onecms.io/wp-content/uploads/sites/34/2019/06/12171428/berry_picking_1.1-05.jpg">
+                            </div>
+                            <div style="margin-left: 10px; text-align: left; font-size: 15px;">
+                                <div>
+                                    <b>berryberry203</b>
+                                </div>
+                                <div style="color:gray; font-size: 14px">
+                                    New to Instagram
+                                </div>
+                            </div>
+                        </div>
+                        <div style="color:#009aee; font-weight:bold;">
+                            Follow
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items: center; margin-left: 5px; justify-content: space-between">
+                        <div style="display:flex; flex-direction:row;">
+                            <div class="box" style="width: 35px; height: 35px;">
+                                <img class="profile"
+                                     src="https://cdn.i-scmp.com/sites/default/files/d8/images/methode/2019/12/12/2fa2638e-1ca7-11ea-8971-922fdc94075f_image_hires_174609.JPG">
+                            </div>
+                            <div style="margin-left: 10px; text-align: left; font-size: 15px;">
+                                <div>
+                                    <b>volcano_star</b>
+                                </div>
+                                <div style="color:gray; font-size: 14px">
+                                    New to Instagram
+                                </div>
+                            </div>
+                        </div>
+                        <div style="color:#009aee; font-weight:bold;">
+                            Follow
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items: center; margin-left: 5px; justify-content: space-between">
+                        <div style="display:flex; flex-direction:row;">
+                            <div class="box" style="width: 35px; height: 35px;">
+                                <img class="profile"
+                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/800px-Python-logo-notext.svg.png">
+                            </div>
+                            <div style="margin-left: 10px; text-align: left; font-size: 15px;">
+                                <div>
+                                    <b>python_learner</b>
+                                </div>
+                                <div style="color:gray; font-size: 14px">
+                                    Follow You
+                                </div>
+                            </div>
+                        </div>
+                        <div style="color:#009aee; font-weight:bold;">
+                            Follow
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items: center; margin-left: 5px; justify-content: space-between">
+                        <div style="display:flex; flex-direction:row;">
+                            <div class="box" style="width: 35px; height: 35px;">
+                                <img class="profile"
+                                     src="https://www.freecodecamp.org/news/content/images/2021/08/chris-ried-ieic5Tq8YMk-unsplash.jpg">
+                            </div>
+                            <div style="margin-left: 10px; text-align: left; font-size: 15px;">
+                                <div>
+                                    <b>coder</b>
+                                </div>
+                                <div style="color:gray; font-size: 14px">
+                                    Follow You
+                                </div>
+                            </div>
+                        </div>
+                        <div style="color:#009aee; font-weight:bold;">
+                            Follow
+                        </div>
+                    </div>
+                </div>
+                <div style="color:gray;
+                            text-align:left;
+                            padding-top:20px;
+                            font-size:14px;">
+                    About ꠨ Help ꠨ Press ꠨ API ꠨ Jobs ꠨ Privacy ꠨ Terms ꠨
+                    <br>
+                    Locations ꠨ Top Accounts ꠨ Hashtags ꠨ Language
+                </div>
+                <div style="color:gray;
+                            text-align:left;
+                            padding-top:20px;
+                            font-size:14px;">
+                    © 2022 INSTAGRAM FROM META
+                </div>
+            </div>
+        </div>
+
+
+        <!-- first modal -->
+        <div id="first_modal" class="modal_overlay">
+            <div class="modal_window">
+                <div style="display:flex; flex-direction: row; justify-content: space-between;">
+                    <div style="width40px; background: gray;">
+                        Front
+                    </div>
+                    <div>
+                        Upload New image
+                    </div>
+                    <div style="width40px; background: gray;">
+                        <span class="material-icons-outlined">
+                            close
+                        </span>
+                    </div>
+                </div>
+                <div class="img_upload_space" style="border-top: 1px solid lightgray; width:778px; height:540px; margin-top:10px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- second modal -->
+        <div id="second_modal" class="modal_overlay">
+            <div class="modal_window">
+                <div style="display:flex; flex-direction: row; justify-content: space-between;">
+                    <div style="width40px; background: gray;">
+                        Front
+                    </div>
+                    <div>
+                        Upload New image
+                    </div>
+                    <div style="width40px; background: gray;">
+                        <span class="material-icons-outlined">
+                            close
+                        </span>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid lightgray; display:flex; flex-direction:row;">
+                    <div class="img_upload_space" style="width:500px; height:540px; margin-top:10px;">
+                    </div>
+                    <div style="border-left: 1px solid lightgray;">
+                        <div>
+                            <textarea id="input_feed_content"
+                                        class="form-control"
+                                        style="width:276px; height:508px;"
+                                        id="exampleFormControlTextarea1"
+                                        rows="5">
+                            </textarea>
+                        </div>
+                        <button id="feed_create_button" type="button" class="btn btn-primary" style="width:100%">Post</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- script $ -->
+        <script>
+
+            let files;
+
+            $('#nav_bar_add_box').click(function(){
+                $('#first_modal').css({
+                    display: 'flex'
+                });
+
+                $(document.body).css({
+                    overflow: 'hidden'
+                });
+            });
+
+            $('#feed_create_button').click(function (){
+                alert("You posted it!")
+
+                let file = files[0]; 
+                let image = files[0].name;
+                let content = $("#input_feed_content").val()
+                let user_id = "doing_lab3"
+                let profile_image = "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg"
+
+                let fd = new FormData();
+                
+                fd.append("file", file);
+                fd.append("image", image);
+                fd.append("content", content);
+                fd.append("user_id", user_id);
+                fd.append("profile_image", profile_image);
+
+                $.ajax({
+                        url: "/content/upload",
+                        data: fd, 
+                        method: "POST",
+                        processData: false,
+                        contentType: false,
+                        success: function(data){
+                            console.log("Good job");
+                        },
+                        error: function(request, status, error) {
+                            console.log("Error")
+                        },
+                        complete: function (){
+                            console.log("Done")
+                            location.replace("/main")
+                        }
+                    });
+            });
+
+
+
+            $('.img_upload_space')
+                .on("dragover", dragOver)
+                .on("dragleave", dragOver)
+                .on("drop", uploadFiles);
+           
+            function dragOver(e){
+                e.stopPropagation();
+                e.preventDefault();
+                if (e.type == "dragover") {
+                    $(e.target).css({
+                        "background-color": "black",
+                        "outline-offset": "-20px"
+                    });
+                } else {
+                    $(e.target).css({
+                        "outline-offset": "-10px"
+                    });
+                }
+            
+            }
+            
+            function uploadFiles(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                dragOver(e); //1
+             
+                e.dataTransfer = e.originalEvent.dataTransfer; //2
+                files = e.target.files || e.dataTransfer.files;
+                console.log("You uploaded something" + files[0].name);
+             
+                if (files.length > 1) {
+                    alert('Please upload one at a time');
+                    return;
+                }
+
+                if (files[0].type.match(/image.*/)) {
+
+                    $('#first_modal').css({
+                        display: 'none'
+                    });
+
+                    $('#second_modal').css({
+                        display: 'flex'
+                    });
+                    
+                    $('.img_upload_space').css({
+                        "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                        "outline": "none",
+                        "background-size": "100%",
+                        "background-repeat": "no-repeat",
+                        "background-position": "center"
+                    });
+                }else{
+                  alert('이미지가 아닙니다.');
+                  return;
+                }
+                
+            }
+            
+        </script>
+
+
+        <!-- Optional JavaScript; choose one of the two! -->
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    </body>
+</html>
