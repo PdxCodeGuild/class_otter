@@ -19,7 +19,14 @@
         {
             "priority": "high",
             "text": "Complete my labs"
+        },
+        {
+            "priority": "high",
+            "text": "Pet The Dezzi"
+        },
+        {
+            "priority": "high",
+            "text": "Pet The Bunbun"
         }
-        
     ]
 }
