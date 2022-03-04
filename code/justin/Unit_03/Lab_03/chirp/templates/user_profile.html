@@ -7,9 +7,9 @@
 
     {% for post in user_profile.posts.all %}
         <div class="post-entry">
-            <h2><a href="{% url 'posts:detail' post.pk %}">{{ post.title }}</a></h2>
+            <h2><a href="{% url 'posts:detail' post.pk %}">{{ post }}</a></h2>
             <h4><em><a href="{% url 'users:profile' post.author.username %}">{{ post.author.username }}</a></em></h4>
-            <p>{{ post.body|linebreaksbr }}</p>
+            <p>{{ post.message|linebreaksbr }}</p>
         </div>
     {% endfor %}
 

@@ -6,7 +6,9 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Save">
+        <button class="btn waves-effect waves-light" name="action">
+            Save<i class="material-icons right">save_as</i>
+        </button>
     </form>
 
 {% endblock content %}

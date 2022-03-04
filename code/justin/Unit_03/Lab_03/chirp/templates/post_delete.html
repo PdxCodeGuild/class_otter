@@ -5,8 +5,10 @@
     <h1>Delete post</h1>
     <form action="" method="post">
         {% csrf_token %}
-        <p>Are you sure you want to delete "{{ post.title }}"?</p>
-        <input type="submit" value="Confirm">
+        <p>Are you sure you want to delete "{{ post }}"?</p>
+        <button class="btn waves-effect waves-light" name="action">
+            Confirm<i class="material-icons right">check_circle</i>
+        </button>
     </form>
 
 {% endblock content %}

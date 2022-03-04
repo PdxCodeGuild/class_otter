@@ -3,16 +3,20 @@
 {% block content %}
 
     <div class="post-entry">
-        <h2>{{ post.title }}</h2>
-        <h4><em><a href="#">{{ post.author.username }}</a></em></h4>
-        <h4><em>Posted on {{ post.created }}</em></h4>
-        <h4><em>Last updated on {{ post.updated }}</em></h4>
-        <p>{{ post.body|linebreaksbr }}</p>
+        <h2>{{ post }}</h2>
+        <span><em><a href="#">{{ post.author.username }}</a></em></span>
+        <div class="right">
+            <p>Posted: {{ post.created_at }}</p>
+        {% if not post.updated_at == None %}
+            <p><em>Update: {{ post.updated_at }}</em></p>
+        {% endif %}
+        </div>
+        <p>{{ post.message|linebreaksbr }}</p>
     </div>
 
     {% if user == post.author %}
-        <p><a href="{% url 'posts:edit' post.pk %}">+ Edit Blog Post</a></p>
-        <p><a href="{% url 'posts:delete' post.pk %}">+ Delete Blog Post</a></p>
+        <p><a class="btn waves-effect waves-light" href="{% url 'posts:edit' post.pk %}"><i class="material-icons right">edit</i>Edit Post</a></p>
+        <p><a class="btn waves-effect waves-light" href="{% url 'posts:delete' post.pk %}"><i class="material-icons right">delete_forever</i>Delete Post</a></p>
     {% endif %}
 
 {% endblock content %}

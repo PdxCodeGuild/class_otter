@@ -1,4 +1,5 @@
 from django.views import generic
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.conf import settings
@@ -16,4 +17,4 @@ class UserProfileView(generic.DetailView):
     context_object_name = 'user_profile'
 
     def get_object(self):
-        return get_object_or_404(settings.AUTH_USER_MODEL, username=self.kwargs['username'])
+        return get_object_or_404(get_user_model(), username=self.kwargs['username'])
