@@ -1,0 +1,12 @@
+<input id="name_input" type="text" value='i n i t i a l   v a l u e'/>
+
+<button type="button" onclick="doTheThing()">'Alert' the value entered in the 'input'.</button>
+
+<script>
+    function doTheThing() {
+        let name_input = document.querySelector('#name_input')
+        let name_value = name_input.value
+        alert(name_value)
+    }
+
+</script>
