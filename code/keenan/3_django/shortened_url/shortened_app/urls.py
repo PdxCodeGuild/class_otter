@@ -5,6 +5,6 @@ from . import views
 
 app_name = 'shortened_app'
 urlpatterns = [
-    path('', views.index, name='index')
-    
+    path('', views.index, name='index'),
+    path('url_shortener', views.create, name='create')
 ]

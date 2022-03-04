@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'shortened_app/index.html')
 
 def create(request):
-    return HttpResponse('Create')
+    return HttpResponse('create')
 
 
 # def redirect(request)

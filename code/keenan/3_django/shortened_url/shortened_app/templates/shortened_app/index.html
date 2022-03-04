@@ -3,13 +3,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>TITLE</title>
+        <title>URL Shortener</title>
     </head>
     <body>
         <h1>URL Shortener</h1>
-        {% comment %} this will need a link to my urls.py urlpatterns like path('url_shortener', views.create, name='create') {% endcomment %}
         <form action="{% url 'shortened_app:create' %}" method="post">
          {% csrf_token %}
         <input type="text" id="url_text" name="url" required>
