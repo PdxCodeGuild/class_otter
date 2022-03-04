@@ -10,12 +10,16 @@ header{
     width: 100%;
     background-color: rgb(128, 128, 128);
 }
-.greet{
+.greet h2 {
+    color: yellow;
     margin-right: 20px;
+}
+.greet h2 a{
+    color: yellow;
 }
 
 body{
-    
+    background-color: rgb(134, 175, 250);
     margin: 10px;
 }
 .chirps{
@@ -40,7 +44,7 @@ header h1 a{
 footer{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     position: fixed;
     bottom: 0;
     padding: 10px;    
