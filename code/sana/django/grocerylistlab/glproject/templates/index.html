@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana's GroceryList- Django Lab</title>
+</head>
+<body>
+    <h1> Grocery List - Django Lab</h1>
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="submit" value="submit" />
+            {% comment %} <input type="text" name="input_text" placeholder="item"/>
+            <input type="text" name="input_des" placeholder="description"/>
+            <input type="checkbox" id="complete" name="check" value="Completed"> {% endcomment %}
+            {% comment %} <button type="submit">submit</button> {% endcomment %}
+        </form>
+    </div> 
+    <div>
+        <ul id="myGL">
+            {% for groitem in grolist %}
+            <li> 
+                {{groitem.name}} <span class="close"><a href"delete/{{groitem.name}}">Delete</span>
+            </li>
+            {% endfor %}
+    </div>
+</body>
+</html>
