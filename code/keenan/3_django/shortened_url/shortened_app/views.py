@@ -5,6 +5,11 @@ from django.http import HttpResponseRedirect
 # reverse lookup
 from django.urls import reverse
 
+# imports for creating a random url
+from random import choice
+from string import ascii_letters, digits
+
+
 
 # 2 views
 # One to submit a url
@@ -16,6 +21,9 @@ def index(request):
     return render(request, 'shortened_app/index.html')
 
 def create(request):
+    url_length = 7
+    available_chars = ascii_letters + digits
+    
     return HttpResponse('create')
 
 
