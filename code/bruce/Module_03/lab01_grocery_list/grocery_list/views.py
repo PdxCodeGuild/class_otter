@@ -27,7 +27,7 @@ class IndexView(generic.ListView):
         # print(context)
         # print(context.keys())
         context['deletable_groceries'] = GroceryItem.objects.filter(deleted = False)
-                # context[] = <another item>
+        # context[] = <another item>
         return context
 
     def get_queryset(self):
@@ -50,7 +50,8 @@ def add(request):
     # as new grocery item:
     if item_description_to_add != '':
         # Create an grocery item from the 'description':
-        GroceryItem.objects.create(description=item_description_to_add)
+        grocery_item = GroceryItem.objects.create(description=item_description_to_add)
+        print(f"Added Item: {grocery_item}")
     else:
         print("No item added.")
 
@@ -97,7 +98,7 @@ def uncomplete(request, pk):
     item = get_object_or_404(GroceryItem, pk=pk)
     # 'uncomplete' the item:
     item.uncomplete_item()
-    print(f"Uncompleted item: {item}")
+    print(f"Uncompleted Item: {item}")
     # Save the state of the item:
     item.save()
 
@@ -112,7 +113,7 @@ def delete(request, pk):
     item = get_object_or_404(GroceryItem, pk=pk)
     # 'delete()' the item (set 'deleted' flag to True):
     item.delete()
-    print(f"Deleted item: {item}")
+    print(f"Deleted Item: {item}")
     # Save the state of the item:
     item.save()
 
