@@ -13,11 +13,10 @@
               rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
-
         <!-- Jquery -->
         <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-        <title>Hello, world!</title>
+        <title>Instagram</title>
         <style>
             .box {
                 width: 150px;
@@ -43,6 +42,7 @@
                 background: rgba(0, 0, 0, 0.8);
                 backdrop-filter: blur(1.5px);
                 -webkit-backdrop-filter: blur(1.5px);
+                z-index:1000;
             }
 
             .modal_window {
@@ -59,15 +59,18 @@
         </style>
     </head>
     <body>
+
+
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light"
              style="position: fixed;
-                    width: 100%;">
+                    width: 100%;
+                    z-index:999;">
             <div class="container-fluid"
                  style="justify-content: space-between;
                         flex-wrap: nowrap;
                         min-width: 1000px;">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/main">
                     <img style="width: 100px"
                          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
                          alt="instagram">
@@ -77,12 +80,27 @@
                        type="search"
                        placeholder="Search"
                        aria-label="Search">
-                <div>
-                    <span class="material-icons">home</span>
-                    <span class="material-icons-outlined">send</span>
-                    <span id="nav_bar_add_box" class="material-icons-outlined">add_box</span>
-                    <span class="material-icons-outlined">explore</span>
-                    <span class="material-icons-outlined">favorite_border</span>
+                <div style="display: flex">
+                    <a href="/main" style="color:black;"><span class="material-icons" style="padding-right: 10px;">home</span></a>
+                    <span id="nav_bar_add_box" class="material-icons-outlined" style="padding-right: 10px; cursor:pointer;">add_box</span>
+
+
+                    <div class="dropdown">
+                        <a href="#" role="button" id="dropdownMenuLink"  data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="box" style="width: 28px; height: 28px;">
+                                <img class="profile"
+                                    src="{% get_media_prefix %}{{ user.profile_image }}">
+
+                            </div> 
+                        </a>
+
+                      
+                        <ul class="dropdown-menu" style="left:-157px;" aria-labelledby="dropdownMenuLink">
+                          <li><a class="dropdown-item" href="/content/profile">Profile</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/user/logout">Log Out</a></li>
+                        </ul>
+                      </div>
                 </div>
             </div>
         </nav>
@@ -108,9 +126,9 @@
                                         margin-left: 5px;">
                                 <div class="box" style="width: 40px; height: 40px;">
                                     <img class="profile"
-                                        src="{{ feed.profile_image }}">
+                                        src="{% get_media_prefix %}{{ feed.profile_image }}">
                                 </div>
-                                <div style="margin-left: 5px;">{{ feed.user_id }}</div>
+                                <div style="margin-left: 5px;">{{ feed.nickname }}</div>
                             </div>
                             <div>
                                 <img style="width: 100%;"
@@ -121,12 +139,22 @@
                                         justify-content: space-between;
                                         margin-top: 15px;">
                                 <div>
-                                    <span class="material-icons-outlined" style="margin-left: 10px;">favorite_border</span>
-                                    <span class="material-icons-outlined" style="margin-left: 10px;">chat_bubble_outline</span>
-                                    <span class="material-icons-outlined" style="margin-left: 10px;">send</span>
+                                    <span id="favorite_{{ feed.id }}" feed_id="{{feed.id}}" class="favorite material-icons-outlined" style="margin-left: 10px; color: red; cursor:pointer">
+                                        {% if feed.is_liked %}
+                                            favorite
+                                        {% else %}
+                                            favorite_border
+                                        {% endif %}
+                                    </span>
                                 </div>
                                 <div>
-                                    <span class="material-icons-outlined" style="margin: 0 10px;">bookmark_border</span>
+                                    <span id= "bookmark_{{ feed.id}}" feed_id="{{feed.id}}" class="bookmark material-icons-outlined" style="margin: 0 10px; cursor:pointer;">
+                                        {% if feed.is_marked %}
+                                        bookmark
+                                        {% else %}
+                                        bookmark_border
+                                        {% endif %}
+                                    </span>
                                 </div>
                             </div>
                             <div style="text-align: left;
@@ -141,22 +169,27 @@
                                 Liked by &nbsp <b>Instagram</b> &nbsp and &nbsp <b>{{ feed.like_count }} others</b>
                             </div>
                             <div style= "text-align: left; margin: 0 10px; ">
-                                <b>{{ feed.user_id }}</b> {{ feed.content}}
+                                <b>{{ feed.nickname }}</b> {{ feed.content}}
                             </div>
-                            <div style= "text-align: left; margin: 0 10px; font-size: 14px;">
-                                <b>aaaa</b> I wanna go there too!
+                            <div id="reply_list_{{ feed.id }}">
+                            {% for reply in feed.reply_list %}
+                                <div style= "text-align: left; margin: 0 10px; font-size: 14px;"><b>{{reply.nickname}}</b> {{reply.reply_content}}</div>
+                            {% endfor %}
                             </div>
-                            <div style= "text-align: left; margin: 0 10px; font-size: 14px;">
-                                <b>whoau</b> Like your pics :)
-                            </div>
-                            <div>
-                                <input type="email"
+
+
+                            <div style="display:flex; flex-direction: row; align-items:center; border-top: solid 1px lightgray">
+                                <input id="reply_{{ feed.id }}" type="text"
                                     class="form-control"
                                     id="exampleFormControlInput1"
                                     placeholder="comment here"
                                     style="box-shadow: none;
                                             outline: none;
                                             border-top: 1px solid lightgray;">
+
+                                <div feed_id = "{{ feed.id }}" class="upload_reply" style="width: 50px; color:cornflowerblue; font-weight:bold;">
+                                    Post
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,25 +197,26 @@
                 {% endfor %}
             </div>
             <!-- Body Right -->
-            <div style="width: 400px; height: 1000px; position: fixed; left: 62%;">
+            <div style="width: 400px; height: 1000px; position: fixed; left: 62%; z-index:0;">
                 <div style="display: flex;
                             flex-direction: row;
                             align-items: center;
-                            margin-left: 5px;">
+                            margin-left: 5px;
+                            padding-top: 15px;">
                     <div class="box" style="width: 60px; height: 60px;">
                         <img class="profile"
-                             src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg">
+                             src="{% get_media_prefix %}{{ user.profile_image }}">
                     </div>
                     <div style="margin-left: 10px; text-align: left;">
                         <div>
-                            <b>doing_lab3</b>
+                            <b>{{ user.nickname }}</b>
                         </div>
                         <div style="color:gray;">
-                            Jung
+                            {{ user.name }}
                         </div>
                     </div>
                 </div>
-                <div style="border: 1px solid lightgray; margin-top: 20px; padding:10px;">
+                <div style="border: 1px solid lightgray; margin-top: 35px; padding:10px;">
                     <div style='display:flex; flex-direction:row; justify-content: space-between; '>
                         <div style="color: gray; font-weight: bold;">
                             Suggestions For You
@@ -312,14 +346,13 @@
         <div id="first_modal" class="modal_overlay">
             <div class="modal_window">
                 <div style="display:flex; flex-direction: row; justify-content: space-between;">
-                    <div style="width40px; background: gray;">
-                        Front
+                    <div style="width40px;">
                     </div>
                     <div>
                         Upload New image
                     </div>
-                    <div style="width40px; background: gray;">
-                        <span class="material-icons-outlined">
+                    <div style="width40px;">
+                        <span class="modal_close material-icons-outlined" style="cursor:pointer;">
                             close
                         </span>
                     </div>
@@ -333,14 +366,13 @@
         <div id="second_modal" class="modal_overlay">
             <div class="modal_window">
                 <div style="display:flex; flex-direction: row; justify-content: space-between;">
-                    <div style="width40px; background: gray;">
-                        Front
+                    <div style="width40px;">
                     </div>
                     <div>
                         Upload New image
                     </div>
-                    <div style="width40px; background: gray;">
-                        <span class="material-icons-outlined">
+                    <div style="width40px;">
+                        <span class="modal_close material-icons-outlined">
                             close
                         </span>
                     </div>
@@ -369,6 +401,116 @@
         <!-- script $ -->
         <script>
 
+            $(".bookmark").click(function(event){
+                let feed_id = event.target.attributes.getNamedItem('feed_id').value;
+                let bookmark_id = event.target.id;
+                console.log(bookmark_id)
+                let bookmark_text = $.trim($('#'+bookmark_id).html())
+                console.log(bookmark_text)
+
+                if(bookmark_text == "bookmark"){
+                    $('#'+bookmark_id).html('bookmark_border');
+                }else{
+                    $('#'+bookmark_id).html('bookmark')
+                }
+
+                $.ajax({
+                    url: "/content/bookmark",
+                    data: {
+                        feed_id : feed_id,
+                        bookmark_text : bookmark_text
+                    }, 
+                    method: "POST",
+                    success: function(data) {
+                        console.log("Good job");
+                    },
+                    error: function(request, status, error) {
+                        console.log("Error");
+                    },
+                    complete: function (){
+                        console.log("Done");
+                    }
+                })
+            })
+
+            $(".favorite").click(function(event){
+                let feed_id = event.target.attributes.getNamedItem('feed_id').value;
+                let favorite_id = event.target.id;
+                console.log(favorite_id)
+                let favorite_text = $.trim($('#'+favorite_id).html())
+                console.log(favorite_text)
+
+                if(favorite_text == "favorite"){
+                    $('#'+favorite_id).html('favorite_border');
+                }else{
+                    $('#'+favorite_id).html('favorite')
+                }
+
+                $.ajax({
+                    url: "/content/like",
+                    data: {
+                        feed_id : feed_id,
+                        favorite_text : favorite_text
+                    }, 
+                    method: "POST",
+                    success: function(data) {
+                        console.log("Good job");
+                    },
+                    error: function(request, status, error) {
+                        console.log("Error");
+                    },
+                    complete: function (){
+                        console.log("Done");
+                    }
+                })
+            })
+
+
+
+            $(".upload_reply").click(function(event){
+                let feed_id = event.target.attributes.getNamedItem('feed_id').value;
+                let reply_id = 'reply_' + feed_id;
+                let reply_content = $('#' + reply_id).val();
+
+
+                if(reply_content.length <= 0){
+                    alert("Comment Something");
+                    return 0;
+                }
+
+                $.ajax({
+                    url: "/content/reply",
+                    data: {
+                        feed_id : feed_id,
+                        reply_content : reply_content
+                    }, 
+                    method: "POST",
+                    success: function(data) {
+                        console.log("Good job");
+                        alert("You commented it!")
+                        $("#reply_list_" + feed_id).append("<div style='margin: 0 20px; text-align: left; font-size: 14px;'><b>{{ user.nickname}}</b> "+ reply_content +"</div>")
+                        {% comment %} location.replace('/main'); {% endcomment %}
+                    },
+                    error: function(request, status, error) {
+                        console.log("Error");
+                    },
+                    complete: function (){
+                        console.log("Done");
+                        $('#' + reply_id).val('')
+                    }
+                });
+                    
+            });
+
+            $('.modal_close').click(function(){
+                $("#first_modal").css({
+                    display:"none"
+                })
+                $("#second_modal").css({
+                    display:"none"
+                });
+            });
+
             let files;
 
             $('#nav_bar_add_box').click(function(){
@@ -387,16 +529,12 @@
                 let file = files[0]; 
                 let image = files[0].name;
                 let content = $("#input_feed_content").val()
-                let user_id = "doing_lab3"
-                let profile_image = "https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/service/a85d0594017900001.jpg"
 
                 let fd = new FormData();
                 
                 fd.append("file", file);
                 fd.append("image", image);
                 fd.append("content", content);
-                fd.append("user_id", user_id);
-                fd.append("profile_image", profile_image);
 
                 $.ajax({
                         url: "/content/upload",
@@ -472,7 +610,7 @@
                         "background-position": "center"
                     });
                 }else{
-                  alert('이미지가 아닙니다.');
+                  alert('No image.');
                   return;
                 }
                 
