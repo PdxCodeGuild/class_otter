@@ -17,7 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('chirps.urls')),
+    path('chirp/', include('chirps.urls')),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
+    # This is used to start adding the users functionality.
+    path('', include('django.contrib.auth.urls')),
+    path('users/', include('users.urls')),
 ]

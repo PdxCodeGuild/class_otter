@@ -57,6 +57,7 @@ ROOT_URLCONF = 'chirp_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # Modified this to add "BASE_DIR / 'templates'".
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {

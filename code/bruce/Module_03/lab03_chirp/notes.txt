@@ -22,6 +22,11 @@ https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab03-chir
 
 # Activate virtual environment:
     # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+    # BASH:
         source C:/Users/Bruce/.virtualenvs/lab03_chirp-joLf1SIb/Scripts/activate
     # PS:
         C:\Users\Bruce\.virtualenvs\lab03_chirp-joLf1SIb\Scripts\activate.ps1
@@ -51,16 +56,7 @@ pipenv install django==3.2 docutils==0.18.1
 
 # 2 #
 # Activate virtual environment:
-    # BASH:
-        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
-    # PS:
-        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
 
-# Activate virtual environment:
-    # BASH:
-        source C:/Users/Bruce/.virtualenvs/lab03_chirp-joLf1SIb/Scripts/activate
-    # PS:
-        C:\Users\Bruce\.virtualenvs\lab03_chirp-joLf1SIb\Scripts\activate.ps1
 
 # 03 #
 # Create Django project:
@@ -89,14 +85,6 @@ INSTALLED_APPS = [
 # Test server response:
 python .\manage.py runserver 8005
 http://127.0.0.1:8005/
-
-# 10 #
-# Migrations:
-python manage.py makemigrations <appname>
-python .\manage.py makemigrations chirps
-
-python manage.py sqlmigrate chirps 0001
-python manage.py migrate
 
 # NOTE: Create Custom user model here, in the future.
 https://github.com/perennialAutodidact/django_guides/blob/master/custom_user_model.md
@@ -177,8 +165,23 @@ python .\manage.py makemigrations users
 python manage.py sqlmigrate users 0001
 python manage.py migrate
 
+# 14 #
+#### A bunch of other modifications and setup ####
+
 
 grey-fuzziness : 1234test
 
 
 overflow: hidden; white-space: nowrap;
+
+
+# 15 #
+# Adding CustomUser functionality:
+https://github.com/perennialAutodidact/django_guides/blob/master/custom_user_model.md
+
+# Migrations:
+python manage.py makemigrations <appname>
+python .\manage.py makemigrations users
+
+python manage.py sqlmigrate users 000
+python manage.py migrate

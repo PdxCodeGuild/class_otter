@@ -5,6 +5,7 @@
     <h4>How about a new Chirp?</h4>
     <form action="" method="post">
         {% csrf_token %}
+        
         {{ form.as_p }}
 
         {% comment %} <input type="submit" value="Chirp!"> {% endcomment %}

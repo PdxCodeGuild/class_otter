@@ -1,0 +1,252 @@
+# Assignment:
+https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab03-chirp.md
+
+# Resources:
+
+    # Django Project Setup:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+
+    # Django admin documentation generator:
+    https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+
+    # Docutils:
+    https://docutils.sourceforge.io/
+
+    # Django tutorial:
+    https://docs.djangoproject.com/en/4.0/intro/tutorial01/
+
+    # Django customizing:
+    https://docs.djangoproject.com/en/4.0/topics/auth/customizing/
+
+    # Custom User model:
+    https://github.com/perennialAutodidact/django_guides/blob/master/custom_user_model.md
+
+    ##### This seems like a better custom user guide #####
+    https://learndjango.com/tutorials/django-custom-user-model
+
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/lab03_chirp_custom_user-VkSsAfH9/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\lab03_chirp_custom_user-VkSsAfH9\Scripts\activate.ps1
+
+# Start server
+python .\manage.py runserver 8006
+
+# Link to 'home':
+http://127.0.0.1:8006/chirp/
+
+
+### STEP ###
+# Create virtual environment and install 'Django' and 'docutils':
+pipenv install django==3.2 docutils==0.18.1
+
+
+### STEP ###
+# Activate virtual environment.
+
+
+### STEP ###
+# Create Django project:
+django-admin startproject $PROJECT_NAME .
+django-admin startproject chirp_project .
+
+
+### STEP ###
+# Create 'chirps' app:
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp chirps
+
+
+### STEP ###
+# Check server runs, check for the green rocket:
+python .\manage.py runserver 8006
+http://127.0.0.1:8006/
+
+
+### STEP ###
+# add "'chirps.apps.ChirpsConfig'" to 'INSTALLED_APPS' in chirp_project/settings.py.
+# add "'django.contrib.admindocs'" to 'INSTALLED_APPS' in chirp_project/settings.py.
+INSTALLED_APPS = [
+    ...,
+    'chirps.apps.ChirpsConfig',
+    'django.contrib.admindocs',
+]
+
+
+### STEP ###
+### OPTIONAL ###
+# Check server runs, check for the green rocket:
+python .\manage.py runserver 8006
+http://127.0.0.1:8006/
+
+
+### STEP ###
+# Create 'users' app:
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp users
+
+
+### STEP ###
+# add "'chirps.apps.UsersConfig'" to 'INSTALLED_APPS' in chirp_project/settings.py.
+INSTALLED_APPS = [
+    ...,
+    'chirps.apps.UsersConfig',
+]
+
+
+### STEP ###
+https://github.com/perennialAutodidact/django_guides/blob/master/custom_user_model.md
+https://docs.djangoproject.com/en/4.0/topics/auth/customizing/
+# Add to users/models.py
+from django.contrib.auth.models import AbstractUser
+# Can we use 'User' as our class name?
+class CustomUser(AbstractUser):
+    pass
+
+    def __str__(self):
+        return self.username
+
+
+### STEP ###
+# Add 'AUTH_USER_MODEL' to chirp_project/settings.py:
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+### STEP ###
+# Add to users/admin.py:
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+admin.site.register(CustomUser, UserAdmin)
+
+
+### STEP ###
+# Add 'is_moderator' to users/models.py:
+is_moderator = models.BooleanField("moderator status", default=False, help_text="Designates whether a user should be treated as a moderator.")
+
+
+### STEP ###
+# Test server admin:
+python .\manage.py runserver 8006
+http://127.0.0.1:8006/admin/
+
+
+### STEP ###
+# Add 'path('admin/doc/', include('django.contrib.admindocs.urls'))' (before path() with 'admin') to chirp_project/urls.py:
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
+    path('admin/', admin.site.urls),
+]
+
+### STEP ###
+# Create a view.
+# Create chirps/urls.py:
+
+
+### STEP ###
+# Create 'Chirp' model:
+author = models.ForeignKey('settings.AUTH_USER_MODEL', related_name='chirps', on_delete=models.CASCADE)
+
+
+##### Lots of errors #####
+# NOTE: Need to pass the variable "settings.AUTH_USER_MODEL" and not the string "'settings.AUTH_USER_MODEL'" into the Chirp model. Needed this change to even have 'makemigrations' succeed.
+author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='chirps', on_delete=models.CASCADE)
+
+
+### STEP ###
+# Migrations:
+##### ONLY DO THIS AFTER ADDING 'AUTH_USER_MODEL' TO chirp_project/settings.py #####
+python .\manage.py makemigrations users
+python manage.py sqlmigrate users NNNN
+
+python .\manage.py makemigrations chirps
+python manage.py sqlmigrate chirps NNNN
+
+python manage.py migrate users
+python manage.py migrate
+
+
+### STEP ###
+# Create Superuser:
+python manage.py createsuperuser
+
+
+### STEP ###
+# Test server admin:
+python .\manage.py runserver 8006
+http://127.0.0.1:8006/admin/
+
+
+### STEP ###
+# Create view, url, html.
+
+chirps/views.py:
+    class ChirpListView(ListView):
+
+chirps/urls.py:
+    from django.urls import path
+    from . import views
+
+    app_name = 'chirps'
+    urlpatterns = [
+        path('', views.ChirpListView.as_view(), name='home')
+    ]
+
+home.html:
+    {% for chirp in chirp_list %}
+    {{ chirp }}
+    {% endfor %}
+
+
+### STEP ###
+# Test app server:
+python .\manage.py runserver 8006
+http://127.0.0.1:8006/chirp/
+
+
+### STEP ###
+# Add 'STATICFILES_DIRS' to chirp_project/settings.py
+# To locate the css, js, images, etc:
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
+https://github.com/django/django/blob/main/django/contrib/auth/urls.py
+### STEP ###
+# Add to chirp_project/urls.py 'urlpatterns':
+path('', include('django.contrib.auth.urls')),
+
+
+### STEP ###
+# Add a 'login' page:
+templates/registration/login.html.
+
+
+### STEP ###
+# Add to chirp_project/settings.py:
+# This specifies where user is redirected after login.
+LOGIN_REDIRECT_URL = 'chirps:home'
+
+
+### STEP ###
+# Add to chirp_project/settings.py:
+LOGOUT_REDIRECT_URL = 'chirps:home'
+
+
+### STEP ###
+# Added 'LoginRequiredMixin' to CreateView.
+
+
+### STEP ###
+# Customize admin interface.
+https://docs.djangoproject.com/en/4.0/ref/contrib/admin/
+
+

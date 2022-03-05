@@ -1,0 +1,20 @@
+AttributeError at /users/signup/
+Manager isn't available; 'auth.User' has been swapped for 'users.CustomUser'
+Request Method:	POST
+Request URL:	http://127.0.0.1:8006/users/signup/
+Django Version:	3.2
+Exception Type:	AttributeError
+Exception Value:	
+Manager isn't available; 'auth.User' has been swapped for 'users.CustomUser'
+Exception Location:	C:\Users\Bruce\.virtualenvs\lab03_chirp_custom_user-VkSsAfH9\lib\site-packages\django\db\models\manager.py, line 187, in __get__
+Python Executable:	C:\Users\Bruce\.virtualenvs\lab03_chirp_custom_user-VkSsAfH9\Scripts\python.exe
+Python Version:	3.10.2
+Python Path:	
+['C:\\Users\\Bruce\\Programming\\class_otter\\code\\bruce\\Module_03\\lab03_chirp_custom_user',
+ 'C:\\Users\\Bruce\\Programming',
+ 'C:\\Users\\Bruce\\AppData\\Local\\Programs\\Python\\Python310\\python310.zip',
+ 'C:\\Users\\Bruce\\AppData\\Local\\Programs\\Python\\Python310\\DLLs',
+ 'C:\\Users\\Bruce\\AppData\\Local\\Programs\\Python\\Python310\\lib',
+ 'C:\\Users\\Bruce\\AppData\\Local\\Programs\\Python\\Python310',
+ 'C:\\Users\\Bruce\\.virtualenvs\\lab03_chirp_custom_user-VkSsAfH9',
+ 'C:\\Users\\Bruce\\.virtualenvs\\lab03_chirp_custom_user-VkSsAfH9\\lib\\site-packages']

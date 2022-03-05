@@ -8,7 +8,7 @@
 
         <div class="card-stacked">
             <div class="card-action">
-                <span><a href="{% url 'users:profile' chirp.author %}">{{ chirp.author.username }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
+                <span><a href="#">{{ chirp.author.username }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
             </div>
             <div class="card-content">
                 <form action="" method="post">
@@ -26,4 +26,3 @@
 </div>
 
 {% endblock content %}
-

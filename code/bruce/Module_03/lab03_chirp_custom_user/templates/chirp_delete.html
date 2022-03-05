@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col s12 m7">
+    <h4 class="header">Delete a Tiny Chirp</h4>
+    <div class="card horizontal">
+
+        <div class="card-stacked">
+            <div class="card-action">
+                <span><a href="#">{{ chirp.author.username }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
+            </div>
+            <div class="card-content">
+                <p>{{ chirp.tiny_body }}</p><br>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <p>Are you sure you want to delete the Chirp?</p><br>
+                    <button class="btn waves-effect waves-light light-blue lighten-1" type="submit">Confirm deletion of Chirp
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>                   
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
