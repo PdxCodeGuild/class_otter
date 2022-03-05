@@ -11,19 +11,32 @@
     <div>
         <form method="POST" action="">
             {% csrf_token %}
-            <input type="submit" value="submit" />
-            {% comment %} <input type="text" name="input_text" placeholder="item"/>
-            <input type="text" name="input_des" placeholder="description"/>
-            <input type="checkbox" id="complete" name="check" value="Completed"> {% endcomment %}
-            {% comment %} <button type="submit">submit</button> {% endcomment %}
+            <input type="text" name="name" placeholder="name"/>
+            <input type="text" name="description" placeholder="description"/>
+             <button type="submit">submit</button> 
         </form>
     </div> 
     <div>
         <ul id="myGL">
             {% for groitem in grolist %}
-            <li> 
-                {{groitem.name}} <span class="close"><a href"delete/{{groitem.name}}">Delete</span>
-            </li>
+                <h2> {{groitem.name}}</h2>  
+                    <h3>{{groitem.description}}</h3>
+                    <h4>Date Item Added:{{groitem.add_date}}</h4>
+                    {% comment %} <form method="POST" action="">
+                        {% csrf_token %} {% endcomment %}
+                        {% comment %} <input type="checkbox" id="complete" name="check" value="Completed">  {% endcomment %}
+                        <span class="close"><a href="completed/{{groitem.pk}}">Change Status</a></span>
+                    {% comment %} </form> {% endcomment %}
+                    <br>
+                    <h2></h2>
+                    {% if groitem.completion == True %}  
+                        {% comment %} {{groitem.completion}} {% endcomment %}
+                        <h4>Completed</h4>
+                        <h4>Last Update{{groitem.update}}</h4>
+                    {% endif %}
+                    <span class="close"><a href="delete/{{groitem.pk}}">Delete</a></span>
+                    <br>
+                    <h2></h2>
             {% endfor %}
     </div>
 </body>
