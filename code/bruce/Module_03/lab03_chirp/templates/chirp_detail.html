@@ -12,14 +12,15 @@
             </div>
             <div class="card-content">
                 <p>{{ chirp.tiny_body | linebreaksbr }}</p>
-                {% if user == chirp.author %}
-                <p><a href="{% url 'chirps:moderate' chirp.pk %}">Moderate this Chirp</a>
-                <p><a href="{% url 'chirps:delete' chirp.pk %}">Delete this Chirp</a>
-                {% endif %}
             </div>
         </div>
 
     </div>
+    {% if user == chirp.author %}
+    <p><a href="{% url 'chirps:moderate' chirp.pk %}">Moderate this Chirp</a>
+    <p><a href="{% url 'chirps:delete' chirp.pk %}">Delete this Chirp</a>
+    {% endif %}
+
 </div>
 
 {% endblock content %}
