@@ -10,14 +10,17 @@
         <!-- JavaScript -->
         <script type="text/javascript" src="js/ROT13.js"></script>
         <script type="text/javascript" src="js/CC_Verify.js"></script>
+        <script type="text/javascript" src="js/Pick6.js"></script>
 
         <script>
             window.onpageshow = function() {
                 rot13 = new ROT13();
                 cc_verify = new CC_Verify();
+                pick6 = new Pick6();
                 
-                rot13.run();
-                cc_verify.run();
+                // rot13.run();
+                // cc_verify.run();
+                pick6.run();
             }
         </script>
     </body>
