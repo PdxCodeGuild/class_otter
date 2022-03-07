@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="author" content="Jacob M.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chirp</title>
+        
+        <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
+        <link rel="stylesheet" href="{% static 'posts/style.css' %}">
+
+    </head>
+
+    <body>
+        <header>
+            <div class="name">
+                <h1><a href="{% url 'chirp:new' %}">Chirp</a></h1>
+            </div>
+            
+            <div class='logo'>
+                <a href="{% url 'chirp:home' %}"><img src="https://th.bing.com/th/id/R.8993124426c4eb9dba74047368829707?rik=GOhsDL4orxBrWw&riu=http%3a%2f%2fwww.pngall.com%2fwp-content%2fuploads%2f4%2fSingle-Flying-Bird-Transparent-180x180.png&ehk=DbywGW1nGrxiugqaYlJm0Y7sOjHqvApsD3ZMdv%2boZQ0%3d&risl=&pid=ImgRaw&r=0"></a>
+                
+            </div>
+            
+            <div class="greet">
+                {% if user.is_authenticated %}
+                    <h2>Hello, <a href="{% url 'chirp:home' %}">{{ user.username }}</a>!</h2>  
+                    <p><a href="{% url 'logout' %}">Logout</a></p>
+                {% else %}
+                    <h2><a href="{% url 'login' %}">Login</a></h2>
+                    
+
+                {% endif %}
+
+            </div>
+            
+        </header>
+        <div class='chirps'>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+    <footer>
+        <div>
+            {% if user.is_authenticated %}
+                <h3><a href="{% url 'chirp:new' %}">New Chirp</a></h3>
+            {% else %}    
+                <h3><a href="{% url 'users:signup' %}">Sign Up</a></h3>
+            {% endif %}
+        </div>
+    </footer>
+</html>
