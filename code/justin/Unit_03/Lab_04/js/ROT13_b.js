@@ -5,13 +5,10 @@ class ROT13 {
     constructor() { }
 
     run() {
-        let textToEncrypt = prompt("Enter text to be encrypted: ");
-        let rotation = parseInt(prompt("Enter cypher rotation: "));
-
+        let textToEncrypt = document.getElementById('textToEncrypt').value;
+        let rotation = parseInt(document.getElementById('cypherRotation').value);
         let encryptedText = this.encrypt(textToEncrypt, rotation);
-
-        console.log(`${textToEncrypt}: ${encryptedText}`);
-        alert(`You entered:\t${textToEncrypt}\nEncrypted:\t${encryptedText}`);
+        document.getElementById('encryptedText').innerHTML = encryptedText;
     }
 
     encrypt(text, rotation=13)
