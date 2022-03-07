@@ -1,0 +1,6 @@
+# VS Code JavaScript Extensions:
+https://www.sitepoint.com/vs-code-extensions-javascript-developers/
+
+# JavaScript tutorial:
+https://www.w3schools.com/js/default.asp
+

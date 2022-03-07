@@ -18,14 +18,19 @@
     <!-- 'min' for development environment -->
     <link type="text/css" rel="stylesheet" href={% static "short/css/materialize.min.css" %}  media="screen,projection"/>
     <!-- non-'min' for development environment -->
-    {% comment %} <link type="text/css" rel="stylesheet" href={% static "short/css/materialize.css" %}  media="screen,projection"/> {% endcomment %}
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "short/images/apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "short/images/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "short/images/favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "short/images/site.webmanifest" %}">
+    <!--  -->
 
     <title>URL Shortener</title>
 </head>
 <body>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" class="brand-logo" href='short:index_cards'>URL Shortenerator</a>
+            <a id="logo-container" class="brand-logo" href="{% url 'short:index_cards' %}">URL Shortenerator</a>
             <ul class="right hide-on-med-and-down">
                 <li>
                     <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
