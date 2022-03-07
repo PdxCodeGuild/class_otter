@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burrito Order</title>
+    {% comment %} <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}"> {% endcomment %}
+</head>
+<body>
+    <form action="https://webhook.site/3b5756f9-03a2-43ca-aad2-9394b49cc7e9" method="post">
+        <input type="text" name="input_text" placeholder="enter name"/>
+        <input type="text" name="input_text" placeholder="enter password"/>
+        <input type="radio" name="whTortilla" value="white flour"> white<br>
+        <input type="radio" name="wheTortilla" value="wheat flour"> wheat<br>
+        <input type="radio" name="cTortilla" value="corn">corn
+        <input type="radio" name="wrice" value="white rice"> white rice<br>
+        <input type="radio" name="brice" value="brown rice"> brown rice<br>
+        <input type="radio" name="Tortilla" value="Carnitas">Carnitas<br>
+        <input type="radio" name="Tortilla" value="Chicken">Chicken<br>
+        <input type="radio" name="Tortilla" value="Sofritas">Sofritas<br>
+        <input type="radio" name="Tortilla" value="none">no protein<br>
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <label for="vehicle1">Cheese</label><br>
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <label for="vehicle2"> Sour Cream</label><br>
+
+        <label for="w3review">Delivery Instructions:</label>
+        <textarea id="w3review" name="w3review" rows="4" cols="50">
+            Enter Delivery Instructions
+        </textarea
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>

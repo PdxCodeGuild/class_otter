@@ -119,17 +119,17 @@ class RedirectToPageViewTests(TestCase):
         self.assertEquals(response.status_code, 404)
 
 
-class AddViewTests(TestCase):
+# class AddViewTests(TestCase):
 
-    def test_add_view_function(self):
-        """
-        add() gets 'url' and 'url_description' from user, generates 'code', adds 'url_description', 'url' and 'code' to database, sends user back to the same template they sent request from.
-        """
-        new_attributes_and_our_origin_to_send = {
-            'url-description': "Test long URL description",
-            'long-url': "subdomain.domain",
-            'our-origin': "index_cards",
-        }
-        # NOTE: Need to specify 'post()' function here. 'get()' will fail. Since we are not actually using a 'form' 'button', which would have the 'POST' method specified in the tag, we need to use the proper client function 'post()'.
-        # self.client.get(reverse('short:add'), new_attributes_and_our_origin_to_send) # Fails on "KeyError: 'long-url'"
-        self.client.post(reverse('short:add'), new_attributes_and_our_origin_to_send)
+#     def test_add_view_function(self):
+#         """
+#         add() gets 'url' and 'url_description' from user, generates 'code', adds 'url_description', 'url' and 'code' to database, sends user back to the same template they sent request from.
+#         """
+#         new_attributes_and_our_origin_to_send = {
+#             'url-description': "Test long URL description",
+#             'long-url': "subdomain.domain",
+#             'our-origin': "index_cards",
+#         }
+#         # NOTE: Need to specify 'post()' function here. 'get()' will fail. Since we are not actually using a 'form' 'button', which would have the 'POST' method specified in the tag, we need to use the proper client function 'post()'.
+#         # self.client.get(reverse('short:add'), new_attributes_and_our_origin_to_send) # Fails on "KeyError: 'long-url'"
+#         self.client.post(reverse('short:add'), new_attributes_and_our_origin_to_send)

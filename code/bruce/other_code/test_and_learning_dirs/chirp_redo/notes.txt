@@ -1,0 +1,670 @@
+# Redo of Chirp
+# Assignment:
+https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab03-chirp.md
+
+# Resources:
+
+    # Django Project Setup:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+
+    # Django admin documentation generator:
+    https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+
+    # Docutils:
+    https://docutils.sourceforge.io/
+
+    # Django tutorial:
+    https://docs.djangoproject.com/en/3.2/intro/tutorial01/
+
+    # Django customizing:
+    https://docs.djangoproject.com/en/3.2/topics/auth/customizing/
+
+    ##### This seems like a better custom user guide #####
+    https://learndjango.com/tutorials/django-custom-user-model
+
+    # Django on GitHub:
+    https://github.com/django/django/tree/main/django
+
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/chirp_redo-ho95tkZE/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\chirp_redo-ho95tkZE\Scripts\activate.ps1
+
+
+# Start server
+python .\manage.py runserver 8080
+
+# Link to 'home':
+http://127.0.0.1:8080/chirp/
+
+
+### STEP ###
+# Create virtual environment and install 'Django' and 'docutils':
+pipenv install django==3.2 docutils==0.18.1
+
+
+### STEP ###
+# Activate virtual environment.
+
+
+### STEP ###
+# Create Django project:
+django-admin startproject $PROJECT_NAME .
+django-admin startproject chirp_project .
+
+
+### STEP ###
+# Create 'chirps' app:
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp chirps
+
+
+### STEP ###
+# Check server runs, check for the green rocket:
+python .\manage.py runserver 8080
+http://127.0.0.1:8080/
+
+
+### STEP ###
+# Register the apps as 'INSTALLED_APPS' in 'chirp_project/settings.py':
+https://docs.djangoproject.com/en/3.2/intro/tutorial02/#database-setup
+https://docs.djangoproject.com/en/3.2/ref/settings/#installed-apps
+# 'ChirpsConfig' is in chirps/apps.py. As noted by using 'chirps.apps.ChirpsConfig'.
+# add "'chirps.apps.ChirpsConfig'" to 'INSTALLED_APPS' in chirp_project/settings.py.
+# add "'django.contrib.admindocs'" to 'INSTALLED_APPS' in chirp_project/settings.py.
+INSTALLED_APPS = [
+    ...,
+    'chirps.apps.ChirpsConfig',
+    'django.contrib.admindocs',
+]
+
+
+### STEP ###
+# Create 'users' app:
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp users
+
+
+### STEP ###
+# Add "'users.apps.UsersConfig'" to 'INSTALLED_APPS' in chirp_project/settings.py:
+INSTALLED_APPS = [
+    ...,
+    'users.apps.UsersConfig',
+]
+
+
+### STEP ###
+# CustomUser
+https://learndjango.com/tutorials/django-custom-user-model
+# Add to users/models.py:
+from django.contrib.auth.models import AbstractUser
+# Can we use 'User' as our class name?
+class CustomUser(AbstractUser):
+    pass
+
+    def __str__(self):
+        return self.username
+
+
+### STEP ###
+# CustomUser
+# Add to 'CustomUser' in users/models.py:
+    is_moderator = models.BooleanField("moderator status", default=False, help_text="Designates whether a user should be treated as a moderator.")
+
+
+### STEP ###
+# CustomUser
+# Add 'AUTH_USER_MODEL' to chirp_project/settings.py:
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+### STEP ###
+# CustomUser
+# Create users/forms.py:
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
+
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email')
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email')
+
+
+### STEP ###
+# CustomUser
+# Add to users/admin.py:
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models import CustomUser
+
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+    list_display = ['email', 'username', 'is_moderator']
+
+admin.site.register(CustomUser, CustomUserAdmin)
+
+
+### STEP ###
+# Test server admin:
+python .\manage.py runserver 8080
+http://127.0.0.1:8080/admin/
+#### NOTE ####
+# Error due to 'ValueError: Dependency on app with no migrations: users'
+
+
+### STEP ###
+# Create "Chirp" model in chirps/models.py:
+from django.db import models
+from django.urls import reverse
+from chirp_project import settings
+
+class Chirp(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='chirps', on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    # Using 'updated' here so we can track when Chirps are 'moderated'. Even though the 'Chirp's aren't typically 'updated'.
+    updated = models.DateTimeField(auto_now=True)
+    tiny_body = models.TextField('Tiny Body', max_length=127)
+
+    def __str__(self):
+        return f"{self.author} : {self.tiny_body}"
+
+    # # This is used to redirect user to the 'detail' page after they create a new Chirp.
+    # def get_absolute_url(self):
+    #     return reverse('chirps:detail', args=(self.pk,))
+    
+    # Need this to order the Chirps on 'home' page.
+    class Meta:
+        ordering = ['-created']
+
+
+### STEP ###
+# Add to chirps/admin.py:
+from django.contrib import admin
+from .models import Chirp
+
+admin.site.register(Chirp)
+
+
+### STEP ###
+# Migrations:
+##### ONLY DO THIS AFTER ADDING 'AUTH_USER_MODEL' TO chirp_project/settings.py #####
+python .\manage.py makemigrations users
+python .\manage.py sqlmigrate users NNNN
+
+python .\manage.py makemigrations chirps
+python .\manage.py sqlmigrate chirps NNNN
+
+python .\manage.py migrate users
+python .\manage.py migrate
+
+
+### STEP ###
+# Create superuser:
+python .\manage.py createsuperuser
+
+
+### STEP ###
+https://docs.djangoproject.com/en/3.2/topics/http/urls/
+https://docs.djangoproject.com/en/3.2/ref/urls/#path
+https://docs.djangoproject.com/en/3.2/ref/urls/#include
+# Add to 'urlpatterns' in chirp_project/urls.py:
+from django.urls import path, include
+urlpatterns = [
+    ...,
+    # Make sure this 'admin/doc/' 'include()' is before 'admin/' line.
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
+    path('admin/', admin.site.urls),
+]
+
+
+### STEP ###
+# Test server admin:
+python .\manage.py runserver 8080
+http://127.0.0.1:8080/admin/
+
+
+### STEP ###
+# Add to chirp_project/urls.py:
+urlpatterns = [
+    ...,
+    path('chirp/', include('chirps.urls')),
+]
+
+
+### STEP ###
+https://docs.djangoproject.com/en/3.2/ref/settings/#dirs
+# Modify 'TEMPLATES' in chirp_project/settings.py:
+'DIRS': [BASE_DIR / 'templates'],
+
+
+### STEP ###
+# Reference for 'attribute's of ListView:
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#listview
+# Create a 'view' in chirps/views.py:
+chirps/views.py:
+    class ChirpListView(ListView):
+
+# Create chirps/urls.py and put a urlpattern in it:
+chirps/urls.py:
+    from django.urls import path
+    from . import views
+
+    app_name = 'chirps'
+    urlpatterns = [
+        path('', views.ChirpListView.as_view(), name='home')
+    ]
+
+# Create templates/home.html:
+https://jinja.palletsprojects.com/en/3.0.x/templates/#for
+templates/home.html:
+    {% for chirp in chirp_list %}
+    {{ chirp }}
+    {% endfor %}
+
+
+### STEP ###
+# Test server:
+python .\manage.py runserver 8080
+http://127.0.0.1:8080/chirp/
+
+
+### STEP ###
+https://docs.djangoproject.com/en/3.2/ref/settings/#staticfiles-dirs
+# Add to chirp_project/settings.py
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
+### STEP ###
+# Create 'base.html' and use '{% block %}':
+https://jinja.palletsprojects.com/en/3.0.x/templates/#base-template
+# Examples:
+    {% block head %} {% endblock head %}
+    {% block title %} {% endblock title %}
+    {% block content %} {% endblock content %}
+    {% block footer %} {% endblock footer %}
+
+    {% block head %} {% endblock %}
+    {% block title %} {% endblock %}
+    {% block content %} {% endblock %}
+    {% block footer %} {% endblock %}
+
+
+### STEP ###
+# Add to 'base.html':
+{% load static %}
+    {% block content %}
+    {% comment %} Content Goeth Here! {% endcomment %}
+    {% endblock content %}
+
+# Modify 'home.html':
+https://jinja.palletsprojects.com/en/3.0.x/templates/#child-template
+{% extends 'base.html' %}
+{% block content %}
+    <html content>
+{% endblock content %}
+
+
+# Add css, js, and style.css to 'static'.
+https://materializecss.com/getting-started.html
+
+
+### STEP ###
+# Create a 'detail' view:
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#detail-views
+chirps/views.py:
+    class ChirpDetailView(DetailView)
+chirps/urls.py:
+    https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#view
+    https://docs.djangoproject.com/en/3.2/ref/class-based-views/base/#django.views.generic.base.View.as_view
+    path('<int:pk>', views.ChirpDetailView.as_view(), name='detail'),
+templates/chirp_detail.html:
+https://jinja.palletsprojects.com/en/3.0.x/templates/#child-template
+
+
+### STEP ###
+# Create a 'create' view:
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#createview
+chirps/views.py:
+    class ChirpCreateView(CreateView):
+        fields = ['tiny_body']
+chirps/urls.py:
+    path('hatch/', views.ChirpCreateView.as_view(), name='hatch'),
+templates/chirp_hatch.html:
+
+
+### STEP ###
+# Create a 'moderate' view:
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#updateview
+chirps/views.py:
+    class ChirpModerateView(UpdateView):
+chirps/urls.py:
+    path('<int:pk>/moderate/', views.ChirpModerateView.as_view(), name='moderate'),
+templates/chirp_moderate.html:
+
+
+### STEP ###
+# Create a 'delete' view:
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#deleteview
+chirps/views.py:
+    class ChirpDeleteView(DeleteView):
+chirps/urls.py:
+    path('<int:pk>/delete/', views.ChirpModerateView.as_view(), name='delete'),
+templates/chirp_delete.html:
+
+
+### STEP ###
+# Add 'success_url' and import to chirps/views.py:
+https://docs.djangoproject.com/en/3.2/ref/urlresolvers/#reverse-lazy
+from django.urls import reverse_lazy
+success_url = reverse_lazy('chirps:home')
+
+
+### STEP ###
+# Add to urlpatterns in chirp_project/urls.py:
+https://github.com/django/django/blob/main/django/contrib/auth/urls.py
+# The 'django.contrib.auth.urls' module provides view functions, we will need to provide the templates.
+urlpatterns = [
+    ...,
+    path('', include('django.contrib.auth.urls')),
+]
+
+
+### STEP ###
+# Need registration/login.html.
+https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.views.LoginView
+# Add 'registration/login.html' to chirp_redo/templates/:
+# Django provides the 'form.as_p':
+https://jinja.palletsprojects.com/en/3.0.x/templates/#child-template
+{% extends 'base.html' %}
+{% block content %}
+    <form action="" method="post">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Log in to Chirp
+            <i class="material-icons right">send</i>
+        </button>
+    </form>                   
+{% endblock content %}
+
+
+### STEP ###
+# NOTE: We have not yet done much customization to the model 'CustomUser'. The 'django.contrib.auth.urls' provides login functionality since our 'CustomUser' inherits 'AbstractUser'.
+# Add 'LOGIN_REDIRECT_URL' to chirp_project/settings.py:
+https://docs.djangoproject.com/en/3.2/ref/settings/#login-redirect-url
+LOGIN_REDIRECT_URL = 'chirps:home'
+
+
+### STEP ###
+# Add 'login' and 'logout' links to 'base.html':
+https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.views.LoginView
+https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.views.LogoutView
+href={% url 'login' %}
+# No 'logout' page needed since we are directing them to 'chirps:home'.
+href={% url 'logout' %}
+
+
+### STEP ###
+# Add conditionals to hide or present 'login' and 'logout' as appropriate to 'base.html':
+https://jinja.palletsprojects.com/en/3.0.x/templates/#logic
+    {% if user.is_authenticated %}
+    <li>
+        <a href="#">Welcome: {{ user.username }}!</a>
+    </li>
+    <li>
+        <a href="{% url 'chirps:hatch' %}">Hatch an egg</a>
+    </li>
+    <li>
+        <a href="{% url 'logout' %}">Logout</a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{% url 'login' %}">Login</a>
+    </li>
+    <li>
+        <a href="#">Sign Up</a>
+    </li>
+    {% endif %}
+
+
+### STEP ###
+# Route 'users' urls.
+https://docs.djangoproject.com/en/3.2/topics/http/urls/
+https://docs.djangoproject.com/en/3.2/ref/urls/#path
+https://docs.djangoproject.com/en/3.2/ref/urls/#include
+# Add 'users.urls' to chirp_project/urls.py:
+urlpatterns = [
+    ...,
+    path('users/', include('users.urls')),
+]
+
+
+### STEP ###
+# Route 'users/signup/' urls.
+# Create users/urls.py and add 'path()' and imports to it:
+from django.urls import path
+from . import views
+app_name = 'users'
+urlpatterns = [
+    path('signup/', views.SignUpView.as_view(), name='signup' ),
+]
+
+
+### STEP ###
+# Create 'chirps/templates/signup.html':
+{% extends 'base.html' %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Sign up to Chirp!<i class="material-icons right">send</i>
+        </button>
+    </form>                   
+{% endblock content %}
+
+
+### STEP ###
+# User Profile Page - view, url, template.
+
+# 'view':
+# 'model', 'template_name', and 'context_object_name' are 'attributes' of 'DetailView' and, subsequently, 'UserProfileView' since it inherits 'DetailView'.
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#DetailView
+# Add 'UserProfileView' to users/views.py:
+class UserProfileView(DetailView):
+    """
+    Inherits 'DetailView'. Displays users' profile info, and users' Chirps.
+    """
+    model = CustomUser
+    template_name = 'user_profile.html'
+    context_object_name = 'user_profile'
+
+    def get_object(self):
+        return get_object_or_404(CustomUser, username=self.kwargs['username'])
+
+# OPTIONAL #
+# Function-based view:
+https://docs.djangoproject.com/en/3.2/topics/http/views/#writing-views
+def user_profile(request, username):
+    user_profile = get_object_or_404(CustomUser, username=username)
+    context = {'user_profile': user_profile}
+    return render(request, 'user_profile.html', context)
+# /OPTIONAL #
+
+# 'url':
+urlpatterns = [
+    ...,
+    path('<str:username>/', views.UserProfileView.as_view(), name='profile' ),
+]
+
+# Template:
+# 'templates/user_profile.html':
+{% extends 'base.html' %}
+{% block content %}
+    <h6>Hatched: {{ user_profile.date_joined}}</h6>
+    <h3>{{ user_profile.username }}'s Chirps</h3>
+    {% for chirp in user_profile.chirps.all %}
+        <span>Hatched on: <a href="{% url 'chirps:detail' chirp.pk %}"><em>{{ chirp.created}}</em></a></span>
+        <span><a href="{% url 'users:profile' chirp.author.username %}" class="secondary-content"><i>{{ chirp.author.username }}</i></a></span>
+        <p>{{ chirp.tiny_body | linebreaksbr }}</p>
+    {% endfor %}
+{% endblock content %}
+
+
+
+### STEP ###
+# Create 'user_profile.html':
+{% extends 'base.html' %}
+{% block content %}
+    <h6>Hatched: {{ user_profile.date_joined}}</h6>
+    <h3>{{ user_profile.username }}'s Chirps</h3>
+    {% for chirp in user_profile.chirps.all %}
+        <span>Hatched on: <a href={% url 'chirps:detail' chirp.pk %} ><em>{{ chirp.created}}</em></a></span>
+        <span><a href={% url 'users:profile' chirp.author.username %} class="secondary-content"><i>{{ chirp.author.username }}</i></a></span>
+        <p>{{ chirp.tiny_body | linebreaksbr }}</p>
+    {% endfor %}
+{% endblock content %}
+
+
+### STEP ###
+# Add 'form_valid' to ChirpCreateView:
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/mixins-editing/#django.views.generic.edit.FormMixin.form_valid
+
+# Example:
+https://docs.djangoproject.com/en/3.2/topics/class-based-views/generic-editing/#basic-forms
+
+# This function runs after form is validated and before data is saved to database.
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+### STEP ###
+# Add 'LoginRequiredMixin' and imports to chirps/views.py:
+https://docs.djangoproject.com/en/3.2/topics/auth/default/#the-loginrequired-mixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class ChirpCreateView(LoginRequiredMixin, CreateView)
+
+
+### STEP ###
+# Test create new Chirp.
+# Logged out and tried using '' to create a Chirp.
+# ERROR: 404 with route 'http://127.0.0.1:8080/accounts/login/?next=/chirp/hatch/'
+
+
+### STEP ###
+# Add 'LOGIN_URL' to chirp_project/settings.py:
+https://docs.djangoproject.com/en/3.2/ref/settings/#login-url
+LOGIN_URL = 'login'
+ 
+
+### STEP ###
+# Add 'LoginRequiredMixin' to 'Update' and 'Delete' views:
+class ChirpModerateView(LoginRequiredMixin, UpdateView)
+class ChirpDeleteView(LoginRequiredMixin, DeleteView)
+
+
+### STEP ###
+# Add 'UserPassesTestMixin' to 'Moderate' and 'Delete' views:
+https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin
+
+# Resources:
+    # UpdateView:
+        https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#updateview
+    # DeleteView:
+        https://docs.djangoproject.com/en/3.2/ref/class-based-views/flattened-index/#deleteview
+    # UserPassesTestMixin:
+        https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin
+    # Method:
+        # test_func()
+            https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin.test_func
+
+class ChirpModerateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
+class ChirpDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
+
+
+### STEP ###
+# Add 'test_func(self)' to 'Moderate' and 'Delete' views:
+    def test_func(self):
+        """
+        Returns 'True' if the 'author' of the 'chirp' is the same user as the 'request' 'user'. Otherwise, returns 'False'.
+        """
+        chirp = self.get_object()
+        return self.request.user == chirp.author
+
+
+### STEP ###
+# Modify a CustomUser, 'is_moderator=True':
+python .\manage.py shell
+from users.models import CustomUser
+CustomUser.objects.all()
+# Set cu to CustomUser 'Bruce', which had pk=2:
+cu = CustomUser.objects.filter(pk=2)[0]
+cu
+# <CustomUser: 2:Bruce - Moderator:False>
+# Set 'is_moderator=True':
+cu.is_moderator=True
+cu
+# <CustomUser: 2:Bruce - Moderator:True>
+# Save the change:
+cu.save()
+# Change verified in admin UI.
+
+
+### STEP ###
+# Modify 'test_func' in 'ChirpModerateView':
+https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin.test_func
+    def test_func(self):
+        """
+        Returns 'True' if the 'request' 'user' is a moderator. Otherwise, returns 'False'.
+        """
+        print(f"self.request.user.is_moderator: {self.request.user.is_moderator}")
+        return self.request.user.is_moderator
+
+
+### STEP ###
+# Change whether 'moderate' link is available in 'chirp_detail.html':
+# Resources:
+    https://jinja.palletsprojects.com/en/3.0.x/templates/
+
+{% if user.is_moderator and user != chirp.author %}
+<a href={% url 'chirps:moderate' chirp.pk %} >Moderate this Chirp</a><br>
+<a href={% url 'chirps:delete' chirp.pk %} >Delete this Chirp</a>
+{% endif %}
+{% if user == chirp.author %}
+<a href={% url 'chirps:moderate' chirp.pk %} >Edit this Chirp</a><br>
+<a href={% url 'chirps:delete' chirp.pk %} >Delete this Chirp</a>
+{% endif %}
+
+
+### STEP ###
+# Change text of 'Edit' or 'Moderate' chirp in 'chirp_moderate.html':
+    {% if user == chirp.author %}
+    <h4 class="header">Edit a Tiny Chirp</h4>
+    {% else %}
+    <h4 class="header">Moderate a Tiny Chirp</h4>
+    {% endif %}
+
+
+# TODO: Make separate 'moderate' and 'edit' views since we want different functionality with each view.
+
+
+### STEP ###

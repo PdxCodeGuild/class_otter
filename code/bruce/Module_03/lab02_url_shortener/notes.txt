@@ -7,6 +7,10 @@ https://docs.djangoproject.com/en/4.0/intro/tutorial01/
 URLField:
 https://docs.djangoproject.com/en/4.0/ref/models/fields/#urlfield
 
+# Run server:
+python .\manage.py runserver 8000
+http://127.0.0.1:8000
+
 # 1 #
 # Install pipenv and Django version 3.2:
 pipenv install django==3.2
