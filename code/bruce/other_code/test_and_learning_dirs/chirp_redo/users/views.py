@@ -27,6 +27,7 @@ class UserProfileView(DetailView):
     context_object_name = 'user_profile'
 
     def get_object(self):
+        # Django packages up a dictionary 'self.kwargs' which has the key "'username'" from "'<str:username>/'", and passes that to the class view.
         # The 'self.kwargs['username']' here matches the "'<str:username>/'" in users/urls.py.
         # It's the 'kwarg' passed through the url.
         # The 'username' in 'username=' is the kwarg inside 'CustomUser' (and the get_object_or_404).

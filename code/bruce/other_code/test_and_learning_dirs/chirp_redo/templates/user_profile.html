@@ -33,3 +33,5 @@
 {% endblock content %}
 
 {% comment %} Use 'user_profile' above for this page's 'User' content instead of 'user' since we want the posts for the 'User' we are viewing and not the 'User' we are logged in as. {% endcomment %}
+{% comment %} 'user' is the user in the 'base.html' template, 'user_profile' is the user in 'user_profile.html' template. {% endcomment %}
+{% comment %} We want the 'base.html' to show logged-in user info, and the 'user_profile.html' to show the info of the user we are viewing. {% endcomment %}
