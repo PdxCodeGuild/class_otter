@@ -8,12 +8,16 @@
     </head>
     <body>
         <!-- JavaScript -->
-        <script type="text/javascript" src="ROT13.js"></script>
+        <script type="text/javascript" src="js/ROT13.js"></script>
+        <script type="text/javascript" src="js/CC_Verify.js"></script>
 
         <script>
             window.onpageshow = function() {
                 rot13 = new ROT13();
-                rot13.run()
+                cc_verify = new CC_Verify();
+                
+                rot13.run();
+                cc_verify.run();
             }
         </script>
     </body>
