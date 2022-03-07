@@ -16,13 +16,13 @@
                 <div class="nav-wrapper">
                     <a class="brand-logo" href="{% url 'posts:home' %}">Chirp</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    {% if user.is_authenticated %}
+                        {% if user.is_authenticated %}
                         <li><a class="waves-effect waves-light" href={% url 'posts:new' %}><i class="material-icons left">add</i>New Post</a></li>
                         <li><a class="waves-effect waves-light" href={% url 'logout' %}><i class="material-icons left">logout</i>Logout</a></li>
-                    {% else %}
+                        {% else %}
                         <li><a class="waves-effect waves-light" href={% url 'login' %}><i class="material-icons left">login</i>Login</a></li>
                         <li><a class="waves-effect waves-light" href={% url 'users:signup' %}><i class="material-icons left">person_add</i>Sign-up</a></li>
-                    {% endif %}
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
