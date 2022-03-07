@@ -6,7 +6,6 @@ class Pick6 {
 
     run() {
         let winning_numbers = this.select_numbers();
-        console.log(winning_numbers);
         let expenses = 0;
         let earnings = 0;
 
@@ -17,7 +16,7 @@ class Pick6 {
             earnings += this.get_prize(match_count);
         }
 
-        alert(`Winnings: ${earnings - expenses}\nROI: ${(earnings - expenses) / expenses}`)
+        document.getElementById('lotto_winnings').innerHTML = `Winnings: $${earnings - expenses}\nROI: ${(earnings - expenses) / expenses}`;
     }
 
     select_numbers() {

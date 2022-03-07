@@ -6,7 +6,6 @@ class Pick6 {
 
     run() {
         let winning_numbers = this.select_numbers();
-        console.log(winning_numbers);
         let expenses = 0;
         let earnings = 0;
 
