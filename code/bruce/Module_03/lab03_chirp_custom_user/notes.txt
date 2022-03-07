@@ -94,10 +94,10 @@ python manage.py startapp users
 
 
 ### STEP ###
-# add "'chirps.apps.UsersConfig'" to 'INSTALLED_APPS' in chirp_project/settings.py.
+# add "'users.apps.UsersConfig'" to 'INSTALLED_APPS' in chirp_project/settings.py.
 INSTALLED_APPS = [
     ...,
-    'chirps.apps.UsersConfig',
+    'users.apps.UsersConfig',
 ]
 
 
