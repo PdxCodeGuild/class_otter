@@ -8,8 +8,6 @@ class User(AbstractUser):
     nickname = models.CharField(max_length=24, unique=True)
     name = models.CharField(max_length=24)
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=24, null = True, blank= True)
 
-USERNAME_FIELD = 'nickname'
-
-class Meta:
-    db_table = "User"
+    USERNAME_FIELD = 'nickname'
