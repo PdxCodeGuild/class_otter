@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col s12 m7">
+    <h4 class="header">Chirp Login</h4>
+    <div class="card horizontal">
+
+        <div class="card-stacked">
+            <div class="card-content">
+                <form action="" method="post">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+
+                <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Log in to Chirp
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>                   
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

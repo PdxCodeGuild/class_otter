@@ -26,44 +26,44 @@
 <body>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" class="brand-logo" href="{% url 'chirps:home' %}">Chirp</a>
+            <a id="logo-container" class="brand-logo" href={% url 'chirps:home' %} >Chirp Home</a>
             <ul class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'users:profile' user.username %}">Welcome, {{ user.username }}!</a>
+                    <a href={% url 'users:profile' user.username %} >Welcome: {{ user.username }}!</a>
                 </li>
                 <li>
-                    <a href="{% url 'chirps:hatch' %}">Hatch an egg</a>
+                    <a href={% url 'chirps:hatch' %} >Hatch an egg</a>
                 </li>
                 <li>
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <a href={% url 'logout' %} >Logout</a>
                 </li>
                 {% else %}
                 <li>
-                    <a href="{% url 'login' %}">Login</a>
+                    <a href={% url 'login' %} >Login</a>
                 </li>
                 <li>
-                    <a href="{% url 'users:signup' %}">Sign Up</a>
+                    <a href={% url 'users:signup' %} >Sign Up</a>
                 </li>
                 {% endif %}
             </ul>
             <ul id="nav-mobile" class="sidenav">
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'users:profile' user.username %}">Welcome, {{ user.username }}!</a>
+                    <a href={% url 'users:profile' user.username %} >Welcome, {{ user.username }}!</a>
                 </li>
                 <li>
-                    <a href="{% url 'chirps:hatch' %}">Hatch an egg</a>
+                    <a href={% url 'chirps:hatch' %} >Hatch an egg</a>
                 </li>
                 <li>
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <a href={% url 'logout' %}>Logout</a>
                 </li>
                 {% else %}
                 <li>
-                    <a href="{% url 'login' %}">Login</a>
+                    <a href={% url 'login' %} >Login</a>
                 </li>
                 <li>
-                    <a href="{% url 'users:signup' %}">Sign Up</a>
+                    <a href={% url 'users:signup' %} >Sign Up</a>
                 </li>
                 {% endif %}
             </ul>
@@ -93,14 +93,14 @@
                 <a id="logo-container" class="brand-logo" href="{% url 'chirps:home' %}">Chirp</a><br>
                 
                 {% if user.is_authenticated %}
-                <a href="{% url 'users:profile' user.username %}">{{ user.username }}</a> - 
-                <a href="{% url 'chirps:hatch' %}">Hatch an egg</a> - 
-                <a href="{% url 'logout' %}">Logout</a> - 
+                <a href={% url 'users:profile' user.username %} >Welcome: {{ user.username }}</a> - 
+                <a href={% url 'chirps:hatch' %} >Hatch an egg</a> - 
+                <a href={% url 'logout' %} >Logout</a> - 
                 {% else %}
-                <a href="{% url 'login' %}">Login</a> - 
-                <a href="{% url 'users:signup' %}">Sign Up</a> - 
+                <a href={% url 'login' %} >Login</a> - 
+                <a href={% url 'users:signup' %} >Sign Up</a> - 
                 {% endif %}
-                <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
+                <a href={% url 'admin:index' %} target="_blank">Admin Page</a>
 
             </div>
         </div>

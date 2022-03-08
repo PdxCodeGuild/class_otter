@@ -4,22 +4,22 @@
 
 <div class="col s12 m7">
     <h4 class="header">Create a Tiny Chirp account</h4>
-    <div class="card horizontal">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="card horizontal">
 
-        <div class="card-stacked">
-            <div class="card-content">
-                <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <br>
-                <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Sign up to Chirp!
-                    <i class="material-icons right">send</i>
-                </button>
-            </form>                   
+            <div class="card-stacked">
+                <div class="card-content">
+                    {{ form.as_p }}
+                    <br>
+                </div>
             </div>
+            
         </div>
-
-    </div>
+        <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Sign up to Chirp!
+            <i class="material-icons right">send</i>
+        </button>
+    </form>                   
 </div>
 
 {% endblock content %}
