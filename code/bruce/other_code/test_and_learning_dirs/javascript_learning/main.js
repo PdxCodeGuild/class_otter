@@ -1,16 +1,21 @@
 // setTimeout(hide_element, 750)
 // setTimeout(show_element, 1500)
 
+
 function hide_element() {
     document.getElementById('element-to-hide').style.display='none'
 }
+
+
 function show_element() {
     document.getElementById('element-to-hide').style.display='block'
 }
 
+
 function externalChangeText() {
-    document.getElementById('external-js-change-id').innerHTML="The new test!"
+    document.getElementById('external-js-change-id').innerHTML="The new text!"
 }
+
 
 function externalChangeTextBack() {
     document.getElementById('external-js-change-id').innerHTML="Initial text"
@@ -41,27 +46,22 @@ function promptThenAddTwoNumbers() {
 // return	Exits a function
 // try	Implements error handling to a block of statements
 
+
 function waitTime(thingToDisplay, time) {
     setTimeout(document.getElementById("loop-for-5").innerHTML=thingToDisplay, time)
 }
 
-function cycleNumbers() {
-    let i = 0;
-    while (i < 6) {
-        waitTime(i, 1000)
-    }
-    i++
-}
 
 // Display numbers in window.alert()
 function promptAndContinue() {
     i = 0
-    while (i < 6) {
+    while (i < 4) {
         number = prompt("Enter a number:")
         window.alert(number)
+        i++
     }
-    i++
 }
+
 
 let length = 16;                               // Number
 let lastName = "Johnson";                      // String

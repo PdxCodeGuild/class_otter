@@ -5,6 +5,7 @@
     // BlackJack advice:
     // https://github.com/PdxCodeGuild/class_otter/blob/bruce/1%20Python/labs/04%20Blackjack%20Advice.md
 
+    
 const faceCards = {
     A: 1,
     J: 10,
@@ -12,9 +13,11 @@ const faceCards = {
     K: 10,
 }
 
+
 function getFaceCardValue(card) {
     return faceCards[card]
 }
+
 
 function getCardValue(card) {
     if ( isNaN(card) ) {
@@ -24,14 +27,15 @@ function getCardValue(card) {
     }
 }
 
+
 function promptUserAddScore(score) {
     userInput = prompt("Please enter a card:");
     userInputUpper = userInput.toUpperCase();
-
     console.log('Card value: ' + getCardValue(userInputUpper))
     score += getCardValue(userInputUpper)
     return score
 }
+
 
 function advise(score) {
     if (score > 21) {
@@ -45,10 +49,10 @@ function advise(score) {
     }
 }
 
+
 function consoleLogOrAlert(alertString, score) {
     let doAlert = true
     currentAdvise = advise(score)
-
     if (doAlert) {
         window.alert(alertString + score + ' - ' + currentAdvise)
         console.log(alertString + score + ' - ' + currentAdvise)
@@ -59,15 +63,11 @@ function consoleLogOrAlert(alertString, score) {
 }
 
 
-function playBlackJack() {
+function getBlackJackAdvice() {
     let score = 0;
-    
     let alertString = 'Score: ';
-    
     score = promptUserAddScore(score)
-    
     alertString = 'Cumulative score: ';
-
     while (true) {
         let advice = consoleLogOrAlert(alertString, score)
         if (advice.includes("Busted")) {
@@ -80,6 +80,3 @@ function playBlackJack() {
         score = promptUserAddScore(score)
     }
 }
-
-
-

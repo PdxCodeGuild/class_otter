@@ -1,3 +1,10 @@
+// Assignment:
+    // https://github.com/PdxCodeGuild/class_otter/blob/bruce/4%20JavaScript/labs/Lab%2001-03%20Pick%203.md
+
+// Resources:
+    // https://github.com/PdxCodeGuild/class_otter/blob/main/1%20Python/labs/01%20Unit%20Converter.md
+
+
 const conversion = {
     'in': 39370.08,
     'ft': 3280.84,
@@ -41,18 +48,16 @@ function consoleLogOrAlert(description, thingToSay) {
 
 function convertLength() {
     userLength = parseFloat(prompt("Please enter length:"));
-    inputUnit = prompt("Input Units - (in/ft/yd/m/km/mi):");
-    outputUnit = prompt("Output Units - (in/ft/yd/m/km/mi):");
-
     consoleLogOrAlert('Input Length', userLength);
 
+    inputUnit = prompt("Input Units - (in/ft/yd/m/km/mi):");
     theActualInputUnit = units[inputUnit];
     consoleLogOrAlert('Input Units', theActualInputUnit);
 
+    outputUnit = prompt("Output Units - (in/ft/yd/m/km/mi):");
     theActualOutputUnit = units[outputUnit];
     consoleLogOrAlert('Output Units', theActualOutputUnit);
 
     outputLength = userLength * conversion[theActualOutputUnit] / conversion[theActualInputUnit];
-
     consoleLogOrAlert('Results', userLength + ' ' + theActualInputUnit + ' is ' + outputLength + ' ' + theActualOutputUnit);
 }
