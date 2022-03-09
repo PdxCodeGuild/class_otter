@@ -7,15 +7,22 @@
 // Create an array of the letters of the alphabet:
 const cipherListAlpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
+// Buttons:
+buttonEncode = document.getElementById("encode-cipher")
+buttonDecode = document.getElementById("decode-cipher")
 
-function consoleLogOrAlert(description, thingToSay) {
-    let doAlert = true;
+// Event listeners:
+buttonEncode.addEventListener('click', letsCipherSomething)
+buttonDecode.addEventListener('click', letsUncipherSomething)
+
+
+function consoleLogOrAlert(description, thingToSay, doAlert=true) {
 
     if (doAlert) {
-        window.alert(description + ': ' + thingToSay);
-        console.log(description + ': ' + thingToSay);
+        window.alert(description + ': ' + thingToSay)
+        console.log(description + ': ' + thingToSay)
     } else {
-        console.log(description + ': ' + thingToSay);
+        console.log(description + ': ' + thingToSay)
     }
     return thingToSay;
 }
@@ -32,9 +39,9 @@ let defaultSchema = 7;
 
 function encodeALetter(code, schema=defaultSchema, cipherList=cipherListAlpha) {
     if (code == ' ') {
-        return ' ';
+        return ' '
     }
-    translation = cipherListAlpha.indexOf(code.toLowerCase());
+    translation = cipherListAlpha.indexOf(code.toLowerCase())
     resolution = (translation + schema) % 26
     if (resolution > 25) {
         resolution = resolution - 26
@@ -60,11 +67,12 @@ function decodeALetter(code, schema=defaultSchema, cipherList=cipherListAlpha) {
 
 function letsCipherSomething() {
     messageToEncode = prompt("Please enter message to encode:")
-    let encodedMessage = '';
-    const letterArray = messageToEncode.split("");
+    let userSchema = parseInt(prompt("Please enter your cipher rotation (0-25):"))
+    let encodedMessage = ''
+    const letterArray = messageToEncode.split("")
     for (let letter of letterArray) {
-        encodedLetter = encodeALetter(letter)
-        encodedMessage += encodedLetter;
+        encodedLetter = encodeALetter(letter, schema=userSchema)
+        encodedMessage += encodedLetter
     }
     consoleLogOrAlert('Encode', messageToEncode + ' -> ' + encodedMessage)
 }
@@ -72,11 +80,12 @@ function letsCipherSomething() {
 
 function letsUncipherSomething() {
     messageToDecode = prompt("Please enter message to decode:")
-    let decodedMessage = '';
-    const letterArray = messageToDecode.split("");
+    let userSchema = parseInt(prompt("Please enter your cipher rotation (0-25):"))
+    let decodedMessage = ''
+    const letterArray = messageToDecode.split("")
     for (let letter of letterArray) {
-        decodedLetter = decodeALetter(letter)
-        decodedMessage += decodedLetter;
+        decodedLetter = decodeALetter(letter, schema=userSchema)
+        decodedMessage += decodedLetter
     }
     consoleLogOrAlert('Decode', messageToDecode + ' -> ' + decodedMessage)
 }
