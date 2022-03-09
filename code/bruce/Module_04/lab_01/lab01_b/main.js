@@ -27,26 +27,15 @@
 // python -m http.server
 
 
-console.log("Starting main.js")
-
+// Create some DOM objects:
 let selectorInputUnits = document.getElementById('selector-input-units')
 let selectorOutputUnits = document.getElementById('selector-output-units')
-console.log(selectorInputUnits)
-console.log(selectorOutputUnits)
-
-let selectors = document.getElementsByTagName('select')
-// console.log(selectors)
 
 let inputLength = document.getElementById('user-length')
-let outputLength = document.getElementById('output-length')
-console.log(inputLength)
-console.log(outputLength)
-
-let inputBoxes = document.getElementsByTagName('input')
-// console.log(inputBoxes)
+let outputDisplay = document.getElementById('output-display')
 
 let calculateButton = document.getElementById('calculate-and-display')
-console.log(calculateButton)
+
 
 // Array of units displayed for user:
 let userUnits = [
@@ -60,6 +49,10 @@ let userUnits = [
     'yard',
     'm',
     'meter',
+    'fathom',
+    'chain',
+    'nmi',
+    'klick',
     'km',
     'kilometer',
     'mi',
@@ -68,7 +61,7 @@ let userUnits = [
 
 
 // Object with unit abbreviations to calculation units:
-const calcluationUnits = {
+const calculationUnits = {
     'in'    : 'in',
     'inch'  : 'in',
     '"'     : 'in',
@@ -79,21 +72,30 @@ const calcluationUnits = {
     'yard'  : 'yd',
     'm'     : 'm',
     'meter' : 'm',
+    'fathom': 'fathom',
+    'chain' : 'chain',
+    'nmi'   : 'nmi',
+    'nautical mile': 'nmi',
+    'klick' : 'klick',
     'km'    : 'km',
     'kilometer': 'km',
     'mi'    : 'mi',
-    'mile'  : 'mi'
+    'mile'  : 'mi',
 }
 
 
-// Table of one kilometer length in various unit measurements:
-const conversionTable = {
-    'in': 39370.08,
-    'ft': 3280.84,
-    'yd': 1093.613,
-    'm' : 1000,
-    'km': 1,
-    'mi': .6213712
+// conversionObject of one kilometer length in various unit measurements:
+const conversionObject = {
+    'in'    : 39370.08,
+    'ft'    : 3280.84,
+    'yd'    : 1093.613,
+    'm'     : 1000,
+    'fathom': 546.806,
+    'chain' : 49.709,
+    'nmi'   : 1.852,
+    'klick' : 1,
+    'km'    : 1,
+    'mi'    : .6213712
 }
 
 
@@ -107,38 +109,48 @@ for (selectorType of [selectorInputUnits, selectorOutputUnits]) {
 }
 
 
-selectorInputUnits.addEventListener('input', inputUnitsActivity)
-
-function inputUnitsActivity() {
-    console.log("User has selected Input Units:", selectorInputUnits.value)
-}
-
 calculateButton.addEventListener('click', calculateAndDisplay)
 
 function calculateAndDisplay(event) {
     console.log("Calculating and Displaying")
-    // console.log(event)
-    // console.log(event.x, event.y)
-    // alert(event.x + ' : ' + event.y)
 
-    // Get the value the user typed into the input box:
+    // Get the 'string' value the user typed into the input box:
     theUserInputLengthString = inputLength.value
-    // console.log(typeof theUserInputLengthString)
+    // Convert the 'string' to 'float':
     theUserInputLengthFloat = parseFloat(theUserInputLengthString)
-    // console.log(typeof theUserInputLengthFloat)
-
-    console.log(theUserInputLengthFloat)
     
+    // Get the input units:
+    inputUnits = selectorInputUnits.value
+    
+    // Get the output units:
+    outputUnits = selectorOutputUnits.value
+    
+    // Get the 'calculationUnits' for the 'inputUnits' and 'outputUnits':
+    theActualInputUnit = calculationUnits[inputUnits]
+    theActualOutputUnit = calculationUnits[outputUnits]
+    
+    // Convert the input length to output length:
+    calculatedOutputLength =
+        theUserInputLengthFloat *
+        conversionObject[theActualOutputUnit] /
+        conversionObject[theActualInputUnit]
+    
+    console.log("User Input Length: " + theUserInputLengthFloat + " " + inputUnits)
+    console.log("Output Length: " + calculatedOutputLength + " " + theActualOutputUnit)
+    
+    // Display the output length and units:
+    let outputPrecision = 4
+    outputLengthToDisplay = calculatedOutputLength.toPrecision(outputPrecision)
+    
+    outputLengthString =
+        theUserInputLengthFloat + ' ' +
+        inputUnits + ' is ' +
+        outputLengthToDisplay + ' ' +
+        outputUnits
+
+    let outputElement = document.createElement('p')
+    outputElement.innerText = outputLengthString
+    // outputDisplay.appendChild(outputElement)
+    // Use 'prepend' to display most recent calculation at the top.
+    outputDisplay.prepend(outputElement)
 }
-
-
-
-
-
-userLength = parseFloat(prompt("Please enter length:"));
-
-theActualInputUnit = calcluationUnits[inputUnit];
-
-theActualOutputUnit = calcluationUnits[outputUnit];
-
-outputLength = userLength * conversionTable[theActualOutputUnit] / conversionTable[theActualInputUnit];
