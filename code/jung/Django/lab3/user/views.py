@@ -19,7 +19,7 @@ class Join(APIView):
         password = request.data.get('password', None)
 
         User.objects.create(email=email, nickname=nickname, name=name, password=make_password(password), profile_image="default_profile.jpg")
-    
+
         return Response(status=200)
 
 
@@ -28,7 +28,6 @@ class Login(APIView):
         return render(request, 'user/login.html')
 
     def post(self, request):
-        # login
         email = request.data.get("email", None)
         password = request.data.get('password', None)
 
@@ -38,7 +37,7 @@ class Login(APIView):
             return Response(status=404, data=dict(message="The information was incorrect."))
 
         if user.check_password(password):
-            
+
             request.session['email'] = email
             return Response(status=200)
         else:
@@ -56,7 +55,7 @@ class UploadProfile(APIView):
 
         file = request.FILES['file']
         email = request.data.get('email')
-        
+
         uuid_name = uuid4().hex
         save_path = os.path.join(MEDIA_ROOT, uuid_name)
 
@@ -65,7 +64,6 @@ class UploadProfile(APIView):
                 destination.write(chunk)
 
         profile_image = uuid_name
-
 
         user = User.objects.filter(email=email).first()
         user.profile_image = profile_image
