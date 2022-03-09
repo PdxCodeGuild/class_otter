@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+</head>
+<body>
+    <h1>Unit Converter</h1>
+
+    <div>
+        <label for="number">What is the distance? </label>
+        <input type="number" id="number"><br>
+    </div>
+
+    <div>
+        <label for="input_unit">
+            What are the input units? 
+            <select id="input_unit">
+                <option value="m">m</option>
+                <option value="km">km</option>
+                <option value="mi">mi</option>
+                <option value="ft">ft</option>
+            </select>
+        </label>
+    </div>
+
+    <div>
+        <label for="output_unit">
+            What are the input units? 
+            <select id="output_unit">
+                <option value="m">m</option>
+                <option value="km">km</option>
+                <option value="mi">mi</option>
+                <option value="ft">ft</option>
+            </select>
+        </label>
+    </div>
+
+    <button id="get_nums">Click Me!</button>
+    <p id="result"></p>
+
+    <script src="./unit_converter.js">
+    </script>
+</body>
+</html>

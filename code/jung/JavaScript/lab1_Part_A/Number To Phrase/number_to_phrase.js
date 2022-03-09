@@ -45,7 +45,7 @@ let hunds_dict = {
     700 : "seven-hundred",
     800 : "eight-hundred",
     900 : "nine-hundred"
-};
+}; 
 
 let number = prompt("0-999, choose a number: ");
 
