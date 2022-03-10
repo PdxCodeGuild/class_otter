@@ -9,23 +9,28 @@ let item_list = []
 
 
 add.addEventListener('click', function(){
-    node = document.createElement("li");
-    list_item = document.createTextNode(type_text.value);
-    node.appendChild(list_item);
+    let last_node = document.createElement("li");
+    let list_item = document.createTextNode(type_text.value);
+    last_node.appendChild(list_item);
     let complete = document.createElement("button");
+
     complete.innerHTML = "Complete";
-    node.appendChild(complete);
+    complete.addEventListener('click', function(){
+        last_node.remove()
+        completed.appendChild(last_node)
+        complete.remove()
+    })
+    last_node.appendChild(complete);
+
     let remove = document.createElement("button");
     remove.innerHTML = "Remove";
-    node.appendChild(remove);
-    document.getElementById("item_list").appendChild(node);
+    remove.addEventListener('click', function(){
+        last_node.remove()
+    })
+    last_node.appendChild(remove);
+    document.getElementById("item_list").appendChild(last_node);
 })
 
-
-
-remove.addEventListener('click', function(){
-    todo.remove()
-})
 
 // completed.addEventListener('click', function(){
     
