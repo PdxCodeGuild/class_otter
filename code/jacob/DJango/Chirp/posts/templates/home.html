@@ -3,7 +3,7 @@
 {% block content %}
     {% for post in object_list %}
         <div>
-            <h4>{{ post.user }} on {{ post.created }}</h4>
+            <h4><a href= "{% url 'users:profile' post.user.username %}>{{ post.user }}</a> on {{ post.created }}</h4>
             <p>{{ post.whistle|linebreaksbr }}</p>
 
         </div>
