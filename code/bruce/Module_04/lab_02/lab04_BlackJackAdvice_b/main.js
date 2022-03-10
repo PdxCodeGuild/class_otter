@@ -60,8 +60,21 @@ function giveAdvice() {
     let theCurrentCardValue = getCardValue(cardRank)
     console.log(`Current Card Score: ${theCurrentCardValue}`)
 
+
     totalScore += theCurrentCardValue
     console.log(`Total Score: ${totalScore}`)
+
+    // Optional process to filter out non-numeric and non-('J','Q','K','A') inputs.
+    // Code currently had the filter in 'getFaceCardValue'.
+    // if (isNaN(theCurrentCardValue) ) {
+    //     console.log(`Input is NaN: ${totalScore}`)
+    // } else {
+    //     totalScore += theCurrentCardValue
+    //     console.log(`Total Score: ${totalScore}`)
+    // }
+
+
+
 
     theAdvice = advise(totalScore)
     console.log(theAdvice)
@@ -85,7 +98,11 @@ function giveAdvice() {
 
 
 function getFaceCardValue(card) {
-    return faceCards[card]
+    if (card in faceCards) {
+        return faceCards[card]
+    } else {
+        return 0
+    }
 }
 
 

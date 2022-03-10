@@ -31,8 +31,14 @@ function getCardValue(card) {
 function promptUserAddScore(score) {
     userInput = prompt("Please enter a card:");
     userInputUpper = userInput.toUpperCase();
-    console.log('Card value: ' + getCardValue(userInputUpper))
-    score += getCardValue(userInputUpper)
+    returnedCardValue = getCardValue(userInputUpper)
+    
+    if (isNaN(returnedCardValue)) {
+        console.log('Card value is NaN: ' + returnedCardValue)
+    } else {
+        score += returnedCardValue
+        console.log('Card value: ' + returnedCardValue)
+    }
     return score
 }
 
