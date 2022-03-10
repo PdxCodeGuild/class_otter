@@ -20,18 +20,21 @@
     <!-- Navbar -->
 
     <h1>To Do List</h1>
-    <form id="new_items">
+    <div id="new_items">
         <label for="new_item">Add an item to your list: </label>
         <input type="text" id="type_text">
         <button id="add">Add</button>
-    </form>
+    </div>
+
 
     <!-- Need to Do -->
     <h2>Need to Do</h2>
     <ul>
         <li id="todo">
-        <button id="remove">Remove</button>
-        <button id="complete">Complete</button>
+        <div class="buttons">
+            <button id="remove">Remove</button>
+            <button id="complete">Complete</button>
+        </div>
         </li>
     </ul>
     <br>
