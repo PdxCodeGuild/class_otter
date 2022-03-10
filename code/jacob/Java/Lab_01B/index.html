@@ -18,13 +18,27 @@
         </div>
 
         <div>
-            <label for="units">What units is the distance?(ft, mi, m, yd, in)</label>
-            <input type="text" id="units">
+            <label for="units">What units is the distance?</label>
+            <select id="units">
+                <option value="ft">ft</option>
+                <option value="mi">mi</option>
+                <option value="m">m</option>
+                <option value="km">km</option>
+                <option value="yd">yd</option>
+                <option value="in">in</option>
+            </select>
         </div>
-
+        
         <div>
-            <label for="convertTo">What units do you want to convert to?(ft, mi, m, yd, in)</label>
-            <input type="text" id="convertTo">
+            <label for="convertTo">What units do you want to convert to?</label>
+            <select id="convertTo">
+                <option value="ft">ft</option>
+                <option value="mi">mi</option>
+                <option value="m">m</option>
+                <option value="km">km</option>
+                <option value="yd">yd</option>
+                <option value="in">in</option>
+            </select>
         </div>
 
         <button class="go" id="process">Run</button>
