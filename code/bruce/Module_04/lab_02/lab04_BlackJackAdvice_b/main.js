@@ -13,44 +13,36 @@ const faceCards = {
     K: 10,
 }
 
+let thePageHeading = document.createElement('h1')
+thePageHeading.innerText = "Bunbun's BlackJack Advise"
+document.body.appendChild(thePageHeading)
+
+let theInputAmalgamation = document.createElement('div')
+theInputAmalgamation.className = 'input-div'
+
 let theInputBox = document.createElement('input')
-// console.log(theInputBox)
-
-
 let theDisplayElement = document.createElement('p')
-// console.log(theDisplayElement)
-
 let theButtonElement = document.createElement('button')
-// console.log(theButtonElement)
 
-document.body.appendChild(theInputBox)
+document.body.appendChild(theInputAmalgamation)
+theInputAmalgamation.appendChild(theInputBox)
+theInputAmalgamation.appendChild(document.createElement('br'))
+theInputAmalgamation.appendChild(theButtonElement)
 
-// let theLineBreak1 = document.createElement('br')
-// let theLineBreak2 = document.createElement('br')
-// document.body.appendChild(theLineBreak1)
-// document.body.appendChild(theLineBreak2)
-
-// Add two line breaks.
-for (let i=0; i < 2; i++) {
-    let aLineBreak = document.createElement('br')
-    document.body.appendChild(aLineBreak)
-}
-
-document.body.appendChild(theButtonElement)
 document.body.appendChild(theDisplayElement)
 
 theInputBox.placeholder = "Input card rank here"
-
 theButtonElement.innerText = "Give me BlackJack Advice"
 
 theButtonElement.addEventListener('click', giveAdvice)
 
 
 // Listen on 'theInputBox' for 'Enter' key. 'click' the button if 'Enter' is pressed while in 'theInputBox'.
-theInputBox.addEventListener("keyup", function(event) {
+theInputBox.addEventListener("keydown", function(event) {
   if (event.key == 'Enter') {
     // Cancel the default action, if needed
     event.preventDefault()
+    // console.log(event)
     theButtonElement.click()
   }
 })
@@ -63,8 +55,7 @@ let totalScore = 0
 function giveAdvice() {
     console.log("I'm giving advice!!!!")
     cardRank = theInputBox.value.toUpperCase()
-    theInputBox.value = ''
-    // console.log(cardRank)
+    theInputBox.value = null
 
     let theCurrentCardValue = getCardValue(cardRank)
     console.log(`Current Card Score: ${theCurrentCardValue}`)
@@ -75,11 +66,19 @@ function giveAdvice() {
     theAdvice = advise(totalScore)
     console.log(theAdvice)
     
-    if (totalScore == 21) {
+    if (totalScore >= 21) {
         theDisplayElement.style.fontSize = "xx-large"
+        theInputAmalgamation.remove()
+        let doPlayAgain = document.createElement('button')
+        doPlayAgain.innerText = "Please advise me on another game of BlackJack"
+        document.body.appendChild(doPlayAgain)
+        doPlayAgain.focus()
+        doPlayAgain.addEventListener('click', function (event) {
+            location.reload()
+        })
     }
 
-    theDisplayElement.innerText = `${totalScore} : ${theAdvice}`
+    theDisplayElement.innerText = `${totalScore} Points : ${theAdvice}`
 
     theInputBox.focus()
 }

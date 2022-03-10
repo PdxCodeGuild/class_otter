@@ -26,6 +26,11 @@
 // Run server:
 // python -m http.server
 
+// Create page header:
+let thePageHeader = document.createElement('h1')
+thePageHeader.innerText = "Length Converter 2019"
+document.body.prepend(thePageHeader)
+
 
 // Create some DOM objects:
 let selectorInputUnits = document.getElementById('selector-input-units')
