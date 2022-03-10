@@ -68,8 +68,8 @@ function addTodoToList(event) {
     // Add this <li> inside the <ul>
     uncompletedListUl.appendChild(listItem)
     // uncompletedListUl.prepend(listItem)
-    // task = inputBox.value
-    // listItem.innerText = task
+    task = inputBox.value
+    listItem.innerText = task
 
     let completeButton = document.createElement('button')
     completeButton.addEventListener('click', completeItem)
@@ -91,11 +91,14 @@ function addTodoToList(event) {
 
 function completeItem() {
     console.log(this.parentElement)
-    // Add the whole parent elemeni to the completed list.
-    
+    // Add the whole parent element to the completed list.
+    elementToAppend = this.parentElement
+    console.log(elementToAppend)
+
     completedListUl.appendChild(this.parentElement)
+
     // Remove the whole parent element from the uncompleted list.
-    this.parentElement.remove()
+    // this.parentElement.remove()
     // if item.delete is checked, 
     console.log(`Completed: ${this}`)
 }
