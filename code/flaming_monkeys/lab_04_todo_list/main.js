@@ -3,10 +3,10 @@
 
 // Let's make a simple todo-list which supports the following operations:
 
-// add an item to the list
-// remove an item from the list
-// mark an item as completed
-// Removed items should disappear entirely.
+// add an item to the list - done 
+// remove an item from the list - done
+// mark an item as completed - done 
+// Removed items should disappear entirely. - done
 // Completed items should appear at the bottom (or in a separate list) with a line through them.
 
 // <header> ToDo List
@@ -34,16 +34,25 @@ let inputElementLabel = document.createElement('label')
 let inputBox = document.createElement('input')
 // Button to execute script.
 let todoAddButton = document.createElement('button')
+let uncompletedListheading = document.createElement('h2')
+
+uncompletedListheading.innerText = 'uncompleted items'
+
+
 
 // List of todos
 let uncompletedListUl = document.createElement('ul')
 uncompletedListUl.id = 'uncompleted-list'
 // We create the items in a function. Function is being called by add button.
-    // Create the <li>s.
-    // let listItem = document.createElement('li')
+// Create the <li>s.
+// let listItem = document.createElement('li')
 
 let completedListUl = document.createElement('ul')
 completedListUl.id = 'completed-list'
+let completedListheading = document.createElement('h2')
+
+completedListheading.innerText = 'completed items'
+
 
 
 
@@ -51,9 +60,14 @@ document.body.appendChild(inputElementLabel)
 document.body.appendChild(inputBox)
 document.body.appendChild(todoAddButton)
 
+
 // Uncompleted and completed list elements.
+document.body.appendChild(uncompletedListheading)
 document.body.appendChild(uncompletedListUl)
+document.body.appendChild(completedListheading)
 document.body.appendChild(completedListUl)
+
+
 
 todoAddButton.addEventListener('click', addTodoToList)
 todoAddButton.innerText = "Add a Task"
@@ -69,7 +83,9 @@ function addTodoToList(event) {
     uncompletedListUl.appendChild(listItem)
     // uncompletedListUl.prepend(listItem)
     task = inputBox.value
-    listItem.innerText = task
+    let justtheTask = document.createElement('span')
+    justtheTask.innerText = task
+
 
     let completeButton = document.createElement('button')
     completeButton.addEventListener('click', completeItem)
@@ -80,7 +96,7 @@ function addTodoToList(event) {
 
     deleteButton.innerText = "Delete the item"
 
-
+    listItem.appendChild(justtheTask)
     listItem.appendChild(completeButton)
     listItem.appendChild(deleteButton)
 
@@ -90,19 +106,27 @@ function addTodoToList(event) {
 
 
 function completeItem() {
-    console.log(this.parentElement)
+    // console.log(this.parentElement)
     // Add the whole parent element to the completed list.
     elementToAppend = this.parentElement
-    console.log(elementToAppend)
-
-    completedListUl.appendChild(this.parentElement)
+    console.log(` element to append ${elementToAppend}`)
+    let task = this.parentElement.firstChild.innerText
+    console.log(`${task}`)
+    // theText = elementToAppend.innerText
+    // console.log(` this is line 112 -- ${theText}`)
+    // elementToAppend.innerHTML = `<p>${theText}</p>`
+    completedListUl.appendChild(elementToAppend)
 
     // Remove the whole parent element from the uncompleted list.
     // this.parentElement.remove()
     // if item.delete is checked, 
-    console.log(`Completed: ${this}`)
+    // console.log(`Completed: ${this}`)
 }
-
+{/* <script>
+var str = new String("Demo Text");
+document.write(str.strike());
+alert(str.strike());
+</script>  */}
 
 function deleteItem() {
     // Is there are way we can tell the remover which element this is in?
@@ -110,7 +134,7 @@ function deleteItem() {
     console.log(`typeof this: ${typeof this}`)
     console.log(`this: ${this}`)
     console.log(`this.innerText: ${this.innerText}`)
-    
+
     console.log(`typeof this.parentElement: ${typeof this.parentElement}`)
     console.log(`this.parentElement: ${this.parentElement}`)
     console.log(`this.parentElement.innerText: ${this.parentElement.innerText}`)
