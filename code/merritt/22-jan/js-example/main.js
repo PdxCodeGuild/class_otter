@@ -66,3 +66,52 @@ dontPress.addEventListener('click', function() {
     document.body.appendChild(myButton)
     dontPress.remove()
 })
+
+///////////////////////////////////////////////////////////////////////
+
+let addBtnText = document.createElement('input')
+addBtnText.type = 'number'
+
+let addBtn = document.createElement('button')
+addBtn.innerText = "Create Button"
+addBtn.addEventListener('click', function() {
+    let button = document.createElement('button')
+    button.innerText = addBtnText.value
+    let interval
+    function cancelButtonCallback() {
+        clearInterval(interval)
+        this.previousSibling.remove()
+        this.remove()
+    }
+    button.addEventListener('click', function() {
+        clearInterval(interval)
+        interval = setInterval(function() {
+            console.log(button.innerText)
+        }, parseInt(button.innerText)*1000)
+    })
+    document.body.appendChild(button)
+
+    let cancelButton = document.createElement('button')
+    cancelButton.innerText = '×'
+
+    cancelButton.addEventListener('click', cancelButtonCallback)
+    document.body.appendChild(cancelButton)
+})
+
+document.body.appendChild(addBtnText)
+document.body.appendChild(addBtn)
+
+///////////////////////////////////////////////////////////////////////
+
+let timeoutButtons = document.getElementsByClassName('btn')
+for (let i=0; i < timeoutButtons.length; i++) {
+    timeoutButtons[i].addEventListener('click', function(){
+        setTimeout(function(){
+            console.log(timeoutButtons[i].innerText)
+        }, parseInt(timeoutButtons[i].innerText)*1000)
+        // setTimeout(function(){
+        //     console.log(this)
+        //     console.log(this.innerText)
+        // }.bind(this), parseInt(this.innerText)*1000)
+    })
+}
