@@ -19,3 +19,4 @@ processNumber.addEventListener('click', function(){
     results.innerText = (Math.round(newOutput*1000)/1000)
 
 })
+
