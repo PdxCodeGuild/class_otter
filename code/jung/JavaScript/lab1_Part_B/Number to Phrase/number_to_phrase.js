@@ -98,6 +98,14 @@ function convert(number) {
 
 
 getNums.addEventListener('click', function(){
-    let convertResult = convert(number.value)
-    result.innerText = convertResult
+    if (number.value === "") {
+        result.innerText = "Put something!"
+        setTimeout(function(){
+            location.reload(1);
+        }, 1000)
+    }
+    else {
+        let convertResult = convert(number.value)
+        result.innerText = convertResult
+    }
 })

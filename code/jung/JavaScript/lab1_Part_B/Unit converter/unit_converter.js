@@ -3,6 +3,7 @@ let input_unit = document.getElementById('input_unit')
 let output_unit = document.getElementById('output_unit')
 let getNums = document.getElementById("get_nums")
 let result = document.getElementById("result")
+let modalBtn = document.getElementById("modalBtn")
 
 
 function conversion(input_unit, output_unit, distance) {
@@ -40,9 +41,19 @@ function conversion(input_unit, output_unit, distance) {
 }
 
 
-getNums.addEventListener('click', function(){
-    let answer = conversion(input_unit.value, output_unit.value, parseInt(distance.value))
-    console.log(typeof input_unit)
-    result.innerText = `${distance.value} ${input_unit.value} = ${answer} ${output_unit.value}`
+modalBtn.addEventListener('click', function(){
+    if (distance.value === "") {
+        modalBtn.innerText = "Put something!"
+        setTimeout(function(){
+            location.reload(1);
+        }, 1000)
+    }
+    else {
+        let answer = conversion(input_unit.value, output_unit.value, parseInt(distance.value))
+        modalBtn.innerText = `${distance.value} ${input_unit.value} = ${answer} ${output_unit.value}`
+        setTimeout(function(){
+            location.reload(1);
+        }, 10000)
+    }
 })
 
