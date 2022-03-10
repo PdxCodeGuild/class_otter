@@ -1,6 +1,6 @@
 user_num_list = []
 
-answer = 0
+
 
 while True:
 
@@ -8,7 +8,7 @@ while True:
 
     if user_num == 'done':
 
-        answer = sum (user_num_list)/len(user_num_list)
+        answer = sum(user_num_list)/len(user_num_list)
 
         print(f'The average is : {answer}')
 

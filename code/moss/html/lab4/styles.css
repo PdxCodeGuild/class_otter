@@ -42,23 +42,27 @@ header {
 }
 
 .list {
+    
     width: 30%;
     /* padding: 0px; */
 }
 
 .img-container {
+   justify-content: center;
     width: 70%;
+
 }
 
+
+
 img {
-    
+    /* border: 20px solid black; */
     display: block;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     
-
     
 }
 

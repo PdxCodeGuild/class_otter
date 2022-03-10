@@ -12,6 +12,8 @@ let to_unit = document.getElementById('user_out_unit')
 
 let button = document.getElementById('btn')
 
+let result = document.getElementById('result')
+
 let convr_unit_m = {
 
     'in': .0254,
@@ -32,7 +34,7 @@ let convr_unit_m = {
 // let m_convr_out = document.getElementById('m_convr_out')
 
 // let result = (`${user_dist} ${user_unit} is ${m_convr_out} ${user_out_unit}`)
-let result = document.getElementById('result')
+
 
 button.addEventListener('click', function(e) {
     
