@@ -7,15 +7,13 @@ let english = {
     "n": "a", "o": "b", "p": "c", "q": "d", "r": "e", "s": "f", "t": "g", "u": "h", "v": "i", "w": "j", "x": "k", "y": "l", "z": "m"
 }
 
-function displaytext() {
-    console.log('hello, Bruce')
-}
+
 // console.log(wordInput)
 // console.log(outputDiv)
 // console.log(runBt)
-let characters = []
 
 runBt.addEventListener("click", function () {
+    let characters = []
     let textValue = wordInput.value
     console.log(textValue)
     // for loop grabs each character of text value
