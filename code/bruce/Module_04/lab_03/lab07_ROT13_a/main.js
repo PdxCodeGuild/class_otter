@@ -74,7 +74,7 @@ function letsCipherSomething() {
         encodedLetter = encodeALetter(letter, schema=userSchema)
         encodedMessage += encodedLetter
     }
-    consoleLogOrAlert('Encode', messageToEncode + ' -> ' + encodedMessage)
+    consoleLogOrAlert('Encode', `${userSchema} | ${messageToEncode} -> ${encodedMessage}`)
 }
 
 
@@ -87,5 +87,5 @@ function letsUncipherSomething() {
         decodedLetter = decodeALetter(letter, schema=userSchema)
         decodedMessage += decodedLetter
     }
-    consoleLogOrAlert('Decode', messageToDecode + ' -> ' + decodedMessage)
+    consoleLogOrAlert('Decode', `${userSchema} | ${messageToDecode} -> ${decodedMessage}`)
 }
