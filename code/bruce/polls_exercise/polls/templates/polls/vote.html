@@ -1,0 +1,16 @@
+{% comment %} This is not needed. The 'vote' operation is performed from 'detail' view, then redirect to results or back to details. {% endcomment %}
+
+{% comment %} <form action="/" method='POST'>
+    <label for="choice">Make your vote</label>
+    <select id="choices" name="choice">
+        {% if choices_list %}
+            {% for choice in choices_list %}
+            <option value={{ choice }}>{{ choice.choice_text }}</option>
+            {% endfor %}
+        {% else %}
+            <p>No polls are available.</p>
+        {% endif %}
+    </select>
+    <input type="submit" value="Submit Vote">
+
+</form> {% endcomment %}

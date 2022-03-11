@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Order Form</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
+        <link rel="stylesheet" href="lab04.css">
+
+    </head>
+        <body>
+            <header>
+                <div>
+                    <h1>Hot Burritos</h1>
+                    
+                </div>
+                <nav>
+                    <p><a href="#">Home</a></p>
+                    <p><a href="#">About</a></p>
+                    <p><a href="#">Contact Us</a></p>
+                </nav>
+            </header>
+            <main>
+                <form class="menu" action="url here" method="post">
+                    
+                    <div class="who">
+                        <h3>What account are you using?</h3>
+                        <input type="text" name="first" id="first" placeholder="required" required>
+                        <label for="first">First Name</label><br>
+                        <input type="text" name="last" id="last" placeholder="required" required>
+                        <label for="last">Last Name</label><br>
+                        <input type="password" id="password" placeholder="required" required>
+                        <label for="password">Enter Password</label><br>
+                    </div>
+                    
+                    <div class="tortilla">
+                        <h3>Tell us what kind of Tortilla you want:</h3>
+                        <input type="radio" name="tortilla" value="White Flour">White Flour<br>
+                        <input type="radio" name="tortilla" value="Wheat Flour">Wheat Flour<br>
+                        <input type="radio" name="tortilla" value="Spinach">Spinach<br>
+                        <input type="radio" name="tortilla" value="Corn">Corn<br>
+                    </div>
+
+                    <div class="rice">
+                        <h3>What kind of rice do you want on the Burrito?</h3>
+                        <input type="radio" name="rice" value="White Rice">White Rice<br>
+                        <input type="radio" name="rice" value="Brown Rice">Brown Rice<br>
+                    </div>
+
+                    <div class="beans">
+                        <h3>What kind of beans do you want on the Burrito?</h3>
+                        <input type="radio" name="beans" value="Black Beans">Black Beans<br>
+                        <input type="radio" name="beans" value="Pinto Beans">Pinto Beans<br>
+                    </div>
+
+                    <div class="meat">
+                        <h3>What kind of meat would you like on the Burrito?</h3>
+                        <input type="radio" name="meat" value="Carnitas">Carnitas<br>
+                        <input type="radio" name="meat" value="Chicken">Chicken<br>
+                        <input type="radio" name="meat" value="Sofritas">Sofritas<br>
+                        <input type="radio" name="meat" value="None">None<br>
+                    </div>
+                    
+                    <div class="addons">                   
+                        <h3>Additional Ingredients:</h3>
+                        <input type="checkbox" name="additions" value="cheese">
+                        <label for="additions">Cheese</label><br>
+                        <input type="checkbox" name="additions" value="sour cream">
+                        <label for="additions">Sour Cream</label><br>
+                    </div>
+
+                    <div class="direct">
+                        <h3>Delivery Instructions</h3>
+                        <textarea rows="5" cols="40"></textarea>
+
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>    
+
+            </main>
+        </body>
+</html>

@@ -1,0 +1,26 @@
+Constant Objects and Arrays
+The keyword const is a little misleading.
+
+It does not define a constant value. It defines a constant reference to a value.
+
+Because of this you can NOT:
+
+Reassign a constant value
+Reassign a constant array
+Reassign a constant object
+
+But you CAN:
+
+Change the elements of constant array
+Change the properties of constant object
+
+# Operators
+https://www.w3schools.com/js/js_operators.asp
+
+# Assignment
+https://www.w3schools.com/js/js_assignment.asp
+
+# Expressiongs and Operators:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators
+https://www.w3schools.com/jsref/jsref_operators.asp
+

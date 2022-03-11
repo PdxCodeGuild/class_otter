@@ -1,0 +1,128 @@
+/* Color palette */
+/* Color Theme Swatches in Hex */
+.theme_fishing_cat_muted-1-hex { color: #192026; }
+.theme_fishing_cat_muted-2-hex { color: #6E8C03; }
+.theme_fishing_cat_muted-3-hex { color: #BF9056; }
+.theme_fishing_cat_muted-4-hex { color: #8C5F37; }
+.theme_fishing_cat_muted-5-hex { color: #D9C3B0; }
+
+/* Color Theme Swatches in RGBA */
+.theme_fishing_cat_muted-1-rgba { color: rgba(25, 32, 38, 1); }
+.theme_fishing_cat_muted-2-rgba { color: rgba(110, 140, 3, 1); }
+.theme_fishing_cat_muted-3-rgba { color: rgba(191, 144, 86, 1); }
+.theme_fishing_cat_muted-4-rgba { color: rgba(140, 95, 55, 1); }
+.theme_fishing_cat_muted-5-rgba { color: rgba(217, 195, 176, 1); }
+
+/* Color Theme Swatches in HSLA */
+.theme_fishing_cat_muted-1-hsla { color: hsla(207, 20, 12, 1); }
+.theme_fishing_cat_muted-2-hsla { color: hsla(73, 95, 28, 1); }
+.theme_fishing_cat_muted-3-hsla { color: hsla(33, 45, 54, 1); }
+.theme_fishing_cat_muted-4-hsla { color: hsla(28, 43, 38, 1); }
+.theme_fishing_cat_muted-5-hsla { color: hsla(27, 35, 77, 1); }
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+table.available-units-table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+body {
+    color: rgba(25, 32, 38, 1);
+    background-color: rgba(217, 195, 176, 1);
+    font-family: 'Courier Prime', monospace;
+    font-weight: 700;
+
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 40% 15% 30% 15%;
+    padding: 24px;
+    
+    min-width:820px;
+    width: auto !important;
+    width:820px;
+
+    min-height:700px;
+    height: auto !important;
+    height:700px;
+}
+
+div.available-units {
+    border-right: 2px solid rgba(140, 95, 55, 1);
+    grid-area: 1 / 1 / 4 / 2;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    padding: 0 auto 25px auto;
+}
+
+div.user-input-block {
+    grid-area: 1 / 2 / 2 / 3;
+    margin: 6px auto;
+}
+
+div.unit-choice-block {
+    margin: 6px auto;
+}
+
+div.unit-choice-block > * {
+    padding: 6px 0;
+    margin: 6px;
+}
+
+div.input-and-submit-block {
+    padding: 6px 0;
+
+}
+
+div.input-and-submit-block > * {
+    padding: 6px 0;
+    margin: 6px auto;
+}
+
+.submit-button-block {
+    text-align: center;
+}
+
+.submit-button-block > input {
+    padding: 12px;
+}
+
+div.display-results-border {
+    grid-area: 2 / 2 / 3 / 3;
+    border: 4px solid rgba(110, 140, 3, 1);
+    padding: 0 18px;
+    margin: 6px;
+}
+
+div.display-results-block {
+    margin: auto;
+    text-align: center  ;
+    padding: 15px;
+    font-size: 36px;
+}
+
+/* Center the available units. */
+table.available-units-table {
+    text-align: center;
+}
+
+th, td {
+    padding: 6px;
+}
+
+footer {
+    /* border: 2px solid red; */
+    grid-area: 4 / 2 / 5 / 3;
+    margin: auto;
+}
+
+

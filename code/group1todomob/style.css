@@ -1,0 +1,7 @@
+.marked{
+    text-decoration: line-through;
+}
+
+ul > li {
+    margin-top: 6px;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shortener</title>
+</head>
+<body>
+    <h1>Url Shortener</h1>
+    <form action="{% url 'url_shortener_app:short_url' %}" method="post">
+        {% csrf_token %}
+        <label>long url</label>
+        <input type='text' name="long_url"/>
+        <button type="submit">submit</button>
+      </form>
+      <h2>long url</h2>
+      {%for item in long_url%}
+      {{item.long_url}}
+      {%endfor%}
+      <h2>url code</h2>
+      {%for item in long_url%}
+      <a href="{{item.long_url}}">{{item.short_url}}</a>
+      {%endfor%}
+</body>
+</html>
