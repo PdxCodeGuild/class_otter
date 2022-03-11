@@ -65,7 +65,11 @@ function completeItem() {
     /////////
 
     uncompleteButton = createUncompleteButton()
-    elementToComplete.appendChild(uncompleteButton)
+    // // Puts 'uncompleteButton' at the end, after the delete button.
+    // elementToComplete.appendChild(uncompleteButton)
+    // Puts 'uncompleteButton' 'after' the text '<span>' and before the delete button.
+    // This makes most sense to me to keep complete/uncomplete buttons immediately next to task text.
+    elementToComplete.firstChild.after(uncompleteButton)
 
     // Remove 'this' (the complete button).
     this.remove()
