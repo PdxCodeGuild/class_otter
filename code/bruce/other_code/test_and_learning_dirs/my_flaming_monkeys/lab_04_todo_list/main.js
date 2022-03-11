@@ -163,33 +163,32 @@ function completeItem() {
 
 function unCompleteItem() {
     // Flag to specify if we are printing the console log lines to console.log.
-    // let doConsoleLog = false
-    let doConsoleLog = true
+    let doConsoleLog = false
+    // let doConsoleLog = true
 
 
     elementToMove = this.parentElement
     // This line gets the 'TEXT' inside the '<s>TEXT</s>' in the <span>.
+    // Getting the 'innerText' seems to 'skip' the <s></s> tags.
     let task = elementToMove.firstChild.innerText
 
 
-    pleaseConsoleLog(`Before replacing <s>TEXT</s> with TEXT - firstChild: ${elementToMove.firstChild}`, doConsoleLog)
     pleaseConsoleLog(`Before replacing <s>TEXT</s> with TEXT - innerHTML: ${elementToMove.firstChild.innerHTML}`, doConsoleLog)
-    pleaseConsoleLog(`Before replacing <s>TEXT</s> with TEXT - innerText: ${elementToMove.firstChild.innerText}`, doConsoleLog)
+    // Before replacing <s>TEXT</s> with TEXT - innerHTML: <s>A totally new task!</s>
 
 
     // This line replaces the '<s>TEXT</s>' in the <span> with 'TEXT'.
     elementToMove.firstChild.innerText = task
 
 
-    pleaseConsoleLog(`After replacing <s>TEXT</s> with TEXT - firstChild: ${elementToMove.firstChild}`, doConsoleLog)
     pleaseConsoleLog(`After replacing <s>TEXT</s> with TEXT - innerHTML: ${elementToMove.firstChild.innerHTML}`, doConsoleLog)
-    pleaseConsoleLog(`After replacing <s>TEXT</s> with TEXT - innerText: ${elementToMove.firstChild.innerText}`, doConsoleLog)
+    // After replacing <s>TEXT</s> with TEXT - innerHTML: A totally new task!
 
 
     let completeButton = document.createElement('button')
     completeButton.addEventListener('click', completeItem)
     completeButton.innerText = "Complete the item"
-    // Add the 'complete' button immediately after the task text element.
+    // Add the 'complete' button immediately after the task <span> element.
     this.parentElement.firstChild.after(completeButton)
     // Remove the 'uncomplete' button.
     this.remove()
