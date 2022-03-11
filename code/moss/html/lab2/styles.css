@@ -49,11 +49,11 @@ body {
     
 }
 
-.title{
+.title {
     font-weight: bolder;
 }
 
-    @media (min-width: 700px) {
+@media (min-width: 700px) {
     header, main, footer{ 
         margin: 32px;
     }
