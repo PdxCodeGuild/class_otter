@@ -8,7 +8,7 @@ let metrics = {
     "meter": 1
 }
 
-let distance = prompt("what is your distance? ")
+let distance = parseFloat(prompt("what is your distance? "))
 
 let input_1 = prompt("pick input unit feet,miles,kilometers,yard or inch? ")
 

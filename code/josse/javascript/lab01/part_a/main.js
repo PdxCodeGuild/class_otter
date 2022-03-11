@@ -5,6 +5,11 @@ for (let i = 0; i < 6; i++) {
     // console.log(i)
 
     let number = prompt("please enter a number or done: ")
+    // let number = prompt("please enter a number or done: ")
+    // let number = prompt("please enter a number or done: ")
+    // let number = prompt("please enter a number or done: ")
+    // let number = prompt("please enter a number or done: ")
+    // let number = prompt("please enter a number or done: ")
     if (number === "done") {
         console.log("done")
         break
