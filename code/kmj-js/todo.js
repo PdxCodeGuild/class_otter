@@ -48,6 +48,10 @@ add.addEventListener('click', function(){
     localStorage.setItem('completed_data', JSON.stringify(completed_data))
 })
 
+// for (let i = 0; i < localStorage.length; i++){
+
+// }
+
 
 // completed.addEventListener('click', function(){
     
