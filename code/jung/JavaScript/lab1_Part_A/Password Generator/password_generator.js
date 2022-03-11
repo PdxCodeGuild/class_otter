@@ -30,13 +30,12 @@ function generatePassword() {
             container += values.symbols;
         };
 
-    result = ""
+    result = "";
     
     for (let i = 0; i < length; i++) {
         result += container[Math.floor(Math.random()*container.length)]
-    }
-
-    return result
+    };
+    return result;
 }
 
 console.log(generatePassword());
