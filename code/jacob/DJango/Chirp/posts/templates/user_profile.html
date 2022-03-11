@@ -4,7 +4,7 @@
     <h2>{{ user_profile.username }}</h2>
 
     {% for post in user_profile.posts.all %}
-        <p>{{ post.body|linebreaksbr }}</p>
+        <p>{{ post.whistle|linebreaksbr }}</p>
     {% endfor %}
 
 {% endblock content %}

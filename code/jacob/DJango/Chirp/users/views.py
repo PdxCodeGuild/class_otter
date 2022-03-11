@@ -20,7 +20,3 @@ class UserProfileView(DetailView):
     def get_object(self):
         return get_object_or_404(User, username=self.kwargs['username'])
 
-def user_profile(request, username):
-    user_profile = get_object_or_404(User, username=username)
-    context = {'user_profile': user_profile}
-    return render(request, 'user_profile.html', context)
