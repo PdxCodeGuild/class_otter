@@ -22,19 +22,23 @@ add.addEventListener('click', function(){
     complete.innerHTML = "Complete";
     complete.addEventListener('click', function(){
         completed.appendChild(last_node)
-        completed_data.push(type_text.value);
-        last_node.remove()
+        console.log(list_item)
+        completed_data.push(list_item.nodeValue)
+        console.log(completed_data)
+        todo_data.splice(todo_data.indexOf(list_item.nodeValue), 1)
         complete.remove()
-        localStorage.removeItem(type_text.value);
+        localStorage.setItem('todo_data', JSON.stringify(todo_data))
+        localStorage.setItem('completed_data', JSON.stringify(completed_data))
     })
     last_node.appendChild(complete);
 
     let remove = document.createElement("button");
     remove.innerHTML = "Remove";
     remove.addEventListener('click', function(){
-        last_node.remove()
-        localStorage.removeItem(last_node);
-    })
+        todo_data.splice(todo_data.indexOf(list_item.nodeValue), 1)
+        completed_data.splice(completed_data.indexOf(list_item.nodeValue), 1)
+        remove.parentElement.remove()
+        })
     last_node.appendChild(remove);
 
     document.getElementById("item_list").appendChild(last_node);
