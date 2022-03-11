@@ -86,7 +86,6 @@ function addTodoToList(event) {
     let justtheTask = document.createElement('span')
     justtheTask.innerText = task
 
-
     let completeButton = document.createElement('button')
     completeButton.addEventListener('click', completeItem)
     let deleteButton = document.createElement('button')
@@ -108,17 +107,27 @@ function addTodoToList(event) {
 function completeItem() {
     // console.log(this.parentElement)
     // Add the whole parent element to the completed list.
-    elementToAppend = this.parentElement
+    // let elementToAppend = this.parentElement
+    const elementToAppend = Object.create(this.parentElement)
     console.log(` element to append ${elementToAppend}`)
     let task = this.parentElement.firstChild.innerText
+    console.log(`${task}!!`)
+    // elementToAppend.firstChild.innerHtml = `${task}` 
+    // task = elementToAppend.firstChild.innerText
     console.log(`${task}`)
     // theText = elementToAppend.innerText
     // console.log(` this is line 112 -- ${theText}`)
-    // elementToAppend.innerHTML = `<p>${theText}</p>`
-    completedListUl.appendChild(elementToAppend)
+    let lineItem = document.createElement('li')
+    lineItem.innerHTML = `<s>${task}</s>`
+
+    let deleteButton = document.createElement('button')
+    deleteButton.addEventListener('click', deleteItem)
+    deleteButton.innerText = "Delete the item"
+    lineItem.appendChild(deleteButton)
+    completedListUl.appendChild(lineItem)
 
     // Remove the whole parent element from the uncompleted list.
-    // this.parentElement.remove()
+    this.parentElement.remove()
     // if item.delete is checked, 
     // console.log(`Completed: ${this}`)
 }
