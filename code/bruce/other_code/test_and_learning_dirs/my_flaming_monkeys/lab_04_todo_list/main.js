@@ -1,6 +1,50 @@
 // Assignment:
 // https://github.com/PdxCodeGuild/class_otter/blob/bruce/4%20JavaScript/mob/04%20Todo%20List.md
 
+// Resources:
+    // A selection of some of the 'interface's we used:
+    // DOM interfaces(?):
+        // HTMLLIElement:
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement
+        // HTMLSpanElement:
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement
+        // HTMLButtonElement:
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
+        // HTMLLabelElement
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement
+
+
+    // DOM Methods:
+        // Document.createElement():
+            // https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+        // EventTarget.addEventListener():
+            // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+        // Node.appendChild():
+            // https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+        // Element.after():
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/after
+        // Element.remove():
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/remove
+        // EventTarget.addEventListener():
+            // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+    // DOM Properties:
+        // Document.body ('document.body' used below):
+            // https://developer.mozilla.org/en-US/docs/Web/API/Document/body
+        // HTMLElement.innerText
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText
+        // HTMLDataElement.value:
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataElement/value
+        // Node.parentElement:
+            // https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement
+        // Node.firstChild:
+            // https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild
+        // Element.innerHTML:
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+        // Element.id:
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/id
+        
+
 let pageHeader = document.createElement('h1')
 pageHeader.innerText = "Scott, Josse, and Bruce's Awesome ToDo and Task List"
 
@@ -52,6 +96,7 @@ function addTodoToList() {
 
 
 function completeItem() {
+    // 'this' IS the complete button.
     elementToComplete = this.parentElement
 
     let task = elementToComplete.firstChild.innerText
@@ -65,10 +110,7 @@ function completeItem() {
     /////////
 
     uncompleteButton = createUncompleteButton()
-    // // Puts 'uncompleteButton' at the end, after the delete button.
-    // elementToComplete.appendChild(uncompleteButton)
-    // Puts 'uncompleteButton' 'after' the text '<span>' and before the delete button.
-    // This makes most sense to me to keep complete/uncomplete buttons immediately next to task text.
+    // Puts 'uncompleteButton' 'after' the task <span> 'elementToComplete.firstChild' and before the delete button.
     elementToComplete.firstChild.after(uncompleteButton)
 
     // Remove 'this' (the complete button).
@@ -79,6 +121,7 @@ function completeItem() {
 
 
 function unCompleteItem() {
+    // 'this' IS the uncomplete button.
     elementToUncomplete = this.parentElement
     let task = elementToUncomplete.firstChild.innerText
 
@@ -95,8 +138,9 @@ function unCompleteItem() {
 
 
 function deleteItem() {
-    // Remove the whole task <li> (which is the parent element of 'this').
-    // So, 'this' (being a child element of <li>) is removed as well.
+    // 'this' IS the delete button.
+    // Remove the whole task 'an HTMLLIElement' (which is the parent element of 'this').
+    // So, 'this' (being a child element of the specific HTMLLIElement) is removed as well.
     this.parentElement.remove()
 }
 
