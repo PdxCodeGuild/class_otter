@@ -4,6 +4,7 @@ let addCardButton = document.querySelector('#add-card')
 let cardInput = document.querySelector('#drop-down')
 let adviseButton = document.querySelector('#get-advice')
 let advice = document.querySelector('#advice')
+let output = document.querySelector('#output')
 let cardList = []
 addCardButton.addEventListener('click', function(){
     let choice = cardInput.value
@@ -26,15 +27,19 @@ adviseButton.addEventListener('click', function(){
 
 
 if (result === 21){
+    output.innerText = `your total is: ${result}`
     advice.innerText ='Blackjack!'
 }
 else if (result >= 17 && result < 21){
+    output.innerText = `your total is: ${result}`
     advice.innerText = 'Stay'
 }
 else if (result < 17){
+    output.innerText = `your total is: ${result}`
     advice.innerText ='Hit'
 }
 else if (result >21){
+    output.innerText = `your total is: ${result}`
     advice.innerText ='You Have Busted'
 }
 })
