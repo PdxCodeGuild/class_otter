@@ -3,28 +3,27 @@
 {% block content %}
 
 
+<h4>How about a new Chirp?</h4>
     <div class="col s12 m7">
+        <form action="" method="post">
         <div class="card horizontal">
 
             <div class="card-stacked">
                 <div class="card-action">
-                    <h4>How about a new Chirp?</h4>
                 </div>
                 <div class="card-content">
-                    <form action="" method="post">
                         {% csrf_token %}
                 
                         <p>{{ form.as_p }}</p>
-                
-                        <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Chirp!
-                            <i class="material-icons right">send</i>
-                        </button>
-                
-                    </form>                
+                        
+                    </div>
                 </div>
+                
             </div>
-
-        </div>
+            <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Chirp!
+                <i class="material-icons right">send</i>
+            </button>
+        </form>                
     </div>
 
 {% endblock content %}

@@ -13,14 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('chirp/', include('chirps.urls')),
+    # Make sure this 'admin/doc/' is located above/before 'admin/' for proper routing.
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
-    # This is used to start adding the users functionality.
+    path('chirp/', include('chirps.urls')),
     path('', include('django.contrib.auth.urls')),
     path('users/', include('users.urls')),
 ]

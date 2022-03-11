@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g&7r7p*l(9cfrv^@wnl=(306u3u!q&25%pnas0fmwlvdwn4$53'
+SECRET_KEY = 'django-insecure-5pr9#38eidmqwzz3uecsgh2&dw3%ej5q=eanave27$9#2ut$w#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,8 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    # This app is being used in 'chirp_project/urls.py'. It provides view function. I suspect there is a pre-built 'view' function.
-    # https://github.com/django/django/blob/main/django/contrib/auth/views.py
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -59,7 +57,6 @@ ROOT_URLCONF = 'chirp_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Modified this to add "BASE_DIR / 'templates'".
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -130,6 +127,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 #### NOTE: CUSTOMIZATIONS ####
 
 # CustomUser
@@ -138,12 +136,9 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # Needed this to properly locate the files in 'static' directory.
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-# Redirects user to login page if they are not logged in. A '?' addition to the url will be added to redirect user to the originally intended page once they are logged in.
-LOGIN_URL = 'login'
-
-# After login, redirect user to home.
+# Where to send user upon successful login.
 LOGIN_REDIRECT_URL = 'chirps:home'
 # After logout, redirect user to home.
 LOGOUT_REDIRECT_URL = 'chirps:home'
-
-
+# Routes user to login if they attempt to use the url 'http://127.0.0.1:8080/chirp/hatch/' without being logged in.
+LOGIN_URL = 'login'
