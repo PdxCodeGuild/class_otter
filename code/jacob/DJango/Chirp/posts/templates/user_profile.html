@@ -4,6 +4,7 @@
     <h2>{{ user_profile.username }}</h2>
 
     {% for post in user_profile.posts.all %}
+        <h4>Posted on {{ post.created }}</h4>
         <p>{{ post.whistle|linebreaksbr }}</p>
     {% endfor %}
 
