@@ -20,7 +20,7 @@ Vue can be run from a CLI tool and it's own project like Django, but in class we
 in with a `script` tag. This means we can add Vue to an existing HTML page and add Vue functionality and features
 at our own page, on top of our existing front-end knowledge.
 
-`<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>`
+`<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>`
 
 Also highly recommended:
 * [Vuetur syntax highlighting and snippits for VS Code](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
