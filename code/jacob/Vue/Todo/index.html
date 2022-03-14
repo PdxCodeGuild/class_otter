@@ -13,14 +13,14 @@
     <div id="app">
         {{ message }}
         <div>
-            <input type="text" placeholder="new todo" v-model="newTodos.text" v-on:keyup.enter="addTodo">
+            <input type="text" placeholder="new todo" v-model="newTodos.text">
             <button v-on:click="addTodo">New Task</button>
         </div>
         <ul>
             <li v-for="todo in todos" :key="todo.id">
                 {{ todo.text }}
                 <input type="checkbox" v-model="todo.completed">
-                <button v-on:click="removeTodo">Remove Task</button>
+                <button v-on:click="removeTodo(todo)">Remove Task</button>
             </li>
         </ul>
 

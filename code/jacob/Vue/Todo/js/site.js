@@ -19,8 +19,8 @@ new Vue({
             this.newTodos.id++
             this.newTodos.text=""
         },
-        removeTodo: function(todos){
-            this.todos.splice(this.todos.indexOf(todos), 1)
+        removeTodo: function(todo){
+            this.todos.splice(this.todos.indexOf(todo), 1)
         }
     }
 })
