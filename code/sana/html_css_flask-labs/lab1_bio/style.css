@@ -1,0 +1,27 @@
+title {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+}
+body {
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 10px 0;
+    padding: 5%;
+    background-image: url(https://wallpaperaccess.com/full/1302754.jpg);
+    font-weight: bolder;
+
+}
+#quote {
+    font-family: 'Roboto Serif', sans-serif;
+    font-weight: bolder;
+    font-size: larger;
+   }
+#image {
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+#list {
+     list-style: circle;
+}

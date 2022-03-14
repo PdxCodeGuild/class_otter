@@ -11,6 +11,22 @@
         {
             "priority": "low",
             "text": "wash dishes"
+        },
+        {
+            "priority": "low",
+            "text": "save the dog"
+        },
+        {
+            "priority": "high",
+            "text": "walk the cat"
+        },
+        {
+            "priority": "high",
+            "text": "butter the dog"
+        },
+        {
+            "priority": "medium",
+            "text": "learn css learn java learn programming get better at life"
         }
     ]
 }

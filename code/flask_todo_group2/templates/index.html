@@ -7,23 +7,39 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resizer.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
     </head>
     <body>
         <header>
             <h1>Todo List</h1>
         </header>
-
+        <hr>
         <main>
             <ul>
             {% for task in task_list %}
-                <li>{{ task['text'] }} ({{ task['priority'] }})</li>
+                <li>
+                    <span class="ptag {{ task['priority'] }}">{{ task['priority'] }}</span>
+                    <span class="outer">{{ task['text'] }}</span>
+                </li>
             {% endfor %}
             </ul>
-
-            <form action="/" method="post">
-                <input type="text" name="input_text" placeholder="enter some text"/>
+        </main>
+        <hr>
+        <aside>
+            <form action="" method="post">
+                <label for="priority">Priority:</label>
+                <select name="priority" id="priority" required>
+                    <option value=""> --Select-- </option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <br>
+                <label for="box">To do:</label>
+                <input type="text" id="box" name="input_text" placeholder="Enter a description..." required>
                 <button type="submit">submit</button>
             </form>              
-        </main>
+        </aside>
     </body>
 </html>

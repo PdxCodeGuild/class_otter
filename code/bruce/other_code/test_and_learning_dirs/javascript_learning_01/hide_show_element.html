@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h2>What Can JavaScript Do?</h2>
+    <h3>Hide an element's contents.</h3>
+    
+        <button type="button" onclick="document.getElementById('demo').style.display='none'">Hide the element's contents</button>
+        <!-- style="display: none;" -->
+        <button type="button" onclick="document.getElementById('demo').style.display='block'">Show the element's contents</button>
+
+    <p id="demo">JavaScript can hide HTML elements.</p>
+    <script>
+        // This line will hide the element on page load. The buttons above can be used to 'hide' and 'unhide' the element afterward.
+        function hide_element() {
+            document.getElementById('demo').style.display='none'
+        }
+        setTimeout(hide_element, 2500)
+        function show_element() {
+            document.getElementById('demo').style.display='block'
+        }
+        setTimeout(show_element, 5000)
+    </script>
+</body>
+</html>

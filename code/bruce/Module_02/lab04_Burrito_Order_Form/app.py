@@ -8,11 +8,12 @@
 
 from flask import Flask, render_template
 from customer_info import customer
-from menu_info import menu_wrap as menu_wrap
-from menu_info import menu_rice as menu_rice
-from menu_info import menu_beans as menu_beans
-from menu_info import menu_protein as menu_protein
-from menu_info import menu_add as menu_add
+from menu_info import *
+# from menu_info import menu_wrap as menu_wrap
+# from menu_info import menu_rice as menu_rice
+# from menu_info import menu_beans as menu_beans
+# from menu_info import menu_protein as menu_protein
+# from menu_info import menu_add as menu_add
 
 
 

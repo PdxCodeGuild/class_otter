@@ -50,10 +50,10 @@ db.load()
 def index():
     todos = db.get('todos')
     if request.method == 'POST':
-        # task = {'priority': request.form['priority'], 'text': request.form['task']}
-        # todos.append(task)
-        # db.set('todos', todos)
-        # db.save()
+        task = {'priority': request.form['priority'], 'text': request.form['input_text']}
+        todos.append(task)
+        db.set('todos', todos)
+        db.save()
 
         # handle data here
         return redirect('/')

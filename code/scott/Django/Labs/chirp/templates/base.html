@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Chirps</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+    <body>
+        <header>
+            <div class="container-sm" style="width:30%;height:15%;left:0">   
+                <img src="https://c.tenor.com/XNnOBXW3a58AAAAi/bird-animation.gif" alt="My logo" width="150" height="150">
+            </div>
+
+            <div class="container-sm" style="width:70%;height:15%">
+                <h1><a href="{% url 'chirps:home' %}">Mad Chirps</a></h1>
+            </div>
+            <nav class="navbar navbar-expand-sm bg-light"style="width:70%;height:15%;top:0;right:0">
+            
+                {% if user.is_authenticated %}
+                    <p>Hello: <a href="{% url 'users:profile' user.username %}">{{ user.username }}</a>!</p>
+                    <h6><em>Chirping Since: <a href="{% url 'users:profile' user.date_joined %}">{{ user.date_joined }}</a></em></h6>
+                    <p><a href="{% url 'logout' %}">Logout</a></p>
+                    <p><a href="{% url 'chirps:new' %}">+New Chirp</a></p>
+                {% else %}
+                    <p><a href="{% url 'login' %}">Login</a></p>
+                    <p><a href="{% url 'users:signup' %}">Sign Up</a></p>
+                {% endif %}
+            </nav>
+
+        </header>
+        <main>
+            <div class="w3-sidebar" style="width:45%;height:65%;right:0;top:22.5%">
+                <h5 class="w3-bar-item">The Hen House</h5>
+                {% for chirp in chirp_list%}
+                <div class="chirp-entry">
+                    <h2><a href="{% url 'chirps:detail' chirp.pk %}">{{ chirp.title }}</a></h2>
+                    <h4><em>{{ chirp.author.username }}</em></h4>
+                    <p>{{ chirp.body|linebreaksbr }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="w3-sidebar" style="width:45%;height:65%;left:0;top:22.5%">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </main>
+        <footer> 
+            <div class="w3-container w3-teal" 
+                <div class="w3-display-bottommiddle">Copyright Mad Chirps 2022</div>
+            </div>  
+        </footer>
+    </body>
+
+</html>
