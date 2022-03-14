@@ -7,7 +7,6 @@ let word = prompt("please enter a word you would like to encrypt. ")
 
 let characters = []
 for (char of word) {
-    console.log(english[char].push)
 
 
     characters.push(english[char])

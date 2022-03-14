@@ -16,7 +16,7 @@ class ATM:
     def deposit(self,amount):
         
         self.__balance += amount
-        self.__transactions.append(f'user deposited ${amount}')
+        self.__transactions.append(f'\nYou deposited ${amount}')
     
     def check_withdrawal(self, amount):
 
@@ -30,7 +30,7 @@ class ATM:
     def withdraw(self, amount):
         
         self.__balance -= amount
-        self.__transactions.append(f'user withdrew ${amount}')
+        self.__transactions.append(f'\nYou withdrew ${amount}')
 
         return amount
         
@@ -38,23 +38,34 @@ class ATM:
     def calc_interest(self):
 
         return self.__balance * self.__intrst_rate
-    
+
     # # # VERSION 2 # # #
-
-    # def print_transactions (self)
     
-        
+    def print_transactions(self):
 
+        transaction_statemnt = ''
+
+        if self.__transactions == []:
+            print('\n There are no transactions on record')
+        # If user does not have any accumulated history?#
+        else:
+            for transaction in self.__transactions:
+                transaction_statemnt += f'{transaction}'
+            return transaction_statemnt
+    
+
+    
 atm = ATM() # create an instance of our class
 print('\nWelcome to the ATM')
 
 while True:
     command = input('''\nEnter a command:
     The following commands are:
-    balance  - get the current balance
+    balance  - access the current balance
     deposit  - deposit money
     withdraw - withdraw money
-    interest - accumulate interest
+    interest - access accumulated interest
+    transactions - access your transaction history
     exit     - exit the program\n
     ''')
      
@@ -76,7 +87,7 @@ while True:
             atm.withdraw(amount) # call the withdraw(amount) method
             print(f'\nWithdrew ${amount}')
         else:
-            print('\nInsufficient funds')
+            print('\n*** Insufficient Funds ***')
     
     elif command == 'interest':
         
@@ -84,15 +95,20 @@ while True:
         atm.deposit(amount)
         print(f'\nAccumulated ${amount} in interest')
     
-    # elif command == 'transactions':
+    elif command == 'transactions':
+
+        transaction_histry = atm.print_transactions()
+        print(f'\n---Transactions Log--- \n{transaction_histry}')
+        
         
     elif command == 'help':
         
         print('Available commands:')
-        print('balance  - get the current balance')
+        print('balance  - access the current balance')
         print('deposit  - deposit money')
         print('withdraw - withdraw money')
-        print('interest - accumulate interest')
+        print('interest - access accumulated interest')
+        print('transactions - access your transaction history')
         print('exit     - exit the program')
     
     elif command == 'exit':
