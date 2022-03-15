@@ -11,16 +11,29 @@
 </head>
 <body>
     <div id="app">
-        {{ message }}
+        <h2>{{ message }}</h2>
         <div>
-            <input type="text" placeholder="new todo" v-model="newTodos.text">
-            <button v-on:click="addTodo">New Task</button>
+            <input type="text" placeholder="New Todo" v-model="newTodos.text">
+            <button v-on:click="addTodo" class="new">New Task</button>
         </div>
+        <h3>Incomplete</h3>
         <ul>
-            <li v-for="todo in todos" :key="todo.id">
-                {{ todo.text }}
-                <input type="checkbox" v-model="todo.completed">
-                <button v-on:click="removeTodo(todo)">Remove Task</button>
+            <li v-for="todo in incomplete" v-bind:key="todo.id" class="todo">
+                <div class="target">
+                    <p>{{ todo.text }}</p>
+                    <input type="checkbox" v-model="todo.completed">
+                    <button v-on:click="removeTodo(todo)" class="button">Remove Task</button>
+                </div>
+            </li>
+        </ul>
+        <h4>Completed</h4>
+        <ul>
+            <li v-for="todo in complete" v-bind:key="todo.id" class="todo">
+                <div class="target">
+                    <p>{{ todo.text }}</p>
+                    <input type="checkbox" v-model="todo.completed">
+                    <button v-on:click="removeTodo(todo)" class="button">Remove Task</button>
+                </div>
             </li>
         </ul>
 
