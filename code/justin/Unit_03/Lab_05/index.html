@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
-    <div id="app">
-        {{ message }}
+    <div id="addItemApp">
+        <input v-model="newItemText">
     </div>
 
-    <script src="https://unpkg.com/vue@2"></script>
+    <div id="todoListApp">
+        <h4>Incomplete</h4>
+        <ul>
+            <todo-item v-for="item in incompleteItems" v-bind:item="item" v-bind:key="item.id"></todo-item>
+        </ul>
+
+        <h4>Complete</h4>
+        <ul>
+            <todo-item v-for="item in completeItems" v-bind:item="item" v-bind:key="item.id"></todo-item>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="js/site.js"></script>
 </body>
 </html>
