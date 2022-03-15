@@ -12,7 +12,7 @@ var addItemApp = new Vue({
 
 Vue.component('todo-item', {
     props: ['item'],
-    template: '<li><button v-on:click="item.isCompleted=true">Complete</button>{{ item.text }}<button>Remove</button></li>'
+    template: '<li><button v-on:click="item.isCompleted=true">Complete</button>{{ item.text }}<button v-on:click="$emit(\'remove\', item.id)">Remove</button></li>'
 })
 
 let idIncrementor = 0;
@@ -30,6 +30,21 @@ var todoListApp = new Vue({
             { id: GetTodoID(), text: 'Learn Vue', isCompleted: false },
             { id: GetTodoID(), text: 'Build something awesome', isCompleted: false }
           ]
+    },
+    methods: {
+        remove: function(itemID) {
+            let index = -1;
+            for (let i = 0; i < this.todoList.length; i++) {
+                if (this.todoList[i].id == itemID) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index != -1) {
+                this.todoList.splice(index, 1);
+            }
+        }
     },
     computed: {
         incompleteItems: function() {
