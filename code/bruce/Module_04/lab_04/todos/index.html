@@ -24,7 +24,8 @@
                 <li v-for="(todo, index) in uncompletedTodos">
                     <button v-on:click="completeTodo(todo, index)">C?</button>
                     <button v-on:click="deleteUncompletedTodo(todo, index)">D?</button>
-                    <label for="checkbox">{{ todo.isCompleted }}</label>
+                    <label for="checkbox" v-if="todo.isCompleted">Completed</label>
+                    <label for="checkbox" v-if="!todo.isCompleted">Not Completed</label>
                     <input type="checkbox" id="checkbox" v-model="todo.isCompleted">
                     <span>{{ index + 1 }}: </span>
                     <span>{{ todo.text }} - </span>
