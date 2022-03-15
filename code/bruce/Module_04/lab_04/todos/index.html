@@ -50,7 +50,19 @@
             <h3>{{ checkboxTodosHeading }}</h3>
             <ul style="list-style-type: none">
                 <li
-                v-for="todo in todos"
+                v-for="todo in incompleteTodos"
+                :key="todo.id"
+                >
+                    <input type="checkbox" id="checkbox" v-model="todo.isCompleted">
+                    <label for="checkbox" v-if="todo.isCompleted">Completed</label>
+                    <label for="checkbox" v-if="!todo.isCompleted">Not Completed</label>
+                    <button v-on:click="deleteTodo(todo)">D?</button>
+                    <span>{{ todo.id }}: </span>
+                    <span>{{ todo.text }} - </span>
+                    <span>isCompleted: {{ todo.isCompleted }}</span>
+                </li>
+                <li
+                v-for="todo in completeTodos"
                 :key="todo.id"
                 >
                     <input type="checkbox" id="checkbox" v-model="todo.isCompleted">
