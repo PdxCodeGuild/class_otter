@@ -21,20 +21,26 @@
             <!-- List with Buttons -->
             <h3>{{ uncompletedTodosHeading }}</h3>
             <ul style="list-style-type: none">
-                <li v-for="(todo, index) in uncompletedTodos">
-                    <button v-on:click="completeTodo(todo, index)">C?</button>
-                    <button v-on:click="deleteUncompletedTodo(todo, index)">D?</button>
-                    <span>{{ index + 1 }}: </span>
+                <li
+                v-for="todo in incompleteTodos"
+                :key="todo.id"
+                >
+                    <button v-on:click="completeTodo(todo)">C?</button>
+                    <button v-on:click="deleteToDo(todo)">D?</button>
+                    <span>{{ todo.id }}: </span>
                     <span>{{ todo.text }} - </span>
                     <span>isCompleted: {{ todo.isCompleted }}</span>
                 </li>
             </ul>
             <h3>{{ completedTodosHeading }}</h3>
             <ul style="list-style-type: none">
-                <li v-for="(todo, index) in completedTodos">
-                    <button v-on:click="uncompleteTodo(todo, index)">U?</button>
-                    <button v-on:click="deleteCompletedTodo(todo, index)">D?</button>
-                    <span>{{ index + 1 }}: </span>
+                <li
+                v-for="todo in completeTodos"
+                :key="todo.id"
+                >
+                    <button v-on:click="uncompleteTodo(todo)">U?</button>
+                    <button v-on:click="deleteToDo(todo)">D?</button>
+                    <span>{{ todo.id }}: </span>
                     <span>{{ todo.text }} - </span>
                     <span>isCompleted: {{ todo.isCompleted }}</span>
                 </li>
