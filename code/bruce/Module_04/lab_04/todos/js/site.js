@@ -10,11 +10,13 @@
 // https://v2.vuejs.org/v2/guide/events.html
 // Form Input Bindings:
 // https://v2.vuejs.org/v2/guide/forms.html
+// Displaying Filtered/Sorted Results:
+// https://v2.vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
 
 const app1 = new Vue({
     el: '#app',
     data: {
-        contentHeading: 'The ToDos',
+        mainHeading: 'Button ToDos',
         uncompletedTodosHeading: 'Uncompleted ToDos',
         completedTodosHeading: 'Completed ToDos',
         newTodoText: '',
@@ -28,6 +30,17 @@ const app1 = new Vue({
             { text: "Pet Bunbun", isCompleted: true},
             { text: "Make sure kittens don't starve", isCompleted: true},
             { text: "Video tape the kittens", isCompleted: true},
+        ],
+
+        checkboxHeading: 'Checkbox ToDos',
+        checkboxTodosHeading: 'ToDos',
+        newText: '',
+        nextId: 5,
+        todos: [
+            {text: "Get fuzzy!", isCompleted: false, id: 1},
+            {text: "Scrub him!", isCompleted: false, id: 2},
+            {text: "Make sure they're fed!", isCompleted: false, id: 3},
+            {text: "Give em a comfy bed.", isCompleted: false, id: 4},
         ],
     },
     methods: {
@@ -63,6 +76,18 @@ const app1 = new Vue({
             console.log(`Deleting: ${todo.text}`)
             this.completedTodos.splice(index, 1)
         },
+
+        addTodo: function(newText) {
+            // Add 'newTodoText' to 'uncompletedTodos'.
+            console.log(`Adding todo: ${newText}`)
+            // This line seems to add a 'key' to the 'todos'?
+            this.todos.push({text: newText, isCompleted: false})
+        },
+        deleteTodo: function(todo) {
+            console.log(`Deleting: ${todo.text}`)
+            // Need to figure out how to delete the item with specific id.
+            this.todos.splice(index, 1)            
+        }
     },
 })
 
