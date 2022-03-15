@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/site.css" />
+    <title>Lab 4: Vue Todos</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h2>{{ contentHeading }}</h2>
+        </header>
+        <main>
+            <p>
+                <span>Add ToDo: </span>
+                <input v-model="newTodoText" placeholder="Your new ToDo">
+                <button v-on:click="addTheTodo(newTodoText)">Add the ToDo</button>
+            </p>
+            <h3>{{ uncompletedTodosHeading }}</h3>
+            <ul style="list-style-type: none">
+            <!-- <ul style="list-style-type: none"> -->
+                <li v-for="(todo, index) in uncompletedTodos">
+                    <button v-on:click="completeTodo(todo, index)">C?</button>
+                    <button v-on:click="deleteUncompletedTodo(todo, index)">D?</button>
+                    <label for="checkbox">{{ todo.isCompleted }}</label>
+                    <input type="checkbox" id="checkbox" v-model="todo.isCompleted">
+                    <span>{{ index + 1 }}: </span>
+                    <span>{{ todo.text }} - </span>
+                    <span>isCompleted: {{ todo.isCompleted }}</span>
+                </li>
+            </ul>
+            <h3>{{ completedTodosHeading }}</h3>
+            <ul style="list-style-type: none">
+                <li v-for="(todo, index) in completedTodos">
+                    <button v-on:click="uncompleteTodo(todo, index)">U?</button>
+                    <button v-on:click="deleteCompletedTodo(todo, index)">D?</button>
+                    <span>{{ index + 1 }}: </span>
+                    <span>{{ todo.text }} - </span>
+                    <span>isCompleted: {{ todo.isCompleted }}</span>
+                </li>
+            
+            </ul>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="/js/site.js"></script> 
+</body>
+</html>

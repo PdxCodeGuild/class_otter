@@ -11,14 +11,33 @@
         <h1>{{ heading }}</h1>
         <p v-bind:title="timeLoaded">Hover here for time of page load.</p>
         <p v-if="elementSeen">elementSeen == true</p>
-        <ul>
-            <li v-for="(todo, index) in todos" style="list-style-type: none">
-                <button v-on:click="completeTodo(todo)">Complete?</button>
-                <button v-on:click="uncompleteTodo(todo)">Uncomplete?</button>
+        <h2>The ToDos</h2>
+        <p>
+            <span>Add ToDo: </span>
+            <input v-model="newTodoText" placeholder="Your new ToDo">
+            <button v-on:click="addTheTodo(newTodoText)">Add the ToDo</button>
+        </p>
+        <h3>Uncompleted ToDos</h3>
+        <ul style="list-style-type: none">
+        <!-- <ul style="list-style-type: none"> -->
+            <li v-for="(todo, index) in uncompletedTodos">
+                <button v-on:click="completeTodo(todo, index)">Complete?</button>
+                <button v-on:click="deleteUncompletedTodo(todo, index)">Delete?</button>
                 <span>{{ index + 1 }}: </span>
                 <span>{{ todo.text }}</span>
                 <span>{{ todo.isCompleted }}</span>
             </li>
+        </ul>
+        <h3>Completed ToDos</h3>
+        <ul style="list-style-type: none">
+            <li v-for="(todo, index) in completedTodos">
+                <button v-on:click="uncompleteTodo(todo, index)">Uncomplete?</button>
+                <button v-on:click="deleteCompletedTodo(todo, index)">Delete?</button>
+                <span>{{ index + 1 }}: </span>
+                <span>{{ todo.text }}</span>
+                <span>{{ todo.isCompleted }}</span>
+            </li>
+        
         </ul>
         <p>
             <span>{{ somethingSaid }} </span>
