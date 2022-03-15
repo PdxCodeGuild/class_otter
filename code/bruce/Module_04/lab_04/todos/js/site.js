@@ -16,53 +16,41 @@
 const app1 = new Vue({
     el: '#app',
     data: {
-        mainHeading: 'Button ToDos',
-        uncompletedTodosHeading: 'Uncompleted ToDos',
-        completedTodosHeading: 'Completed ToDos',
-        newTodoText: '',
-        uncompletedTodos: [
-            { text: "Scrub the kittens", isCompleted: false},
-            { text: "phil fude bole", isCompleted: false},
-            { text: "Watch kittens play", isCompleted: false},
-            { text: "Scrub Bunbun", isCompleted: false},
-        ],
-        completedTodos: [
-            { text: "Pet Bunbun", isCompleted: true},
-            { text: "Make sure kittens don't starve", isCompleted: true},
-            { text: "Video tape the kittens", isCompleted: true},
-        ],
+        mainHeading: 'Button Interface for ToDos',
+        uncompletedToDosHeading: 'Uncompleted ToDos',
+        completedToDosHeading: 'Completed ToDos',
+        newToDoText: '',
 
-        checkboxHeading: 'Checkbox ToDos',
+        checkboxHeading: 'Checkbox Interface for ToDos',
         checkboxTodosHeading: 'ToDos',
         newText: '',
-        nextId: 12,
+        nextId: 11,
         todos: [
             { text: "Get fuzzy!", isCompleted: false, id: 1},
             { text: "Scrub him!", isCompleted: false, id: 2},
             { text: "Make sure they're fed!", isCompleted: false, id: 3},
             { text: "Give em a comfy bed.", isCompleted: false, id: 4},
             { text: "Scrub the kittens", isCompleted: false, id: 5},
-            { text: "phil fude bole", isCompleted: false, id: 6},
-            { text: "Watch kittens play", isCompleted: false, id: 7},
-            { text: "Scrub Bunbun", isCompleted: false, id: 8},
-            { text: "Pet Bunbun", isCompleted: true, id: 9},
-            { text: "Make sure kittens don't starve", isCompleted: true, id: 10},
-            { text: "Video tape the kittens", isCompleted: true, id: 11},
+            { text: "Watch kittens play", isCompleted: false, id: 6},
+            { text: "Scrub Dezzi", isCompleted: false, id: 7},
+            { text: "Pet Bunbun", isCompleted: true, id: 8},
+            { text: "Make sure kittens don't starve", isCompleted: true, id: 9},
+            { text: "Video tape the kittens", isCompleted: true, id: 10},
         ],
     },
     methods: {
-        addTheTodo: function(newTodoText) {
-            console.log(`Adding todo: ${newTodoText}`)
-            this.todos.push({text: newTodoText, isCompleted: false, id: this.nextId})
+        addTheToDo: function(newToDoText) {
+            console.log(`Adding todo: ${newToDoText}`)
+            this.todos.push({text: newToDoText, isCompleted: false, id: this.nextId})
             this.nextId++
-            this.newTodoText = ''
+            this.newToDoText = ''
         },
-        completeTodo: function(todo) {
+        completeToDo: function(todo) {
             console.log(`Completing: ${this.todos[this.todos.indexOf(todo)].text}`)
             console.log(`Completing: ${todo.text}`)
             todo.isCompleted = true
         },
-        uncompleteTodo: function(todo) {
+        uncompleteToDo: function(todo) {
             console.log(`Uncompleting: ${this.todos[this.todos.indexOf(todo)].text}`)
             console.log(`Uncompleting: ${todo.text}`)
             todo.isCompleted = false
@@ -72,16 +60,9 @@ const app1 = new Vue({
             console.log(`Deleting: ${todo.text}`)
             this.todos.splice(this.todos.indexOf(todo), 1)
         },
-        // deleteCompletedTodo: function(todo) {
-        //     console.log(`Deleting: ${this.todos[this.todos.indexOf(todo)].text}}`)
-        //     console.log(`Deleting: ${todo.text}`)
-        //     this.completedTodos.splice(index, 1)
-        // },
 
         addTodo: function(newText) {
             console.log(`Adding todo: ${newText}`)
-            // this.todos.length
-            // Add 'newText' to 'todos'.
             this.todos.push({text: newText, isCompleted: false, id: this.nextId})
             console.log(`Length todos: ${this.todos.length}`)
             console.log(`Next ID: ${this.nextId}`)
@@ -95,15 +76,12 @@ const app1 = new Vue({
             console.log(`ToDo ID: ${todo.id}`)
             console.log(`Deleting: ${todo.text}`)
             console.log(`Index of ToDo: ${this.todos.indexOf(todo)}`)
-            // Need to figure out how to delete the item with specific id.
-            // We have an array. What are methods to modify arrays?
             this.todos.splice(this.todos.indexOf(todo), 1)
         },
     },
     computed: {
-        // a computed getter
         incompleteTodos: function () {
-            // Return list of todos where isCompleted == true.
+            // Return list of todos where isCompleted == false.
             return this.todos.filter(function(todo) {
                 return todo.isCompleted === false
             })

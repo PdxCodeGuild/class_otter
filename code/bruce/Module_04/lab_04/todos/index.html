@@ -15,34 +15,30 @@
         <main>
             <p>
                 <span>Add ToDo: </span>
-                <input v-model="newTodoText" placeholder="Your new ToDo">
-                <button v-on:click="addTheTodo(newTodoText)">Add the ToDo</button>
+                <input v-model="newToDoText" placeholder="Your new ToDo">
+                <button v-on:click="addTheToDo(newToDoText)">Add the ToDo</button>
             </p>
             <!-- List with Buttons -->
-            <h3>{{ uncompletedTodosHeading }}</h3>
+            <h3>{{ uncompletedToDosHeading }}</h3>
             <ul style="list-style-type: none">
                 <li
                 v-for="todo in incompleteTodos"
                 :key="todo.id"
                 >
-                    <button v-on:click="completeTodo(todo)">C?</button>
-                    <button v-on:click="deleteToDo(todo)">D?</button>
-                    <!-- <span>{{ todo.id }}: </span> -->
+                    <button v-on:click="completeToDo(todo)">Complete?</button>
+                    <button v-on:click="deleteToDo(todo)">Delete?</button>
                     <span>{{ todo.text }}</span>
-                    <!-- <span>isCompleted: {{ todo.isCompleted }}</span> -->
                 </li>
             </ul>
-            <h3>{{ completedTodosHeading }}</h3>
+            <h3>{{ completedToDosHeading }}</h3>
             <ul style="list-style-type: none">
                 <li
                 v-for="todo in completeTodos"
                 :key="todo.id"
                 >
-                    <button v-on:click="uncompleteTodo(todo)">U?</button>
-                    <button v-on:click="deleteToDo(todo)">D?</button>
-                    <!-- <span>{{ todo.id }}: </span> -->
+                    <button v-on:click="uncompleteToDo(todo)">Uncomplete?</button>
+                    <button v-on:click="deleteToDo(todo)">Delete?</button>
                     <span>{{ todo.text }}</span>
-                    <!-- <span>isCompleted: {{ todo.isCompleted }}</span> -->
                 </li>
             
             </ul>
@@ -60,22 +56,18 @@
                 :key="todo.id"
                 >
                     <input type="checkbox" v-bind:id="'uncompleteCheckbox' + todo.id" v-model="todo.isCompleted">
-                    <label v-bind:for="'uncompleteCheckbox' + todo.id" >Complete/Uncomplete</label>
+                    <label v-bind:for="'uncompleteCheckbox' + todo.id">Complete</label>
                     <button v-on:click="deleteTodo(todo)">Delete?</button>
-                    <!-- <span>{{ todo.id }}: </span> -->
                     <span>{{ todo.text }}</span>
-                    <!-- <span>isCompleted: {{ todo.isCompleted }}</span> -->
                 </li>
                 <li
                 v-for="todo in completeTodos"
                 :key="todo.id"
                 >
-                    <input type="checkbox" id="completeCheckbox" v-model="todo.isCompleted">
-                    <label for="completeCheckbox" >Complete/Uncomplete</label>
+                    <input type="checkbox" v-bind:id="'uncompleteCheckbox' + todo.id" v-model="todo.isCompleted">
+                    <label v-bind:for="'uncompleteCheckbox' + todo.id">Complete</label>
                     <button v-on:click="deleteTodo(todo)">Delete?</button>
-                    <!-- <span>{{ todo.id }}: </span> -->
                     <span>{{ todo.text }}</span>
-                    <!-- <span>isCompleted: {{ todo.isCompleted }}</span> -->
                 </li>
             </ul>
         </main>
