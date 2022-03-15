@@ -12,7 +12,10 @@ var addItemApp = new Vue({
 
 Vue.component('todo-item', {
     props: ['item'],
-    template: '<li><button v-on:click="item.isCompleted=true">Complete</button>{{ item.text }}<button v-on:click="$emit(\'remove\', item.id)">Remove</button></li>'
+    template: `<li class="row">
+                <a :class='["col s1 waves-effect waves-light btn green", item.isCompleted && "disabled"]' v-on:click="item.isCompleted=true"><i class="material-icons left">done</i></a>
+                <span class="col s10">{{ item.text }}</span>
+                <a class="col s1 waves-effect waves-light btn red" v-on:click="$emit(\'remove\', item.id)"><i class="material-icons left">delete_forever</i></a></li>`
 })
 
 let idIncrementor = 0;
@@ -25,11 +28,7 @@ function GetTodoID() {
 var todoListApp = new Vue({
     el: '#todoListApp',
     data: {
-        todoList: [
-            { id: GetTodoID(), text: 'Learn JavaScript', isCompleted: false },
-            { id: GetTodoID(), text: 'Learn Vue', isCompleted: false },
-            { id: GetTodoID(), text: 'Build something awesome', isCompleted: false }
-          ]
+        todoList: []
     },
     methods: {
         remove: function(itemID) {
