@@ -17,7 +17,7 @@
             Add a new Todo Item <br>
             <input type="text" placeholder="New Item" v-model="newtodo.text"/><br>
             <button v-on:click="add_todo">Add  Item</button>
-            </div>
+            </div><br>
 
             <h2>Incomplete</h2>
             <ul>
@@ -27,7 +27,7 @@
                     {{ todo.text }}
                     <button v-on:click="delete_todo(todo)" class="button">Remove Task</button>
                 </li>
-            </ul>
+            </ul><br>
 
             <h2>Completed</h2>
             <ul>
