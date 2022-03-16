@@ -21,7 +21,7 @@
             <div>
                 <h4>Incomplete</h4>
                 <ul>
-                    <todo-item v-for="item in incompleteItems" v-bind:item="item" v-bind:key="item.id" v-on:remove="remove($event)"></todo-item>
+                    <todo-item v-for="item in incompleteItems" v-bind:item="item" v-bind:key="item.id" v-on:remove="remove($event)" v-on:complete="complete($event)"></todo-item>
                 </ul>
             </div>
 
