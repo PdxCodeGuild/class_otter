@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Quotes</h1>
+        <div v-if="Object.keys(qotd).length">
+            <p>{{ qotd.quote.body }}</p>
+            <p><a :href="qotd.quote.url">{{ qotd.quote.author }}</a></p>
+        </div>
+        <button @click="loadQuotes">Lincoln me!</button>
+        <ul v-if="Object.keys(results).length">
+            <li v-for="quote in results.quotes" :key="quote.id">
+                <p>{{ quote.body }}</p>
+                <p><a :href="quote.url">{{ quote.author }}</a></p>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
