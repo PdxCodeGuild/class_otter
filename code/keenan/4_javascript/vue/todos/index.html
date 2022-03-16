@@ -22,20 +22,20 @@
             <h2>Incomplete</h2>
             <ul>
                 <li v-for="todo in todos" v-bind:key="todos.id" v-if="!todo.completed">
-                    {{ todo.text }}
-                    <input type="checkbox" v-model="todo.completed">
                     <!-- I could use a computed property to adjust the logic on the button -->
+                    <input type="checkbox" v-model="todo.completed">
+                    {{ todo.text }}
                     <button v-on:click="delete_todo(todo)" class="button">Remove Task</button>
                 </li>
             </ul>
 
             <h2>Completed</h2>
-                <ul>
-                    <li v-for="todo in todos" v-bind:key="todos.id" v-if="todo.completed">
-                        {{ todo.text }}
-                        <input text= "Completed" type="checkbox" v-model="todo.completed">
-                    </li>
-                </ul>
+            <ul>
+                <li v-for="todo in todos" v-bind:key="todos.id" v-if="todo.completed">
+                    <input text= "Completed" type="checkbox" v-model="todo.completed">
+                    {{ todo.text }}
+                </li>
+            </ul>
 
     </div>
 
