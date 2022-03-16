@@ -4,20 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Todo List</title>
-    <!-- Add your styles here! -->
-    <link rel="stylesheet" href="/css/site.css" />
+
+    <title>My Vue Todo List</title>
+
+    <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
     <div id="app">
-        {{ message }}
+            <h1>Vue Todo List</h1>
+            
+            <div>
+            Add a new Todo Item <br>
+            <input type="text" placeholder="New Item" v-model="newtodo.text"/><br>
+            <button v-on:click="add_todo">Add  Item</button>
+            </div>
+
+            <h2>Incomplete</h2>
+            <ul>
+                <li v-for="todo in todos" v-bind:key="todos.id" v-if="!todo.completed">
+                    {{ todo.text }}
+                    <input type="checkbox" v-model="todo.completed">
+                    <!-- I could use a computed property to adjust the logic on the button -->
+                    <button v-on:click="delete_todo(todo)" class="button">Remove Task</button>
+                </li>
+            </ul>
+
+            <h2>Completed</h2>
+                <ul>
+                    <li v-for="todo in todos" v-bind:key="todos.id" v-if="todo.completed">
+                        {{ todo.text }}
+                        <input text= "Completed" type="checkbox" v-model="todo.completed">
+                    </li>
+                </ul>
+
     </div>
 
     <!-- Include Vue from a CDN of your choice, I chose unpkg -->
-    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <!-- Include your code here... -->
-    <script src="/js/site.js"></script>
+    <script src="js/site.js"></script>
     
 </body>
 </html>
