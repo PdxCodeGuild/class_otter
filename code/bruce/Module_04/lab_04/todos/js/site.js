@@ -12,10 +12,20 @@
 // https://v2.vuejs.org/v2/guide/forms.html
 // Displaying Filtered/Sorted Results:
 // https://v2.vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
+// Array.prototype.filter()
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+// Array.prototype.push()
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+// Array.prototype.splice()
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+// Array.prototype.indexOf()
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 
 const app1 = new Vue({
     el: '#app',
     data: {
+
+        theBindStyle: 'left',
         mainHeading: 'Button Interface for ToDos',
         uncompletedToDosHeading: 'Uncompleted ToDos',
         completedToDosHeading: 'Completed ToDos',
@@ -39,6 +49,7 @@ const app1 = new Vue({
         ],
     },
     methods: {
+        // Functions for the button-operation part.
         addTheToDo: function(newToDoText) {
             console.log(`Adding todo: ${newToDoText}`)
             this.todos.push({text: newToDoText, isCompleted: false, id: this.nextId})
@@ -61,6 +72,7 @@ const app1 = new Vue({
             this.todos.splice(this.todos.indexOf(todo), 1)
         },
 
+        // Functions for the checkbox-operation part.
         addTodo: function(newText) {
             console.log(`Adding todo: ${newText}`)
             this.todos.push({text: newText, isCompleted: false, id: this.nextId})
@@ -79,6 +91,7 @@ const app1 = new Vue({
             this.todos.splice(this.todos.indexOf(todo), 1)
         },
     },
+    // 'computed' properties to sort the 'todos' by 'isComplete'.
     computed: {
         incompleteTodos: function () {
             // Return list of todos where isCompleted == false.
