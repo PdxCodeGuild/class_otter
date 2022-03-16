@@ -20,14 +20,14 @@
     <h3> Shortened Url : {{unique_url}} </h3>
 
   </div>
-  <div>
+  {% comment %} <div>
     <h2> Paste shortened Url in box to be Redirected</h2>
     <form method="POST" action="">
       {% csrf_token %}
       <input type="text" id="input" size="30" maxlength="100" >
       <button type="submit" id="submit">submit</button> 
   </form>
-  </div>
+  </div> {% endcomment %}
 
   </body>
 </html>
