@@ -29,8 +29,8 @@ const app1 = new Vue({
 
         theBindStyle: 'left',
         mainButtonHeading: 'Button Interface for ToDos',
-        uncompletedToDosHeading: 'Uncompleted ToDos',
-        completedToDosHeading: 'Completed ToDos',
+        uncompletedToDosHeading: 'Uncompleted',
+        completedToDosHeading: 'Completed',
         newToDoText: '',
 
         checkboxHeading: 'Checkbox Interface for ToDos',

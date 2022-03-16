@@ -8,3 +8,11 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.page-footer {
+    background-color: #a7ffeb ;
+}
+
+.nav-wrapper {
+    background-color: #a7ffeb ;
+}

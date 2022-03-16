@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/site.css" />
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="/css/materialize.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/css/site.css" />
     <title>Lab 4: Vue Todos</title>
 </head>
 <body>
@@ -17,10 +18,10 @@
 
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">ToDos - CheckBox Interface</a>
+            <a href="#" class="brand-logo teal-text darken-4">ToDos - CheckBox Interface</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="index.html">Button and CheckBox Interface</a></li>
-                <li><a href="button_interface.html">Button Interface</a></li>
+                <li><a href="index.html" class="teal-text darken-4">Button and CheckBox Interface</a></li>
+                <li><a href="button_interface.html" class="teal-text darken-4">Button Interface</a></li>
             </ul>
         </div>
     </nav>
@@ -31,14 +32,16 @@
         <p>
             <span>Add ToDo: </span>
             <input
+                v-on:keyup.enter="addTheToDo(newToDoText)"
                 v-model="newToDoText"
                 placeholder="Your new ToDo"
                 >
             <button v-on:click="addTheToDo(newToDoText)">Add the ToDo</button>
         </p>
-        <h3>{{ checkboxTodosHeading }}</h3>
-        <ul style="list-style-type: none">
+        <ul class="collection with-header" style="list-style-type: none">
+            <li class="collection-header"><h4>{{ checkboxTodosHeading }}</h4></li>
             <li
+            class="collection-item"
             v-for="todo in incompleteTodos"
             :key="todo.id"
             >
@@ -50,12 +53,13 @@
                     class="filled-in"
                     checked="checked"
                     >
-                    <span>Complete</span>
+                    <span>Done!</span>
                 </label>
-                <button v-on:click="deleteToDo(todo)">Delete?</button>
                 <span>{{ todo.text }}</span>
+                <a v-on:click="deleteToDo(todo)" class="waves-effect waves-light btn-small right"><i class="material-icons">delete</i></a>
             </li>
             <li
+            class="collection-item"
             v-for="todo in completeTodos"
             :key="todo.id"
             >
@@ -67,10 +71,10 @@
                     class="filled-in"
                     checked="checked"
                     >
-                    <span>Complete</span>
+                    <span>Done!</span>
                 </label>
-                <button v-on:click="deleteToDo(todo)">Delete?</button>
                 <span>{{ todo.text }}</span>
+                <a v-on:click="deleteToDo(todo)" class="waves-effect waves-light btn-small right"><i class="material-icons">delete</i></a>
             </li>
         </ul>
     </main>
@@ -78,20 +82,20 @@
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
-              <h5 class="white-text">Footer Content</h5>
-              <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              <h5 class="teal-text darken-4">Footer Content</h5>
+              <p class="teal-text darken-4">You can use rows and columns here to organize your footer content.</p>
             </div>
             <div class="col l4 offset-l2 s12">
-              <h5 class="white-text">Links</h5>
+              <h5 class="teal-text darken-4">Links</h5>
               <ul>
-                <li><a href="index.html">Button and CheckBox Interface</a></li>
-                <li><a href="button_interface.html">Button Interface</a></li>
+                <li><a href="index.html" class="teal-text darken-4">Button and CheckBox Interface</a></li>
+                <li><a href="button_interface.html" class="teal-text darken-4">Button Interface</a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="footer-copyright">
-          <div class="container">
+          <div class="container teal-text darken-4">
           © 2022 FlynntKnapp
           </div>
         </div>
