@@ -10,14 +10,13 @@
 <body>
     <div id="app">
         <header v-bind:style="'text-align:' + theBindStyle">
-            <h1>ToDos - Combination Button/CheckBox Interface</h1>
+            <h1>ToDos - Button Interface</h1>
             <nav>
-                <a href="button_interface.html">Button Interface</a>
+                <a href="index.html">Button and CheckBox Interface</a>
                 <a href="checkbox_interface.html">CheckBox Interface</a>
             </nav>
         </header>
         <main>
-            <h2>{{ mainButtonHeading }}</h2>
             <p>
                 <span>Add ToDo: </span>
                 <input
@@ -49,45 +48,6 @@
                     <span>{{ todo.text }}</span>
                 </li>
             
-            </ul>
-            <!-- List with checkboxes -->
-            <h2>{{ checkboxHeading }}</h2>
-            <p>
-                <span>Add ToDo: </span>
-                <input
-                    v-model="newToDoText"
-                    placeholder="Your new ToDo"
-                    >
-                <button v-on:click="addTheToDo(newToDoText)">Add the ToDo</button>
-            </p>
-            <h3>{{ checkboxTodosHeading }}</h3>
-            <ul style="list-style-type: none">
-                <li
-                v-for="todo in incompleteTodos"
-                :key="todo.id"
-                >
-                    <input
-                    type="checkbox"
-                    v-bind:id="'uncompleteCheckbox' + todo.id"
-                    v-model="todo.isCompleted"
-                    >
-                    <label v-bind:for="'uncompleteCheckbox' + todo.id">Complete</label>
-                    <button v-on:click="deleteToDo(todo)">Delete?</button>
-                    <span>{{ todo.text }}</span>
-                </li>
-                <li
-                v-for="todo in completeTodos"
-                :key="todo.id"
-                >
-                    <input
-                    type="checkbox"
-                    v-bind:id="'uncompleteCheckbox' + todo.id"
-                    v-model="todo.isCompleted"
-                    >
-                    <label v-bind:for="'uncompleteCheckbox' + todo.id">Complete</label>
-                    <button v-on:click="deleteToDo(todo)">Delete?</button>
-                    <span>{{ todo.text }}</span>
-                </li>
             </ul>
         </main>
     </div>

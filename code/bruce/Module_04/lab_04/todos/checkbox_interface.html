@@ -10,46 +10,13 @@
 <body>
     <div id="app">
         <header v-bind:style="'text-align:' + theBindStyle">
-            <h1>ToDos - Combination Button/CheckBox Interface</h1>
+            <h1>ToDos - CheckBox Interface</h1>
             <nav>
+                <a href="index.html">Button and CheckBox Interface</a>
                 <a href="button_interface.html">Button Interface</a>
-                <a href="checkbox_interface.html">CheckBox Interface</a>
             </nav>
         </header>
         <main>
-            <h2>{{ mainButtonHeading }}</h2>
-            <p>
-                <span>Add ToDo: </span>
-                <input
-                    v-model="newToDoText"
-                    placeholder="Your new ToDo"
-                    >
-                <button v-on:click="addTheToDo(newToDoText)">Add the ToDo</button>
-            </p>
-            <!-- List with Buttons -->
-            <h3>{{ uncompletedToDosHeading }}</h3>
-            <ul style="list-style-type: none">
-                <li
-                v-for="todo in incompleteTodos"
-                :key="todo.id"
-                >
-                    <button v-on:click="completeToDo(todo)">Complete?</button>
-                    <button v-on:click="deleteToDo(todo)">Delete?</button>
-                    <span>{{ todo.text }}</span>
-                </li>
-            </ul>
-            <h3>{{ completedToDosHeading }}</h3>
-            <ul style="list-style-type: none">
-                <li
-                v-for="todo in completeTodos"
-                :key="todo.id"
-                >
-                    <button v-on:click="uncompleteToDo(todo)">Uncomplete?</button>
-                    <button v-on:click="deleteToDo(todo)">Delete?</button>
-                    <span>{{ todo.text }}</span>
-                </li>
-            
-            </ul>
             <!-- List with checkboxes -->
             <h2>{{ checkboxHeading }}</h2>
             <p>

@@ -1,3 +1,5 @@
+// Start server:
+// python -m http.server
 // Resources:
 // https://v2.vuejs.org/v2/guide/
 // Avoid 'if' and 'for' in same element:
@@ -26,14 +28,13 @@ const app1 = new Vue({
     data: {
 
         theBindStyle: 'left',
-        mainHeading: 'Button Interface for ToDos',
+        mainButtonHeading: 'Button Interface for ToDos',
         uncompletedToDosHeading: 'Uncompleted ToDos',
         completedToDosHeading: 'Completed ToDos',
         newToDoText: '',
 
         checkboxHeading: 'Checkbox Interface for ToDos',
         checkboxTodosHeading: 'ToDos',
-        newText: '',
         nextId: 11,
         todos: [
             { text: "Get fuzzy!", isCompleted: false, id: 1},
@@ -53,7 +54,10 @@ const app1 = new Vue({
         addTheToDo: function(newToDoText) {
             console.log(`Adding todo: ${newToDoText}`)
             this.todos.push({text: newToDoText, isCompleted: false, id: this.nextId})
+            console.log(`Length todos: ${this.todos.length}`)
+            console.log(`Next ID: ${this.nextId}`)
             this.nextId++
+            console.log(`Next ID: ${this.nextId}`)
             this.newToDoText = ''
         },
         completeToDo: function(todo) {
@@ -69,25 +73,6 @@ const app1 = new Vue({
         deleteToDo: function(todo) {
             console.log(`Deleting: ${this.todos[this.todos.indexOf(todo)].text}`)
             console.log(`Deleting: ${todo.text}`)
-            this.todos.splice(this.todos.indexOf(todo), 1)
-        },
-
-        // Functions for the checkbox-operation part.
-        addTodo: function(newText) {
-            console.log(`Adding todo: ${newText}`)
-            this.todos.push({text: newText, isCompleted: false, id: this.nextId})
-            console.log(`Length todos: ${this.todos.length}`)
-            console.log(`Next ID: ${this.nextId}`)
-            this.nextId++
-            console.log(`Next ID: ${this.nextId}`)
-            this.newText = ''
-        },
-        deleteTodo: function(todo) {
-            console.log(`ToDo: ${todo}`)
-            console.log(`ToDo Is Completed: ${todo.isCompleted}`)
-            console.log(`ToDo ID: ${todo.id}`)
-            console.log(`Deleting: ${todo.text}`)
-            console.log(`Index of ToDo: ${this.todos.indexOf(todo)}`)
             this.todos.splice(this.todos.indexOf(todo), 1)
         },
     },
