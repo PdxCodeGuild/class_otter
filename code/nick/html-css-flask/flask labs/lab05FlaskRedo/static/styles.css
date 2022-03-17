@@ -1,0 +1,16 @@
+html{
+    background-color: blue;
+    font-family: 'Fredoka', sans-serif;
+    font-family: 'Barlow', sans-serif;
+}
+h1{
+    background-color: orange;
+    text-align: center;
+}
+
+form{
+    text-align: center;
+}
+h2{
+    background-color: orange;
+}
