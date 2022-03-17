@@ -13,7 +13,7 @@
 
 
         <div id="app-4">
-            <input v-model="new_text" type="text">
+            <input v-model="newText" type="text">
             <button @click="create_todo">submit</button>
             <ol>
                 <li v-for="todo in todos" :key="todo.id">
@@ -23,9 +23,11 @@
                 </li>
             </ol>
                     <br>
-                    <li v-for="todo in completed_list" :key="todo.id">
-                       <!-- completed: {{ completed_list[0]["text"] }} -->
+                    <li v-for="todo in completedList" :key="todo.id">
+                       <!-- completed: {{ completedList[0]["text"] }} -->
                        completed: {{ todo.text }}
+                    <button @click="completed(todo)">complete</button>
+
                     </li>
                                              
         </div>
