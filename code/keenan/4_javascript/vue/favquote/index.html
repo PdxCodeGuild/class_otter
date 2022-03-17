@@ -2,22 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>My Vue Todo List</title>
-
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Quotes</title>
 </head>
+
+<!-- where should this stylesheet call sit -->
+<link rel="stylesheet" href="css/style.css" />
+
 <body>
     <div id="app">
-            {{ message }}
+        <h1>Quotes</h1>
+        <div v-if="Object.keys(quotes).length">
+            <li v-for="quote in quotes.quotes" :key="quote.id">
+                <p>{{ quote.body }}</p>
+                <p><a :href="quote.url">{{ quote.author }}</a></p>
+            </li>
+        
+        </div>
+        <button @click="loadLincoln">Lincoln me!</button>
+        <ul v-if="Object.keys(results).length">
+            <li v-for="quote in results.quotes" :key="quote.id">
+                <p>{{ quote.body }}</p>
+                <p><a :href="quote.url">{{ quote.author }}</a></p>
+            </li>
+        </ul>
+    </div>
 
-    <!-- Include Vue from a CDN of your choice, I chose unpkg -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
-    <!-- Include your code here... -->
-    <script src="js/site.js"></script>
-    
+    <script src="js/main.js"></script>
 </body>
+
 </html>
