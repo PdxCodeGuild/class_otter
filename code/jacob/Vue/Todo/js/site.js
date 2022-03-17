@@ -3,7 +3,7 @@ new Vue({
     data: {
         message: 'My Todo List',
         todos: [
-            {id: 1, text: "Walk the dog", completed: false},
+            {id: 1, text: "Go for a walk", completed: false},
             {id: 2, text: "Wash the car", completed: false}
         ],
         newTodos: {id: 3, text: "", completed: false},
