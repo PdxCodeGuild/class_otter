@@ -16,7 +16,10 @@ class Pick6 {
             earnings += this.get_prize(match_count);
         }
 
-        document.getElementById('lotto_winnings').innerHTML = `Winnings: $${earnings - expenses}\nROI: ${(earnings - expenses) / expenses}`;
+        document.getElementById('earnings').innerHTML = `Won: $${earnings}`;
+        document.getElementById('expenses').innerHTML = `Spent: $${expenses}`;
+        document.getElementById('balance').innerHTML = `Balance: $${earnings - expenses}`;
+        document.getElementById('roi').innerHTML = `ROI: ${(earnings - expenses) / expenses}`;
     }
 
     select_numbers() {
@@ -41,7 +44,7 @@ class Pick6 {
 
     get_prize(match_count) {
         if (match_count > 0 && match_count < 7) {
-            return this.prize_tiers[match_count + 1];
+            return this.prize_tiers[match_count - 1];
         }
         else {
             return 0;
