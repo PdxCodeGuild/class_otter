@@ -9,9 +9,21 @@
 <body>
     <header></header>
     <main id="app">
+        <h1>Lots of Quotes!</h1>
         <article v-if="Object.keys(qotd).length">
+            <h2>Daily Quote</h2>
             <p>{{ qotd.quote.body }}</p>
-            <p><a v-bind:href="qotd.quote.url">{{ qotd.quote.author }}</a></p>
+            <p><a v-bind:href="qotd.quote.url" target="_blank">{{ qotd.quote.author }}</a></p>
+        </article>
+        <button @click="loadLincolnQuotes">Gimme some Lincoln!</button>
+        <article v-if="Object.keys(results).length">
+            <h2>Lincoln Quotes</h2>
+            <ul>
+                <li v-for="quote in results.quotes" v-bind:key="quote.id">
+                <p>{{ quote.body }}</p>
+                <p><a :href="quote.url" target="_blank">{{ quote.author }}</a></p>
+                </li>
+            </ul>
         </article>
     </main>
     <footer></footer>
