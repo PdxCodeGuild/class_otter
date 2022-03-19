@@ -10,21 +10,44 @@
     <header></header>
     <main id="app">
 
-        <h1>Lots of Quotes!</h1>
-        <div v-if="Object.keys(qotd).length">
-            <h2>Daily Quote</h2>
+        <h1>We have the Quotes!</h1>
+
+        <!-- <div v-if="Object.keys(qotd).length">
+            <h2>A Random Quote</h2>
             <p>{{ qotd.quote.body }}</p>
             <p><a :href="qotd.quote.url" target="_blank">{{ qotd.quote.author }}</a></p>
+        </div> -->
+
+        <div v-if="Object.keys(randomQuotes).length && !Object.keys(results).length">
+            <h2>Some Random Quotes</h2>
+            <ul>
+                <quote-component
+                    v-for="quote in randomQuotes"
+                    v-bind:quote-component="quote"
+                    v-bind:key="quote.id"
+                >
+                </quote-component>
+            </ul>
         </div>
 
         <div>
+            <button @click="loadRandomQuotes">Home</button>
             <button @click="previousPage">Previous Page</button>
             <button @click="nextPage">Next Page</button>
         </div>
 
         <quote-search @search-quotes="searchAndLoadQuotes"></quote-search>
 
-        <button @click="loadLincolnQuotes">Gimme some Lincoln!</button>
+        <button @click="loadAuthorQuotes('Abraham Lincoln')">Gimme some Lincoln!</button>
+        <button @click="loadAuthorQuotes('Maya Angelou')">Props to Maya Angelou!</button>
+        <button @click="loadAuthorQuotes('Desmond Tutu')">How about Desmond Tutu!</button>
+        <button @click="loadAuthorQuotes('Rashida Jones')">Even Rashida Jones!</button>
+        <button @click="loadAuthorQuotes('Lenny Bruce')">Or maybe Lenny Bruce!</button>
+        <!-- <button @click="loadAuthorQuotes('martin-luther-king-jr')">Definitely Martin Luther King, Jr.!</button> -->
+        <button @click="loadAuthorQuotes('Martin Luther King Jr')">Definitely Martin Luther King, Jr.!</button>
+        <button @click="loadAuthorQuotes('Emma Thompson')">Some Emma Thompson!</button>
+        <button @click="loadAuthorQuotes('Erma Bombeck')">Can't miss Erma Bombeck!</button>
+        
 
         <div v-if="Object.keys(results).length">
             <h2>Your '{{ displayedSearchTerm }}' Quotes</h2>

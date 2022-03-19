@@ -38,12 +38,15 @@ Vue.component('quote-search', {
     methods: {
         submitComponentSearchRequest: function() {
             console.log(`Emitting  ${this.searchType}:${this.searchTerm} search to root component!!!`)
-            // console.log(`Search Type: ${this.searchType}`)
-            // console.log(`Search Term: ${this.searchTerm}`)
+            if (this.searchType === '') {
+                this.searchType = 'keyword'
+            }
             this.$emit('search-quotes', {
                 type: this.searchType,
                 term: this.searchTerm,
             })
+            this.searchType = ''
+            this.searchTerm = ''
         }
     }
 })
@@ -70,32 +73,55 @@ const vm = new Vue({
         qotd: {},
         token: `Token token="855df50978dc9afd6bf86579913c9f8b"`,
         results: {},
+        randomQuotes: [],
         searchType: '',
         searchTerm: '',
+        quickButtonAuthorSearchName: '',
         displayedSearchTerm: '',
         currentPage: 1,
+        isLastPage: false,
     },
     methods: {
 
-        loadQotd: function() {
-            axios({
-                method: 'get',
-                url: 'https://favqs.com/api/qotd'
-            }).then((response) => {
-                this.qotd = response.data
-            }).catch(error => {
-                console.log(error.response.data)
-            })
+        // loadSingleQuote: function() {
+        //     axios({
+        //         method: 'get',
+        //         url: 'https://favqs.com/api/qotd'
+        //     }).then((response) => {
+        //         this.qotd = response.data
+        //     }).catch(error => {
+        //         console.log(error.response.data)
+        //     })
+        // },
+
+        loadRandomQuotes: function() {
+            this.results = {}
+            this.randomQuotes = []
+            for (let i = 0; i < 5; i++) {
+                // console.log(i)
+                axios({
+                    method: 'get',
+                    url: 'https://favqs.com/api/qotd'
+                }).then((response) => {
+                    this.qotd = response.data
+                    // console.log(this.qotd.quote.body)
+                    this.randomQuotes.push(this.qotd.quote)
+                }).catch(error => {
+                    console.log(error.response.data)
+                })
+            }
         },
 
-        loadLincolnQuotes: function() {
-            console.log(`Getting some Lincoln Quotes`)
+        loadAuthorQuotes: function(author) {
+            console.log(`Getting some ${ author } Quotes`)
+            this.searchType = 'author'
+            this.searchTerm = author
             axios({
                 method: 'get',
                 url: 'https://favqs.com/api/quotes',
                 params: {
-                    filter: "abraham lincoln",
-                    type: "author"
+                    type: this.searchType,
+                    filter: this.searchTerm,
                 },
                 headers: {
                     "Authorization": this.token
@@ -110,8 +136,8 @@ const vm = new Vue({
 
         searchAndLoadQuotes: function(payload) {
             console.log(`Getting some ${payload.type}:${payload.term} Quotes`)
-            this.displayedSearchTerm = payload.term
             this.searchType = payload.type
+            this.searchTerm = payload.term
             if (payload.term === 'keyword') {
                 payload.type = ''
             }
@@ -119,8 +145,8 @@ const vm = new Vue({
                 method: 'get',
                 url: 'https://favqs.com/api/quotes',
                 params: {
-                    filter: payload.term,
-                    type: payload.type
+                    filter: this.searchTerm,
+                    type: this.searchType,
                 },
                 headers: {
                     "Authorization": this.token
@@ -129,6 +155,8 @@ const vm = new Vue({
                 this.results = response.data
                 if (payload.type === 'author') {
                     this.displayedSearchTerm = this.results.quotes[0].author
+                } else {
+                    this.displayedSearchTerm = this.searchTerm
                 }
             }).catch(error => {
                 console.log(error.response.data)
@@ -136,15 +164,63 @@ const vm = new Vue({
         },
 
         nextPage: function() {
-            console.log("Go to next page!")
+            if (!this.results.last_page) {
+                console.log("Going to next page!")
+                this.currentPage++
+                console.log(`On last page (before request): ${this.results.last_page}`)
+                // console.log(`On first page (before request): ${this.results.page === 1}`)
+                
+                axios({
+                    method: 'get',
+                    url: 'https://favqs.com/api/quotes',
+                    params: {
+                        filter: this.searchTerm,
+                        type: this.searchType,
+                        page: this.results.page + 1
+                    },
+                    headers: {
+                        "Authorization": this.token
+                    }
+                }).then((response) => {
+                    this.results = response.data
+                    console.log(`On last page (after request): ${this.results.last_page}`)
+                    // console.log(`On first page (after request): ${this.results.page === 1}`)
+                }).catch(error => {
+                    console.log(error.response.data)
+                })
+            }
         },
         
         previousPage: function() {
-            console.log("Go to previous page!")
-
+            if (this.results.page !== 1) {
+                console.log("Going to previous page!")
+                this.currentPage--
+                // console.log(`On last page (before request): ${this.results.last_page}`)
+                console.log(`On first page (before request): ${this.results.page === 1}`)
+                
+                axios({
+                    method: 'get',
+                    url: 'https://favqs.com/api/quotes',
+                    params: {
+                        filter: this.searchTerm,
+                        type: this.searchType,
+                        page: this.results.page - 1
+                    },
+                    headers: {
+                        "Authorization": this.token
+                    }
+                }).then((response) => {
+                    this.results = response.data
+                    // console.log(`On last page (after request): ${this.results.last_page}`)
+                    console.log(`On first page (after request): ${this.results.page === 1}`)
+                }).catch(error => {
+                    console.log(error.response.data)
+                })
+            }
         },
     },
+
     created: function() {
-        this.loadQotd()
+        this.loadRandomQuotes()
     }
 })
