@@ -38,6 +38,7 @@
             <load-qotd @done-searching="showQuotes=false"></load-qotd>                      
             
             <div v-if="showQuotes">
+                <p>{{ qotd }}</p>
                 <div v-for="quote in qotd.quotes" :key="quote.id">
                     <p>{{ quote.body }}</p>
                     <p><a :href="quote.url">{{ quote.author }}</a></p>
