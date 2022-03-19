@@ -5,9 +5,7 @@
     // a 'quote' component - This will allow me to decide and change the content of a quote in any of the areas of the page.
     // ???
 
-// Authors:
-    // martin-luther-king-jr
-    // maya angelou
+// results.quotes[N].dialogue needs to be false. Unless I want to show multi-line context/dialogue quotes.
 
 
 Vue.component('quote-search', {
@@ -70,10 +68,11 @@ Vue.component('quote-component', {
 const vm = new Vue({
     el: '#app',
     data: {
-        qotd: {},
+        qotdObject: {},
         token: `Token token="855df50978dc9afd6bf86579913c9f8b"`,
         results: {},
         randomQuotes: [],
+        
         searchType: '',
         searchTerm: '',
         quickButtonAuthorSearchName: '',
@@ -83,29 +82,17 @@ const vm = new Vue({
     },
     methods: {
 
-        // loadSingleQuote: function() {
-        //     axios({
-        //         method: 'get',
-        //         url: 'https://favqs.com/api/qotd'
-        //     }).then((response) => {
-        //         this.qotd = response.data
-        //     }).catch(error => {
-        //         console.log(error.response.data)
-        //     })
-        // },
-
         loadRandomQuotes: function() {
             this.results = {}
             this.randomQuotes = []
             for (let i = 0; i < 5; i++) {
-                // console.log(i)
+                this.qotdObject = {}
                 axios({
                     method: 'get',
                     url: 'https://favqs.com/api/qotd'
                 }).then((response) => {
-                    this.qotd = response.data
-                    // console.log(this.qotd.quote.body)
-                    this.randomQuotes.push(this.qotd.quote)
+                    this.qotdObject = response.data
+                    this.randomQuotes.push(this.qotdObject.quote)
                 }).catch(error => {
                     console.log(error.response.data)
                 })
@@ -116,6 +103,7 @@ const vm = new Vue({
             console.log(`Getting some ${ author } Quotes`)
             this.searchType = 'author'
             this.searchTerm = author
+            this.randomQuotes = []
             axios({
                 method: 'get',
                 url: 'https://favqs.com/api/quotes',
@@ -138,6 +126,7 @@ const vm = new Vue({
             console.log(`Getting some ${payload.type}:${payload.term} Quotes`)
             this.searchType = payload.type
             this.searchTerm = payload.term
+            this.randomQuotes = []
             if (payload.term === 'keyword') {
                 payload.type = ''
             }
@@ -168,7 +157,6 @@ const vm = new Vue({
                 console.log("Going to next page!")
                 this.currentPage++
                 console.log(`On last page (before request): ${this.results.last_page}`)
-                // console.log(`On first page (before request): ${this.results.page === 1}`)
                 
                 axios({
                     method: 'get',
@@ -184,7 +172,6 @@ const vm = new Vue({
                 }).then((response) => {
                     this.results = response.data
                     console.log(`On last page (after request): ${this.results.last_page}`)
-                    // console.log(`On first page (after request): ${this.results.page === 1}`)
                 }).catch(error => {
                     console.log(error.response.data)
                 })
@@ -195,7 +182,6 @@ const vm = new Vue({
             if (this.results.page !== 1) {
                 console.log("Going to previous page!")
                 this.currentPage--
-                // console.log(`On last page (before request): ${this.results.last_page}`)
                 console.log(`On first page (before request): ${this.results.page === 1}`)
                 
                 axios({
@@ -211,7 +197,6 @@ const vm = new Vue({
                     }
                 }).then((response) => {
                     this.results = response.data
-                    // console.log(`On last page (after request): ${this.results.last_page}`)
                     console.log(`On first page (after request): ${this.results.page === 1}`)
                 }).catch(error => {
                     console.log(error.response.data)
