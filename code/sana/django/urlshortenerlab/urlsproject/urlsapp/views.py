@@ -18,11 +18,15 @@ def index(request):
 
 def process(request): 
     if request.method == 'POST':
-        input_url = request.POST['link']      
+        print("here2")
+        input_url = request.POST['name']      
+        print(request.POST)
         unique_url = str(uuid.uuid4())[:7]
         new_url = Link(ulink=input_url, slink=unique_url)
+        print(new_url)
         new_url.save()
-    return render(request, 'index.html', {'links' : Link.objects.all()})
+        print("here1")
+    return render(request, 'index.html', {'link' : Link.objects.all(), 'go_url' : new_url.slink})
 
   
 # def send(request):
@@ -36,5 +40,13 @@ def process(request):
     #         return redirect('/')
 
 def goto(request, pk):
-    go_url = Link.objects.get(ulink=pk)
-    return redirect('http://'+go_url.ulink)
+    go_url = Link.objects.filter(slink=pk)
+    print(go_url)
+    # go_url = Link.objects.filter(ulink=pk)
+    return redirect('http://'+go_url[0].ulink)
+
+# def shorturl(request, pk):
+#     go_url = Link.objects.filter(slink=pk)
+#     # print(go_url)
+#     # go_url = Link.objects.filter(ulink=pk)
+#     return go_url
