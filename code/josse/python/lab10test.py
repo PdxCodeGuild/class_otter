@@ -100,10 +100,20 @@ print(specific_contact)
 
 
 def print_contact_information(dictionary):
-    '''Display dictionary information'''
-    # Get keys for the dictionary
-    # print out the value for keys
-    # use f string !!!!!!!!!!!!!!!!
+   return dictionary.keys()
+
+
+show_keys = print_contact_information(specific_contact)
+
+print(show_keys)
+
+
+while True:
+    input(f"Would you like to create , read, update, delete? ")
+'''Display dictionary information'''
+# Get keys for the dictionary
+# print out the value for keys
+# use f string !!!!!!!!!!!!!!!!
 # Create a cred repl using a while loop.
 # inside while loop
 # create print statement inside cred to show what input was selected. for each selection
