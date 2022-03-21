@@ -2,7 +2,6 @@ html {
     box-sizing: border-box;
 }
 
-/* check what this does again */
 *, 
 *:before, 
 *:after {
@@ -11,7 +10,8 @@ html {
 
 
 body {
-    display: flex;
+    /* display: flex;
+    Lines below to justify content also aren't working */
     justify-content: center;
     align-items: center;
     color: #4a5258;
@@ -38,7 +38,9 @@ input[type='submit'] {
 h2 {
     margin: 0;
 }
-
+h3 {
+    margin: 0;
+}
 ul {
     list-style-type: none;
     margin: 0;
