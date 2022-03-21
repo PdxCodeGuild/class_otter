@@ -11,7 +11,7 @@
         <h1>Vue Todos</h1>
         <add-a-todo @add-todo="addTodo"></add-a-todo>
         <ul>
-            <!-- '<todo-li>' is a custom element we created in component. -->
+            <!-- '<the-todo-li>' is a custom element we created in component. -->
             <!-- '@remove-item' is a custom event we created in component. -->
             <!-- 'todoo' is a custom attribute we created, in 'props' in component. -->
             <!-- v-bind: ===> :  when an attribute. -->
@@ -22,24 +22,24 @@
                 @remove-item="removeRootTodo"
                 @toggle-item="toggleRootTodo"
              -->
-            <todo-li
+            <the-todo-li
                 v-for="aTodoItem in incompleteTodos"
                 v-bind:key="aTodoItem.id"
                 v-bind:todoo="aTodoItem"
                 v-on:remove-item="removeRootTodo"
                 v-on:toggle-item="toggleRootTodo"
             >
-            </todo-li>
+            </the-todo-li>
         </ul>
         <ul>
-            <todo-li
+            <the-todo-li
                 v-for="aTodoItem in completeTodos"
                 :key="aTodoItem.id"
                 :todoo="aTodoItem"
                 @remove-item="removeRootTodo"
                 @toggle-item="toggleRootTodo"
             >
-            </todo-li>
+            </the-todo-li>
         </ul>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

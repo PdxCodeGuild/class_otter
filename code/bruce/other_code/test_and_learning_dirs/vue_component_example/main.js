@@ -25,7 +25,9 @@ Vue.component('add-a-todo', {
     }
 })
 
-Vue.component('todo-li', {
+// 'the-todo-li' matches with '<the-todo-li>' in index.html.
+// The component name is kebab-case. The component name shows up in the <tag> in index.html.
+Vue.component('the-todo-li', {
     data: function() {
         return {
             editMode: false
@@ -34,7 +36,7 @@ Vue.component('todo-li', {
     props: ['todoo'],
     template: `
         <li>
-            <input v-if="editMode" v-model="todoo.text" type="text">
+            <input v-if="editMode" v-model="todoo.text" type="text" v-on:keyup.enter="editMode = !editMode">
             <template v-else>{{ todoo.text }}</template>
             <input type="checkbox" v-model="todoo.completed">
             <button v-on:click="editMode = editMode ? false : true">{{ editMode ? "Save" : "Edit" }}</button>
