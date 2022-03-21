@@ -49,7 +49,7 @@ Example: `index.html`
     </div>
 
     <!-- Include Vue from a CDN of your choice, I chose unpkg -->
-    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue@2"></script>
     <!-- Include your code here... -->
     <script src="/js/site.js"></script>
 </body>
