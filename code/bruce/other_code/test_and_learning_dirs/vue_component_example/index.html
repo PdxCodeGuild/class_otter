@@ -22,10 +22,21 @@
                 @remove-item="removeRootTodo"
                 @toggle-item="toggleRootTodo"
              -->
+             <!-- 
+                 'aTodoItem' is a local iterating identifier.
+                 'incompleteTodos' is a computed property which we are iterating through.
+                 'removeRootTodo' is a root component method.
+                 'toggleRootTodo' is a root component method.
+
+                 NOTE: Always use kebab-case for event identifiers/names.
+                 'remove-item' is an emitted event. It calls 'removeRootTodo' in root component.
+                 'toggle-item' is an emitted event. It calls 'toggleRootTodo' in root component.
+
+              -->
             <the-todo-li
                 v-for="aTodoItem in incompleteTodos"
                 v-bind:key="aTodoItem.id"
-                v-bind:todoo="aTodoItem"
+                v-bind:to-doo="aTodoItem"
                 v-on:remove-item="removeRootTodo"
                 v-on:toggle-item="toggleRootTodo"
             >
@@ -35,7 +46,7 @@
             <the-todo-li
                 v-for="aTodoItem in completeTodos"
                 :key="aTodoItem.id"
-                :todoo="aTodoItem"
+                :to-doo="aTodoItem"
                 @remove-item="removeRootTodo"
                 @toggle-item="toggleRootTodo"
             >

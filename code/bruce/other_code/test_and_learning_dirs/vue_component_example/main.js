@@ -1,14 +1,14 @@
 Vue.component('add-a-todo', {
     data: function() {
         return {
-            id: 5,
+            id: 6,
             text: "",
             completed: false
         }
     },
     template: `
         <div>
-            <input type="text" placeholder="add a todo" v-model="text" @keyup.enter="addTodo">
+            <input type="text" placeholder="Todo description" v-model="text" @keyup.enter="addTodo">
             <button @click="addTodo">Add To List</button>
         </div>
     `,
@@ -33,23 +33,27 @@ Vue.component('the-todo-li', {
             editMode: false
         }
     },
-    props: ['todoo'],
+    // props can be camelCase (toDoo) which matches with kebab-case (to-doo) in index.html.
+    // props 'toDoo' matches with 'to-doo' in `v-bind:to-doo="aTodoItem"` in index.html.
+    // props 'toDoo' matches with 'toDoo' below in template.
+    // props 'toDoo' matches with 'toDoo' below in 'mounted' and 'destroyed' methods.
+    props: ['toDoo'],
     template: `
         <li>
-            <input v-if="editMode" v-model="todoo.text" type="text" v-on:keyup.enter="editMode = !editMode">
-            <template v-else>{{ todoo.text }}</template>
-            <input type="checkbox" v-model="todoo.completed">
+            <input v-if="editMode" v-model="toDoo.text" type="text" v-on:keyup.enter="editMode = !editMode">
+            <template v-else>{{ toDoo.text }}</template>
+            <input type="checkbox" v-model="toDoo.completed">
             <button v-on:click="editMode = editMode ? false : true">{{ editMode ? "Save" : "Edit" }}</button>
             <button v-on:click="editMode = !editMode">{{ editMode ? "Save" : "Edit" }}</button>
-            <button @click="toggleComponentTodo(todoo)">Tog-Func</button>
-            <button @click="$emit('toggle-item', todoo)">Tog-Emit</button>
+            <button @click="toggleComponentTodo(toDoo)">Tog-Func</button>
+            <button @click="$emit('toggle-item', toDoo)">Tog-Emit</button>
             <!-- Can use button two ways -->
             <!-- The '@click=' can have either: -->
-            <!-- "removeTodo(todoo)" | Calls 'this' component's removeTodo, which then emits. -->
+            <!-- "removeTodo(toDoo)" | Calls 'this' component's removeTodo, which then emits. -->
             <!-- OR -->
-            <!-- "$emit('remove-item', todoo)" | Which directly emits. -->
-            <button @click="removeTodo(todoo)">Del-Func</button>
-            <button @click="$emit('remove-item', todoo)">Del-Emit</button>
+            <!-- "$emit('remove-item', toDoo)" | Which directly emits. -->
+            <button @click="removeTodo(toDoo)">Del-Func</button>
+            <button @click="$emit('remove-item', toDoo)">Del-Emit</button>
         </li>
     `,
     methods: {
@@ -63,10 +67,10 @@ Vue.component('the-todo-li', {
         }
     },
     mounted: function() {
-        console.log(`mounted: ${this.todoo.text}`)
+        console.log(`mounted: ${this.toDoo.text}`)
     },
     destroyed: function() {
-        console.log(`destroyed: ${this.todoo.text}`)
+        console.log(`destroyed: ${this.toDoo.text}`)
     },
 })
 
@@ -78,6 +82,7 @@ const vm = new Vue({
             {id: 2, text: "Butter the cat", completed: false},
             {id: 3, text: "Burn out!", completed: true},
             {id: 4, text: "Fade away!", completed: false},
+            {id: 5, text: "Rock OUT!", completed: false},
         ],
     },
     computed: {
