@@ -33,7 +33,7 @@ var app = new Vue({
 
 
     created: function () {
-        this.getBook()
+        this.userSearch()
     }
 
 })
