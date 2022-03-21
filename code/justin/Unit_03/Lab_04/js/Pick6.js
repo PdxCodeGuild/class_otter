@@ -16,7 +16,7 @@ class Pick6 {
             earnings += this.get_prize(match_count);
         }
 
-        alert(`Winnings: ${earnings - expenses}\nROI: ${(earnings - expenses) / expenses}`)
+        alert(`Won: $${earnings}\nSpent: $${expenses}\nBalance: $${earnings - expenses}\nROI: ${(earnings - expenses) / expenses}`)
     }
 
     select_numbers() {
@@ -41,7 +41,7 @@ class Pick6 {
 
     get_prize(match_count) {
         if (match_count > 0 && match_count < 7) {
-            return this.prize_tiers[match_count + 1];
+            return this.prize_tiers[match_count - 1];
         }
         else {
             return 0;
