@@ -1,0 +1,22 @@
+
+
+h1, h2 {
+    text-align: center;
+}
+
+#questions {
+    width: 100%;
+    background-color: rgb(221, 204, 204);
+    display: block;
+    border: 1px solid red;
+}
+
+
+#answers {
+    background-color: rgb(235, 232, 211);
+    width: 100%;
+}
+
+#previous_page, #next_page {
+    color: blue;
+}

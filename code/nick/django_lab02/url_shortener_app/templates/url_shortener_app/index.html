@@ -11,16 +11,23 @@
     <form action="{% url 'url_shortener_app:short_url' %}" method="post">
         {% csrf_token %}
         <label>long url</label>
-        <input type='text' name="long_url"/>
+        <input type='text' name="long_url" required/>
         <button type="submit">submit</button>
       </form>
+      
+      
       <h2>long url</h2>
       {%for item in long_url%}
-      {{item.long_url}}
+      <p>{{item.long_url}}</p>
       {%endfor%}
+      
+      
       <h2>url code</h2>
       {%for item in long_url%}
-      <a href="{{item.long_url}}">{{item.short_url}}</a>
+      <ul>
+          <a href="{%url 'url_shortener_app:redirect' %}"><li>{{item.short_url}}</li></a>
+      </ul>
       {%endfor%}
+      
 </body>
 </html>
