@@ -11,12 +11,62 @@
 </head>
 <body>
     <div class="container">
-<!--
-        <div id="addItemApp">
-            <input v-model="newItemText">
-            <button class="waves-effect waves-light btn" v-on:click="this.addNewItem">New Item</button>
+        <div class="container" id="searchQuoteApp">
+            <div class="input-field">
+                <input v-model="searchText" id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" name="searchTypeOptions" v-model="searchType" checked>
+                    <span>Keyword</span>
+                </label>
+                
+                <label>
+                    <input type="radio" name="searchTypeOptions" v-model="searchType">
+                    <span>Author</span>
+                </label>
+                
+                <label>
+                    <input type="radio" name="searchTypeOptions" v-model="searchType">
+                    <span>Tag</span>
+                </label>
+            </div>
+
+            <button class="waves-effect waves-light btn" v-on:click="this.searchForQuote">Search</button>
         </div>
 
+        <div class="container" id="quotesListApp">
+            <div>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+
+                    <div class="card-action right-align">
+                        <a href="#">Author</a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <ul class="pagination center-align">
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+        </div>
+<!--
         <div id="todoListApp">
             <div>
                 <h4>Incomplete</h4>
