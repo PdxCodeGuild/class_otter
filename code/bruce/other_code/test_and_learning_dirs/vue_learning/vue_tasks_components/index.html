@@ -25,6 +25,9 @@
             
             <h2 v-if="Object.keys(incompleteTasks).length">{{ incompleteTaskHeading }}</h2>
 
+            <!-- We are making some custom events. -->
+            <!-- `v-on:delete-component-task` does same thing as `@delete-component-task`. -->
+            <!-- `@delete-component-task` is an event and `@click` is an event. -->
             <a-task
                 v-for="task in incompleteTasks"
                 v-bind:key="task.id"

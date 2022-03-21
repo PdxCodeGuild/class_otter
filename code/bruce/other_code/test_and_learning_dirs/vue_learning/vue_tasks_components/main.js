@@ -22,7 +22,11 @@ Vue.component('a-task', {
     methods: {
         deleteTask: function(aaTask) {
             console.log(`Planning to remove: ${this.aaTask.description}.`)
-            this.$emit(`delete-component-task`, aaTask)
+            // Emit the event and send payload of 'aaTask'.
+            // Multiple objects can be sent in payload. They will arrive as a 'params' array.
+            // These seem to be positional parameters.
+            // We can essentially send anything along with the event.
+            this.$emit(`delete-component-task`, aaTask, "It's gonna be gone!")
         },
         
         toggleCompletion: function(aaTask) {
@@ -73,8 +77,11 @@ const vm = new Vue({
             task.isCompleted = !task.isCompleted
         },
 
-        deleteRootTask: function(task) {
+        deleteRootTask: function(task, payloadString) {
+            // The emitted event's payload 'aaTask' is now referenced as 'task'.
+            // The parameters are positional parameters.
             console.log(`Deleting: ${task.description}`)
+            console.log(`Payload string: ${ payloadString }`)
             this.taskList.splice(this.taskList.indexOf(task), 1)
             console.log(`Deleted ${task.description}: ${this.taskList.indexOf(task) === -1}`)
         }

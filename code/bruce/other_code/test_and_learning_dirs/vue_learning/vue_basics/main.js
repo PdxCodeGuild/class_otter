@@ -5,7 +5,7 @@ const app1 = new Vue({
         heading: 'GoodBuy, World!',
         timeLoaded: 'Page loaded at ' + new Date().toLocaleString(),
         elementSeen: true,
-        newTodoText: 'try this',
+        newTodoText: '',
         uncompletedTodos: [
             { text: "Scrub the kittens"},
             { text: "phil fude bole"},
@@ -46,6 +46,7 @@ const app1 = new Vue({
             console.log(`Adding todo: ${newTodoText}`)
             // This line seems to add a 'key' to the 'todos'?
             this.uncompletedTodos.push({text: newTodoText, isCompleted: false})
+            this.newTodoText = ''
         },
         completeTodo: function(todo, index) {
             console.log(`Completing: ${this.uncompletedTodos[index].text}`)

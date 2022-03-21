@@ -7,7 +7,8 @@
     <title>Lab 6: Mini-Capstone API</title>
     <style>
     table, th, td {
-        border:1px solid black;
+        border:3px solid rgba(166, 3, 3);
+        color: rgb(90, 115, 2);
         width: 100%;
     }
     table {
@@ -21,6 +22,8 @@
 
         <h1>Flynnt Knapp's Adafruit IO Feed</h1>
 
+        <the-chart></the-chart>
+
         <h2>Five most recent measurements</h2>
         <ul v-if="Object.keys(esp8266DataArray).length">
             <temperature-display-li
@@ -33,9 +36,9 @@
 
         <!-- <temperature-chart></temperature-chart> -->
 
-        <div>
+        <!-- <div>
             <canvas id="myChart"></canvas>
-        </div>
+        </div> -->
 
         <table v-if="Object.keys(esp8266DataArray).length">
             <thead>
@@ -47,12 +50,12 @@
             </thead>
             <tbody>
 
-                <temperature-display-table
+                <tr is="temperature-display-table"
                     v-for="dataPoint in esp8266DataArray"
                     v-bind:temperature-display-table="dataPoint"
                     v-bind:key="dataPoint.id"
                 >
-                </temperature-display-table>
+                </tr>
             </tbody>
         </table>
 
