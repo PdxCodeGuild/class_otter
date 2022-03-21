@@ -1,0 +1,13 @@
+
+
+Resources:
+https://stackoverflow.com/questions/34643620/how-can-i-split-my-click-commands-each-with-a-set-of-sub-commands-into-multipl
+cli/
+├── __init__.py
+├── cli.py
+├── group1
+│   ├── __init__.py
+│   ├── commands.py
+└── group2
+    ├── __init__.py
+    └── commands.py

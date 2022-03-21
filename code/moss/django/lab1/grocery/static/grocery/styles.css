@@ -1,0 +1,50 @@
+
+/***** TRIED TO IMITATE A YELLOW NOTEPAD *****/
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color:#F2E7AE;
+ 
+}
+
+header {
+   text-align: center;
+   border-left: 4px solid #F28379;
+   
+}
+
+h1{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+hr {
+   border: 2px solid #89C2D9;
+
+}
+
+p {
+   font-size: 18px;
+}
+
+h2, p {
+    padding-left: 50px;
+
+}
+
+form {
+    padding-left: 50px;
+}
+
+main {
+    border-left: 4px solid #F28379;
+}
+
+
+

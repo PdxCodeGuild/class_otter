@@ -9,6 +9,7 @@ M-F 9:30 am – 4:30 pm
 
 - January 17th (MLK Day)
 - February 21st (Presidents Day)
+- March 11th
 
 ### Staff
 
@@ -20,7 +21,7 @@ M-F 9:30 am – 4:30 pm
 
 ## Capstone Dates:
 
-Capstone proposal due: March 24th, 2022  
+Capstone proposal due: March 28th, 2022  
 Presentation Day: April 15th, 2022  
 
 ## Django Labs Assigned:
@@ -28,23 +29,23 @@ Presentation Day: April 15th, 2022
 | Lab   | Name                   | Date Assigned | Due By Start Of Class | Hard Due Date |
 | ----- | ---------------------- | ------------- | --------------------- | ------------- |
 | 00    | Polls                  | Feb 15th      | Feb 18th              |               |
-| 01    | Todo List              | Feb 18th      | Feb 28th              | Mar 4th       |
-| 02    | URL Shortener          | Feb 23nd      | Feb 28th              | Mar 9th       |
-| 03    | Chirp                  | Feb 25th      | Mar 3rd               | Mar 11th      |
-| 04    | Students API           | Mar 21st      | Mar 24th              | Apr 4th       |
-| 05    | Pokedex                | Mar 22nd      | Mar 24th              | Apr 5th       |
+| 01    | Todo List              | Feb 22nd      | Feb 28th              | Mar 8th       |
+| 02    | URL Shortener          | Feb 24th      | Feb 28th              | Mar 10th      |
+| 03    | Chirp                  | Mar 1st       | Mar 4th               | Mar 15th      |
+| 04    | Students API           | Mar 23rd      | Mar 28th              | Apr 6th       |
+| 05    | Pokedex                | Mar 24th      | Mar 28th              | Apr 7th       |
 
 ## JavaScript Labs Assigned:
 
 | Lab   | Name                   | Date Assigned | Due By Start Of Class | Hard Due Date |
 | ----- | ---------------------- | ------------- | --------------------- | ------------- |
-| 01    | Pick 3                 | Mar 3rd       | Mar 10th              | Mar 17th      |
-| 02    | Pick 3                 | Mar 3rd       | Mar 10th              | Mar 17th      |
-| 03    | Pick 3                 | Mar 3rd       | Mar 10th              | Mar 17th      |
-| Group | Todo List              | Mar 9th       | Mar 10th              | Mar 23rd      |
-| 04    | Vue Todos              | Mar 10th      | Mar 21st              | Mar 24th      |
-| 05    | Quotes in Vue          | Mar 14th      | Mar 21st              | Mar 28th      |
-| 06    | Mini-Capstone          | Mar 16th      | Mar 21st              | Mar 30th      |
+| 01    | Pick 3                 | Mar 4th       | Mar 14th              | Mar 18th      |
+| 02    | Pick 3                 | Mar 4th       | Mar 14th              | Mar 18th      |
+| 03    | Pick 3                 | Mar 4th       | Mar 14th              | Mar 18th      |
+| Group | Todo List              | Mar 10th      | Mar 14th              | Mar 24th      |
+| 04    | Vue Todos              | Mar 14th      | Mar 21st              | Mar 28th      |
+| 05    | Quotes in Vue          | Mar 16th      | Mar 21st              | Mar 20th      |
+| 06    | Mini-Capstone          | Mar 18th      | Mar 23rd              | Apr 1st       |
 
 ## HTML/CSS Labs Assigned:
 
@@ -54,7 +55,8 @@ Presentation Day: April 15th, 2022
 | 02    | Company Landing Page   | Feb 3rd       | Feb 7th               | Feb 17th      |
 | 03    | Blog                   | Feb 4th       | Feb 8th               | Feb 18th      |
 | 04    | Burrito Order Form     | Feb 8th       | Feb 14th              | Feb 22nd      |
-| Group | Flask Todos            | Feb 9th       | Feb 11th              | Feb 23rd      |
+| Group | Flask Todos            | Feb 9th       | Feb 10th              | Feb 23rd      |
+| 05    | Flask Redo             | Feb 10th      | Feb 14th              | Feb 24rd      |
 | 06    | Personal Portfolio     | Feb 11th      | Feb 15th              | Feb 25th      |
 
 ## Python Labs Assigned:

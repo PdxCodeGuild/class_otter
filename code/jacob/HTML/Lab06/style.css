@@ -1,0 +1,88 @@
+html{
+    box-sizing: border-box;
+}
+body{
+    margin: 6px;
+    background-color: bisque;
+}
+
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;    
+    background-color: rgba(128, 128, 128, 0.356);    
+}
+
+nav{
+    display: flex;    
+    margin-top: 12px;
+}
+
+nav p{    
+    margin: 12px;    
+}
+
+a{
+    transition: all ease-in-out 125ms;
+    color: black;
+}
+
+a:hover{
+    text-shadow: 0 0 4px white;
+    transition: all ease-in-out 125ms;
+}
+
+.intro{
+    display: flex;
+    max-width: 100%;
+    background-color: yellow;    
+    font-family: 'Roboto';
+    font: 100;
+    line-height: 1.3em;
+    
+}
+
+.skills{
+    display: flex;
+    max-width: 100%;
+    background-color: deepskyblue;
+    font-family: 'Roboto';
+    font: 100;
+    line-height: 1.5em;
+}
+
+@media (min-width: 750px){
+    body{
+        margin: 24px;
+    }
+    header{
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999px;
+        width: 100%;
+        margin: 10px;
+    }
+    header h2{
+        margin: 24px;
+    }
+
+    footer{
+        margin: 24px;
+    }
+
+    
+}
+
+@media (min-width: 1000px){
+
+    header{
+        font-size: larger;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

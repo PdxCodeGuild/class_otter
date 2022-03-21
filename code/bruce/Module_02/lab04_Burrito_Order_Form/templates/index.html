@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome for the cat paw -->
+    <script src="https://kit.fontawesome.com/386a044235.js" crossorigin="anonymous"></script>
+    <!--  -->
+    <!--  -->
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!--  -->
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+    <!--  -->
+    <title>Bunbun's Burritos</title>
+</head>
+<body>
+    <!-- Will use this <div> to flex the header to the left side on wider screens and leaves the footer alone. Actually, this may not be necessary, we may be able to put <header>, <main>, and <footer> in same container and have same results.  -->
+    <div class="header-and-main">
+        <header>
+            <h1 class="our-name">
+                Bunbun's Burritos
+            </h1>
+            <div class="paw-print">
+                <i class="fa-solid fa-paw fa-5x"></i>
+            </div>
+            <nav>
+                <p><a href="#">Create Account</a></p>
+                <p><a href="#">Refer a Friend</a></p>
+                <p><a href="#">Careers</a></p>
+                <p><a href="#">History of the Burrito</a></p>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <h2>
+                    Make the important decisions about your ingredients:
+                </h2>
+            </section>
+            
+            <form action="https://webhook.site/f7337193-976d-48c7-b5e9-c445ec66ae6e" method="post">
+                <h3>Customer Information</h3>
+                <div class="customer-info">
+                    {% for field in customer %}
+                    <p>
+                        <label for="{{ field['item_key'] }}">{{ field['description'] }}</label>
+                        <input type="{{ field['type'] }}" name="{{ field['item_key'] }}" id="{{ field['item_key'] }}" placeholder="Required" required>                        
+                    </p>
+                        {% endfor %}
+                </div>
+
+                <article class="menu-choices">
+                    <div class="wrap">
+                        <h3>Wrap Choice</h3>
+                        {% for field in menu_wrap %}
+                        <p><input type="radio" name="wrap" value="{{ field['item_key'] }}" id="{{ field['item_key'] }}"><label for="{{ field['item_key'] }}">{{ field['description'] }}</label></p>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="rice">
+                        <h3>Rice</h3>
+                        {% for field in menu_rice %}
+                        <p><input type="radio" name="rice" value="{{ field['item_key'] }}" id="{{ field['item_key'] }}"><label for="{{ field['item_key'] }}">{{ field['description'] }}</label></p>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="beans">
+                        <h3>Beans</h3>
+                        {% for field in menu_beans %}
+                        <p><input type="radio" name="beans" value="{{ field['item_key'] }}" id="{{ field['item_key'] }}"><label for="{{ field['item_key'] }}">{{ field['description'] }}</label></p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="protein">
+                        <h3>Protein</h3>
+                        {% for field in menu_protein %}
+                        <p><input type="radio" name="protein" value="{{ field['item_key'] }}" id="{{ field['item_key'] }}"><label for="{{ field['item_key'] }}">{{ field['description'] }}</label></p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="additional-items">
+                        <h3>Additional Items</h3>
+                        {% for field in menu_add %}
+                        <p><input type="checkbox" name="{{ field['item_key'] }}" value="{{ field['item_key'] }}" id="{{ field['item_key'] }}"><label for="{{ field['item_key'] }}">{{ field['description'] }}</label></p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="delivery-instructions">
+                        <h3>Delivery Instructions</h3>
+                        <p><textarea class="text-area" type="text" name="delivery_instructions" placeholder="optional" id="delivery_instructions"></textarea></p>
+                    </div>
+                </article>
+                <div class="submit-button">
+                    <input type="submit" value="Submit Order" id="submit">
+                </div>
+            </form>
+
+        </main>
+    </div>
+    <footer>
+        <p>
+            Butterscotch Pi 2022
+        </p>
+    </footer>
+</body>
+</html>

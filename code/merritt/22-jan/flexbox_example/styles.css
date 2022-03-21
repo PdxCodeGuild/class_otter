@@ -1,0 +1,155 @@
+/* #8C4842 dark red
+#BFB39B sand
+#72734F mustard
+#498C66 green
+#284B59 dark blue */
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%
+}
+
+main p {
+    text-align: justify;
+    line-height: 1.25;
+}
+
+header, main, footer {
+    padding: 1em;
+}
+
+header {
+    text-align: center;
+    color: #BFB39B;
+}
+
+a {
+    transition: all ease-in-out 125ms;
+}
+
+a:hover {
+    text-shadow: 0 0 4px white;
+    transition: all ease-in-out 125ms;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background-color: #BFB39B;
+    color: #284B59;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+a {
+    color: #BFB39B;
+}
+
+.header-background {
+    width: 100%;
+    background-color: #8C4842;
+}
+
+/* footer {
+    background-color: #8C4842;
+} */
+
+#email {
+    color: coral;
+    background-color: cornflowerblue;
+    width: 500px;
+    height: 100px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3em;
+}
+
+#email:hover {
+    background-color: aliceblue;
+    width: 300px;
+}
+
+#email:focus {
+    background-color: #8C4842;
+}
+
+#email:active {
+    background-color: black;
+}
+
+input::placeholder {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input[type="submit"] {
+    border: 5px solid coral;
+    border-radius: 0;
+}
+
+input[type="submit"]:active {
+    box-shadow: 0 0 5px black;
+}
+
+@media (min-width: 750px) {
+    header, main, footer {
+        padding: 2em;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* box-shadow: 0 4px 16px #284B59; */
+    }
+
+    nav p {
+        margin: 1em;
+    }
+
+    .flex-gallery {
+        display: flex;
+        /* flex-direction: row; */
+        flex-wrap: wrap;
+        margin: 0 -1em;
+        /* justify-content: space-evenly; */
+        /* align-items: flex-start; */
+    }
+
+    .gallery-item {
+        width: 50%;
+        padding: 0 1em;
+    }
+}
+
+@media (min-width: 1100px) {
+    .gallery-item {
+        width: 33.33%;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    header > div > h1, header > div > h3 {
+        margin: 0;
+    }
+}
+
+@media (min-width: 1400px) {
+
+    header, main, footer {
+        max-width: 1352px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

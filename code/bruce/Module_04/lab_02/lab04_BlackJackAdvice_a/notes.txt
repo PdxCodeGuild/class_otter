@@ -1,0 +1,10 @@
+let text = "Hello World!";
+let result = text.toUpperCase();
+
+<button type="button" onclick="playBlackJack()">Play Blackjack</button>
+
+Number.isInteger()
+
+userCard.toUpperCase()
+
+console.log()

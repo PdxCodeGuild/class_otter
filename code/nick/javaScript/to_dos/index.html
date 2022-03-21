@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo List</title>
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+    <h1>To Do List</h1>
+    <div id="app">
+        <input type="text" placeholder="todoName" v-model="newTodo"/>
+        <button v-on:click="addTodo">Add</button>
+        <h2>In-complete</h2>
+        <ul>
+            <li v-for="todo in todos">
+                {{todo.text}}
+                
+                <button @click="deleteTodo">Delete</button>
+                <!-- <button @click="completedTodo">Completed</button> -->
+            </li>
+        </ul>
+        <h2>Completed</h2>
+        <ul>
+            <li>
+
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="/js/site.js"></script>
+</body>
+</html>

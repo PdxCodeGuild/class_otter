@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Todos</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Vue Todos</h1>
+        <add-a-todo @add-todo="addTodo"></add-a-todo>
+        <ul>
+            <!-- '<the-todo-li>' is a custom element we created in component. -->
+            <!-- '@remove-item' is a custom event we created in component. -->
+            <!-- 'todoo' is a custom attribute we created, in 'props' in component. -->
+            <!-- v-bind: ===> :  when an attribute. -->
+            <!-- v-on: ===> @ when a action. -->
+            <!-- 
+                :key="aTodoItem.id"
+                :todoo="aTodoItem"
+                @remove-item="removeRootTodo"
+                @toggle-item="toggleRootTodo"
+             -->
+             <!-- 
+                 'aTodoItem' is a local iterating identifier.
+                 'incompleteTodos' is a computed property which we are iterating through.
+                 'removeRootTodo' is a root component method.
+                 'toggleRootTodo' is a root component method.
+
+                 NOTE: Always use kebab-case for event identifiers/names.
+                 'remove-item' is an emitted event. It calls 'removeRootTodo' in root component.
+                 'toggle-item' is an emitted event. It calls 'toggleRootTodo' in root component.
+
+              -->
+            <the-todo-li
+                v-for="aTodoItem in incompleteTodos"
+                v-bind:key="aTodoItem.id"
+                v-bind:to-doo="aTodoItem"
+                v-on:remove-item="removeRootTodo"
+                v-on:toggle-item="toggleRootTodo"
+            >
+            </the-todo-li>
+        </ul>
+        <ul>
+            <the-todo-li
+                v-for="aTodoItem in completeTodos"
+                :key="aTodoItem.id"
+                :to-doo="aTodoItem"
+                @remove-item="removeRootTodo"
+                @toggle-item="toggleRootTodo"
+            >
+            </the-todo-li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

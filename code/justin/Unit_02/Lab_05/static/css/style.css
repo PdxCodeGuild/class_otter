@@ -1,0 +1,137 @@
+body {
+    /* background-color: var(--background-color); */
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    min-height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--active-color);
+}
+
+h1 {
+    color: var(--primary-color);
+}
+
+#main-content {
+    margin: 4px 6px;
+}
+
+form {
+    border: 2px solid var(--secondary-color);
+    padding: 4px;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slider > input {
+    min-width: 220px;
+}
+
+label {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+textarea {
+    background-color: var(--background-offset-color);
+    min-height: 120px;
+    border-radius: 4px;
+    border-color: var(--active-color);
+    padding: 3px;
+}
+
+textarea:hover {
+    border-color: var(--button-color);
+    border-width: 2px;
+    padding: 2px;
+}
+
+textarea:focus {
+    border-color: var(--button-color);
+}
+
+main {
+    margin-top: 32px;
+}
+
+aside {
+    margin-top: 32px;
+}
+
+.message-box {
+    border: 1px solid var(--text-color);
+    background-color: var(--background-offset-color);
+    min-height: 120px;
+    padding: 4px;
+    margin: 0px;
+}
+
+.hide {
+    display: none;
+}
+
+button {
+    width: 100%;
+    background-color: var(--button-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    border-color: var(--active-color);
+    border-radius: 6px;
+    margin-bottom: 4px;
+}
+
+button:hover {
+    background-color: var(--hover-color);
+    border-color: var(--button-color);
+}
+
+button:active {
+    background-color: var(--active-color);
+    border-color: var(--hover-color);
+}
+
+#app-instructions {
+    margin: 8px;
+    text-align: justify;
+}
+
+@media (min-width: 700px) {
+    #main-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #main-content > * {
+        padding: 0px 8px;
+        flex: 1;
+    }
+
+    form {
+        border: none;
+        padding: 0px;
+    }
+
+    label {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+/* @media (min-width: 1000px) {
+} */

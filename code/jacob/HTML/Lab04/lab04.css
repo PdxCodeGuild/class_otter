@@ -1,0 +1,66 @@
+header{
+    padding-top: 24px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    background-color: orangered;
+    
+}
+nav{
+    display: flex;
+    justify-content: center;
+    
+}
+nav p{
+    margin: 12px;
+    
+}
+a{
+    color: white;
+}
+main{
+    background-color: yellow;
+    font-family: Roboto;
+}
+
+.menu{
+    margin: 24px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.who{
+    width: 450px;
+    margin: 24px;
+    flex-wrap: wrap;
+}
+.tortilla{
+    width: 450;
+    margin: 24px;
+    flex-wrap: wrap;
+}
+.rice{
+    width: 450px;
+    margin: 24px;
+    flex-wrap: wrap;
+}
+.beans{
+    width: 450px;
+    margin: 24px;
+    flex-wrap: wrap;
+}
+
+.meat{
+    width: 450px;
+    margin: 24px;
+    flex-wrap: wrap;
+}
+.addons{
+    width: 450px;
+    margin: 24px;
+    flex-wrap: wrap;
+}
+.direct{
+    width: 450px;
+    margin: 24px;
+    flex-wrap: wrap;
+}

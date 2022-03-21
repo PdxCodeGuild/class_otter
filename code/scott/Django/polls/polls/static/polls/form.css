@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(68, 109, 195);
+}
+
+fieldset {
+    background-color: antiquewhite;
+    border-style: groove;
+    border-width: 5px;
+    border-color: black;
+    width:fit-content;
+}
+
+legend  h1 {
+    padding-top: 40px;
+}
+
+label {
+    color: chocolate;
+}
