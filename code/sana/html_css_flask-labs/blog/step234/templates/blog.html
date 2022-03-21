@@ -5,23 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sana's Blog</title>
     <!-- Compiled and minified CSS -->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
-
-
 </head>
 
 <body>
+    <div class="nav">
+        <a href="#blog">Blogs</a>
+        <a class="authors" href="#authors">Authors</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </div>  
     <div class="row">
         {% for post in posts %}
         <div class="col s12 m6 l3">
-            <div class="article">
-                <div class="author">
+            <div class="article" name="article" id="article">
+                <div class="author" name="author" id="author">
                     <p>{{ post.author }}</p>
-                    <span class="title">{{post.title}}</span>
+                    <span class="title" name="title" id="title">{{post.title}}</span>
                 </div>
-                <div class="content">
+                <div class="content" id="content" name="content">
                     <p>{{ post.preview }}</p>
         </div>
         {% endfor %}

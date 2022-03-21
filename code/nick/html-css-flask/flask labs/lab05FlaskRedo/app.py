@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 metrics ={'ft': 0.3048, 'in': .9144, 'yd': .0254, 'mi': 1609.34, 'm': 1, 'km': 1000}
 output = [1]
