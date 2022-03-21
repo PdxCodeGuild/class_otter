@@ -28,19 +28,22 @@
             <a-task
                 v-for="task in incompleteTasks"
                 v-bind:key="task.id"
-                v-bind:a-task="task"
-                v-on:deleteComponentTask="deleteRootTask"
-                >
-                </a-task>
+                v-bind:aa-task="task"
+                v-on:delete-component-task="deleteRootTask"
+                v-on:toggle-component-task="toggleCompletion"
+            >
+            </a-task>
             
             <h2 v-if="Object.keys(completedTasks).length">{{ completedTaskHeading }}</h2>
             
             <a-task
                 v-for="task in completedTasks"
                 v-bind:key="task.id"
-                v-bind:a-task="task"
-                >
-                </a-task>
+                v-bind:aa-task="task"
+                v-on:delete-component-task="deleteRootTask"
+                v-on:toggle-component-task="toggleCompletion"
+            >
+            </a-task>
 
         </section>
 
