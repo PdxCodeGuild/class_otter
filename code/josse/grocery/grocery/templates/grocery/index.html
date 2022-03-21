@@ -18,11 +18,15 @@
         <form action="{% url 'grocery:mark_complete' item.id %}" method="post">
             {% csrf_token %}
             <h1><input type="submit" value='mark_complete' name="mark_complete"> </h1>
+            <h1><input type="submit" value='delete' name="delete"> </h1>
             {% endfor %}       
             <fieldset>
                 <legend><h1>Completed List</h1></legend>
-
+                {%for item in completed_item%}    
+                
+                    {{item.text_description}}
                     
+                {%endfor%}
             </fieldset>
             
         </form> 
