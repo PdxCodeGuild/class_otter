@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes from favqs.com</title>
+</head>
+<body>
+    <header></header>
+    <main id="app">
+
+        <h1>We have the Quotes!</h1>
+
+        <!-- <div v-if="Object.keys(qotd).length">
+            <h2>A Random Quote</h2>
+            <p>{{ qotd.quote.body }}</p>
+            <p><a :href="qotd.quote.url" target="_blank">{{ qotd.quote.author }}</a></p>
+        </div> -->
+
+        <quote-search @search-quotes="searchAndLoadQuotes"></quote-search>
+
+        <div>
+            <button @click="loadRandomQuotes">Home</button>
+            <button @click="previousPage">Previous Page</button>
+            <button @click="nextPage">Next Page</button>
+        </div>
+
+        <button @click="loadAuthorQuotes('Rashida Jones')">Rashida Jones</button>
+        <button @click="loadAuthorQuotes('Abraham Lincoln')">Abraham Lincoln</button>
+        <button @click="loadAuthorQuotes('Maya Angelou')">Maya Angelou</button>
+        <button @click="loadAuthorQuotes('Martin Luther King Jr')">Martin Luther King, Jr.!</button>
+        <button @click="loadAuthorQuotes('Desmond Tutu')">Desmond Tutu</button>
+        <button @click="loadAuthorQuotes('Erma Bombeck')">Erma Bombeck</button>
+        <button @click="loadAuthorQuotes('Lenny Bruce')">Lenny Bruce</button>
+        <button @click="loadAuthorQuotes('Emma Thompson')">Emma Thompson</button>
+        <button @click="loadAuthorQuotes('Helen Mirren')">Helen Mirren</button>
+        <button @click="loadAuthorQuotes('Aldous Huxley')">Aldous Huxley</button>
+
+        <div v-if="Object.keys(randomQuotes).length && !Object.keys(results).length">
+            <h2>Some Random Quotes</h2>
+            <ul>
+                <quote-component
+                    v-for="quote in randomQuotes"
+                    v-bind:quote-component="quote"
+                    v-bind:key="quote.id"
+                >
+                </quote-component>
+            </ul>
+        </div>
+
+        <div v-if="Object.keys(results).length">
+            <h2>Your '{{ displayedSearchTerm }}' Quotes</h2>
+            <ul>
+                <quote-component
+                    v-for="quote in results.quotes"
+                    v-bind:quote-component="quote"
+                    v-bind:key="quote.id"
+                >
+                </quote-component>
+            </ul>
+        </div>
+
+    </main>
+    <footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/site.js"></script>
+</body>
+</html>
