@@ -91,6 +91,7 @@ img {
     max-width: 100%;
     /* width: 50%; */
     height:150px;
+    j
 }
 
 nav p {
@@ -149,6 +150,7 @@ nav p {
     padding: 0 1em;
     object-fit: cover;
     justify-content: center;
+    justify-self: center;
     align-self:flex-start;
     text-align: center;
 }
