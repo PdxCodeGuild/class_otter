@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />    
     <title>Lab 6: Mini-Capstone API</title>
-    <style>
-    table, th, td {
-        border:3px solid rgba(166, 3, 3);
-        color: rgb(90, 115, 2);
-        width: 100%;
-    }
-    table {
-        width: 100%;
-    }
-    </style>
+
 </head>
 <body>
+
     <header></header>
+
     <main id="app">
 
         <h1>Flynnt Knapp's Adafruit IO Feed</h1>
 
-        <search-component></search-component>
+        <search-component
+            v-on:send-to-root="saveSomethingToRootComponent"
+            v-on:send-esp8266-to-root="saveESP8266ToRootComponent"
+        >
+        </search-component>
 
-        <the-chart></the-chart>
+        <temperature-chart
+            v-bind:chart-data-object="rootChartDataObject"
+            v-on:create-labels="createLabelArray"
+            v-on:create-values="createValueArray"
+        >
+        </temperature-chart>
 
-        <h2>Five most recent measurements</h2>
         <ul v-if="Object.keys(esp8266DataArray).length">
             <temperature-display-li
                 v-for="dataPoint in esp8266DataArray"
@@ -35,12 +37,6 @@
             >
             </temperature-display-li>
         </ul>
-
-        <!-- <temperature-chart></temperature-chart> -->
-
-        <!-- <div>
-            <canvas id="myChart"></canvas>
-        </div> -->
 
         <table v-if="Object.keys(esp8266DataArray).length">
             <thead>
@@ -61,27 +57,10 @@
             </tbody>
         </table>
 
-
-  <!-- <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Country</th>
-        <th scope="col">Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="name in info" :key="name.Country">
-        <td>{{name.Country}}</td>
-        <td>{{name.Value}}</td>
-      </tr>
-    </tbody>
-  </table> -->
-
-
-
-
     </main>
+
     <footer></footer>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props Basics</title>
+</head>
+<body>
+
+    <header></header>
+
+    <main id="app">
+
+        <h1>Vue Props Basics</h1>
+
+        <test-component
+            test-component-title="Title declared in html tag"
+        >
+        </test-component>
+
+
+        <test-component
+            v-bind:test-component-title="rootTestText"
+        >
+        </test-component>
+
+
+        <test-component-with-object
+            v-bind:object-from-root="rootTestObject"
+        >
+        </test-component-with-object>
+
+    </main>
+
+    <footer></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

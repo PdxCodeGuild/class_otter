@@ -1,0 +1,9 @@
+table, th, td {
+    border:3px solid rgba(166, 3, 3);
+    color: rgb(90, 115, 2);
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
