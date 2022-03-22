@@ -47,13 +47,13 @@ else{
 
 let result = (firstCard + secondCard + thirdCard)
 alert(result)
-if (result == 21){
+if (result === 21){
     alert('You Have Blackjack!')
 }
 else if (result < 17){
     alert('Hit')
 }
-else if (result >= 17 < 21){
+else if (result >= 17 && result < 21){
     alert('Stay')
 }
 else if (result > 21){
