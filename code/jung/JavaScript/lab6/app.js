@@ -125,7 +125,6 @@ Vue.component("memoryGame", {
         for (let i = 0; i < this.cardData.length; i++) {
           const random_pokemon_image = Math.floor(Math.random() * image_list.length);
           let random_img = image_list[random_pokemon_image]
-          let random_name = 
           this.cardData[i].value = random_img
           let index = image_list.indexOf(random_img);
           if (index > -1) {
