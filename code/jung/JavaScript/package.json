@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vue/composition-api": "^1.4.9",
+    "vue": "^3.2.31"
+  }
+}

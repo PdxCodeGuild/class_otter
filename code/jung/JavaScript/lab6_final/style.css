@@ -1,0 +1,46 @@
+body {
+    margin:25px;
+}
+
+#nav {
+    background: #1F2326;
+    color: white;
+}
+
+h3 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.polaroid {
+    margin-top: 80px;
+    width:100%;
+    margin-left:5%;
+    margin-right: 5%;
+    box-shadow: 0 4px 8px 0 #E4E4E4;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    justify-content: space-between;
+}
+
+  
+img {
+    width: 100%;
+    border-radius: 8px;
+    height: 300px;
+    object-fit: cover;
+}
+  
+.container {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+#more_facts {
+    margin-bottom: 20px;
+}
