@@ -120,6 +120,7 @@ Vue.component("memoryGame", {
 
 
         // console.log(random_pokemon_image)
+        
         // for-loop
         // .splice .pop (get rid of each url that's used)
         for (let i = 0; i < this.cardData.length; i++) {

@@ -17,7 +17,7 @@ h3 {
 }
 
 .polaroid {
-    margin-top: 80px;
+    margin-top: 30px;
     width:100%;
     margin-left:5%;
     margin-right: 5%;
@@ -32,7 +32,7 @@ h3 {
 img {
     width: 100%;
     border-radius: 8px;
-    height: 300px;
+    height: 450px;
     object-fit: cover;
 }
   
