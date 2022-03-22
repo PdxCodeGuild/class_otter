@@ -7,7 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>APOD</title>
-                
+        
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
         <link rel="stylesheet" href="style.css">
 
@@ -15,21 +16,49 @@
     <body>
         
         <div id="app">
-            
-            <!-- <p>{{ apod }}</p> -->
-            <p>{{ message }}</p>
-                <p>{{ apod.title }}</p>
-                <p>{{ apod.explanation }}</p>
-                <!-- <img :src= "info.url"> -->
-                <iframe width="420" height="345" :src="apod.url"></iframe>
-            <!-- <div v-for="info in apod" :key="info.date">
-                <p>{{ message }}</p>
-                <p>{{ info.title }}</p>
-                <p>{{ info.explanation }}</p>
-                <img :src= "info.url">
-                <iframe width="420" height="345" :src="info.url"></iframe>
-            </div> -->
-        
+            <header>
+                <h2>Choose a date for a previous picture:</h2>
+                <input type="date" v-model="userFilter" class="calendar">
+                <button v-on:click="loadAPOD" class="button">Submit</button>
+            </header>
+                <div v-if="Object.keys(apod).length" class="sets">
+                    
+                    <div v-if="apod.media_type === 'image'">
+                        <img :src="apod.url">
+                    </div>
+
+                    <div v-else-if="apod.media_type === 'video'">
+                        <iframe :src="apod.url"></iframe>
+                    </div>
+                    
+                    <div class="text">
+                        <h3>{{ apod.title }}</h3>
+                        <p>{{ apod.explanation }}</p>
+                    </div>
+                    
+                
+                </div>
+
+                <div v-else>
+                    <div v-for="info in arand" :key="info.date" class="sets">
+                        
+                        <div v-if="info.media_type === 'image'">
+                            <img :src="info.url">
+                        </div>
+
+                        <div v-else-if="info.media_type === 'video'">
+                            <iframe :src="info.url"></iframe>
+                        </div>
+
+                        <div class="text">
+                            <h3>{{ info.title }}</h3>
+                            <p>{{ info.explanation }}</p>
+                        </div>
+                        
+                    
+                    </div>
+                
+                </div>
         </div>
     
         
