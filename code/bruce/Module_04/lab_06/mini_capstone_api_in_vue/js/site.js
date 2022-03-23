@@ -1,4 +1,5 @@
-
+// <<a class="waves-effect waves-teal btn-flat">button</a>
+// <a class="waves-effect waves-light btn-small">Button</a>
 
 
 Vue.component('search-component', {
@@ -19,6 +20,14 @@ Vue.component('search-component', {
             // humidityesp32
             // temperatureesp32
             // batteryvoltageesp32
+
+            availableFeeds: [
+                'temperatureesp8266',
+                'humidityesp8266',
+                'humidityesp32',
+                'temperatureesp32',
+                'batteryvoltageesp32',
+            ],
     
             esp8266TemperatureKey: 'temperatureesp8266',
     
@@ -30,11 +39,11 @@ Vue.component('search-component', {
     // props: ['feedResponseArray'],
     template: `
         <section>
-            <h2>Search Interface</h2>
+            <h3>Search Interface</h3>
 
             <p>
-                <button @click="loadEsp8266TemperatureData">Load Livingroom Temperature Feed</button>
-                <button>Load Livingroom Humidity Feed</button>
+                <a class="waves-effect waves-teal btn-flat" @click="loadEsp8266TemperatureData">Load Livingroom Temperature Feed</a>
+                <a class="waves-effect waves-teal btn-flat">Load Livingroom Humidity Feed</a>
             </p>
             
         </section>
@@ -110,8 +119,8 @@ Vue.component('temperature-chart', {
 
                     datasets: [{
                         label: 'Living Room Temperature',
-                        backgroundColor: 'rgba(76, 89, 46, 1)',
-                        borderColor: 'rgba(76, 89, 46, 1)',
+                        backgroundColor: '#0d47a1',
+                        borderColor: '#0d47a1',
                         data: [
                             0,
                             1,
@@ -130,16 +139,16 @@ Vue.component('temperature-chart', {
     props: ['chartDataObject'],
     template: `
         <div>
-            <h2>{{ chartHeading }}</h2>
+            <h3>{{ chartHeading }}</h3>
             <div>
-            <button v-on:click="createLabels">Extract Labels</button><!--  -->
-            <button v-on:click="createValues">Extract Values</button><!--  -->
-            <button v-on:click="loadDataFromRoot">Update Chart Config</button>
+            <a class="waves-effect waves-teal btn-flat" v-on:click="createLabels">Extract Labels</a><!--  -->
+            <a class="waves-effect waves-teal btn-flat" v-on:click="createValues">Extract Values</a><!--  -->
+            <a class="waves-effect waves-teal btn-flat" v-on:click="loadDataFromRoot">Update Chart Config</a>
             </div>
             <div>
-                <button v-on:click="loadChart">Load Chart</button>
-                <button v-on:click="updateChart">Update Chart</button>
-                <button v-on:click="destroyChart">Remove Chart</button>
+                <a class="waves-effect waves-teal btn-flat" v-on:click="loadChart">Load Chart</a>
+                <a class="waves-effect waves-teal btn-flat" v-on:click="updateChart">Update Chart</a>
+                <a class="waves-effect waves-teal btn-flat" v-on:click="destroyChart">Remove Chart</a>
             </div>
             <canvas id="esp8266TemperatureChart" class="component-class"></canvas>
         </div>
