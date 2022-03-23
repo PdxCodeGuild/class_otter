@@ -20,6 +20,17 @@ const vm = new Vue({
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(response => this.info = response.data)
+        }
+        spotifySearch: function() {
+            // this needs to include a 'search' field for user input to search
+            axios({
+                method: 'get'
+                url: 'https://api.spotify.com/v1/search'
+                headers: {
+                    'Authorization': `Bearer ${ this.info.access_token}`,
+                }
+            })
+            return response.data
         }    
     },
     created: function() {

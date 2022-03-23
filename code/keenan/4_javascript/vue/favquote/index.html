@@ -10,23 +10,30 @@
 <!-- where should this stylesheet call sit -->
 <link rel="stylesheet" href="css/style.css" />
 
+
+<!--  insert drop down to search by one of 3 categoies, author etc..
+text input form for the search item,  -->
 <body>
     <div id="app">
         <h1>Quotes</h1>
+        <!--  could be a v if tag to show if the 'results' item has a length can show the results, not the list below
+        the v-else could be  the last lines fo the js file already assigns quotes @ created, so the v-if below is always going to have a value.  pointless code-->
         <div v-if="Object.keys(quotes).length">
-            <li v-for="quote in quotes.quotes" :key="quote.id">
+            <div v-for="quote in quotes.quotes" :key="quote.id">
                 <p>{{ quote.body }}</p>
                 <p><a :href="quote.url">{{ quote.author }}</a></p>
-            </li>
-        
+                <hr>
+            </div>
+            
+    
         </div>
-        <button @click="loadLincoln">Lincoln me!</button>
+        <!-- <button @click="loadLincoln">Lincoln me!</button>
         <ul v-if="Object.keys(results).length">
             <li v-for="quote in results.quotes" :key="quote.id">
                 <p>{{ quote.body }}</p>
                 <p><a :href="quote.url">{{ quote.author }}</a></p>
             </li>
-        </ul>
+        </ul> -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
