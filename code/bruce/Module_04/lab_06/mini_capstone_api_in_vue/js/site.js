@@ -360,6 +360,7 @@ Vue.component('temperature-chart', {
             this.chartConfig.data.datasets[0].data = this.chartDataObject.valueArray
         },
 
+        
         loadChart: function() {
             this.destroyChart()
             console.log(`rootChartDataObject`, this.chartDataObject)
@@ -370,7 +371,7 @@ Vue.component('temperature-chart', {
                 this.chartConfig
             )
 
-            
+
         },
         
         updateChart: function() {
