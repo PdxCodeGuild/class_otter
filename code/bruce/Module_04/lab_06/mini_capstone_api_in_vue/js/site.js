@@ -110,8 +110,8 @@ Vue.component('temperature-chart', {
 
                     datasets: [{
                         label: 'Living Room Temperature',
-                        backgroundColor: 'rgb(166, 3, 3)',
-                        borderColor: 'rgb(166, 3, 3)',
+                        backgroundColor: 'rgba(76, 89, 46, 1)',
+                        borderColor: 'rgba(76, 89, 46, 1)',
                         data: [
                             0,
                             1,
@@ -159,7 +159,7 @@ Vue.component('temperature-chart', {
 
             console.log(`Chart Data Object`, this.chartDataObject)
             console.log(`Getting data from Root!`)
-            
+
             this.chartConfig.data.labels = this.chartDataObject.labelArray
             this.chartConfig.data.datasets[0].data = this.chartDataObject.valueArray
         },

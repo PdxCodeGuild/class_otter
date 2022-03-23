@@ -1,6 +1,28 @@
+/* Color Theme Swatches in Hex */
+.theme_fermilab_bubble_chamber-1-hex { color: #4A6D8C; }
+.theme_fermilab_bubble_chamber-2-hex { color: #9FB0BF; }
+.theme_fermilab_bubble_chamber-3-hex { color: #1E1D19; }
+.theme_fermilab_bubble_chamber-4-hex { color: #4C592E; }
+.theme_fermilab_bubble_chamber-5-hex { color: #A69485; }
+
+/* Color Theme Swatches in RGBA */
+.theme_fermilab_bubble_chamber-1-rgba { color: rgba(74, 109, 140, 1); }
+.theme_fermilab_bubble_chamber-2-rgba { color: rgba(159, 176, 191, 1); }
+.theme_fermilab_bubble_chamber-3-rgba { color: rgba(30, 29, 25, 1); }
+.theme_fermilab_bubble_chamber-4-rgba { color: rgba(76, 89, 46, 1); }
+.theme_fermilab_bubble_chamber-5-rgba { color: rgba(166, 148, 133, 1); }
+
+/* Color Theme Swatches in HSLA */
+.theme_fermilab_bubble_chamber-1-hsla { color: hsla(208, 30, 41, 1); }
+.theme_fermilab_bubble_chamber-2-hsla { color: hsla(208, 20, 68, 1); }
+.theme_fermilab_bubble_chamber-3-hsla { color: hsla(48, 9, 10, 1); }
+.theme_fermilab_bubble_chamber-4-hsla { color: hsla(78, 31, 26, 1); }
+.theme_fermilab_bubble_chamber-5-hsla { color: hsla(27, 15, 58, 1); }
+
+
 table, th, td {
-    border:3px solid rgba(166, 3, 3);
-    color: rgb(90, 115, 2);
+    border:3px solid rgba(30, 29, 25, 1);
+    color: rgba(30, 29, 25, 1);
     width: 100%;
 }
 
