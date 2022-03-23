@@ -19,7 +19,6 @@
         <search-component
             v-on:send-to-root="saveSomethingToRootComponent"
             v-on:send-esp8266-to-root="saveESP8266ToRootComponent"
-            v-on:send-esp8266-chart-to-root="saveESP8266ChartToRootComponent" 
         >
         </search-component>
 
@@ -29,13 +28,6 @@
             v-on:create-values="createValueArray"
         >
         </temperature-chart>
-
-        <!-- <temperature-chart-chart-data
-            v-bind:chart-data-object="rootChartChartDataObject"
-            v-on:create-labels="createLabelArray"
-            v-on:create-values="createValueArray"
-        >
-        </temperature-chart-chart-data> -->
 
         <table v-if="Object.keys(esp8266DataArray).length">
             <thead>
