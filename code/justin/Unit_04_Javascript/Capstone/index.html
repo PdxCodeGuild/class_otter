@@ -26,7 +26,8 @@
             </div>
 
             <div>
-                <h4>Favorites</h4>
+                <h4>Favorites: {{favoritesList.length}}</h4>
+                <p><em>({{favoriteCountTrivia}})</em></p>
                 <trivia-item v-for="trivia in favoritesList" v-bind:trivia="trivia" v-bind:key="trivia.id" v-on:remove="remove($event)"></trivia-item>
             </div>
         </div>

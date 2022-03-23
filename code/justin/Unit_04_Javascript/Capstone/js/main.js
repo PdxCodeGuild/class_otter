@@ -56,11 +56,29 @@ var triviaListApp = new Vue({
     el: '#triviaListApp',
     data: {
         triviaList: [],
-        selectedNumber: ''
+        selectedNumber: '',
+        favoriteCountTrivia: '',
     },
     methods: {
         getTriviaForSelectedNumber: function() {
             this.getTrivia(this.selectedNumber);
+        },
+        getFavoriteCountTrivia: function() {
+            let favoritesCount = 0;
+            for (let i = 0; i < this.triviaList.length; i++) {
+                if (this.triviaList[i].isFavorite) {
+                    favoritesCount++;
+                }
+            }
+
+            axios({
+                method: 'get',
+                url: `http://numbersapi.com/${favoritesCount}/trivia`,
+            }).then((response) => {
+                this.favoriteCountTrivia = response.data;
+            }).catch(error => {
+                console.log(error);
+            });
         },
         getTrivia: function(numberForTrivia) {
             if (isNaN(parseInt(numberForTrivia))) {
@@ -92,13 +110,16 @@ var triviaListApp = new Vue({
                 this.triviaList.push(item);
                 
                 saveFavorites();
+                this.getFavoriteCountTrivia();
             }
         },
         remove: function(itemID) {
             let index = FindIndexByID(this.triviaList, itemID);
             if (index != -1) {
                 this.triviaList.splice(index, 1);
+                
                 saveFavorites();
+                this.getFavoriteCountTrivia();
             }
         }
     },
@@ -126,6 +147,7 @@ var triviaListApp = new Vue({
     },
     created: function() {
         this.getTrivia('random');
+        this.getFavoriteCountTrivia();
     }
 });
 
