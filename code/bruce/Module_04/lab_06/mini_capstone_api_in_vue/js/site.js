@@ -1,6 +1,12 @@
 // <<a class="waves-effect waves-teal btn-flat">button</a>
 // <a class="waves-effect waves-light btn-small">Button</a>
-
+// References:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toTimeString
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getHours
+// https://www.w3schools.com/jsref/jsref_getminutes.asp
+// https://www.w3schools.com/jsref/jsref_gethours.asp
+// 
 
 Vue.component('search-component', {
     // Move search functionality to this component.
@@ -214,8 +220,8 @@ Vue.component('temperature-chart', {
             console.log(`Chart Data Object`, this.chartDataObject)
             console.log(`Getting data from Root!`)
 
-            this.chartConfig.data.labels = this.chartDataObject.labelArray
-            this.chartConfig.data.datasets[0].data = this.chartDataObject.valueArray
+            this.chartConfig.data.labels = this.chartDataObject.labelArray.reverse()
+            this.chartConfig.data.datasets[0].data = this.chartDataObject.valueArray.reverse()
         },
         
         loadChart: function() {
