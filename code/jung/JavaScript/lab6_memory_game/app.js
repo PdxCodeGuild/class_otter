@@ -19,9 +19,8 @@ Vue.component("memoryGame", {
         { id:15, value:"", show: false},
         { id:16, value:"", show: false},
       ],
-      currentVal: null,
-      result: '',
-      pokemon: {},
+      currentVal: null, //Current Card I selected
+      result: '', //Matched or not
       pokemon_list: [],
       random_pokemon_list: [],
 
@@ -31,11 +30,11 @@ Vue.component("memoryGame", {
     <div>
       <div class="game-board">
         <h3> {{result}} </h3>
-        <h4>Current Card: {{currentVal}} </h4>
-        <div class="cardHolder">
+        <h4>Current Card: <img :src="currentVal"></h4>
+        <div class="card-board">
           <div class="card" v-for="(card, index) in cardData" :key="index">
-            <button :class="card.show? 'show' : ''" @click="showCard(index, card.value)">
-              <p v-if="!card.show">Click Here</p>
+            <button @click="showCard(index, card.value)" :class="card.show? 'show' : ''">
+              <p v-if="!card.show">Click Here</p> 
               <img v-if="card.show" :src="card.value">
             </button>
           </div>
@@ -56,29 +55,29 @@ Vue.component("memoryGame", {
         this.result = "Try again!"
         setTimeout(() => {
           this.cardData.map( card => card.show=false)
-        }, 1000)
+        }, 500)
         this.currentVal = null
       }
     },
 
-    listOldPokemon: function() {
-      for (let i = 0; i < 8; i++) {
-        axios({
-          method: "get",
-          url: `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`,
-        }).then((response) => {
-          this.pokemon_list.push(response.data.sprites.other["official-artwork"].front_default)
-        }).catch(error => {
-          console.log(error.response.data)
-        })
-      }
-    },
+    // listOldPokemon: function() {
+    //   for (let i = 0; i < 8; i++) {
+    //     axios({
+    //       method: "get",
+    //       url: `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`,
+    //     }).then((response) => {
+    //       this.pokemon_list.push(response.data.sprites.other["official-artwork"].front_default)
+    //     }).catch(error => {
+    //       console.log(error.response.data)
+    //     })
+    //   }
+    // },
 
     listPokemon: function() {    
-      let URL3 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
-      let URL2 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
-      let URL4 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
       let URL1 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
+      let URL2 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
+      let URL3 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
+      let URL4 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
       let URL5 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
       let URL6 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
       let URL7 = `https://pokeapi.co/api/v2/pokemon/${Math.floor(1 + Math.random() * 151)}`
@@ -93,11 +92,13 @@ Vue.component("memoryGame", {
       const promise7 = axios.get(URL7)
       const promise8 = axios.get(URL8)
 
+
       Promise.all([promise1, promise2, promise3, promise4, promise5, promise6, promise7, promise8]).then(values => {
         // console.log(values)
         let image_list = []
         for(let i = 0; i < values.length; i++){
-          let n = values[i].data.sprites.other["official-artwork"].front_default
+          // let n = values[i].data.sprites.other["official-artwork"].front_default
+          let n = values[i].data.sprites.versions["generation-v"]["black-white"].animated.front_default
           if(! sameURL(n)) {
             image_list.push(n)
           } else {
@@ -109,31 +110,23 @@ Vue.component("memoryGame", {
         }
 
         // take image list make 2times = total 8 pairs of images
-        let num = 1;
-        while(num>0) {
-          image_list = image_list.concat(image_list)
-          num--
-        }
+        image_list = image_list.concat(image_list)
         console.log(image_list)
-
-        // shuffle them around in place OR randomly pick them
-
-
-        // console.log(random_pokemon_image)
         
         // for-loop
+        // shuffle them around in place OR randomly pick them
         // .splice .pop (get rid of each url that's used)
         for (let i = 0; i < this.cardData.length; i++) {
           const random_pokemon_image = Math.floor(Math.random() * image_list.length);
           let random_img = image_list[random_pokemon_image]
+          // console.log(random_img)
           this.cardData[i].value = random_img
           let index = image_list.indexOf(random_img);
           if (index > -1) {
             image_list.splice(index, 1)
           }
         }
-        console.log(image_list)
-        // console.log(image_list[random_pokemon_image])
+        // console.log(image_list)
       })
     }
   },
