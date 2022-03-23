@@ -5,6 +5,6 @@ canvas {
     z-index: -1;
 }
 
-.container {
+.container-background {
     background-color: rgba(256, 256, 256, 0.25);
 }

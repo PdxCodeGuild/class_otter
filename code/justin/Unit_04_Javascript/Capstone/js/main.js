@@ -154,7 +154,7 @@ var triviaListApp = new Vue({
 
 Vue.component('trivia-item', {
     props: ['trivia'],
-    template: `<div class="card">
+    template: `<div class="card container-background">
                     <div class="card-content">
                         <p>{{ trivia.text }}</p>
                         <a :class='["col s1 waves-effect waves-light btn green", trivia.isFavorite && "disabled"]' v-on:click="$emit(\'favorite\', trivia.id)"><i class="material-icons left">favorite</i></a>
@@ -177,8 +177,7 @@ function backgroundCanvasLoop() {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    characters = "01";
-    characters = characters.split("");
+    characters = ['0', '1', ' '];
 
     font_size = 10;
     var columns = canvas.width / font_size;
