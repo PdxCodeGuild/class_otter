@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Numbers Trivia</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div id="triviaListApp">
+            <div class="input-field">
+                <label for="number">Select a number (leave blank for random):</label>
+                <input v-model="selectedNumber" type="number" name="number">
+                <button class="waves-effect waves-light btn right" v-on:click="this.getTriviaForSelectedNumber">Get Trivia!</button>
+            </div>
+
+            <br>
+            
+            <div>
+                <h4>Number Trivia!</h4>
+                <trivia-item v-for="trivia in newList" v-bind:trivia="trivia" v-bind:key="trivia.id" v-on:favorite="favorite($event)" v-on:remove="remove($event)"></trivia-item>
+            </div>
+
+            <div>
+                <h4>Favorites</h4>
+                <trivia-item v-for="trivia in favoritesList" v-bind:trivia="trivia" v-bind:key="trivia.id" v-on:remove="remove($event)"></trivia-item>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
