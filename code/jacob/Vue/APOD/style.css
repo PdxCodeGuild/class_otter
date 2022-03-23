@@ -1,3 +1,71 @@
+html{
+    box-sizing: border-box;
+}
 body{
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 125px;
+    background-color: bisque;
+    
+}
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+header{
+    background-image: url('https://i0.wp.com/25.media.tumblr.com/11e9421d56b1281a56957bcd9ba99a8a/tumblr_mmn38puXc11s6sl0co1_500.gif');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999px;
+    width: 100%;
+    
+}
+
+header h2{
+    color: white;
+    margin-left: 12px;
+}
+
+img{
+    display: inline;
+    width: 500px;
+    height: 500px;
+}
+
+iframe{
+    display: inline;
+    width: 500px;
+    height: 500px;
+}
+
+.calendar{
+    margin-left: 12px;
+}
+
+.button{
     margin: 12px;
+}
+
+p{      
+    line-height: 1.4em;
+    font-family: 'Roboto', Helvetica, sans-serif;
+    font-size: 100;
+}
+
+@media (min-width: 730px) {
+    .sets{
+        display: flex;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1030px) {
+    .text{
+        flex-wrap: wrap;
+    }
+   
 }
