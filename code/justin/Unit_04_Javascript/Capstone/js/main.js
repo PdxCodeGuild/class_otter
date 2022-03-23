@@ -164,3 +164,52 @@ Vue.component('trivia-item', {
 });
 
 loadLocalStorage();
+
+let canvas;
+let context;
+let font_size;
+let drops;
+let characters;
+function backgroundCanvasLoop() {
+    canvas = document.getElementById("backgroundCanvas");
+    context = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    characters = "01";
+    characters = characters.split("");
+
+    font_size = 10;
+    var columns = canvas.width / font_size;
+    drops = [];
+    
+    for(var x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+
+    setInterval(draw, 33);
+}
+
+function draw()
+{
+    context.fillStyle = "rgba(64, 64, 64, 0.05)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    
+    context.fillStyle = "#0F0";
+    context.font = font_size + "px arial";
+
+    for(var i = 0; i < drops.length; i++)
+    {
+        var text = characters[Math.floor(Math.random() * characters.length)];
+        context.fillText(text, i * font_size, drops[i] * font_size);
+        
+        if(drops[i] * font_size > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        
+        drops[i]++;
+    }
+}
+
+backgroundCanvasLoop();
