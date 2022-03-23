@@ -13,7 +13,7 @@ Vue.component('search-component', {
             esp8266DataArray: [],
             // feedResponseArray: [],
             userName: 'FlynntKnapp',
-            userKey: 'cc8d6fdeba6b4d0aa6901988169ec8d6',
+            userKey: '',
             // Feeds:
             // temperatureesp8266
             // humidityesp8266
@@ -42,8 +42,22 @@ Vue.component('search-component', {
             <h3>Search Interface</h3>
 
             <p>
+                <a class="waves-effect waves-teal btn-flat">Load Chosen Data Feed</a>
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" disabled selected>Select Feed ID</option>
+                        <template v-for="feedChoice in availableFeeds">
+                        <option :value="feedChoice">{{ feedChoice }}</option>
+                        </template>
+                    </select>
+                    <label>Choose Data Feed</label>
+                </div>
+                <div>
                 <a class="waves-effect waves-teal btn-flat" @click="loadEsp8266TemperatureData">Load Livingroom Temperature Feed</a>
+                <a class="waves-effect waves-teal btn-flat" @click="getListOfFeeds">Get List of Feeds</a>
+                <a class="waves-effect waves-teal btn-flat" @click="getFeedInfo">Get Feed Info</a>
                 <a class="waves-effect waves-teal btn-flat">Load Livingroom Humidity Feed</a>
+                </div>
             </p>
             
         </section>
@@ -55,10 +69,41 @@ Vue.component('search-component', {
                 method: 'get',
                 url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/${ this.esp8266TemperatureKey }/data?limit=${ this.temperatureFeedReturnLength }`,
                 params: {
-                    'X-AIO-Key': this.userKey,
+                    // 'X-AIO-Key': this.userKey,
+                    'X-AIO-Key': adafruit.key,
                 }
             }).then((response) => {
                 this.sendESP8266ToRoot(response.data)
+            }).catch(error => {
+                console.log(error.response.data)
+            })
+        },
+
+        getListOfFeeds: function() {
+            axios({
+                method: 'get',
+                // https://io.adafruit.com/api/v2/{username}/feeds/
+                url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/`,
+                params: {
+                    'X-AIO-Key': adafruit.key,
+                }
+            }).then((response) => {
+                this.sendSomethingToRoot(response.data)
+            }).catch(error => {
+                console.log(error.response.data)
+            })
+        },
+
+        getFeedInfo: function() {
+            axios({
+                method: 'get',
+                // /{username}/feeds/{feed_key}
+                url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/${ this.esp8266TemperatureKey }`,
+                params: {
+                    'X-AIO-Key': adafruit.key,
+                }
+            }).then((response) => {
+                this.sendSomethingToRoot(response.data)
             }).catch(error => {
                 console.log(error.response.data)
             })
@@ -71,7 +116,7 @@ Vue.component('search-component', {
 
         sendESP8266ToRoot: function(childComponentObject) {
             console.log(`Sending ESP8266 to Root! - `, childComponentObject)
-            this.$emit('send-esp8266-to-root', childComponentObject)
+            this.$emit('send-esp-temp-to-root', childComponentObject)
         },
     },
     mounted: function() {
@@ -172,7 +217,6 @@ Vue.component('temperature-chart', {
             this.chartConfig.data.labels = this.chartDataObject.labelArray
             this.chartConfig.data.datasets[0].data = this.chartDataObject.valueArray
         },
-
         
         loadChart: function() {
             this.destroyChart()
@@ -227,7 +271,7 @@ const vm = new Vue({
     el: '#app',
     data: {
         esp8266DataArray: [],
-        esp8266ChartDataArray: [],
+        // esp8266ChartDataArray: [],
 
         rootChartDataObject: {
             labelArray: [],
@@ -249,7 +293,7 @@ const vm = new Vue({
             console.log(`Value of 'objectReceivedFromChildComponent' in Root component! - `, this.objectReceivedFromChildComponent)
         },
 
-        saveESP8266ToRootComponent: function(payload) {
+        saveEsp8266ToRootComponent: function(payload) {
             // This 'payload' was received from 'search-component':
             console.log(`Root is printing something from search! - `, payload)
             // Save 'payload' to some 'property' in Root component:

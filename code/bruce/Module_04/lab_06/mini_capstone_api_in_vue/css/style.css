@@ -50,3 +50,7 @@ main {
      /* background-color: rgba(121, 85, 72, 0.65); */
      background-color: rgba(74, 109, 140, 0.65);
 }
+
+ul.dropdown-content.select-dropdown li span {
+    color: #0d47a1;
+}

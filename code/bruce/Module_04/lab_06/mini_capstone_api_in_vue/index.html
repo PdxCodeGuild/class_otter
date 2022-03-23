@@ -30,11 +30,12 @@
 
     <main id="app" class="container">
 
-        <!-- <h1>Flynnt Knapp's Adafruit IO Feed</h1> -->
-
+        <!-- The numbers 'esp8266' in below binding were weirding the linting. -->
+        <!-- So I changed binding to include alphas only. -->
+        <!-- v-on:send-esp8266-to-root="saveEsp8266ToRootComponent" -->
         <search-component
             v-on:send-to-root="saveSomethingToRootComponent"
-            v-on:send-esp8266-to-root="saveESP8266ToRootComponent"
+            v-on:send-esp-temp-to-root="saveEsp8266ToRootComponent"
         >
         </search-component>
         <div class="col s12 m6">
@@ -113,5 +114,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script src="js/site.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+        });
+    </script>
+    <script src="secrets.js"></script>
 </body>
 </html>
