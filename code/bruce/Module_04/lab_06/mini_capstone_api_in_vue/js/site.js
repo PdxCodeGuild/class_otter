@@ -78,7 +78,7 @@ Vue.component('search-component', {
     // props: ['feedResponseArray'],
     template: `
         <section>
-            <h2>Adafruit IO Feed</h2>
+            <h2>Search Interface</h2>
 
             <p>
                 <button @click="loadEsp8266TemperatureData">Load Livingroom Temperature Feed</button>
@@ -285,7 +285,7 @@ Vue.component('the-chart-example', {
 Vue.component('temperature-chart', {
     data: function() {
         return {
-            chartHeading: "Chart Heading",
+            chartHeading: "Chart Interface",
 
         // This is the Chart object's 'config':
             chartConfig: {
@@ -326,14 +326,14 @@ Vue.component('temperature-chart', {
         <div>
             <h2>{{ chartHeading }}</h2>
             <div>
-            <!-- <button v-on:click="createLabels">Extract Labels</button> -->
-            <!-- <button v-on:click="createValues">Extract Values</button> -->
+            <button v-on:click="createLabels">Extract Labels</button><!--  -->
+            <button v-on:click="createValues">Extract Values</button><!--  -->
             <button v-on:click="loadDataFromRoot">Update Chart Config</button>
             </div>
             <div>
-                <button v-on:click="loadChart">Load Temperature chart</button>
-                <button v-on:click="updateChart">Update Temperature chart</button>
-                <button v-on:click="destroyChart">Remove Temperature chart</button>
+                <button v-on:click="loadChart">Load Chart</button>
+                <button v-on:click="updateChart">Update Chart</button>
+                <button v-on:click="destroyChart">Remove Chart</button>
             </div>
             <canvas id="esp8266TemperatureChart" class="component-class"></canvas>
         </div>
@@ -350,8 +350,8 @@ Vue.component('temperature-chart', {
         // "chartConfig.data.datasets.0.data.0"
         // "chartConfig.data.labels.0"
         loadDataFromRoot: function() {
-            this.createLabels()
-            this.createValues()
+            // this.createLabels()
+            // this.createValues()
             this.chartConfig.data.labels = []
             this.chartConfig.data.datasets[0].data = []
             console.log(`Chart Data Object`, this.chartDataObject)
@@ -364,10 +364,13 @@ Vue.component('temperature-chart', {
             this.destroyChart()
             console.log(`rootChartDataObject`, this.chartDataObject)
 
+
             const esp8266TemperatureChart = new Chart(
                 document.getElementById('esp8266TemperatureChart'),
                 this.chartConfig
             )
+
+            
         },
         
         updateChart: function() {
