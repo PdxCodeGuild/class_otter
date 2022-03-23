@@ -57,9 +57,16 @@ Vue.component('search-component', {
             // humidityesp32
             // temperatureesp32
             // batteryvoltageesp32
+
+            hoursTimeDiff: 1,
+            hoursTimeDiffString: 'hours',
     
-            defaultFeedReturnLength: 600,
-            feedReturnLength: 7,
+            defaultHoursReturnLength: 24,
+            temperatureFeedReturnLength: 600,
+
+            sampleUrls: [
+                'https://io.adafruit.com/api/v2/{username}/feeds/{feed_key}/data/chart?hours=1',
+            ],
             ///////////////////////////////////////
 
 
@@ -71,13 +78,15 @@ Vue.component('search-component', {
     // props: ['feedResponseArray'],
     template: `
         <section>
-            <h2>The Super Special Search component!</h2>
+            <h2>Adafruit IO Feed</h2>
 
             <p>
-                <button @click="loadEsp8266TemperatureData">Load ESP8266 Feed</button>
+                <button @click="loadEsp8266TemperatureData">Load Livingroom Temperature Feed</button>
+                <!-- <button @click="loadEsp8266TemperatureChartData">Load Livingroom Chart Temperature Feed</button> -->
+                <button>Load Livingroom Humidity Feed</button>
             </p>
 
-            <!--  -->
+            
             <!--  -->
             <!--  -->
             
@@ -88,7 +97,7 @@ Vue.component('search-component', {
         loadEsp8266TemperatureData: function() {
             axios({
                 method: 'get',
-                url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/${ this.esp8266TemperatureKey }/data?limit=${ this.defaultFeedReturnLength }`,
+                url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/${ this.esp8266TemperatureKey }/data?limit=${ this.temperatureFeedReturnLength }`,
                 params: {
                     'X-AIO-Key': this.userKey,
                 }
@@ -105,6 +114,28 @@ Vue.component('search-component', {
             })
         },
 
+        loadEsp8266TemperatureChartData: function() {
+            axios({
+                method: 'get',
+                // url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/${ this.esp8266TemperatureKey }/data?limit=${ this.defaultHoursReturnLength }`,
+                // 'https://io.adafruit.com/api/v2/{username}/feeds/{feed_key}/data/chart?hours=1'
+                url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/${ this.esp8266TemperatureKey }/data/chart?${ this.hoursTimeDiffString }=${ this.hoursTimeDiff }?limit=${ this.defaultHoursReturnLength }`,
+                params: {
+                    'X-AIO-Key': this.userKey,
+                }
+            }).then((response) => {
+                // console.log(response)  // Response Object
+                // console.log(response.data)  // Response Array
+                // console.log(response.data[0])  // First element of Array
+                // this.feedResponseArray = response.data
+                // this.sendSomethingToRoot(response.data)
+                this.esp8266DataArray = response.data
+                this.sendESP8266ChartDataToRoot(response.data)
+            }).catch(error => {
+                console.log(error.response.data)
+            })
+        },
+
         sendSomethingToRoot: function(childComponentObject) {
             console.log(`Sending something to Root! - `, childComponentObject)
             this.$emit('send-to-root', childComponentObject)
@@ -113,6 +144,11 @@ Vue.component('search-component', {
         sendESP8266ToRoot: function(childComponentObject) {
             console.log(`Sending ESP8266 to Root! - `, childComponentObject)
             this.$emit('send-esp8266-to-root', childComponentObject)
+        },
+
+        sendESP8266ChartDataToRoot: function(childComponentObject) {
+            console.log(`Sending ESP8266 to Root! - `, childComponentObject)
+            this.$emit('send-esp8266-chart-to-root', childComponentObject)
         },
 
     },
@@ -254,7 +290,6 @@ Vue.component('temperature-chart', {
         // This is the Chart object's 'config':
             chartConfig: {
                 type: 'line',
-                pointStyle: 'line',
 
                 data: {
                     labels: [
@@ -271,7 +306,14 @@ Vue.component('temperature-chart', {
                         label: 'Living Room Temperature',
                         backgroundColor: 'rgb(166, 3, 3)',
                         borderColor: 'rgb(166, 3, 3)',
-                        data: [0, 1, 3, 6, 10, 15, 21],
+                        data: [
+                            0,
+                            1,
+                            3,
+                            6,
+                            10,
+                            15,
+                            21],
                     }],
                 },
 
@@ -284,8 +326,8 @@ Vue.component('temperature-chart', {
         <div>
             <h2>{{ chartHeading }}</h2>
             <div>
-            <button v-on:click="createLabels">Extract Labels</button>
-            <button v-on:click="createValues">Extract Values</button>
+            <!-- <button v-on:click="createLabels">Extract Labels</button> -->
+            <!-- <button v-on:click="createValues">Extract Values</button> -->
             <button v-on:click="loadDataFromRoot">Update Chart Config</button>
             </div>
             <div>
@@ -308,6 +350,10 @@ Vue.component('temperature-chart', {
         // "chartConfig.data.datasets.0.data.0"
         // "chartConfig.data.labels.0"
         loadDataFromRoot: function() {
+            this.createLabels()
+            this.createValues()
+            this.chartConfig.data.labels = []
+            this.chartConfig.data.datasets[0].data = []
             console.log(`Chart Data Object`, this.chartDataObject)
             console.log(`Getting data from Root!`)
             this.chartConfig.data.labels = this.chartDataObject.labelArray
@@ -359,6 +405,127 @@ Vue.component('temperature-chart', {
     }
 })
 
+// Vue.component('temperature-chart-chart-data', {
+//     data: function() {
+//         return {
+//             chartHeading: "Chart Heading",
+
+//         // This is the Chart object's 'config':
+//             chartConfig: {
+//                 type: 'line',
+
+//                 data: {
+//                     labels: [
+//                         1,
+//                         2,
+//                         3,
+//                         4,
+//                         5,
+//                         6,
+//                         7,
+//                     ],
+
+//                     datasets: [{
+//                         label: 'Living Room Temperature',
+//                         backgroundColor: 'rgb(166, 3, 3)',
+//                         borderColor: 'rgb(166, 3, 3)',
+//                         data: [
+//                             0,
+//                             1,
+//                             3,
+//                             6,
+//                             10,
+//                             15,
+//                             21],
+//                     }],
+//                 },
+
+//                 options: {} 
+//             },
+//         }
+//     },
+//     props: ['rootChartChartDataObject'],
+//     template: `
+//         <div>
+//             <h2>{{ chartHeading }}</h2>
+//             <div>
+//             <button v-on:click="createLabels">Extract Labels</button>
+//             <button v-on:click="createValues">Extract Values</button>
+//             <button v-on:click="loadDataFromRoot">Update Chart Config</button>
+//             </div>
+//             <div>
+//                 <button v-on:click="loadChart">Load Temperature chart</button>
+//                 <button v-on:click="updateChart">Update Temperature chart</button>
+//                 <button v-on:click="destroyChart">Remove Temperature chart</button>
+//             </div>
+//             <canvas id="esp8266TemperatureChartChart" class="component-class"></canvas>
+//         </div>
+//     `,
+//     methods: {
+//         createLabels: function() {
+//             this.$emit('create-labels')
+//         },
+        
+//         createValues: function() {
+//             this.$emit('create-values')
+//         },
+
+//         // "chartConfig.data.datasets.0.data.0"
+//         // "chartConfig.data.labels.0"
+//         loadDataFromRoot: function() {
+//             this.chartConfig.data.labels = []
+//             this.chartConfig.data.datasets[0].data = []
+//             console.log(`Chart Data Object`, this.chartDataObject)
+//             console.log(`Getting data from Root!`)
+//             this.chartConfig.data.labels = this.chartDataObject.labelArray
+//             this.chartConfig.data.datasets[0].data = this.chartDataObject.valueArray
+//         },
+
+//         loadChart: function() {
+//             this.destroyChart()
+//             console.log(`rootChartDataObject`, this.chartDataObject)
+
+//             const esp8266TemperatureChartChart = new Chart(
+//                 document.getElementById('esp8266TemperatureChartChart'),
+//                 this.chartConfig
+//             )
+//         },
+        
+//         updateChart: function() {
+//             let theElusiveChart = Chart.getChart("esp8266TemperatureChartChart")
+
+//             //////////////////////////////////////
+//             // To Update existing chart:
+//             // theElusiveChart.update()
+//             //////////////////////////////////////
+
+
+//             //////////////////////////////////////
+//             // To Destroy and create new chart:
+//             if (theElusiveChart !== undefined) {
+//                 theElusiveChart.destroy()
+//                 const esp8266TemperatureChartChart = new Chart(
+//                     document.getElementById('esp8266TemperatureChartChart'),
+//                     this.chartConfig
+//                     )
+//             }
+//             //////////////////////////////////////
+                
+//         },
+
+//         destroyChart: function() {
+//             let theElusiveChart = Chart.getChart("esp8266TemperatureChartChart")
+//             if (theElusiveChart !== undefined) {
+//                 theElusiveChart.destroy()
+//             }
+//         },
+//     },
+
+//     mounted: function() {
+//         console.log(`Chart mounted!`)
+//     }
+// })
+
 
 const vm = new Vue({
     el: '#app',
@@ -368,11 +535,14 @@ const vm = new Vue({
         // "esp8266DataArray.0.created_at"
         // "esp8266DataArray.0.value"
         esp8266DataArray: [],
+        esp8266ChartDataArray: [],
 
         rootChartDataObject: {
             labelArray: [],
             valueArray: [],
         },
+
+        rootChartChartDataObject: {},
 
 
 
@@ -407,13 +577,19 @@ const vm = new Vue({
             console.log(`Value of 'esp8266DataArray' in Root component! - `, this.esp8266DataArray)
         },
 
+        saveESP8266ChartToRootComponent: function(payload) {
+            this.esp8266ChartDataArray = payload
+        },
+
         createLabelArray: function() {
+            this.rootChartDataObject.labelArray = []
             for (let i = 0; i < this.esp8266DataArray.length; i++) {
-                this.rootChartDataObject.labelArray.push(i)
+                this.rootChartDataObject.labelArray.push(this.esp8266DataArray[i].created_at)
             }
         },
 
         createValueArray: function() {
+            this.rootChartDataObject.valueArray = []
             for (let i = 0; i < this.esp8266DataArray.length; i++) {
                 this.rootChartDataObject.valueArray.push(this.esp8266DataArray[i].value)
             }
