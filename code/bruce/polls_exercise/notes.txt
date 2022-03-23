@@ -1,0 +1,241 @@
+# Old code, before generic:
+https://github.com/PdxCodeGuild/class_otter/tree/ee3ddea944d53a859c7c7a0372da2c60ae9b6796/code/bruce/polls_exercise
+
+# Resources:
+    https://docs.djangoproject.com/en/4.0/intro/tutorial03/
+    https://github.com/PdxCodeGuild/class_otter/tree/main/3%20Django/docs
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/polls-sSv472B-/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\polls-sSv472B-\Scripts\activate.ps1
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+# Start Django server:
+    python manage.py runserver <optional 8008>
+
+# Link to application:
+http://127.0.0.1:8000/polls/
+
+# Interactive shell:
+    python manage.py shell
+
+# Imports for testing
+from polls.models import Choice, Question
+from django.utils import timezone
+
+
+########### Return all the 'Choice's or 'Question's ###########
+Question.objects.all()
+Choice.objects.all()
+###############################################################
+
+
+########### Create 'Question's and 'Choice's ###########
+q1 = Question.objects.create(question_text="Are cats better than dogs?", pub_date=timezone.now())
+
+## Add some Choices ##
+c1 = Choice.objects.create(question=q, choice_text="Are you serious?")
+c2 = Choice.objects.create(question=q, choice_text="Of course!")
+c3 = Choice.objects.create(question=q, choice_text="In every universe!")
+
+q2 = Question.objects.create(question_text="Are dogs acceptable?", pub_date=timezone.now())
+c4 = Choice.objects.create(question=q2, choice_text="As long as they are named Shaler!")
+c5 = Choice.objects.create(question=q2, choice_text="Only if they're a Blue Tick Beagle.")
+c6 = Choice.objects.create(question=q2, choice_text="")
+########################################################
+
+
+######### Delete 'Question's or 'Choice's #########
+# 'delete()'-ing a question will delete the choices via CASCADE.
+q = <get or instantiate some question>
+q.delete()
+###################################################
+
+
+
+# Instantiate a new question:
+q = Question(arg1,arg2)
+
+# Save the instantiated, after adding data, question to db:
+q.save()
+
+c = Choice(question_id=1, choice_text="Of course!!", votes=2000)
+c.save()
+
+>>> Question.objects.get(id=3)
+<Question: Question object (3)>
+
+>>> Question.objects.get(id=3).question_text
+'Ya know, cats are best?
+
+# Get the object/memory location:
+>>> Question.objects.get(id=3).choices
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x000001A5E3503CD0>
+
+# Get the QuerySet:
+>>> Question.objects.get(id=3).choices.all()
+<QuerySet [<Choice: Choice object (2)>]>
+
+# Get the text:
+Question.objects.get(id=3).choices.all().choice_text
+>>> Question.objects.get(id=3).choices.all().choice_text
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'choice_text'
+
+Question.objects.get(id=3).choices.all()[0]
+>>> Question.objects.get(id=3).choices.all()[0]
+<Choice: Choice object (2)>
+
+Question.objects.get(id=3).choices.all()[0].choice_text
+>>> Question.objects.get(id=3).choices.all()[0].choice_text
+'Of course!!'
+
+>>> Question.objects.all()
+<QuerySet [<Question: Question object (1)>, <Question: Question object (2)>, <Question: Question object (3)>]>
+>>> Question.objects.all()[1]
+<Question: Question object (2)>
+>>> Question.objects.all()[1].question_text
+"I'm gonna ask one more time... HOW AWESOME ARE CATS???"
+
+
+
+############ filter - can return more than one ############
+Question.objects.filter(id=1)
+
+Question.objects.filter(question_text__contains='are')
+Question.objects.filter(question_text__contains='Ya')
+# Case insensitive:
+Question.objects.filter(question_text__contains='ya')
+
+Question.objects.filter(question_text__startswith='h')
+Question.objects.filter(question_text__startswith='m')
+
+Question.objects.filter(pub_date__year=2022)
+Question.objects.filter(pub_date__year='2022')
+
+############### get - can only return one ###############
+Question.objects.get(id=2)
+Question.objects.get(pk=2)
+
+
+Question.objects.filter(id=1)[0].was_published_recently()
+
+######### Try to edit a question #########
+q = Question.objects.get(pk=5)
+q.question_text="Isss BunBun Purrfect?"
+q.save()
+q.question_text
+'Isss BunBun Purrfect?'
+
+
+c = Choice.objects.get(id=2)
+c.choice_text  # 'Of course!!'
+c.save()
+
+############ Change question_id for a choice ############
+c = Choice.objects.get(id=2)
+c.question_id = 4
+c.save()
+c.choice_text  # 'Absolutely!'
+
+
+>>> q = Question.objects.get(pk=2)
+>>> q.id
+2
+>>> q.question_text
+"I'm gonna ask one more time... HOW AWESOME ARE CATS???"
+>>> q.pub_date
+datetime.datetime(2022, 2, 16, 2, 22, 40, 519017, tzinfo=<UTC>)
+>>> q.pub_date.year
+2022
+>>> q.pub_date.month
+2
+>>> q.pub_date.day
+16
+
+
+
+######### Test has_two_or_more_choices() #########
+q_37 = Question.objects.get(pk=37)
+q_38 = Question.objects.get(pk=38)
+
+q_37.has_two_or_more_choices()
+True
+q_38.has_two_or_more_choices()
+False
+
+q_37.has_only_one_obvious_choice()
+q_38.has_only_one_obvious_choice()
+
+
+########### Create Choice ###########
+# Requires a provided 'q', assigned above.
+c = Choice(question=q, choice_text='Some choice', votes=3)
+-- OR --
+Choice.objects.create(question=q, choice_text="An extra choice")
+
+Choice.objects.create(question=q, choice_text="choice 01")
+
+c3 = q.choices.create(choice_text="the text")
+
+>>> q.choices.all()
+<QuerySet [<Choice: choice 01>, <Choice: choice 01>, <Choice: choice 01>]>
+
+q.choices.all()
+c.question
+
+
+# Instantly updates DB.
+# returns a variable to use.
+c4 = q.choices.create(choice_text="I resist!")
+# Doesn't return a variable to use.
+Choice.objects.create(question=q, choice_text="Really???")
+
+
+# TODO: How to get the ids for items?
+
+
+#### two ways ####
+len(q.choices.all())  # 2
+q.choices.count()  # 2
+
+
+q.question_text='the text'
+q.save()
+
+#### Instant delete ####
+c.delete()
+
+############### Testing in command line ###############
+# Command line testing in 'python manage.py shell':
+
+from django.test.utils import setup_test_environment
+setup_test_environment()
+
+from django.test import Client
+client = Client()
+response = client.get("/")
+# Not Found: /
+
+from django.urls import reverse
+response = client.get(reverse('polls:index'))
+response.content
+response.status_code
+response.context
+response.context['latest_question_list']
+#######################################################
+
+# Can use decimal 'days':
+>>> datetime.timedelta(days=.5)
+datetime.timedelta(seconds=43200)
+>>> datetime.timedelta(days=.24) 
+datetime.timedelta(seconds=20736)
+

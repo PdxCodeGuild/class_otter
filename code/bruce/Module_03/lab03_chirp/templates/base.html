@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "images/apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "images/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "images/favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "images/site.webmanifest" %}">
+    
+    <!-- My styling -->
+    <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Chirps Industries</title>
+</head>
+<body>
+
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" class="brand-logo" href="{% url 'chirps:home' %}">Chirp</a>
+            <ul class="right hide-on-med-and-down">
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'users:profile' user.username %}">Welcome, {{ user.username }}</a>
+                </li>
+                <li>
+                    <a href="{% url 'chirps:hatch' %}">Hatch an egg</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'users:signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul id="nav-mobile" class="sidenav">
+                {% if user.is_authenticated %}
+                <li>
+                    <span>Welcome, {{ user.username }}</span>
+                </li>
+                <li>
+                    <a href="{% url 'chirps:hatch' %}">Hatch an egg</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'users:signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger" target="_blank"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <main class='container'>
+        {% block content %}
+        {% comment %} Content Goeth Here! {% endcomment %}
+        {% endblock content %}
+    </main>
+    <footer class="page-footer orange">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Personal Bio</h5>
+                    <p class="grey-text text-lighten-4">
+                        US Navy veteran - Python developer - Tech accessibility fan - Excelling in full-stack Python development at <a href="https://pdxcodeguild.com/courses/day" target="_blank">PDX Code Guild</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made by <a class="orange-text text-lighten-3" href="http://brucestull.com" target="_blank">BruceStull 2022</a><br>
+                Assignment <a class="orange-text text-lighten-3" href="https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab03-chirp.md" target="_blank">Lab 03 : Chirp (Twitter Clone)</a><br>
+                <a id="logo-container" class="brand-logo" href="{% url 'chirps:home' %}">Chirp</a><br>
+                
+                {% if user.is_authenticated %}
+                <a href="{% url 'users:profile' user.username %}">{{ user.username }}</a> - 
+                <a href="{% url 'chirps:hatch' %}">Hatch an egg</a> - 
+                <a href="{% url 'logout' %}">Logout</a> - 
+                {% else %}
+                <a href="{% url 'login' %}">Login</a> - 
+                <a href="{% url 'users:signup' %}">Sign Up</a> - 
+                {% endif %}
+                <a href="{% url 'admin:index' %}" target="_blank">Admin Page</a>
+
+            </div>
+        </div>
+    </footer>
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+        });
+    </script>
+</body>
+</html>

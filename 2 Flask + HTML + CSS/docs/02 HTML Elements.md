@@ -162,7 +162,7 @@ You can also create "internal links", which will take you do another part of the
 An `img` tag lets us display an image. The `src` attribute can be a relative path or a url. The `alt` is the text that will be displayed if the image fails to load.
 
 ```html
-<img src="http://www.ackermanplumbing.com/ackermanplumbingserviceslogo.png" alt="Ackerman Plumbing" width="50" height="50"/>
+<img src="http://www.ackermanplumbing.com/ackermanplumbingserviceslogo.png" alt="Ackerman Plumbing" />
 ```
 
 

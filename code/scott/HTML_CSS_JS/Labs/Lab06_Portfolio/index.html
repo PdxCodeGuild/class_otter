@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Grid Layout</title>
+		<link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
+		<link rel="stylesheet" type="text/css" href="css/960_12_col.css"/>
+		<style>
+			* #header {
+				font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				font-size: large;
+				font-weight: 300;
+				color: #c2c0bde1;
+				text-align: center;}
+			#nav, #footer {
+				font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				color: #f1eaf1d7;
+				text-align: center;
+				background-color: transparent;
+				margin-top: 20px;
+				padding: 10px 0px 5px 0px;}
+			.article {
+				background-color: #171817;
+				margin-top: 20px;
+				padding: 10px 0px 5px 0px;
+				height: 200px;}				
+			.feature {
+				font-family:Franklin Gothic 'Lucida Sans', 'Lucida Sans Regular', Lucida Grande, 'Lucida Sans Unicode', 'Geneva', 'Verdana, sans-serif', 'Arial Narrow', 'Arial, sans-serif';
+				color: #D9BD89;
+				text-align: center;
+				background-color: #590202;
+				background-image:url("https://www.transparenttextures.com/patterns/white-leather.png");
+				margin-top: 20px;
+				height: 500px;border-color:hsla(191, 33%, 40%, 0.589);
+				border-style:inset;
+				border-radius: 15%;
+			}			
+			.columns {
+				font-family:Franklin Gothic 'Lucida Sans', 'Lucida Sans Regular', Lucida Grande, 'Lucida Sans Unicode', 'Geneva', 'Verdana, sans-serif', 'Arial Narrow', 'Arial, sans-serif';
+				color: #D9BD89;
+				text-align: center;
+				background-color: #358C84 ;
+				background-image:url("https://www.transparenttextures.com/patterns/white-leather.png");
+				margin-top: 20px;
+				padding: 10px 0px 5px 0px;
+				height: 240px;border-color:hsla(191, 33%, 40%, 0.589);
+				border-style:inset;
+				border-radius: 15%;
+			}
+			.column_1 {
+				font-family:Franklin Gothic 'Lucida Sans', 'Lucida Sans Regular', Lucida Grande, 'Lucida Sans Unicode', 'Geneva', 'Verdana, sans-serif', 'Arial Narrow', 'Arial, sans-serif';
+				color: #D9BD89;
+				text-align: center;
+				background-color:#024959;
+				background-image:url("https://www.transparenttextures.com/patterns/swirl.png");
+				margin-top: 20px;
+				padding: 10px 0px 5px 0px;
+				height:770px;
+				border-color:hsla(191, 33%, 40%, 0.589);
+				border-style:inset;
+				border-radius: 15%;
+			}
+			.column_2 {
+				text-align: center;
+				background-color: #744848;
+				background-image:url("https://www.transparenttextures.com/patterns/white-leather.png");
+				margin-top: 20px;
+				padding: 10px 0px 5px 0px;
+				height: 200px;
+				border-color:hsla(191, 33%, 40%, 0.589);
+				border-style:inset;
+				border-radius: 25%;
+			}
+			li {
+				display: inline;
+				padding: 5px;}
+			img {
+				display: inline;
+				padding: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container_12 clearfix">
+			<div id="header" class="grid_12">
+				<h1>Portfolio Title</h1>
+				<div id="nav">
+					<ul>
+						<li><a href="">Work History </a></li>
+						<li><a href="">Github Repository </a></li>
+						<li><a href="">something </a></li>
+						<li><a href="">About Me </a></li>
+						<li><a href="">Contact </a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="column_1 grid_2">
+				<p>Column One</p>
+			</div>
+			<div class="feature grid_5"">
+				<p>Featured</p>
+				<img src="img/Scott.JPG" alt="My logo" width="380" height="300">
+				<picture>
+					<img src="img\Norw_CMYK_V_Tag.jpg" alt="Norwich"  width="50" height="50">
+					<img src="img\isc2_cissp2.png" alt="My logo"  width="50" height="50">
+					<img src="img\CISM.png" alt="My logo"  width="50" height="50">
+					<img src="img\splunk.png" alt="My logo"  width="50" height="50">
+					<img src="img\itilv3.png" alt="My logo"  width="50" height="50">
+				</picture>
+			</div>
+			<!-- <div class="column_2 grid_3">
+				<p>Column Two</p>
+			</div> -->
+			<div class="feature grid_5">
+				<p>Column Three</p>
+			</div>
+			<div class="columns grid_3">
+				<p>Column Four</p>
+			</div>
+
+			<div id="footer" class="grid_12">
+				<p>S.L.Madden - 2022</p>
+			</div>
+		</div><!-- .container_12 -->
+	</body>
+</html>

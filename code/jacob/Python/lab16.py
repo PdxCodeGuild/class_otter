@@ -146,7 +146,7 @@ class MyApp:
 
     def button7Click(self):        
         self.quote.set(quotd())
-
+    
     def button8Click(self):
         save = []
         save.append(self.quote.get())
@@ -173,7 +173,7 @@ def div_nums(a, b):
     return (a / b)
 
 root = Tk()
-root.wm_title("Testing")
+root.wm_title("GUI")
 myapp = MyApp(root)                
 
 root.mainloop()

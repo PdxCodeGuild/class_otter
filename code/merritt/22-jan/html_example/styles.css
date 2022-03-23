@@ -1,0 +1,44 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+p {
+    color: red;
+    background-color: aqua;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: cadetblue;
+}
+
+body li {
+    color: orange;
+}
+
+ol > li {
+    color: purple;
+}
+
+.blue {
+    color: blue;
+    background-color: brown;
+}
+
+.cool-paragraph {
+    /* float: left; */
+    background-color: wheat;
+    width: 50%;
+    /* height: 500px; */
+    padding: 20px 40px 60px 80px;
+    margin: 50px auto 100px;
+    border: 5px dashed black;
+}
+
+#second-paragraph {
+    color: green;
+    background-color: black;
+}

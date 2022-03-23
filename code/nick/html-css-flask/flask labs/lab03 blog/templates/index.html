@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Dog Blog</title>
+  </head>
+  <body>
+    <h1>Welcome to The Dog Blog: A Blog about Dogs</h1>
+    <nav>
+      <ul class="top-nav">
+        <li class="item"><a href="#">Home</a></li>
+        <li class="item"><a href="#news">News</a></li>
+        <li class="item"><a href="#contact">Contact us</a></li>
+        <li class+"item"><a href="#about">About</a></li>
+      </ul>
+    </nav>
+    
+
+    <nav class="side-nav">
+      <a href="#" class="db-bar-item db-button">Sporting Group</a>
+      <a href="#" class="db-bar-item db-button">Hound Group</a>
+      <a href="#" class="db-bar-item db-button">Working Group</a>
+      <a href="#" class="db-bar-item db-button">Terrier Group</a>
+      <a href="#" class="db-bar-item db-button">Toy Group</a>
+      <a href="#" class="db-bar-item db-button">Non-Sporting Group</a>
+      <a href="#" class="db-bar-item db-button">Herding Group</a>
+    </nav>
+    <main>
+      {%for post in posts%}
+      <h1>{{post['title']}}</h1>
+      <p>{{post['body']}}</p>
+      <h3>{{post['author']}}</h3>
+      <p>{{post['date']}}</p>
+      {%endfor%}
+    </main>
+  </body>
+  <footer>Copyright 2022</footer>
+</html>

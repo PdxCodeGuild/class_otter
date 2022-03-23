@@ -1,0 +1,67 @@
+<form action="{% url 'grocery:create' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>Grocery Item</h1></legend>
+        <input type="text" name="input_grocery_item" id="description" placeholder="grocery item">
+        <input type="submit" value="submit">
+    </fieldset>
+    
+        {% comment %} {% for item in new_grocery_list %}
+        <h1>{{item}}<input type="checkbox" name="check_complete"> </h1>
+        {%endfor%}    {% endcomment %}
+       
+    </form>  
+    
+    <legend><h2>List</h2>
+     {%for item in new_grocery_list%}
+        {{item.text_description}} 
+        <form action="{% url 'grocery:mark_complete' item.id %}" method="post">
+            {% csrf_token %}
+            <h1><input type="submit" value='mark_complete' name="mark_complete"> </h1>
+            <h1><input type="submit" value='delete' name="delete"> </h1>
+            {% endfor %}       
+            <fieldset>
+                <legend><h1>Completed List</h1></legend>
+                {%for item in completed_item%}    
+                
+                    {{item.text_description}}
+                    
+                {%endfor%}
+            </fieldset>
+            
+        </form> 
+        
+    
+    
+    
+    
+    
+    
+    {% comment %} <label for='the_input_box'>label</label>
+            <input type="submit" name="check_complete" value='completed' id= 'the_input_box' value="{{ item.id }}" >
+            <fieldset>
+                
+                
+                </fieldset> {% endcomment %}
+                
+            
+
+            
+            {% comment %}  {% endcomment %}
+ 
+ 
+ {% comment %} {% for item in new_grocery_list %}
+ <h1>{{item}}<input type="checkbox" name="check_complete"> </h1>
+ {%endfor%}   
+ <input type="submit" name="completed_item" value="completed"> {% endcomment %}
+ {% comment %} {% if check_complete==True %} {% endcomment %}
+            
+            {% comment %} {% if check_complete==True %} {% endcomment %}
+            {% comment %} {% if is_completed==True %} {% endcomment %}
+            {% comment %} {% endfor %} {% endcomment %}
+{% comment %} 
+    <input type="checkbox" name="{{ item.id }}" id="{{ item.id }}" value="{{ item.id }}">  
+          The below 'for=' matches with 'id=' above. 
+                 <label for="{{ item.id }}">{{ item.description }}{% if item.completed %} -- (completed)
+                     {% endif %}</label><br>
+                     {% endcomment %}

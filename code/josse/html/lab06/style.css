@@ -1,0 +1,17 @@
+h1 { 
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body{
+    background-color: rgba(245, 245, 245, 0.945);
+    background-image: url(nyc.jpg);
+
+}
+p{}
+img{
+
+    width: 200px; 
+    height: 200px;
+    border-radius: 500px;
+    margin-left: 50px;
+}   

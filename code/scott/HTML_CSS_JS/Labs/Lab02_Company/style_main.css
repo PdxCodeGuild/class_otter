@@ -1,0 +1,261 @@
+/* #8C4842 dark red
+#BFB39B sand
+#72734F mustard
+#498C66 green
+#284B59 dark blue */
+
+html {box-sizing: border-box;
+    background: url("Next_opaq.jpg") no-repeat center center fixed; 
+    -webkit-background-size:cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size:auto;
+    background-repeat: repeat;}
+
+*, *:before, *:after {box-sizing: inherit;}
+
+img {display: block;
+    max-width: 100%;
+    height:150px;
+}
+
+nav p{font-family: 'Permanent Marker', cursive;
+    font-weight: 400;
+    color:#ff0;}
+
+a {padding: 5px;}
+
+a {transition: all ease-in-out 125ms;
+    color: #BFB39B;}
+
+a:hover {text-shadow: 0 0 4px white;
+    transition: all ease-in-out 125ms;}
+
+header > article {order: 1; width: 100%; flex:2;}
+/* header > aside {order: 3; width: 200px;}  */
+
+header {display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center;
+    /* align-self: center ;
+    justify-self: center;  */}
+
+.header-background {width: 100%;
+    max-height:auto;
+    background-color: #995E4C;}
+
+header, main, form, footer {padding: 5px;
+}
+
+h1 {font-family: 'Permanent Marker', cursive;
+    font-size: 2em;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #463232;
+    font-weight: 500;
+}
+
+h2 {font-family: Permanent Marker, 'cursive';
+    color:rgb(78, 70, 70);
+    font-weight: 400;
+}
+
+h3 {font-family: Permanent Marker, 'cursive';
+    color: #202c2d;
+    /* background: #FFFFFF; */
+    text-shadow: 0 1px #808d93, -1px 0 #cdd2d5, -1px 2px #808d93, -2px 1px #cdd2d5, -2px 3px #808d93, -3px 2px #cdd2d5, -3px 4px #808d93, -4px 3px #cdd2d5, -4px 5px #808d93, -5px 4px #cdd2d5, -5px 6px #808d93, -6px 5px #cdd2d5, -6px 7px #808d93, -7px 6px #cdd2d5, -7px 8px #808d93, -8px 7px #cdd2d5;
+    font-weight: 300;
+}
+
+
+h4 {font-family: 'Permanent Marker', cursive;
+    color:#4F657E;
+    text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0,0,0,0.9), 2px 2px 2px rgba(206,89,55,0);
+    font-weight: 250;
+}
+
+h6 {font-family: 'Permanent Marker', cursive;
+    color: #FFFFFF;
+    /* background: #912C22; */
+    text-shadow: 0 0 10px #FFFFFF;
+    font-weight: 200;
+}
+
+header p {font-family: 'Permanent Marker', cursive;
+    color:#ff0;
+    font-weight: 400;
+    justify-content: space-between;
+    align-content: space-between;
+    text-align: center;
+}
+
+main > nav {order: 1; max-width: 15%;flex:1;}
+main > article{order: 2; max-width:50%; flex:1;}
+main > aside {order: 3; max-width: 20%;flex:1;}
+main > form {order: 4; max-width: 25%;flex:1;}
+main  {
+    box-sizing: border-box;
+    border-style: inset;
+    display:flex;    
+    flex-direction:row;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 60vw;
+    border-style: groove;
+    background: url("chalkground.jpg") repeat-x; z-index: -1;
+    position: absolute;
+    top: 20;
+    padding: 5px;
+    /* vertical-align:top; */
+}
+
+main nav {
+    display: flex;
+    flex-flow:column; 
+    width:10vw;
+    height:200px;
+    position:absolute;
+    top: 20;
+    box-shadow: 0 4px 16px #284B59;
+    padding: 5px;
+}
+/* vertical-align:top; */
+
+main article {
+    justify-content: center;
+    display: flex;
+    flex-flow:column; 
+    width:45%;
+    height:auto;
+    position:absolute;
+    top: 20;
+    box-shadow: 0 4px 16px #284B59;
+    padding: 5px;
+}
+
+main article img {height:400px;}
+
+main aside {
+    display: flex;
+    flex-flow:column; 
+    width:33.33%;
+    height:auto;
+    position:absolute;
+    top: 20;
+    right:100px;
+    padding: 5px;
+     /* flex-wrap: wrap; */
+    text-align: center;
+    /* align-self:flex-end;*/
+    align-items:center;
+    justify-self:center;
+    
+}
+
+    .flex-gallery {
+        padding: 5px;
+        align-items:baseline;
+        justify-content:baseline;
+}
+
+    .flex-gallery1 {
+        margin: 0 -1em;
+        align-self:auto;
+    }
+        /* justify-content:center;
+        align-items:center;
+        flex-direction: row;
+        object-fit:none;    */
+    
+    .gallery-item {
+        gap: 5px 10px;
+        padding: 5px;
+        width: 100px;
+        height:40px;
+    
+    }
+
+
+    .gallery-item1 {padding: 0 1em;}
+        /* width: 100%;
+        max-width: 100%;
+        object-position: 50% 50%;
+        object-fit: cover;
+        align-self: center;} */
+
+main p {justify-content: space-between;
+    align-content: space-between;
+    text-align: center;
+}
+
+form {
+    width : 150px;
+    padding: 0;
+    margin: 0;
+    flex-flow:column; 
+    height: fit-content;
+    position:absolute;
+    align-content: flex-end;
+    left: 0; 
+    /* position: relative; */
+    
+    /* align-self:flex-end;   
+    flex-direction:column;
+    flex-wrap: nowrap; */
+    justify-content: space-evenly;
+
+}
+
+@media (min-width: 320px){
+      /* Too narrow to support three columns */
+    main { flex-flow: column;
+        align-self: center;
+        text-align:center;
+    }
+ 
+    main > article, main > nav, main > aside {
+        /* Return them to document order  */
+        order: 0; width: auto;}
+
+    header {max-height: min-content;
+        flex-direction: row;
+        text-align:center;}
+
+    nav {padding: 10px;
+        /* flex-direction: row; */
+    }
+}
+@media (min-width: 750px) {
+     /* Too narrow to support three columns  */
+    main {
+        text-align:center;
+        flex-flow: column; } 
+}
+    /* main > article, main > nav, main > aside {
+        order: 0; width: auto;} Return them to document order */
+    /* header, main, form, footer {padding: 2em;}
+    .gallery-item {width: 33.33%;}
+    .gallery-item1 {width: 33.33%;} */
+
+@media (min-width: 1100px) {
+    header, main, form, footer {
+        max-width: 100%;}
+    /* .gallery-item {
+        width: 33.33%;}
+
+    .gallery-item1 {
+        width: 33.33%;} */
+
+    /* header {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;} */
+
+    /* header > div > h1, header > div > h3 {
+        margin: 0;} */
+}
+
+@media (min-width: 1400px) {
+    header, main, form, footer {
+        max-width: 100%;
+    }
+}

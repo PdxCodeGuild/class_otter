@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col s12 m7">
+    <form action="" method="post">
+        <h4 class="header">Moderate a Tiny Chirp</h4>
+        <div class="card horizontal">
+
+            <div class="card-stacked">
+                <div class="card-action">
+                    <span><a href="{% url 'users:profile' chirp.author %}">{{ chirp.author.username }}</a></span><span class='right'>Hatched on: {{ chirp.created }}</span>
+                </div>
+                <div class="card-content">
+                    
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                                    
+                </div>
+            </div>
+
+        </div>
+        <button class="btn waves-effect waves-light light-blue lighten-1" type="submit" name="action">Save changes to Chirp
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+</div>
+
+{% endblock content %}
+
