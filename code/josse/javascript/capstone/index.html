@@ -5,30 +5,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hubballi&family=Permanent+Marker&family=Source+Serif+Pro&display=swap"
+     rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <title>Josse Capstone</title>
 </head>
 
 <body>
-
+   <div class="links"
+       <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Books</a></li>
+        <li><a href="">Contact</a></li>
+        <li><a href="">About</a></li>
+        </ul>
+    </div>
     <div id="app">
         <h1>Book Search</h1>
-        <label for="value">Choose one:</label>
+        <label for="value">Name of book:</label>
         <select id="value" name="value" v-model="selectedType">
             <option value="title">Title</option>
-            <option value="author_name">Author</option>
+            <!-- <option value="authors">Author</option> -->
         </select>
-        <input type="text" placeholder="Search" v-model="userText"></input>
+        <input @keyup.enter="userSearch" type="text" placeholder="Search" v-model="userText"></input>
         <button @click="userSearch">Submit</button>
-
 
         <div class="container">
             <ul v-if="Object.keys(userResults.docs).length">
                 <li v-for="item in userResults.docs" :key="item.key">
-                    <p> {{ item.title }} -- {{item.author_name}} </p>
+                    <h2> {{ item.title }} </h2>
+                    <h4> by{{item.author_name}} </h4>
+                    <hr>
+                
+
+
+                    <div class="img" v-for="insideIsbn in item.isbn" :key="insideIsbn">
+                        <p><a :href="`https://openlibrary.org/isbn/${insideIsbn}`" target="_blank">
+                        <img :src="`https://covers.openlibrary.org/b/isbn/${insideIsbn}-M.jpg`" /></a></p> 
+                        <br>
+                    </div> 
+                        <!-- <h2> {{author}} </h2> -->
+
+
                 </li>
             </ul>
         </div>
-
+<!-- 
         <div class="container" v-if="selectedType === 'title'">
             <ul v-if="Object.keys(userResults.docs).length">
                 <li v-for="item in userResults.docs" :key="item.key">
@@ -36,14 +63,19 @@
                 </li>
             </ul>
         </div>
-        <div class="container" v-else>
+        <div class="container" v-if="selectedType === 'authors'">
             <ul v-if="Object.keys(userResults.docs).length">
                 <li v-for="item in userResults.docs" :key="item.key">
-                    <p> {{ item.author_name }} -- {{item.title}} </p>
+                    <p> {{ item.name }} </p>
                 </li>
             </ul>
         </div>
+ -->
 
+
+        <footer>
+            
+        </footer>
         <!-- {{this.selectedType.place}} -->
 
         <!-- <p>{{userResults}}</p> -->

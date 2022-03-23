@@ -4,7 +4,8 @@ var app = new Vue({
         books: {},
         userResults: {},
         userText: "",
-        selectedType: ""
+        selectedType: "",
+        isbn: []
 
 
     },
@@ -27,8 +28,20 @@ var app = new Vue({
                 url: 'http://openlibrary.org/search.json',
                 params: params
             }).then(response => this.userResults = response.data)
+
         },
+
+        // coverSearch: function () {
+        //     let params = {}
+        //     params[this.selectedType] = this.userText
+        //     axios({
+        //         method: 'get',
+        //         url: ''
+        //     })
+
     },
+
+
 
 
 

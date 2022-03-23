@@ -26,7 +26,6 @@ def add_item_to_list(request):
 def mark_complete(request,pk):
     completed_list = []
     if request.method == 'POST':
-
         GroceryItem.objects.create(item_complete=request.POST['mark_complete'])
         grocery_item = get_object_or_404(GroceryItem, pk=pk)
         grocery_item.is_completed = False if grocery_item.is_completed else True 
@@ -38,10 +37,9 @@ def mark_complete(request,pk):
     print(f"this item is completed {c}")
     completed_list.append(grocery_checked_completed)
 
-    return HttpResponseRedirect(reverse('grocery:index'))
 
 
 def delete(request, pk):
-    grocery_item = get_object_or_404(GroceryItem,pk=pk)
-    grocery_item.delete()
+    item = get_object_or_404(GroceryItem, pk=pk)
+    item.delete()
     return HttpResponseRedirect(reverse('grocery:index'))

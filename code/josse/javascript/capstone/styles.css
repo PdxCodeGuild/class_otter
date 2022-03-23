@@ -1,0 +1,33 @@
+body {
+    background-color: white;
+
+}
+
+
+
+h1{
+    font-family: 'Permanent Marker', cursive;
+}
+
+h2{
+    font-family: 'Source Serif Pro', serif;
+
+}
+
+.app {
+    text-align: center;
+}
+
+h4{
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.links{
+    
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    
+        display: flex;
+        justify-content: space-evenly;
+}
