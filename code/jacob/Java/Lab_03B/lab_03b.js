@@ -12,8 +12,8 @@ checker.addEventListener('click', function(){
 
      
      function score(a, b){
-     let x = points[a] + points[b]
-     return x
+          let x = points[a] + points[b]
+          return x
      }
 
      let advice = score(card1, card2) + points[card3]
@@ -27,15 +27,19 @@ checker.addEventListener('click', function(){
           advice = 21
           cardAdvice.innerText = "Blackjack"
      }
-     
-     
+     else if (advice === 21){
+          cardAdvice.innerText ="Blackjack"
+     }
+
      else if (advice < 17){
           cardAdvice.innerText ="Hit"
      }
+
      else if (advice >= 17 && advice < 21){
           cardAdvice.innerText ="Stay"
           
      }
+     
      else if (advice > 21){
           cardAdvice.innerText ="Busted"
      }
