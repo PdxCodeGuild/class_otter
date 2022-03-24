@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="css/materialize.min.css" />
 </head>
 <body>
-    <div class="container">
-        <div id="searchQuotesApp">
+    <div id="searchQuotesApp" class="container">
+        <div>
             <div class="input-field">
                 <i class="material-icons prefix">search</i>
                 <input v-model="searchText" id="search" type="search" required>
@@ -33,13 +33,13 @@
                     <span>Tag</span>
                 </label>
 
-                <button class="waves-effect waves-light btn right" v-on:click="this.searchForQuotes">Search</button>
+                <button class="waves-effect waves-light btn right" v-on:click="this.search">Search</button>
             </div>
         </div>
 
         <br>
 
-        <div id="quotesListApp">
+        <div>
             <div v-if="quotes.length">
                 <div v-for="quote in quotes" class="card">
                     <div class="card-content">
@@ -65,15 +65,7 @@
             </div>
 
             <div v-if="shouldPaginate">
-                <ul class="pagination center-align">
-                    <li class="{}"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active"><a href="#!">1</a></li>
-                    <li class="waves-effect"><a href="#!">2</a></li>
-                    <li class="waves-effect"><a href="#!">3</a></li>
-                    <li class="waves-effect"><a href="#!">4</a></li>
-                    <li class="waves-effect"><a href="#!">5</a></li>
-                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
+                <pagination v-bind:page="page" v-on:search="search($event)"></pagination>
             </div>
         </div>
     </div>
