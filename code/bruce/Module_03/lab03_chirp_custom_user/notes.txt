@@ -61,15 +61,15 @@ django-admin startproject chirp_project .
 
 
 ### STEP ###
-# Create 'chirps' app:
-python manage.py startapp $APPNAME_HERE
-python manage.py startapp chirps
-
-
-### STEP ###
 # Check server runs, check for the green rocket:
 python .\manage.py runserver 8080
 http://127.0.0.1:8080/
+
+
+### STEP ###
+# Create 'chirps' app:
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp chirps
 
 
 ### STEP ###
