@@ -40,8 +40,16 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'students_app'
+    'students_app',
+    'apis'
+
 ]
+# is this needed?
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
