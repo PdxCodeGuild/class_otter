@@ -2,6 +2,7 @@ const vm = new Vue({
     el: "#app",
     data: {
         info: {},
+        releases: {},
     },
 
 
@@ -20,13 +21,48 @@ const vm = new Vue({
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(response => this.info = response.data)
-        }    
+        },
+
+        getGenres: function() {
+            // const country = SE;
+            const limit = 10;
+            const offset = 5;
+            axios({
+                method: "get",
+                url: "https://api.spotify.com/v1/browse/new-releases",
+                headers: {
+                    'Authorization': `Bearer ${ this.info.access_token }`
+                }
+            }).then(response => this.releases = response.data)
+        }
+
+        
+        // putting this on hold beacuse I don't understand the input criteria
+        // spotifySearch: function () {
+        //     // this needs to include a 'search' field for user input to search
+        //     axios({
+        //         method: 'get'
+        //         url: 'https://api.spotify.com/v1/search'
+        //         headers: {
+        //             'Authorization': `Bearer ${ this.info.access_token}`,
+        //         }
+        //     })
+        //     console.log(response.data)
+        // }    
     },
     created: function() {
         this.getAuth()
+        this.getGenres()
     }
 
 })
+
+
+// what is the usage for the async keyword for a function like my getAuth..?
+// instead of at line 39 could i use a (), iffy? reviewing info from this yt vid https://www.youtube.com/watch?v=SbelQW2JaDQ&t=408s
+
+// 
+
     //     axios ({ 
     //         method: 'get',
     //         url: 'https://api.spotify.com/v1',
@@ -37,9 +73,7 @@ const vm = new Vue({
     //     }).then(response => (this.info = response))
     //   }
 
-      
-
-
+    
 
 
 // redirect URI - http://localhost:8080 this was saved in spotify developer tools
