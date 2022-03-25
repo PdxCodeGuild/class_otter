@@ -64,18 +64,18 @@ balance = 0
 user_choice_of_tickets = input("how many tickets would you like to purchase? ")
 number_of_tickets_to_buy = int(user_choice_of_tickets)
 
-final_balance = balance
+final_balance = 0
 
 for _ in range(number_of_tickets_to_buy):
     my_ticket = generate_ticket()
-    final_balance -= 2 
+    balance -= 2 
     number_of_matches = find_matches(winning_ticket,my_ticket)
     final_balance += winning_per_match[number_of_matches]
 
 print(final_balance) 
 
 #return on investment
-earnings = final_balance - balance
+earnings = final_balance 
 
 expenses = number_of_tickets_to_buy * 2
 

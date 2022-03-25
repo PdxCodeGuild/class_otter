@@ -1,0 +1,70 @@
+body {
+    background-color: white;
+
+    justify-content: center;
+}
+
+title{
+
+   text-align: center;
+
+}
+
+h1{
+    font-family: 'Permanent Marker', cursive;
+    padding-left: 15px;
+}
+
+h2{
+    font-family: 'Source Serif Pro', serif;
+
+}
+
+.app {
+    text-align: center;
+}
+
+h4{
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.links{
+    
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    
+        display: flex;
+        justify-content: space-evenly;
+}
+
+ul {
+    text-align: center;
+}
+
+
+.img {
+  display: flex;
+  justify-content: start;
+  flex-direction: column-reverse;
+  margin-right: 20px;
+    }
+    
+
+label{
+    padding-left: 15px;
+}
+
+.btn{
+    padding: 5px;
+
+}
+
+.containerHeader{
+    padding-top: 1px;
+}
+
+footer{
+
+    position: absolute;
+}

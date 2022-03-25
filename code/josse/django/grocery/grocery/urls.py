@@ -9,5 +9,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('create/', views.add_item_to_list, name='create'),
     path('mark_complete/<int:pk>', views.mark_complete, name='mark_complete'),
-    path('<int:pk>/delete', views.delete, name='delete')
+    path('delete/<int:pk>', views.delete, name='delete')
 ]

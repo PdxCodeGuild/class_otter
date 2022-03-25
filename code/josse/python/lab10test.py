@@ -108,8 +108,6 @@ show_keys = print_contact_information(specific_contact)
 print(show_keys)
 
 
-while True:
-    input(f"Would you like to create , read, update, delete? ")
 '''Display dictionary information'''
 # Get keys for the dictionary
 # print out the value for keys
