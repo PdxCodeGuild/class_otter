@@ -1,0 +1,92 @@
+# Assignment:
+https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab07-pokedex.md
+
+# Resources:
+    # Pokedex:
+    https://github.com/flamingveggies/pokedex
+
+    # Django Rest Framework:
+    https://www.django-rest-framework.org/
+    https://learndjango.com/tutorials/django-rest-framework-tutorial-todo-api
+
+    # Django Project Setup:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+
+    # Django admin documentation generator:
+    https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+
+    # Docutils:
+    https://docutils.sourceforge.io/
+
+    # Django tutorial:
+    https://docs.djangoproject.com/en/3.2/intro/tutorial01/
+
+    # Django customizing:
+    https://docs.djangoproject.com/en/3.2/topics/auth/customizing/
+
+    ##### This seems like a better custom user guide #####
+    https://learndjango.com/tutorials/django-custom-user-model
+
+    # Django on GitHub:
+    https://github.com/django/django/tree/main/django
+
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/pokedex_main-6XpG_hGW/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\pokedex_main-6XpG_hGW\Scripts\activate.ps1
+
+
+### STEP ###
+# Create virtual environment:
+pipenv install
+
+
+### STEP ###
+# Activate virtual environment:
+C:\Users\Bruce\.virtualenvs\pokedex_main-6XpG_hGW\Scripts\activate.ps1
+
+
+### STEP ###
+# Migrate 'users' first since we have CustomUser:
+python manage.py migrate users
+
+
+### STEP ###
+# Migrate the other models:
+python manage.py migrate
+
+
+### STEP ###
+# Create superuser:
+python manage.py createsuperuser
+
+
+### STEP ###
+# Load Pokemon into database:
+python manage.py load_pokemon
+
+
+### STEP ###
+# Start server
+python .\manage.py runserver 8000
+
+
+### STEP ###
+# 
+
+
+
+
+# Link to 'home':
+http://127.0.0.1:8000/students/
+# Link to 'admin':
+http://127.0.0.1:8000/admin/
+# Link to 'api':
+curl http://localhost:8000/api/v1/

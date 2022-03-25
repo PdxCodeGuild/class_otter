@@ -30,6 +30,8 @@
 
     <main id="app" class="container">
 
+        <submit-button-component></submit-button-component>
+
         <!-- The numbers 'esp8266' in below binding were weirding the linting. -->
         <!-- So I changed binding to include alphas only. -->
         <!-- v-on:send-esp8266-to-root="saveEsp8266ToRootComponent" -->
@@ -50,6 +52,26 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- <div class="col s12 m6" v-if="Object.keys(objectReceivedFromChildComponent).length">
+            <div class="card">
+                <div class="card-content">
+                    <div>
+                        <h4>Root Object</h4>
+                        <ul>
+                            <li
+                                v-for="item in objectReceivedFromChildComponent"
+                            >
+                                {{ item }}
+                            </li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
 
         <div class="col s12 m6" v-if="Object.keys(esp8266DataArray).length">
             <div class="card">
@@ -78,8 +100,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </main>
 
