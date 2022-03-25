@@ -1,0 +1,213 @@
+html {
+    display: block;
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 100;
+    color: white;
+    background:#606d96;
+    text-shadow: 0 0 2 #000000;
+}
+
+.header-title {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* font-size:1.5rem; */
+    color: white;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: black;
+}
+
+.header-title h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	color: #d7ceb2;
+	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	font: 80px 'BazarMedium';
+	letter-spacing: 10px;
+    justify-content: center;
+}
+
+.btn btn-primary {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    line-height: 5.8rem;
+    color: rgb(94, 94, 94);
+    text-shadow: 5px 5px #ffff00;
+    filter: drop-shadow(-10px 10px 20px #fff000);
+    background-color: #5e5555;
+
+
+}
+
+.zipcode {
+    text-align: center;
+    align-items: center;
+    width: 100%;    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    /* line-height: 5.8rem; */
+    color: rgb(94, 94, 94);
+    text-shadow: 5px 5px #ffff00;
+    filter: drop-shadow(-10px 10px 20px #fff000);
+    
+}
+
+.zipcode input{
+    height:45px;
+    padding-bottom: 0em;
+    text-align: center;
+    background-color:antiquewhite;
+}
+
+.zipcode button {
+    margin-top: .5rem;
+    display: inline-block;
+        padding: 5px 15px;
+    font-size: 10;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: rgb(167, 79, 79);
+    background-color: rgba(165, 165, 204, 0.37);
+    border:rgb(112, 110, 95);
+    border-style: groove;
+    border-radius: 15px;
+}
+
+.zipcode button:hover {
+    background-color: lightskyblue;
+}
+
+.zipcode button:active {
+    background-color: lightslategray;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px)
+}
+
+.container {
+    width: 520px;
+    height: 150px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* left: 50%; */
+}
+
+.weather {
+    width: 375px;
+    height: 315px;
+    /* background-color:rgba(106, 151, 168, 0.123); */
+    position: absolute;
+    top: 90%;
+    left: 15%;
+    /* margin-top: -50px; */
+    /* left: 0%; */
+    /* padding-left: 80px; */
+    /* vertical-align: top; */
+    font-weight: 700;
+ 	font: 10px 'BazarMedium';
+	letter-spacing: 10px;
+    color:cornsilk;
+    text-shadow: 1px 1px #4bb36a;
+    filter: drop-shadow(-2px 2px 5px #076313);
+    /* justify-content: center; */
+}
+
+
+.city {
+    padding-left: 0px;
+    font-size: 4em;
+    font-weight: 900;
+    color: #572877c2;
+    text-shadow: 1px 1px #cfcca1;
+    filter: drop-shadow(-2px 2px 5px  #cfcca1);
+    text-transform: uppercase;
+    font-family: sans-serif;
+    text-align: left;
+    vertical-align: center;
+}
+
+.date {
+    padding-left: 0px;
+    /* margin-top: -1.5em;
+    margin-bottom: 2em; */
+    color: #f0f2fa;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+/* .weather-icon {
+    display: inline-flex;
+    height: 10rem;
+    align-content:flex-end;
+    float: right;
+} */
+
+/* .clouds {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+} */
+
+div img {
+    height:60px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* padding-left: 25px; */
+    justify-content:center;
+}
+
+.current-temp {
+    /* padding-left: 50px;
+    padding-top: 25px; */
+    font-family: 'Vast Shadow', cursive;
+    font-size:medium;
+    font-weight:bolder;
+    color: #b9154cf6;
+    text-shadow: 1px 1px #cfcca1;
+    filter: drop-shadow(-2px 2px 5px #cfcca1);
+    vertical-align: center;
+    justify-content: end;
+
+}
+
+.feels-like {
+    font-weight: bold;
+    margin-bottom: -.25rem;
+    font-family: 'Vast Shadow', cursive;
+    font-size: small;
+    color:rgb(185, 71, 115);
+    text-shadow: 1px 1px #4bb36a;
+    filter: drop-shadow(-2px 2px 5px #076313);
+    /* vertical-align: top; */
+    /* position: absolute; */
+}
+
+.hi-lo {
+    padding-top: 15px;
+    padding-right:25px;
+    align-self: top;
+    text-align:left;
+    text-justify: distribute;
+    display: block;
+    position: relative;
+    font-size: small;
+    font-weight: bold;
+    color:rgb(241, 235, 217);
+    text-shadow: 1px 1px #4bb36a;
+    filter: drop-shadow(-2px 2px 5px #076313);
+    top: 90%;
+}

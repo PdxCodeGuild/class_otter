@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/favQs.js" defer></script>
 </head>
-<body style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; background-color: burlywood;color:rgb(46, 7, 7)"></body>
+<body style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; background-color: burlywood;color:rgb(46, 7, 7)">
     <nav class="navbar navbar-light" style="background-color: #315069;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -55,10 +55,10 @@
             </div>
         </form>
 
-        <quote v-for = "quote in quotes"></quote>
-        <!-- <article v-for = "quote in quotes">
+        <!-- <quote v-for = "quote in quotes"></quote> -->
+         <article v-for = "quote in quotes">
             <p>"{{ quote.body }}"" by {{ quote.author }}</p>
-        </article> -->
+        </article>
         <div v-if="lastPage == false"><button @click="nextPage">Next Page</button></div>
     </div>
     

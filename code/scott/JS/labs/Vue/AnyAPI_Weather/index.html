@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather</title>
+        <!-- CSS -->	
+        <style type="text/css">
+            .background {
+            box-sizing: border-box;
+            width: auto;
+            height:100vh;
+            padding: 3px;
+            background-image: url('./156134.png');
+            color:rgb(105, 201, 164)"
+            border: 1px solid black;
+            background-size: 100% 100%;
+            }
+        </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" 
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body class='background'>
+    <nav class="navbar navbar-light" style="background-image: url('./thunderstorm.webp');background-repeat: no-repeat;
+    background-size: 100% 85%;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;color:rgb(105, 201, 164)">
+                <img src="https://static.vecteezy.com/system/resources/previews/001/192/792/non_2x/storm-png.png" alt="" width="47" height="57"
+                    class="d-inline-block align-text-center">
+                Mad Weather
+            </a>
+            <a class="navbar-brand" href="#">
+                <img src="https://cdn.pixabay.com/photo/2016/03/31/15/22/clouds-1293230_1280.png" alt="" width="75" height="57"
+                    class="d-inline-block align-text-center">
+                
+            </a>
+            <a class="navbar-brand" href="#">
+                <img src="https://cdn.pixabay.com/photo/2016/03/31/15/22/clouds-1293230_1280.png" alt="" width="75" height="57"
+                    class="d-inline-block align-text-center">
+                
+            </a>
+            <a class="navbar-brand" href="#" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;color:rgb(105, 201, 164)">
+                <img src="https://img.icons8.com/color/2x/vue-js.png" alt="" width="47" height="57"
+                    class="d-inline-block align-text-center">
+                Vue-js Get Weather
+            </a>
+        </div>
+    </nav>
+        <div class="outter-div">
+            <div class="header-title">
+                <h1>Weather</h1><br>
+            </div>
+        </div>
+        <div id="app" class="container">
+            <div class="zipcode">
+                <br>
+                <get-weather @result="getWeather"></get-weather><br>
+                <hr>
+            </div>
+            <div v-if="Object.keys(results).length" class="weather">
+                <div id="weather">
+                    <span class="city">{{ results.name }}</span><br>
+                    <span class="date">{{ results.date }}</span><br>
+                    <img class="weather-icon" :src="results.image">
+                    <span class="current-temp">{{ results.main.temp }}°F </span><br>
+                    {{ results.weather[0].description }}<br>
+                    <span id="temp-values" class="hi-lo">High: {{ results.main.temp_max }}°F <br> 
+                        Low: {{ results.main.temp_min }}°F</span><br>
+                </div>
+                <div id="info" class="feels-like">
+                    Feels Like: {{ results.main.feels_like }}°F <br>
+                    Humidity: {{ results.main.humidity }}% <br>
+                    Wind: {{ results.wind.speed }} mph <br>
+
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="secrets.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>

@@ -1,51 +1,4 @@
-// Vue.component('quote-me', {
-//     data: function() {
-//         return {
-//             filter: "",
-//             type: ""
-//         }
-//     },
-//     template: `
-//         <div>
-//         <h3>Enter your search text below..</h3>
-//         <input type="type" placeholder="Enter Search Text Here" @keyup.enter="getQuote" v-model="filter">
-//         <h3>Now select from the options below how you would like to search..</h3>
-//         <select v-model="type">
-//         <option disabled value="">Please select one</option>
-//         <option>author</option>
-//         <option>keyword</option>
-//         <option>tag</option>
-//         </select>
-//         <h3>If everything is correct, click below!</h3>
-//             <button @click="getQuote">Get Quote</button>
-//         </div>
-//         `,
-//     methods: {
-//         getQuote: function() {
-//             this.$emit('quote', {type: this.type, filter: this.filter})
-//             this.filter = ""
-//             this.type = ""
-//         }
-//     }
-// })
-
-
-
-// const App = {
-// 	data() {
-// 		return {
-//             randomQuote: '',
-// 			quotes: [], //array literal
-//             lastPage: true, //for paging
-//             authorPage: 1, // method variable and start page
-//             keywordPage: 1, // method variable and start page
-//             tagPage: 1, // method variable and start page
-//             tag: '', // variable and type for Tag Search
-//             author: '', // variable and type for Author Search
-// 			keyword: '', // variable and type for Keyword
-//             type: '',
-// 		}
-//     },
+// Create an app using `createApp()` that uses the `hello` component
 
 
 const App = {
@@ -69,19 +22,6 @@ const App = {
     },
 
     methods: {
-
-        // loadRandom25: function() {
-        //     axios({
-        //         url: "https://favqs.com/api/quotes",
-        //         method: "get",
-        //         headers: {
-        //             "Authorization": `Token token="${apiKey}"`
-        //         },
-        //     }).then(response => {
-        //         this.results = response.data
-        //     })
-        // },
-
         getRandomQuote() {            
             axios({
                 method: 'get',
@@ -166,21 +106,15 @@ const App = {
                     this.quotes = response.data.quotes
                     this.lastPage = response.data.last_page
                 })
-        }
+        },
     }
 }
+
+
 
 Vue.createApp(App).mount('#app')
 
 
-App.component('quote', {
-    props: ['quote'],
-    template: ` 
-        <article>
-            <p>"{{ quote.body }}"" by {{ quote.author }}</p>
-        </article> 
-`
-});
 //  axios({
     // method: 'get',
     // url: 'https://favqs.com/api/qotd',
