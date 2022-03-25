@@ -21,7 +21,7 @@
                 <input type="date" v-model="userFilter" class="calendar">
                 <button v-on:click="loadAPOD" class="button">Submit</button>
             </header>
-                <div v-if="Object.keys(apod).length" class="sets">
+                <div v-if="Object.keys(apod).length" class="day">
                     
                     <div v-if="apod.media_type === 'image'">
                         <img :src="apod.url">
@@ -31,7 +31,7 @@
                         <iframe :src="apod.url"></iframe>
                     </div>
                     
-                    <div class="text">
+                    <div class="single">
                         <h3>{{ apod.title }}</h3>
                         <p>{{ apod.explanation }}</p>
                     </div>
