@@ -1,0 +1,137 @@
+# Assignment:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab06-drf_vue.md
+
+# Resources:
+
+    # Django Rest Framework:
+    https://www.django-rest-framework.org/
+    https://learndjango.com/tutorials/django-rest-framework-tutorial-todo-api
+
+    # Django Project Setup:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+
+    # Django admin documentation generator:
+    https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+
+    # Docutils:
+    https://docutils.sourceforge.io/
+
+    # Django tutorial:
+    https://docs.djangoproject.com/en/3.2/intro/tutorial01/
+
+    # Django customizing:
+    https://docs.djangoproject.com/en/3.2/topics/auth/customizing/
+
+    ##### This seems like a better custom user guide #####
+    https://learndjango.com/tutorials/django-custom-user-model
+
+    # Django on GitHub:
+    https://github.com/django/django/tree/main/django
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/drf_vue-yptaJXO-/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\drf_vue-yptaJXO-\Scripts\activate.ps1
+
+
+
+# Start server
+python .\manage.py runserver 8000
+
+# Link to 'home':
+http://127.0.0.1:8000/students/
+# Link to 'admin':
+http://127.0.0.1:8000/admin/
+# Link to 'api':
+curl http://localhost:8000/api/v1/
+
+http://localhost:8000/api/v1/
+# Allow: GET, HEAD, OPTIONS                         # basis
+
+http://localhost:8000/api/v1/students/
+# Allow: GET, POST, HEAD, OPTIONS                   # ADD: POST
+
+http://localhost:8000/api/v1/students/2
+# Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS     # ADD: PUT, PATCH, DELETE
+
+
+
+# Project and app names:
+# Project:
+    students_site
+# Apps:
+    students
+    users
+
+
+### STEP ###
+# Create virtual environment and install 'Django' and 'docutils':
+pipenv install django==3.2 docutils==0.18.1
+
+
+### STEP ###
+# Activate virtual environment.
+C:\Users\Bruce\.virtualenvs\drf_vue-yptaJXO-\Scripts\activate.ps1
+
+
+### STEP ###
+# TODO: Create a document for how to create a new app.
+# Set up Project and Applications
+
+
+### STEP ###
+# Install djangorestframework:
+# pipenv install djangorestframework==3.13.1    <= This didn't work.
+# pipenv install djangorestframework==3.13      <= This didn't work.
+# pipenv install djangorestframework            <= This didn't work.
+
+pipenv install djangorestframework==3.13.1      <= Finally worked.
+
+
+### STEP ###
+# Add 'rest_framework' to students_site.settings.py:
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    ...
+]
+
+
+### STEP ###
+# Create 'api' app:
+python manage.py startapp $APPNAME_HERE
+python manage.py startapp api
+
+
+### STEP ###
+# Add 'api.apps.ApiConfig' to students_site.settings.py:
+INSTALLED_APPS = [
+    ...
+    'api.apps.ApiConfig',
+    ...
+]
+
+
+### NOTE ###
+# No need to create a new 'api' app 'model', rest_framework uses existing model from 'students.models'.
+
+
+### STEP ###
+### STEP ###
+### STEP ###
+### STEP ###
+
+
+
+### STEP ###
+# Add students url field to model:
+students_app_url = models.URLField('students url')
+
+python manage.py makemigrations
+python manage.py migrate
