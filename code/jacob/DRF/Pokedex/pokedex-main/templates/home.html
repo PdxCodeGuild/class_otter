@@ -1,7 +1,74 @@
-{% if user.is_authenticated %}
-<h1>Welcome {{ user.username }}!</h1>
-<p><a href="{% url 'logout' %}">Logout</a><p>
-{% else %}
-<h1>Welcome, visitor!</h1>
-<p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+</head>
+<body>
+    <div id="app">
+        
+        {% if user.is_authenticated %}
+
+            <h1>Welcome {{ user.username }}!</h1>
+            <p><a href="{% url 'logout' %}">Logout</a><p>
+
+                <input type="text"
+                <div v-for="poke in pokemon" :key="poke.id">
+                    <p>[[ poke.name ]]</p>
+                    <p>[[ poke.height ]]</p>
+                    <img :src="poke.image_front">
+                </div>
+
+
+
+        {% else %}
+
+            <h1>Welcome, visitor!</h1>
+            <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
+            
+            
+            
+        {% endif %}
+    
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script >
+        const vm = new Vue({
+            el: '#app',
+            delimiters: ['[[', ']]'],
+            data: {
+                pokemon: {},
+                working: "Hi There"
+            },
+            methods: {
+                loadPokemon: function() {
+                    axios({
+                        method: 'get',
+                        url: '/api/'
+                    }).then(response => this.pokemon = response.data)
+                },
+                editPokemon: function() {
+                    axios({
+                        method: 'patch',
+                        url: ''
+                    })
+                },
+                deletePokemon: function() {
+                    axios({
+                        method: 'delete',
+                        url: ''
+                    })
+                }
+            },
+            created: function() {
+                this.loadPokemon()
+            }
+            
+        })
+    </script>
+
+</body>
