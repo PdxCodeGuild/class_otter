@@ -1,0 +1,69 @@
+# Resources:
+
+    # Django Rest Framework:
+    https://www.django-rest-framework.org/
+
+    # Quick Start:
+    https://www.django-rest-framework.org/tutorial/quickstart/
+
+    # WSV Tutorial:
+    https://learndjango.com/tutorials/django-rest-framework-tutorial-todo-api
+
+    # Django Project Setup:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+
+    # Django admin documentation generator:
+    https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+
+    # Docutils:
+    https://docutils.sourceforge.io/
+
+    # Django tutorial:
+    https://docs.djangoproject.com/en/3.2/intro/tutorial01/
+
+    # Django customizing:
+    https://docs.djangoproject.com/en/3.2/topics/auth/customizing/
+
+    ##### This seems like a better custom user guide #####
+    https://learndjango.com/tutorials/django-custom-user-model
+
+    # Django on GitHub:
+    https://github.com/django/django/tree/main/django
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+
+# Start server
+python .\manage.py runserver 8000
+
+# Link to 'admin':
+http://127.0.0.1:8000/admin/
+# Link to 'api':
+curl http://localhost:8000/api/v1/
+
+http://localhost:8000/api/v1/
+
+
+# Project and app names:
+# Project:
+    library_project
+# Apps:
+    students
+    users
+
+
+### STEP ###
+# Create virtual environment and install 'Django', 'docutils', and 'djangorestframework':
+pipenv install django==3.2 docutils==0.18.1 djangorestframework==3.13.1
+
+
+### STEP ###
+# Set up Project:
+django-admin startproject $PROJECT_NAME .
+django-admin startproject library_project .
+
+
