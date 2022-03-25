@@ -2,11 +2,30 @@ var app = new Vue({
     el: '#app',
     data: {
         todos: [
-            { text: 'play games', completed: false },
-            { text: 'learn stuff', completed: false },
-            { text: 'take a nap', completed: false }
+            { id: 1, text: 'play games', completed: false },
+            { id: 2, text: 'learn stuff', completed: false },
+            { id: 3, text: 'take a nap', completed: false }
         ],
-        newTodo: ''
+        computed: {
+            incompleteTodos: function () {
+                let incompleteTodos = []
+                for (let i = 0; this.length; i++) {
+                    if (!this.todos[i].completed === false) {
+                        incompleteTodos.push(this.todos[i])
+                    }
+                }
+                return incompleteTodos
+            },
+            completeTodo: function () {
+                let completeTodos = []
+                for (let i = 0; this.length; i++) {
+                    if (!this.todos[i].completed === false) {
+                        completeTodos.push(this.todos[i])
+                    }
+                }
+                return completeTodos
+            }
+        }
     },
     methods: {
         addTodo: function () {
@@ -17,6 +36,9 @@ var app = new Vue({
             this.todos.splice(this.todos.indexOf(todos), 1);
 
         },
+        completeTodo: function () {
+            console.log('button works')
+        }
 
     }
 

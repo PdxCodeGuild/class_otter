@@ -15,10 +15,10 @@
         <h2>In-complete</h2>
         <ul>
             <li v-for="todo in todos">
-                {{todo.text}}
+                {{todo.text}}--{{todo.completed}}
                 
                 <button @click="deleteTodo">Delete</button>
-                <!-- <button @click="completedTodo">Completed</button> -->
+                <button @click="completeTodo">Completed</button>
             </li>
         </ul>
         <h2>Completed</h2>
