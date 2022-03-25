@@ -1,11 +1,15 @@
 from django import views
 from django.urls import path
 
-# from .views import StudentAPIView
+# This line is here to allow access to api throuth the Django browsable api.
+from .views import StudentAPIView
+
 from . import views
 
 urlpatterns = [
-    # path('', StudentAPIView.as_view()),
+    # This path is here to allow access to api through the Django browsable api.
+    path('', StudentAPIView.as_view()),
+
     path('students/<int:pk>/', views.StudentDetail.as_view()),
     path('students/', views.StudentList.as_view()),
 ]
