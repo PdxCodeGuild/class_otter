@@ -1,0 +1,302 @@
+# Resources:
+
+    # Django Rest Framework:
+    https://www.django-rest-framework.org/
+
+    # Quick Start:
+    https://www.django-rest-framework.org/tutorial/quickstart/
+
+    # WSV Tutorial:
+    https://learndjango.com/tutorials/django-rest-framework-tutorial-todo-api
+
+    # Django Project Setup:
+    https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/docs/Django%20Project%20Setup.md
+
+    # Django admin documentation generator:
+    https://docs.djangoproject.com/en/3.2/ref/contrib/admin/admindocs/#module-django.contrib.admindocs
+
+    # Docutils:
+    https://docutils.sourceforge.io/
+
+    # Django tutorial:
+    https://docs.djangoproject.com/en/3.2/intro/tutorial01/
+
+    # Django customizing:
+    https://docs.djangoproject.com/en/3.2/topics/auth/customizing/
+
+    ##### This seems like a better custom user guide #####
+    https://learndjango.com/tutorials/django-custom-user-model
+
+    # Django on GitHub:
+    https://github.com/django/django/tree/main/django
+
+# Activate virtual environment:
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/drf_basic-nfOvCFZl/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\drf_basic-nfOvCFZl\Scripts\activate.ps1
+
+
+
+# Start server
+python .\manage.py runserver 8000
+
+# Link to 'admin':
+http://127.0.0.1:8000/admin/
+# Link to 'api':
+curl http://localhost:8000/api/v1/
+
+http://localhost:8000/api/v1/
+
+
+# Project and app names:
+# Project:
+    library_project
+# Apps:
+    students
+    users
+
+
+### STEP ###
+# Create virtual environment and install 'Django' and 'docutils':
+pipenv install django==3.2 docutils==0.18.1
+
+
+### STEP ###
+# Set up Project:
+django-admin startproject $PROJECT_NAME .
+django-admin startproject library_project .
+
+
+### STEP ###
+# Create 'books' app:
+python .\manage.py startapp $APP_NAME
+python .\manage.py startapp books
+
+
+### STEP ###
+# Check for green rocket:
+python .\manage.py runserver 8000
+http://127.0.0.1:8000/
+
+
+### STEP ###
+# Add the app 'books.apps.BooksConfig' to 'library_project.settings.py':
+INSTALLED_APPS = [
+    ...
+    'books.apps.BooksConfig',
+    ...
+]
+
+
+### STEP ###
+# Migrate current project:
+python .\manage.py migrate
+
+
+### STEP ###
+# Create superuser:
+python .\manage.py createsuperuser
+
+
+### STEP ###
+# Create model in 'books.models.py':
+class Book(models.Model):
+    title = models.CharField(max_length=300)
+    subtitle = models.CharField(max_length=300)
+    author = models.CharField(max_length=100)
+    isbn = models.CharField(max_length=13)
+
+    def __str__(self):
+        return self.title
+
+
+### STEP ###
+# Migrate current project:
+python .\manage.py makemigrations
+python .\manage.py migrate
+
+
+
+### STEP ###
+# Register model in 'books.admin.py':
+from .models import Book
+admin.site.register(Book)
+
+
+### STEP ###
+# Using admin UI, add some data to application database:
+python .\manage.py runserver 8000
+http://127.0.0.1:8000/admin/
+
+
+### STEP ###
+## CREATE THE VIEW ##
+# Create a 'ListView' view in 'books.views.py':
+from django.views.generic import ListView
+from .models import Book
+class BookListView(ListView):
+    model = Book
+    template_name = 'books/book_list.html'
+
+
+### STEP ###
+## ADD PATH TO URLS ##
+# Add 'include' to imports:
+# Add path('', include('books.urls')) to 'library_project.urls.py':
+from django.urls import path, include
+urlpatterns = [
+    ...
+    path('', include('books.urls')),
+    ...
+]
+
+
+### STEP ###
+## ADD VIEW TO URLS ##
+# Create urls 'books.urls.py':
+from django.urls import path
+from .views import BookListView
+# app_name is optional unless needed.
+app_name = 'books'
+urlpatterns = [
+    path('', BookListView.as_view(), name='home'),
+]
+
+
+### STEP ###
+## CREATE THE HTML ##
+# Creating html view for testing and comparing.
+# Create template file 'books.templates.books.book_list.html':
+# Add simple element:
+    {% for book in book_list %}
+        <ul>
+            <li>Title: {{ book.title }}</li>
+            <li>Subtitle: {{ book.subtitle }}</li>
+            <li>Author: {{ book.author }}</li>
+            <li>ISBN: {{ book.isbn }}</li>
+        </ul>
+    {% endfor%}
+
+
+### NOTE ###
+# We now have a vanilla django application.
+# It can pull data from database and display it in html webpage.
+
+
+### STEP ###
+# Install djangorestframework:
+pipenv install djangorestframework==3.13.1
+
+
+### STEP ###
+# https://www.django-rest-framework.org/tutorial/quickstart/#settings
+# Add 'rest_framework' to 'library_project.settings.py' 'INSTALLED_APPS':
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    ...
+]
+
+
+### STEP ###
+# Create the 'api' app:
+python .\manage.py startapp api
+
+
+### STEP ###
+# Add the 'api.apps.ApiConfig' app to 'library_project.settings.py':
+INSTALLED_APPS = [
+    ...
+    'api.apps.ApiConfig',
+    ...
+]
+
+
+### STEP ###
+# Add path() to api urls in 'library_project.urls':
+urlpatterns = [
+    ...
+    path('api/v1/', include('api.urls')),
+    ...
+]
+
+
+### STEP ###
+# Create 'api.urls.py':
+from django.urls import path
+from .views import BookAPIView
+urlpatterns = [
+    # No 'name=' needed since we won't be reversing or hyper-linking.
+    path('', BookAPIView.as_view()),
+]
+
+
+### STEP ###
+# Create a view in 'api.views.py':
+from rest_framework import generics
+from books.models import Book
+from .serializers import BookSerializer
+class BookAPIView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+
+### STEP ###
+# Create the serializer in 'api.serializers.py':
+from rest_framework import serializers
+from books.models import Book
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ('id', 'title', 'subtitle', 'author', 'isbn')
+
+
+### STEP ###
+# Test API endpoint:
+python .\manage.py runserver 8000
+curl http://localhost:8000/api/v1/
+
+# Another optional 'OPTIONS' to get 'allow'ed request methods:
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS
+curl -X OPTIONS http://localhost:8000/api/v1/ -i
+
+# HEAD request:
+curl -I http://localhost:8000/api/v1/
+
+
+# Response:
+[{"id":1,"title":"The First Book","subtitle":"Are you sure?","author":"Bunbun","isbn":"1234567890123"},{"id":2,"title":"The Second Book","subtitle":"Maybe!","author":"Dezzi","isbn":"0123456789012"},{"id":3,"title":"The Third Book","subtitle":"Okay, that's enough of that!","author":"Greta","isbn":"0987654321123"},{"id":4,"title":"The Last Book","subtitle":"Done!","author":"Mama","isbn":"1212121212123"}]
+
+
+### STEP ###
+# Test API endpoint GUI:
+python .\manage.py runserver 8000
+http://localhost:8000/api/v1/
+
+
+### NOTE ###
+# Can change available methods by changing inherited class:
+# Can change 'ListAPIView' to 'ListCreateAPIView':
+
+# class BookAPIView(generics.ListAPIView):          # Allow: GET, HEAD, OPTIONS
+# class BookAPIView(generics.ListCreateAPIView):    # Allow: GET, POST, HEAD, OPTIONS
+
+
+### LEARN ###
+# Add 'some_random_attribute' to Book:
+    some_random_attribute = models.CharField(max_length=100, blank=True, null=True, default='')
+# Stop server.
+# Migrations:
+python .\manage.py makemigrations
+python .\manage.py migrate
+# Add to 'api.serializers.py':
+        fields = (..., 'some_random_attribute', ...)
+# Start server:
+python .\manage.py runserver 8000
+

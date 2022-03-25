@@ -14,7 +14,7 @@
         <h2>The ToDos</h2>
         <p>
             <span>Add ToDo: </span>
-            <input v-model="newTodoText" placeholder="Your new ToDo">
+            <input type="text" v-model="newTodoText" placeholder="Your new ToDo" @keyup.enter="addTheTodo(newTodoText)">
             <button v-on:click="addTheTodo(newTodoText)">Add the ToDo</button>
         </p>
         <h3>Uncompleted ToDos</h3>

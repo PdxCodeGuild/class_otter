@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunbun's Book List</title>
+</head>
+<body>
+    <h1>The Book Page</h1>
+    <h2>List of Books</h2>
+    {% comment %} Either context works: book_list or object_list. {% endcomment %}
+    {% comment %} {% for book in object_list %} {% endcomment %}
+    {% for book in book_list %}
+        <ul>
+            <li>Title: {{ book.title }}</li>
+            <li>Subtitle: {{ book.subtitle }}</li>
+            <li>Author: {{ book.author }}</li>
+            <li>ISBN: {{ book.isbn }}</li>
+        </ul>
+    {% endfor%}
+
+</body>
+</html>

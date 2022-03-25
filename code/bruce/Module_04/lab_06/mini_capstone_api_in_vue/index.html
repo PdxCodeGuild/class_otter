@@ -4,82 +4,122 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <link rel="stylesheet" href="/css/style.css" />    
     <title>Lab 6: Mini-Capstone API</title>
-    <style>
-    table, th, td {
-        border:1px solid black;
-        width: 100%;
-    }
-    table {
-        width: 100%;
-    }
-    </style>
+
 </head>
-<body>
+<body class="blue lighten-5">
+
     <header></header>
-    <main id="app">
 
-        <h1>Flynnt Knapp's Adafruit IO Feed</h1>
+    <nav>
+        <div class="nav-wrapper blue lighten-1">
+            <a href="#" class="brand-logo">Flynnt Knapp's Adafruit IO Feed</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <!-- <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li> -->
+            </ul>
+        </div>
+    </nav>
 
-        <h2>Five most recent measurements</h2>
-        <ul v-if="Object.keys(esp8266DataArray).length">
-            <temperature-display-li
-                v-for="dataPoint in esp8266DataArray"
-                v-bind:temperature-display-li="dataPoint"
-                v-bind:key="dataPoint.id"
-            >
-            </temperature-display-li>
-        </ul>
+    <main id="app" class="container">
 
-        <!-- <temperature-chart></temperature-chart> -->
-
-        <div>
-            <canvas id="myChart"></canvas>
+        <!-- The numbers 'esp8266' in below binding were weirding the linting. -->
+        <!-- So I changed binding to include alphas only. -->
+        <!-- v-on:send-esp8266-to-root="saveEsp8266ToRootComponent" -->
+        <search-component
+            v-on:send-to-root="saveSomethingToRootComponent"
+            v-on:send-esp-temp-to-root="saveEsp8266ToRootComponent"
+        >
+        </search-component>
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <temperature-chart
+                        v-bind:chart-data-object="rootChartDataObject"
+                        v-on:create-labels="createLabelArray"
+                        v-on:create-values="createValueArray"
+                    >
+                    </temperature-chart>
+                </div>
+            </div>
         </div>
 
-        <table v-if="Object.keys(esp8266DataArray).length">
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Feed</th>
-                    <th>Temperature</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="col s12 m6" v-if="Object.keys(esp8266DataArray).length">
+            <div class="card">
+                <div class="card-content">
+                    <div>
+                        <h3>Table of Feed results</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Feed</th>
+                                    <th>Temperature</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                <temperature-display-table
-                    v-for="dataPoint in esp8266DataArray"
-                    v-bind:temperature-display-table="dataPoint"
-                    v-bind:key="dataPoint.id"
-                >
-                </temperature-display-table>
-            </tbody>
-        </table>
-
-
-  <!-- <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Country</th>
-        <th scope="col">Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="name in info" :key="name.Country">
-        <td>{{name.Country}}</td>
-        <td>{{name.Value}}</td>
-      </tr>
-    </tbody>
-  </table> -->
-
+                                <tr is="temperature-display-table"
+                                    v-for="dataPoint in esp8266DataArray"
+                                    v-bind:temperature-display-table="dataPoint"
+                                    v-bind:key="dataPoint.id"
+                                >
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
     </main>
-    <footer></footer>
+
+    <footer class="page-footer blue lighten-1">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <!-- <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p> -->
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <!-- <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    </ul> -->
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2022 FlynntKnapp
+                    <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
     <script src="js/site.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+        });
+    </script>
+    <script src="secrets.js"></script>
 </body>
 </html>
