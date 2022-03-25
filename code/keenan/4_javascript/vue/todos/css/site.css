@@ -2,7 +2,6 @@ html {
     box-sizing: border-box;
 }
 
-/* check what this does again */
 *, 
 *:before, 
 *:after {
@@ -11,7 +10,6 @@ html {
 
 
 body {
-    display: flex;
     justify-content: center;
     align-items: center;
     color: #4a5258;
