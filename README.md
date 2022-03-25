@@ -10,6 +10,8 @@ M-F 9:30 am – 4:30 pm
 - January 17th (MLK Day)
 - February 21st (Presidents Day)
 - March 11th
+- April 1st
+- April 8th
 
 ### Staff
 
