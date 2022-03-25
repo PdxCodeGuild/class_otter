@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quotes in Vue</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css" />
+</head>
+<body>
+    <div id="searchQuotesApp" class="container">
+        <div>
+            <div class="input-field">
+                <i class="material-icons prefix">search</i>
+                <input v-model="searchText" id="search" type="search" required>
+            </div>
+            
+            <div>
+                <label>
+                    <input type="radio" name="searchTypeOptions" value="keyword" v-model="searchType" checked>
+                    <span>Keyword</span>
+                </label>
+                
+                <label>
+                    <input type="radio" name="searchTypeOptions" value="author" v-model="searchType">
+                    <span>Author</span>
+                </label>
+                
+                <label>
+                    <input type="radio" name="searchTypeOptions" value="tag" v-model="searchType">
+                    <span>Tag</span>
+                </label>
+
+                <button class="waves-effect waves-light btn right" v-on:click="this.search">Search</button>
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <div v-if="quotes.length">
+                <div v-for="quote in quotes" class="card">
+                    <div class="card-content">
+                        <p class="activator">{{ quote.body }}</p>
+                    </div>
+
+                    <div class="card-action right-align">
+                        <a :href="quote.url">{{ quote.author }}</a>
+                    </div>
+
+                    <div class="card-reveal">
+                        <span class="card-title"><i class="material-icons right">close</i></span>
+                        
+                        <div v-for="tag in quote.tags">
+                            <span class="chip">{{ tag }}</span>
+                        </div>
+
+                        <div v-if="quote.tags.length == 0">
+                            <p>No tags available</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+
+            <div v-if="shouldPaginate">
+                <pagination v-bind:page="page" v-on:search="search($event)"></pagination>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
