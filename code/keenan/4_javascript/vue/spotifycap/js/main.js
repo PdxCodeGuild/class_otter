@@ -20,7 +20,10 @@ const vm = new Vue({
                     'Authorization': `Basic ${ authstring }`,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            }).then(response => this.info = response.data)
+            }).then(response => {
+                this.info = response.data,
+                this.getGenres()
+            })
         },
 
         getGenres: function() {
@@ -34,9 +37,12 @@ const vm = new Vue({
                     'Authorization': `Bearer ${ this.info.access_token }`
                 }
             }).then(response => this.releases = response.data)
+            // there is not response.data, in releases it would be something like releases.albums.items which is the list of 20 objects
         }
 
         
+
+
         // putting this on hold beacuse I don't understand the input criteria
         // spotifySearch: function () {
         //     // this needs to include a 'search' field for user input to search
@@ -52,7 +58,6 @@ const vm = new Vue({
     },
     created: function() {
         this.getAuth()
-        this.getGenres()
     }
 
 })
