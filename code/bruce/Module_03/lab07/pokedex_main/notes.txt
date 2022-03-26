@@ -43,6 +43,16 @@ https://github.com/PdxCodeGuild/class_otter/blob/main/3%20Django/labs/lab07-poke
         C:\Users\Bruce\.virtualenvs\pokedex_main-6XpG_hGW\Scripts\activate.ps1
 
 
+# Start server:
+python .\manage.py runserver 8010
+
+
+# Link to 'home':
+http://localhost:8010/
+# Link to 'admin':
+http://localhost:8010/admin/
+
+
 ### STEP ###
 # Create virtual environment:
 pipenv install
@@ -75,18 +85,65 @@ python manage.py load_pokemon
 
 ### STEP ###
 # Start server
-python .\manage.py runserver 8000
+python .\manage.py runserver 8010
 
 
 ### STEP ###
-# 
+# superuser: dezzi
 
 
+### STEP ###
+# Install docutils and drf:
+pipenv install docutils==0.18.1 djangorestframework==3.13.1
 
 
-# Link to 'home':
-http://127.0.0.1:8000/students/
-# Link to 'admin':
-http://127.0.0.1:8000/admin/
+### STEP ###
+# Create app 'api':
+python .\manage.py startapp $APP_NAME
+python .\manage.py startapp api
+
+
+### STEP ###
+## URLS ##
+# Add api path() to 'pokedex_project.urls.py':
+urlpatterns = [
+    ...
+    path('api/v1/', include('api.urls')),
+    ...
+]
+
+
+### STEP ###
+## VIEWS ##
+# Create 'api.views.py':
+from rest_framework import viewsets
+from pokemon.models import Pokemon
+from .serializers import PokemonSerializer
+class PokemonViewSet(viewsets.ModelViewSet):
+    queryset = Pokemon.objects.all()
+    serializer_class = PokemonSerializer
+
+
+### STEP ###
+## SERIALIZERS ##
+# 'api.serializers.py':
+from rest_framework import serializers
+from pokemon.models import Pokemon
+class PokemonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pokemon
+        fields = ('number', 'name', 'height', 'weight')
+
+
 # Link to 'api':
-curl http://localhost:8000/api/v1/
+curl http://localhost:8010/api/v1/
+curl http://localhost:8010/api/v1/pokemons/
+http://localhost:8010/api/v1/pokemons/1/
+
+
+### STEP ###
+### STEP ###
+### STEP ###
+### STEP ###
+### STEP ###
+### STEP ###

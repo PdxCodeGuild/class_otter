@@ -47,7 +47,7 @@
 python .\manage.py runserver 8000
 
 # Link to 'admin':
-http://127.0.0.1:8000/admin/
+http://localhost:8000/admin/
 
 # curl request to api endpoint:
 curl http://localhost:8000/api/v1/
@@ -87,7 +87,7 @@ python .\manage.py startapp api
 ### STEP ###
 # Check for green rocket:
 python .\manage.py runserver 8000
-http://127.0.0.1:8000/
+http://localhost:8000/
 
 
 ### STEP ###
@@ -115,7 +115,7 @@ python .\manage.py createsuperuser
 ### STEP ###
 # Check for green rocket:
 python .\manage.py runserver 8000
-http://127.0.0.1:8000/
+http://localhost:8000/
 
 
 ### STEP ###
@@ -153,7 +153,7 @@ admin.site.register(Post)
 ### STEP ###
 # Start server and add some posts:
 python .\manage.py runserver 8000
-http://127.0.0.1:8000/admin/
+http://localhost:8000/admin/
 
 
 ### STEP ###
@@ -164,7 +164,7 @@ urlpatterns = [
     ...
 ]
 
-
+# Resource: https://www.django-rest-framework.org/api-guide/routers/
 ### STEP ###
 # Create 'api.urls.py':
 from django.urls import path

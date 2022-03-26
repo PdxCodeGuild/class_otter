@@ -24,6 +24,13 @@ const app1 = new Vue({
         barPadding: 5,
         barSpacer: '-o-',
         barString: '',
+
+        shoppingList: [
+            { name: 'Car', selected: false },
+            { name: 'Cat', selected: false },
+            { name: 'Dog', selected: false },
+            { name: 'Dew', selected: false },
+        ]
     },
     methods: {
         reverseMessage: function() {
