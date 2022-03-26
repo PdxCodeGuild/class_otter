@@ -8,13 +8,24 @@
 </head>
 
 <!-- where should this stylesheet call sit -->
-<link rel="stylesheet" href="css/style.css" />
+<!-- <link rel="stylesheet" href="css/style.css" /> -->
+<link rel="stylesheet" href="https://unpkg.com/mvp.css">
 
 <body>
     <h2>PLACEHOLDER: Spotify request Information</h2>
     <div id="app">
         {{ info }}
+    </div><br>
+
+    <h2>Genre Output</h2>
+    <div id="app">
+        {{ releases }}
     </div>
+
+    <!-- <div>
+        <input type="text" placeholder="Artist Search" v-model="artist">
+                <button v-on:click="">Submit</button>
+    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

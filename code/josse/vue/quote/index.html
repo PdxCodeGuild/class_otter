@@ -19,29 +19,29 @@
         </select>
         <input type="text" placeholder="Search" v-model="userText"></input>
         <button @click="userQuote">Submit</button>
-            <div class="container">
-                <ul v-if="Object.keys(quote).length && !Object.keys(results).length">
-                    <li v-for="quote in quote.quotes" :key="quote.id">
-                        <p>{{ quote.body }}     -- {{quote.author }}</p>
-                    </li>
-                </ul>
-            </div> 
+        <div class="container">
+            <ul v-if="Object.keys(quote).length && !Object.keys(results).length">
+                <li v-for="quote in quote.quotes" :key="quote.id">
+                    <p>{{ quote.body }} -- {{quote.author }}</p>
+                </li>
+            </ul>
+        </div>
 
-            <div class="container">
-                <ul v-if="Object.keys(results).length">
-                    <li v-for="quote in results.quotes" :key="quote.id">
-                        <p>{{ quote.body }}     -- {{quote.author }}</p>
-                    </li>
-                </ul>
-            </div> 
+        <div class="container">
+            <ul v-if="Object.keys(results).length">
+                <li v-for="quote in results.quotes" :key="quote.id">
+                    <p>{{ quote.body }} -- {{quote.author }}</p>
+                </li>
+            </ul>
+        </div>
 
 
 
         <footer>
-        <button @click="lastPage">back page</button>
-        <button @click="nextPage">next page</button>
+            <button @click="lastPage">back page</button>
+            <button @click="nextPage">next page</button>
         </footer>
-            
+
     </div>
 
 

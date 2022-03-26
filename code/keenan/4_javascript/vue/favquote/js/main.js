@@ -6,7 +6,7 @@ const vm = new Vue({
     },
 
     methods: {
-        // this was calling for a single quote based on the api, now it should hopefullyl pull 25 random
+        // this was calling for a single quote based on the api, now it should hopefully pull 25 random
         loadQuotes: function() {
             axios({
                 method: 'get',

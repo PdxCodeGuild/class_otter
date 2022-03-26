@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>All STUDENTS</h1>
+
+    {% for pupil in object_list %}
+    <ul>
+        <li> First Name:{{ pupil.first_name }}</li>
+        <li> Last Name:{{ pupil.last_name }}</li>
+        <li> Cohort:{{ pupil.cohort }}</li>
+        <li> Favorite Topic:{{ pupil.favorite_topic }}</li>
+        <li> Favorite Teacher:{{ pupil.favorite_teacher }}</li>
+        <li> Capstone:{{ pupil.capstone }}</li>
+    </ul>
+</body>
+
+</html>
