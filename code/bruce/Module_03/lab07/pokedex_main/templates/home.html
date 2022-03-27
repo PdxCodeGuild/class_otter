@@ -20,25 +20,37 @@
     <main id="app">
         <h1>[[ mainHeading ]]</h1>
         <h2>[[ stringObjectArrayHeading ]]</h2>
-        <ul
-            v-for="pokemon in pokemons"
-        >
-            <!-- How to make a url link to route to the individual Pokemon info? -->
-            <li>
-                <a :href="pokemon.localBrowsableApiUrl" target="_blank">
-                    API: [[ pokemon.name ]]
-                </a>
-                <button @click="viewSinglePokemon(pokemon)">
-                    View Single Pokemon
-                </button>
-                <button @click="loadSinglePokemon(pokemon)">
-                    Load Single Pokemon
-                </button>
-                <img :src=pokemon.image_front :alt="pokemon.imageFrontAltText">
-                <img :src=pokemon.image_back :alt="pokemon.imageBackAltText">
-            </li>
-        </ul>
-        <!-- "pokemons.0.name" -->
+        <div id="temp-load-and-clear-buttons">
+            <button @click="loadPokemons">Load All Pokemons<button>
+            <button @click="clearPokemons">Clear All Pokemons<button>
+            <!-- <button @click="clearAPokemon">Clear the Pokemon<button> -->
+        </div>
+        <template v-if="Object.keys(pokemons).length">
+            <ul
+                v-for="pokemon in pokemons"
+            >
+                <!-- How to make a url link to route to the individual Pokemon info? -->
+                <li>
+                    <a @click="viewSinglePokemon(pokemon)" href='#'>[[ pokemon.name ]]</a>
+                    <!-- <template v-if="Object.keys(pokemons).length > 1">
+                        <button @click="viewSinglePokemon(pokemon)">
+                            View Single Pokemon
+                        </button>
+                    </template> -->
+                    <!-- <template v-else>
+                        <button @click="loadPokemons">
+                            Load All Pokemon
+                        </button>
+                    </template> -->
+                    <img :src=pokemon.image_front :alt="pokemon.imageFrontAltText">
+                    <img :src=pokemon.image_back :alt="pokemon.imageBackAltText">
+                    <a :href="pokemon.localBrowsableApiUrl" target="_blank">
+                        API: [[ pokemon.name ]]
+                    </a>
+                </li>
+            </ul>
+        </template>
+            <!-- "pokemons.0.name" -->
     </main>
     <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -100,10 +112,18 @@
                     console.log(`Viewing single Pokemon!`)
                     console.log(`payload`, payload)
                     console.log(`payload.id: `, payload.id, ` - payload.name: `, payload.name)
+                    this.pokemons = []
+                    this.pokemons.push(payload)
                 },
                 loadSinglePokemon: function(payload) {
                     console.log(`Loading single Pokemon: `, payload.name)
-                }
+                },
+                clearPokemons: function() {
+                    this.pokemons = []
+                },
+                clearAPokemon: function() {
+                    this.aPokemon = {}
+                },
             },
             created: function() {
 
