@@ -1,2 +1,0 @@
-C:\Users\Scott\.virtualenvs\polls-iH-qcaeL\scripts\activat.ps1
-C:\Users\Scott\.virtualenvs\polls-iH-qcaeL\scripts\deactivate

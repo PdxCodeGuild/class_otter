@@ -1,3 +1,0 @@
-This is a test file
-Testing for multiple lines of text;
-in a single file

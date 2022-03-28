@@ -1,5 +1,0 @@
-result = text.toLowerCase();
-
-let index = fruits.indexOf("Apple");
-
-const myArray = text.split("");
