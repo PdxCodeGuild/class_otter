@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <p>{{ who_is_cool }} is cool!</p>
+
+    {% if temperature < 50 %}
+    <p>cold</p>
+    {% elif temperature < 80 %}
+    <p>warm</p>
+    {% else %}
+    <p>hot</p>
+    {% endif %}
+
+    <ul>
+        {% for item in shopping_list %}
+        <li>{{item}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+

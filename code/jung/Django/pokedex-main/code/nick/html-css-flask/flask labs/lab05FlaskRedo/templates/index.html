@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100&family=Fredoka:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"/>
+  <title>Unit Converter</title>
+</head>
+ <body>
+    <h1>What are the units you are converting from?</h1>
+    <form action="" method="post">
+      <input type="number" name="number" />
+      <select name="unit" id="unit">
+        <option value="ft">feet</option>
+        <option value="in">inches</option>
+        <option value="mi">miles</option>
+        <option value="m">meters</option>
+        <option value="km">kilometers</option>
+        <option value="yd">yards</option>
+      </select>
+      <label for="number"></label><br />
+      <button type="submit">Convert</button>
+      <h2>{{ output }} meters</h2>
+    </form>
+</body>
+</html>

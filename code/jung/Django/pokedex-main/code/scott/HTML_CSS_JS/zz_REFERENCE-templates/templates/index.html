@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- root element -->
+<html lang="en">
+  <!-- the head contains metadata about the document  -->
+  <head>
+    <!-- meta tags store general metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- page title, the text that appears on a browser -->
+    <title>under-construction</title>
+    <!-- import external css -->
+    <!-- <link rel="stylesheet" href="I:\class_otter\code\scott\HTML_CSS_JS\reset_style.css"/> -->
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="style_main.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  </head>
+  <!-- the body contains the actual document that will be shown to the user -->
+<body>
+<body>
+    <p>Hello {{name}}</p>
+
+    {% if temperature < 50 %}
+    <p>cold</p>
+    {% elif temperature < 80 %}
+    <p>warm</p>
+    {% else %}
+    <p>hot</p>
+    {% endif %}
+
+    <ul>
+    {% for item in shopping_list %}
+    <li>{{ item["description"] }}<br>Completed? {{ item["completed"] }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

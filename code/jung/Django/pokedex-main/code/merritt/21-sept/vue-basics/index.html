@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Is Cool</title>
+</head>
+<body>
+    <div id="app-4">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage('message goes here', 2, $event)">Reverse Message</button>
+        <ol v-if="todos.length">
+            <p>here are some todos:</p>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+        <ul>
+            <li v-for="num in numbers">{{ num }}</li>
+        </ul>
+        <input type="text" v-model="message">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

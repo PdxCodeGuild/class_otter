@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHIRP</title>
+    <link rel='stylesheet' href="{% static 'css/style.css' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hubballi&family=Rampart+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class='nav-left'>
+            <h1><a href='{% url 'posts:home'%}'>Chirp</a></h1>
+        </div>
+        <div class='nav-right'>
+            {% if user.is_authenticated %}
+            <p>Welcome Back {{user.username}}!<a href="{% url 'users:profile' user.username%}">profile page </a></p>
+            <p><a href="{% url 'logout' %}">Logout</a></p>
+            <p><a href="{% url 'posts:new' %}">New Chirp</a></p>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a></p>
+            <p><a href="{% url 'users:signup' %}">Sign Up</a></p>
+        {% endif %}
+
+        </div>
+    </header>
+    <div class='container'>
+        {% block content%}
+     
+
+        {% endblock content %}
+
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning</title>
+</head>
+<body>
+    <p id="inline-js-id">This is going to change.</p>
+    <button type="button" onclick='document.getElementById("inline-js-id").innerHTML = "Remember, inline JavaScript only okay for testing."'>Run inline JavaScript</button>
+    
+    <p id="external-js-change-id">Initial text</p>
+    <button type="button" onclick="externalChangeText()">External JS: 'Initial text' > 'The new text!'</button>
+    <button type="button" onclick="externalChangeTextBack()">External JS: 'The new text!' > 'Initial text'</button>
+
+    <div>
+        <h4>Let's add two numbers</h4>
+        <button type="button" onclick="promptThenAddTwoNumbers()">Prompt for two numbers then display sum</button>
+        <p>
+            <span>Results: </span><span id="add-two-numbers"></span>
+        </p>
+    </div>
+    
+    <div>
+        <h4>Loop example</h4>
+        <button type="button" onclick="promptAndContinue()">Cycle</button>
+        <p id="loop-for-5"></p>
+    </div>
+
+    <div>
+        
+    </div>
+    
+    
+    <!-- Keep at bottom since it is appear/disapper -->
+    <p id="element-to-hide">I'm going to appear, disappear, reappear.</p>
+
+    <script src="main.js"></script>    
+</body>
+</html>

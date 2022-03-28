@@ -1,0 +1,200 @@
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+    background-image: url("binary-whirlpool.png");
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;  
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+h1 {
+    font-family: "Palatino Linotype", Book Antiqua, "Palatino", serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #330099;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #550080;
+    font-weight: 700;
+    text-decoration: bold;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: capitalize;
+    text-align: center; 
+    text-align: justify;
+    text-justify: inter-word;
+    text-align: center;
+}
+
+#page0 {
+    color: #FFFF4D;
+    background: none;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #003322;
+    text-decoration: bold;
+    text-align: justify;
+    text-justify: inter-word;
+    text-align: center;
+    border-style:solid;
+    border-color: 00004D;
+    padding-left: 30px;
+}
+
+#page1 {
+    color: #E1A95F;
+    background: transparent;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #003322;
+    text-align: justify;
+    text-decoration: bold;
+    text-justify: inter-word;
+    text-align: center;
+    padding-left: 30px;
+}
+
+#quote {
+    font-size: 24px;
+    background: transparent;
+    text-align: justify;
+    text-justify: inter-word;
+    text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+    text-align: justify;
+    text-decoration: bold;
+    text-justify: inter-word;
+    text-align: center;
+    padding-left: 30px;
+}
+
+#quote0 {
+    color: #FFFF4D;
+    background: none;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;color: #003322;
+    text-decoration: bold;
+    text-align: justify;
+    text-justify: inter-word;
+    text-align: center;
+    border-style:solid;
+    border-color: 00004D;
+    padding-left: 38%;
+}
+
+#quote1 {
+    color: #FFFF4D;
+    background: none;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #e9bd92, 0 -18px 40px #F00;color: #003322;
+    text-decoration: bold;
+    text-align: justify;
+    text-justify: inter-word;
+    text-align: center;
+    border-style:solid;
+    border-color: 00004D;
+    padding-left: 30px;
+}
+
+.center {
+    display: block;
+
+      border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8%;
+    height: 10%;
+}
+

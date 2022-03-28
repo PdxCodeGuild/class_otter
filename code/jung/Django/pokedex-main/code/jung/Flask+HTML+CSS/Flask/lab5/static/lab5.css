@@ -1,0 +1,34 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+}
+
+header {
+    background-color: rgb(117, 102, 84);
+    border-bottom: 3px solid white;
+    color: white;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 0px;
+}
+
+.main {
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+#rotate, #text, #cipher, #submit {
+    margin-top: 10px;
+}

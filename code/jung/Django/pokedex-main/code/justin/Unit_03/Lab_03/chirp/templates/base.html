@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+
+        <title>Chirp</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="nav-wrapper">
+                    <a class="brand-logo" href="{% url 'posts:home' %}">Chirp</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        {% if user.is_authenticated %}
+                        <li><a class="waves-effect waves-light" href={% url 'posts:new' %}><i class="material-icons left">add</i>New Post</a></li>
+                        <li><a class="waves-effect waves-light" href={% url 'logout' %}><i class="material-icons left">logout</i>Logout</a></li>
+                        {% else %}
+                        <li><a class="waves-effect waves-light" href={% url 'login' %}><i class="material-icons left">login</i>Login</a></li>
+                        <li><a class="waves-effect waves-light" href={% url 'users:signup' %}><i class="material-icons left">person_add</i>Sign-up</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>

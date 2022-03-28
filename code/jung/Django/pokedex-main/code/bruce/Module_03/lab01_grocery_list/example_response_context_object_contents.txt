@@ -1,0 +1,7 @@
+example_response_context_object_contents.txt
+# Example response context object:
+response = self.client.get(reverse('grocery_list:index'))
+
+response.context:
+
+[{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: 'JhIJHWFWnf4z2DgqnhsdD9heM7S8yTxpAZ6oFQHX6GnwuLz0oDaIO8AaXP4V5PNH'>, 'request': <WSGIRequest: GET '/grocery-list/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x000001E97DE9F9A0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x000001E97DEE35B0>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x000001E97DEE27D0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'paginator': None, 'page_obj': None, 'is_paginated': False, 'object_list': <QuerySet [<GroceryItem: 1: A grocery item - Completed[False]>]>, 'uncompleted_groceries': <QuerySet [<GroceryItem: 1: A grocery item - Completed[False]>]>, 'view': <grocery_list.views.IndexView object at 0x000001E97DEE2B60>, 'completed_groceries': <QuerySet []>, 'deletable_groceries': <QuerySet [<GroceryItem: 1: A grocery item - Completed[False]>]>}]

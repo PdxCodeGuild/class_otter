@@ -1,0 +1,47 @@
+Flask static files (Example)
+Web applications often require static files, such as javascript files or CSS files that support Web display.
+
+Typically, you configure the Web server and it provides you with this. But during development Flask development, 
+Python parses all web requests.
+
+To solve this, these files are places in the static folder, which will be available in the application’s /static.
+Static files
+Where to place static files
+The URL of the special endpoint static is used to generate a static file. In your programs directory, 
+create a new directory named static.
+
+In this directory you can place images, javascript files, css files and many other files that don’t need a Python backend.
+
+Example
+In the following example, the javascript function defined in the hello.js is called on the OnClick event of the HTML button in index.html, 
+which is rendered on the “/“ URL of the Flask application.
+
+from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+   return render_template("index.html")
+
+if __name__ == '__main__':
+   app.run(debug = True)
+Then index.html
+
+<html>
+
+   <head>
+      <script type = "text/javascript" 
+         src = "{{ url_for('static', filename = 'hello.js') }}" ></script>
+   </head>
+   
+   <body>
+      <input type = "button" onclick = "sayHello()" value = "Say Hello" />
+   </body>
+   
+</html>
+Add a javascript file, hello.js
+
+function sayHello() {
+   alert("Hello World")
+}
+Related course: Python Flask: Create Web Apps with Flask
