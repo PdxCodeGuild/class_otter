@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from pokemon.models import Pokemon, Type
 from .serializers import PokemonSerializer, TypeSerializer
@@ -12,5 +13,5 @@ class PokemonViewSet(viewsets.ModelViewSet):
 class TypeViewSet(viewsets.ModelViewSet):
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
-    permission_classes = [IsLoggedInOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
