@@ -12,13 +12,13 @@ class NestedNameSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 class PokemonSerializer(serializers.ModelSerializer):
-    types = NestedTypeSerializer(read_only=True, many=True)
+    type_detail = NestedTypeSerializer(read_only=True, many=True, source="types")
     class Meta:
         model = models.Pokemon
-        fields = ('number', 'name', 'height', 'weight', 'image_front', 'image_back', 'caught_by', 'types')
+        fields = ('number', 'name', 'height', 'weight', 'image_front', 'image_back', 'caught_by', 'types', 'type_detail', 'id')
 
 class TypeSerializer(serializers.ModelSerializer):
     pokemon = NestedNameSerializer(read_only=True, many=True)
     class Meta:
         model = models.Type
-        fields = ('type', 'pokemon')
+        fields = ('type', 'pokemon', 'id')
