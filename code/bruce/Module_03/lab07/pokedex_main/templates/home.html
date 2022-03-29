@@ -30,7 +30,21 @@
                 <button @click="loadTypes">Load All Types<button>
                 <button @click="clearTypes">Clear All Types<button>
             </div>
+            <div>
+                <button @click="toggleEditMode">Turn on editMode</button>
+                <p>Edit Mode: [[ editMode ]]</p>
+            </div>
                 
+        </div>
+
+        <div v-if="editMode">
+            <h2>Operating in Edit Mode</h2>
+            <input type="text" v-model="pokemons[0].name" id="pokemons[0].name">
+            <input type="text" v-model="pokemons[0].height" id="pokemons[0].height">
+            <input type="text" v-model="pokemons[0].weight" id="pokemons[0].weight">
+        </div>
+        <div v-else>
+            <h2>No Edits Here!</h2>
         </div>
 
         <template v-if="Object.keys(pokemons).length">
@@ -81,6 +95,8 @@
                 pokemonsHeading: "Pokemons List",
                 typesHeading: "Types List",
 
+                editMode: false,
+
                 pokemons: [],
 
                 aPokemon: {
@@ -96,6 +112,19 @@
                     "imageBackAltText": "",
                 },
 
+                workingAddPokemon: {
+                    "number": 231,
+                    "name": "Snacker",
+                    "height": 1.3,
+                    "weight": 3.1,
+                    "image_front": "https://a.pokemon.url",
+                    "image_back": "https://a.pokemon.url",
+                    "caught_by": [
+                        1
+                    ],
+                    "type_detail": []
+                },
+
                 types: [],
 
                 aType: {},
@@ -105,7 +134,7 @@
             },
             methods: {
                 loadPokemons: function() {
-
+                    this.clearPokemonsAndTypes()
                     axios({
                         method: 'get',
                         url: `http://localhost:8010/api/v1/pokemons/`,
@@ -128,7 +157,7 @@
                 },
 
                 loadTypes: function() {
-
+                    this.clearPokemonsAndTypes()
                     axios({
                         method: 'get',
                         url: `http://localhost:8010/api/v1/types/`,
@@ -141,12 +170,12 @@
                             this.types[i].localBrowsableApiUrl = `http://localhost:8010/api/v1/types/${this.types[i].id}/`
                             // "types.2.pokemon_detail.2.number"
                             for (let j = 0; j < response.data[i].pokemon_detail.length; j++) {
-                                console.log(
-                                    `http://localhost:8010/api/v1/pokemons/${response.data[i].pokemon_detail[j].number}/`,
-                                    response.data[i].type,
-                                    response.data[i].pokemon_detail[j].number,
-                                    response.data[i].pokemon_detail[j].name
-                                )
+                                // console.log(
+                                //     `http://localhost:8010/api/v1/pokemons/${response.data[i].pokemon_detail[j].number}/`,
+                                //     response.data[i].type,
+                                //     response.data[i].pokemon_detail[j].number,
+                                //     response.data[i].pokemon_detail[j].name
+                                // )
                                 response.data[i].pokemon_detail[j].localBrowsableApiUrl = `http://localhost:8010/api/v1/pokemons/${response.data[i].pokemon_detail[j].number}/`
 
                             }
@@ -159,7 +188,21 @@
                     this.pokemons = []
                 },
 
+                addPokemon: function() {
+                    axios({
+                        method: 'post',
+                        url: `http://localhost:8010/api/v1/pokemons/`,
+                        data: this.workingAddPokemon,
+                    }).then(response => {
+                        console.log(`response: `, response)
+                    }).then(error => {
+                        console.log(error.response)
+                        console.log(error.response.data)                        
+                    })
+                },
+
                 viewSinglePokemon: function(payload) {
+                    this.clearPokemonsAndTypes()
                     console.log(`Viewing single Pokemon!`)
                     console.log(`payload`, payload)
                     console.log(`payload.id: `, payload.id, ` - payload.name: `, payload.name)
@@ -181,6 +224,15 @@
                 clearTypes: function() {
                     this.pokemons = []
                     this.types = []
+                },
+
+                clearPokemonsAndTypes: function() {
+                    this.pokemons = []
+                    this.types = []
+                },
+
+                toggleEditMode: function() {
+                    this.editMode = !this.editMode
                 },
 
                 getPokemonByTypeAndNumber: function(payload) {

@@ -142,8 +142,78 @@ http://localhost:8010/api/v1/pokemons/1/
 
 
 ### STEP ###
+# Add to 'pokedex_project.urls.py':
+urlpatterns = [
+    ...
+    path('api-auth/', include('rest_framework.urls')),
+    ...
+]
+
+
+### NOTE ###
+# Delete a few Pokemon, which were added in test.
+Can delete while logged in browsable api as user_name 'bruce'.
+Can also delete while not logged in browsable api as user_name 'bruce'.
+
+
 ### STEP ###
+# Create 'api.permissions.py' and add '':
+from rest_framework import permissions
+
+class IsLoggedInOrReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        print("request.user: ", request.user)
+        return True
+
+# Add to 'api.views.py':
+from .permissions import IsLoggedInOrReadOnly
+class PokemonViewSet(viewsets.ModelViewSet):
+    ...
+    permission_classes = [IsLoggedInOrReadOnly]
+    ...
+
+### NOTE ###
+# Not logged in:    request.user:  bruce
+# Logged in:        request.user:  AnonymousUser
+
+### NOTE ###
+# Access to api view 'TypeViewSet' still allowed since there are no 'permission_classes' set in 'TypeViewSet'.
+# Allows no access to api view 'PokemonViewSet':
+class IsLoggedInOrReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return False
+
+####################
+# Doesn't work.
+### NOTE ###
+# Provide access:
+# request.user = a_username
+
+# Deny access:
+# request.user == 'AnonymousUser' or request.user == ''
+####################
+
+
+### NOTE ###
+# is_authenticated
+https://docs.djangoproject.com/en/4.0/topics/auth/default/#authentication-in-web-requests
+
+
 ### STEP ###
+# Final 'IsLoggedInOrReadOnly' in 'api.permissions.py':
+class IsLoggedInOrReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        return request.user.is_authenticated
+
+
+### NOTE ###
+# A User needs to be logged in to change or add Pokemon.
+
+
 ### STEP ###
 ### STEP ###
 ### STEP ###
