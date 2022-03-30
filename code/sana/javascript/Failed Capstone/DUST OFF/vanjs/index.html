@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Van DUST OFF - Google Map API</title>
+    <!-- <script src="index.js"></script> -->
+
+    <style>
+        #map{
+            height:400px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>    
+<h1>Veteran Mental Health Medevac</h1>
+
+<div>
+    <script>
+        const successful_callback = function(position) {
+            console.log(position)
+            console.log(position.coords.GeolocationCoordinates.latitude)
+            console.log(position.coords.GeolocationCoordinates.longitude)
+
+        } 
+        const error_callback = function(position) {
+            console.log(position)
+
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            navigator.geolocation.getCurrentPosition(successful_callback, error_callback)
+        )
+
+        
+function initMap() {
+
+const uluru = { lat: 45.5152, lng: 122.6784 };
+
+const map = new google.maps.Map(document.getElementById("map"), {
+  zoom: 4,
+  center: uluru,
+});
+
+const marker = new google.maps.Marker({
+  position: uluru,
+  map: map,
+});
+}
+
+    </script>
+</div>
+
+<p>
+    latitude: <span id="latitude"></span>&deg;<br>
+</p>
+<p>
+    longitude: <span id="longitude"></span>&deg;<br>
+</p>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTj-NfEVW1Kgj16VejGxHFz7XeRhwAJ6w&callback=initMap&v=weekly"
+  
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src='index.js'></script>
+</body>
+</html>

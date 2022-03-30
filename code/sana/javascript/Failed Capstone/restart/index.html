@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Awful Kanye Quotes</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <img src="https://cutewallpaper.org/24/kanye-west-face-png/2167525355.jpg" alt="pic"> 
+    <div id="app">
+      <button class="button" role="button" @click="loadQuote">Remember you wanted this</button><br><br><br>
+      <blockquote>
+        <h1>
+          {{quoteResponse.quote}}
+        </h1>
+      </blockquote>
+      <i id="quote">
+      </i>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
