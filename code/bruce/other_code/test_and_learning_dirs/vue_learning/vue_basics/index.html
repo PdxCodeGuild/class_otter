@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .highlighted {
+            font-style: oblique;
+        }
+    </style>
     <title>Vue Basics</title>
 </head>
 <body>
@@ -38,6 +43,13 @@
                 <span>{{ todo.isCompleted }}</span>
             </li>
         
+        </ul>
+        <h3>Shopping List - Click item to toggle 'oblique'</h3>
+        <ul>
+            <li
+                v-for="item in shoppingList"
+                v-on:click="item.selected = !item.selected"
+                v-bind:class="{highlighted: item.selected}">{{ item.name }}</li>
         </ul>
         <p>
             <span>{{ somethingSaid }} </span>

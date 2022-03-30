@@ -35,25 +35,35 @@
         source C:/Users/Bruce/.virtualenvs/<virtual environment name>/Scripts/activate
     # PS:
         C:\Users\Bruce\.virtualenvs\<virtual environment name>\Scripts\activate.ps1
+    
+    # BASH:
+        source C:/Users/Bruce/.virtualenvs/drf_api_blog-cTj-QUHc/Scripts/activate
+    # PS:
+        C:\Users\Bruce\.virtualenvs\drf_api_blog-cTj-QUHc\Scripts\activate.ps1
+
 
 
 # Start server
 python .\manage.py runserver 8000
 
 # Link to 'admin':
-http://127.0.0.1:8000/admin/
-# Link to 'api':
+http://localhost:8000/admin/
+
+# curl request to api endpoint:
 curl http://localhost:8000/api/v1/
 
+# Link to 'api':
 http://localhost:8000/api/v1/
+http://localhost:8000/api/v1/posts/
+http://localhost:8000/api/v1/posts/1/
 
 
 # Project and app names:
 # Project:
-    library_project
+    blog_project
 # Apps:
-    students
-    users
+    posts
+    api
 
 
 ### STEP ###
@@ -64,6 +74,371 @@ pipenv install django==3.2 docutils==0.18.1 djangorestframework==3.13.1
 ### STEP ###
 # Set up Project:
 django-admin startproject $PROJECT_NAME .
-django-admin startproject library_project .
+django-admin startproject blog_project .
 
 
+### STEP ###
+# Create the two apps:
+python .\manage.py startapp $APP_NAME
+python .\manage.py startapp posts
+python .\manage.py startapp api
+
+
+### STEP ###
+# Check for green rocket:
+python .\manage.py runserver 8000
+http://localhost:8000/
+
+
+### STEP ###
+# Add the apps 'rest_framework', 'posts.apps.PostsConfig', and 'api.apps.ApiConfig' to 'blog_project.settings.py':
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    ...
+    'posts.apps.PostsConfig',
+    'api.apps.ApiConfig',
+    ...
+]
+
+
+### STEP ###
+# Migrate:
+python .\manage.py migrate
+
+
+### STEP ###
+# Create superuser:
+python .\manage.py createsuperuser
+
+
+### STEP ###
+# Check for green rocket:
+python .\manage.py runserver 8000
+http://localhost:8000/
+
+
+### STEP ###
+# Add to 'posts.models.py':
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey('auth.User', related_name="posts", on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    body = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-created']
+
+
+### STEP ###
+# makemigrations:
+python .\manage.py makemigrations
+python .\manage.py migrate
+
+
+### STEP ###
+# NOTE: We aren't adding 'api' model to 'admin.py' since we didn't create a model for it.
+# Register model 'Post' in 'posts.admin.py':
+from django.contrib import admin
+from .models import Post
+admin.site.register(Post)
+
+
+### STEP ###
+# Start server and add some posts:
+python .\manage.py runserver 8000
+http://localhost:8000/admin/
+
+
+### STEP ###
+# Add api path() to 'blog_project.urls.py':
+urlpatterns = [
+    ...
+    path('api/v1/', include('api.urls')),
+    ...
+]
+
+# Resource: https://www.django-rest-framework.org/api-guide/routers/
+### STEP ###
+# Create 'api.urls.py':
+from django.urls import path
+from rest_framework.routers import DefaultRouter
+from . import views
+urlpatterns = [
+    path('posts/<int:pk>/', views.PostDetail.as_view()),
+    path('posts/', views.PostList.as_view())
+]
+
+
+### STEP ###
+# Add to 'api.views.py':
+from rest_framework import generics
+from posts.models import Post
+from .serializers import PostSerializer
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+### STEP ###
+# Create 'api.serializers.py':
+from rest_framework import serializers
+from posts.models import Post
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'author', 'created', 'updated', 'body')
+
+
+### STEP ###
+# Check our simple 'api' routes in Django browsable api:
+http://localhost:8000/api/v1/posts/
+http://localhost:8000/api/v1/posts/1/
+
+
+### NOTE ###
+# Now, we're going to implement user login authorizations.
+Video: BS_Django_REST_05
+
+
+### STEP ###
+# NOTE: Now using 'ViewSet':
+# Modify 'api.views.py':
+from rest_framework import generics, viewsets
+from django.contrib.auth import get_user_model
+
+from posts.models import Post
+from .serializers import PostSerializer
+
+# Imports used here: viewsets, Post, PostSerializer
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+### STEP ###
+# NOTE: Now using 'DefaultRouter':
+# Modify 'api.urls.py':
+from django.urls import path
+from rest_framework.routers import DefaultRouter
+
+from . import views
+
+# Imports used here: DefaultRouter, views
+router = DefaultRouter()
+router.register('posts', views.PostViewSet, basename='posts')
+
+urlpatterns = router.urls
+
+
+### NOTE ###
+# We are now using the 'DefaultRouter', we set it up to use existing url 'posts' prefixes.
+# Test api:
+http://localhost:8000/api/v1/posts/
+http://localhost:8000/api/v1/posts/1/
+
+
+### STEP ###
+# Modify 'api.views.py':
+from rest_framework import generics, viewsets
+from django.contrib.auth import get_user_model
+
+from posts.models import Post
+from .serializers import PostSerializer, UserSerializer
+
+# Imports used here: viewsets, get_user_model, UserSerializer
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+
+
+### STEP ###
+# Modify (add to) 'api.urls.py':
+router.register('users', views.UserViewSet, basename='users')
+
+
+### STEP ###
+# Add to 'api.serializers.py':
+# Imports used here: serializers, get_user_model, 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = get_user_model()
+        # Where does 'posts' come frome?
+        fields = ('id', 'username', 'posts')
+
+
+### STEP ###
+# Add to 'api.urls.py':
+router.register('users', views.UserViewSet, basename='users')
+
+
+### NOTE ###
+# We are now using the 'DefaultRouter', we set it up to use existing url 'posts' prefixes.
+# Test api:
+http://localhost:8000/api/v1/users/
+http://localhost:8000/api/v1/users/1/
+
+
+Video: BS_Django_REST_05 00:19:49
+
+### STEP ###
+# Modify 'api.serializers.py':
+class UserSerializer(serializers.ModelSerializer):
+    ...
+    posts = PostSerializer(many=True, read_only=True)
+    ...
+
+
+### NOTE ###
+# All of a users' posts of each user show up in users views.
+
+### NOTE ###
+# users/1/ response example:
+{"id":1,"username":"admin","posts":[{"id":2,"title":"Admin's First Post","author":1,"created":"2022-03-25T10:54:39.632111Z","updated":"2022-03-25T10:54:39.632111Z","body":"Oh, NO!!!"}]}
+
+# users/2/ response example:
+{"id":2,"username":"Papa","posts":[{"id":4,"title":"Totally new, nth post","author":2,"created":"2022-03-25T14:13:30.441943Z","updated":"2022-03-25T14:13:30.441943Z","body":"How about that??"},{"id":3,"title":"Papa's Second Post","author":2,"created":"2022-03-25T10:54:59.895523Z","updated":"2022-03-25T10:54:59.895523Z","body":"How about that? A second post???"},{"id":1,"title":"Papa's First Post","author":2,"created":"2022-03-25T10:54:19.940174Z","updated":"2022-03-25T14:21:48.768848Z","body":"What's going on?"}]}
+
+-OR-
+
+# users/ response example:
+[{"id":1,"username":"admin","posts":[{"id":2,"title":"Admin's First Post","author":1,"created":"2022-03-25T10:54:39.632111Z","updated":"2022-03-25T10:54:39.632111Z","body":"Oh, NO!!!"}]},{"id":2,"username":"Papa","posts":[{"id":4,"title":"Totally new, nth post","author":2,"created":"2022-03-25T14:13:30.441943Z","updated":"2022-03-25T14:13:30.441943Z","body":"How about that??"},{"id":3,"title":"Papa's Second Post","author":2,"created":"2022-03-25T10:54:59.895523Z","updated":"2022-03-25T10:54:59.895523Z","body":"How about that? A second post???"},{"id":1,"title":"Papa's First Post","author":2,"created":"2022-03-25T10:54:19.940174Z","updated":"2022-03-25T14:21:48.768848Z","body":"What's going on?"}]}]
+
+
+### NOTE ###
+# A better way, rather than 'nesting' "PostSerializer' inside 'UserSerializer', is to use 'NestedPostSerializer'.
+# We can exclude the 'author' attribute from the 'NestedPostSerializer' since it will already be nested within an 'user'. Don't need to provide thata info twice.
+# 'NestedPostSerializer': 'Post' without 'user'.
+# 'NestedUserSerializer': 'User' without 'posts'.
+
+
+### STEP ###
+# Final 'api.serializers.py':
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+
+from posts.models import Post
+
+class NestedPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'created', 'updated', 'body')
+
+class NestedUserSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = get_user_model()
+    class Meta: 
+        model = get_user_model()
+        # I removed author 'id' since it is shown in post 'author' and there is only one 'author' per 'post'.
+        # fields = ('id', 'username')
+        fields = ('username',)
+
+class PostSerializer(serializers.ModelSerializer):
+    author_detail = NestedUserSerializer(read_only=True, source='author')
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'author', 'author_detail', 'created', 'updated', 'body')
+
+class UserSerializer(serializers.ModelSerializer):
+    posts_detail = NestedPostSerializer(many=True, read_only=True, source='posts')
+    # 'read_only=True' is needed since a 'user' could have multiple 'post's.
+    class Meta: 
+        model = get_user_model()
+        # Where does 'posts' come frome? # 'related_name="posts"' in 'posts.models.Post.author'?
+        # 'posts' was providing an array of post ids, now (from above) it will provide array of actual post objects.
+        fields = ('id', 'username', 'posts', 'posts_detail')
+
+
+### STEP ###
+# To enable login/logout of browsable api:
+# Add to 'blog_project.urls.py':
+urlpatterns = [
+    ...
+    path('api-auth', include('rest_framework.urls')),
+    ...
+]
+
+
+### STEP ###
+# Modify 'api.views.py':
+# Add to 'PostViewSet' and 'UserViewSet':
+class PostViewSet(viewsets.ModelViewSet):
+    ...
+    permission_classes = [IsAuthorOrReadOnly]
+    ...
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    ...
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    ...
+
+
+
+### STEP ###
+# Create 'api.permissions.py':
+from rest_framework import permissions
+
+class ReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return True if request.method in permissions.SAFE_METHODS else False
+
+class IsTA(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.username == 'liz'
+
+class IsAuthorOrReadOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.author == request.user
+
+
+### STEP ###
+# Add to 'blog_project.urls.py':
+from django.views.generic import TemplateView
+
+urlpatterns = [
+    ...
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    ...
+]
+
+
+### STEP ###
+# Create 'templates.home.html':
+<h1>Goodbuy, World!</h1>
+Goodbuy, World!
+
+
+### STEP ###
+# Test that template is rendering:
+http://localhost:8000/
+
+
+### STEP ###
+# Modify 'api.urls.py':
+urlpatterns = router.urls + [
+    path('currentuser/', views.CurrentUserView.as_view()),
+]
+
+
+### STEP ###
+# Modify 'api.views.py':
+class CurrentUserView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    def get_object(self):
+        return self.request.user
+
+
+
+### STEP ###
+### STEP ###

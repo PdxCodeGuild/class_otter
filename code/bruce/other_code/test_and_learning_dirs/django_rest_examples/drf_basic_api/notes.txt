@@ -58,9 +58,8 @@ http://localhost:8000/api/v1/
 # Project:
     library_project
 # Apps:
-    students
-    users
-
+    books
+    api
 
 ### STEP ###
 # Create virtual environment and install 'Django' and 'docutils':

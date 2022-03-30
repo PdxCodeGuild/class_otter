@@ -8,6 +8,67 @@
 // https://www.w3schools.com/jsref/jsref_gethours.asp
 // 
 
+
+Vue.component('submit-button-component', {
+    data: function() {
+        return {
+            userName: 'FlynntKnapp',
+
+            tempAvailableFeeds: [
+                'feed01',
+                'feed02',
+            ],
+
+            flynntKnappFeeds: [],
+
+            theCurrentResponse: {},
+        }
+    },
+
+    template: `
+        <ul>
+            <li><h4>Hard-Coded Feeds</h4></li>
+            <li v-for="feed in tempAvailableFeeds">{{ feed }}</li>
+            <li><h4>Programmatically Obtained Feeds!</h4></li>
+            <li v-for="feed in flynntKnappFeeds">{{ feed }}</li>
+        </ul>
+    `,
+
+    methods: {
+        loadFlynntKnappFeeds: function() {
+            console.log(`We're trying to get the Adafruit Feeds for FlynntKnapp!`)
+            console.log(`this.userName`, this.userName)
+            console.log(`adafruit.key`, adafruit.key)
+            axios({
+                method: 'get',
+                // https://io.adafruit.com/api/v2/{username}/feeds/
+                url: `https://io.adafruit.com/api/v2/${ this.userName }/feeds/`,
+                params: {
+                    'X-AIO-Key': adafruit.key,
+                }
+            }).then(response => {
+                console.log(`response`, response)
+                const workingFeedsList = []
+                // "theCurrentResponse.data.0.key"
+                for (let i = 0; i < response.data.length; i++) {
+                    workingFeedsList.push(response.data[i].key)
+                }
+                this.flynntKnappFeeds = workingFeedsList
+            }).catch(error => {
+                console.log(error.response.data)
+            })
+        },
+
+
+    },
+
+    mounted: function() {
+        this.adafruit.key = adafruit.key
+        this.loadFlynntKnappFeeds()
+    }
+})
+
+
 Vue.component('search-component', {
     // Move search functionality to this component.
     data: function() {
@@ -94,7 +155,11 @@ Vue.component('search-component', {
                     'X-AIO-Key': adafruit.key,
                 }
             }).then((response) => {
-                this.sendSomethingToRoot(response.data)
+                const listOfFeeds = []
+                for (let i = 0; i < response.data.length; i++) {
+                    listOfFeeds.push(response.data[i].key)
+                }
+                this.sendSomethingToRoot(listOfFeeds)
             }).catch(error => {
                 console.log(error.response.data)
             })
@@ -276,6 +341,7 @@ Vue.component('temperature-chart', {
 const vm = new Vue({
     el: '#app',
     data: {
+        listOfFlynntKnappFeeds: [],
         esp8266DataArray: [],
         // esp8266ChartDataArray: [],
 

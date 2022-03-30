@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunbun's Pokedex</title>
+</head>
+<body>
+    {% csrf_token %}
+    <section>
+        {% if user.is_authenticated %}
+        <h1 id="user-welcome">Welcome {{ user.username }}!</h1>
+        <p><a href="{% url 'logout' %}">Logout</a><p>
+        {% else %}
+        <h1>Welcome, visitor!</h1>
+        <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
+        {% endif %}
+    </section>
+    <main id="app">
+
+        <h1>[[ mainHeading ]]</h1>
+
+        <div id="temp-load-and-clear-buttons">
+            <div>
+                <button @click="loadPokemons">Load All Pokemons<button>
+                <button @click="clearPokemons">Clear All Pokemons<button>
+            </div>
+            <div>
+                <button @click="loadTypes">Load All Types<button>
+                <button @click="clearTypes">Clear All Types<button>
+            </div>
+            <div v-if="Object.keys(pokemons).length">
+                <button @click="toggleEditMode">Toggle Edit and Delete Mode</button>
+                <p>Edit Mode: [[ editMode ]]</p>
+            </div>
+                
+        </div>
+
+        <div v-if="editMode">
+            <h2>Operating in Edit Mode</h2>
+            <input type="text" v-model="pokemons[0].number" id="pokemons[0].number">
+            <input type="text" v-model="pokemons[0].name" id="pokemons[0].name">
+            <input type="text" v-model="pokemons[0].height" id="pokemons[0].height">
+            <input type="text" v-model="pokemons[0].weight" id="pokemons[0].weight">
+            <button @click="saveEditedPokemon(pokemons[0])">Save Edits</button><br>
+            <button @click="deleteEditedPokemon(pokemons[0])">Delete Pokemon</button>
+        </div>
+        <div v-else>
+            <h2>No Edits Here!</h2>
+        </div>
+
+        <div v-if="Object.keys(pokemons).length && !editMode">
+            <h2>Add a Pokemon here</h2>
+            <label for="current-pokemon-number">Pokemon Number</label>
+            <input type="text" v-model="aPokemon.number" id="current-pokemon-number"><br>
+            <label for="current-pokemon-name">Pokemon Name</label>
+            <input type="text" v-model="aPokemon.name" id="current-pokemon-name"><br>
+            <label for="current-pokemon-height">Pokemon Height</label>
+            <input type="text" v-model="aPokemon.height" id="current-pokemon-height"><br>
+            <label for="current-pokemon-weight">Pokemon Weight</label>
+            <input type="text" v-model="aPokemon.weight" id="current-pokemon-weight"><br>
+            <label for="current-pokemon-image-front">Pokemon Front Image URL</label>
+            <input type="text" v-model="aPokemon.image_front" id="current-pokemon-image-front"><br>
+            <label for="current-pokemon-image-back">Pokemon Back Image URL</label>
+            <input type="text" v-model="aPokemon.image_back" id="current-pokemon-image-back"><br>
+            <button @click="addPokemon(aPokemon)">Add a Pokemon</button>
+        </div>
+
+        <template v-if="Object.keys(pokemons).length">
+        <h2>[[ pokemonsHeading ]]</h2>
+            <ul
+                v-for="pokemon in pokemons"
+            >
+                <li>
+                    <a @click="getASinglePokemonFromApi(pokemon)" href='#'>[[ pokemon.name ]]</a>
+                    <img :src=pokemon.image_front :alt="pokemon.imageFrontAltText">
+                    <img :src=pokemon.image_back :alt="pokemon.imageBackAltText">
+                    <a :href="pokemon.localBrowsableApiUrl" target="_blank">
+                        API: [[ pokemon.name ]]
+                    </a>
+                </li>
+            </ul>
+        </template>
+
+        <template v-if="Object.keys(types).length">
+        <h2>[[ typesHeading ]]</h2>
+
+            <ul
+                v-for="type in types"
+            >
+                <li>
+                    <a @click="viewSingleType(type)" href='#'>[[ type.type ]]</a>
+                    <ul v-for="pokemon in type.pokemon_detail">
+                        <li><a href="#" @click="getASinglePokemonFromApi(pokemon)">[[ pokemon.name ]]</a></li>
+                        <li><a :href="pokemon.localBrowsableApiUrl" target="_blank">API: [[ pokemon.name ]]</a></li>
+                    </ul>
+                </li>
+                <a :href="type.localBrowsableApiUrl" target="_blank">
+                    API: [[ type.type ]]
+                </a>
+            </ul>
+        </template>
+
+    </main>
+    <footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            delimiters: ['[[',']]'],
+            data: {
+                mainHeading: "Pokedex!",
+                pokemonsHeading: "Pokemons List",
+                typesHeading: "Types List",
+
+                editMode: false,
+
+                pokemons: [],
+
+                aPokemon: {},
+
+                // aPokemon: {
+                //     "number": 751,
+                //     "name": "Snackerolio",
+                //     "height": 1.3,
+                //     "weight": 3.1,
+                //     "image_front": "https://brucestull.com/",
+                //     "image_back": "https://github.com/brucestull",
+                //     "caught_by": [
+                //         1
+                //     ],
+                // },
+
+                // workingAddPokemon: {
+                //     "number": 232,
+                //     "name": "Snacker",
+                //     "height": 1.3,
+                //     "weight": 3.1,
+                //     "image_front": "https://brucestull.com/",
+                //     "image_back": "https://github.com/brucestull",
+                //     "caught_by": [
+                //         1
+                //     ],
+                //     "type_detail": []
+                // },
+
+                // workingEditPokemon: {
+                //     "number": 232,
+                //     "name": "Snacker",
+                //     "height": 1.3,
+                //     "weight": 3.1,
+                //     "image_front": "https://brucestull.com/",
+                //     "image_back": "https://github.com/brucestull",
+                //     "caught_by": [
+                //         1
+                //     ],
+                //     "type_detail": []
+                // },
+
+                types: [],
+
+                aType: {},
+
+                csrf_token: "",
+
+                postResponse: {},
+
+            },
+            methods: {
+                loadPokemons: function() {
+                    this.clearPokemonsAndTypes()
+                    axios({
+                        method: 'get',
+                        url: `/api/v1/pokemons/`,
+               
+                    }).then((response) => {
+                        console.log(`response: `, response)
+                        for (let i = 0; i < response.data.length; i++) {
+                            this.pokemons.push(response.data[i])
+                            this.pokemons[i].localBrowsableApiUrl = `/api/v1/pokemons/${this.pokemons[i].id}/`
+                            this.pokemons[i].imageFrontAltText = `Front view of ${ this.pokemons[i].name }`
+                            this.pokemons[i].imageBackAltText = `Back view of ${ this.pokemons[i].name }`
+                        }
+                        console.log(`this.pokemons: `, this.pokemons)
+                    }).catch(error => {
+                        console.log(error.response)
+                        console.log(error.response.data)
+                    })
+                    this.types = []
+                },
+
+                loadTypes: function() {
+                    this.clearPokemonsAndTypes()
+                    this.editMode = false
+                    axios({
+                        method: 'get',
+                        url: `/api/v1/types/`,
+               
+                    }).then((response) => {
+                        console.log(`response`, response)
+                        for (let i = 0; i < response.data.length; i++) {
+                            this.types.push(response.data[i])
+                            this.types[i].localBrowsableApiUrl = `/api/v1/types/${this.types[i].id}/`
+                            for (let j = 0; j < response.data[i].pokemon_detail.length; j++) {
+                                response.data[i].pokemon_detail[j].localBrowsableApiUrl = `/api/v1/pokemons/${response.data[i].pokemon_detail[j].id}/`
+
+                            }
+                        }
+                        console.log(`this.types: `, this.types)
+                    }).catch(error => {
+                        console.log(error.response)
+                        console.log(error.response.data)
+                    })
+                    this.pokemons = []
+                },
+
+                saveEditedPokemon: function(payload) {
+                    console.log("Attempting to Edit a Pokemon: ", payload)
+                    console.log("Attempting to Edit: ", payload.name)
+                    workingPayload = {
+                        "id": payload.id,
+                        "number": payload.number,
+                        "name": payload.name,
+                        "height": payload.height,
+                        "weight": payload.weight,
+                    }
+                    console.log("Changed Properties", workingPayload)
+                    axios({
+                        method: 'patch',
+                        url: `/api/v1/pokemons/${workingPayload.id}/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                        data: workingPayload
+                    }).then(response => {
+                        this.editMode = false
+                        this.loadPokemons()
+                    }).catch(error => {
+                        console.log(`Is the error caught?`)
+                        console.log(error.response.data)                        
+                    })
+                },
+
+                deleteEditedPokemon: function(payload) {
+                    console.log(`We're really tired, but we're trying to delete: `, payload)
+                    axios({
+                        method: 'delete',
+                        url: `/api/v1/pokemons/${payload.id}/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                    }).then(response => {
+                        this.editMode = false
+                        this.loadPokemons()
+                        // this.clearPokemonsAndTypes()
+                    }).catch(error => {
+                        console.log(error.response.data)                        
+                    })
+                },
+
+                addPokemon: function() {
+                    console.log("Attempting to Add a Pokemon")
+                    axios({
+                        method: 'post',
+                        url: `/api/v1/pokemons/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                        data: this.aPokemon
+                    }).then(response => {
+                        this.loadPokemons()
+                        // this.aPokemon = {}
+                    }).catch(error => {
+                        console.log(error.response.data)                        
+                    })
+                },
+
+                getASinglePokemonFromApi: function(payload) {
+                    console.log("Getting a single pokemon, hopefully this one: ", payload.name)
+                    this.clearPokemonsAndTypes()
+                    axios({
+                        method: 'get',
+                        url: `/api/v1/pokemons/${ payload.id }/`,
+                    }).then((response) => {
+                        console.log(`response: `, response)
+                        this.pokemons.push(response.data)
+                        this.pokemons[0].localBrowsableApiUrl = `http://localhost:8010/api/v1/pokemons/${this.pokemons[0].id}/`
+                        this.pokemons[0].imageFrontAltText = `Front view of ${ this.pokemons[0].name }`
+                        this.pokemons[0].imageBackAltText = `Back view of ${ this.pokemons[0].name }`
+                        console.log(`this.pokemons: `, this.pokemons)
+                    }).catch(error => {
+                        console.log(error.response)
+                        console.log(error.response.data)
+                    })
+                },
+
+                viewSinglePokemon: function(payload) {
+                    this.clearPokemonsAndTypes()
+                    console.log(`Viewing single Pokemon!`)
+                    // console.log(`payload`, payload)
+                    console.log(`payload.id: `, payload.id, ` - payload.name: `, payload.name)
+                    this.pokemons.push(payload)
+                },
+
+                viewSingleType: function(payload) {
+                    console.log(`Viewing single Type: `, payload.type)
+                    this.clearPokemonsAndTypes()
+                    this.types.push(payload)
+                },
+
+                clearPokemons: function() {
+                    this.pokemons = []
+                },
+                
+                clearTypes: function() {
+                    this.types = []
+                },
+
+                clearPokemonsAndTypes: function() {
+                    this.pokemons = []
+                    this.types = []
+                },
+
+                toggleEditMode: function() {
+                    this.editMode = !this.editMode
+                },
+            },
+            created: function() {
+
+            },
+            mounted: function() {
+                this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+                this.loadPokemons()
+            }
+        })
+    </script>
+</body>
+</html>
