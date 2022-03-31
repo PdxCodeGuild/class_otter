@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Pokedex</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+
+</head>
+<body>
+    {% csrf_token %}
+    <div id="app">
+        
+        {% if user.is_authenticated %}
+
+            <h1>Welcome {{ user.username }}!</h1>
+            <p><a href="{% url 'logout' %}">Logout</a><p>
+            <h3>Search</h3>
+            <input type="text" v-model="userFilter" @keyup.enter="filterPoke">
+            <button v-on:click="filterPoke">Submit</button>
+            <h3>Create</h3>
+            <input type="text" v-model="newPokemon">
+            <select v-model="newType">
+                <option v-for="type in type" :value="type.id">[[ type.type ]]</option>
+            </select>
+            <button v-on:click="createPokemon">Submit</button>  
+
+            <div class="all">
+                <div v-for="poke in searchPoke" :key="poke.id">
+                    <div>
+                        <p>[[ poke.name ]]</p>
+                        <p>[[ poke.height ]]</p>
+                        <p>[[ poke.weight ]]</p>
+                        <img :src="poke.image_front">
+                        <button v-on:click="deletePokemon(poke)">Delete</button>
+                        <button v-on:click="toggle=true">Edit</button>
+                    </div>
+                    <div v-if="toggle===true">
+                        <input type="number" v-model="statHeight">
+                        <input type="number" v-model="statWeight">
+                        <button v-on:click="editPokemon(poke)">Submit</button>    
+                    </div>
+                </div>
+            </div>
+
+            <h3>Main List:</h3>
+
+            <div class="all">
+                <div v-for="poke in pokemon" :key="poke.id" class="list">
+                    <p>Name: [[ poke.name ]]</p>
+                    <p>Types:</p>
+                    <div v-for="type in poke.type_detail" :key="type.id">
+                        <p>[[ type.type ]]</p>
+                    </div>
+                    <img :src="poke.image_front">
+                </div>
+            </div>
+
+
+        {% else %}
+
+            <h1>Welcome, visitor!</h1>
+            <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
+            
+            
+            
+        {% endif %}
+    
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script >
+        const vm = new Vue({
+            el: '#app',
+            delimiters: ['[[', ']]'],
+            data: {
+                pokemon: [],
+                type: [],
+                searchPoke: [],
+                userFilter: "",
+                newPokemon: "",
+                newNumber: 152,
+                newType: [],
+                toggle: false,
+                newHeight: 4,
+                newWeight: 3,
+                newUser: [1],
+                newImageF: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+                newImageB: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
+                statHeight: 0,
+                statWeight: 0,
+                csrf_token: "",
+                working: "Hi There"
+            },
+            methods: {
+                loadPokemon: function() {
+                    axios({
+                        method: 'get',
+                        url: '/api/'
+                    }).then(response => this.pokemon = response.data)
+                },
+                loadType: function() {
+                    axios({
+                        method: 'get',
+                        url: '/api/type/'
+                    }).then(response => this.type = response.data)
+                },
+                createPokemon: function() {
+                    axios({
+                        method: 'post',
+
+                        url: '/api/',
+
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+
+                        data: {
+                            "number": this.newNumber,
+                            "name": this.newPokemon,
+                            "height": this.newHeight,
+                            "weight": this.newWeight,
+                            "image_front": this.newImageF,
+                            "image_back": this.newImageB,
+                            "caught_by": this.newUser,
+                            "types": [this.newType]
+                            }
+
+                        }).then(response => {
+                            this.loadPokemon()
+                            this.newPokemon=""
+                            this.newType=""
+                            this.newNumber+=1
+                        })
+                        
+                    
+                },
+                editPokemon: function(poke) {
+                    axios({
+                        method: 'patch',
+                        url: `/api/${poke.id}/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                        data: {
+                            "height": this.statHeight,
+                            "weight": this.statWeight
+                        }
+                    })
+                },
+                deletePokemon: function(poke) {
+                    axios({
+                        method: 'delete',
+                        url: `/api/${poke.id}/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        }
+
+                    })
+                },                       
+                filterPoke: function() {
+                    this.searchPoke = []
+                    for (let poke of this.pokemon){
+                        
+                        if (poke["name"].includes(this.userFilter)) {
+                            this.searchPoke.push(poke)
+                        }
+                        for (let type of poke.type_detail) {
+                            if (type.type.includes(this.userFilter)) {
+                                this.searchPoke.push(poke)
+                            }
+                        }
+                    }
+                    this.userFilter = "" 
+                }
+            },
+            created: function() {
+                this.loadPokemon()
+                this.loadType()
+            },
+            mounted: function() {
+                this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+            }
+            
+        })
+    </script>
+
+</body>

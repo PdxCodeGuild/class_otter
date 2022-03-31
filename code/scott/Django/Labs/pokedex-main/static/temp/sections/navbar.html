@@ -1,0 +1,71 @@
+{%load static%}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+
+    <!-- Icons for Navbar -->
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'pokemon:index' %}">
+      <i class="bi bi-house-door-fill" ></i>
+      </a>
+
+      <div class="navbar" id="navbarNavDropdown">
+  
+
+          <button href='#' class="btn dropdown-toggle" id="dropdownElements" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Elements
+          </button>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownElements">
+
+            <li><a class="dropdown-item text-dark" href="{% url 'pokemon:select_element' 'electric' %}" ><i class="bi bi-lightning-fill" ></i> Electric </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'water' %}" class="dropdown-item text-dark">
+            <i class="bi bi-droplet-fill"></i> Water </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'grass' %}" class="dropdown-item text-dark">
+              <i class="bi bi-flower1"></i> Grass </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'fire' %}" class="dropdown-item text-dark">
+            <i class="bi bi-thermometer-high"></i> Fire </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'fighting' %}" class="dropdown-item text-dark">
+              <i class="bi bi-emoji-dizzy-fill"></i> Fighting </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'flying' %}" class="dropdown-item text-dark">
+            <i class="bi bi-wind"></i> Flying </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'poison' %}" class="dropdown-item text-dark">
+              <i class="bi bi-radioactive"></i> Poison </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'ghost' %}" class="dropdown-item text-dark">
+            <i class="bi bi-snapchat"></i> Ghost </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'rock' %}" class="dropdown-item text-dark">
+              <i class="bi bi-gem"></i> Rock </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'Psychic' %}" class="dropdown-item text-dark">
+              <i class="bi bi-stars"></i> Pyshcic </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'fairy' %}" class="dropdown-item text-dark">
+              <i class="bi bi-magic"></i> Fairy </a></li>
+
+            <li><a href="{% url 'pokemon:select_element' 'ice' %}" class="dropdown-item text-dark">
+              <i class="bi bi-snow3"></i> Ice </a></li>
+
+        </ul>
+    </div>
+
+    <!-- Form for Navbar Search -->
+      <form action="{% url 'pokemon:index' %}" class="d-flex" method="POST"  >
+
+        <fieldset>
+        <input class="form-control me-2" type="text" placeholder="Enter Name or Number" aria-label="Search" name="pokemon_search" id="pokemon_search">
+        </fieldset>
+        <button class="btn btn-outline-dark mx-1" type="submit">Search</button>
+        
+
+        {% csrf_token %}
+
+      </form>
+    </div>
+</nav>

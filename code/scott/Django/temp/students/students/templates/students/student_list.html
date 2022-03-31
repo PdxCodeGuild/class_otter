@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+</head>
+<body>
+    <h1>All Students</h1>
+    {% for student in object_list %}
+    <ul>
+        <li>Username: {{ student.username }}</li>
+        <li>Firstname: {{ student.firstname }}</li>
+        <li>Lastname: {{ student.lastname }}</li>
+        <li>Cohort: {{ student.cohort }}</li>
+        <li>Favorite Topic: {{ student.favorite_topic }}</li>
+        <li>Favorite Teacher : {{ student.favorite_teacher }}</li>
+        <li>Capstone: {{ student.capstone }}</li>
+        <li>Capstone: {{ student.created }}</li>
+        <li>Capstone: {{ student.updated }}</li>
+
+    </ul>
+    {% endfor %}
+</body>
+</html>
