@@ -53,7 +53,7 @@ var app4 = new Vue({
 
         remove: function (remove) {
 
-            this.todos.splice(remove, 1);
+            this.todos.splice(this.todos.indexOf(remove), 1);
 
         }
 

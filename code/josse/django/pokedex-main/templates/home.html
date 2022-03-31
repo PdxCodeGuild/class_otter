@@ -1,7 +1,147 @@
-{% if user.is_authenticated %}
-<h1>Welcome {{ user.username }}!</h1>
-<p><a href="{% url 'logout' %}">Logout</a><p>
-{% else %}
-<h1>Welcome, visitor!</h1>
-<p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+    <h1>Welcome {{ user.username }}!</h1>
+    <p><a href="{% url 'logout' %}">Logout</a>
+    <p>
+        {% else %}
+    <h1>Welcome, visitor!</h1>
+    <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
+    {% endif %}
+    <div id='app'>
+        <input @keyup.enter="name" type="text" placeholder="Create Pokemon Name" v-model="createName"></input>
+        <input @keyup.enter="name" type="number" placeholder="enter pokemon height" v-model="createHeight"></input>
+        <input @keyup.enter="name" type="number" placeholder="enter pokemon weight" v-model="createWeight"></input>
+        <button @click="createPokemon">Submit</button>
+        <hr>
+        
+        
+        
+        
+        
+        <div v-for='monster in pokemon' :key='monster.id'>
+            <p>[[monster.name]]</p>
+            <p><button @click="deletePokemon(monster)">Delete</button></p>
+            <p><img :src="monster.image_front" /></p>
+            <input @keyup.enter="editPokemon(monster)" type="text" placeholder="edit Pokemon" v-bind="thePokemonName">
+            <p><button @click="editPokemon(monster)">Update</button></p>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            delimiters: ['[[', ']]'],
+            data: {
+                pokemon: [],
+                csrf_token: "",
+                createName: "",
+                createWeight: 0,
+                createHeight: 0,
+
+
+                newPokemon: {
+
+                    "number": null,
+                    "name": "",
+                    "height": null,
+                    "weight": null,
+                    "image_front": "",
+                    "image_back": "",
+                    "type_detail": []
+
+                },
+
+                thePokemonName: "",
+            },
+            methods: {
+                loadpokemon: function () {
+                    axios({
+                        method: 'get',
+                        url: '/api/v1/pokemon/'
+                    }).then(response => this.pokemon = response.data)
+                },
+                createPokemon: function () {
+                    axios({
+                        method: 'post',
+                        url: '/api/v1/pokemon/',
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                        data: {
+
+                            "number": 152,
+                            "name": this.createName,
+                            "height": this.createHeight,
+                            "weight": this.createWeight,
+                            "image_front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+                            "image_back": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
+                            "type_detail": []
+
+                        }
+                    }).then(response => this.loadpokemon())
+                },
+
+                deletePokemon: function (pokemon) {
+                    console.log(`deleting a ${pokemon}`)
+                    console.log("deleting a pokemon", pokemon)
+                    axios({
+                        method: 'delete',
+                        url: `/api/v1/pokemon/${pokemon.id}/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                    }).then(response => this.loadpokemon())
+
+
+                },
+
+
+                editPokemon: function(pokemon){
+                    console.log("updating a pokemon", pokemon)
+                    console.log(this.thePokemonName)
+                    axios({
+                        method: 'patch',
+                        url: `/api/v1/pokemon/${pokemon.id}`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                        data: {
+
+                            "name": this.createName,
+
+                        }
+                    }).then(response => this.loadpokemon())
+
+                }
+
+
+            },  
+
+            created: function () {
+                this.loadpokemon()
+            },
+            mounted: function () {
+                this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+            }
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>
