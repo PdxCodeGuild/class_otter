@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% load static %}{% block content %} 
+<h2 class="text-center py-4"> Pokemon </h2>
+<div class="row row-cols-1 row-cols-md-2 g-4"></div>
+
+{% for item in pokemon %}
+    <div class="col">
+        <div class="card text-white bg-secondary border-dark mt-4 shadow">
+            <div class="d-flex justify-content-center">
+            <img src="{{ item.image_front }}" alt="{{item.name}} front" class="card-img-top mx-auto my-4" style='width:10rem;'> 
+            <img src="{{ item.image_back }}" alt="{{item.name}} back" class="card-img-top mx-auto my-4" style='width:10rem;'> 
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center"><b>{{item.number}}. {{item.name.upper}}</b></h5>
+
+                
+                <p class="card-text text-center">
+                    Height: {{item.height}}' <br>
+                    Weight: {{item.weight}} lbs <br>
+                    Type: {% for type in item.types.all %} 
+                        {{type}}
+                    {% endfor %}
+                </p>
+
+            </div>
+        </div>
+    </div>
+<br>
+{% endfor %}
+
+</div>
+{% endblock %}
