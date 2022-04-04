@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    {% csrf_token %}
     {% if user.is_authenticated %}
     <h1>Welcome {{ user.username }}!</h1>
     <p><a href="{% url 'logout' %}">Logout</a><p>
@@ -15,26 +16,31 @@
     <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
     {% endif %}
     <div id="app">
-        {{message}}
-        <div>
+        [[ pokemon ]]
+    </div>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script> 
             const vm = new Vue({
         el:'#app',
+        delimiters: ['[[', ']]'],
         data: {
-            message: 'hello world',
+            pokemon: [],
+            type: [],
+            here: 'Hello'
+        },
+        mounted () {
+            this.getPokemon();
         },
         methods: {
-            logMessage:{
-                function (){
-                    console.log(this);
-                }
-            },
-            mounted: function (){
-                logMessage();
-            }
-        }});
+        getPokemon () {
+            axios({
+                method: 'get',
+                url: '/apis/v1/'
+            }).then(response => this.pokemon= response.data)
+        }
+    }
+});
     </script>
 </body>
 </html>
