@@ -18,6 +18,10 @@ const app1 = new Vue({
             { text: "Video tape the kittens"},
         ],
         somethingSaid: "I'm something said!",
+
+        the: {
+            userText: '',
+        },
         userText: '',
         modelPlaceholder: "Type something here",
         counterOfClicks: 0,
