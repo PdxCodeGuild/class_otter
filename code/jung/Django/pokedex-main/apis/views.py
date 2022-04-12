@@ -1,10 +1,9 @@
 # from django.shortcuts import render
-from rest_framework import generics, viewsets, permissions
-from django.contrib.auth import 
+from rest_framework import viewsets, generics, filters
 
-from pokemon import models
-from pokemon.models import Pokemon
-from .serializers import PokemonSerializer, TypeSerializer
+from pokemon.models import Pokemon, Type
+from .serializers import PokemonSerializer, TypeSerializer, UserSerializer
+from users.models import CustomUser
 
 # class ListPokemon(generics.ListCreateAPIView):
 #     queryset = models.Pokemon.objects.all()
@@ -16,11 +15,25 @@ from .serializers import PokemonSerializer, TypeSerializer
 #     serializer_class = PokemonSerializer
 
 class PokemonViewSet(viewsets.ModelViewSet):
-    queryset = models.Pokemon.objects.all()
+    queryset = Pokemon.objects.all()
     serializer_class = PokemonSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
 
 class TypeViewSet(viewsets.ModelViewSet):
-    queryset = models.Pokemon.objects.all()
+    queryset = Type.objects.all()
     serializer_class = TypeSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['type']
 
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username']
+
+class CurrentUserView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
+    def get_object(self):
+        return self.request.user
     

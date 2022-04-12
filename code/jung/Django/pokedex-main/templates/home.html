@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+    {% csrf_token %}
     {% if user.is_authenticated %}
     <h1>Welcome {{ user.username }}!</h1>
     <p><a href="{% url 'logout' %}">Logout</a><p>
@@ -16,6 +17,72 @@
     <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
     {% endif %}
 
+    <div id="app">
+
+        <div>
+            <h2>Search Pokemon: </h2>
+            <input type="text" v-model="name" placeholder="name">
+            <button @click="searchPokemon">Search</button>
+        </div>
+
+        <div>
+            <div v-if="results[0]">
+                <img :src="results[0].image_front" alt="results[0].name">
+                <h3>[[results[0].name]]</h3>
+                <h3>[[results[0].number]]</h3>
+                
+            </div>
+        </div>
+
+        <!-- ALL POKEMON LIST -->
+        <!-- <ul>
+            <li v-for="pokemon in pokemons" :key="pokemon.id">
+                <img :src="pokemon.image_front" :alt="pokemon.name">
+                <h3>[[ pokemon.name ]]</h3>
+                <h4>[[ pokemon.id ]]</h4>
+                <h4>[[ pokemon.type_detail ]]</h4>
+            </li>
+        </ul> -->
+
+        <!-- ALL TYPES OF POKEMON LIST -->
+        <!-- <ul>
+            <li v-for="type in types" :key="type.id">
+                <h3>[[ type.type ]]</h3>
+            </li>
+        </ul> -->
+
+
+        <div>
+            <h2>Create Pokemon</h2>
+            <input type="text" v-model="newPokemon.name" placeholder="name"><br>
+            <input type="text" v-model="newPokemon.number" placeholder="number"><br>
+            <input type="text" v-model="newPokemon.types" placeholder="types"><br>
+            <!-- <input type="text" v-model="newPokemon.height" placeholder="height"><br>
+            <input type="text" v-model="newPokemon.weight" placeholder="weight"><br>
+            <input type="text" v-model="newPokemon.image_front" placeholder="image_front"><br>
+            <input type="text" v-model="newPokemon.image_back" placeholder="image_back"><br>
+            <input type="text" v-model="newPokemon.caught_by" placeholder="caught_by"><br> -->
+
+            <button @click="createPokemon">Submit</button>
+            <button @click="createPokemon">Delete</button>
+        </div>
+
+
+        <div v-if="pokemons.length > -1">
+            <h2>Caught Pokemons: </h2>
+            <div v-for= "pokemon in caughtPokemon" :key="pokemon.name">
+                <img :src="pokemon.image_front" :alt="pokemon.name"><br>
+                [[ pokemon.name ]]<br>
+                <button @click="catchPokemon(pokemon)">Let this pokemon go!</button>
+            </div>
+            <h2>Uncaught Pokemons: </h2>
+            <div v-for= "pokemon in uncaughtPokemon" :key="pokemon.name">
+                <img :src="pokemon.image_front" :alt="pokemon.name"><br>
+                [[ pokemon.name ]]<br>
+                <button @click="catchPokemon(pokemon)">Catch this pokemon!</button>
+            </div>
+        </div>
+    </div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -25,9 +92,113 @@
             el: '#app',
             delimiters: ['[[', ']]'],
             data: {
-
+                pokemons: [],
+                types: [],
+                users: [],
+                currentUser: {},
+                selected: '',
+                newPokemon: {
+                    "name": "",
+                    "number": "",
+                    "types": "",
+                },
+                csrf_token: "",
+                selected_type: "",
+                caught: [],
+                uncaught: [],
+                name: "",
+                pokemon: "",
+                results: {},
+                pokemon_list: []
             },
+            
+            methods: {
+                loadPokemons: function() {
+                    axios({
+                        method: "get",
+                        url: '/apis/v1/pokemons/'
+                    }).then(response => this.pokemon_list = response.data)
+                },
 
+                searchPokemon: function() {
+                    let poke_list = []
+                    let poke_id = ""
+                    for (let pokemon of this.pokemon_list) {
+                        if (pokemon.name === this.name){
+                            poke_list.push(pokemon)
+                        }
+                    }
+                    this.results = poke_list
+                },
+
+                createPokemon: function() {
+                    axios({
+                        method: "post",
+                        url: "apis/v1/pokemons/",
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                        },
+                        data: {
+                            "name": this.newPokemon.name,
+                            "number": this.newPokemon.number,
+                            "types": JSON.parse(this.newPokemon.types),
+
+                        }
+                    }).then(response => {
+                        this.loadPokemons()
+                        this.newPokemon = {
+                            "name": "",
+                            "number": "",
+                        
+                        }
+                    })
+                },
+
+                catchPokemon: function(pokemon) {
+                    if(this.currentUser.caught.includes(pokemon.id)) {
+                        this.currentUser.caught.splice(this.currentUser.caught.indexOf(pokemon.id), 1)
+                    } else {
+                        this.currentUser.caught.push(pokemon.id)
+                    }
+                    axios ({
+                        method: 'patch',
+                        url: 'apis/v1/currentuser/',
+                        data: {
+                            'caught': this.currentUser.caught
+                        },
+                        headers: {"X-CSRFToken": this.csrf_token},  
+                    }).then(response => {
+                        this.loadCurrentUser
+                    })
+                },
+
+                loadCurrentUser: function() {
+                    axios({
+                        method: "get",
+                        url: "apis/v1/currentuser/"
+                    }).then(response => this.currentUser = response.data)
+                }
+            },
+            created: function() {
+                this.loadPokemons()
+                this.loadCurrentUser()
+            },
+            mounted: function() {
+                this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+            },
+            computed: {
+                caughtPokemon: function() {
+                    return this.pokemon_list.filter(pokemon => {
+                        return this.currentUser.caught.includes(pokemon.id)
+                    })
+                },
+                uncaughtPokemon: function() {
+                    return this.pokemon_list.filter(pokemon => {
+                        return !this.currentUser.caught.includes(pokemon.id)
+                    })
+                }
+            }
+        })
     </script>
     
 </body>

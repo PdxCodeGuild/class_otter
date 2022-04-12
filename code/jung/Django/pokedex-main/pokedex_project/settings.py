@@ -41,13 +41,18 @@ INSTALLED_APPS = [
     'apis.apps.ApisConfig',
     'pokemon.apps.PokemonConfig',
     'users.apps.UsersConfig',
+    'django_filters',
 ]
 
 REST_FRAMEWORK = {
+    
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    "DEFAULT_FILTER_BACKENDS": ['django_filters.rest_framework.DjangoFilterBackend']
 }
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
