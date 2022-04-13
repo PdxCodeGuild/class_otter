@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Part 2</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+      <h1> 
+          Api/Students (admin: 12345) in comments
+      </h1>
+      {% comment %} <div id="students-container">
+      </div>
+      <script> {% endcomment %}
+          {% comment %} let studentsContainer = document.getElementById('students-container')
+          let getStudents = async () => {
+              let response = await fetch('http://127.0.0.1:8000/api/students/')
+              let students = await response.json()
+              // console.log('students', students) 
+              //console.log('response', response)
+              for(let i = 0; students.length> i; i++){
+                  let student = students[i]
+                  let row = '<div> <h3>${students.first_name} ${students.last_name}, ${students.cohort}, ${students.favorite_topic}, ${students.favorite_teacher}, ${students.capstone}</h3></div>'
+              }
+          }
+          getStudents()
+               {% endcomment %}
+      {% comment %} </script> {% endcomment %}
+  </body>
+</html>

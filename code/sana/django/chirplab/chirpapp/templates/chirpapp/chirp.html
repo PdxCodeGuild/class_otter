@@ -1,0 +1,17 @@
+{% extends 'chirpapp/base.html' %}
+    {% block content %}
+    <div class="container">
+
+        <form method = "POST" >
+            {% csrf_token %}
+            <fieldset class = "form-group">
+                <lengend class = "border-bottom mb-4"> Write your Chirp Here </legend>
+                {{form.as_p}}
+            </fieldset>
+
+            <div classs = "form-group">
+                <button class = "btn btn-outline- info" type= "submit">Chirp</button>
+            </div>        </form>
+
+    </div>
+    {% endblock content %}
