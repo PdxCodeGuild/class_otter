@@ -1,0 +1,40 @@
+{% extends 'chirpapp/base.html'%}
+
+    {%block content%}
+
+
+    <div class="jumbotron">
+        <h1 class="display-4">Hello, {{user.username}}</h1>
+        <hr class="my-4">
+        <p>Click to chirp a mesage</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'chirp' %}" role="button">Chirp a Message</a>
+        </p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <br> <br>>
+
+    <div class = 'container'>
+        {% for chirp in object_list %}
+        <div class="card">
+            <div class="card-header">
+                <a href="#"> {{chirp.username}} </a>
+            <p> {{chirp.datetime}} </p>
+        </div>
+        <div class="card-body">
+        <p> {{chirp.text}} </p>
+        </div>
+    </div>
+
+    {% endfor %}
+
+{%endblock content%}

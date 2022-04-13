@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Todo Lab</title>
+    
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-container" id="tasklist">
+        <h1 class ="app-header">Vue To Do List</h1>
+    </div>
+    <div class="add-task">
+        <input type="text" autocomplete="off" placeholder="Add Task" class="task-input" v-model='tasks.name' @keyup.enter="newTask">
+        <input type="submit" value="" class="submit-task" id="newTask" @click='newTask'>
+    </div>
+    <ul class="task-list">
+        <li class="task-list-item" v-for="task in tasks">
+            <label class="task-list-item-label">
+            <input type="checkbox">
+            <span>{{task.name}}</span>
+        </label>
+            <span class="delete-btn" type="'button" id="delTask" @click='delTask(task)'>{{task.del}}</span>
+        </li>
+    </ul>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

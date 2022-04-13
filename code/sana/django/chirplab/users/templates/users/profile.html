@@ -1,0 +1,18 @@
+{% extends 'chirpapp/base.html' %}
+
+{%block content%}
+
+<div class = 'container'>
+</div>
+
+<h3> {{user.username}}</h3>
+
+<div class "card">
+
+    <div class ="card-body">
+        {{user.profile.bio}}
+    </div>
+    
+<div>
+
+{%endblock%}

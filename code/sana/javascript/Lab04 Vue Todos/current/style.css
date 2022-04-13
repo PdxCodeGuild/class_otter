@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap");
+*{
+    box-sizing:border-box;
+}
+
+:root{
+    --checkbox-color: rgb(202, 60, 60);
+    --checkbox-shadow: rgba(238, 156, 167, 0.2);
+    --add-button: rgba(255, 255, 255, 0.7);
+    --add-button-shadow: rgba(238, 156, 167, 0.4)
+
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    margin:0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: 
+    linear-gradient(62deg,rgba(7, 86, 160, 0.973) 13%, rgba(144, 255, 122, 0.5) 4%),
+    linear-gradient(44deg,rgba(0, 1, 2, 0.945) 39%, rgba(57, 156, 102, 0.5) 18%),
+    linear-gradient(118deg, rgba(7, 160, 147, 0.031) 40%, rgba(19, 82, 6, 0.5) 54%),
+    linear-gradient(58deg,rgba(69, 69, 70, 0.973) 83%, rgba(81, 146, 38, 0.5) 4%);
+    background-blend-mode: normal, lighten, multiply, hard-light;
+    font-family: "DM Sans", sans-serif;
+    overflow: hidden;
+
+}
+
+input{
+    outline: none;
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+.app-container{
+    max-width: 480px;
+    width: 100%;
+    max-height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 25px;
+    border-radius: 25px;
+    overflow: auto;
+    color: #222;
+
+}
+.app-header{
+    font-size: 20px;
+    line-height: 32px;
+    margin: 0 0 12px 0;
+    color: #272727
+}
+
+.submit-task{
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border: none;
+    background: var(--add-button);
+    color: #272727;
+    background-image: url("https://cdn.imgbin.com/10/16/16/imgbin-computer-icons-plus-and-minus-signs-circle-circle-mHeLJbHBFQq5FjrsacddTjsmF.jpg");
+    background-size: 18px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 12px var(--add-button-shadow);
+
+}
+
+.add-task{
+    height: 40px;
+    font-size: 14px;
+    display: flex;
+}
+
+.task-input{
+    width: 100%;
+    padding: 0 5px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #272727;
+    background-color: transparent;
+    margin-right: 15px;
+    color: #272727;
+    box-shadow: none;
+    border-radius: 0;
+}
+.task-input::placeholder {
+    color: #272727;
+}
+.task-list-item {
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 35px;
+    margin-bottom: 12px;
+
+}
+.task-list-item input {
+    width:16px;
+    height: 16px;
+    border: 1px solid #272727;
+    border-radius: 50%;
+    background-image: url("https://e7.pngegg.com/pngimages/448/432/png-clipart-black-check-illustration-check-mark-symbol-computer-icons-mark-miscellaneous-hand.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0;
+    transition: 0.2s;
+    margin-right: 8px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    appearance: none;
+
+}
+.task-list-item input:hover {
+    border-color: var(--checkbox-color);
+    box-shadow: 0 0 0 3px var(--checkbox-shadow);
+}
+.task-list-item input:checked {
+    background-size: 10px;
+    border: 1px solid var(--checkbox-color);
+    background-color: var(--checkbox-color);
+}
+
+.task-list-item input:checked + span{
+    color: #272727;
+    text-decoration: line-through #272727;
+}
+.task-list-item-label {
+    display: flex;
+    align-items: flex-start;
+    color: #272727;
+    margin-right: 8px;
+    font-size: 14px;
+    line-height: 24px;
+    position: relative;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.delete-btn{
+    margin-left: auto;
+    margin-right: 5px;
+    display: block;
+    width:16px;
+    height: 16px;
+    background-image: url("https://spng.pngfind.com/pngs/s/47-471196_icon-trash-png-font-awesome-trash-o-transparent.png");
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+    cursor: pointer;
+}
