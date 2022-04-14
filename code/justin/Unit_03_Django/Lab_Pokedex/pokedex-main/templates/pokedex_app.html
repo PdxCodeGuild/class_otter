@@ -1,0 +1,15 @@
+{% extends "vue_components.html" %}
+
+{% block vueApp %}
+<script type="module">
+    import { createApp } from 'vue'
+    
+    var pokedex_app = createApp({
+        data: function() {
+            return { }
+        },
+    });
+    pokedex_app.config.compilerOptions.delimiters = ['[[', ']]'];
+    pokedex_app.mount('#pokedex_app');
+</script>
+{% endblock %}
