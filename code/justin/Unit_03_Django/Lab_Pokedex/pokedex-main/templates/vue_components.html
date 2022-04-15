@@ -17,27 +17,27 @@
                                         </p>
                                     </div>
                                 </span>
-                                <div>
-                                    <p><strong>Height:</strong>[[ pokemon_details.height ]]</p>
-                                    <p><strong>Weight:</strong>[[ pokemon_details.weight ]]</p>
-                                </div>
-                                <div>
-                                    <div class="row">
-                                        <div class="col s2">
-                                            <img class="responsive-img" v-bind:src=pokemon_details.image_front>
-                                        </div>
-                                        <div class="col s2 offset-s2">
-                                            <img class="responsive-img" v-bind:src=pokemon_details.image_back>
+                                <div class="row">
+                                    <div class="col s2">
+                                        <p><strong>Height:</strong>[[ pokemon_details.height ]]</p>
+                                        <p><strong>Weight:</strong>[[ pokemon_details.weight ]]</p>
+                                        <template v-for="type in pokemon_details.types">
+                                            <p>[[type]]</p>
+                                        </template>
+                                    </div>
+                                    <div class="col s8 offset-s2">
+                                        <div class="row">
+                                            <div class="col s2">
+                                                <img class="responsive-img" v-bind:src=pokemon_details.image_front>
+                                            </div>
+                                            <div class="col s2 offset-s2">
+                                                <img class="responsive-img" v-bind:src=pokemon_details.image_back>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <template v-for="type in pokemon_details.types">
-                                        <p>[[type]]</p>
-                                    </template>
-                                </div>
-                                <div v-for="user in pokemon_details.caught_by">
-                                    <p>[[ user ]]</p>
+                                    <div v-for="user in pokemon_details.caught_by">
+                                        <p>[[ user ]]</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
