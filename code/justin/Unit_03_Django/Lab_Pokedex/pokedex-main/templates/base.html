@@ -10,13 +10,25 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <h1>Welcome {{ user.username }}!</h1>
-        <p><a href="{% url 'logout' %}">Logout</a><p>
-    {% else %}
-        <h1>Welcome, visitor!</h1>
-        <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
-    {% endif %}
+    <div class="navbar-fixed navbar-fixed-full-height">
+        <nav class="red">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo center">Pokedex</a>
+                <ul class="left hide-on-med-and-down">
+                    <li class="active"><a href="/">Home</a></li>
+                </ul>
+                <ul class="right">
+                {% if user.is_authenticated %}
+                    <li>Hi {{ user.username }}!</li>
+                    <li><a href="{% url 'logout' %}" class="waves-effect waves-light btn-small green accent-3">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                    <li><a href="{% url 'users:signup' %}" class="waves-effect waves-light btn green accent-3">Sign Up</a></li>
+                {% endif %}
+                </div>
+            </div>
+        </nav>
+    </div>
 
     {% block content %}
     {% endblock %}

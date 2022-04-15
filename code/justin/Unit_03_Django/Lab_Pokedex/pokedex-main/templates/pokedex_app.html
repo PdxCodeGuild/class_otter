@@ -6,10 +6,53 @@
     
     var pokedex_app = createApp({
         data: function() {
-            return { }
+            return {
+                pokemon_list: []
+            }
         },
+        methods: {
+            getPokemon: function() {
+                axios({
+                    method: 'get',
+                    url: '/apis/v1/pokemon'
+                }).then((response) => {
+                    for (let pokemon_index in response.data) {
+                        let pokemon = response.data[pokemon_index];
+
+                        let number_string = '#';
+                        if (pokemon.number > 99) {
+                            number_string += pokemon.number.toString();
+                        }
+                        else if(pokemon.number > 9) {
+                            number_string += '0' + pokemon.number.toString();
+                        }
+                        else {
+                            number_string += '00' + pokemon.number.toString();
+                        }
+
+                        this.pokemon_list.push({
+                            id: pokemon.id,
+                            number: number_string,
+                            name: pokemon.name,
+                            height: pokemon.height,
+                            weight: pokemon.weight,
+                            image_front: pokemon.image_front,
+                            image_back: pokemon.image_back,
+                            types: pokemon.types,
+                            caught_by: pokemon.caught_by
+                        });
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+        },
+        created: function() {
+            this.getPokemon();
+        }
     });
     pokedex_app.config.compilerOptions.delimiters = ['[[', ']]'];
+    pokedex_app.component('pokemon', pokemon_component);
     pokedex_app.mount('#pokedex_app');
 </script>
 {% endblock %}
