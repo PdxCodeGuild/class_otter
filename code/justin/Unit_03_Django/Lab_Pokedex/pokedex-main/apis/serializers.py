@@ -1,9 +1,11 @@
 from rest_framework import serializers
-from pokemon import models
+from pokemon import models as pokemonModels
+from users import models as userModels
 
 
 class PokemonSerializer(serializers.ModelSerializer):
     types = serializers.StringRelatedField(many=True)
+    caught_by = serializers.StringRelatedField(many=True)
     class Meta:
         fields = [
             'id',
@@ -16,7 +18,7 @@ class PokemonSerializer(serializers.ModelSerializer):
             'caught_by',
             'types'
         ]
-        model = models.Pokemon
+        model = pokemonModels.Pokemon
 
 class TypeSerializer(serializers.ModelSerializer):
     pokemon = PokemonSerializer(many=True)
@@ -26,4 +28,15 @@ class TypeSerializer(serializers.ModelSerializer):
             'type',
             'pokemon'
         ]
-        model = models.Type
+        model = pokemonModels.Type
+
+class CustomUserSerializer(serializers.ModelSerializer):
+    caught = PokemonSerializer(many=True)
+    class Meta:
+        fields = [
+            'id',
+            'username',
+            'email',
+            'caught'
+        ]
+        model = userModels.CustomUser

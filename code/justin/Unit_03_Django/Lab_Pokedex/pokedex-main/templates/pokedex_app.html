@@ -7,7 +7,10 @@
     var pokedex_app = createApp({
         data: function() {
             return {
-                pokemon_list: []
+                pokemon_list: [],
+                profile: {
+                    user_data: {}
+                }
             }
         },
         methods: {
@@ -39,20 +42,56 @@
                             image_front: pokemon.image_front,
                             image_back: pokemon.image_back,
                             types: pokemon.types,
-                            caught_by: pokemon.caught_by
+                            caught_by: pokemon.caught_by,
                         });
                     }
                 }).catch((error) => {
                     console.log(error);
                 });
             },
+            getProfile: function() {
+                axios({
+                    method: 'get',
+                    url: '/apis/v1/profiles/{{user_profile.id}}'
+                }).then((response) => {
+                        let profile = response.data;
+                        this.profile.user_data = {
+                            id: profile.id,
+                            username: profile.username,
+                            email: profile.email,
+                            caught: profile.caught
+                        }
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+            capture: function(pokemonID) {
+                console.log("Capturing: " + pokemondID);
+            },
+            release: function(pokemonID) {
+                console.log("Releasing: " + pokemondID);
+            }
+        },
+        computed: {
+            uncaught_pokemon: function() {
+                let caught_list = this.profile.user_data.caught;
+                let uncaught_list = [];
+
+                uncaught_list = this.pokemon_list.filter(function(pokemon) {
+                    return caught_list.indexOf(pokemon) == -1;
+                });
+
+                return uncaught_list;
+            }
         },
         created: function() {
             this.getPokemon();
+            this.getProfile();
         }
     });
     pokedex_app.config.compilerOptions.delimiters = ['[[', ']]'];
     pokedex_app.component('pokemon', pokemon_component);
+    pokedex_app.component('profile', profile_component);
     pokedex_app.mount('#pokedex_app');
 </script>
 {% endblock %}

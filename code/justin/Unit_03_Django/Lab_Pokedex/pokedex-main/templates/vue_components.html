@@ -10,11 +10,20 @@
                                 <span class="card-title row">
                                     <div class="col s2">
                                         [[ pokemon_details.number ]]
+                                        {% if user.username == user_profile.username %}
+                                            {% comment %} catch_or_release pokemon here {% endcomment %}
+                                        {% endif %}
                                     </div>
-                                    <div class="col s4 offset-s2">
+                                    <div class="col s2 offset-s2">
                                         <p class="center-align">
                                             <a href="#!">[[ pokemon_details.name ]]</a>
                                         </p>
+                                    </div>
+                                    <div class="col s1 offset-s2">
+                                        <button class="waves-effect waves-light btn-small orange darken-2" v-on:click="$emit(\'capture\', pokemon_details.id)">Capture</button>
+                                    </div>
+                                    <div class="col s1 offset-s1">
+                                        <button class="waves-effect waves-light btn-small light-blue darken-2" v-on:click="$emit(\'release\', pokemon_details.id)">Release</button>
                                     </div>
                                 </span>
                                 <div class="row">
@@ -36,12 +45,22 @@
                                         </div>
                                     </div>
                                     <div v-for="user in pokemon_details.caught_by">
-                                        <p>[[ user ]]</p>
+                                        <p>[[user]]</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>`
     };
+
+    let profile_component = {
+        props: ['profile_details'],
+        template: ` <div class="col s12 blue-grey lighten-3">
+                        <div class="white-text">
+                            <h2>[[profile_details.user_data.username]]'s profile</h2>
+                            <p><strong>Email: [[profile_details.user_data.email]]</strong></p>
+                        </div>
+                    </div>`
+    }
 </script>
 {% endblock %}
