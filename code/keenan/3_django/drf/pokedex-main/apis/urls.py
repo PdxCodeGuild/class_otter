@@ -1,8 +1,10 @@
 from django.urls import path
 
-from .views import ListPokemon, ListType
+from .views import PokemonViewSet, TypeViewSet
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('', ListPokemon.as_view()),
-    path('<int:pk>/', ListType.as_view()),
-]
+router = DefaultRouter()
+router.register('pokemon', PokemonViewSet, basename='pokemon')
+router.register('types', TypeViewSet, basename='types')
+
+urlpatterns = router.urls
