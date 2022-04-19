@@ -16,7 +16,10 @@
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo center">Pokedex</a>
                 <ul class="left hide-on-med-and-down">
-                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="/users/profile/{{user.username}}">Profile</li>
+                    {% endif %}
                 </ul>
                 <ul class="right">
                 {% if user.is_authenticated %}
