@@ -4,27 +4,25 @@
 <script>
     let pokemon_component = {
         props: ['pokemon_details'],
+        emits: ['capture_or_release'],
         template:  `<div class="col s12 m6">
                         <div class="card">
                             <div class="card-content">
                                 <span class="card-title row">
                                     <div class="col s2">
-                                        [[ pokemon_details.number ]]
-                                        {% if user.username == user_profile.username %}
-                                            {% comment %} catch_or_release pokemon here {% endcomment %}
-                                        {% endif %}
+                                        <span>[[pokemon_details.number]]</span>
                                     </div>
-                                    <div class="col s2 offset-s2">
+                                    <div class="col s4 offset-s2">
                                         <p class="center-align">
                                             <a href="#!">[[ pokemon_details.name ]]</a>
                                         </p>
                                     </div>
-                                    <div class="col s1 offset-s2">
-                                        <button class="waves-effect waves-light btn-small orange darken-2" v-on:click="$emit(\'capture\', pokemon_details.id)">Capture</button>
+
+                                    {% if user.is_authenticated %}
+                                    <div class="col s2 offset-s1">
+                                        <button class="waves-effect waves-light btn-small light-blue darken-2" v-on:click="$emit(\'capture_or_release\', pokemon_details.id)">Ownership</button>
                                     </div>
-                                    <div class="col s1 offset-s1">
-                                        <button class="waves-effect waves-light btn-small light-blue darken-2" v-on:click="$emit(\'release\', pokemon_details.id)">Release</button>
-                                    </div>
+                                    {% endif %}
                                 </span>
                                 <div class="row">
                                     <div class="col s2">
@@ -34,18 +32,16 @@
                                             <p>[[type]]</p>
                                         </template>
                                     </div>
-                                    <div class="col s8 offset-s2">
-                                        <div class="row">
-                                            <div class="col s2">
-                                                <img class="responsive-img" v-bind:src=pokemon_details.image_front>
-                                            </div>
-                                            <div class="col s2 offset-s2">
-                                                <img class="responsive-img" v-bind:src=pokemon_details.image_back>
-                                            </div>
-                                        </div>
+                                    <div class="col s2 offset-s2">
+                                        <img class="responsive-img" v-bind:src=pokemon_details.image_front>
                                     </div>
-                                    <div v-for="user in pokemon_details.caught_by">
-                                        <p>[[user]]</p>
+                                    <div class="col s2 offset-s2">
+                                        <img class="responsive-img" v-bind:src=pokemon_details.image_back>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s2" v-for="user in pokemon_details.caught_by">
+                                        <span>[[user]]</span>
                                     </div>
                                 </div>
                             </div>
@@ -57,10 +53,10 @@
         props: ['profile_details'],
         template: ` <div class="col s12 blue-grey lighten-3">
                         <div class="white-text">
-                            <h2>[[profile_details.user_data.username]]'s profile</h2>
-                            <p><strong>Email: [[profile_details.user_data.email]]</strong></p>
+                            <h2>[[profile_details.username]]'s profile</h2>
+                            <p><strong>Email: [[profile_details.email]]</strong></p>
                         </div>
                     </div>`
-    }
+    };
 </script>
 {% endblock %}

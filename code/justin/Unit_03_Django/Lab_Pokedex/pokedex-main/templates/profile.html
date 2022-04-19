@@ -6,14 +6,10 @@
         
         <div class="row">
             <profile v-bind:profile_details="profile"></profile>
-        <div class="row">
         </div>
+        <div class="row">
             <h4>Caught</h4>
-            <pokemon v-for="pokemon in profile.user_data.caught" v-bind:pokemon_details="pokemon" v-bind:key="pokemon.id" v-on:release="release($event)"></pokemon>
-        <div class="row">
-        </div>
-            <h4>Uncaught</h4>
-            <pokemon v-for="pokemon in uncaught_pokemon" v-bind:pokemon_details="pokemon" v-bind:key="pokemon.id" v-on:capture="capture($event)"></pokemon>
+            <pokemon v-for="pokemon in profile.caught" v-bind:pokemon_details="pokemon" v-bind:key="pokemon.id" v-on:capture_or_release="capture_or_release($event)"></pokemon>
         </div>
     </div>
 {% endblock %}
