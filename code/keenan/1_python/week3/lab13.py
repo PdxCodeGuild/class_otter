@@ -38,11 +38,15 @@ class Game:
 
 # move(x, y, player) Place a player's token character string at a given coordinate (top-left is 0, 0), x is horizontal position, y is vertical position.
 # >>> board.move(2, 1, player_1)
-    def move(self, location, token):
-        if self.board[location] != " ":
-            return 'invalid move'
-        else:
-            self.board = player.token
+    def move(self, player):
+        while True:                
+            move = input("Where do you want to move: ")
+            if self.board[move] != " ":
+                print('invalid move')
+                continue
+            else:
+                self.board[move] = player.token
+                break
 
 # calc_winner() What token character string has won or None if no one has.
     def calc_winner():
@@ -68,8 +72,8 @@ class Game:
 def main():
     game = Game()
 
-    player1 = input(f"Player one please enter your name: ")
-    player2 = input(f"Player two please enter your name: ")
+    player1name = input(f"Player one please enter your name: ")
+    player2name = input(f"Player two please enter your name: ")
     
     player1_token = input(f"Select 'X' or 'O' as your token: ").upper()
     
@@ -80,9 +84,23 @@ def main():
     else:
             player2_token = "X"
 
-    player1 = Player(player1, player1_token)
-    player2 = Player(player2, player2_token)
+    player1 = Player(player1name, player1_token)
+    player2 = Player(player2name, player2_token)
+    # game.__repr__()
 
-    game.__repr__()
+    turn = 0
+    
+    for i in range(10):
+        turn +=1
+
+        if turn % 2 == 1:
+            print(f"{player1.name}'s turn.")
+            game.move(player1)
+        else:
+            print(f"{player2.name}'s turn.")
+            game.move(player2)
+
+        game.__repr__()
+
 
 main()
