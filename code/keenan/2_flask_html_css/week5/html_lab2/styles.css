@@ -1,5 +1,4 @@
 body {
-    text-align: center;
     background-color: #6d4444;
     font-family: "Special Elite", cursive;
   }
@@ -8,21 +7,47 @@ body {
     background-color: #ffffff;
     padding: 20px 10px;
     height: 100px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 
+.title {
+    font-size: 50px;
+    text-align: center;
+}
 
 .logo {
     float: left;
     border: 3px black;
     max-height: 100px;
     max-width: 120px;
+    display: block;
+    position: absolute;
 }
 
-.title {
-    padding-top: 40px;
-}
+/* .title {
+    float: center;
+} */
 
 .header-right {
     float: right;
+    float: top;
 }
+
+
+a:link {
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+a:hover {
+    color: #ff0000;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+  
