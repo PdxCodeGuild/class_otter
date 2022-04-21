@@ -1,7 +1,8 @@
 const vm = new Vue({
     el: '#app',
     data: {
-        results: {}
+        results: {},
+        page: 1,
     },
     methods: {
         quotesbytag: function() {

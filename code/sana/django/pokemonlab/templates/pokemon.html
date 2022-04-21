@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block pokemon %}
+<div id="detail">
+    [[message]]
+    <div>
+        <img v-bind:src="mon.image_front" v-bind:alt="mon.name + 'front image'">
+        <img v-bind:src="mon.image_back" v-bind:alt="mon.name + 'back image'">
+    </div>
+    <div>
+        <p>Name: [[mon.name]]</p>
+        <p>Number: [[mon.number]]</p>
+        <p>Height: [[mon.height]]</p>
+        <p>Weight: [[mon.weight]]</p>
+        <p>Types: </p>
+        <ul>
+            <li v-for="type in mon.types">[[type]]</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

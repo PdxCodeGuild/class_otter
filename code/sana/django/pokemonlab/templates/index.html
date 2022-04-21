@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block pokedex %}
+<div id="index">
+    <h1>[[message]]</h1>
+
+    <div v-for="mon in pokemon">
+        <a v-bind:href="mon.number + '/'">
+            <h3>[[mon.name]]</h3>
+            <img v-bind:src="mon.image_front">
+        </a>
+    </div>
+</div>
+
+
+{% endblock %}

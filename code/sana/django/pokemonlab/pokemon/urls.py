@@ -1,0 +1,10 @@
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    # path('', views.index, name="index"),
+    # path('<int:number>/', views.pokemon, name="pokemon"),
+    # path('api/', views.api_list, name="list"),
+    # path('<int:number>/api/', views.api_updated, name='updated')
+]

@@ -19,7 +19,7 @@ def getStudents(request):
     serilizer = StudentSerializer(student, many=True)
     return Response(serilizer.data)
 
-@api_view(['PUT', ])
+@api_view(['PUT'])
 def api_edit(request, slug):
 
     try:
@@ -36,7 +36,7 @@ def api_edit(request, slug):
 
         return Response(serializer.data)
 
-@api_view(['DELETE', ])
+@api_view(['DELETE'])
 def api_delete(request, slug):
 
     try:
@@ -52,7 +52,7 @@ def api_delete(request, slug):
             data["failure"] = "deletion failure"
         return Response(data=data)
 
-@api_view(['POST', ])
+@api_view(['POST'])
 def api_new(request, slug):
     student = Students.objects.create()
     if request.method == 'POST':
