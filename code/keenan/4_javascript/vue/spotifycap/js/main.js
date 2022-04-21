@@ -37,7 +37,7 @@ const vm = new Vue({
                     'Authorization': `Bearer ${ this.info.access_token }`
                 }
             }).then(response => this.releases = response.data)
-            // there is not response.data, in releases it would be something like releases.albums.items which is the list of 20 objects
+            // there is no response.data, in releases it would be something like releases.albums.items which is the list of 20 objects
         }
 
         

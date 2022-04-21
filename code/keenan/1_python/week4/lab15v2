@@ -1,0 +1,44 @@
+# Lab 15: Quotes API
+# 01/25/2022
+# updated 04/20/2022 - Site down as of 04/20/2022
+
+# Version 2: List Quotes by Keyword
+# The Favqs Quote API also supports getting a list of quotes associated with a given keyword https://favqs.com/api/quotes?page=<page>&filter=<keyword>. Prompt the user for a keyword, list the quotes you get in response, and prompt the user to either show the next page or enter a new keyword. You can use string concatenation to build the URL.
+
+# > enter a keyword to search for quotes: nature
+# 25 quotes associated with nature - page 1
+# <list of quotes>
+# > enter 'next page' or 'done': next page
+# 25 quotes associated with nature - page 2
+# <list of quotes>
+# > enter 'next page' or 'done': done
+# > enter a keyword to search for quotes:
+
+
+import requests
+import json
+import pprint
+
+# This API endpoint requires an API key be included in a request header. You can find documentation of specifying request headers here and documentation on authorization with the Favqs API here under "Authorization".
+
+headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}
+
+# print('\n\n')
+# page = 0
+# search_term = input("Enter a keyword to search for quotes: ")
+
+
+# # theres URL params will add to the URL to fill the text "?page=<page>&filter=<keyword>"
+# url_params = {
+#     'page': page,
+#     'filter': search_term
+# }
+
+# response_v2 = requests.get('https://favqs.com/api/quotes', params = url_params, headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}) 
+
+
+# quotes_dict_v2 = json.loads(response_v2.text)
+# # print(quotes_dict_v2)
+
+# pprint.pprint(response_v2.json())
+

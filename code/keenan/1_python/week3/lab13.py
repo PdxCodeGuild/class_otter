@@ -1,6 +1,6 @@
 # Lab 13: Tic-Tac-Toe
 # 01/20/22
-
+# updated 04/20/2022
 
 # Tic Tac Toe is a game. Players take turns placing tokens (a 'O' or 'X') into a 3x3 grid. Whoever gets three in a row first wins.
 # You will write a Player class and Game class to model Tic Tac Toe, and a function main that models gameplay taking in user inputs through REPL.

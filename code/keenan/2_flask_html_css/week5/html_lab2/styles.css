@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+    background-color: #6d4444;
+    font-family: "Special Elite", cursive;
+  }
+
+.header {
+    background-color: #ffffff;
+    padding: 20px 10px;
+    height: 100px;
+}
+
+
+
+.logo {
+    float: left;
+    border: 3px black;
+    max-height: 100px;
+    max-width: 120px;
+}
+
+.title {
+    padding-top: 40px;
+}
+
+.header-right {
+    float: right;
+}
