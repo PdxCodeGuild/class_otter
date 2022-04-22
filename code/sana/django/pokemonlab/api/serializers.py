@@ -1,7 +1,7 @@
 
 from unicodedata import name
 from rest_framework.serializers import ModelSerializer
-from django.core import serializers
+
 from pokemon.models import Pokemon, Type
 from django.contrib.auth import get_user_model
 
@@ -22,19 +22,39 @@ class NestedTypeSerializer(ModelSerializer):
 class PokemonSerializer(ModelSerializer):
     type_info = NestedTypeSerializer(many=True, source='types')
     class Meta:
-        fields = ('name', 'number', 'height', 'weight', 'image_front', 'image_back', 'caught_by' )
+        fields = ('id', 'name', 'number', 'height', 'weight', 'image_front', 'image_back', 'caught_by', 'type_info' )
         model = Pokemon
 
-class TypesSerializer(serializers.ModelSerializer):
+class TypesSerializer(ModelSerializer):
     pokemon_info = NestedPokemonSerializer(many=True, source='pokemon')
     class Meta:
         model = Type
-        fields = ('types', 'pokemon_info')
+        fields = ('type', 'pokemon_info')
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class CustomUserSerializer(ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('caught', 'id', 'username')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # class TypeSerializer(serializers.Serializer):

@@ -1,29 +1,54 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+
 from pokemon.models import Pokemon, Type
-from .serializers import PokemonSerializer, TypesSerializer , CustomUserSerializer
-from . import serializers
+# from .serializers import PokemonSerializer, TypesSerializer , CustomUserSerializer
+from api.serializers import PokemonSerializer, TypesSerializer
 from rest_framework import generics, viewsets
 from django.contrib.auth import get_user_model
 # from django.http import JsonResponse
 
-class Pokemon_View_Sets(viewsets.ModelViewSet):
+class PokemonViewSet(viewsets.ModelViewSet):
 
     queryset = Pokemon.objects.all()
-    Serializer_Class = PokemonSerializer
+    serializer_class = PokemonSerializer
     
-class Type_View_Sets(viewsets.ModelViewSet):
+class TypeViewSet(viewsets.ModelViewSet):
     queryset = Type.objects.all()
-    Serializer_Class = TypesSerializer
+    serializer_class = TypesSerializer
 
-class CustomUser_View_Sets(viewsets.ModelViewSet):
-    queryset = get_user_model().objects.all()
-    Serializer_Class = CustomUserSerializer
+# class CustomUserViewSet(viewsets.ModelViewSet):
+#     queryset = get_user_model().objects.all()
+#     serializer_class = CustomUserSerializer
 
-class CustomUser_View(generics.RetrieveUpdateDestroyAPIView):
-    Serializer_Class = CustomUserSerializer
-    def get_object(self):
-        return self.request.user
+# class CustomUserView(generics.RetrieveUpdateDestroyAPIView):
+#     serializer_class = CustomUserSerializer
+#     def get_object(self):
+#         return self.request.user
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def getRoutes(request):
 #     routes = [
@@ -33,17 +58,17 @@ class CustomUser_View(generics.RetrieveUpdateDestroyAPIView):
 #     ]
 #     return JsonResponse(routes, safe=False)
 
-@api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        'GET /api',
-        'GET /api/pokemon',
-        'GET /api/pokemons',
-        'GET /api/types',
-        'GET /api/type/:type',
-        'GET /api/pokemon/:name',
-    ]
-    return Response(routes)
+# @api_view(['GET'])
+# def getRoutes(request):
+#     routes = [
+#         'GET /api',
+#         'GET /api/pokemon',
+#         'GET /api/pokemons',
+#         'GET /api/types',
+#         'GET /api/type/:type',
+#         'GET /api/pokemon/:name',
+#     ]
+#     return Response(routes)
 
 
 # @api_view(['GET'])

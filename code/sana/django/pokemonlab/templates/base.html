@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex Lab</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+    {% comment %} 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
         integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> {% endcomment %}
 
     <script defer src="{% static 'Pokemon/main.js' %}"></script>
 </head>
 
 <body>
+    {% csrf_token %}
 
     {% if user.is_authenticated %}
     <h1>Welcome {{ user.username }}!</h1>
@@ -28,9 +28,32 @@
     {% endif %}
 
     <div id="app">
-        {% block pokemon %}
+        {% block content %}
         {% endblock %}
     </div>
+
+<div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        delimiters: ['[[',']]'],
+        data: {
+            csrf_token: "",
+        },
+        methods: {
+        },
+        created: function() {
+        },
+        mounted: function() {
+            this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+        }
+    })
+</script>
 </body>
 
 </html>
