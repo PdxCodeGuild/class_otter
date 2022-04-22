@@ -1,42 +1,57 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     background-color: #6d4444;
     font-family: "Special Elite", cursive;
-  }
+}
 
 .header {
+    display: flex;
     background-color: #ffffff;
-    padding: 20px 10px;
-    height: 100px;
+    max-height: 150px;
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 2%;
     margin-bottom: 2%;
 }
 
-
 .title {
-    font-size: 50px;
-    text-align: center;
+    /* not being centered.  offset from mid towards the image. image not considered with regards to centering bc only text elements are selected? */
+    font-size: 40px;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo {
-    float: left;
-    border: 3px black;
+    margin-right: auto;
+    display: block;
     max-height: 100px;
     max-width: 120px;
-    display: block;
-    position: absolute;
 }
-
-/* .title {
-    float: center;
-} */
 
 .header-right {
-    float: right;
-    float: top;
+    /* offset weirdly on mobile */
+    padding-top: 1%;
+    padding-right: 1%;
+    margin-left: auto;
 }
 
+.content {
+    max-width: 90%;
+    margin: auto;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+}
 
 a:link {
     color: rgb(0, 0, 0);
