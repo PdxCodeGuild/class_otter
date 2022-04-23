@@ -20,7 +20,7 @@ class NestedTypeSerializer(ModelSerializer):
         fields = ('type',)
 
 class PokemonSerializer(ModelSerializer):
-    type_info = NestedTypeSerializer(many=True, source='types')
+    type_info = NestedTypeSerializer(many=True, source='types', read_only=True)
     class Meta:
         fields = ('id', 'name', 'number', 'height', 'weight', 'image_front', 'image_back', 'caught_by', 'type_info' )
         model = Pokemon

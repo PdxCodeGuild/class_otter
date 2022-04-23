@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>add Pokemon</h1>
+
+{% comment %} {
+    "name": "s",
+    "number": 210,
+    "height": 1.0,
+    "weight": 2.0,
+    "image_front": "https://www.bing.com/",
+    "image_back": "https://www.bing.com/",
+    "caught_by": [
+        1
+    ],
+    "type_info": []
+} {% endcomment %}
+
+
+<label for='new_name'> name
+    <input type='text' v-model='new_name' id='new_name'>
+<label for='new_name'> number
+    <input type='text' v-model='new_number' id='new_number'>
+<label for='new_name'> height
+    <input type='text' v-model='new_height' id='new_height'>
+<label for='new_name'> weight
+    <input type='text' v-model='new_weight' id='new_height'>
+<label for='new_name'> front image
+    <input type='text' v-model='new_fimage' id='new_fimage'>
+<label for='new_name'> back image
+    <input type='text' v-model='new_bimage' id='new_bimage'>
+</form>
+
+<button type='button' @click='addPokemon'>Edit </button>
+{% endblock %}

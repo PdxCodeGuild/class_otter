@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Delete Pokemon </h1>
+<label for='delete_Pokemon'>Delete Pokemon
+  <input type='text' v-model='delete_Pokemon' id='delete_Pokemon'>
+  <button type='button' @click='deletePokemon'>Delete </button>
+{% endblock %}

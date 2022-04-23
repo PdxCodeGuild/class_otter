@@ -1,24 +1,39 @@
-
 {% extends 'base.html' %}
-
 {% block content %}
 
-    {% if user.is_authenticated %}
-    <h1>Welcome {{ user.username }}!</h1>
-    <p><a href="{% url 'logout' %}">Logout</a><p>
-    {% else %}
-    <h1>Welcome, visitor!</h1>
-    <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
-    {% endif %}
-    
-    <form role="search">
-        <label for="search" class="hidden-visually">Search: </label>
-        <input type="text" name="search" id="search" v-model="search" />
-        <button type="submit">Search</button>
-</form>
-    <div id="app-6">
-        <p>{{ message }}</p>
-        <input v-model="message">
-    </div>
-   
-  {% endblock %}
+{% if user.is_authenticated %}
+<h1>Welcome {{ user.username }}!</h1>
+<p><a href="{% url 'logout' %}">Logout</a><p>
+{% else %}
+<h1>Welcome, visitor!</h1>
+<p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
+{% endif %}
+{% if user.is_authenticated %}
+
+<p><a href="{% url 'add' %}">Add</a><p>
+<p><a href="{% url 'edit' %}">Edit</a><p>
+
+{% else %}
+<h1>Welcome, visitor!</h1>
+<p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
+{% endif %}
+
+<ul>
+<template v-for="pokemon in pokemons"> 
+
+    <li>[[ pokemon.name ]]</li>
+    <li>[[ pokemon.height]]</li>
+    <li>[[ pokemon.weight ]]</li>
+    <li>[[ pokemon.number ]]</li>
+    <img :src="pokemon.image_front">
+    <img :src="pokemon.image_back">
+    <template v-for="types in pokemon.type_info">
+    <li>[[ types.type ]]</li>
+    <label for='delete_Pokemon'>Delete Pokemon
+      <input type='text' v-model='delete_Pokemon' id='delete_Pokemon'>
+      <button type='button' @click='deletePokemon'>Delete </button>
+    </template>
+</template>
+</ul>
+
+{% endblock %}

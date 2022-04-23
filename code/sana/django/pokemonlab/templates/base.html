@@ -7,53 +7,119 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex Lab</title>
-
-    {% comment %} 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
-        integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
-        crossorigin="anonymous"></script> {% endcomment %}
-
-    <script defer src="{% static 'Pokemon/main.js' %}"></script>
 </head>
-
 <body>
+    <p> base </p>
     {% csrf_token %}
+    <main id="app">
 
-    {% if user.is_authenticated %}
-    <h1>Welcome {{ user.username }}!</h1>
-    <p><a href="{% url 'logout' %}">Logout</a><p>
-    {% else %}
-    <h1>Welcome, visitor!</h1>
-    <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
-    {% endif %}
-
-    <div id="app">
         {% block content %}
         {% endblock %}
-    </div>
+    </main>
 
-<div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            delimiters: ['[[',']]'],
+            data: {
+                csrf_token: "",
+                message: 'Hello world!',
+                pokemons: []
 
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            },
+            methods: {
 
-<script>
-    const vm = new Vue({
-        el: '#app',
-        delimiters: ['[[',']]'],
-        data: {
-            csrf_token: "",
-        },
-        methods: {
-        },
-        created: function() {
-        },
-        mounted: function() {
-            this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
-        }
-    })
-</script>
+                loadPokemon: function () {
+                    console.log(this.message)
+                    axios({
+                        method: 'get',
+                        url:'/api/v1/pokemon/',
+                    }).then(res => {
+                        console.log(res.data)
+                        this.pokemons = res.data
+
+                    })
+                
+                },
+                deletePokemon: function () {
+                    console.log('deleting')
+                    axios({
+                        method: 'delete',
+                        url:'/api/v1/pokemon/152/',
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                          },
+                    }).then(res => {
+                        console.log(res)
+                    }).catch(error => {
+
+                        console.log(error)
+                    })
+                },
+                addPokemon: function () {
+                    console.log('adding')
+                    axios({
+                        method: 'post',
+                        url:'/api/v1/pokemon/',
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                          },
+                          data: {
+
+                            "name": "s",
+                            "number": 210,
+                            "height": 1.0,
+                            "weight": 2.0,
+                            "image_front": "https://www.bing.com/",
+                            "image_back": "https://www.bing.com/",
+                            "caught_by": [
+                                1
+                            ],
+                            "type_info": []
+                          }
+                    }).then(res => {
+                        console.log(res)
+                    })
+                },
+                editPokemon: function () {
+                    console.log('editting')
+                    axios({
+                        method: 'put',
+                        url:'/api/v1/pokemon/',
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                          },
+                          data: {
+
+                            "name": edit_name,
+                            "number": edit_number,
+                            "height": 1,
+                            "weight": 2.0,
+                            "image_front": "https://www.bing.com/",
+                            "image_back": "https://www.bing.com/",
+                            "caught_by": [
+                                1
+                            ],
+                            "type_info": []
+                          }
+                    }).then(res => {
+                        console.log(res)
+                    })
+                },
+            },
+            created: function() {
+            },
+            mounted: function() {
+                console.log('works')
+                this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+                this.loadPokemon()
+            
+            }
+        })
+    </script>
 </body>
 
 </html>
