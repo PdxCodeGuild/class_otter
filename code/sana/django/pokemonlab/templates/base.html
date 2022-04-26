@@ -34,6 +34,12 @@
                 edit_weight: "",
                 edit_bimage: "",
                 edit_fimage: "",
+                new_bimage: "",
+                new_fimage: "",
+                new_height: "",
+                new_name: "",
+                new_number: "",
+                new_weight: "",
 
             },
             methods: {
@@ -65,7 +71,7 @@
                         console.log(error)
                     })
                 },
-                addPokemon: function () {
+                addPokemon: function update() {
                     console.log('adding')
                     axios({
                         method: 'post',
@@ -75,12 +81,12 @@
                           },
                           data: {
 
-                            "name": "d",
-                            "number": 215,
-                            "height": 1.0,
-                            "weight": 2.0,
-                            "image_front": "https://www.bing.com/",
-                            "image_back": "https://www.bing.com/",
+                            "name": new_name,
+                            "number": new_number,
+                            "height": new_height,
+                            "weight": new_weight,
+                            "image_front": new_fimage,
+                            "image_back": new_bimage,
                             "caught_by": [
                                 1
                             ],
