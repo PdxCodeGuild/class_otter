@@ -1,5 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, get_object_or_404
+from .models import Pokemon
 # # Create your views here.
 # from django.http.response import JsonResponse
 # from django.shortcuts import get_object_or_404, render
@@ -8,16 +8,21 @@ from django.shortcuts import render
 # from .models import Pokemon
 
 
-def edit(request):
+def base_edit(request):
     return render(request, 'pokemon/edit.html')
 
+def base_delete(request):
+    return render(request, 'pokemon/delete.html')
 
-# def pokemon(request, number):
-#     pokemon = get_object_or_404(Pokemon, number=number)
-#     context = {
-#         'pokemon': pokemon
-#     }
-#     return render(request, '/pokemon.html', context)
+def base_add(request):
+    return render(request, 'pokemon/add.html')
+
+def pokemonedit(request, id):
+    pokemon = get_object_or_404(Pokemon, id=id)
+    context = {
+        'pokemon': pokemon
+    }
+    return render(request, '/pokemon.html', context)
 
 
 # def api_list(request):
