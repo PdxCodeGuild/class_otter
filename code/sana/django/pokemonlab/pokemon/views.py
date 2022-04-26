@@ -8,12 +8,8 @@ from django.shortcuts import render
 # from .models import Pokemon
 
 
-# def index(request):
-#     pokemon = Pokemon.objects.all()
-#     context = {
-#         'pokemon': pokemon
-#     }
-#     return render(request, '/index.html', context)
+def edit(request):
+    return render(request, 'pokemon/edit.html')
 
 
 # def pokemon(request, number):

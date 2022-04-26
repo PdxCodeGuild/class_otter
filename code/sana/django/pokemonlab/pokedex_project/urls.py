@@ -10,4 +10,5 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('api/v1/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('pokedex/', include('pokemon.urls')),
 ]

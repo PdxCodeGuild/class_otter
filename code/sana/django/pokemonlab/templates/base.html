@@ -27,7 +27,13 @@
             data: {
                 csrf_token: "",
                 message: 'Hello world!',
-                pokemons: []
+                pokemons: [],
+                edit_name: "",
+                edit_number:"",
+                edit_height:"",
+                edit_weight: "",
+                edit_bimage: "",
+                edit_fimage: "",
 
             },
             methods: {
@@ -69,8 +75,8 @@
                           },
                           data: {
 
-                            "name": "s",
-                            "number": 210,
+                            "name": "d",
+                            "number": 215,
                             "height": 1.0,
                             "weight": 2.0,
                             "image_front": "https://www.bing.com/",
@@ -85,10 +91,9 @@
                     })
                 },
                 editPokemon: function () {
-                    console.log('editting')
                     axios({
                         method: 'put',
-                        url:'/api/v1/pokemon/',
+                        url:'/api/v1/pokemon/id',
                         headers: {
                             "X-CSRFToken": this.csrf_token
                           },
@@ -96,18 +101,20 @@
 
                             "name": edit_name,
                             "number": edit_number,
-                            "height": 1,
-                            "weight": 2.0,
-                            "image_front": "https://www.bing.com/",
-                            "image_back": "https://www.bing.com/",
+                            "height": edit_height,
+                            "weight": edit_weight,
+                            "image_front": edit_fimage,
+                            "image_back": edit_bimage,
                             "caught_by": [
                                 1
                             ],
                             "type_info": []
-                          }
-                    }).then(res => {
+                          }                    
+                        }).then(res => {
                         console.log(res)
                     })
+                        
+
                 },
             },
             created: function() {

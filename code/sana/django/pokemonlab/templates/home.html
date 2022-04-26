@@ -15,10 +15,14 @@
 <h1>Welcome, visitor!</h1>
 <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
 {% endif %}
-
+<button type='button' @click='addPokemon'>Add New Pokemon</button>
 <ul>
 <template v-for="pokemon in pokemons"> 
-
+  <div :id=`${pokemon.id}`> 
+  <label for='delete_Pokemon'>
+    {% comment %} <input type='text' v-model='delete_Pokemon' id='delete_Pokemon'> {% endcomment %} 
+    <button type='button' @click='deletePokemon'>Delete Pokemon </button>
+    <a href="{% url 'edit' %}">Edit Pokemon</a>
     <li>[[ pokemon.name ]]</li>
     <li>[[ pokemon.height]]</li>
     <li>[[ pokemon.weight ]]</li>
@@ -26,11 +30,11 @@
     <img :src="pokemon.image_front">
     <img :src="pokemon.image_back">
     <template v-for="types in pokemon.type_info">
-    <li>[[ types.type ]]</li>
-    <label for='delete_Pokemon'>Delete Pokemon
-      <input type='text' v-model='delete_Pokemon' id='delete_Pokemon'>
-      <button type='button' @click='deletePokemon'>Delete </button>
+      <li>[[ types.type ]]</li>
     </template>
+
+    </div>
+    <br>
 </template>
 </ul>
 

@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    # path('', views.index, name="index"),
+    path('', views.edit, name="edit"),
     # path('<int:number>/', views.pokemon, name="pokemon"),
     # path('api/', views.api_list, name="list"),
     # path('api/', views.api_list, name="lo"),
