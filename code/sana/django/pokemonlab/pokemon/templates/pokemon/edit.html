@@ -16,7 +16,6 @@
 } {% endcomment %}
 
 
-
 <label for='edit_name'>edit name
     <input type='text' v-model='edit_name' id='edit_name'>
 <label for='edit_number'>edit number
@@ -31,5 +30,6 @@
     <input type='text' v-model='edit_bimage' id='edit_bimage'>
 </form>
 
-<button type='button' @click='editPokemon'>Edit </button>
+<button type='button' @click='editPokemon( [[ pokemon.id ]])'>Edit </button>
+</div>
 {% endblock %}

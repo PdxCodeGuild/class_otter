@@ -51,7 +51,7 @@
             methods: {
 
                 loadPokemon: function () {
-                    console.log(this.message)
+
                     axios({
                         method: 'get',
                         url:'/api/v1/pokemon/',
@@ -64,7 +64,6 @@
                 },
                 deletePokemon: function (id_delete) {
                     console.log(id_delete)
-                    id_delete = id
                     axios({
                         method: 'delete',
                         url:`/api/v1/pokemon/${id_delete}/`,
@@ -110,7 +109,6 @@
                     })
                 },
                 editPokemon: function (id_edit) {
-                    id_edit = id
                     axios({
                         method: 'put',
                         url:`/api/v1/pokemon/${id_edit}/`,

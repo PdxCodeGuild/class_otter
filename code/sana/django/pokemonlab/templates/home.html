@@ -19,17 +19,33 @@
 <ul>
   <template v-for="pokemon in pokemons"> 
     <div :id=`${pokemon.id}`>
-      <button type='button' @click='deletePokemon("158")'>Delete this Pokemon</button>
-        <a href="{% url 'delete' %}">Delete Pokemon</a>
-        <a href="{% url 'edit' %}">Edit Pokemon</a>
+      <button type='button' @click='deletePokemon([[ pokemon.id ]])'> Delete Pokemon </button>
+
     <li>[[ pokemon.name ]]</li>
     <li>[[ pokemon.height]]</li>
     <li>[[ pokemon.weight ]]</li>
     <li>[[ pokemon.number ]]</li>
     <img :src="pokemon.image_front">
     <img :src="pokemon.image_back">
+    <label for='edit_name'>edit name </label>
+      <input type='text' v-model='edit_name' id='edit_name'>
+  <label for='edit_number'>edit number </label>
+      <input type='text' v-model='edit_number' id='edit_number'>
+  <label for='edit_height'>edit height</label>
+      <input type='text' v-model='edit_height' id='edit_height'>
+  <label for='edit_weight'>edit weight </label>
+      <input type='text' v-model='edit_weight' id='edit_height'>
+  <label for='edit_fimage'>edit front image</label>
+      <input type='text' v-model='edit_fimage' id='edit_fimage'>
+  <label for='edit_bimage'>edit back image </label>
+      <input type='text' v-model='edit_bimage' id='edit_bimage'>
+      <button type='button' @click='editPokemon( [[ pokemon.id ]] )'>Edit </button>
     <template v-for="types in pokemon.type_info">
       <li>[[ types.type ]]</li>
+    </form>
+    
+    
+    
     </template>
 
     </div>
