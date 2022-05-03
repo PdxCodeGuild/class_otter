@@ -1,0 +1,130 @@
+{% extends "vue_components.html" %}
+
+{% block vueApp %}
+<script type="module">
+    import { createApp } from 'vue'
+    
+    var pokedex_app = createApp({
+        data: function() {
+            return {
+                pokemon_list: [],
+                profile: {
+                },
+                caught_ids: []
+            }
+        },
+        methods: {
+            getPokemon: function() {
+                axios({
+                    method: 'get',
+                    url: '/apis/v1/pokemon'
+                }).then((response) => {
+                    for (let pokemon_index in response.data) {
+                        let pokemon = response.data[pokemon_index];
+
+                        let number_string = '#';
+                        if (pokemon.number > 99) {
+                            number_string += pokemon.number.toString();
+                        }
+                        else if(pokemon.number > 9) {
+                            number_string += '0' + pokemon.number.toString();
+                        }
+                        else {
+                            number_string += '00' + pokemon.number.toString();
+                        }
+
+                        this.pokemon_list.push({
+                            id: pokemon.id,
+                            number: number_string,
+                            name: pokemon.name,
+                            height: pokemon.height,
+                            weight: pokemon.weight,
+                            image_front: pokemon.image_front,
+                            image_back: pokemon.image_back,
+                            types: pokemon.types,
+                            caught_by: pokemon.caught_by
+                        });
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+            getProfile: function() {
+                let userID = "{{user.id}}";
+                
+                if (userID === "None") {
+                    return;
+                }
+
+                axios({
+                    method: 'get',
+                    url: `/apis/v1/profiles/${userID}`,
+                }).then((response) => {
+                    let profile = response.data;
+                    this.profile = {
+                        id: profile.id,
+                        username: profile.username,
+                        email: profile.email,
+                        caught: profile.caught
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+            capture_or_release: function(pokemonID) {
+                let caught_list = this.profile.caught;
+                let index = FindIndexByID(caught_list, pokemonID);
+
+                let pokemonIndex = FindIndexByID(this.pokemon_list, pokemonID);
+                let caught_by_list = this.pokemon_list[pokemonIndex].caught_by;
+                
+                if (index >= 0) {
+                    let userIndex = FindIndexByValue(caught_by_list, this.profile.username);
+                    this.pokemon_list[pokemonIndex].caught_by.splice(userIndex, 1);
+                    this.profile.caught.splice(index, 1);
+                    this.releasePokemon(pokemonID, this.profile.id);
+                }
+                else {
+                    this.pokemon_list[pokemonIndex].caught_by.push(this.profile.username);
+                    this.profile.caught.push(this.pokemon_list[pokemonIndex]);
+                    this.catchPokemon(pokemonID, this.profile.id);
+                }
+            },
+            catchPokemon: function(pokemonID, caught_by_id) {
+                axios({
+                    method: 'put',
+                    url: `/apis/v1/pokemon/${pokemonID}/capture/`,
+                    headers: {'X-CSRFToken': csrftoken},
+                    mode: 'same-origin',
+                    data: {
+                        userID: caught_by_id
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+            releasePokemon: function(pokemonID, caught_by_id) {
+                axios({
+                    method: 'put',
+                    url: `/apis/v1/pokemon/${pokemonID}/release/`,
+                    headers: {'X-CSRFToken': csrftoken},
+                    mode: 'same-origin',
+                    data: {
+                        userID: caught_by_id
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+        },
+        created: function() {
+            this.getProfile();
+            this.getPokemon();
+        }
+    });
+    pokedex_app.config.compilerOptions.delimiters = ['[[', ']]'];
+    pokedex_app.component('pokemon', pokemon_component);
+    pokedex_app.component('profile', profile_component);
+    pokedex_app.mount('#pokedex_app');
+</script>
+{% endblock %}

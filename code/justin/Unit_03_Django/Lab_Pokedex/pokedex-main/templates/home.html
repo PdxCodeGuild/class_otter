@@ -1,0 +1,10 @@
+{% extends "pokedex_app.html" %}
+
+{% block content %}
+    <div id="pokedex_app" class="container">
+        {% csrf_token %}
+        <div class="row">
+            <pokemon v-for="pokemon in pokemon_list" v-bind:pokemon_details="pokemon" v-bind:key="pokemon.id" v-on:capture_or_release="capture_or_release($event)"></pokemon>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "pokedex_app.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h2 class="center-align">Sign Up</h2>
+        </div>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-field col s4 offset-s4">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {% if form.username.help_text %}
+                <span class="helper-text black-text">{{ form.username.help_text|safe }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4 offset-s4">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {% if form.password1.help_text %}
+                <span class="helper-text black-text">{{ form.password1.help_text|safe }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4 offset-s4">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {% if form.password2.help_text %}
+                <span class="helper-text black-text">{{ form.password2.help_text|safe }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <button class="col s4 offset-s4 btn waves-effect waves-light green accent-4" type="submit">Sign Up</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

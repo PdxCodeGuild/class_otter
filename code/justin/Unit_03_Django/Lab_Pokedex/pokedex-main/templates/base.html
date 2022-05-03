@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+    
+    <title>{% block title %}Pokedex{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+</head>
+<body>
+    <div class="navbar-fixed navbar-fixed-full-height">
+        <nav class="red">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo center">Pokedex</a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="/">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="/users/profile/{{user.username}}">Profile</li>
+                    {% endif %}
+                </ul>
+                <ul class="right">
+                {% if user.is_authenticated %}
+                    <li>Hi {{ user.username }}!</li>
+                    <li><a href="{% url 'logout' %}" class="waves-effect waves-light btn-small green accent-3">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                    <li><a href="{% url 'users:signup' %}" class="waves-effect waves-light btn green accent-3">Sign Up</a></li>
+                {% endif %}
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    {% load static %}
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+            }
+        }
+    </script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block vueComponents %}
+    {% endblock %}
+    
+    {% block vueApp %}
+    {% endblock %}
+</body>
+</html>
