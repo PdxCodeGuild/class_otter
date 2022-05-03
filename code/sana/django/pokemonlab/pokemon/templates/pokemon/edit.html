@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Edit Pokemon</h1>
+
+{% comment %} {
+    "name": "s",
+    "number": 210,
+    "height": 1.0,
+    "weight": 2.0,
+    "image_front": "https://www.bing.com/",
+    "image_back": "https://www.bing.com/",
+    "caught_by": [
+        1
+    ],
+    "type_info": []
+} {% endcomment %}
+
+
+<label for='edit_name'>edit name
+    <input type='text' v-model='edit_name' id='edit_name'>
+<label for='edit_number'>edit number
+    <input type='text' v-model='edit_number' id='edit_number'>
+<label for='edit_height'>edit height
+    <input type='text' v-model='edit_height' id='edit_height'>
+<label for='edit_weight'>edit weight
+    <input type='text' v-model='edit_weight' id='edit_height'>
+<label for='edit_fimage'>edit front image
+    <input type='text' v-model='edit_fimage' id='edit_fimage'>
+<label for='edit_bimage'>edit back image
+    <input type='text' v-model='edit_bimage' id='edit_bimage'>
+</form>
+
+<button type='button' @click='editPokemon( [[ pokemon.id ]])'>Edit </button>
+</div>
+{% endblock %}

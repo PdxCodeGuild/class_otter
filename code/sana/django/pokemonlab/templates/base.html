@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex Lab</title>
+</head>
+<body>
+    <p> base </p>
+    {% csrf_token %}
+    <main id="app">
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            delimiters: ['[[',']]'],
+            data: {
+                csrf_token: "",
+                pokemons: [],
+                edit_name: "",
+                edit_number:"",
+                edit_height:"",
+                edit_weight: "",
+                edit_bimage: "",
+                edit_fimage: "",
+                new_bimage: "",
+                new_fimage: "",
+                new_height: "",
+                new_name: "",
+                new_number: "",
+                new_weight: "",
+                edit_url: '',
+                delete_url: "/api/v1/pokemon/",
+                poke_id: "",
+                message: "",
+                id_edit: "",
+                id_delete: "",
+            
+
+            },
+            methods: {
+
+                loadPokemon: function () {
+
+                    axios({
+                        method: 'get',
+                        url:'/api/v1/pokemon/',
+                    }).then(res => {
+                        console.log(res.data)
+                        this.pokemons = res.data
+
+                    })
+                
+                },
+                deletePokemon: function (id_delete) {
+                    console.log(id_delete)
+                    axios({
+                        method: 'delete',
+                        url:`/api/v1/pokemon/${id_delete}/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                          },
+                    }).then(res => {
+                        console.log(res)
+                    }).catch(error => {
+
+                        console.log(error)
+                    })
+                },
+                addPokemon: function () {
+                    console.log('adding', this.new_name)
+                    axios({
+                        method: 'post',
+                        url:'/api/v1/pokemon/',
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                          },
+                          data: {
+
+
+                            "name": this.new_name,
+                            "number": this.new_number,
+                            "height": this.new_height,
+                            "weight": this.new_weight,
+                            "image_front": this.new_fimage,
+                            "image_back": this.new_bimage,
+                            "caught_by": [
+                                1
+                            ],
+                            "type_info": []
+
+                          }
+                    }).then(res => {
+                        console.log(res)
+                    }).catch(error => {
+
+                        console.log(error)
+
+                    })
+                },
+                editPokemon: function (id_edit) {
+                    axios({
+                        method: 'put',
+                        url:`/api/v1/pokemon/${id_edit}/`,
+                        headers: {
+                            "X-CSRFToken": this.csrf_token
+                          },
+                          data: {
+
+                            "name": this.edit_name,
+                            "number": this.edit_number,
+                            "height": this.edit_height,
+                            "weight": this.edit_weight,
+                            "image_front": this.edit_fimage,
+                            "image_back": this.edit_bimage,
+                            "caught_by": [
+                                1
+                            ],
+                            "type_info": []
+                          }                    
+                        }).then(res => {
+                        console.log(res)
+                    })
+                        
+
+                },
+            },
+            created: function() {
+            },
+            mounted: function() {
+                console.log('works')
+                this.csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+                this.loadPokemon()
+            
+            }
+        })
+    </script>
+</body>
+
+</html>
