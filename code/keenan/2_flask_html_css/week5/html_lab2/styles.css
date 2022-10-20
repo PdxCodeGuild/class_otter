@@ -5,6 +5,17 @@ html {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+/* QUESTION: Are the above redundant or contradictory */
+
+
+/* Q: add this during processing consistently */
+* {
+    border: 1px solid rgb(0, 0, 0);
+}
+
+
+
+
 
 body {
     background-color: #6d4444;
@@ -13,6 +24,7 @@ body {
 
 .header {
     display: flex;
+    justify-content: space-between;
     background-color: #ffffff;
     max-height: 150px;
     margin-left: 2%;
@@ -20,6 +32,13 @@ body {
     margin-top: 2%;
     margin-bottom: 2%;
 }
+
+/* In order to drop the header right below the rest of the I could do the parent div("header" as flex row, and have the "header-right" as a separate container outside of the "header -logo" and "header title".  The  container of (header right) can be a separate child that could be bumped down in flex-column formatting. the ABC container would always be flex-column, the BC container would swap to column. 
+
+The other option to do the same as (display: none), block or flex, to trigger them. 
+
+Prototype in a separate doc to play with the containers as the only items and then play. */
+
 
 .title {
     /* not being centered.  offset from mid towards the image. image not considered with regards to centering bc only text elements are selected? */
@@ -36,11 +55,13 @@ body {
     max-width: 120px;
 }
 
+
 .header-right {
-    /* offset weirdly on mobile */
+    /* display none on mobile or bump it below on devices */
     padding-top: 1%;
     padding-right: 1%;
-    margin-left: auto;
+    scroll-padding-left: 1%;
+    /* margin-left: auto; */
 }
 
 .content {
